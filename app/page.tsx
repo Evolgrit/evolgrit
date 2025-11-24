@@ -4,54 +4,47 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
       <header className="max-w-6xl mx-auto px-5 pt-6 pb-10">
         {/* NAVBAR */}
-        <nav className="flex items-center justify-between gap-4 mb-10">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
-              E
-            </div>
-            <div>
-              <div className="text-sm font-semibold tracking-[0.18em] uppercase">
-                Evolgrit
-              </div>
-              <div className="text-[11px] text-slate-500">
-                Language · Jobs · AI
-              </div>
-            </div>
-          </div>
-
-<div className="hidden sm:flex items-center gap-4 text-sm">
-  {/* Language switch */}
-  <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 px-2 py-1 text-[11px]">
-    <span className="font-semibold text-slate-900">DE</span>
-    <span className="text-slate-400">/</span>
-    <a href="/en" className="text-slate-500 hover:text-slate-900">
-      EN
-    </a>
+<nav className="flex items-center justify-between gap-4 mb-10">
+  <div className="flex items-center gap-2">
+    <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
+      E
+    </div>
+    <div>
+      <div className="text-sm font-semibold tracking-[0.18em] uppercase">
+        Evolgrit
+      </div>
+      <div className="text-[11px] text-slate-500">
+        Sprache · Jobs · KI
+      </div>
+    </div>
   </div>
 
-  <a href="#product" className="text-slate-500 hover:text-slate-900">
-    Product
-  </a>
-  <a
-    href="#how-it-works"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    How it works
-  </a>
-  <a
-    href="#for-employers"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    For employers
-  </a>
-  <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-    Log in
-  </button>
-  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-    Join waitlist
-  </button>
-</div>
-        </nav>
+  <div className="hidden sm:flex items-center gap-4 text-sm">
+    {/* Sprachschalter */}
+    <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
+      <span className="text-slate-900 font-semibold">DE</span>
+      <span className="text-slate-300">·</span>
+      <a href="/en" className="text-slate-500 hover:text-slate-900">EN</a>
+    </div>
+
+    <a href="#product" className="text-slate-500 hover:text-slate-900">
+      Produkt
+    </a>
+    <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+      Wie es funktioniert
+    </a>
+    <a href="#for-employers" className="text-slate-500 hover:text-slate-900">
+      Für Arbeitgeber
+    </a>
+
+    <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
+      Login
+    </button>
+    <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+      Zur Warteliste
+    </button>
+  </div>
+</nav>
 
         {/* HERO */}
         <main className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
@@ -77,21 +70,21 @@ export default function Home() {
       und klaren Profilen für Arbeitgeber.
     </p>
 
-    <div className="flex flex-wrap gap-3 mb-3">
-      <a
-        href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta-Warteliste&body=Hallo%20Evolgrit-Team,%0A%0Aich%20möchte%20gern%20an%20der%20Beta%20teilnehmen.%0A%0AName:%0ASprachniveau:%0ABeruflicher%20Hintergrund:%0A"
-        className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
-      >
-        Zur Beta-Warteliste
-      </a>
-      <a
-        href="mailto:info@evolgrit.com?subject=Evolgrit%20Kontakt"
-        className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
-      >
-        Kontakt aufnehmen
-      </a>
-    </div>
+<div className="flex flex-wrap gap-3 mb-3">
+  <a
+    href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta-Warteliste&body=Hallo%20Evolgrit-Team,%0A%0AIch%20möchte%20gerne%20an%20der%20Beta%20teilnehmen.%0A%0AName:%0ASprachniveau:%0ABeruflicher%20Hintergrund:"
+    className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
+  >
+    Zur Beta-Warteliste
+  </a>
 
+  <a
+    href="mailto:info@evolgrit.com?subject=Evolgrit%20Kontakt"
+    className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
+  >
+    Kontakt aufnehmen
+  </a>
+</div>
             <p className="text-[12px] text-slate-500">
               <span className="text-emerald-600 font-medium">
                 Built for people first.

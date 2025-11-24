@@ -21,11 +21,11 @@ export default function Home() {
 
 <div className="hidden sm:flex items-center gap-4 text-sm">
   {/* Language switch */}
-  <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 px-2 py-1 text-[11px]">
+  <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
     <a href="/" className="text-slate-500 hover:text-slate-900">
       DE
     </a>
-    <span className="text-slate-400">/</span>
+    <span className="text-slate-300">·</span>
     <span className="font-semibold text-slate-900">EN</span>
   </div>
 
@@ -51,8 +51,6 @@ export default function Home() {
     Join waitlist
   </button>
 </div>
-        </nav>
-
         {/* HERO */}
         <main className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
           {/* LEFT SIDE */}
@@ -77,21 +75,20 @@ export default function Home() {
       und klaren Profilen für Arbeitgeber.
     </p>
 
-    <div className="flex flex-wrap gap-3 mb-3">
-      <a
-        href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta-Warteliste&body=Hallo%20Evolgrit-Team,%0A%0Aich%20möchte%20gern%20an%20der%20Beta%20teilnehmen.%0A%0AName:%0ASprachniveau:%0ABeruflicher%20Hintergrund:%0A"
-        className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
-      >
-        Zur Beta-Warteliste
-      </a>
-      <a
-        href="mailto:info@evolgrit.com?subject=Evolgrit%20Kontakt"
-        className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
-      >
-        Kontakt aufnehmen
-      </a>
-    </div>
-
+<div className="flex flex-wrap gap-3 mb-3">
+  <a
+    href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&body=Hi%20Evolgrit%20team,%0A%0AI'd%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
+    className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
+  >
+    Join the beta waitlist
+  </a>
+  <a
+    href="mailto:info@evolgrit.com?subject=Evolgrit%20Contact"
+    className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
+  >
+    Contact us
+  </a>
+</div>
             <p className="text-[12px] text-slate-500">
               <span className="text-emerald-600 font-medium">
                 Built for people first.
