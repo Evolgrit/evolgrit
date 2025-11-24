@@ -68,13 +68,11 @@ export default function Home() {
   for international talent.
 </h1>
 
-    <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
-      Evolgrit unterstützt Menschen, die nach Deutschland kommen, dabei
-      sprachlich anzukommen, die Kultur zu verstehen und den passenden
-      Job zu finden – mit adaptiven Lernpfaden, persönlichem Mentoring
-      und klaren Profilen für Arbeitgeber.
-    </p>
-
+<p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
+  Evolgrit helps people who move to Germany build real-world language
+  skills, understand the culture, and find the right job — with adaptive
+  learning paths, personal mentoring, and clear profiles for employers.
+</p>
 <div className="flex flex-wrap gap-3 mb-3">
   <a
     href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&body=Hi%20Evolgrit%20team,%0A%0AI'd%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
