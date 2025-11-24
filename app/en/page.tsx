@@ -1,4 +1,3 @@
-// app/page.tsx
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
@@ -18,39 +17,41 @@ export default function Home() {
               </div>
             </div>
           </div>
-</nav>
-<div className="hidden sm:flex items-center gap-4 text-sm">
-  {/* Language switch */}
-  <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
-    <a href="/" className="text-slate-500 hover:text-slate-900">
-      DE
-    </a>
-    <span className="text-slate-300">·</span>
-    <span className="font-semibold text-slate-900">EN</span>
-  </div>
 
-  <a href="#product" className="text-slate-500 hover:text-slate-900">
-    Product
-  </a>
-  <a
-    href="#how-it-works"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    How it works
-  </a>
-  <a
-    href="#for-employers"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    For employers
-  </a>
-  <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-    Log in
-  </button>
-  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-    Join waitlist
-  </button>
-</div>
+          <div className="hidden sm:flex items-center gap-4 text-sm">
+            {/* Language switch */}
+            <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
+              <a href="/" className="text-slate-500 hover:text-slate-900">
+                DE
+              </a>
+              <span className="text-slate-300">·</span>
+              <span className="font-semibold text-slate-900">EN</span>
+            </div>
+
+            <a href="#product" className="text-slate-500 hover:text-slate-900">
+              Product
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-slate-500 hover:text-slate-900"
+            >
+              How it works
+            </a>
+            <a
+              href="#for-employers"
+              className="text-slate-500 hover:text-slate-900"
+            >
+              For employers
+            </a>
+            <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
+              Log in
+            </button>
+            <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+              Join waitlist
+            </button>
+          </div>
+        </nav>
+
         {/* HERO */}
         <main className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
           {/* LEFT SIDE */}
@@ -60,33 +61,36 @@ export default function Home() {
               New · Private beta 2025 for motivated learners & employers
             </div>
 
-<h1 className="text-4xl sm:text-5xl lg:text-[44px] font-semibold leading-tight tracking-tight mb-3">
-  AI-powered{" "}
-  <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-    German learning & job coaching
-  </span>{" "}
-  for international talent.
-</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-[44px] font-semibold leading-tight tracking-tight mb-3">
+              AI-powered{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+                German learning & job coaching
+              </span>{" "}
+              for international talent.
+            </h1>
 
-<p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
-  Evolgrit helps people who move to Germany build real-world language
-  skills, understand the culture, and find the right job — with adaptive
-  learning paths, personal mentoring, and clear profiles for employers.
-</p>
-<div className="flex flex-wrap gap-3 mb-3">
-  <a
-    href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&body=Hi%20Evolgrit%20team,%0A%0AI'd%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
-    className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
-  >
-    Join the beta waitlist
-  </a>
-  <a
-    href="mailto:info@evolgrit.com?subject=Evolgrit%20Contact"
-    className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
-  >
-    Contact us
-  </a>
-</div>
+            <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
+              Evolgrit helps people who move to Germany build real-world
+              language skills, understand the culture, and find the right job –
+              with adaptive learning paths, personal mentoring, and clear
+              profiles for employers.
+            </p>
+
+            <div className="flex flex-wrap gap-3 mb-3">
+              <a
+                href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&body=Hi%20Evolgrit%20team,%0A%0AI'd%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
+                className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
+              >
+                Join the beta waitlist
+              </a>
+              <a
+                href="mailto:info@evolgrit.com?subject=Evolgrit%20Contact"
+                className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
+              >
+                Contact us
+              </a>
+            </div>
+
             <p className="text-[12px] text-slate-500">
               <span className="text-emerald-600 font-medium">
                 Built for people first.
@@ -96,7 +100,7 @@ export default function Home() {
             </p>
           </section>
 
-          {/* RIGHT SIDE – MOCK DASHBOARD */}
+          {/* RIGHT SIDE – dashboard preview */}
           <aside
             aria-label="Preview of Evolgrit dashboard"
             className="rounded-2xl border border-slate-200/70 bg-white/90 shadow-xl shadow-slate-900/5 p-4 sm:p-5 backdrop-blur"
@@ -128,7 +132,9 @@ export default function Home() {
                   Job-ready profiles
                 </div>
                 <div className="text-[17px] font-semibold">24</div>
-                <div className="text-[11px] text-slate-500">of 32 learners</div>
+                <div className="text-[11px] text-slate-500">
+                  of 32 learners
+                </div>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
                 <div className="text-[11px] text-slate-500 mb-1">
@@ -177,7 +183,10 @@ export default function Home() {
         </main>
 
         {/* VALUE STRIP */}
-        <section className="mt-10 grid gap-3 md:grid-cols-3 text-[13px]" id="product">
+        <section
+          className="mt-10 grid gap-3 md:grid-cols-3 text-[13px]"
+          id="product"
+        >
           <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
             Adaptive German learning based on real job contexts, not textbook
@@ -200,18 +209,19 @@ export default function Home() {
             cultural coaching.
           </div>
         </section>
-        {/* BRANDING SECTION: What is Evolgrit? */}
-<section className="max-w-3xl mx-auto mt-20 text-slate-700 leading-relaxed px-5">
-  <h2 className="text-2xl font-semibold mb-4 text-slate-900">What is Evolgrit?</h2>
-  <p className="mb-3">
-    We believe every person can improve their future — through evolution
-    <em> (Evol-) </em> and resilience <em> (-grit) </em>.
-  </p>
-  <p>
-    Evolgrit stands for the ability to keep moving forward despite challenges,
-    to learn, to grow, and to build a new life.
-  </p>
-</section>
+
+        {/* BRANDING SECTION */}
+        <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
+          <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
+          <p className="mb-3">
+            We believe every person can improve their future — through evolution{" "}
+            <em>(Evol-)</em> and resilience <em>(-grit)</em>.
+          </p>
+          <p>
+            Evolgrit stands for the ability to keep moving forward despite
+            challenges, to learn, to grow, and to build a new life.
+          </p>
+        </section>
       </header>
     </div>
   );
