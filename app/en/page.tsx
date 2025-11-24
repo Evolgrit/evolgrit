@@ -18,7 +18,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-
+</nav>
 <div className="hidden sm:flex items-center gap-4 text-sm">
   {/* Language switch */}
   <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
