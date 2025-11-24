@@ -205,6 +205,18 @@ export default function Home() {
             cultural coaching.
           </div>
         </section>
+        {/* BRANDING SECTION: What is Evolgrit? */}
+<section className="max-w-3xl mx-auto mt-20 text-slate-700 leading-relaxed px-5">
+  <h2 className="text-2xl font-semibold mb-4 text-slate-900">What is Evolgrit?</h2>
+  <p className="mb-3">
+    We believe every person can improve their future — through evolution
+    <em> (Evol-) </em> and resilience <em> (-grit) </em>.
+  </p>
+  <p>
+    Evolgrit stands for the ability to keep moving forward despite challenges,
+    to learn, to grow, and to build a new life.
+  </p>
+</section>
       </header>
     </div>
   );

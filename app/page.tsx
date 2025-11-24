@@ -205,6 +205,18 @@ export default function Home() {
             cultural coaching.
           </div>
         </section>
+        {/* BRANDING SECTION: Was ist Evolgrit? */}
+<section className="max-w-3xl mx-auto mt-20 text-slate-700 leading-relaxed px-5">
+  <h2 className="text-2xl font-semibold mb-4 text-slate-900">Was ist Evolgrit?</h2>
+  <p className="mb-3">
+    Wir glauben, dass jeder Mensch seine Zukunft verbessern kann — durch
+    Entwicklung <em>(Evol-)</em> und Ausdauer <em>(-grit)</em>.
+  </p>
+  <p>
+    Evolgrit steht für die Fähigkeit, trotz Herausforderungen weiterzugehen,
+    zu lernen, zu wachsen und ein neues Leben aufzubauen.
+  </p>
+</section>
       </header>
     </div>
   );
