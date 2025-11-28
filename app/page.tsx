@@ -23,40 +23,35 @@ export default function Home() {
           </div>
 
           {/* Desktop-Nav */}
-          <div className="hidden sm:flex items-center gap-4 text-sm">
-            {/* Language switch */}
-            <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
-              <a href="/" className="text-slate-500 hover:text-slate-900">
-                DE
-              </a>
-              <span className="text-slate-300">·</span>
-              <span className="font-semibold text-slate-900">EN</span>
-            </div>
+<div className="hidden sm:flex items-center gap-4 text-sm">
+  {/* Language indicator (EN only) */}
+  <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
+    EN
+  </div>
 
-            <a href="#product" className="text-slate-500 hover:text-slate-900">
-              Product
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-slate-500 hover:text-slate-900"
-            >
-              How it works
-            </a>
-            <a
-              href="#for-employers"
-              className="text-slate-500 hover:text-slate-900"
-            >
-              For employers
-            </a>
-
-            <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-              Log in
-            </button>
-            <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-              Join waitlist
-            </button>
-          </div>
-
+  {/* Rest der Navigation bleibt gleich */}
+  <a href="#product" className="text-slate-500 hover:text-slate-900">
+    Product
+  </a>
+  <a
+    href="#how-it-works"
+    className="text-slate-500 hover:text-slate-900"
+  >
+    How it works
+  </a>
+  <a
+    href="#for-employers"
+    className="text-slate-500 hover:text-slate-900"
+  >
+    For employers
+  </a>
+  <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
+    Log in
+  </button>
+  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+    Join waitlist
+  </button>
+</div>
           {/* Mobile-Hamburger */}
           <button
             className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
