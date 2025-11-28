@@ -1,9 +1,13 @@
+'use client';
+import { useState } from "react";
 export default function Home() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
       <header className="max-w-6xl mx-auto px-5 pt-6 pb-10">
         {/* NAVBAR */}
         <nav className="flex items-center justify-between gap-4 mb-10">
+          {/* Logo + Titel */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
               E
@@ -18,6 +22,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Desktop-Nav */}
           <div className="hidden sm:flex items-center gap-4 text-sm">
             {/* Language switch */}
             <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200">
@@ -43,6 +48,7 @@ export default function Home() {
             >
               For employers
             </a>
+
             <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
               Log in
             </button>
@@ -50,8 +56,64 @@ export default function Home() {
               Join waitlist
             </button>
           </div>
+
+          {/* Mobile-Hamburger */}
+          <button
+            className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Open navigation menu"
+          >
+            {/* Icon: 3 Striche */}
+            <span className="flex flex-col gap-[3px]">
+              <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+              <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+              <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+            </span>
+          </button>
         </nav>
 
+        {/* Mobile-Menü */}
+        {isMenuOpen && (
+          <div className="sm:hidden mb-6 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                Language
+              </span>
+              <div className="flex items-center gap-2">
+                <a href="/" className="text-slate-500 hover:text-slate-900">
+                  DE
+                </a>
+                <span className="text-slate-300">·</span>
+                <span className="font-semibold text-slate-900">EN</span>
+              </div>
+            </div>
+
+            <a href="#product" className="block text-slate-700 hover:text-slate-900">
+              Product
+            </a>
+            <a
+              href="#how-it-works"
+              className="block text-slate-700 hover:text-slate-900"
+            >
+              How it works
+            </a>
+            <a
+              href="#for-employers"
+              className="block text-slate-700 hover:text-slate-900"
+            >
+              For employers
+            </a>
+
+            <div className="pt-2 flex gap-2">
+              <button className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm">
+                Log in
+              </button>
+              <button className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+                Join waitlist
+              </button>
+            </div>
+          </div>
+        )}
         {/* HERO */}
         <main className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
           {/* LEFT SIDE */}
