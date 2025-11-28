@@ -2,9 +2,15 @@
 import { useState } from "react";
 export default function Home() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const activeSection = typeof window !== "undefined" 
+  ? window.location.hash 
+  : "";
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
-      <header className="max-w-6xl mx-auto px-5 pt-6 pb-10">
+<header
+  className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50"
+>
+  <div className="max-w-6xl mx-auto px-5 py-4">
         {/* NAVBAR */}
         <nav className="flex items-center justify-between gap-4 mb-10">
           {/* Logo + Titel */}
@@ -23,39 +29,40 @@ export default function Home() {
           </div>
 
           {/* Desktop-Nav */}
-<div className="hidden sm:flex items-center gap-4 text-sm">
-  {/* Language indicator (EN only) */}
-  <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
-    EN
-  </div>
+          <div className="hidden sm:flex items-center gap-4 text-sm">
+            {/* Language indicator (EN only) */}
+            <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
+              EN
+            </div>
 
-  {/* Rest der Navigation bleibt gleich */}
-  <a href="#product" className="text-slate-500 hover:text-slate-900">
-    Product
-  </a>
-  <a
-    href="#how-it-works"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    How it works
-  </a>
-  <a
-    href="#for-employers"
-    className="text-slate-500 hover:text-slate-900"
-  >
-    For employers
-  </a>
-  <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-    Log in
-  </button>
-  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-    Join waitlist
-  </button>
-</div>
+            <a href="#product" className="text-slate-500 hover:text-slate-900">
+              Product
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-slate-500 hover:text-slate-900"
+            >
+              How it works
+            </a>
+            <a
+              href="#for-employers"
+              className="text-slate-500 hover:text-slate-900"
+            >
+              For employers
+            </a>
+
+            <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
+              Log in
+            </button>
+            <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+              Join waitlist
+            </button>
+          </div>
+
           {/* Mobile-Hamburger */}
           <button
             className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((open) => !open)}
             aria-label="Open navigation menu"
           >
             {/* Icon: 3 Striche */}
@@ -66,24 +73,22 @@ export default function Home() {
             </span>
           </button>
         </nav>
-
-        {/* Mobile-Menü */}
+        {/* Mobile menu (EN only) */}
         {isMenuOpen && (
           <div className="sm:hidden mb-6 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
                 Language
               </span>
-              <div className="flex items-center gap-2">
-                <a href="/" className="text-slate-500 hover:text-slate-900">
-                  DE
-                </a>
-                <span className="text-slate-300">·</span>
-                <span className="font-semibold text-slate-900">EN</span>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                EN
               </div>
             </div>
 
-            <a href="#product" className="block text-slate-700 hover:text-slate-900">
+            <a
+              href="#product"
+              className="block text-slate-700 hover:text-slate-900"
+            >
               Product
             </a>
             <a
@@ -109,7 +114,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        {/* HERO */}
+               {/* HERO */}
         <main className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
           {/* LEFT SIDE */}
           <section>
@@ -279,7 +284,8 @@ export default function Home() {
             challenges, to learn, to grow, and to build a new life.
           </p>
         </section>
-      </header>
+  </div>
+</header>
     </div>
   );
 }
