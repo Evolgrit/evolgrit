@@ -397,71 +397,75 @@ export default function Home() {
           </div>
         </section>
 
-        {/* HOW IT WORKS SECTION */}
-        <section
-          id="how-it-works"
-          className="max-w-6xl mx-auto mt-24 px-5"
-        >
-          <h2 className="text-3xl font-semibold text-slate-900 mb-8 text-center">
-            How Evolgrit works for learners
-          </h2>
+{/* HOW IT WORKS SECTION */}
+<section
+  id="how-it-works"
+  className="max-w-6xl mx-auto mt-24 px-5"
+>
+  <h2 className="text-3xl font-semibold text-slate-900 mb-8 text-center">
+    How Evolgrit works for learners
+  </h2>
 
-          <div className="grid gap-6 md:grid-cols-4 text-sm">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
-                1
-              </span>
-              <h3 className="font-semibold text-slate-900 mb-2">
-                Onboarding & profiling
-              </h3>
-              <p className="text-slate-600">
-                Learners share their background, target role and current
-                language level – so we can tailor their journey.
-              </p>
-            </div>
+  <div className="grid gap-6 md:grid-cols-4 text-sm">
+    {/* STEP 1 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
+        1
+      </span>
+      <h3 className="font-semibold text-slate-900 mb-2">
+        Onboarding & profiling
+      </h3>
+      <p className="text-slate-600">
+        Learners share their background, target role and current
+        language level – so we can tailor their journey.
+      </p>
+    </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
-                2
-              </span>
-              <h3 className="font-semibold text-slate-900 mb-2">
-                Hybrid learning program
-<h3>Hybrid learning program</h3>
-<p>
-  AI-powered modules and live mentor sessions train language,
-  culture and job-specific skills in parallel. Tasks and formats
-  change regularly so learners stay engaged over many months.
-</p>
-            </div>
+    {/* STEP 2 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
+        2
+      </span>
+      <h3 className="font-semibold text-slate-900 mb-2">
+        Hybrid learning program
+      </h3>
+      <p className="text-slate-600">
+        AI-powered modules and live mentor sessions train language,
+        culture and job-specific skills in parallel. Tasks and formats
+        change regularly so learners stay engaged over many months.
+      </p>
+    </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
-                3
-              </span>
-              <h3 className="font-semibold text-slate-900 mb-2">
-                Progress & readiness
-<h3>Progress & readiness</h3>
-<p>
-  Learners see their progress over weeks and months, mentors track
-  readiness and we identify who is ready for interviews and new
-  opportunities – not after a test, but based on real behaviour.
-</p>
-            </div>
+    {/* STEP 3 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
+        3
+      </span>
+      <h3 className="font-semibold text-slate-900 mb-2">
+        Progress & readiness
+      </h3>
+      <p className="text-slate-600">
+        Learners see their progress over weeks and months, mentors track
+        readiness and we identify who is ready for interviews and new
+        opportunities – not after a test, but based on real behaviour.
+      </p>
+    </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
-                4
-              </span>
-              <h3 className="font-semibold text-slate-900 mb-2">
-                Matching & next steps
-              </h3>
-              <p className="text-slate-600">
-                We connect learners with partner employers or education paths –
-                always aligned with skills, language and personal goals.
-              </p>
-            </div>
-          </div>
-        </section>
+    {/* STEP 4 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white mb-3">
+        4
+      </span>
+      <h3 className="font-semibold text-slate-900 mb-2">
+        Matching & next steps
+      </h3>
+      <p className="text-slate-600">
+        We connect learners with partner employers or education paths –
+        always aligned with skills, language and personal goals.
+      </p>
+    </div>
+  </div>
+</section>
 {/* PROGRAM TIMELINE SECTION */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
   <h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
