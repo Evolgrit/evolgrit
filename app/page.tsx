@@ -6,128 +6,118 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
-      {/* HEADER / NAVBAR */}
-      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
-        <div className="max-w-6xl mx-auto px-5 py-4">
-          <nav className="flex items-center justify-between gap-4">
-            {/* Logo + Titel */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
-                E
-              </div>
-              <div>
-                <div className="text-sm font-semibold tracking-[0.18em] uppercase">
-                  Evolgrit
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Language · Jobs · AI
-                </div>
-              </div>
-            </div>
+<header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
+  <div className="max-w-6xl mx-auto px-5 py-4">
+    <nav className="flex items-center justify-between gap-4">
 
-            {/* Desktop-Nav */}
-            <div className="hidden sm:flex items-center gap-4 text-sm">
-              {/* Language indicator (EN only) */}
-              <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
-                EN
-              </div>
-
-              <a
-                href="#product"
-                className="text-slate-500 hover:text-slate-900"
-              >
-                Product
-              </a>
-              <a
-                href="#how-it-works"
-                className="text-slate-500 hover:text-slate-900"
-              >
-                How it works
-              </a>
-              <a
-                href="#for-employers"
-                className="text-slate-500 hover:text-slate-900"
-              >
-                For employers
-              </a>
-
-              <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-                Log in
-              </button>
-              <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-                Join waitlist
-              </button>
-            </div>
-
-            {/* Mobile-Hamburger */}
-            <button
-              className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
-              onClick={() => setIsMenuOpen((open) => !open)}
-              aria-label="Open navigation menu"
-            >
-              <span className="flex flex-col gap-[3px]">
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-              </span>
-            </button>
-          </nav>
-
-          {/* Mobile menu (EN only) */}
-          {isMenuOpen && (
-            <div className="sm:hidden mt-4 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                  Language
-                </span>
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  EN
-                </div>
-              </div>
-
-              <a
-                href="#product"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Product
-              </a>
-              <a
-                href="#how-it-works"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                How it works
-              </a>
-              <a
-                href="#for-employers"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                For employers
-              </a>
-
-<div className="pt-2 flex gap-2">
-<button
-  className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm"
-  onClick={() => setIsMenuOpen(false)}
->
-  Log in
-</button>
-
-<button
-  className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
-  onClick={() => setIsMenuOpen(false)}
->
-  Join waitlist
-</button>
-</div>   
-         </div>
-          )}
+      {/* Logo + Title */}
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
+          E
         </div>
-      </header>
+        <div>
+          <div className="text-sm font-semibold tracking-[0.18em] uppercase">
+            Evolgrit
+          </div>
+          <div className="text-[11px] text-slate-500">
+            Language · Jobs · AI
+          </div>
+        </div>
+      </div>
 
+      {/* Desktop Menu */}
+      <div className="hidden sm:flex items-center gap-4 text-sm">
+        <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
+          EN
+        </div>
+
+        <a href="#product" className="text-slate-500 hover:text-slate-900">
+          Product
+        </a>
+        <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+          How it works
+        </a>
+        <a href="#for-employers" className="text-slate-500 hover:text-slate-900">
+          For employers
+        </a>
+
+        <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
+          Log in
+        </button>
+        <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+          Join waitlist
+        </button>
+      </div>
+
+      {/* Mobile hamburger */}
+      <button
+        className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
+        onClick={() => setIsMenuOpen((o) => !o)}
+        aria-label="Open navigation menu"
+      >
+        <span className="flex flex-col gap-[3px]">
+          <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+          <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+          <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+        </span>
+      </button>
+    </nav>
+
+    {/* Mobile Menu */}
+    {isMenuOpen && (
+      <div className="sm:hidden mt-4 mb-2 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
+
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
+            Language
+          </span>
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            EN
+          </div>
+        </div>
+
+        <a
+          href="#product"
+          className="block text-slate-700 hover:text-slate-900"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Product
+        </a>
+
+        <a
+          href="#how-it-works"
+          className="block text-slate-700 hover:text-slate-900"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          How it works
+        </a>
+
+        <a
+          href="#for-employers"
+          className="block text-slate-700 hover:text-slate-900"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          For employers
+        </a>
+
+        <div className="pt-2 flex gap-2">
+          <button
+            className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Log in
+          </button>
+          <button
+            className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Join waitlist
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+</header>
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-5 pt-10 pb-24">
         {/* HERO */}
@@ -488,7 +478,7 @@ export default function Home() {
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
         <span className="h-2 w-2 rounded-full bg-blue-500" />
-        Phase 1 · Arrival & foundations
+        <span>Phase 1 · Arrival &amp; foundations</span>
       </div>
       <ul className="text-slate-600 space-y-2">
         <li>• Orientation, onboarding and first language baseline.</li>
@@ -501,7 +491,7 @@ export default function Home() {
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
         <span className="h-2 w-2 rounded-full bg-emerald-500" />
-        Phase 2 · Deepening & practice
+        <span>Phase 2 · Deepening &amp; practice</span>
       </div>
       <ul className="text-slate-600 space-y-2">
         <li>• Job-related German, scenarios and role plays.</li>
@@ -514,7 +504,7 @@ export default function Home() {
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
         <span className="h-2 w-2 rounded-full bg-slate-600" />
-        Phase 3 · Job-ready & matching
+        <span>Phase 3 · Job-ready &amp; matching</span>
       </div>
       <ul className="text-slate-600 space-y-2">
         <li>• Interview preparation and workplace communication.</li>
