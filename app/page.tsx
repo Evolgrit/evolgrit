@@ -89,24 +89,29 @@ export default function Home() {
               <a
                 href="#product"
                 className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Product
               </a>
               <a
                 href="#how-it-works"
                 className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
               >
                 How it works
               </a>
               <a
                 href="#for-employers"
                 className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
               >
                 For employers
               </a>
 
               <div className="pt-2 flex gap-2">
                 <button className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm">
+                onClick={() => setIsMenuOpen(false)}
+                >
                   Log in
                 </button>
                 <button className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
