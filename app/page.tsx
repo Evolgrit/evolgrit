@@ -120,60 +120,57 @@ export default function Home() {
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-5 pt-10 pb-24">
     
-                {/* HERO */}
-        <section className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center mb-16">
-          {/* LEFT SIDE */}
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 mb-4">
-              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-              New · Private beta 2025 for motivated learners & employers
-            </div>
+{/* HERO */}
+<section className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center mb-16">
+  {/* LINKER TEIL */}
+  <div>
+    <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 mb-4">
+      <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+      New · Private beta 2026 for motivated learners & employers
+    </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[44px] font-semibold leading-tight tracking-tight mb-3">
-              AI-powered{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-                German learning & job coaching
-              </span>{" "}
-              for international talent.
-            </h1>
+    <h1 className="text-4xl sm:text-5xl lg:text-[44px] font-semibold leading-tight tracking-tight mb-3">
+      AI-powered{" "}
+      <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+        German learning & job coaching
+      </span>{" "}
+      for international talent.
+    </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
-              Evolgrit helps people who move to Germany build real-world
-              language skills, understand the culture, and find the right job –
-              with adaptive learning paths, personal mentoring, and clear
-              profiles for employers.
-            </p>
+    <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
+      Evolgrit helps people who move to Germany build real-world language
+      skills, understand the culture, and find the right job – with adaptive
+      learning paths, personal mentoring, and clear profiles for employers.
+    </p>
 
-            <div className="flex flex-wrap gap-3 mb-3">
-              <a
-                href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&body=Hi%20Evolgrit%20team,%0A%0AI'd%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
-                className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
-              >
-                Join the beta waitlist
-              </a>
-              <a
-                href="mailto:info@evolgrit.com?subject=Evolgrit%20Contact"
-                className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
-              >
-                Contact us
-              </a>
-            </div>
+    <div className="flex flex-wrap gap-3 mb-3">
+      <a
+        href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist"
+        className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
+      >
+        Join the beta waitlist
+      </a>
+      <a
+        href="mailto:info@evolgrit.com?subject=Evolgrit%20Contact"
+        className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-800 hover:bg-white shadow-sm inline-flex items-center justify-center"
+      >
+        Contact us
+      </a>
+    </div>
 
-            <p className="text-[12px] text-slate-500">
-              <span className="text-emerald-600 font-medium">
-                Built for people first.
-              </span>{" "}
-              We start with a small cohort of learners and partner employers to
-              shape the product together.
-            </p>
-          </div>
+    <p className="text-[12px] text-slate-500">
+      <span className="text-emerald-600 font-medium">Built for people first.</span>{" "}
+      We start with a small cohort of learners and partner employers to
+      shape the product together.
+    </p>
+  </div>
 
-          {/* RIGHT SIDE – dashboard preview */}
-          <aside
-            aria-label="Preview of Evolgrit dashboard"
-            className="rounded-2xl border border-slate-200/70 bg-white/90 shadow-xl shadow-slate-900/5 p-4 sm:p-5 backdrop-blur"
-          >
-            <div className="flex items-center justify-between mb-3">
+  {/* RECHTER TEIL */}
+  <aside
+    aria-label="Preview of Evolgrit dashboard"
+    className="rounded-2xl border border-slate-200/70 bg-white/90 shadow-xl shadow-slate-900/5 p-4 sm:p-5 backdrop-blur"
+  >
+                <div className="flex items-center justify-between mb-3">
               <div className="text-[12px] text-slate-500">
                 Evolgrit ·{" "}
                 <span className="font-semibold text-slate-800">
@@ -267,61 +264,36 @@ export default function Home() {
         </section>
 {/* AUDIENCE SECTION */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
-  <h2 className="text-3xl font-semibold text-slate-900 mb-10 text-center">
+  <h2 className="text-3xl font-semibold text-slate-900 text-center mb-12">
     Who Evolgrit is built for
   </h2>
 
-  <div className="grid gap-6 md:grid-cols-3 text-sm">
-    {/* LEARNERS */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center mb-4 text-lg font-bold">
-        L
-      </div>
+  <div className="grid gap-6 md:grid-cols-3">
+
+    {/* Learners */}
+    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
+      <div className="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-lg font-bold mb-4">L</div>
       <h3 className="font-semibold text-slate-900 mb-2">Learners</h3>
-      <p className="text-slate-600 mb-4">
-        Build real German skills, cultural confidence and job readiness with a structured 6–12 month hybrid journey.
-      </p>
-      <a
-        href="#how-it-works"
-        className="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-      >
-        See the learning journey
-      </a>
+      <p className="text-slate-600 mb-4">6–12 month hybrid journey to build real German skills, culture & job readiness.</p>
+      <a className="text-blue-600 font-medium text-sm hover:underline" href="#how-it-works">See journey →</a>
     </div>
 
-    {/* EMPLOYERS */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center mb-4 text-lg font-bold">
-        E
-      </div>
+    {/* Employers */}
+    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
+      <div className="h-10 w-10 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center text-lg font-bold mb-4">E</div>
       <h3 className="font-semibold text-slate-900 mb-2">Employers</h3>
-      <p className="text-slate-600 mb-4">
-        Access committed international talent who grow into your roles with transparent readiness tracking.
-      </p>
-      <a
-        href="#for-employers"
-        className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
-      >
-        Hire with Evolgrit
-      </a>
+      <p className="text-slate-600 mb-4">A pipeline of motivated international candidates with transparent readiness.</p>
+      <a className="text-emerald-600 font-medium text-sm hover:underline" href="#for-employers">Hire talent →</a>
     </div>
 
-    {/* MENTORS */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center mb-4 text-lg font-bold">
-        M
-      </div>
+    {/* Mentors */}
+    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
+      <div className="h-10 w-10 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center text-lg font-bold mb-4">M</div>
       <h3 className="font-semibold text-slate-900 mb-2">Mentors</h3>
-      <p className="text-slate-600 mb-4">
-        Support learners across language, culture and mindset — and help shape the next generation of global talent.
-      </p>
-      <a
-        href="mailto:info@evolgrit.com?subject=Mentor%20Application"
-        className="inline-flex items-center justify-center rounded-full bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
-      >
-        Become a mentor
-      </a>
+      <p className="text-slate-600 mb-4">Support learners in language, culture and mindset through 1:1 coaching.</p>
+      <a className="text-purple-600 font-medium text-sm hover:underline" href="mailto:info@evolgrit.com?subject=Mentor%20Application">Become a mentor →</a>
     </div>
+
   </div>
 </section>
         {/* PRODUCT SECTION */}
