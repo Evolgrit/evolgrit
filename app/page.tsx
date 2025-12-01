@@ -126,23 +126,21 @@ export default function Home() {
   <div>
     <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 mb-4">
       <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-      New · Private beta 2026 for motivated learners & employers
+New · Private beta 2026 for international learners & employers
     </div>
 
-    <h1 className="text-4xl sm:text-5xl lg:text-[44px] font-semibold leading-tight tracking-tight mb-3">
-      AI-powered{" "}
-      <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-        German learning & job coaching
-      </span>{" "}
-      for international talent.
-    </h1>
-
-    <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
-      Evolgrit helps people who move to Germany build real-world language
-      skills, understand the culture, and find the right job – with adaptive
-      learning paths, personal mentoring, and clear profiles for employers.
-    </p>
-
+<h1 className="text-4xl sm:text-[52px] font-semibold leading-snug tracking-tight mb-4">
+  AI-powered{" "}
+  <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+    German learning & job coaching
+  </span>{" "}
+  for international talent.
+</h1>
+<p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
+  Evolgrit is a 6–12 month hybrid journey that combines AI-powered
+  German learning, cultural readiness and job preparation — so
+  international talent can truly arrive and stay in Germany.
+</p>
     <div className="flex flex-wrap gap-3 mb-3">
       <a
         href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist"
@@ -297,11 +295,11 @@ export default function Home() {
   </div>
 </section>
         {/* PRODUCT SECTION */}
-        <section
-          id="product"
-          className="max-w-6xl mx-auto mt-20 px-5 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start"
-        >
-          <div>
+<section
+  id="product"
+  className="scroll-mt-24 max-w-6xl mx-auto mt-20 px-5 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start"
+>
+            <div>
             <h2 className="text-3xl font-semibold text-slate-900 mb-4">
               A hybrid program for language, culture & careers.
             </h2>
@@ -372,9 +370,9 @@ export default function Home() {
 {/* HOW IT WORKS SECTION */}
 <section
   id="how-it-works"
-  className="max-w-6xl mx-auto mt-24 px-5"
+  className="scroll-mt-24 max-w-6xl mx-auto mt-24 px-5"
 >
-  <h2 className="text-3xl font-semibold text-slate-900 mb-8 text-center">
+    <h2 className="text-3xl font-semibold text-slate-900 mb-8 text-center">
     How Evolgrit works for learners
   </h2>
 
@@ -491,11 +489,11 @@ export default function Home() {
   </div>
 </section>
         {/* FOR EMPLOYERS SECTION */}
-        <section
-          id="for-employers"
-          className="max-w-6xl mx-auto mt-24 px-5 mb-24"
-        >
-          <div className="grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center">
+<section
+  id="for-employers"
+  className="scroll-mt-24 max-w-6xl mx-auto mt-24 px-5 mb-24"
+>
+            <div className="grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center">
             <div>
               <h2 className="text-3xl font-semibold text-slate-900 mb-4">
                 For employers who need international talent to actually stay.
