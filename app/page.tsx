@@ -262,8 +262,11 @@ export default function Home() {
 <div
   className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600"
 >
+<div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
   <span className="h-2 w-2 rounded-full bg-emerald-500" />
-  Built together with learners and employers in one loop.
+  <span>
+    Built together with learners and employers in one loop.
+  </span>
 </div>
         </section>
 {/* AUDIENCE SECTION */}
