@@ -250,24 +250,23 @@ export default function Home() {
     </div>
   </aside>
 </section>
-        {/* VALUE STRIP (HIGHLIGHTS) */}
-        <section className="mt-10 grid gap-3 md:grid-cols-3 text-[13px]" id="product-highlights">
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Adaptive German learning based on real job contexts, not textbook dialogs.
-          </div>
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            One profile that combines language level, skills and work history – ready for employers.
-<div
-  className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600"
->
-<div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
-  <span className="h-2 w-2 rounded-full bg-emerald-500" />
-  <span>
+{/* VALUE STRIP (HIGHLIGHTS) */}
+<section className="mt-10 grid gap-3 md:grid-cols-3 text-[13px]" id="product-highlights">
+  <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
+    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+    Adaptive German learning based on real job contexts, not textbook dialogs.
+  </div>
+
+  <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
+    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+    One profile that combines language level, skills and work history – ready for employers.
+  </div>
+
+  <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-slate-600">
+    <span className="h-2 w-2 rounded-full bg-emerald-500" />
     Built together with learners and employers in one loop.
-  </span>
-</div>
+  </div>
+</section>
 {/* AUDIENCE SECTION */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
   <h2 className="text-3xl font-semibold text-slate-900 text-center mb-12">
