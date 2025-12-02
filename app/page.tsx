@@ -493,220 +493,231 @@ export default function Home() {
     </div>
   </div>
 </section>
-{/* PROGRAM TIMELINE SECTION */}
-<section className="max-w-6xl mx-auto mt-24 px-5">
-  <h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
-    A 6–12 month journey – not just a course.
-  </h2>
-<p className="text-slate-600 text-sm sm:text-base mb-8 text-center max-w-2xl mx-auto">
-  Evolgrit is structured in three phases – from arrival to job-ready –
-  so that learners can grow step by step without burning out.
-</p>
-  <div className="grid gap-6 md:grid-cols-3 text-sm">
-    {/* Phase 1 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-blue-500" />
-        <span>Phase 1 · Arrival &amp; foundations</span>
-      </div>
-      <ul className="text-slate-600 space-y-2">
-        <li>• Orientation, onboarding and first language baseline.</li>
-        <li>• Focus on everyday communication and confidence.</li>
-        <li>• Early contact with mentors and peer community.</li>
-      </ul>
-    </div>
+      {/* PROGRAM TIMELINE SECTION */}
+      <section className="max-w-6xl mx-auto mt-24 px-5">
+        <h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
+          A 6–12 month journey – not just a course.
+        </h2>
+        <p className="text-slate-600 text-sm sm:text-base mb-8 text-center max-w-2xl mx-auto">
+          Evolgrit is structured in three phases – from arrival to job-ready –
+          so that learners can grow step by step without burning out.
+        </p>
 
-    {/* Phase 2 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-emerald-500" />
-        <span>Phase 2 · Deepening &amp; practice</span>
-      </div>
-      <ul className="text-slate-600 space-y-2">
-        <li>• Job-related German, scenarios and role plays.</li>
-        <li>• Alternating tasks to keep motivation high.</li>
-        <li>• Regular feedback from mentors and AI-coach.</li>
-      </ul>
-    </div>
-
-    {/* Phase 3 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-slate-600" />
-        <span>Phase 3 · Job-ready &amp; matching</span>
-      </div>
-      <ul className="text-slate-600 space-y-2">
-        <li>• Interview preparation and workplace communication.</li>
-        <li>• Matching with partner employers or education paths.</li>
-        <li>• Clear next steps: job, apprenticeship or further training.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-        {/* FOR EMPLOYERS SECTION */}
-<section
-  id="for-employers"
-  className="scroll-mt-24 max-w-6xl mx-auto mt-24 px-5 mb-24"
->
-            <div className="grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center">
-            <div>
-              <h2 className="text-3xl font-semibold text-slate-900 mb-4">
-                For employers who need international talent to actually stay.
-              </h2>
-              <p className="text-slate-600 mb-6 text-sm sm:text-base">
-                Evolgrit gives you access to motivated international candidates
-                who are not only learning German – they are actively preparing
-                for life and work in your organisation.
-              </p>
-
-              <ul className="text-slate-600 space-y-2 text-sm">
-                <li>• Pre-screened candidates with transparent progress.</li>
-                <li>• One place to see language level, skills and readiness.</li>
-                <li>• Reduced onboarding risk through structured support.</li>
-                <li>• A partner who understands both talent and employers.</li>
-              </ul>
+        <div className="grid gap-6 md:grid-cols-3 text-sm">
+          {/* Phase 1 */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-blue-500" />
+              <span>Phase 1 · Arrival &amp; foundations</span>
             </div>
+            <ul className="text-slate-600 space-y-2">
+              <li>• Orientation, onboarding and first language baseline.</li>
+              <li>• Focus on everyday communication and confidence.</li>
+              <li>• Early contact with mentors and peer community.</li>
+            </ul>
+          </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-sm space-y-3">
-              <h3 className="font-semibold text-slate-900">
-                What you can expect as a partner
-              </h3>
-              <p className="text-slate-600">
-                We start small with pilot cohorts and align the program with
-                your roles, locations and timelines. You get clear expectations
-                on language, skills and support.
-              </p>
-              <p className="text-slate-600">
-                In later stages, Evolgrit can plug into your existing talent
-                pipeline and help you build a repeatable model for
-                international hiring.
-              </p>
-              <div className="pt-2">
-                <a
-                  href="mailto:info@evolgrit.com?subject=Evolgrit%20Employer%20Partnership"
-                  className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
-                >
-                  Talk to us about hiring
-                </a>
-              </div>
+          {/* Phase 2 */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span>Phase 2 · Deepening &amp; practice</span>
+            </div>
+            <ul className="text-slate-600 space-y-2">
+              <li>• Job-related German, scenarios and role plays.</li>
+              <li>• Alternating tasks to keep motivation high.</li>
+              <li>• Regular feedback from mentors and AI-coach.</li>
+            </ul>
+          </div>
+
+          {/* Phase 3 */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-slate-600" />
+              <span>Phase 3 · Job-ready &amp; matching</span>
+            </div>
+            <ul className="text-slate-600 space-y-2">
+              <li>• Interview preparation and workplace communication.</li>
+              <li>• Matching with partner employers or education paths.</li>
+              <li>• Clear next steps: job, apprenticeship or further training.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* FOR EMPLOYERS SECTION */}
+      <section
+        id="for-employers"
+        className="scroll-mt-24 max-w-6xl mx-auto mt-24 px-5 mb-24"
+      >
+        <div className="grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center">
+          <div>
+            <h2 className="text-3xl font-semibold text-slate-900 mb-4">
+              For employers who need international talent to actually stay.
+            </h2>
+            <p className="text-slate-600 mb-6 text-sm sm:text-base">
+              Evolgrit gives you access to motivated international candidates
+              who are not only learning German – they are actively preparing
+              for life and work in your organisation.
+            </p>
+
+            <ul className="text-slate-600 space-y-2 text-sm">
+              <li>• Pre-screened candidates with transparent progress.</li>
+              <li>• One place to see language level, skills and readiness.</li>
+              <li>• Reduced onboarding risk through structured support.</li>
+              <li>• A partner who understands both talent and employers.</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-sm space-y-3">
+            <h3 className="font-semibold text-slate-900">
+              What you can expect as a partner
+            </h3>
+            <p className="text-slate-600">
+              We start small with pilot cohorts and align the program with your
+              roles, locations and timelines. You get clear expectations on
+              language, skills and support.
+            </p>
+            <p className="text-slate-600">
+              In later stages, Evolgrit can plug into your existing talent
+              pipeline and help you build a repeatable model for international
+              hiring.
+            </p>
+            <div className="pt-2">
+              <a
+                href="mailto:info@evolgrit.com?subject=Evolgrit%20Employer%20Partnership"
+                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+              >
+                Talk to us about hiring
+              </a>
             </div>
           </div>
-        </section>
-{/* PHASE DETAIL SECTION – Apple-like layout */}
-<section className="max-w-6xl mx-auto mt-24 px-5 grid gap-12 lg:grid-cols-[minmax(260px,320px),1fr] items-start">
-  {/* LEFT: Phone Mockup */}
-  <div className="lg:sticky top-32">
-    <div className="mx-auto w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
-      <span className="text-slate-400 text-xs">
-        Evolgrit app preview – phases 1–3
-      </span>
-    </div>
-  </div>
+        </div>
+      </section>
 
-  {/* RIGHT: Phases */}
-  <div className="space-y-10 text-sm">
-    {/* Phase 1 */}
-    <div id="phase-1">
-      <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-blue-500" />
-        Phase 1 · Arrival & foundations
-      </div>
-      <h3 className="text-xl font-semibold text-slate-900 mb-2">
-        Land softly in Germany.
-      </h3>
-      <p className="text-slate-600 mb-2">
-        Orientation, onboarding and first language baseline – with a focus
-        on everyday communication and feeling at home.
-      </p>
-      <ul className="text-slate-600 space-y-1">
-        <li>• Orientation and personal starting point check.</li>
-        <li>• Everyday German for living and basic work situations.</li>
-        <li>• Early contact with mentors and peer community.</li>
-      </ul>
-    </div>
+      {/* PHASE DETAIL SECTION – Apple-like layout */}
+      <section className="max-w-6xl mx-auto mt-24 px-5 grid gap-12 lg:grid-cols-[minmax(260px,320px),1fr] items-start">
+        {/* LEFT: Phone Mockup */}
+        <div className="lg:sticky top-32">
+          <div className="mx-auto w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
+            <span className="text-slate-400 text-xs">
+              Evolgrit app preview – phases 1–3
+            </span>
+          </div>
+        </div>
 
-    {/* Phase 2 */}
-    <div id="phase-2">
-      <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-emerald-500" />
-        Phase 2 · Deepening & practice
-      </div>
-      <h3 className="text-xl font-semibold text-slate-900 mb-2">
-        Practice for real jobs and real life.
-      </h3>
-      <p className="text-slate-600 mb-2">
-        Job-related German, scenarios and role plays – with alternating
-        task formats to keep motivation high.
-      </p>
-      <ul className="text-slate-600 space-y-1">
-        <li>• Job-specific language for logistics, care, childcare and trades.</li>
-        <li>• Changing formats (video, tasks, group sessions) to avoid burnout.</li>
-        <li>• Regular feedback from mentors and AI-coach.</li>
-      </ul>
-    </div>
+        {/* RIGHT: Phases */}
+        <div className="space-y-10 text-sm">
+          {/* Phase 1 */}
+          <div id="phase-1">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-blue-500" />
+              Phase 1 · Arrival & foundations
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">
+              Land softly in Germany.
+            </h3>
+            <p className="text-slate-600 mb-2">
+              Orientation, onboarding and first language baseline – with a focus
+              on everyday communication and feeling at home.
+            </p>
+            <ul className="text-slate-600 space-y-1">
+              <li>• Orientation and personal starting point check.</li>
+              <li>• Everyday German for living and basic work situations.</li>
+              <li>• Early contact with mentors and peer community.</li>
+            </ul>
+          </div>
 
-    {/* Phase 3 */}
-    <div id="phase-3">
-      <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
-        <span className="h-2 w-2 rounded-full bg-slate-600" />
-        Phase 3 · Job-ready & matching
-      </div>
-      <h3 className="text-xl font-semibold text-slate-900 mb-2">
-        Move confidently into work.
-      </h3>
-      <p className="text-slate-600 mb-2">
-        Interview preparation, workplace communication and matching with
-        partner employers or education paths.
-      </p>
-      <ul className="text-slate-600 space-y-1">
-        <li>• Practice for interviews and typical workplace conversations.</li>
-        <li>• Matching with partner employers or education partners.</li>
-        <li>• Clear next steps: job, apprenticeship or further training.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-        {/* BRANDING SECTION */}
-        <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
-          <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
-          <p className="mb-3">
-            We believe every person can improve their future — through evolution{" "}
-            <em>(Evol-)</em> and resilience <em>(-grit)</em>.
-          </p>
-          <p>
-            Evolgrit stands for the ability to keep moving forward despite
-            challenges, to learn, to grow, and to build a new life.
-          </p>
-        </section>
-        {/* FINAL CTA BAR */}
-<section className="max-w-6xl mx-auto mt-16 px-5">
-  <div className="rounded-2xl bg-slate-900 text-slate-50 px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-    <div>
-      <h2 className="text-xl sm:text-2xl font-semibold mb-1">
-        Ready to shape the next Evolgrit cohort?
-      </h2>
-      <p className="text-slate-300 text-sm sm:text-base">
-        Whether you&apos;re a learner, employer or mentor – we&apos;d love to
-        explore how Evolgrit can work for you.
-      </p>
-    </div>
-    <div className="flex flex-wrap gap-3">
-      <a
-        href="mailto:info@evolgrit.com?subject=Join%20Evolgrit%20beta"
-        className="rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-      >
-        Join the beta waitlist
-      </a>
-      <a
-        href="mailto:info@evolgrit.com?subject=Evolgrit%20intro%20call"
-        className="rounded-full border border-slate-500 px-4 py-2 text-sm font-medium text-slate-50 hover:bg-slate-800"
-      >
-        Book an intro call
-      </a>
-    </div>
-  </div>
-</section>
-      </main>
+          {/* Phase 2 */}
+          <div id="phase-2">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              Phase 2 · Deepening & practice
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">
+              Practice for real jobs and real life.
+            </h3>
+            <p className="text-slate-600 mb-2">
+              Job-related German, scenarios and role plays – with alternating
+              task formats to keep motivation high.
+            </p>
+            <ul className="text-slate-600 space-y-1">
+              <li>
+                • Job-specific language for logistics, care, childcare and
+                trades.
+              </li>
+              <li>
+                • Changing formats (video, tasks, group sessions) to avoid
+                burnout.
+              </li>
+              <li>• Regular feedback from mentors and AI-coach.</li>
+            </ul>
+          </div>
+
+          {/* Phase 3 */}
+          <div id="phase-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
+              <span className="h-2 w-2 rounded-full bg-slate-600" />
+              Phase 3 · Job-ready & matching
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">
+              Move confidently into work.
+            </h3>
+            <p className="text-slate-600 mb-2">
+              Interview preparation, workplace communication and matching with
+              partner employers or education paths.
+            </p>
+            <ul className="text-slate-600 space-y-1">
+              <li>• Practice for interviews and typical workplace conversations.</li>
+              <li>• Matching with partner employers or education partners.</li>
+              <li>• Clear next steps: job, apprenticeship or further training.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* BRANDING SECTION */}
+      <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
+        <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
+        <p className="mb-3">
+          We believe every person can improve their future — through evolution{" "}
+          <em>(Evol-)</em> and resilience <em>(-grit)</em>.
+        </p>
+        <p>
+          Evolgrit stands for the ability to keep moving forward despite
+          challenges, to learn, to grow, and to build a new life.
+        </p>
+      </section>
+
+      {/* FINAL CTA BAR */}
+      <section className="max-w-6xl mx-auto mt-16 px-5">
+        <div className="rounded-2xl bg-slate-900 text-slate-50 px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-semibold mb-1">
+              Ready to shape the next Evolgrit cohort?
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base">
+              Whether you&apos;re a learner, employer or mentor – we&apos;d
+              love to explore how Evolgrit can work for you.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="mailto:info@evolgrit.com?subject=Join%20Evolgrit%20beta"
+              className="rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+            >
+              Join the beta waitlist
+            </a>
+            <a
+              href="mailto:info@evolgrit.com?subject=Evolgrit%20intro%20call"
+              className="rounded-full border border-slate-500 px-4 py-2 text-sm font-medium text-slate-50 hover:bg-slate-800"
+            >
+              Book an intro call
+            </a>
+          </div>
+        </div>
+      </section>
+            </main>
     </div>
   );
 }
