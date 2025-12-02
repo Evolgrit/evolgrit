@@ -671,6 +671,7 @@ export default function Home() {
     </div>
   </div>
 </section>
+
         {/* BRANDING SECTION */}
         <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
           <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
