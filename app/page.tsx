@@ -595,19 +595,14 @@ export default function Home() {
 {/* PHASE DETAIL SECTION – Apple-like layout */}
 <section className="max-w-6xl mx-auto mt-24 px-5 grid gap-12 lg:grid-cols-[minmax(260px,320px),1fr] items-start">
   {/* LEFT: Phone Mockup */}
-  <div>
-    <div className="mx-auto w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center mb-8 lg:mb-0">
+  <div className="lg:sticky top-32">
+    <div className="mx-auto w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
       <span className="text-slate-400 text-xs">
         Evolgrit app preview – phases 1–3
       </span>
     </div>
   </div>
 
-  {/* RIGHT: Phases */}
-  <div className="space-y-10 text-sm">
-    {/* Phase 1, 2, 3 ... */}
-  </div>
-</section>
   {/* RIGHT: Phases */}
   <div className="space-y-10 text-sm">
     {/* Phase 1 */}
@@ -671,7 +666,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
         {/* BRANDING SECTION */}
         <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
           <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
