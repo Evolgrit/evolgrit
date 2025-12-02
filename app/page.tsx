@@ -268,7 +268,6 @@ export default function Home() {
     Built together with learners and employers in one loop.
   </span>
 </div>
-        </section>
 {/* AUDIENCE SECTION */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
   <h2 className="text-3xl font-semibold text-slate-900 text-center mb-12">
