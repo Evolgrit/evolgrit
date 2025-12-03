@@ -133,14 +133,19 @@ export default function Home() {
 {/* HERO */}
 <section className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center mb-16">
   {/* LEFT SIDE – TEXT */}
-  <div>
-    <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 mb-4">
-      <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-      Private beta 2026 · international learners & employers
-    </div>
+<div>
+  <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 mb-3">
+    <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+    Private beta 2026 · international learners & employers
+  </div>
 
-    <h1 className="text-4xl sm:text-[52px] font-semibold leading-snug tracking-tight mb-4">
-      AI-powered{" "}
+  {/* Category / Positioning line */}
+  <p className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-[0.16em] uppercase mb-3">
+    Not a language school. A European talent &amp; integration engine.
+  </p>
+
+  <h1 className="text-4xl sm:text-[52px] font-semibold leading-snug tracking-tight mb-4">
+          AI-powered{" "}
       <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
         German learning &amp; job coaching
       </span>{" "}
@@ -280,7 +285,12 @@ export default function Home() {
       <div className="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-lg font-bold mb-4">L</div>
       <h3 className="font-semibold text-slate-900 mb-2">Learners</h3>
       <p className="text-slate-600 mb-4">6–12 month hybrid journey to build real German skills, culture & job readiness.</p>
-      <a className="text-blue-600 font-medium text-sm hover:underline" href="#how-it-works">See journey →</a>
+<a
+  className="text-blue-600 font-medium text-sm hover:underline"
+  href="/learner-journey"
+>
+  See learner journey →
+</a>
     </div>
 
     {/* Employers */}
@@ -318,9 +328,9 @@ export default function Home() {
       <p className="text-slate-600 mb-4">
         Warehouse, delivery & supply-chain roles with quick placement pathways.
       </p>
-      <a href="#" className="text-blue-600 font-medium hover:underline">
-        See logistics pathway →
-      </a>
+<a href="#phase-2" className="text-blue-600 font-medium hover:underline">
+  See logistics pathway →
+</a>
     </div>
 
     {/* Drivers */}
@@ -332,9 +342,9 @@ export default function Home() {
       <p className="text-slate-600 mb-4">
         Bus & van drivers — in high demand across Europe.
       </p>
-      <a href="#" className="text-emerald-600 font-medium hover:underline">
-        See driver pathway →
-      </a>
+<a href="#phase-2" className="text-emerald-600 font-medium hover:underline">
+  See driver pathway →
+</a>
     </div>
 
     {/* Kindergarden / Care */}
@@ -346,9 +356,9 @@ export default function Home() {
       <p className="text-slate-600 mb-4">
         Kindergarden assistants & entry-care roles with cultural readiness support.
       </p>
-      <a href="#" className="text-purple-600 font-medium hover:underline">
-        See care pathway →
-      </a>
+<a href="#phase-2" className="text-purple-600 font-medium hover:underline">
+  See care pathway →
+</a>
     </div>
 
   </div>
@@ -363,10 +373,10 @@ export default function Home() {
               A hybrid program for language, culture & careers.
             </h2>
 <p className="text-slate-600 mb-6 text-sm sm:text-base">
-  Evolgrit is designed as a 6–12 month journey where learners build
-  German, cultural confidence and job readiness in parallel. AI-guided
-  modules, changing task formats and regular human mentoring keep
-  motivation high – and make sure progress is real, not just on paper.
+  With Evolgrit, learners build German, cultural confidence and job
+  readiness in parallel. AI-guided modules, changing task formats and
+  regular human mentoring keep motivation high – and make sure progress
+  is real, not just on paper.
 </p>
             <div className="space-y-4">
               <div className="flex gap-3">
@@ -495,9 +505,9 @@ export default function Home() {
 </section>
       {/* PROGRAM TIMELINE SECTION */}
       <section className="max-w-6xl mx-auto mt-24 px-5">
-        <h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
-          A 6–12 month journey – not just a course.
-        </h2>
+<h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
+  Three phases – not just a course.
+</h2>
         <p className="text-slate-600 text-sm sm:text-base mb-8 text-center max-w-2xl mx-auto">
           Evolgrit is structured in three phases – from arrival to job-ready –
           so that learners can grow step by step without burning out.
@@ -523,11 +533,11 @@ export default function Home() {
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               <span>Phase 2 · Deepening &amp; practice</span>
             </div>
-            <ul className="text-slate-600 space-y-2">
-              <li>• Job-related German, scenarios and role plays.</li>
-              <li>• Alternating tasks to keep motivation high.</li>
-              <li>• Regular feedback from mentors and AI-coach.</li>
-            </ul>
+<ul className="text-slate-600 space-y-2">
+  <li>• Job-related German, scenarios and role plays.</li>
+  <li>• Alternating tasks to keep motivation high.</li>
+  <li>• Regular feedback from mentors and AI-coach.</li>
+</ul>
           </div>
 
           {/* Phase 3 */}
