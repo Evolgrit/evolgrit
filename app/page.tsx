@@ -595,87 +595,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PHASE DETAIL SECTION – Apple-like layout */}
-      <section className="max-w-6xl mx-auto mt-24 px-5 grid gap-12 lg:grid-cols-[minmax(260px,320px),1fr] items-start">
-        {/* LEFT: Phone Mockup */}
-        <div className="lg:sticky top-32">
-          <div className="mx-auto w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
-            <span className="text-slate-400 text-xs">
-              Evolgrit app preview – phases 1–3
-            </span>
-          </div>
-        </div>
+{/* PHASE DETAIL SECTION – Apple-like layout */}
+<section className="max-w-6xl mx-auto mt-24 px-5 grid gap-12 lg:grid-cols-[1.4fr,minmax(260px,320px)] items-start">
+  {/* LEFT: Phases (scrollt) */}
+  <div className="order-2 lg:order-1 space-y-24 text-sm lg:pr-8">
+    {/* Phase 1 */}
+    <div
+      id="phase-1"
+      className="min-h-[60vh] flex flex-col justify-center"
+    >
+      <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
+        <span className="h-2 w-2 rounded-full bg-blue-500" />
+        Phase 1 · Arrival & foundations
+      </div>
+      <h3 className="text-xl font-semibold text-slate-900 mb-2">
+        Land softly in Germany.
+      </h3>
+      <p className="text-slate-600 mb-2">
+        Orientation, onboarding and first language baseline – with a focus
+        on everyday communication and feeling at home.
+      </p>
+      <ul className="text-slate-600 space-y-1">
+        <li>• Orientation and personal starting point check.</li>
+        <li>• Everyday German for living and basic work situations.</li>
+        <li>• Early contact with mentors and peer community.</li>
+      </ul>
+    </div>
 
-        {/* RIGHT: Phases */}
-        <div className="space-y-10 text-sm">
-          {/* Phase 1 */}
-          <div id="phase-1">
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-blue-500" />
-              Phase 1 · Arrival & foundations
-            </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
-              Land softly in Germany.
-            </h3>
-            <p className="text-slate-600 mb-2">
-              Orientation, onboarding and first language baseline – with a focus
-              on everyday communication and feeling at home.
-            </p>
-            <ul className="text-slate-600 space-y-1">
-              <li>• Orientation and personal starting point check.</li>
-              <li>• Everyday German for living and basic work situations.</li>
-              <li>• Early contact with mentors and peer community.</li>
-            </ul>
-          </div>
+    {/* Phase 2 */}
+    <div
+      id="phase-2"
+      className="min-h-[60vh] flex flex-col justify-center"
+    >
+      <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
+        <span className="h-2 w-2 rounded-full bg-emerald-500" />
+        Phase 2 · Deepening & practice
+      </div>
+      <h3 className="text-xl font-semibold text-slate-900 mb-2">
+        Practice for real jobs and real life.
+      </h3>
+      <p className="text-slate-600 mb-2">
+        Job-related German, scenarios and role plays – with alternating
+        task formats to keep motivation high.
+      </p>
+      <ul className="text-slate-600 space-y-1">
+        <li>• Job-specific language for logistics, care, childcare and trades.</li>
+        <li>• Changing formats (video, tasks, group sessions) to avoid burnout.</li>
+        <li>• Regular feedback from mentors and AI-coach.</li>
+      </ul>
+    </div>
 
-          {/* Phase 2 */}
-          <div id="phase-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              Phase 2 · Deepening & practice
-            </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
-              Practice for real jobs and real life.
-            </h3>
-            <p className="text-slate-600 mb-2">
-              Job-related German, scenarios and role plays – with alternating
-              task formats to keep motivation high.
-            </p>
-            <ul className="text-slate-600 space-y-1">
-              <li>
-                • Job-specific language for logistics, care, childcare and
-                trades.
-              </li>
-              <li>
-                • Changing formats (video, tasks, group sessions) to avoid
-                burnout.
-              </li>
-              <li>• Regular feedback from mentors and AI-coach.</li>
-            </ul>
-          </div>
+    {/* Phase 3 */}
+    <div
+      id="phase-3"
+      className="min-h-[60vh] flex flex-col justify-center"
+    >
+      <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
+        <span className="h-2 w-2 rounded-full bg-slate-600" />
+        Phase 3 · Job-ready & matching
+      </div>
+      <h3 className="text-xl font-semibold text-slate-900 mb-2">
+        Move confidently into work.
+      </h3>
+      <p className="text-slate-600 mb-2">
+        Interview preparation, workplace communication and matching with
+        partner employers or education paths.
+      </p>
+      <ul className="text-slate-600 space-y-1">
+        <li>• Practice for interviews and typical workplace conversations.</li>
+        <li>• Matching with partner employers or education partners.</li>
+        <li>• Clear next steps: job, apprenticeship or further training.</li>
+      </ul>
+    </div>
+  </div>
 
-          {/* Phase 3 */}
-          <div id="phase-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-slate-600" />
-              Phase 3 · Job-ready & matching
-            </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
-              Move confidently into work.
-            </h3>
-            <p className="text-slate-600 mb-2">
-              Interview preparation, workplace communication and matching with
-              partner employers or education paths.
-            </p>
-            <ul className="text-slate-600 space-y-1">
-              <li>• Practice for interviews and typical workplace conversations.</li>
-              <li>• Matching with partner employers or education partners.</li>
-              <li>• Clear next steps: job, apprenticeship or further training.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
+  {/* RIGHT: Phone Mockup (sticky) */}
+  <div className="order-1 lg:order-2 lg:sticky lg:top-32 flex justify-center lg:justify-end">
+    <div className="w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
+      {/* Platzhalter – später Screenshot / Diagramme */}
+      <span className="text-slate-400 text-xs text-center px-4">
+        Evolgrit app preview – phases 1–3
+      </span>
+    </div>
+  </div>
+</section>
       {/* BRANDING SECTION */}
       <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
         <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
