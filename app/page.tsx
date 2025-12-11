@@ -52,10 +52,13 @@ export default function Home() {
                 For employers
               </a>
 
-              <button className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm">
-                Log in
-              </button>
-              <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
+  <a
+    href="/login"
+    className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm"
+  >
+    Log in
+  </a>
+                  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
                 Join waitlist
               </button>
             </div>
@@ -108,20 +111,21 @@ export default function Home() {
                 For employers
               </a>
 
-              <div className="pt-2 flex gap-2">
-                <button
-                  className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Log in
-                </button>
-                <button
-                  className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Join waitlist
-                </button>
-              </div>
+<div className="pt-2 flex gap-2">
+  <a
+    href="/login"
+    className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm flex items-center justify-center text-slate-700"
+    onClick={() => setIsMenuOpen(false)}
+  >
+    Log in
+  </a>
+  <button
+    className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
+    onClick={() => setIsMenuOpen(false)}
+  >
+    Join waitlist
+  </button>
+</div>
             </div>
           )}
         </div>
@@ -689,19 +693,18 @@ export default function Home() {
     </div>
   </div>
 </section>
-      {/* BRANDING SECTION */}
-      <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
-        <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
-        <p className="mb-3">
-          We believe every person can improve their future — through evolution{" "}
-          <em>(Evol-)</em> and resilience <em>(-grit)</em>.
-        </p>
-        <p>
-          Evolgrit stands for the ability to keep moving forward despite
-          challenges, to learn, to grow, and to build a new life.
-        </p>
-      </section>
-
+{/* BRANDING SECTION */}
+<section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
+  <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
+  <p className="mb-3">
+    We believe every person can improve their future — through evolution{" "}
+    <em>(Evol-)</em> and grit <em>(-grit)</em>.
+  </p>
+  <p>
+    Evolgrit stands for the ability to keep going despite challenges, to
+    learn, to grow and to build a new life.
+  </p>
+</section>
       {/* FINAL CTA BAR */}
       <section className="max-w-6xl mx-auto mt-16 px-5">
         <div className="rounded-2xl bg-slate-900 text-slate-50 px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
