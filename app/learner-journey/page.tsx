@@ -1,9 +1,150 @@
 'use client';
 
+import { useState } from "react";
+
 export default function LearnerJourneyPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
+      {/* HEADER / NAVBAR – gleiches Design wie Startseite */}
+      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
+        <div className="max-w-6xl mx-auto px-5 py-4">
+          <nav className="flex items-center justify-between gap-4">
+            {/* Logo + Title */}
+            <button
+              type="button"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+              className="flex items-center gap-2"
+            >
+              <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
+                E
+              </div>
+              <div>
+                <div className="text-sm font-semibold tracking-[0.18em] uppercase">
+                  Evolgrit
+                </div>
+                <div className="text-[11px] text-slate-500">
+                  Language · Jobs · AI
+                </div>
+              </div>
+            </button>
+
+            {/* Desktop Menu */}
+            <div className="hidden sm:flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
+                EN
+              </div>
+
+              <a
+                href="/#product"
+                className="text-slate-500 hover:text-slate-900"
+              >
+                Product
+              </a>
+              <a
+                href="/#how-it-works"
+                className="text-slate-500 hover:text-slate-900"
+              >
+                How it works
+              </a>
+              <a
+                href="/#for-employers"
+                className="text-slate-500 hover:text-slate-900"
+              >
+                For employers
+              </a>
+
+              <a
+                href="/login"
+                className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm"
+              >
+                Log in
+              </a>
+              <a
+                href="mailto:info@evolgrit.com?subject=Evolgrit%20beta%20waitlist"
+                className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
+              >
+                Join waitlist
+              </a>
+            </div>
+
+            {/* Mobile hamburger */}
+            <button
+              className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              aria-label="Open navigation menu"
+            >
+              <span className="flex flex-col gap-[3px]">
+                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
+              </span>
+            </button>
+          </nav>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="sm:hidden mt-4 mb-2 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                  Language
+                </span>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  EN
+                </div>
+              </div>
+
+              <a
+                href="/#product"
+                className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Product
+              </a>
+              <a
+                href="/#how-it-works"
+                className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                How it works
+              </a>
+              <a
+                href="/#for-employers"
+                className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                For employers
+              </a>
+
+              <div className="pt-2 flex gap-2">
+                <a
+                  href="/login"
+                  className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm flex items-center justify-center text-slate-700"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Log in
+                </a>
+                <a
+                  href="mailto:info@evolgrit.com?subject=Evolgrit%20beta%20waitlist"
+                  className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 flex items-center justify-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Join waitlist
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* MAIN CONTENT – dein Dashboard */}
+      <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
         {/* SIDEBAR – nur ab md sichtbar */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
           <div className="mb-6">
@@ -50,7 +191,7 @@ export default function LearnerJourneyPage() {
           </div>
         </aside>
 
-        {/* MAIN + RECHTE SPALTE */}
+        {/* MITTLERE SPALTE + RECHTE SPALTE */}
         <main className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
           {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
           <section className="space-y-6">
@@ -120,15 +261,22 @@ export default function LearnerJourneyPage() {
                 <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>15 Minuten Sprachnotizen zum Thema „Arbeitstag“ aufnehmen.</span>
+                    <span>
+                      15 Minuten Sprachnotizen zum Thema „Arbeitstag“
+                      aufnehmen.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>Ein Mini‑Quiz zu Deutsch im Supermarkt abschließen.</span>
+                    <span>
+                      Ein Mini‑Quiz zu Deutsch im Supermarkt abschließen.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-slate-300" />
-                    <span>Fragen für deine nächste Mentor‑Session vorbereiten.</span>
+                    <span>
+                      Fragen für deine nächste Mentor‑Session vorbereiten.
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -301,9 +449,26 @@ export default function LearnerJourneyPage() {
                 </span>
               </div>
             </div>
+
+            {/* Warum Evolgrit */}
+            <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Warum Evolgrit
+              </p>
+              <p className="font-semibold mb-2">
+                Wir glauben, dass jeder Mensch seine Zukunft verbessern kann —
+                durch Entwicklung (Evol-) und Ausdauer (-grit).
+              </p>
+              <p className="text-slate-200">
+                Evolgrit steht für die Fähigkeit, trotz Herausforderungen
+                weiterzugehen, zu lernen, zu wachsen und ein neues Leben
+                aufzubauen. Dieses Dashboard ist dein persönlicher Blick auf
+                diese Reise.
+              </p>
+            </div>
           </section>
         </main>
-      </div>
+      </main>
     </div>
   );
 }
