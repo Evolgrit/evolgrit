@@ -1,143 +1,309 @@
-// app/learner-journey/page.tsx
+'use client';
 
 export default function LearnerJourneyPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Mini-Header nur für diese Seite */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-3">
-          <a href="/" className="flex items-center gap-2 text-sm font-semibold text-slate-800">
-            <div className="w-7 h-7 rounded-xl bg-slate-900 flex items-center justify-center text-[11px] text-slate-100 shadow-sm">
-              E
-            </div>
-            <span className="tracking-[0.18em] uppercase text-[11px] text-slate-500">
-              Evolgrit
-            </span>
-          </a>
-          <a
-            href="/#product"
-            className="text-xs sm:text-sm text-slate-500 hover:text-slate-900"
-          >
-            ← Back to overview
-          </a>
-        </div>
-      </header>
+      <div className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
+        {/* SIDEBAR – nur ab md sichtbar */}
+        <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
+          <div className="mb-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
+              Dashboard
+            </p>
+            <h1 className="text-lg font-semibold text-slate-900">
+              Hi, Lina 👋
+            </h1>
+            <p className="text-xs text-slate-500">
+              Deine 6–12‑Monats‑Reise mit Evolgrit.
+            </p>
+          </div>
 
-      <main className="max-w-6xl mx-auto px-5 pt-10 pb-24 space-y-16">
-        {/* HERO / INTRO */}
-        <section className="text-center space-y-4">
-          <p className="inline-flex items-center gap-2 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 px-3 py-1 text-[11px] font-medium">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Learner journey · 6–12 month program
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-            Your Evolgrit journey from arrival to job‑ready.
-          </h1>
-          <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
-            Evolgrit begleitet dich in drei Phasen: Ankommen, Vertiefen und
-            Übergang in Job oder Ausbildung – mit Sprache, Kultur und Job‑Skills,
-            die zusammen wachsen.
-          </p>
-        </section>
+          <nav className="space-y-1 text-sm">
+            <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
+              <span>Übersicht</span>
+              <span className="text-[11px] rounded-full bg-slate-800 px-2 py-[2px]">
+                Heute
+              </span>
+            </button>
+            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+              Meine Reise
+            </button>
+            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+              Lernmodule
+            </button>
+            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+              Mentor‑Sessions
+            </button>
+            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+              Jobs & Chancen
+            </button>
+            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+              Dokumente
+            </button>
+          </nav>
 
-        {/* 12-MONTH JOURNEY MAP */}
-        <section>
-          <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
-            6–12 month journey at a glance
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base mb-6 max-w-2xl">
-            The exact length depends on your starting level, but the structure
-            stays the same: three phases that build on each other.
-          </p>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-8">
-            {/* Große 3-Phasen-Timeline */}
-            <div>
-              <div className="flex justify-between text-[11px] uppercase tracking-[0.16em] text-slate-400 mb-2">
-                <span>Month 1</span>
-                <span>Month 4</span>
-                <span>Month 8</span>
-                <span>Month 12</span>
-              </div>
-
-              <div className="grid grid-cols-12 h-2 rounded-full overflow-hidden bg-slate-100">
-                {/* Phase 1: 1–3 */}
-                <div className="col-span-3 bg-blue-500/80" />
-                {/* Phase 2: 4–8 */}
-                <div className="col-span-5 bg-emerald-500/90" />
-                {/* Phase 3: 9–12 */}
-                <div className="col-span-4 bg-slate-600/80" />
-              </div>
-
-              <div className="grid gap-4 mt-4 text-sm md:grid-cols-3">
-                <div>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-2">
-                    <span className="h-2 w-2 rounded-full bg-blue-500" />
-                    Phase 1 · Arrival & foundations
-                  </div>
-                  <ul className="text-slate-600 space-y-1">
-                    <li>• Orientation, onboarding & first language baseline.</li>
-                    <li>• Everyday German & cultural basics.</li>
-                    <li>• Building routine with mentors & peers.</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    Phase 2 · Deepening & practice
-                  </div>
-                  <ul className="text-slate-600 space-y-1">
-                    <li>• Job-related German for logistics, care & childcare.</li>
-                    <li>• Alternating tasks & group sessions to stay motivated.</li>
-                    <li>• Continuous feedback from mentors & AI coach.</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-2">
-                    <span className="h-2 w-2 rounded-full bg-slate-600" />
-                    Phase 3 · Job-ready & matching
-                  </div>
-                  <ul className="text-slate-600 space-y-1">
-                    <li>• Interview prep & workplace communication.</li>
-                    <li>• Matching with partner employers or education paths.</li>
-                    <li>• Clear next step: job, apprenticeship or training.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Drei Lern-Tracks */}
-            <div className="space-y-3 text-[12px] sm:text-xs">
-              {[
-                { label: "Language", color: "bg-blue-500" },
-                { label: "Culture & integration", color: "bg-emerald-500" },
-                { label: "Jobs & careers", color: "bg-slate-600" },
-              ].map((track) => (
-                <div key={track.label} className="flex items-center gap-3">
-                  <div className="w-32 text-slate-500 font-medium">
-                    {track.label}
-                  </div>
-                  <div className="flex-1 grid grid-cols-12 gap-[3px]">
-                    <div
-                      className={`h-2 rounded-full ${track.color} opacity-70 col-span-3`}
-                    />
-                    <div
-                      className={`h-2 rounded-full ${track.color} opacity-90 col-span-5`}
-                    />
-                    <div
-                      className={`h-2 rounded-full ${track.color} opacity-80 col-span-4`}
-                    />
-                  </div>
-                </div>
-              ))}
+          <div className="mt-auto pt-4 border-t border-slate-100">
+            <div className="rounded-2xl bg-emerald-50 text-emerald-800 px-3 py-3 text-xs">
+              <p className="font-semibold mb-1">Community</p>
+              <p>Teile Fragen mit anderen Lernenden aus deiner Kohorte.</p>
             </div>
           </div>
-        </section>
+        </aside>
 
-        {/* Optional: kleine Sektion „What a typical week looks like“ kannst du später ergänzen */}
-      </main>
+        {/* MAIN + RECHTE SPALTE */}
+        <main className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
+          {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
+          <section className="space-y-6">
+            {/* Aktuelle Phase */}
+            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6">
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
+                    Aktuelle Phase
+                  </p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
+                    Phase 1 · Ankommen & Grundlagen
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                    Fokus auf Alltagssprache, Orientierung in Deutschland und
+                    erste Kontakte mit deiner Kohorte.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
+                    Woche 3 von 8
+                  </span>
+                  <p className="mt-1 text-xs text-slate-400">
+                    26% deiner Gesamt‑Reise
+                  </p>
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mb-4">
+                <div className="flex justify-between text-[11px] text-slate-500 mb-1">
+                  <span>Reise‑Fortschritt</span>
+                  <span>25%</span>
+                </div>
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-blue-500 to-emerald-400" />
+                </div>
+              </div>
+
+              {/* Phasen-Badges */}
+              <div className="flex flex-wrap gap-2 text-[11px]">
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  Deutsch · A2 → B1
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  Integration & Alltag
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                  Wöchentliches Mentoring
+                </span>
+              </div>
+            </div>
+
+            {/* Heute / Diese Woche */}
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Heute */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Heute
+                </p>
+                <h3 className="text-sm font-semibold text-slate-900 mb-3">
+                  Deine nächsten Schritte
+                </h3>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                    <span>15 Minuten Sprachnotizen zum Thema „Arbeitstag“ aufnehmen.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                    <span>Ein Mini‑Quiz zu Deutsch im Supermarkt abschließen.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-slate-300" />
+                    <span>Fragen für deine nächste Mentor‑Session vorbereiten.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Diese Woche */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Diese Woche
+                </p>
+                <h3 className="text-sm font-semibold text-slate-900 mb-3">
+                  Fällige Meilensteine
+                </h3>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
+                  <li>✅ Einstufungstest Phase 1 abgeschlossen</li>
+                  <li>🟩 2 / 3 Sprachmodule der Woche erledigt</li>
+                  <li>🟨 1 Gruppensession geplant · Donnerstag 18:00</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Nächste Phasen-Kacheln */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 1
+                </p>
+                <h3 className="font-semibold text-slate-900 mb-1">
+                  Ankommen & Alltag
+                </h3>
+                <p className="text-slate-600 mb-3">
+                  Sicherheit im Alltag: Einkaufen, Arzt, Behörde, öffentlicher
+                  Verkehr.
+                </p>
+                <p className="text-[11px] text-slate-500">
+                  4 von 8 Wochen abgeschlossen.
+                </p>
+              </div>
+
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 2
+                </p>
+                <h3 className="font-semibold text-slate-900 mb-1">
+                  Job‑Sprache & Szenarien
+                </h3>
+                <p className="text-slate-600 mb-3">
+                  Rollenspiele und Aufgaben für deinen Zielbereich
+                  (Logistik, Care, Tech, …).
+                </p>
+                <p className="text-[11px] text-slate-500">
+                  Startet nach Phase&nbsp;1 · geplant Q3.
+                </p>
+              </div>
+
+              <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 text-xs sm:text-sm">
+                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 3
+                </p>
+                <h3 className="font-semibold mb-1">
+                  Matching & Einstieg in den Job
+                </h3>
+                <p className="text-slate-200 mb-3">
+                  Bewerbungen, Interviews, Onboarding – mit klaren nächsten
+                  Schritten.
+                </p>
+                <p className="text-[11px] text-emerald-300">
+                  Ziel: Dein erster Job in Deutschland, der zu dir passt.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* RECHTE SPALTE – OVERVIEW */}
+          <section className="space-y-4 lg:space-y-5">
+            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+              <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Überblick
+              </p>
+              <h2 className="text-sm font-semibold text-slate-900 mb-4">
+                Dein aktuelles Profil
+              </h2>
+
+              {/* Sprachlevel */}
+              <div className="mb-4">
+                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                  <span>Deutsch‑Level</span>
+                  <span>A2 · auf dem Weg zu B1</span>
+                </div>
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div className="h-full w-2/3 rounded-full bg-blue-500" />
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">
+                  Konzentriere dich auf Hör‑ und Sprechübungen, um B1 zu
+                  erreichen.
+                </p>
+              </div>
+
+              {/* Integration */}
+              <div className="mb-4">
+                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                  <span>Integration & Alltag</span>
+                  <span>45%</span>
+                </div>
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div className="h-full w-[45%] rounded-full bg-emerald-500" />
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">
+                  Nächster Schritt: Modul „Gesundheitssystem“ abschließen.
+                </p>
+              </div>
+
+              {/* Job-readiness */}
+              <div>
+                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                  <span>Job‑Bereitschaft</span>
+                  <span>35%</span>
+                </div>
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div className="h-full w-[35%] rounded-full bg-amber-500" />
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">
+                  Lebenslauf‑Profil vervollständigen und erste Job‑Simulation
+                  starten.
+                </p>
+              </div>
+            </div>
+
+            {/* Nächste Session */}
+            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Nächste Session
+              </p>
+              <h3 className="font-semibold text-slate-900 mb-1">
+                Gruppensession mit deinem Mentor
+              </h3>
+              <p className="text-slate-600 mb-3">
+                Donnerstag · 18:00–19:00 Uhr (online)
+              </p>
+              <ul className="text-slate-600 space-y-1 mb-3">
+                <li>• Check‑in: Wie läuft dein Alltag in Deutschland?</li>
+                <li>• Sprachübung: Situationen im Job.</li>
+                <li>• Fragen zu Papieren, Wohnung, Verträgen.</li>
+              </ul>
+              <button className="w-full rounded-full bg-slate-900 text-slate-50 py-2 text-xs font-medium hover:bg-slate-800">
+                Zoom‑Link anzeigen
+              </button>
+            </div>
+
+            {/* Zieljob / Tags */}
+            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Dein Ziel
+              </p>
+              <h3 className="font-semibold text-slate-900 mb-1">
+                Zielrolle: Kundenservice / Logistikkoordination
+              </h3>
+              <p className="text-slate-600 mb-3">
+                Wir bereiten dich auf Rollen vor, die Sprache, digitale Tools
+                und Teamarbeit kombinieren.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[11px]">
+                <span className="rounded-full bg-slate-100 px-3 py-1">
+                  Deutsch mit Kunden
+                </span>
+                <span className="rounded-full bg-slate-100 px-3 py-1">
+                  Digitale Tools
+                </span>
+                <span className="rounded-full bg-slate-100 px-3 py-1">
+                  Team & Kommunikation
+                </span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   );
 }
