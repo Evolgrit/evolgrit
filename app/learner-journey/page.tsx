@@ -8,39 +8,35 @@ export default function LearnerJourneyPage() {
 
   const journeyProgress = 0.6; // 60%
   const journeyProgressDegrees = journeyProgress * 360;
-      return (
+
+  return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* HEADER / NAVBAR – gleiches Design wie Startseite */}
       <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
         <div className="max-w-6xl mx-auto px-5 py-4">
           <nav className="flex items-center justify-between gap-4">
             {/* Logo + Title */}
-<a
-  href="/"
-  className="flex items-center gap-2 cursor-pointer"
->
-  <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
-    E
-  </div>
-  <div>
-    <div className="text-sm font-semibold tracking-[0.18em] uppercase">
-      Evolgrit
-    </div>
-    <div className="text-[11px] text-slate-500">
-      Language · Jobs · AI
-    </div>
-  </div>
-</a>
+            <a href="/" className="flex items-center gap-2 cursor-pointer">
+              <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
+                E
+              </div>
+              <div>
+                <div className="text-sm font-semibold tracking-[0.18em] uppercase">
+                  Evolgrit
+                </div>
+                <div className="text-[11px] text-slate-500">
+                  Language · Jobs · AI
+                </div>
+              </div>
+            </a>
+
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
                 EN
               </div>
 
-              <a
-                href="/#product"
-                className="text-slate-500 hover:text-slate-900"
-              >
+              <a href="/#product" className="text-slate-500 hover:text-slate-900">
                 Product
               </a>
               <a
@@ -143,7 +139,6 @@ export default function LearnerJourneyPage() {
       <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
         {/* SIDEBAR – nur ab md sichtbar */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
-        <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
           <div className="mb-6">
             <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
               Dashboard
@@ -181,7 +176,8 @@ export default function LearnerJourneyPage() {
               </div>
             </div>
           </div>
-                    <nav className="space-y-1 text-sm">
+
+          <nav className="space-y-1 text-sm">
             <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
               <span>Übersicht</span>
               <span className="text-[11px] rounded-full bg-slate-800 px-2 py-[2px]">
@@ -213,8 +209,8 @@ export default function LearnerJourneyPage() {
           </div>
         </aside>
 
-        {/* MITTLERE SPALTE + RECHTE SPALTE */}
-        <main className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
+        {/* GRID: mittlere Spalte + rechte Spalte */}
+        <div className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
           {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
           <section className="space-y-6">
             {/* Aktuelle Phase – Hero Card */}
@@ -320,7 +316,101 @@ export default function LearnerJourneyPage() {
                 </div>
               </div>
             </div>
-{/* Diese Woche – visuelle Meilensteine */}
+
+            {/* Heute / Diese Woche */}
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Heute – Activity Cards */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Heute
+                </p>
+                <h3 className="text-sm font-semibold text-slate-900 mb-1">
+                  Deine nächsten Schritte
+                </h3>
+                <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
+                  Drei kurze Aktivitäten – wähle, womit du heute starten möchtest.
+                </p>
+
+                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  {/* Activity 1: Sprachmemo */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-lg">
+                      <span role="img" aria-label="Microphone">
+                        🎙️
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Sprachmemo „Arbeitstag“
+                        </p>
+                        <span className="rounded-full bg-emerald-50 px-2 py-[2px] text-[10px] text-emerald-700">
+                          Speaking · 15 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        Nimm 15 Minuten Audio zu deinem heutigen Arbeitstag auf.
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Activity 2: Mini-Quiz */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg">
+                      <span role="img" aria-label="Shopping cart">
+                        🛒
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Mini‑Quiz: Supermarkt
+                        </p>
+                        <span className="rounded-full bg-blue-50 px-2 py-[2px] text-[10px] text-blue-700">
+                          Vocabulary · 5 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        10 kurze Fragen zu typischen Situationen im Supermarkt.
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Activity 3: Mentor-Check-in */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 text-lg">
+                      <span role="img" aria-label="Chat">
+                        💬
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Fragen für deinen Mentor
+                        </p>
+                        <span className="rounded-full bg-purple-50 px-2 py-[2px] text-[10px] text-purple-700">
+                          Reflection · 10 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        Notiere 2–3 Dinge, über die du in der nächsten Session
+                        sprechen möchtest.
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Diese Woche – visuelle Meilensteine */}
               <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
                   Diese Woche
@@ -374,8 +464,8 @@ export default function LearnerJourneyPage() {
                         </span>
                       </div>
                       <p className="text-[11px] sm:text-xs text-slate-600 mb-2">
-                        Bleibt noch ein Modul – ideal für einen ruhigen
-                        Abend oder das Wochenende.
+                        Bleibt noch ein Modul – ideal für einen ruhigen Abend
+                        oder das Wochenende.
                       </p>
                       <div className="h-1.5 rounded-full bg-blue-100 overflow-hidden">
                         <div className="h-full w-2/3 rounded-full bg-blue-500" />
@@ -407,6 +497,8 @@ export default function LearnerJourneyPage() {
                   </div>
                 </div>
               </div>
+            </div>
+
             {/* Nächste Phasen-Kacheln */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
@@ -457,7 +549,7 @@ export default function LearnerJourneyPage() {
                 </p>
               </div>
             </div>
-                      </section>
+          </section>
 
           {/* RECHTE SPALTE – OVERVIEW */}
           <section className="space-y-4 lg:space-y-5">
@@ -577,7 +669,7 @@ export default function LearnerJourneyPage() {
               </p>
             </div>
           </section>
-        </main>
+        </div>
       </main>
     </div>
   );
