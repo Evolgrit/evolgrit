@@ -508,53 +508,104 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
       {/* PROGRAM TIMELINE SECTION */}
+      {/* PROGRAM TIMELINE / THREE PHASES */}
       <section className="max-w-6xl mx-auto mt-24 px-5">
-<h2 className="text-3xl font-semibold text-slate-900 mb-4 text-center">
-  Three phases – not just a course.
-</h2>
-        <p className="text-slate-600 text-sm sm:text-base mb-8 text-center max-w-2xl mx-auto">
-          Evolgrit is structured in three phases – from arrival to job-ready –
-          so that learners can grow step by step without burning out.
-        </p>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="text-3xl font-semibold text-slate-900 mb-3">
+            Three phases – not just a course.
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600">
+            Evolgrit is a structured 3-phase journey – from arrival to job-ready –
+            so learners can grow step by step without burning out.
+          </p>
+        </div>
 
         <div className="grid gap-6 md:grid-cols-3 text-sm">
           {/* Phase 1 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-blue-500" />
-              <span>Phase 1 · Arrival &amp; foundations</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-sm font-semibold">
+                1
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 1 · Arrival &amp; foundations
+                </p>
+                <h3 className="font-semibold text-slate-900">
+                  Land softly in Germany.
+                </h3>
+              </div>
             </div>
-            <ul className="text-slate-600 space-y-2">
-              <li>• Orientation, onboarding and first language baseline.</li>
-              <li>• Focus on everyday communication and confidence.</li>
-              <li>• Early contact with mentors and peer community.</li>
+
+            <ul className="space-y-1.5 text-slate-600 text-sm">
+              <li>• Orientation, onboarding and a first language baseline.</li>
+              <li>• Everyday German for living and basic work situations.</li>
+              <li>• Early contact with mentors and a peer community.</li>
             </ul>
+
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 text-[11px] px-3 py-1">
+                Everyday confidence
+              </span>
+            </div>
           </div>
 
           {/* Phase 2 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <span>Phase 2 · Deepening &amp; practice</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
+                2
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 2 · Deepening &amp; practice
+                </p>
+                <h3 className="font-semibold text-slate-900">
+                  Practice for real jobs and real life.
+                </h3>
+              </div>
             </div>
-<ul className="text-slate-600 space-y-2">
-  <li>• Job-related German, scenarios and role plays.</li>
-  <li>• Alternating tasks to keep motivation high.</li>
-  <li>• Regular feedback from mentors and AI-coach.</li>
-</ul>
+
+            <ul className="space-y-1.5 text-slate-600 text-sm">
+              <li>• Job-related German with scenarios and role plays.</li>
+              <li>• Job-specific language for logistics, care &amp; childcare.</li>
+              <li>• Changing formats and regular feedback from mentors &amp; AI-coach.</li>
+            </ul>
+
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-[11px] px-3 py-1">
+                Work-ready language
+              </span>
+            </div>
           </div>
 
           {/* Phase 3 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
-              <span className="h-2 w-2 rounded-full bg-slate-600" />
-              <span>Phase 3 · Job-ready &amp; matching</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-sm font-semibold">
+                3
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 3 · Job-ready &amp; matching
+                </p>
+                <h3 className="font-semibold text-slate-900">
+                  Move confidently into work.
+                </h3>
+              </div>
             </div>
-            <ul className="text-slate-600 space-y-2">
+
+            <ul className="space-y-1.5 text-slate-600 text-sm">
               <li>• Interview preparation and workplace communication.</li>
-              <li>• Matching with partner employers or education paths.</li>
+              <li>• Matching with partner employers or education partners.</li>
               <li>• Clear next steps: job, apprenticeship or further training.</li>
             </ul>
+
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-violet-50 text-violet-700 text-[11px] px-3 py-1">
+                Job-ready &amp; matched
+              </span>
+            </div>
           </div>
         </div>
       </section>
