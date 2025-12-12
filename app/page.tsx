@@ -159,7 +159,8 @@ className="flex items-center gap-2 cursor-pointer"
     <p className="text-sm sm:text-base text-slate-600 max-w-xl mb-6">
       Evolgrit is a 6–12 month hybrid journey that combines AI-powered
       German learning, cultural readiness and job preparation – so
-      international talent can truly arrive and stay in Germany.
+      international talent can truly arrive and stay in Germany, not just
+      pass an exam.
     </p>
 
     <div className="flex flex-wrap gap-3 mb-3">
@@ -167,7 +168,7 @@ className="flex items-center gap-2 cursor-pointer"
         href="mailto:info@evolgrit.com?subject=Evolgrit%20Beta%20waitlist&amp;body=Hi%20Evolgrit%20team,%0A%0AI%27d%20like%20to%20join%20the%20beta.%0A%0AName:%0AGerman%20level:%0AProfessional%20background:%0A"
         className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 inline-flex items-center justify-center"
       >
-        Join the beta waitlist
+        Join learner waitlist
       </a>
       <a
         href="#how-it-works"
@@ -453,6 +454,131 @@ className="flex items-center gap-2 cursor-pointer"
     outcomes depend on each person&apos;s situation and effort.
   </p>
 </section>
+{/* WHY EVOLGRIT – NOT A NORMAL COURSE */}
+<section className="max-w-6xl mx-auto mt-20 px-5">
+  <div className="text-center max-w-2xl mx-auto mb-10">
+    <h2 className="text-3xl font-semibold text-slate-900 mb-3">
+      Why Evolgrit is not a normal German course.
+    </h2>
+    <p className="text-sm sm:text-base text-slate-600">
+      Evolgrit combines language, integration and jobs in one loop – built for
+      people who actually want to live and work in Germany, not just pass a test.
+    </p>
+  </div>
+
+  <div className="grid gap-4 md:grid-cols-3 text-sm">
+    {/* Card 1 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-base font-semibold">
+          A
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Language in real jobs
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        Practice German in real work situations – childcare, care, logistics,
+        drivers – instead of artificial textbook dialogues.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-base font-semibold">
+          B
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Integration built-in
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        Housing, offices, doctors and contracts – everyday situations in Germany
+        are part of the learning path, not an afterthought.
+      </p>
+    </div>
+
+    {/* Card 3 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-base font-semibold">
+          C
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Job &amp; employer ready
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        Profiles show language level, skills and reliability signals – so
+        employers can see who is ready for which role, not just who has a
+        certificate.
+      </p>
+    </div>
+  </div>
+</section>
+{/* AI LAYER – WHAT IT ACTUALLY DOES */}
+<section className="max-w-6xl mx-auto mt-16 px-5">
+  <div className="max-w-2xl mb-8">
+    <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3">
+      What the AI in Evolgrit actually does.
+    </h2>
+    <p className="text-sm sm:text-base text-slate-600">
+      AI is not a buzzword for us – it helps learners, mentors and employers
+      make better decisions every week.
+    </p>
+  </div>
+
+  <div className="grid gap-4 md:grid-cols-3 text-sm">
+    {/* AI card 1 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <div className="h-8 w-8 rounded-full bg-sky-500/10 text-sky-600 flex items-center justify-center text-sm font-semibold">
+          1
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Personalised practice tasks
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        Evolgrit adjusts difficulty, topics and feedback to each learner –
+        based on their target role, level and pace.
+      </p>
+    </div>
+
+    {/* AI card 2 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <div className="h-8 w-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
+          2
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Always-on language coach
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        Learners can practice speaking, get corrections and explanations on
+        demand – not only during live sessions.
+      </p>
+    </div>
+
+    {/* AI card 3 */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <div className="h-8 w-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center text-sm font-semibold">
+          3
+        </div>
+        <h3 className="font-semibold text-slate-900">
+          Signals for mentors &amp; employers
+        </h3>
+      </div>
+      <p className="text-slate-600 text-sm">
+        The AI summarises progress into simple signals – language, cultural
+        readiness and reliability – for mentors and partner employers.
+      </p>
+    </div>
+  </div>
+</section>
         {/* PRODUCT SECTION */}
 <section
   id="product"
@@ -718,6 +844,14 @@ className="flex items-center gap-2 cursor-pointer"
               <li>• Reduced onboarding risk through structured support.</li>
               <li>• A partner who understands both talent and employers.</li>
             </ul>
+            <p className="mt-4 text-sm text-slate-600">
+              With Evolgrit you don&apos;t just get a CV – you see:
+            </p>
+            <ul className="mt-2 text-sm text-slate-600 space-y-1">
+              <li>• 🔵 Language level &amp; confidence</li>
+              <li>• 🟢 Cultural readiness (everyday life &amp; workplace)</li>
+              <li>• 🟣 Reliability signals (attendance, task completion)</li>
+            </ul>
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-sm space-y-3">
@@ -734,17 +868,58 @@ className="flex items-center gap-2 cursor-pointer"
               pipeline and help you build a repeatable model for international
               hiring.
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap gap-3">
               <a
                 href="mailto:info@evolgrit.com?subject=Evolgrit%20Employer%20Partnership"
                 className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
               >
                 Talk to us about hiring
               </a>
+              <a
+                href="mailto:info@evolgrit.com?subject=Employer%20intro%20call"
+                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-50"
+              >
+                Book an employer intro call
+              </a>
             </div>
           </div>
         </div>
       </section>
+{/* EMPLOYER TESTIMONIAL – SABRINA */}
+<section className="max-w-6xl mx-auto mt-10 px-5">
+  <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 sm:p-7 flex flex-col sm:flex-row gap-5 items-start">
+    {/* Left: avatar + meta */}
+    <div className="flex flex-col items-center sm:items-start gap-3 shrink-0">
+      <div className="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 text-emerald-700 text-lg font-semibold">
+        S
+      </div>
+      <div className="text-xs text-slate-500 text-center sm:text-left">
+        <p className="font-semibold text-slate-700">Sabrina M.</p>
+        <p>Kindergarten manager · Berlin</p>
+      </div>
+      <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-2 py-[3px] text-[11px]">
+        Hired via Evolgrit
+      </span>
+    </div>
+
+    {/* Right: quote */}
+    <div className="space-y-3">
+      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+        Employer story · Childcare
+      </p>
+      <p className="text-sm sm:text-base text-slate-900 font-semibold">
+        „After three weeks it feels like she has been on the team for years.“
+      </p>
+      <p className="text-sm text-slate-600 leading-relaxed">
+        „Our new colleague Tina joined us through Evolgrit. Her German is
+        confident, she understands typical Kindergarten situations – from
+        morning drop-offs to parent conversations – and moves through everyday
+        life as if she had lived in Germany for years. But she has only been
+        with us for three weeks.“
+      </p>
+    </div>
+  </div>
+</section>
 {/* BRANDING SECTION */}
 <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
   <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
