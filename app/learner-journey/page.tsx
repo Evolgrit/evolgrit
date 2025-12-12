@@ -241,39 +241,96 @@ export default function LearnerJourneyPage() {
               </div>
             </div>
 
-            {/* Heute / Diese Woche */}
-            <div className="grid gap-4 md:grid-cols-2">
-              {/* Heute */}
-              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4">
+ {/* Heute – neue Activity-Cards */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
                   Heute
                 </p>
-                <h3 className="text-sm font-semibold text-slate-900 mb-3">
+                <h3 className="text-sm font-semibold text-slate-900 mb-1">
                   Deine nächsten Schritte
                 </h3>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>
-                      15 Minuten Sprachnotizen zum Thema „Arbeitstag“
-                      aufnehmen.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>
-                      Ein Mini‑Quiz zu Deutsch im Supermarkt abschließen.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-slate-300" />
-                    <span>
-                      Fragen für deine nächste Mentor‑Session vorbereiten.
-                    </span>
-                  </li>
-                </ul>
-              </div>
+                <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
+                  Drei kurze Aktivitäten – wähle, womit du heute starten möchtest.
+                </p>
 
+                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  {/* Activity 1: Sprachmemo */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-lg">
+                      <span role="img" aria-label="Microphone">
+                        🎙️
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Sprachmemo „Arbeitstag“
+                        </p>
+                        <span className="rounded-full bg-emerald-50 px-2 py-[2px] text-[10px] text-emerald-700">
+                          Speaking · 15 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        Nimm 15 Minuten Audio zu deinem heutigen Arbeitstag auf.
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Activity 2: Mini-Quiz */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg">
+                      <span role="img" aria-label="Shopping cart">
+                        🛒
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Mini‑Quiz: Supermarkt
+                        </p>
+                        <span className="rounded-full bg-blue-50 px-2 py-[2px] text-[10px] text-blue-700">
+                          Vocabulary · 5 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        10 kurze Fragen zu typischen Situationen im Supermarkt.
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Activity 3: Mentor-Check-in */}
+                  <button
+                    type="button"
+                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 text-lg">
+                      <span role="img" aria-label="Chat">
+                        💬
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-slate-900">
+                          Fragen für deinen Mentor
+                        </p>
+                        <span className="rounded-full bg-purple-50 px-2 py-[2px] text-[10px] text-purple-700">
+                          Reflection · 10 min
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-600">
+                        Notiere 2–3 Dinge, über die du in der nächsten Session
+                        sprechen möchtest.
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
               {/* Diese Woche */}
               <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
