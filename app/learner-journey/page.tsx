@@ -136,539 +136,599 @@ export default function LearnerJourneyPage() {
       </header>
 
       {/* MAIN CONTENT – dein Dashboard */}
-      <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
-        {/* SIDEBAR – nur ab md sichtbar */}
-        <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
-              Dashboard
-            </p>
+      <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10">
+        {/* MOBILE: Lina + Navigation */}
+        <section className="mb-6 rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5 md:hidden">
+          <div className="flex flex-col items-center gap-2">
+            {/* Avatar mit Fortschrittsring */}
+            <div
+              className="relative h-16 w-16 rounded-full"
+              style={{
+                background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
+              }}
+            >
+              <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
+                <Image
+                  src="/lina-avatar.png"
+                  alt="Lina"
+                  fill
+                  sizes="64px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
 
-<div className="flex flex-col items-center gap-2">
-  {/* Avatar mit Fortschrittsring */}
-  <div
-    className="relative h-16 w-16 rounded-full"
-    style={{
-      background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
-    }}
-  >
-    <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
-      <Image
-        src="/lina-avatar.png"
-        alt="Lina"
-        fill
-        sizes="64px"
-        className="object-cover"
-      />
-    </div>
-  </div>
-
-  <div className="text-center">
-    <h1 className="text-sm font-semibold text-slate-900">
-      Hi, Lina 👋
-    </h1>
-    <p className="text-xs text-slate-500">
-      Deine 6–12‑Monats‑Reise mit Evolgrit.
-    </p>
-    <p className="mt-1 text-[11px] text-emerald-600 font-medium">
-      Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
-    </p>
-  </div>
-</div>
+            <div className="text-center">
+              <h1 className="text-sm font-semibold text-slate-900">
+                Hi, Lina 👋
+              </h1>
+              <p className="text-xs text-slate-500">
+                Deine 6–12‑Monats‑Reise mit Evolgrit.
+              </p>
+              <p className="mt-1 text-[11px] text-emerald-600 font-medium">
+                Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
+              </p>
+            </div>
           </div>
 
-          <nav className="space-y-1 text-sm">
-            <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
-              <span>Übersicht</span>
-              <span className="text-[11px] rounded-full bg-slate-800 px-2 py-[2px]">
-                Heute
-              </span>
+          {/* Mobile-Navigation */}
+          <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+            <button className="rounded-full bg-slate-900 text-slate-50 px-3 py-2 flex items-center justify-center">
+              Übersicht · Heute
             </button>
-            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+            <button className="rounded-full bg-slate-100 text-slate-800 px-3 py-2 flex items-center justify-center">
               Meine Reise
             </button>
-            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+            <button className="rounded-full bg-slate-100 text-slate-800 px-3 py-2 flex items-center justify-center">
               Lernmodule
             </button>
-            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+            <button className="rounded-full bg-slate-100 text-slate-800 px-3 py-2 flex items-center justify-center">
               Mentor‑Sessions
             </button>
-            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+            <button className="rounded-full bg-slate-100 text-slate-800 px-3 py-2 flex items-center justify-center">
               Jobs & Chancen
             </button>
-            <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+            <button className="rounded-full bg-slate-100 text-slate-800 px-3 py-2 flex items-center justify-center">
               Dokumente
             </button>
-          </nav>
-
-          <div className="mt-auto pt-4 border-t border-slate-100">
-            <div className="rounded-2xl bg-emerald-50 text-emerald-800 px-3 py-3 text-xs">
-              <p className="font-semibold mb-1">Community</p>
-              <p>Teile Fragen mit anderen Lernenden aus deiner Kohorte.</p>
-            </div>
           </div>
-        </aside>
+        </section>
 
-        {/* GRID: mittlere Spalte + rechte Spalte */}
-        <div className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
-          {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
-          <section className="space-y-6">
-            {/* Aktuelle Phase – Hero Card */}
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6">
-              <div className="flex flex-col lg:flex-row items-stretch gap-5">
-                {/* Illustration / Journey-Side */}
-                <div className="relative w-full lg:w-1/3 rounded-2xl bg-gradient-to-br from-blue-600 via-sky-500 to-emerald-400 text-slate-50 overflow-hidden p-4 flex flex-col justify-between">
-                  <div className="flex items-center justify-between text-[11px] mb-2">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-[2px]">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                      Phase 1 · Ankommen
-                    </span>
-                    <span className="text-sky-100">Woche 3 / 8</span>
-                  </div>
-
-                  <div className="mt-1 mb-3">
-                    <p className="text-xs text-sky-100/90 mb-1">
-                      Deine Reise heute
-                    </p>
-                    <p className="text-sm font-semibold leading-snug">
-                      Alltag verstehen, sprechen und dich sicher fühlen – Schritt
-                      für Schritt.
-                    </p>
-                  </div>
-
-                  {/* Kleine Mini-Map / Timeline */}
-                  <div className="mt-auto pt-2">
-                    <div className="flex items-center justify-between text-[10px] text-sky-100/90 mb-1">
-                      <span>Heute</span>
-                      <span>Deine Reise</span>
-                    </div>
-                    <div className="h-1.5 rounded-full bg-sky-500/60 overflow-hidden">
-                      <div className="h-full w-1/4 rounded-full bg-emerald-300" />
-                    </div>
-                    <div className="mt-2 flex gap-1 text-[10px] text-sky-100/80">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-blue-200" />
-                        Deutsch
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-200" />
-                        Alltag
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-purple-200" />
-                        Mentoring
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Text / Details-Side */}
-                <div className="flex-1 flex flex-col justify-between gap-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
-                        Aktuelle Phase
-                      </p>
-                      <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
-                        Phase 1 · Ankommen & Grundlagen
-                      </h2>
-                      <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-md">
-                        Fokus auf Alltagssprache, Orientierung in Deutschland und
-                        erste Kontakte mit deiner Kohorte.
-                      </p>
-                    </div>
-                    <div className="text-right text-xs">
-                      <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
-                        Woche 3 von 8
-                      </span>
-                      <p className="mt-1 text-slate-400">
-                        26% deiner Gesamt‑Reise
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Reise-Fortschritt */}
-                  <div>
-                    <div className="flex justify-between text-[11px] text-slate-500 mb-1">
-                      <span>Reise‑Fortschritt</span>
-                      <span>25%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-                      <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-blue-500 to-emerald-400" />
-                    </div>
-                  </div>
-
-                  {/* Phasen-Badges */}
-                  <div className="flex flex-wrap gap-2 text-[11px]">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-                      Deutsch · A2 → B1
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                      Integration & Alltag
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-                      Wöchentliches Mentoring
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Heute / Diese Woche */}
-            <div className="grid gap-4 md:grid-cols-2">
-              {/* Heute – Activity Cards */}
-              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
-                  Heute
-                </p>
-                <h3 className="text-sm font-semibold text-slate-900 mb-1">
-                  Deine nächsten Schritte
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
-                  Drei kurze Aktivitäten – wähle, womit du heute starten möchtest.
-                </p>
-
-                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {/* Activity 1: Sprachmemo */}
-                  <button
-                    type="button"
-                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
-                  >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-lg">
-                      <span role="img" aria-label="Microphone">
-                        🎙️
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Sprachmemo „Arbeitstag“
-                        </p>
-                        <span className="rounded-full bg-emerald-50 px-2 py-[2px] text-[10px] text-emerald-700">
-                          Speaking · 15 min
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600">
-                        Nimm 15 Minuten Audio zu deinem heutigen Arbeitstag auf.
-                      </p>
-                    </div>
-                  </button>
-
-                  {/* Activity 2: Mini-Quiz */}
-                  <button
-                    type="button"
-                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
-                  >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg">
-                      <span role="img" aria-label="Shopping cart">
-                        🛒
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Mini‑Quiz: Supermarkt
-                        </p>
-                        <span className="rounded-full bg-blue-50 px-2 py-[2px] text-[10px] text-blue-700">
-                          Vocabulary · 5 min
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600">
-                        10 kurze Fragen zu typischen Situationen im Supermarkt.
-                      </p>
-                    </div>
-                  </button>
-
-                  {/* Activity 3: Mentor-Check-in */}
-                  <button
-                    type="button"
-                    className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
-                  >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 text-lg">
-                      <span role="img" aria-label="Chat">
-                        💬
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Fragen für deinen Mentor
-                        </p>
-                        <span className="rounded-full bg-purple-50 px-2 py-[2px] text-[10px] text-purple-700">
-                          Reflection · 10 min
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600">
-                        Notiere 2–3 Dinge, über die du in der nächsten Session
-                        sprechen möchtest.
-                      </p>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Diese Woche – visuelle Meilensteine */}
-              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
-                  Diese Woche
-                </p>
-                <h3 className="text-sm font-semibold text-slate-900 mb-1">
-                  Fällige Meilensteine
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
-                  Dein Überblick für diese Woche – was schon geschafft ist und
-                  was noch kommt.
-                </p>
-
-                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {/* Milestone 1: Einstufungstest */}
-                  <div className="flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-3 py-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-xl shadow-sm shadow-emerald-500/40">
-                      <span role="img" aria-label="Check">
-                        ✅
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Einstufungstest Phase 1
-                        </p>
-                        <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-emerald-700">
-                          erledigt
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600">
-                        Dein Ausgangspunkt ist klar – perfekte Basis für die
-                        nächsten Wochen.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Milestone 2: Sprachmodule */}
-                  <div className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 px-3 py-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-xl shadow-sm shadow-blue-500/40">
-                      <span role="img" aria-label="Books">
-                        📚
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Sprachmodule der Woche
-                        </p>
-                        <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-blue-700">
-                          2 / 3 erledigt
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600 mb-2">
-                        Bleibt noch ein Modul – ideal für einen ruhigen Abend
-                        oder das Wochenende.
-                      </p>
-                      <div className="h-1.5 rounded-full bg-blue-100 overflow-hidden">
-                        <div className="h-full w-2/3 rounded-full bg-blue-500" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Milestone 3: Gruppensession */}
-                  <div className="flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50/70 px-3 py-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400 text-xl shadow-sm shadow-amber-400/40">
-                      <span role="img" aria-label="Calendar">
-                        📅
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <p className="font-semibold text-slate-900">
-                          Gruppensession mit Mentor
-                        </p>
-                        <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-amber-800">
-                          Donnerstag · 18:00
-                        </span>
-                      </div>
-                      <p className="text-[11px] sm:text-xs text-slate-600">
-                        Nutze die Session für Fragen zu Alltag, Sprache oder
-                        Papieren – alles ist willkommen.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Nächste Phasen-Kacheln */}
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
-                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 1
-                </p>
-                <h3 className="font-semibold text-slate-900 mb-1">
-                  Ankommen & Alltag
-                </h3>
-                <p className="text-slate-600 mb-3">
-                  Sicherheit im Alltag: Einkaufen, Arzt, Behörde, öffentlicher
-                  Verkehr.
-                </p>
-                <p className="text-[11px] text-slate-500">
-                  4 von 8 Wochen abgeschlossen.
-                </p>
-              </div>
-
-              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
-                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 2
-                </p>
-                <h3 className="font-semibold text-slate-900 mb-1">
-                  Job‑Sprache & Szenarien
-                </h3>
-                <p className="text-slate-600 mb-3">
-                  Rollenspiele und Aufgaben für deinen Zielbereich
-                  (Logistik, Care, Tech, …).
-                </p>
-                <p className="text-[11px] text-slate-500">
-                  Startet nach Phase&nbsp;1 · geplant Q3.
-                </p>
-              </div>
-
-              <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 text-xs sm:text-sm">
-                <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 3
-                </p>
-                <h3 className="font-semibold mb-1">
-                  Matching & Einstieg in den Job
-                </h3>
-                <p className="text-slate-200 mb-3">
-                  Bewerbungen, Interviews, Onboarding – mit klaren nächsten
-                  Schritten.
-                </p>
-                <p className="text-[11px] text-emerald-300">
-                  Ziel: Dein erster Job in Deutschland, der zu dir passt.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* RECHTE SPALTE – OVERVIEW */}
-          <section className="space-y-4 lg:space-y-5">
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+        {/* DESKTOP + TABLET LAYOUT */}
+        <div className="flex gap-6">
+          {/* SIDEBAR – nur ab md sichtbar */}
+          <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
+            <div className="mb-6">
               <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
-                Überblick
+                Dashboard
               </p>
-              <h2 className="text-sm font-semibold text-slate-900 mb-4">
-                Dein aktuelles Profil
-              </h2>
 
-              {/* Sprachlevel */}
-              <div className="mb-4">
-                <div className="flex justify-between text-xs text-slate-500 mb-1">
-                  <span>Deutsch‑Level</span>
-                  <span>A2 · auf dem Weg zu B1</span>
+              <div className="flex flex-col items-center gap-2">
+                {/* Avatar mit Fortschrittsring */}
+                <div
+                  className="relative h-16 w-16 rounded-full"
+                  style={{
+                    background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
+                  }}
+                >
+                  <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
+                    <Image
+                      src="/lina-avatar.png"
+                      alt="Lina"
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full w-2/3 rounded-full bg-blue-500" />
-                </div>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  Konzentriere dich auf Hör‑ und Sprechübungen, um B1 zu
-                  erreichen.
-                </p>
-              </div>
 
-              {/* Integration */}
-              <div className="mb-4">
-                <div className="flex justify-between text-xs text-slate-500 mb-1">
-                  <span>Integration & Alltag</span>
-                  <span>45%</span>
+                <div className="text-center">
+                  <h1 className="text-sm font-semibold text-slate-900">
+                    Hi, Lina 👋
+                  </h1>
+                  <p className="text-xs text-slate-500">
+                    Deine 6–12‑Monats‑Reise mit Evolgrit.
+                  </p>
+                  <p className="mt-1 text-[11px] text-emerald-600 font-medium">
+                    Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
+                  </p>
                 </div>
-                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full w-[45%] rounded-full bg-emerald-500" />
-                </div>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  Nächster Schritt: Modul „Gesundheitssystem“ abschließen.
-                </p>
-              </div>
-
-              {/* Job-readiness */}
-              <div>
-                <div className="flex justify-between text-xs text-slate-500 mb-1">
-                  <span>Job‑Bereitschaft</span>
-                  <span>35%</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full w-[35%] rounded-full bg-amber-500" />
-                </div>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  Lebenslauf‑Profil vervollständigen und erste Job‑Simulation
-                  starten.
-                </p>
               </div>
             </div>
 
-            {/* Nächste Session */}
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
-                Nächste Session
-              </p>
-              <h3 className="font-semibold text-slate-900 mb-1">
-                Gruppensession mit deinem Mentor
-              </h3>
-              <p className="text-slate-600 mb-3">
-                Donnerstag · 18:00–19:00 Uhr (online)
-              </p>
-              <ul className="text-slate-600 space-y-1 mb-3">
-                <li>• Check‑in: Wie läuft dein Alltag in Deutschland?</li>
-                <li>• Sprachübung: Situationen im Job.</li>
-                <li>• Fragen zu Papieren, Wohnung, Verträgen.</li>
-              </ul>
-              <button className="w-full rounded-full bg-slate-900 text-slate-50 py-2 text-xs font-medium hover:bg-slate-800">
-                Zoom‑Link anzeigen
+            <nav className="space-y-1 text-sm">
+              <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
+                <span>Übersicht</span>
+                <span className="text-[11px] rounded-full bg-slate-800 px-2 py-[2px]">
+                  Heute
+                </span>
               </button>
-            </div>
+              <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+                Meine Reise
+              </button>
+              <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+                Lernmodule
+              </button>
+              <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+                Mentor‑Sessions
+              </button>
+              <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+                Jobs & Chancen
+              </button>
+              <button className="w-full text-left rounded-xl px-3 py-2 hover:bg-slate-100">
+                Dokumente
+              </button>
+            </nav>
 
-            {/* Zieljob / Tags */}
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
-                Dein Ziel
-              </p>
-              <h3 className="font-semibold text-slate-900 mb-1">
-                Zielrolle: Kundenservice / Logistikkoordination
-              </h3>
-              <p className="text-slate-600 mb-3">
-                Wir bereiten dich auf Rollen vor, die Sprache, digitale Tools
-                und Teamarbeit kombinieren.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px]">
-                <span className="rounded-full bg-slate-100 px-3 py-1">
-                  Deutsch mit Kunden
-                </span>
-                <span className="rounded-full bg-slate-100 px-3 py-1">
-                  Digitale Tools
-                </span>
-                <span className="rounded-full bg-slate-100 px-3 py-1">
-                  Team & Kommunikation
-                </span>
+            <div className="mt-auto pt-4 border-t border-slate-100">
+              <div className="rounded-2xl bg-emerald-50 text-emerald-800 px-3 py-3 text-xs">
+                <p className="font-semibold mb-1">Community</p>
+                <p>Teile Fragen mit anderen Lernenden aus deiner Kohorte.</p>
               </div>
             </div>
+          </aside>
 
-            {/* Warum Evolgrit */}
-            <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
-                Warum Evolgrit
-              </p>
-              <p className="font-semibold mb-2">
-                Wir glauben, dass jeder Mensch seine Zukunft verbessern kann —
-                durch Entwicklung (Evol-) und Ausdauer (-grit).
-              </p>
-              <p className="text-slate-200">
-                Evolgrit steht für die Fähigkeit, trotz Herausforderungen
-                weiterzugehen, zu lernen, zu wachsen und ein neues Leben
-                aufzubauen. Dieses Dashboard ist dein persönlicher Blick auf
-                diese Reise.
-              </p>
-            </div>
-          </section>
+          {/* GRID: mittlere Spalte + rechte Spalte */}
+          <div className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
+            {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
+            <section className="space-y-6">
+              {/* Aktuelle Phase – Hero Card */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6">
+                <div className="flex flex-col lg:flex-row items-stretch gap-5">
+                  {/* Illustration / Journey-Side */}
+                  <div className="relative w-full lg:w-1/3 rounded-2xl bg-gradient-to-br from-blue-600 via-sky-500 to-emerald-400 text-slate-50 overflow-hidden p-4 flex flex-col justify-between">
+                    <div className="flex items-center justify-between text-[11px] mb-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-[2px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+                        Phase 1 · Ankommen
+                      </span>
+                      <span className="text-sky-100">Woche 3 / 8</span>
+                    </div>
+
+                    <div className="mt-1 mb-3">
+                      <p className="text-xs text-sky-100/90 mb-1">
+                        Deine Reise heute
+                      </p>
+                      <p className="text-sm font-semibold leading-snug">
+                        Alltag verstehen, sprechen und dich sicher fühlen – Schritt
+                        für Schritt.
+                      </p>
+                    </div>
+
+                    {/* Kleine Mini-Map / Timeline */}
+                    <div className="mt-auto pt-2">
+                      <div className="flex items-center justify-between text-[10px] text-sky-100/90 mb-1">
+                        <span>Heute</span>
+                        <span>Deine Reise</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-sky-500/60 overflow-hidden">
+                        <div className="h-full w-1/4 rounded-full bg-emerald-300" />
+                      </div>
+                      <div className="mt-2 flex gap-1 text-[10px] text-sky-100/80">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-blue-200" />
+                          Deutsch
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-200" />
+                          Alltag
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-purple-200" />
+                          Mentoring
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Text / Details-Side */}
+                  <div className="flex-1 flex flex-col justify-between gap-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
+                          Aktuelle Phase
+                        </p>
+                        <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
+                          Phase 1 · Ankommen & Grundlagen
+                        </h2>
+                        <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-md">
+                          Fokus auf Alltagssprache, Orientierung in Deutschland und
+                          erste Kontakte mit deiner Kohorte.
+                        </p>
+                      </div>
+                      <div className="text-right text-xs">
+                        <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
+                          Woche 3 von 8
+                        </span>
+                        <p className="mt-1 text-slate-400">
+                          26% deiner Gesamt‑Reise
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Reise-Fortschritt */}
+                    <div>
+                      <div className="flex justify-between text-[11px] text-slate-500 mb-1">
+                        <span>Reise‑Fortschritt</span>
+                        <span>25%</span>
+                      </div>
+                      <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                        <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-blue-500 to-emerald-400" />
+                      </div>
+                    </div>
+
+                    {/* Phasen-Badges */}
+                    <div className="flex flex-wrap gap-2 text-[11px]">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                        Deutsch · A2 → B1
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        Integration & Alltag
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                        Wöchentliches Mentoring
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Heute / Diese Woche */}
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* Heute – Activity Cards */}
+                <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                    Heute
+                  </p>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-1">
+                    Deine nächsten Schritte
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
+                    Drei kurze Aktivitäten – wähle, womit du heute starten möchtest.
+                  </p>
+
+                  <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                    {/* Activity 1: Sprachmemo */}
+                    <button
+                      type="button"
+                      className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-lg">
+                        <span role="img" aria-label="Microphone">
+                          🎙️
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Sprachmemo „Arbeitstag“
+                          </p>
+                          <span className="rounded-full bg-emerald-50 px-2 py-[2px] text-[10px] text-emerald-700">
+                            Speaking · 15 min
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600">
+                          Nimm 15 Minuten Audio zu deinem heutigen Arbeitstag auf.
+                        </p>
+                      </div>
+                    </button>
+
+                    {/* Activity 2: Mini-Quiz */}
+                    <button
+                      type="button"
+                      className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg">
+                        <span role="img" aria-label="Shopping cart">
+                          🛒
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Mini‑Quiz: Supermarkt
+                          </p>
+                          <span className="rounded-full bg-blue-50 px-2 py-[2px] text-[10px] text-blue-700">
+                            Vocabulary · 5 min
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600">
+                          10 kurze Fragen zu typischen Situationen im Supermarkt.
+                        </p>
+                      </div>
+                    </button>
+
+                    {/* Activity 3: Mentor-Check-in */}
+                    <button
+                      type="button"
+                      className="w-full flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3 text-left hover:bg-slate-100 hover:border-slate-200 transition"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 text-lg">
+                        <span role="img" aria-label="Chat">
+                          💬
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Fragen für deinen Mentor
+                          </p>
+                          <span className="rounded-full bg-purple-50 px-2 py-[2px] text-[10px] text-purple-700">
+                            Reflection · 10 min
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600">
+                          Notiere 2–3 Dinge, über die du in der nächsten Session
+                          sprechen möchtest.
+                        </p>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Diese Woche – visuelle Meilensteine */}
+                <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                    Diese Woche
+                  </p>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-1">
+                    Fällige Meilensteine
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mb-4">
+                    Dein Überblick für diese Woche – was schon geschafft ist und
+                    was noch kommt.
+                  </p>
+
+                  <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                    {/* Milestone 1: Einstufungstest */}
+                    <div className="flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-3 py-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-xl shadow-sm shadow-emerald-500/40">
+                        <span role="img" aria-label="Check">
+                          ✅
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Einstufungstest Phase 1
+                          </p>
+                          <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-emerald-700">
+                            erledigt
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600">
+                          Dein Ausgangspunkt ist klar – perfekte Basis für die
+                          nächsten Wochen.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Milestone 2: Sprachmodule */}
+                    <div className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 px-3 py-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-xl shadow-sm shadow-blue-500/40">
+                        <span role="img" aria-label="Books">
+                          📚
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Sprachmodule der Woche
+                          </p>
+                          <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-blue-700">
+                            2 / 3 erledigt
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600 mb-2">
+                          Bleibt noch ein Modul – ideal für einen ruhigen Abend
+                          oder das Wochenende.
+                        </p>
+                        <div className="h-1.5 rounded-full bg-blue-100 overflow-hidden">
+                          <div className="h-full w-2/3 rounded-full bg-blue-500" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Milestone 3: Gruppensession */}
+                    <div className="flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50/70 px-3 py-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400 text-xl shadow-sm shadow-amber-400/40">
+                        <span role="img" aria-label="Calendar">
+                          📅
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <p className="font-semibold text-slate-900">
+                            Gruppensession mit Mentor
+                          </p>
+                          <span className="rounded-full bg-white/80 px-2 py-[2px] text-[10px] text-amber-800">
+                            Donnerstag · 18:00
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600">
+                          Nutze die Session für Fragen zu Alltag, Sprache oder
+                          Papieren – alles ist willkommen.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Nächste Phasen-Kacheln */}
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+                  <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    Phase 1
+                  </p>
+                  <h3 className="font-semibold text-slate-900 mb-1">
+                    Ankommen & Alltag
+                  </h3>
+                  <p className="text-slate-600 mb-3">
+                    Sicherheit im Alltag: Einkaufen, Arzt, Behörde, öffentlicher
+                    Verkehr.
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    4 von 8 Wochen abgeschlossen.
+                  </p>
+                </div>
+
+                <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+                  <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    Phase 2
+                  </p>
+                  <h3 className="font-semibold text-slate-900 mb-1">
+                    Job‑Sprache & Szenarien
+                  </h3>
+                  <p className="text-slate-600 mb-3">
+                    Rollenspiele und Aufgaben für deinen Zielbereich
+                    (Logistik, Care, Tech, …).
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    Startet nach Phase&nbsp;1 · geplant Q3.
+                  </p>
+                </div>
+
+                <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 text-xs sm:text-sm">
+                  <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    Phase 3
+                  </p>
+                  <h3 className="font-semibold mb-1">
+                    Matching & Einstieg in den Job
+                  </h3>
+                  <p className="text-slate-200 mb-3">
+                    Bewerbungen, Interviews, Onboarding – mit klaren nächsten
+                    Schritten.
+                  </p>
+                  <p className="text-[11px] text-emerald-300">
+                    Ziel: Dein erster Job in Deutschland, der zu dir passt.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* RECHTE SPALTE – OVERVIEW */}
+            <section className="space-y-4 lg:space-y-5">
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Überblick
+                </p>
+                <h2 className="text-sm font-semibold text-slate-900 mb-4">
+                  Dein aktuelles Profil
+                </h2>
+
+                {/* Sprachlevel */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-xs text-slate-500 mb-1">
+                    <span>Deutsch‑Level</span>
+                    <span>A2 · auf dem Weg zu B1</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-full w-2/3 rounded-full bg-blue-500" />
+                  </div>
+                  <p className="mt-1 text-[11px] text-slate-500">
+                    Konzentriere dich auf Hör‑ und Sprechübungen, um B1 zu
+                    erreichen.
+                  </p>
+                </div>
+
+                {/* Integration */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-xs text-slate-500 mb-1">
+                    <span>Integration & Alltag</span>
+                    <span>45%</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-full w-[45%] rounded-full bg-emerald-500" />
+                  </div>
+                  <p className="mt-1 text-[11px] text-slate-500">
+                    Nächster Schritt: Modul „Gesundheitssystem“ abschließen.
+                  </p>
+                </div>
+
+                {/* Job-readiness */}
+                <div>
+                  <div className="flex justify-between text-xs text-slate-500 mb-1">
+                    <span>Job‑Bereitschaft</span>
+                    <span>35%</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-full w-[35%] rounded-full bg-amber-500" />
+                  </div>
+                  <p className="mt-1 text-[11px] text-slate-500">
+                    Lebenslauf‑Profil vervollständigen und erste Job‑Simulation
+                    starten.
+                  </p>
+                </div>
+              </div>
+
+              {/* Nächste Session */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Nächste Session
+                </p>
+                <h3 className="font-semibold text-slate-900 mb-1">
+                  Gruppensession mit deinem Mentor
+                </h3>
+                <p className="text-slate-600 mb-3">
+                  Donnerstag · 18:00–19:00 Uhr (online)
+                </p>
+                <ul className="text-slate-600 space-y-1 mb-3">
+                  <li>• Check‑in: Wie läuft dein Alltag in Deutschland?</li>
+                  <li>• Sprachübung: Situationen im Job.</li>
+                  <li>• Fragen zu Papieren, Wohnung, Verträgen.</li>
+                </ul>
+                <button className="w-full rounded-full bg-slate-900 text-slate-50 py-2 text-xs font-medium hover:bg-slate-800">
+                  Zoom‑Link anzeigen
+                </button>
+              </div>
+
+              {/* Zieljob / Tags */}
+              <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 text-xs sm:text-sm">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Dein Ziel
+                </p>
+                <h3 className="font-semibold text-slate-900 mb-1">
+                  Zielrolle: Kundenservice / Logistikkoordination
+                </h3>
+                <p className="text-slate-600 mb-3">
+                  Wir bereiten dich auf Rollen vor, die Sprache, digitale Tools
+                  und Teamarbeit kombinieren.
+                </p>
+                <div className="flex flex-wrap gap-2 text-[11px]">
+                  <span className="rounded-full bg-slate-100 px-3 py-1">
+                    Deutsch mit Kunden
+                  </span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1">
+                    Digitale Tools
+                  </span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1">
+                    Team & Kommunikation
+                  </span>
+                </div>
+              </div>
+
+              {/* Warum Evolgrit */}
+              <div className="rounded-3xl bg-slate-900 text-slate-50 shadow-sm p-4 sm:p-5 text-xs sm:text-sm">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-2">
+                  Warum Evolgrit
+                </p>
+                <p className="font-semibold mb-2">
+                  Wir glauben, dass jeder Mensch seine Zukunft verbessern kann —
+                  durch Entwicklung (Evol-) und Ausdauer (-grit).
+                </p>
+                <p className="text-slate-200">
+                  Evolgrit steht für die Fähigkeit, trotz Herausforderungen
+                  weiterzugehen, zu lernen, zu wachsen und ein neues Leben
+                  aufzubauen. Dieses Dashboard ist dein persönlicher Blick auf
+                  diese Reise.
+                </p>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
     </div>
