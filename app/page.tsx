@@ -683,15 +683,6 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  {/* RIGHT: Phone Mockup (sticky) */}
-  <div className="order-1 lg:order-2 lg:sticky lg:top-32 flex justify-center lg:justify-end">
-    <div className="w-[260px] aspect-[9/19] rounded-[40px] border border-slate-200 bg-white shadow-xl shadow-slate-900/10 overflow-hidden flex items-center justify-center">
-      {/* Platzhalter – später Screenshot / Diagramme */}
-      <span className="text-slate-400 text-xs text-center px-4">
-        Evolgrit app preview – phases 1–3
-      </span>
-    </div>
-  </div>
 </section>
 {/* BRANDING SECTION */}
 <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
