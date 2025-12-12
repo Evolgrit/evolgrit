@@ -188,59 +188,109 @@ export default function LearnerJourneyPage() {
         <main className="flex-1 grid gap-6 lg:grid-cols-[minmax(0,2fr),minmax(260px,1.3fr)]">
           {/* MITTLERE SPALTE – PHASEN & AUFGABEN */}
           <section className="space-y-6">
-            {/* Aktuelle Phase */}
+            {/* Aktuelle Phase – Hero Card */}
             <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-3 mb-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
-                    Aktuelle Phase
-                  </p>
-                  <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
-                    Phase 1 · Ankommen & Grundlagen
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                    Fokus auf Alltagssprache, Orientierung in Deutschland und
-                    erste Kontakte mit deiner Kohorte.
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
-                    Woche 3 von 8
-                  </span>
-                  <p className="mt-1 text-xs text-slate-400">
-                    26% deiner Gesamt‑Reise
-                  </p>
-                </div>
-              </div>
+              <div className="flex flex-col lg:flex-row items-stretch gap-5">
+                {/* Illustration / Journey-Side */}
+                <div className="relative w-full lg:w-1/3 rounded-2xl bg-gradient-to-br from-blue-600 via-sky-500 to-emerald-400 text-slate-50 overflow-hidden p-4 flex flex-col justify-between">
+                  <div className="flex items-center justify-between text-[11px] mb-2">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-[2px]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+                      Phase 1 · Ankommen
+                    </span>
+                    <span className="text-sky-100">Woche 3 / 8</span>
+                  </div>
 
-              {/* Progress Bar */}
-              <div className="mb-4">
-                <div className="flex justify-between text-[11px] text-slate-500 mb-1">
-                  <span>Reise‑Fortschritt</span>
-                  <span>25%</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-blue-500 to-emerald-400" />
-                </div>
-              </div>
+                  <div className="mt-1 mb-3">
+                    <p className="text-xs text-sky-100/90 mb-1">
+                      Deine Reise heute
+                    </p>
+                    <p className="text-sm font-semibold leading-snug">
+                      Alltag verstehen, sprechen und dich sicher fühlen – Schritt
+                      für Schritt.
+                    </p>
+                  </div>
 
-              {/* Phasen-Badges */}
-              <div className="flex flex-wrap gap-2 text-[11px]">
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-                  Deutsch · A2 → B1
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Integration & Alltag
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-                  Wöchentliches Mentoring
-                </span>
+                  {/* Kleine Mini-Map / Timeline */}
+                  <div className="mt-auto pt-2">
+                    <div className="flex items-center justify-between text-[10px] text-sky-100/90 mb-1">
+                      <span>Heute</span>
+                      <span>Deine Reise</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-sky-500/60 overflow-hidden">
+                      <div className="h-full w-1/4 rounded-full bg-emerald-300" />
+                    </div>
+                    <div className="mt-2 flex gap-1 text-[10px] text-sky-100/80">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-200" />
+                        Deutsch
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-200" />
+                        Alltag
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-[2px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-purple-200" />
+                        Mentoring
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Text / Details-Side */}
+                <div className="flex-1 flex flex-col justify-between gap-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
+                        Aktuelle Phase
+                      </p>
+                      <h2 className="text-lg sm:text-xl font-semibold text-slate-900">
+                        Phase 1 · Ankommen & Grundlagen
+                      </h2>
+                      <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-md">
+                        Fokus auf Alltagssprache, Orientierung in Deutschland und
+                        erste Kontakte mit deiner Kohorte.
+                      </p>
+                    </div>
+                    <div className="text-right text-xs">
+                      <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
+                        Woche 3 von 8
+                      </span>
+                      <p className="mt-1 text-slate-400">
+                        26% deiner Gesamt‑Reise
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Reise-Fortschritt */}
+                  <div>
+                    <div className="flex justify-between text-[11px] text-slate-500 mb-1">
+                      <span>Reise‑Fortschritt</span>
+                      <span>25%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-blue-500 to-emerald-400" />
+                    </div>
+                  </div>
+
+                  {/* Phasen-Badges */}
+                  <div className="flex flex-wrap gap-2 text-[11px]">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                      Deutsch · A2 → B1
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      Integration & Alltag
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-slate-700">
+                      <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                      Wöchentliches Mentoring
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-
 {/* Heute / Diese Woche */}
             <div className="grid gap-4 md:grid-cols-2">
               {/* Heute – neue Activity-Cards */}
