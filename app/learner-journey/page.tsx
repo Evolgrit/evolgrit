@@ -1,14 +1,14 @@
 'use client';
 
+import Image from "next/image";
 import { useState } from "react";
 
 export default function LearnerJourneyPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // später kommt das aus echten Daten – jetzt statisch als Beispiel
-  const journeyProgress = 0.6; // 60% deiner Reise
+  const journeyProgress = 0.6; // 60%
   const journeyProgressDegrees = journeyProgress * 360;
-  return (
+      return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* HEADER / NAVBAR – gleiches Design wie Startseite */}
       <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
@@ -143,24 +143,28 @@ export default function LearnerJourneyPage() {
       <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
         {/* SIDEBAR – nur ab md sichtbar */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
-<div className="mb-6">
+        <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
+          <div className="mb-6">
             <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
               Dashboard
             </p>
 
             <div className="flex items-center gap-3">
-              {/* Profilbild mit Progress-Ring */}
+              {/* Avatar mit Fortschrittsring */}
               <div
-                className="relative h-14 w-14 rounded-full flex items-center justify-center"
+                className="relative h-14 w-14 rounded-full"
                 style={{
                   background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
                 }}
               >
-                <div className="absolute inset-[3px] rounded-full bg-slate-50 flex items-center justify-center overflow-hidden">
-                  {/* Platzhalter-Avatar – später echtes Bild */}
-                  <span className="text-sm font-semibold text-slate-900">
-                    L
-                  </span>
+                <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
+                  <Image
+                    src="/lina-avatar.png"
+                    alt="Lina"
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
                 </div>
               </div>
 
@@ -177,7 +181,7 @@ export default function LearnerJourneyPage() {
               </div>
             </div>
           </div>
-          <nav className="space-y-1 text-sm">
+                    <nav className="space-y-1 text-sm">
             <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
               <span>Übersicht</span>
               <span className="text-[11px] rounded-full bg-slate-800 px-2 py-[2px]">
