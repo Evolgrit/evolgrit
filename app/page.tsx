@@ -22,7 +22,7 @@ export default function Home() {
       behavior: "smooth",
     })
   }
-  className="flex items-center gap-2"
+className="flex items-center gap-2 cursor-pointer"
 >
   <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
     E
