@@ -5,6 +5,9 @@ import { useState } from "react";
 export default function LearnerJourneyPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // später kommt das aus echten Daten – jetzt statisch als Beispiel
+  const journeyProgress = 0.6; // 60% deiner Reise
+  const journeyProgressDegrees = journeyProgress * 360;
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* HEADER / NAVBAR – gleiches Design wie Startseite */}
@@ -140,18 +143,40 @@ export default function LearnerJourneyPage() {
       <main className="max-w-6xl mx-auto px-4 lg:px-6 py-6 lg:py-10 flex gap-6">
         {/* SIDEBAR – nur ab md sichtbar */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 rounded-3xl bg-white/80 border border-slate-200 shadow-sm p-4">
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-1">
+<div className="mb-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
               Dashboard
             </p>
-            <h1 className="text-lg font-semibold text-slate-900">
-              Hi, Lina 👋
-            </h1>
-            <p className="text-xs text-slate-500">
-              Deine 6–12‑Monats‑Reise mit Evolgrit.
-            </p>
-          </div>
 
+            <div className="flex items-center gap-3">
+              {/* Profilbild mit Progress-Ring */}
+              <div
+                className="relative h-14 w-14 rounded-full flex items-center justify-center"
+                style={{
+                  background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
+                }}
+              >
+                <div className="absolute inset-[3px] rounded-full bg-slate-50 flex items-center justify-center overflow-hidden">
+                  {/* Platzhalter-Avatar – später echtes Bild */}
+                  <span className="text-sm font-semibold text-slate-900">
+                    L
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <h1 className="text-sm font-semibold text-slate-900">
+                  Hi, Lina 👋
+                </h1>
+                <p className="text-xs text-slate-500">
+                  Deine 6–12‑Monats‑Reise mit Evolgrit.
+                </p>
+                <p className="mt-1 text-[11px] text-emerald-600">
+                  Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
+                </p>
+              </div>
+            </div>
+          </div>
           <nav className="space-y-1 text-sm">
             <button className="w-full flex items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-50">
               <span>Übersicht</span>
