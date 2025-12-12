@@ -12,29 +12,22 @@ export default function LearnerJourneyPage() {
         <div className="max-w-6xl mx-auto px-5 py-4">
           <nav className="flex items-center justify-between gap-4">
             {/* Logo + Title */}
-            <button
-              type="button"
-              onClick={() =>
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })
-              }
-              className="flex items-center gap-2"
-            >
-              <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
-                E
-              </div>
-              <div>
-                <div className="text-sm font-semibold tracking-[0.18em] uppercase">
-                  Evolgrit
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Language · Jobs · AI
-                </div>
-              </div>
-            </button>
-
+<a
+  href="/"
+  className="flex items-center gap-2 cursor-pointer"
+>
+  <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
+    E
+  </div>
+  <div>
+    <div className="text-sm font-semibold tracking-[0.18em] uppercase">
+      Evolgrit
+    </div>
+    <div className="text-[11px] text-slate-500">
+      Language · Jobs · AI
+    </div>
+  </div>
+</a>
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
