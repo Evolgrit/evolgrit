@@ -241,7 +241,9 @@ export default function LearnerJourneyPage() {
               </div>
             </div>
 
- {/* Heute – neue Activity-Cards */}
+{/* Heute / Diese Woche */}
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Heute – neue Activity-Cards */}
               <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4 sm:p-5">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
                   Heute
@@ -331,6 +333,7 @@ export default function LearnerJourneyPage() {
                   </button>
                 </div>
               </div>
+
               {/* Diese Woche */}
               <div className="rounded-3xl bg-white border border-slate-200 shadow-sm p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
@@ -397,7 +400,7 @@ export default function LearnerJourneyPage() {
                 </p>
               </div>
             </div>
-          </section>
+                      </section>
 
           {/* RECHTE SPALTE – OVERVIEW */}
           <section className="space-y-4 lg:space-y-5">
