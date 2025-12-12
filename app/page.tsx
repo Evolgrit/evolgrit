@@ -367,6 +367,92 @@ className="flex items-center gap-2 cursor-pointer"
 
   </div>
 </section>
+{/* EXAMPLE JOURNEYS – TYPICAL PATHS */}
+<section className="max-w-6xl mx-auto mt-24 px-5">
+  <div className="text-center max-w-2xl mx-auto mb-8">
+    <h2 className="text-3xl font-semibold text-slate-900 mb-3">
+      Example journeys with Evolgrit.
+    </h2>
+    <p className="text-sm sm:text-base text-slate-600">
+      These stories are typical paths – not promises. They show how language,
+      culture and work can grow together over 6–12 months.
+    </p>
+  </div>
+
+  <div className="space-y-4">
+    {/* Lucía – Spain */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
+      <div className="flex flex-col items-center gap-2 shrink-0">
+        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
+          L
+        </div>
+        <span className="text-xs text-slate-500">🇪🇸 Spain</span>
+      </div>
+      <div className="space-y-1 text-sm">
+        <p className="font-semibold text-slate-900">
+          Lucía · 27 · from Spain → Childcare assistant
+        </p>
+        <p className="text-slate-600">
+          Started with A2 German and several years of childcare experience from
+          Spain.
+        </p>
+        <p className="text-slate-600">
+          In 9 months: B1, cultural modules for working with parents and
+          colleagues, first job as a childcare assistant in a Kindergarten.
+        </p>
+      </div>
+    </div>
+
+    {/* Mihai – Romania */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
+      <div className="flex flex-col items-center gap-2 shrink-0">
+        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
+          M
+        </div>
+        <span className="text-xs text-slate-500">🇷🇴 Romania</span>
+      </div>
+      <div className="space-y-1 text-sm">
+        <p className="font-semibold text-slate-900">
+          Mihai · 32 · from Romania → Bus driver
+        </p>
+        <p className="text-slate-600">
+          Strong driving experience, but low confidence in German.
+        </p>
+        <p className="text-slate-600">
+          Evolgrit focused on job phrases, shift plans and passenger
+          situations – now working as a bus driver in local public transport.
+        </p>
+      </div>
+    </div>
+
+    {/* Eleni – Greece */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
+      <div className="flex flex-col items-center gap-2 shrink-0">
+        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
+          E
+        </div>
+        <span className="text-xs text-slate-500">🇬🇷 Greece</span>
+      </div>
+      <div className="space-y-1 text-sm">
+        <p className="font-semibold text-slate-900">
+          Eleni · 24 · from Greece → Warehouse &amp; logistics
+        </p>
+        <p className="text-slate-600">
+          Tech-savvy and used to English, but new to German.
+        </p>
+        <p className="text-slate-600">
+          Combined German with scanner &amp; system language and safety vocabulary –
+          now working in a logistics hub with room to grow.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p className="mt-3 text-[11px] text-slate-500">
+    These are illustrative stories based on typical learner profiles. Actual
+    outcomes depend on each person&apos;s situation and effort.
+  </p>
+</section>
         {/* PRODUCT SECTION */}
 <section
   id="product"
