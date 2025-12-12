@@ -144,37 +144,37 @@ export default function LearnerJourneyPage() {
               Dashboard
             </p>
 
-            <div className="flex items-center gap-3">
-              {/* Avatar mit Fortschrittsring */}
-              <div
-                className="relative h-14 w-14 rounded-full"
-                style={{
-                  background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
-                }}
-              >
-                <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
-                  <Image
-                    src="/lina-avatar.png"
-                    alt="Lina"
-                    fill
-                    sizes="56px"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+<div className="flex flex-col items-center gap-2">
+  {/* Avatar mit Fortschrittsring */}
+  <div
+    className="relative h-16 w-16 rounded-full"
+    style={{
+      background: `conic-gradient(#22c55e 0deg, #22c55e ${journeyProgressDegrees}deg, #e5e7eb ${journeyProgressDegrees}deg, #e5e7eb 360deg)`,
+    }}
+  >
+    <div className="absolute inset-[3px] rounded-full bg-slate-50 overflow-hidden">
+      <Image
+        src="/lina-avatar.png"
+        alt="Lina"
+        fill
+        sizes="64px"
+        className="object-cover"
+      />
+    </div>
+  </div>
 
-              <div className="flex-1">
-                <h1 className="text-sm font-semibold text-slate-900">
-                  Hi, Lina 👋
-                </h1>
-                <p className="text-xs text-slate-500">
-                  Deine 6–12‑Monats‑Reise mit Evolgrit.
-                </p>
-                <p className="mt-1 text-[11px] text-emerald-600">
-                  Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
-                </p>
-              </div>
-            </div>
+  <div className="text-center">
+    <h1 className="text-sm font-semibold text-slate-900">
+      Hi, Lina 👋
+    </h1>
+    <p className="text-xs text-slate-500">
+      Deine 6–12‑Monats‑Reise mit Evolgrit.
+    </p>
+    <p className="mt-1 text-[11px] text-emerald-600 font-medium">
+      Reise‑Fortschritt: {Math.round(journeyProgress * 100)}%
+    </p>
+  </div>
+</div>
           </div>
 
           <nav className="space-y-1 text-sm">
