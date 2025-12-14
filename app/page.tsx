@@ -5,11 +5,12 @@ import { useState } from "react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // GET TO KNOW EVOLGRIT – 7 PILLARS
   const getToKnowCards = [
     {
       id: "language-jobs",
       label: "Language · Jobs",
-      title: "Learn German where you’ll actually use it.",
+      title: "Learn German where you actually use it.",
       description:
         "Job-specific German for care, logistics, childcare and drivers – built into every step of the journey.",
       image: "/know-language-jobs.jpg",
@@ -48,21 +49,21 @@ export default function Home() {
     },
     {
       id: "life-sessions",
-      label: "Live life sessions",
-      title: "Weekly check-ins about real life.",
+      label: "Live sessions",
+      title: "Weekly live sessions that keep you going.",
       description:
-        "Group and 1:1 live sessions about culture, mindset and everyday questions – not only grammar.",
+        "Real talk about life in Germany, culture, mindset and next steps – not only grammar.",
       image: "/know-life-sessions.jpg",
     },
     {
       id: "mentors-cohort",
       label: "Mentors & cohort",
-      title: "You’re not doing this journey alone.",
+      title: "You never walk this journey alone.",
       description:
-        "Mentors and peers walk the journey with you – with clear next steps toward work in Germany.",
+        "Mentors, peers and partner employers walk with you from first words to first working day.",
       image: "/know-mentors-cohort.jpg",
     },
-  ];
+  ] as const;
 
   return (
     <div 
@@ -361,26 +362,25 @@ className="flex items-center gap-2 cursor-pointer"
 {/* PATHWAYS – Apple-style cards with swipe on mobile */}
 <section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
   {/* Headline + intro */}
-  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
     <div>
-      <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
+      <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
         Unlock your future in Germany
       </h2>
-      <p className="mt-3 max-w-2xl text-base text-slate-500">
-        Turn your experience into real life in Germany – with language, culture and job support on one Evolgrit journey.
+      <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+        Turn your experience into a real life in Germany – with language,
+        culture and job support on one Evolgrit journey.
       </p>
-      <p className="mt-2 max-w-xl text-sm text-slate-500">
-        Choose a pathway that fits your strengths. Evolgrit walks beside you from first words to your first working day.
+      <p className="mt-1 text-[13px] text-slate-500 max-w-xl">
+        Choose a pathway that fits your strengths. Evolgrit walks beside you
+        from first words to your first working day.
       </p>
     </div>
-
-    <a
-      href="#how-it-works"
-      className="mt-1 text-sm font-medium text-slate-500 hover:text-slate-900 flex items-center gap-1 self-start sm:self-auto"
-    >
-      <span>Learn how Evolgrit works</span>
-      <span aria-hidden="true">→</span>
-    </a>
+    <div className="hidden sm:flex items-center gap-3 text-sm">
+      <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+        Learn how Evolgrit works →
+      </a>
+    </div>
   </div>
 
   {/* Cards wrapper: swipe on mobile, grid on desktop */}
@@ -396,27 +396,25 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
           Logistics · Warehouses &amp; delivery
         </p>
-        <h3 className="mt-3 text-xl font-semibold text-slate-900">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
           Logistics: Build a stable start, fast.
         </h3>
-        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+        <p className="text-sm text-slate-600 flex-1">
           You enjoy movement, teamwork and clear structures. With Evolgrit you
           learn the German you need for warehouses, scanners, deliveries and
           safety – and we help you into your first contract in Germany.
         </p>
-        <div className="mt-5 flex items-center justify-end">
-          <a
-            href="#phase-2"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-            aria-label="See logistics pathway"
-          >
-            +
-          </a>
-        </div>
+        <a
+          href="#phase-2"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See logistics pathway"
+        >
+          +
+        </a>
       </div>
     </article>
 
@@ -431,27 +429,25 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
           Professional drivers · People &amp; goods
         </p>
-        <h3 className="mt-3 text-xl font-semibold text-slate-900">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
           Professional driver: Move people and goods across Europe.
         </h3>
-        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+        <p className="text-sm text-slate-600 flex-1">
           You like the road and responsibility. Evolgrit helps you with German
           for routes, passengers, shift plans and safety briefings – so you can
           start in local transport or regional logistics.
         </p>
-        <div className="mt-5 flex items-center justify-end">
-          <a
-            href="#phase-2"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-            aria-label="See professional driver pathway"
-          >
-            +
-          </a>
-        </div>
+        <a
+          href="#phase-2"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See professional driver pathway"
+        >
+          +
+        </a>
       </div>
     </article>
 
@@ -466,27 +462,25 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
           Childcare &amp; Care · Families &amp; communities
         </p>
-        <h3 className="mt-3 text-xl font-semibold text-slate-900">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
           Childcare &amp; care: Support families and feel at home.
         </h3>
-        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+        <p className="text-sm text-slate-600 flex-1">
           You love working with people. Evolgrit prepares you for conversations
           with children, parents, colleagues and patients – plus cultural
           modules for trust, empathy and everyday life in Germany.
         </p>
-        <div className="mt-5 flex items-center justify-end">
-          <a
-            href="#phase-2"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-            aria-label="See childcare and care pathway"
-          >
-            +
-          </a>
-        </div>
+        <a
+          href="#phase-2"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See childcare and care pathway"
+        >
+          +
+        </a>
       </div>
     </article>
   </div>
@@ -702,90 +696,85 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-      {/* GET TO KNOW EVOLGRIT – image cards */}
-      <section className="mt-16 bg-slate-50 text-slate-900 py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-5">
-          {/* Heading + Subtext */}
-          <div className="flex items-end justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                Get to know Evolgrit.
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl">
-                Seven pillars that make Evolgrit more than a language course – from
-                AI support to family help, documents and real-life mentoring.
-              </p>
-            </div>
-            <a
-              href="#how-it-works"
-              className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-slate-200 hover:text-white"
+
+      <section
+        aria-labelledby="get-to-know-heading"
+        className="max-w-6xl mx-auto px-4 lg:px-6 py-16"
+      >
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <div>
+            <h2
+              id="get-to-know-heading"
+              className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900"
             >
-              Learn how Evolgrit works
-              <span aria-hidden="true">→</span>
-            </a>
+              Get to know Evolgrit.
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-2xl">
+              Seven pillars that make Evolgrit more than a language course – from AI
+              support to family help, documents and real-life mentoring.
+            </p>
           </div>
+          <a
+            href="#how-it-works"
+            className="hidden sm:inline-flex text-xs font-medium text-slate-500 hover:text-slate-900"
+          >
+            Learn how Evolgrit works →
+          </a>
+        </div>
 
-          {/* Card rail – Apple-style */}
-          <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
-            {getToKnowCards.map((card) => (
-              <article
-                key={card.id}
-                className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
-              >
-                {/* Eigentliche Karte – weißer Rahmen, Bild + Overlay */}
-                <div className="relative rounded-3xl bg-white overflow-hidden shadow-sm">
-                  {/* Bild mit Overlay */}
-                  <div className="relative aspect-[3/4.5]">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      priority={card.id === "language-jobs"}
-                      sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 80vw"
-                      className="object-cover"
-                    />
+        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible">
+          {getToKnowCards.map((card) => (
+            <article
+              key={card.id}
+              className="snap-center shrink-0 w-[80%] sm:w-[55%] md:w-auto md:shrink bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden relative group"
+            >
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 80vw"
+                />
+                {/* Gradient für Lesbarkeit */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/35 to-slate-900/5" />
 
-                    {/* Dunkles Overlay nur im unteren Bereich – für Lesbarkeit */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
-                  </div>
-
-                  {/* Textblock unten – gleiche Typo wie Pathways */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2 text-slate-50">
-                    <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/85">
-                      {card.label}
-                    </p>
-                    <h3 className="text-[15px] sm:text-[17px] font-semibold leading-snug">
-                      {card.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-slate-100/85">
-                      {card.description}
-                    </p>
-                  </div>
-
-                  {/* Plus-Button unten rechts – wie bei Pathways */}
-                  <button
-                    type="button"
-                    className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900/80 text-slate-50 text-lg shadow-md shadow-slate-900/40 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/70"
-                    aria-label={card.cta}
-                  >
-                    +
-                  </button>
+                {/* Text-Overlay */}
+                <div className="absolute inset-4 flex flex-col justify-end">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-200/80">
+                    {card.label}
+                  </p>
+                  <h3 className="mt-2 text-base sm:text-lg font-semibold text-white">
+                    {card.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-100/85">
+                    {card.description}
+                  </p>
                 </div>
-              </article>
-            ))}
-          </div>
 
-          <div className="mt-4 sm:hidden">
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center gap-1 text-xs font-medium text-slate-200"
-            >
-              Learn how Evolgrit works
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
+                {/* Plus-Button */}
+                <button
+                  type="button"
+                  className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-slate-900 shadow-md shadow-slate-900/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+                  aria-label={card.title}
+                >
+                  <span className="text-xl leading-none">+</span>
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-4 sm:hidden">
+          <a
+            href="#how-it-works"
+            className="inline-flex text-xs font-medium text-slate-500 hover:text-slate-900"
+          >
+            Learn how Evolgrit works →
+          </a>
         </div>
       </section>
+
         {/* PRODUCT SECTION */}
 <section
   id="product"
@@ -926,115 +915,104 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-      {/* GET TO KNOW EVOLGRIT */}
-      <section className="bg-slate-50 py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-5">
-          {/* Headline + Intro */}
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
-            Get to know Evolgrit.
+      {/* PROGRAM TIMELINE SECTION */}
+      {/* PROGRAM TIMELINE / THREE PHASES */}
+      <section className="max-w-6xl mx-auto mt-24 px-5">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="text-3xl font-semibold text-slate-900 mb-3">
+            Three phases – not just a course.
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
-            Evolgrit combines language, culture and careers in one journey – built for
-            people who actually want to live and work in Germany, not just pass an exam.
+          <p className="text-sm sm:text-base text-slate-600">
+            Evolgrit is a structured 3-phase journey – from arrival to job-ready –
+            so learners can grow step by step without burning out.
           </p>
+        </div>
 
-          {/* Row 1 – Core of the program */}
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {/* Language in real jobs */}
-            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-blue-50 text-xs font-medium text-blue-700">
-                A
+        <div className="grid gap-6 md:grid-cols-3 text-sm">
+          {/* Phase 1 */}
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-sm font-semibold">
+                1
               </div>
-              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                Language in real jobs
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Practice German in real work situations – childcare, care, logistics and
-                drivers – instead of artificial textbook dialogues.
-              </p>
-            </article>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 1 · Arrival &amp; foundations
+                </p>
+                <h3 className="font-semibold text-slate-900">
+                  Land softly in Germany.
+                </h3>
+              </div>
+            </div>
 
-            {/* Integration built-in */}
-            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-emerald-50 text-xs font-medium text-emerald-700">
-                B
-              </div>
-              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                Integration built‑in
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Housing, offices, doctors and contracts – everyday situations in Germany
-                are part of the learning path, not an afterthought.
-              </p>
-            </article>
+            <ul className="space-y-1.5 text-slate-600 text-sm">
+              <li>• Orientation, onboarding and a first language baseline.</li>
+              <li>• Everyday German for living and basic work situations.</li>
+              <li>• Early contact with mentors and a peer community.</li>
+            </ul>
 
-            {/* Job & employer ready */}
-            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-violet-50 text-xs font-medium text-violet-700">
-                C
-              </div>
-              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                Job &amp; employer ready
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Profiles show language level, skills and reliability signals – so employers
-                can see who is ready for which role, not just who has a certificate.
-              </p>
-            </article>
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 text-[11px] px-3 py-1">
+                Everyday confidence
+              </span>
+            </div>
           </div>
 
-          {/* Row 2 – AI layer */}
-          <div className="mt-12">
-            <h3 className="text-base sm:text-lg font-semibold tracking-tight text-slate-900">
-              How the AI in Evolgrit helps you every week.
-            </h3>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
-              AI is not a buzzword for us – it helps learners, mentors and employers make
-              better decisions every week.
-            </p>
-
-            <div className="mt-6 grid gap-4 lg:grid-cols-3">
-              {/* Personalised practice tasks */}
-              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-sky-50 text-xs font-medium text-sky-700">
-                  1
-                </div>
-                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
-                  Personalised practice tasks
-                </h4>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Evolgrit adjusts difficulty, topics and feedback to each learner – based
-                  on their target role, level and pace.
+          {/* Phase 2 */}
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
+                2
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 2 · Deepening &amp; practice
                 </p>
-              </article>
+                <h3 className="font-semibold text-slate-900">
+                  Practice for real jobs and real life.
+                </h3>
+              </div>
+            </div>
 
-              {/* Always-on language coach */}
-              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-emerald-50 text-xs font-medium text-emerald-700">
-                  2
-                </div>
-                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
-                  Always‑on language coach
-                </h4>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Learners can practice speaking, get corrections and explanations on demand –
-                  not only during live sessions.
-                </p>
-              </article>
+            <ul className="space-y-1.5 text-slate-600 text-sm">
+              <li>• Job-related German with scenarios and role plays.</li>
+              <li>• Job-specific language for logistics, care &amp; childcare.</li>
+              <li>• Changing formats and regular feedback from mentors &amp; AI-coach.</li>
+            </ul>
 
-              {/* Signals for mentors & employers */}
-              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
-                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-amber-50 text-xs font-medium text-amber-700">
-                  3
-                </div>
-                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
-                  Signals for mentors &amp; employers
-                </h4>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  The AI summarises progress into simple signals – language, cultural readiness
-                  and reliability – for mentors and partner employers.
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-[11px] px-3 py-1">
+                Work-ready language
+              </span>
+            </div>
+          </div>
+
+          {/* Phase 3 */}
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-sm font-semibold">
+                3
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Phase 3 · Job-ready &amp; matching
                 </p>
-              </article>
+                <h3 className="font-semibold text-slate-900">
+                  Move confidently into work.
+                </h3>
+              </div>
+            </div>
+
+            <ul className="space-y-1.5 text-slate-600 text-sm">
+              <li>• Interview preparation and workplace communication.</li>
+              <li>• Matching with partner employers or education partners.</li>
+              <li>• Clear next steps: job, apprenticeship or further training.</li>
+            </ul>
+
+            <div className="mt-auto pt-2">
+              <span className="inline-flex items-center rounded-full bg-violet-50 text-violet-700 text-[11px] px-3 py-1">
+                Job-ready &amp; matched
+              </span>
             </div>
           </div>
         </div>
