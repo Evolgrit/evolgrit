@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
@@ -299,58 +300,119 @@ className="flex items-center gap-2 cursor-pointer"
 
   </div>
 </section>
-{/* BRANCH PATHWAYS SECTION */}
-<section className="max-w-6xl mx-auto mt-24 px-5">
-  <h2 className="text-3xl font-semibold text-slate-900 mb-10 text-center">
-    Explore pathways for different careers
+{/* PATHWAYS – UNLOCK YOUR FUTURE */}
+<section
+  id="pathways"
+  className="max-w-6xl mx-auto mt-24 px-5"
+>
+  <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 text-center mb-3">
+    Unlock Your Future in Germany
   </h2>
+  <p className="text-sm sm:text-base text-slate-600 text-center max-w-2xl mx-auto mb-2">
+    Turn your experience into a real life in Germany – with language, culture and job support in one Evolgrit journey.
+  </p>
+  <p className="text-[13px] text-slate-500 text-center max-w-xl mx-auto mb-10">
+    Choose a pathway that fits your strengths. Evolgrit walks beside you from first words to your first working day.
+  </p>
 
-  <div className="grid gap-6 md:grid-cols-3 text-sm">
-
-    {/* Logistics */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-lg font-bold mb-4">
-        L
+  <div className="grid gap-6 md:grid-cols-3">
+    {/* CARD 1 – LOGISTICS */}
+    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+      <div className="relative w-full aspect-[4/3]">
+        <Image
+          src="/pathways-logistics.jpg"
+          alt="International logistics team working together in a warehouse in Germany"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+        />
       </div>
-      <h3 className="font-semibold text-slate-900 mb-2">Logistics</h3>
-      <p className="text-slate-600 mb-4">
-        Warehouse, delivery & supply-chain roles with quick placement pathways.
-      </p>
-<a href="#phase-2" className="text-blue-600 font-medium hover:underline">
-  See logistics pathway →
-</a>
-    </div>
-
-    {/* Drivers */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center text-lg font-bold mb-4">
-        D
+      <div className="p-5 sm:p-6 flex-1 flex flex-col">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
+          Logistics · Warehouses &amp; delivery
+        </p>
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+          Logistics: Build a stable start, fast.
+        </h3>
+        <p className="text-sm text-slate-600 mb-4 flex-1">
+          You enjoy movement, teamwork and clear structures. With Evolgrit you learn
+          the German you need for warehouses, scanners, deliveries and safety – and
+          we help you into your first contract in Germany.
+        </p>
+        <a
+          href="#phase-2"
+          className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+        >
+          See logistics pathway →
+        </a>
       </div>
-      <h3 className="font-semibold text-slate-900 mb-2">Professional Drivers</h3>
-      <p className="text-slate-600 mb-4">
-        Bus & van drivers — in high demand across Europe.
-      </p>
-<a href="#phase-2" className="text-emerald-600 font-medium hover:underline">
-  See driver pathway →
-</a>
-    </div>
+    </article>
 
-    {/* Kindergarden / Care */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-      <div className="h-10 w-10 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center text-lg font-bold mb-4">
-        K
+    {/* CARD 2 – PROFESSIONAL DRIVERS */}
+    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+      <div className="relative w-full aspect-[4/3]">
+        <Image
+          src="/pathways-drivers.jpg"
+          alt="Professional bus driver working in public transport in Germany"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+        />
       </div>
-      <h3 className="font-semibold text-slate-900 mb-2">Childcare & Care</h3>
-      <p className="text-slate-600 mb-4">
-        Kindergarden assistants & entry-care roles with cultural readiness support.
-      </p>
-<a href="#phase-2" className="text-purple-600 font-medium hover:underline">
-  See care pathway →
-</a>
-    </div>
+      <div className="p-5 sm:p-6 flex-1 flex flex-col">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
+          Professional Drivers · Bus &amp; van
+        </p>
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+          Professional Drivers: Move people and goods across Europe.
+        </h3>
+        <p className="text-sm text-slate-600 mb-4 flex-1">
+          You already drive for a living – now you want to do it in Germany.
+          Evolgrit trains the German for routes, passengers and dispatch, and
+          helps you feel confident with shifts, schedules and everyday life on the road.
+        </p>
+        <a
+          href="#phase-2"
+          className="inline-flex items-center text-sm font-medium text-emerald-600 hover:text-emerald-700"
+        >
+          See driver pathway →
+        </a>
+      </div>
+    </article>
 
+    {/* CARD 3 – CHILDCARE & CARE */}
+    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+      <div className="relative w-full aspect-[4/3]">
+        <Image
+          src="/pathways-care.jpg"
+          alt="Childcare and care workers supporting children and patients in Germany"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+        />
+      </div>
+      <div className="p-5 sm:p-6 flex-1 flex flex-col">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
+          Childcare &amp; Care · Families &amp; communities
+        </p>
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+          Childcare &amp; Care: Support families and feel at home.
+        </h3>
+        <p className="text-sm text-slate-600 mb-4 flex-1">
+          You love working with children or caring for others. With Evolgrit you
+          practice German for talking to parents, colleagues and residents – plus
+          cultural modules about schools, health and everyday life in Germany.
+        </p>
+        <a
+          href="#phase-2"
+          className="inline-flex items-center text-sm font-medium text-purple-600 hover:text-purple-700"
+        >
+          See care pathway →
+        </a>
+      </div>
+    </article>
   </div>
-</section>
+</section> 
 {/* EXAMPLE JOURNEYS – TYPICAL PATHS */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
   <div className="text-center max-w-2xl mx-auto mb-8">
