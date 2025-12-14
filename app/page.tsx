@@ -730,45 +730,43 @@ className="flex items-center gap-2 cursor-pointer"
             {getToKnowCards.map((card) => (
               <article
                 key={card.id}
-                className="snap-center shrink-0 w-[82%] md:w-[360px] lg:w-[380px] xl:w-[400px] transition-transform duration-300 hover:-translate-y-1"
+                className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="relative aspect-[9/16] overflow-hidden rounded-[32px] bg-slate-950 shadow-xl shadow-slate-900/40">
-                  {/* Bild */}
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    priority={false}
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 26vw, (min-width: 768px) 40vw, 82vw"
-                  />
+                {/* Eigentliche Karte – weißer Rahmen, Bild + Overlay */}
+                <div className="relative rounded-3xl bg-white overflow-hidden shadow-sm">
+                  {/* Bild mit Overlay */}
+                  <div className="relative aspect-[3/4.5]">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      priority={card.id === "language-jobs"}
+                      sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 80vw"
+                      className="object-cover"
+                    />
 
-                  {/* Dunkler Verlauf über das Bild, damit der Text lesbar ist */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/55 to-transparent" />
+                    {/* Dunkles Overlay nur im unteren Bereich – für Lesbarkeit */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
+                  </div>
 
-                  {/* Textblock unten – gleiche Typo wie „Unlock your future“ Karten */}
+                  {/* Textblock unten – gleiche Typo wie Pathways */}
                   <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2 text-slate-50">
-                    {/* Label-Zeile */}
                     <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/85">
                       {card.label}
                     </p>
-
-                    {/* Titel – wie Pathway-Headline */}
                     <h3 className="text-[15px] sm:text-[17px] font-semibold leading-snug">
                       {card.title}
                     </h3>
-
-                    {/* Beschreibung – wie Body-Text der Pathways */}
                     <p className="mt-1 text-sm text-slate-100/85">
                       {card.description}
                     </p>
                   </div>
 
-                  {/* Plus-Button unten rechts – wie bei Apple */}
+                  {/* Plus-Button unten rechts – wie bei Pathways */}
                   <button
                     type="button"
-                    className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-xl shadow-md shadow-slate-900/50 hover:bg-white"
-                    aria-label={`Learn more about ${card.title}`}
+                    className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900/80 text-slate-50 text-lg shadow-md shadow-slate-900/40 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/70"
+                    aria-label={card.cta}
                   >
                     +
                   </button>
