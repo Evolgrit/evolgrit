@@ -784,104 +784,115 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-      {/* PROGRAM TIMELINE SECTION */}
-      {/* PROGRAM TIMELINE / THREE PHASES */}
-      <section className="max-w-6xl mx-auto mt-24 px-5">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-3xl font-semibold text-slate-900 mb-3">
-            Three phases – not just a course.
+      {/* GET TO KNOW EVOLGRIT */}
+      <section className="bg-slate-50 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5">
+          {/* Headline + Intro */}
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+            Get to know Evolgrit.
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Evolgrit is a structured 3-phase journey – from arrival to job-ready –
-            so learners can grow step by step without burning out.
+          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
+            Evolgrit combines language, culture and careers in one journey – built for
+            people who actually want to live and work in Germany, not just pass an exam.
           </p>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-3 text-sm">
-          {/* Phase 1 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-sm font-semibold">
-                1
+          {/* Row 1 – Core of the program */}
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            {/* Language in real jobs */}
+            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-blue-50 text-xs font-medium text-blue-700">
+                A
               </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 1 · Arrival &amp; foundations
-                </p>
-                <h3 className="font-semibold text-slate-900">
-                  Land softly in Germany.
-                </h3>
+              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+                Language in real jobs
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Practice German in real work situations – childcare, care, logistics and
+                drivers – instead of artificial textbook dialogues.
+              </p>
+            </article>
+
+            {/* Integration built-in */}
+            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-emerald-50 text-xs font-medium text-emerald-700">
+                B
               </div>
-            </div>
+              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+                Integration built‑in
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Housing, offices, doctors and contracts – everyday situations in Germany
+                are part of the learning path, not an afterthought.
+              </p>
+            </article>
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Orientation, onboarding and a first language baseline.</li>
-              <li>• Everyday German for living and basic work situations.</li>
-              <li>• Early contact with mentors and a peer community.</li>
-            </ul>
-
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 text-[11px] px-3 py-1">
-                Everyday confidence
-              </span>
-            </div>
+            {/* Job & employer ready */}
+            <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-violet-50 text-xs font-medium text-violet-700">
+                C
+              </div>
+              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+                Job &amp; employer ready
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Profiles show language level, skills and reliability signals – so employers
+                can see who is ready for which role, not just who has a certificate.
+              </p>
+            </article>
           </div>
 
-          {/* Phase 2 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
-                2
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 2 · Deepening &amp; practice
+          {/* Row 2 – AI layer */}
+          <div className="mt-12">
+            <h3 className="text-base sm:text-lg font-semibold tracking-tight text-slate-900">
+              How the AI in Evolgrit helps you every week.
+            </h3>
+            <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
+              AI is not a buzzword for us – it helps learners, mentors and employers make
+              better decisions every week.
+            </p>
+
+            <div className="mt-6 grid gap-4 lg:grid-cols-3">
+              {/* Personalised practice tasks */}
+              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-sky-50 text-xs font-medium text-sky-700">
+                  1
+                </div>
+                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
+                  Personalised practice tasks
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Evolgrit adjusts difficulty, topics and feedback to each learner – based
+                  on their target role, level and pace.
                 </p>
-                <h3 className="font-semibold text-slate-900">
-                  Practice for real jobs and real life.
-                </h3>
-              </div>
-            </div>
+              </article>
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Job-related German with scenarios and role plays.</li>
-              <li>• Job-specific language for logistics, care &amp; childcare.</li>
-              <li>• Changing formats and regular feedback from mentors &amp; AI-coach.</li>
-            </ul>
-
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-[11px] px-3 py-1">
-                Work-ready language
-              </span>
-            </div>
-          </div>
-
-          {/* Phase 3 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-sm font-semibold">
-                3
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 3 · Job-ready &amp; matching
+              {/* Always-on language coach */}
+              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-emerald-50 text-xs font-medium text-emerald-700">
+                  2
+                </div>
+                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
+                  Always‑on language coach
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Learners can practice speaking, get corrections and explanations on demand –
+                  not only during live sessions.
                 </p>
-                <h3 className="font-semibold text-slate-900">
-                  Move confidently into work.
-                </h3>
-              </div>
-            </div>
+              </article>
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Interview preparation and workplace communication.</li>
-              <li>• Matching with partner employers or education partners.</li>
-              <li>• Clear next steps: job, apprenticeship or further training.</li>
-            </ul>
-
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-violet-50 text-violet-700 text-[11px] px-3 py-1">
-                Job-ready &amp; matched
-              </span>
+              {/* Signals for mentors & employers */}
+              <article className="rounded-3xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-3">
+                <div className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-amber-50 text-xs font-medium text-amber-700">
+                  3
+                </div>
+                <h4 className="text-sm sm:text-base font-semibold text-slate-900">
+                  Signals for mentors &amp; employers
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  The AI summarises progress into simple signals – language, cultural readiness
+                  and reliability – for mentors and partner employers.
+                </p>
+              </article>
             </div>
           </div>
         </div>
