@@ -746,15 +746,20 @@ className="flex items-center gap-2 cursor-pointer"
                   {/* Dunkler Verlauf über das Bild, damit der Text lesbar ist */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/55 to-transparent" />
 
-                  {/* Textblock unten – ähnlich wie bei Apple */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-3 text-slate-50">
-                    <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/80">
+                  {/* Textblock unten – gleiche Typo wie „Unlock your future“ Karten */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2 text-slate-50">
+                    {/* Label-Zeile */}
+                    <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/85">
                       {card.label}
                     </p>
-                    <h3 className="text-base sm:text-lg font-semibold leading-snug">
+
+                    {/* Titel – wie Pathway-Headline */}
+                    <h3 className="text-[15px] sm:text-[17px] font-semibold leading-snug">
                       {card.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-100/80">
+
+                    {/* Beschreibung – wie Body-Text der Pathways */}
+                    <p className="mt-1 text-sm text-slate-100/85">
                       {card.description}
                     </p>
                   </div>
