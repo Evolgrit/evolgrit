@@ -730,43 +730,43 @@ className="flex items-center gap-2 cursor-pointer"
             {getToKnowCards.map((card) => (
               <article
                 key={card.id}
-                className="snap-center shrink-0 w-[260px] sm:w-[280px] md:w-[300px] lg:w-[320px] rounded-[32px] bg-slate-900 relative overflow-hidden group"
+                className="snap-center shrink-0 w-[82%] md:w-[360px] lg:w-[380px] xl:w-[400px] transition-transform duration-300 hover:-translate-y-1"
               >
-                <div className="relative h-[420px] sm:h-[460px]">
+                <div className="relative aspect-[9/16] overflow-hidden rounded-[32px] bg-slate-950 shadow-xl shadow-slate-900/40">
+                  {/* Bild */}
                   <Image
                     src={card.image}
                     alt={card.title}
                     fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 280px, 260px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    priority={false}
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 26vw, (min-width: 768px) 40vw, 82vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
-                  {/* Textblock unten – gleiche Typo wie „Unlock your future“ Karten */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2 text-slate-50">
-                    {/* Label-Zeile */}
-                    <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/85">
+                  {/* Dunkler Verlauf über das Bild, damit der Text lesbar ist */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/55 to-transparent" />
+
+                  {/* Textblock unten – ähnlich wie bei Apple */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-3 text-slate-50">
+                    <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/80">
                       {card.label}
                     </p>
-
-                    {/* Titel – wie Pathway-Headline */}
-                    <h3 className="text-[15px] sm:text-[17px] font-semibold leading-snug">
+                    <h3 className="text-base sm:text-lg font-semibold leading-snug">
                       {card.title}
                     </h3>
-
-                    {/* Beschreibung – wie Body-Text der Pathways */}
-                    <p className="mt-1 text-sm text-slate-100/85">
+                    <p className="text-xs sm:text-sm text-slate-100/80">
                       {card.description}
                     </p>
-
-                    <button
-                      type="button"
-                      className="self-end h-9 w-9 rounded-full bg-white text-slate-900 flex items-center justify-center text-xl shadow-md shadow-black/40 group-hover:scale-105 transition-transform"
-                      aria-label="Learn more about this part of Evolgrit"
-                    >
-                      +
-                    </button>
                   </div>
+
+                  {/* Plus-Button unten rechts – wie bei Apple */}
+                  <button
+                    type="button"
+                    className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-xl shadow-md shadow-slate-900/50 hover:bg-white"
+                    aria-label={`Learn more about ${card.title}`}
+                  >
+                    +
+                  </button>
                 </div>
               </article>
             ))}
