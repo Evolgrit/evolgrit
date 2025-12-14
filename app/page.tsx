@@ -5,6 +5,64 @@ import { useState } from "react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const getToKnowCards = [
+    {
+      id: "language-jobs",
+      label: "Language · Jobs",
+      title: "Learn German where you’ll actually use it.",
+      description:
+        "Job-specific German for care, logistics, childcare and drivers – built into every step of the journey.",
+      image: "/know-language-jobs.jpg",
+    },
+    {
+      id: "ai-coach",
+      label: "AI coach",
+      title: "A language coach that never sleeps.",
+      description:
+        "Practice speaking, get corrections and explanations in the app – anytime between live sessions.",
+      image: "/know-ai-coach.jpg",
+    },
+    {
+      id: "documents-hub",
+      label: "Documents & bureaucracy",
+      title: "Finally understand the paperwork.",
+      description:
+        "Store your documents, get checklists and reminders for visas, contracts, insurance and more.",
+      image: "/know-documents-hub.jpg",
+    },
+    {
+      id: "everyday-life",
+      label: "Everyday life",
+      title: "Learn how Germany really works.",
+      description:
+        "Supermarket, doctors, public transport, appointments – practice real situations for your new life.",
+      image: "/know-everyday-life.jpg",
+    },
+    {
+      id: "family-housing",
+      label: "Family & housing",
+      title: "Support for you and your family.",
+      description:
+        "Guidance for school onboarding, childcare, housing search and understanding local systems.",
+      image: "/know-family-housing.jpg",
+    },
+    {
+      id: "life-sessions",
+      label: "Live life sessions",
+      title: "Weekly check-ins about real life.",
+      description:
+        "Group and 1:1 live sessions about culture, mindset and everyday questions – not only grammar.",
+      image: "/know-life-sessions.jpg",
+    },
+    {
+      id: "mentors-cohort",
+      label: "Mentors & cohort",
+      title: "You’re not doing this journey alone.",
+      description:
+        "Mentors and peers walk the journey with you – with clear next steps toward work in Germany.",
+      image: "/know-mentors-cohort.jpg",
+    },
+  ];
 
   return (
     <div 
@@ -644,6 +702,82 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+      {/* GET TO KNOW EVOLGRIT – image cards */}
+      <section className="mt-16 bg-slate-950 text-slate-50 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5">
+          {/* Heading + Subtext */}
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+                Get to know Evolgrit.
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl">
+                Seven pillars that make Evolgrit more than a language course – from
+                AI support to family help, documents and real-life mentoring.
+              </p>
+            </div>
+            <a
+              href="#how-it-works"
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-slate-200 hover:text-white"
+            >
+              Learn how Evolgrit works
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          {/* Card rail – Apple-style */}
+          <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
+            {getToKnowCards.map((card) => (
+              <article
+                key={card.id}
+                className="snap-center shrink-0 w-[260px] sm:w-[280px] md:w-[300px] lg:w-[320px] rounded-[32px] bg-slate-900 relative overflow-hidden group"
+              >
+                <div className="relative h-[420px] sm:h-[460px]">
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 280px, 260px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+
+                  <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                      {card.label}
+                    </p>
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-semibold leading-snug">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-slate-200/90">
+                        {card.description}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="self-end h-9 w-9 rounded-full bg-white text-slate-900 flex items-center justify-center text-xl shadow-md shadow-black/40 group-hover:scale-105 transition-transform"
+                      aria-label="Learn more about this part of Evolgrit"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-4 sm:hidden">
+            <a
+              href="#how-it-works"
+              className="inline-flex items-center gap-1 text-xs font-medium text-slate-200"
+            >
+              Learn how Evolgrit works
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
         {/* PRODUCT SECTION */}
 <section
   id="product"
