@@ -303,25 +303,26 @@ className="flex items-center gap-2 cursor-pointer"
 {/* PATHWAYS – Apple-style cards with swipe on mobile */}
 <section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
   {/* Headline + intro */}
-  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
     <div>
-      <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
+      <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
         Unlock your future in Germany
       </h2>
-      <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
-        Turn your experience into a real life in Germany – with language,
-        culture and job support on one Evolgrit journey.
+      <p className="mt-3 max-w-2xl text-base text-slate-500">
+        Turn your experience into real life in Germany – with language, culture and job support on one Evolgrit journey.
       </p>
-      <p className="mt-1 text-[13px] text-slate-500 max-w-xl">
-        Choose a pathway that fits your strengths. Evolgrit walks beside you
-        from first words to your first working day.
+      <p className="mt-2 max-w-xl text-sm text-slate-500">
+        Choose a pathway that fits your strengths. Evolgrit walks beside you from first words to your first working day.
       </p>
     </div>
-    <div className="hidden sm:flex items-center gap-3 text-sm">
-      <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
-        Learn how Evolgrit works →
-      </a>
-    </div>
+
+    <a
+      href="#how-it-works"
+      className="mt-1 text-sm font-medium text-slate-500 hover:text-slate-900 flex items-center gap-1 self-start sm:self-auto"
+    >
+      <span>Learn how Evolgrit works</span>
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
 
   {/* Cards wrapper: swipe on mobile, grid on desktop */}
@@ -337,25 +338,27 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
+      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
           Logistics · Warehouses &amp; delivery
         </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+        <h3 className="mt-3 text-xl font-semibold text-slate-900">
           Logistics: Build a stable start, fast.
         </h3>
-        <p className="text-sm text-slate-600 flex-1">
+        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
           You enjoy movement, teamwork and clear structures. With Evolgrit you
           learn the German you need for warehouses, scanners, deliveries and
           safety – and we help you into your first contract in Germany.
         </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See logistics pathway"
-        >
-          +
-        </a>
+        <div className="mt-5 flex items-center justify-end">
+          <a
+            href="#phase-2"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+            aria-label="See logistics pathway"
+          >
+            +
+          </a>
+        </div>
       </div>
     </article>
 
@@ -370,25 +373,27 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
+      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
           Professional drivers · People &amp; goods
         </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+        <h3 className="mt-3 text-xl font-semibold text-slate-900">
           Professional driver: Move people and goods across Europe.
         </h3>
-        <p className="text-sm text-slate-600 flex-1">
+        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
           You like the road and responsibility. Evolgrit helps you with German
           for routes, passengers, shift plans and safety briefings – so you can
           start in local transport or regional logistics.
         </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See professional driver pathway"
-        >
-          +
-        </a>
+        <div className="mt-5 flex items-center justify-end">
+          <a
+            href="#phase-2"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+            aria-label="See professional driver pathway"
+          >
+            +
+          </a>
+        </div>
       </div>
     </article>
 
@@ -403,25 +408,27 @@ className="flex items-center gap-2 cursor-pointer"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
+      <div className="flex-1 flex flex-col justify-between p-6 sm:p-7">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
           Childcare &amp; Care · Families &amp; communities
         </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+        <h3 className="mt-3 text-xl font-semibold text-slate-900">
           Childcare &amp; care: Support families and feel at home.
         </h3>
-        <p className="text-sm text-slate-600 flex-1">
+        <p className="mt-3 text-sm text-slate-600 leading-relaxed">
           You love working with people. Evolgrit prepares you for conversations
           with children, parents, colleagues and patients – plus cultural
           modules for trust, empathy and everyday life in Germany.
         </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See childcare and care pathway"
-        >
-          +
-        </a>
+        <div className="mt-5 flex items-center justify-end">
+          <a
+            href="#phase-2"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+            aria-label="See childcare and care pathway"
+          >
+            +
+          </a>
+        </div>
       </div>
     </article>
   </div>
