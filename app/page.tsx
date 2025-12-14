@@ -742,18 +742,23 @@ className="flex items-center gap-2 cursor-pointer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
-                  <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                  {/* Textblock unten – gleiche Typo wie „Unlock your future“ Karten */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2 text-slate-50">
+                    {/* Label-Zeile */}
+                    <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/85">
                       {card.label}
                     </p>
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-semibold leading-snug">
-                        {card.title}
-                      </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-slate-200/90">
-                        {card.description}
-                      </p>
-                    </div>
+
+                    {/* Titel – wie Pathway-Headline */}
+                    <h3 className="text-[15px] sm:text-[17px] font-semibold leading-snug">
+                      {card.title}
+                    </h3>
+
+                    {/* Beschreibung – wie Body-Text der Pathways */}
+                    <p className="mt-1 text-sm text-slate-100/85">
+                      {card.description}
+                    </p>
+
                     <button
                       type="button"
                       className="self-end h-9 w-9 rounded-full bg-white text-slate-900 flex items-center justify-center text-xl shadow-md shadow-black/40 group-hover:scale-105 transition-transform"
