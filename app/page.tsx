@@ -703,7 +703,7 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
       {/* GET TO KNOW EVOLGRIT – image cards */}
-      <section className="mt-16 bg-slate-950 text-slate-50 py-16 sm:py-20">
+      <section className="mt-16 bg-slate-50 text-slate-900 py-16 sm:py-20">
         <div className="max-w-6xl mx-auto px-5">
           {/* Heading + Subtext */}
           <div className="flex items-end justify-between gap-4 mb-8">
