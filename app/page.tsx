@@ -330,7 +330,7 @@ className="flex items-center gap-2 cursor-pointer"
     <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src="/pathway-logistics.jpg"
+          src="/pathways-logistics.jpg"
           alt="International logistics team in a warehouse"
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
@@ -363,7 +363,7 @@ className="flex items-center gap-2 cursor-pointer"
     <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
         <Image
-          src="/pathway-drivers.jpg"
+          src="/pathways-drivers.jpg"
           alt="Professional bus driver in the driver seat"
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
@@ -396,7 +396,7 @@ className="flex items-center gap-2 cursor-pointer"
     <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src="/pathway-care.jpg"
+          src="/pathways-care.jpg"
           alt="Childcare and care professionals with children and patients"
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
