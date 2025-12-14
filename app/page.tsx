@@ -300,119 +300,132 @@ className="flex items-center gap-2 cursor-pointer"
 
   </div>
 </section>
-{/* PATHWAYS – UNLOCK YOUR FUTURE */}
-<section
-  id="pathways"
-  className="max-w-6xl mx-auto mt-24 px-5"
->
-  <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 text-center mb-3">
-    Unlock Your Future in Germany
-  </h2>
-  <p className="text-sm sm:text-base text-slate-600 text-center max-w-2xl mx-auto mb-2">
-    Turn your experience into a real life in Germany – with language, culture and job support in one Evolgrit journey.
-  </p>
-  <p className="text-[13px] text-slate-500 text-center max-w-xl mx-auto mb-10">
-    Choose a pathway that fits your strengths. Evolgrit walks beside you from first words to your first working day.
-  </p>
+{/* PATHWAYS – Apple-style cards with swipe on mobile */}
+<section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
+  {/* Headline + intro */}
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
+        Unlock your future in Germany
+      </h2>
+      <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+        Turn your experience into a real life in Germany – with language,
+        culture and job support on one Evolgrit journey.
+      </p>
+      <p className="mt-1 text-[13px] text-slate-500 max-w-xl">
+        Choose a pathway that fits your strengths. Evolgrit walks beside you
+        from first words to your first working day.
+      </p>
+    </div>
+    <div className="hidden sm:flex items-center gap-3 text-sm">
+      <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+        Learn how Evolgrit works →
+      </a>
+    </div>
+  </div>
 
-  <div className="grid gap-6 md:grid-cols-3">
-    {/* CARD 1 – LOGISTICS */}
-    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-      <div className="relative w-full aspect-[4/3]">
+  {/* Cards wrapper: swipe on mobile, grid on desktop */}
+  <div className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:pb-0">
+    {/* Logistics card */}
+    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src="/pathways-logistics.jpg"
-          alt="International logistics team working together in a warehouse in Germany"
+          src="/pathway-logistics.jpg"
+          alt="International logistics team in a warehouse"
           fill
-          className="object-cover"
-          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 sm:p-6 flex-1 flex flex-col">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
           Logistics · Warehouses &amp; delivery
         </p>
         <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
           Logistics: Build a stable start, fast.
         </h3>
-        <p className="text-sm text-slate-600 mb-4 flex-1">
-          You enjoy movement, teamwork and clear structures. With Evolgrit you learn
-          the German you need for warehouses, scanners, deliveries and safety – and
-          we help you into your first contract in Germany.
+        <p className="text-sm text-slate-600 flex-1">
+          You enjoy movement, teamwork and clear structures. With Evolgrit you
+          learn the German you need for warehouses, scanners, deliveries and
+          safety – and we help you into your first contract in Germany.
         </p>
         <a
           href="#phase-2"
-          className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See logistics pathway"
         >
-          See logistics pathway →
+          +
         </a>
       </div>
     </article>
 
-    {/* CARD 2 – PROFESSIONAL DRIVERS */}
-    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-      <div className="relative w-full aspect-[4/3]">
+    {/* Professional drivers card */}
+    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
         <Image
-          src="/pathways-drivers.jpg"
-          alt="Professional bus driver working in public transport in Germany"
+          src="/pathway-drivers.jpg"
+          alt="Professional bus driver in the driver seat"
           fill
-          className="object-cover"
-          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 sm:p-6 flex-1 flex flex-col">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
-          Professional Drivers · Bus &amp; van
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
+          Professional drivers · People &amp; goods
         </p>
         <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-          Professional Drivers: Move people and goods across Europe.
+          Professional driver: Move people and goods across Europe.
         </h3>
-        <p className="text-sm text-slate-600 mb-4 flex-1">
-          You already drive for a living – now you want to do it in Germany.
-          Evolgrit trains the German for routes, passengers and dispatch, and
-          helps you feel confident with shifts, schedules and everyday life on the road.
+        <p className="text-sm text-slate-600 flex-1">
+          You like the road and responsibility. Evolgrit helps you with German
+          for routes, passengers, shift plans and safety briefings – so you can
+          start in local transport or regional logistics.
         </p>
         <a
           href="#phase-2"
-          className="inline-flex items-center text-sm font-medium text-emerald-600 hover:text-emerald-700"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See professional driver pathway"
         >
-          See driver pathway →
+          +
         </a>
       </div>
     </article>
 
-    {/* CARD 3 – CHILDCARE & CARE */}
-    <article className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-      <div className="relative w-full aspect-[4/3]">
+    {/* Childcare & care card */}
+    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src="/pathways-care.jpg"
-          alt="Childcare and care workers supporting children and patients in Germany"
+          src="/pathway-care.jpg"
+          alt="Childcare and care professionals with children and patients"
           fill
-          className="object-cover"
-          sizes="(min-width: 1024px) 320px, (min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-5 sm:p-6 flex-1 flex flex-col">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400 mb-1">
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
           Childcare &amp; Care · Families &amp; communities
         </p>
         <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-          Childcare &amp; Care: Support families and feel at home.
+          Childcare &amp; care: Support families and feel at home.
         </h3>
-        <p className="text-sm text-slate-600 mb-4 flex-1">
-          You love working with children or caring for others. With Evolgrit you
-          practice German for talking to parents, colleagues and residents – plus
-          cultural modules about schools, health and everyday life in Germany.
+        <p className="text-sm text-slate-600 flex-1">
+          You love working with people. Evolgrit prepares you for conversations
+          with children, parents, colleagues and patients – plus cultural
+          modules for trust, empathy and everyday life in Germany.
         </p>
         <a
           href="#phase-2"
-          className="inline-flex items-center text-sm font-medium text-purple-600 hover:text-purple-700"
+          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
+          aria-label="See childcare and care pathway"
         >
-          See care pathway →
+          +
         </a>
       </div>
     </article>
   </div>
-</section> 
+</section>
 {/* EXAMPLE JOURNEYS – TYPICAL PATHS */}
 <section className="max-w-6xl mx-auto mt-24 px-5">
   <div className="text-center max-w-2xl mx-auto mb-8">
