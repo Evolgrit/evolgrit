@@ -78,127 +78,125 @@ So können Sie das Modell im Kleinen testen, bevor Sie es skalieren.`,
 
 Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiederholbares System.`,
   },
-];
+const getToKnowCards = [
+  {
+    id: "language-jobs",
+    label: "Language · Jobs",
+    title: "Learn German where you actually use it.",
+    description:
+      "Job-specific German for care, logistics, childcare and drivers – built into every step of the journey.",
+    image: "/know-language-jobs.jpg",
+  },
+  {
+    id: "ai-coach",
+    label: "AI coach",
+    title: "A language coach that never sleeps.",
+    description:
+      "Practice speaking, get corrections and explanations in the app – anytime between live sessions.",
+    image: "/know-ai-coach.jpg",
+  },
+  {
+    id: "documents",
+    label: "Documents · Bureaucracy",
+    title: "Finally understand the paperwork.",
+    description:
+      "Store your documents, get checklists and reminders for visas, contracts, insurance and more.",
+    image: "/know-documents-hub.jpg",
+  },
+  {
+    id: "everyday-life",
+    label: "Everyday life",
+    title: "Learn how Germany really works.",
+    description:
+      "Supermarket, doctors, public transport, appointments – practise real situations for your new life.",
+    image: "/know-everyday-life.jpg",
+  },
+  {
+    id: "family-housing",
+    label: "Family · Housing",
+    title: "Support for you and your family.",
+    description:
+      "Guidance for school onboarding, childcare, housing search and understanding local systems.",
+    image: "/know-family-housing.jpg",
+  },
+  {
+    id: "live-sessions",
+    label: "Live sessions",
+    title: "Weekly live sessions that keep you going.",
+    description:
+      "Real talk about life in Germany, culture, mindset and next steps – not only grammar.",
+    image: "/know-life-sessions.jpg",
+  },
+  {
+    id: "mentors-cohort",
+    label: "Mentors · Cohort",
+    title: "Mentors and a cohort you can grow with.",
+    description:
+      "Learn together with peers, mentors and employers in one loop – with real people, not just an app.",
+    image: "/know-mentors-cohort.jpg",
+  },
+] as const;
 
-type PathwayCard = {
-  id: string;
-  badge: string;
-  title: string;
-  description: string;
-  image: string;
-  modalTitle: string;
-  modalBody: string;
-};
-
-const pathwayCards: PathwayCard[] = [
+const pathwaysCards = [
   {
     id: "crafts",
-    badge: "CRAFTS · CONSTRUCTION",
+    label: "Crafts · Construction",
     title: "Crafts & construction: Build Germany’s future with your hands.",
     description:
       "You like working with your hands and seeing real results. Evolgrit trains your German for tools, safety and construction sites – and helps you into your first job in trades and construction.",
     image: "/pathways-crafts.jpg",
-    modalTitle: "Pathway: Crafts & construction",
-    modalBody: `You help build and repair the places where people live and work – from houses to public buildings.
-
-• German for tools, materials and safety instructions on construction sites.
-• Typical situations: briefing with your foreman, safety checks, working with colleagues from different countries.
-• Support with contracts, housing and local registration when you arrive.
-• Next steps: entry-level roles in carpentry, construction or renovation teams.`,
   },
   {
     id: "facility",
-    badge: "FACILITY · BUILDING SERVICES",
+    label: "Facility · Building services",
     title: "Facility & building services: Keep homes and workplaces running.",
     description:
-      "From small repairs to safety checks – with Evolgrit you learn the German for maintenance requests, tools and documentation, and we guide you into caretaker and building services roles.",
+      "From small repairs to larger jobs, you make buildings work. Evolgrit prepares your German for maintenance requests, tools and safety – so you can grow into caretaker and building services roles.",
     image: "/pathways-facility.jpg",
-    modalTitle: "Pathway: Facility & building services",
-    modalBody: `You keep buildings safe and functional – in housing, schools, offices oder hospitals.
-
-• German for maintenance requests, repair reports and safety checks.
-• Typical situations: talking to tenants, documenting issues, coordinating with external companies.
-• Help with paperwork for insurance, rental contracts and local authorities.
-• Next steps: caretaker, building services assistant or maintenance support.`,
   },
   {
     id: "hospitality",
-    badge: "HOSPITALITY · GASTRONOMY",
+    label: "Hospitality · Gastronomy",
     title:
       "Hospitality & gastronomy: Create places where people feel welcome.",
     description:
       "You enjoy working with people. Evolgrit trains your German for orders, menus, teamwork and shift plans – so you can start in cafés, restaurants or hotels.",
     image: "/pathways-hospitality.jpg",
-    modalTitle: "Pathway: Hospitality & gastronomy",
-    modalBody: `You create spaces where guests feel welcome and looked after.
-
-• German for orders, menus, allergens and bills.
-• Typical situations: busy shifts, teamwork with kitchen and service, handling guest questions politely.
-• Support with working hours, mini-job vs. full-time contracts and tip rules.
-• Next steps: café, restaurant or hotel roles in service and bar.`,
   },
   {
     id: "engineering",
-    badge: "ENGINEERING · PRODUCTION",
+    label: "Engineering · Production",
     title:
       "Engineering & production: Use your technical skills in European industry.",
     description:
       "You bring technical or engineering experience. Evolgrit helps you talk about machines, processes and safety in German – and prepares you for entry-level roles in production and technical support.",
     image: "/pathways-engineering.jpg",
-    modalTitle: "Pathway: Engineering & production",
-    modalBody: `You bring technical skills – we help you use them in German industry.
-
-• German for machines, processes, quality checks and safety rules.
-• Typical situations: handover between shifts, solving technical issues, explaining steps to colleagues and supervisors.
-• Guidance on recognising when you need formal recognition of your degree – and when not.
-• Next steps: assistant engineer, technical support or production technician roles.`,
   },
   {
     id: "logistics",
-    badge: "Logistics · Warehouses & delivery",
+    label: "Logistics · Warehouses & delivery",
     title: "Logistics: Build a stable start, fast.",
     description:
       "You enjoy movement, teamwork and clear structures. With Evolgrit you learn the German you need for warehouses, scanners, deliveries and safety – and we help you into your first contract in Germany.",
     image: "/pathways-logistics.jpg",
-    modalTitle: "Pathway: Logistics",
-    modalBody: `You keep goods moving through Germany’s warehouses and delivery networks.
-
-• German for scanners, warehouse systems, delivery notes and safety rules.
-• Typical situations: shift handovers, checking goods, coordinating with dispatch and drivers.
-• Support with accommodation near your site and understanding shift plans and contracts.
-• Next steps: warehouse associate, logistics coordinator or delivery lead.`,
   },
   {
     id: "drivers",
-    badge: "Professional drivers · People & goods",
+    label: "Professional drivers · People & goods",
     title: "Professional driver: Move people and goods across Europe.",
     description:
       "You like the road and responsibility. Evolgrit helps you with German for routes, passengers, shift plans and safety briefings – so you can start in local transport or regional logistics.",
     image: "/pathways-drivers.jpg",
-    modalTitle: "Pathway: Professional drivers",
-    modalBody: `You take people and goods where they need to go.
-
-• German for route planning, announcements, dispatch instructions and passenger service.
-• Typical situations: solving delays, dealing with passengers, working with dispatch and mechanics.
-• Help with licenses, medical checks and housing near depots.
-• Next steps: bus, van oder regional logistics driver roles.`,
   },
   {
     id: "care",
-    badge: "Childcare & Care · Families & communities",
+    label: "Childcare & care · Families & communities",
     title: "Childcare & care: Support families and feel at home.",
     description:
       "You love working with people. Evolgrit prepares you for conversations with children, parents, colleagues and patients – plus cultural modules for trust, empathy and everyday life in Germany.",
     image: "/pathways-care.jpg",
-    modalTitle: "Pathway: Childcare & care",
-    modalBody: `You support families, the elderly or patients in everyday life.
-
-• German for conversations with parents, colleagues, residents and doctors.
-• Typical situations: handovers, emergencies, cultural nuances in care.
-• Support with recognising qualifications, understanding contracts and housing for families.
-• Next steps: childcare assistant, entry-level care roles or community support.`,
   },
-];
+] as const;
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
@@ -208,7 +206,7 @@ export default function Home() {
     (card) => card.id === openEmployerCardId
   );
   const [openPathwayId, setOpenPathwayId] = useState<string | null>(null);
-  const activePathwayCard = pathwayCards.find(
+  const activePathwayCard = pathwaysCards.find(
     (card) => card.id === openPathwayId
   );
   // EXAMPLE JOURNEYS – IMAGE CARDS
