@@ -79,6 +79,39 @@ So können Sie das Modell im Kleinen testen, bevor Sie es skalieren.`,
 Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiederholbares System.`,
   },
 ];
+// WHO EVOLGRIT IS BUILT FOR – cards
+const whoCards = [
+  {
+    id: "learners",
+    badge: "L",
+    label: "Learners",
+    title: "Build real German, culture & job readiness.",
+    description:
+      "6–12 month hybrid journey with AI-guided modules and mentoring – so German, everyday life and job skills grow together.",
+    cta: "See learner journey",
+    href: "/learner-journey",
+  },
+  {
+    id: "employers",
+    badge: "E",
+    label: "Employers",
+    title: "Hire international talent that’s ready to stay.",
+    description:
+      "A pipeline of motivated international candidates with transparent readiness – language, culture and reliability signals.",
+    cta: "Hire talent",
+    href: "#for-employers",
+  },
+  {
+    id: "mentors",
+    badge: "M",
+    label: "Mentors",
+    title: "Support learners in language, culture & mindset.",
+    description:
+      "Work with motivated learners in 1:1 or group sessions – and help them arrive in Germany with confidence.",
+    cta: "Become a mentor",
+    href: "mailto:info@evolgrit.com?subject=Mentor%20at%20Evolgrit",
+  },
+];
 
 const getToKnowCards = [
   {
@@ -504,43 +537,90 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </aside>
       </section>
-{/* AUDIENCE SECTION */}
-<section className="max-w-6xl mx-auto mt-24 px-5">
-  <h2 className="text-3xl font-semibold text-slate-900 text-center mb-12">
-    Who Evolgrit is built for
-  </h2>
-
-  <div className="grid gap-6 md:grid-cols-3">
-
-    {/* Learners */}
-    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
-      <div className="h-10 w-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-lg font-bold mb-4">L</div>
-      <h3 className="font-semibold text-slate-900 mb-2">Learners</h3>
-      <p className="text-slate-600 mb-4">6–12 month hybrid journey to build real German skills, culture & job readiness.</p>
-<a
-  className="text-blue-600 font-medium text-sm hover:underline"
-  href="/learner-journey"
+<section
+  id="who"
+  className="bg-slate-50 py-16 sm:py-20"
 >
-  See learner journey →
-</a>
+  <div className="max-w-6xl mx-auto px-5">
+    {/* Eyebrow */}
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+      Who Evolgrit is built for
+    </p>
+
+    {/* Headline + Intro */}
+    <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+      <div className="max-w-2xl">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+          Who Evolgrit is built for.
+        </h2>
+        <p className="mt-2 text-sm sm:text-base text-slate-600">
+          Evolgrit connects learners, employers and mentors in one shared
+          journey – so language, culture and work preparation happen together.
+        </p>
+      </div>
     </div>
 
-    {/* Employers */}
-    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
-      <div className="h-10 w-10 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center text-lg font-bold mb-4">E</div>
-      <h3 className="font-semibold text-slate-900 mb-2">Employers</h3>
-      <p className="text-slate-600 mb-4">A pipeline of motivated international candidates with transparent readiness.</p>
-      <a className="text-emerald-600 font-medium text-sm hover:underline" href="#for-employers">Hire talent →</a>
-    </div>
+    {/* Karten – gleiches Layout wie Arbeitgeber-Block */}
+    <div
+      className="
+        mt-8
+        flex gap-4 overflow-x-auto pb-2 -mx-5 px-5
+        md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible
+      "
+    >
+      {whoCards.map((card) => (
+        <article
+          key={card.id}
+          className="
+            group relative w-[260px] shrink-0
+            rounded-3xl border border-slate-200 bg-white shadow-sm
+            p-5 sm:p-6 flex flex-col justify-between
+            transition-transform duration-200
+            hover:-translate-y-1 hover:shadow-lg
+            md:w-auto
+          "
+        >
+          {/* Kopf mit Badge + Label */}
+          <div className="flex items-center gap-3 mb-4">
+            <div
+              className="
+                flex h-9 w-9 items-center justify-center
+                rounded-2xl bg-slate-900 text-slate-50 text-sm font-semibold
+                shadow-sm shadow-slate-900/30
+              "
+            >
+              {card.badge}
+            </div>
+            <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+              {card.label}
+            </div>
+          </div>
 
-    {/* Mentors */}
-    <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow transition">
-      <div className="h-10 w-10 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center text-lg font-bold mb-4">M</div>
-      <h3 className="font-semibold text-slate-900 mb-2">Mentors</h3>
-      <p className="text-slate-600 mb-4">Support learners in language, culture and mindset through 1:1 coaching.</p>
-      <a className="text-purple-600 font-medium text-sm hover:underline" href="mailto:info@evolgrit.com?subject=Mentor%20Application">Become a mentor →</a>
-    </div>
+          {/* Titel + Beschreibung */}
+          <div className="space-y-2">
+            <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+              {card.title}
+            </h3>
+            <p className="text-sm text-slate-600">
+              {card.description}
+            </p>
+          </div>
 
+          {/* CTA-Link unten */}
+          <div className="mt-4 pt-3 border-t border-slate-100">
+            <a
+              href={card.href}
+              className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+            >
+              {card.cta}
+              <span className="ml-1 text-base" aria-hidden="true">
+                →
+              </span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 {/* PATHWAYS – Apple-style cards with swipe on mobile */}
