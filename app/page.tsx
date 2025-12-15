@@ -537,6 +537,107 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </aside>
       </section>
+      {/* LEARNER STORY – TINA */}
+      <section
+        aria-labelledby="tina-story-heading"
+        className="max-w-6xl mx-auto mt-6 px-5"
+      >
+        <div
+          className="
+      rounded-3xl border border-slate-200 bg-white shadow-sm
+      p-6 sm:p-7 lg:p-8
+      flex flex-col gap-6 lg:flex-row lg:items-stretch
+    "
+        >
+          {/* Linke Seite: Story-Text */}
+          <div className="flex-1 space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">
+              Learner story · Childcare
+            </p>
+
+            <h3
+              id="tina-story-heading"
+              className="text-lg sm:text-xl font-semibold tracking-tight text-slate-900"
+            >
+              Tina · 24 · von Kosovo → Kinder­garten­assistentin in Berlin
+            </h3>
+
+            <p className="text-sm sm:text-base text-slate-600">
+              In nur drei Wochen ist Tina vom unsicheren Deutsch zu einer Kollegin
+              geworden, die Kinder, Eltern und Team sicher durch den Alltag
+              begleitet – als wäre sie schon seit Jahren dabei.
+            </p>
+
+            <p className="text-sm sm:text-base text-slate-900 italic">
+              „Vor Evolgrit hatte ich Angst vor Gesprächen mit Eltern. Jetzt kann ich
+              den Tag erklären, Wünsche verstehen und Konflikte ruhig ansprechen –
+              auf Deutsch.“
+            </p>
+
+            {/* kleine Chips wie bei Apple-Tags */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                Alltags­sprache mit Eltern
+              </span>
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                Kultur &amp; Erwartungen verstehen
+              </span>
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                Unter­stützung durch Mentor:innen
+              </span>
+            </div>
+          </div>
+
+          {/* Rechte Seite: kompaktes Profil / Meta */}
+          <aside
+            className="
+        w-full lg:w-64
+        lg:border-l lg:border-slate-100 lg:pl-6
+        flex flex-col gap-4
+        text-sm text-slate-600
+      "
+          >
+            {/* Avatar + Kurzinfo */}
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold">
+                T
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-slate-400">
+                  Profil
+                </p>
+                <p className="text-sm font-medium text-slate-900">
+                  Tina, 24 · Kinder­garten­assistenz
+                </p>
+              </div>
+            </div>
+
+            {/* kleine Fakten-Liste */}
+            <dl className="space-y-2 text-xs sm:text-sm">
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-400">Ausgangs­niveau</dt>
+                <dd className="font-medium text-slate-900">A2 Deutsch</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-400">Zeit mit Evolgrit</dt>
+                <dd className="font-medium text-slate-900">3 Wochen</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-400">Fokus</dt>
+                <dd className="font-medium text-slate-900">
+                  Eltern­ge­spräche, Tages­ablauf, Team
+                </dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-400">Unterstützung</dt>
+                <dd className="font-medium text-slate-900">
+                  AI-Coach + 1:1 Mentoring
+                </dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
 <section
   id="who"
   className="bg-slate-50 py-16 sm:py-20"
