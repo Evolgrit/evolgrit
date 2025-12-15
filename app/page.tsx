@@ -785,7 +785,7 @@ className="flex items-center gap-2 cursor-pointer"
       {pathwaysCards.map((card) => (
         <article
           key={card.id}
-          className="group snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+          className="group snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg pb-14 sm:pb-16"
         >
           <div className="relative h-80">
             <Image
@@ -947,7 +947,7 @@ className="flex items-center gap-2 cursor-pointer"
       {getToKnowCards.map((card) => (
         <article
           key={card.id}
-          className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+          className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16"
         >
           <div className="relative aspect-[4/5]">
             <Image
@@ -1264,7 +1264,7 @@ className="flex items-center gap-2 cursor-pointer"
                 <article
                   key={card.id}
                   onClick={() => setOpenEmployerCardId(card.id)}
-                  className="group snap-center shrink-0 w-[80%] sm:w-[320px] md:w-1/4 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 cursor-pointer relative flex flex-col justify-between p-5"
+                  className="group snap-center shrink-0 w-[80%] sm:w-[320px] md:w-1/4 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 cursor-pointer relative flex flex-col justify-between p-5 pb-14 sm:pb-16"
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900 text-base text-slate-50">
