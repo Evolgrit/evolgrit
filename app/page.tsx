@@ -1239,41 +1239,53 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       )}
-{/* EMPLOYER TESTIMONIAL – SABRINA */}
-<section className="max-w-6xl mx-auto mt-10 px-5">
-  <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 sm:p-7 flex flex-col sm:flex-row gap-5 items-start">
-    {/* Left: avatar + meta */}
-    <div className="flex flex-col items-center sm:items-start gap-3 shrink-0">
-      <div className="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 text-emerald-700 text-lg font-semibold">
-        S
-      </div>
-      <div className="text-xs text-slate-500 text-center sm:text-left">
-        <p className="font-semibold text-slate-700">Sabrina M.</p>
-        <p>Kindergarten manager · Berlin</p>
-      </div>
-      <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-2 py-[3px] text-[11px]">
-        Hired via Evolgrit
-      </span>
-    </div>
+      {/* EMPLOYER TESTIMONIAL – Sabrina & Tina */}
+      <section className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 pt-12 sm:pt-16">
+        <div className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+          {/* Bild oben */}
+          <div className="relative aspect-[16/9] sm:aspect-[21/9]">
+            <Image
+              src="/testimonial-tina.jpg"
+              alt="Tina arbeitet mit Kindern in einem Kindergarten"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 832px, 100vw"
+            />
+          </div>
 
-    {/* Right: quote */}
-    <div className="space-y-3">
-      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-        Employer story · Childcare
-      </p>
-      <p className="text-sm sm:text-base text-slate-900 font-semibold">
-        „After three weeks it feels like she has been on the team for years.“
-      </p>
-      <p className="text-sm text-slate-600 leading-relaxed">
-        „Our new colleague Tina joined us through Evolgrit. Her German is
-        confident, she understands typical Kindergarten situations – from
-        morning drop-offs to parent conversations – and moves through everyday
-        life as if she had lived in Germany for years. But she has only been
-        with us for three weeks.“
-      </p>
-    </div>
-  </div>
-</section>
+          {/* Text darunter */}
+          <div className="p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
+              Arbeitgebergeschichte · Kinderbetreuung
+            </p>
+
+            <p className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">
+              „Nach drei Wochen fühlt es sich an, als wäre sie schon seit Jahren im Team.“
+            </p>
+
+            <p className="text-sm text-slate-600 mb-4">
+              „Unsere neue Kollegin Tina kam über Evolgrit zu uns. Ihr Deutsch ist sicher,
+              sie kennt die typischen Situationen im Kindergarten – vom Elterngespräch bis
+              zur Übergabe am Morgen – und bewegt sich kulturell so, als hätte sie schon
+              lange in Deutschland gelebt. Dabei ist sie erst seit drei Wochen in unserer
+              Einrichtung.“
+            </p>
+
+            <div className="flex items-center gap-3 text-xs text-slate-500">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold">
+                S
+              </div>
+              <div>
+                <p className="font-semibold text-slate-700">Sabrina M.</p>
+                <p>Kindergartenleiterin · Berlin</p>
+              </div>
+              <span className="ml-auto inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-2 py-[2px] text-[11px]">
+                Über Evolgrit angestellt
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 {/* BRANDING SECTION */}
 <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
   <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
