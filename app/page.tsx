@@ -151,7 +151,7 @@ const getToKnowCards = [
     label: "Family · Housing",
     title: "Support for you and your family.",
     description:
-      "Guidance for school onboarding, childcare, housing search and understanding local systems.",
+      "Guidance for school onboarding, childcare, housing search and understanding local systems – so the whole family can arrive, not just the person with the job.",
     image: "/know-family-housing.jpg",
   },
   {
@@ -159,7 +159,7 @@ const getToKnowCards = [
     label: "Live sessions",
     title: "Weekly live sessions that keep you going.",
     description:
-      "Real talk about life in Germany, culture, mindset and next steps – not only grammar.",
+      "Real talk about life in Germany, culture, mindset and well-being – not only grammar. Mentors help with stress, homesickness and tricky situations in everyday life.",
     image: "/know-life-sessions.jpg",
   },
   {
@@ -724,6 +724,37 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+
+{/* WHY EVOLGRIT IS NEEDED NOW */}
+<section className="bg-white py-12 sm:py-14">
+  <div className="max-w-6xl mx-auto px-5">
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+      Why now
+    </p>
+    <div className="mt-3 grid gap-4 md:grid-cols-[minmax(0,1.4fr),minmax(0,1fr)] md:items-start">
+      <div className="space-y-3">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+          Why Evolgrit is needed now.
+        </h2>
+        <p className="text-sm sm:text-base text-slate-600">
+          In many frontline and care roles – from logistics and construction to childcare
+          and hospitality – there are more open jobs than people. At the same time,
+          international talent often loses months to language, paperwork and unclear
+          expectations.
+        </p>
+        <p className="text-sm sm:text-base text-slate-600">
+          Evolgrit connects language, everyday life and job preparation in one guided
+          journey – so people can start faster and are more likely to stay.
+        </p>
+      </div>
+      <ul className="space-y-2 text-sm text-slate-600 mt-2 md:mt-0">
+        <li>• <span className="font-medium">Real demand:</span> roles in care, logistics, trades and service keep growing.</li>
+        <li>• <span className="font-medium">Real friction:</span> language, bureaucracy and everyday life slow people down.</li>
+        <li>• <span className="font-medium">Real opportunity:</span> programmes that combine language and life setup make a difference.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 {/* PATHWAYS – Apple-style cards with swipe on mobile */}
 <section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
   {/* Headline + intro */}
@@ -878,132 +909,6 @@ className="flex items-center gap-2 cursor-pointer"
     depend on each person&apos;s situation and effort.
   </p>
 </section>
-{/* WHY EVOLGRIT – NOT A NORMAL COURSE */}
-<section className="max-w-6xl mx-auto mt-20 px-5">
-  <div className="text-center max-w-2xl mx-auto mb-10">
-    <h2 className="text-3xl font-semibold text-slate-900 mb-3">
-      Why Evolgrit is not a normal German course.
-    </h2>
-    <p className="text-sm sm:text-base text-slate-600">
-      Evolgrit combines language, integration and jobs in one loop – built for
-      people who actually want to live and work in Germany, not just pass a test.
-    </p>
-  </div>
-
-  <div className="grid gap-4 md:grid-cols-3 text-sm">
-    {/* Card 1 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-base font-semibold">
-          A
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Language in real jobs
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        Practice German in real work situations – childcare, care, logistics,
-        drivers – instead of artificial textbook dialogues.
-      </p>
-    </div>
-
-    {/* Card 2 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-base font-semibold">
-          B
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Integration built-in
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        Housing, offices, doctors and contracts – everyday situations in Germany
-        are part of the learning path, not an afterthought.
-      </p>
-    </div>
-
-    {/* Card 3 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-3">
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-base font-semibold">
-          C
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Job &amp; employer ready
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        Profiles show language level, skills and reliability signals – so
-        employers can see who is ready for which role, not just who has a
-        certificate.
-      </p>
-    </div>
-  </div>
-</section>
-{/* AI LAYER – WHAT IT ACTUALLY DOES */}
-<section className="max-w-6xl mx-auto mt-16 px-5">
-  <div className="max-w-2xl mb-8">
-    <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3">
-      What the AI in Evolgrit actually does.
-    </h2>
-    <p className="text-sm sm:text-base text-slate-600">
-      AI is not a buzzword for us – it helps learners, mentors and employers
-      make better decisions every week.
-    </p>
-  </div>
-
-  <div className="grid gap-4 md:grid-cols-3 text-sm">
-    {/* AI card 1 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-sky-500/10 text-sky-600 flex items-center justify-center text-sm font-semibold">
-          1
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Personalised practice tasks
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        Evolgrit adjusts difficulty, topics and feedback to each learner –
-        based on their target role, level and pace.
-      </p>
-    </div>
-
-    {/* AI card 2 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
-          2
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Always-on language coach
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        Learners can practice speaking, get corrections and explanations on
-        demand – not only during live sessions.
-      </p>
-    </div>
-
-    {/* AI card 3 */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center text-sm font-semibold">
-          3
-        </div>
-        <h3 className="font-semibold text-slate-900">
-          Signals for mentors &amp; employers
-        </h3>
-      </div>
-      <p className="text-slate-600 text-sm">
-        The AI summarises progress into simple signals – language, cultural
-        readiness and reliability – for mentors and partner employers.
-      </p>
-    </div>
-  </div>
-</section>
-
 {/* GET TO KNOW EVOLGRIT */}
 <section
   id="get-to-know"
@@ -1020,8 +925,13 @@ className="flex items-center gap-2 cursor-pointer"
           Get to know Evolgrit.
         </h2>
         <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-xl">
-          Seven pillars that make Evolgrit more than a language course – from AI
-          support to family help, documents and real-life mentoring.
+          Evolgrit is not a normal German course. We combine language, everyday life and
+          job preparation in one journey – so you can actually live and work in Germany,
+          not just pass an exam.
+        </p>
+        <p className="mt-1 text-xs sm:text-sm text-slate-500 max-w-xl">
+          These seven pillars show how: from job-specific German and an AI-coach to
+          real-life mentoring, family support and help with documents.
         </p>
       </div>
       <a
@@ -1076,79 +986,6 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-
-        {/* PRODUCT SECTION */}
-<section
-  id="product"
-  className="scroll-mt-24 max-w-6xl mx-auto mt-20 px-5 grid gap-10 md:grid-cols-[1.2fr,0.8fr] items-start"
->
-            <div>
-            <h2 className="text-3xl font-semibold text-slate-900 mb-4">
-              A hybrid program for language, culture & careers.
-            </h2>
-<p className="text-slate-600 mb-6 text-sm sm:text-base">
-  With Evolgrit, learners build German, cultural confidence and job
-  readiness in parallel. AI-guided modules, changing task formats and
-  regular human mentoring keep motivation high – and make sure progress
-  is real, not just on paper.
-</p>
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                <div>
-                  <h3 className="font-semibold text-slate-900 text-sm sm:text-base">
-                    AI-guided learning focused on real work situations
-                  </h3>
-                  <p className="text-slate-600 text-sm">
-                    Learners practice German through job-related contexts,
-                    not textbook dialogues – with personalized feedback and
-                    adaptive difficulty.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                <div>
-                  <h3 className="font-semibold text-slate-900 text-sm sm:text-base">
-                    Human mentors for language, culture and mindset
-                  </h3>
-                  <p className="text-slate-600 text-sm">
-                    Experienced mentors support learners with live sessions,
-                    cultural coaching and practical advice for life and work
-                    in Germany.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-                <div>
-                  <h3 className="font-semibold text-slate-900 text-sm sm:text-base">
-                    Job-ready profiles for employers
-                  </h3>
-                  <p className="text-slate-600 text-sm">
-                    Every participant builds a profile that combines skills,
-                    experience and language progress – so employers see
-                    exactly who is ready for which role.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-3 text-sm">
-            <h3 className="font-semibold text-slate-900 mb-2">
-              What learners get
-            </h3>
-<ul className="text-slate-600 space-y-2">
-  <li>• A clear multi-month structure with defined phases.</li>
-  <li>• Regular changes in task formats to keep motivation high.</li>
-  <li>• Live mentoring for language, culture and career questions.</li>
-  <li>• A clear next step: education, job or internship.</li>
-</ul>
-          </div>
-        </section>
 
 {/* HOW IT WORKS SECTION */}
 <section
@@ -1215,6 +1052,19 @@ className="flex items-center gap-2 cursor-pointer"
         always aligned with skills, language and personal goals.
       </p>
     </div>
+  </div>
+
+  {/* What learners get – integrated */}
+  <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+    <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-2">
+      What learners get with Evolgrit
+    </h3>
+    <ul className="text-sm text-slate-600 space-y-1.5">
+      <li>• A clear multi-month structure with defined phases.</li>
+      <li>• Regular changes in task formats to keep motivation high.</li>
+      <li>• Live mentoring for language, culture and career questions.</li>
+      <li>• A clear next step: job, apprenticeship or further training.</li>
+    </ul>
   </div>
 </section>
       {/* PROGRAM TIMELINE SECTION */}
@@ -1319,6 +1169,64 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       </section>
+
+{/* READINESS SCORE EXPLAINER */}
+<section className="bg-slate-50 py-12 sm:py-14 border-t border-slate-100">
+  <div className="max-w-6xl mx-auto px-5">
+    <div className="max-w-2xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+        Readiness score
+      </p>
+      <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+        See more than just a language level.
+      </h2>
+      <p className="mt-2 text-sm sm:text-base text-slate-600">
+        The Evolgrit Readiness Score brings language, everyday life and job skills
+        together in one simple view – so employers can see who is truly ready for a role,
+        and learners can see how far they have come.
+      </p>
+    </div>
+
+    <div className="mt-5 grid gap-3 sm:grid-cols-2 text-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="text-xs font-medium text-slate-500 mb-1">
+          Language &amp; communication
+        </p>
+        <p className="text-sm text-slate-700">
+          Not just a CEFR level – but confidence in real workplace and everyday
+          situations.
+        </p>
+      </div>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="text-xs font-medium text-slate-500 mb-1">
+          Everyday life &amp; culture
+        </p>
+        <p className="text-sm text-slate-700">
+          How well someone understands expectations in teams, with customers,
+          parents or patients.
+        </p>
+      </div>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="text-xs font-medium text-slate-500 mb-1">
+          Job skills &amp; work language
+        </p>
+        <p className="text-sm text-slate-700">
+          Practice in job-specific scenarios – from shift handovers to safety
+          briefings and customer conversations.
+        </p>
+      </div>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="text-xs font-medium text-slate-500 mb-1">
+          Reliability signals
+        </p>
+        <p className="text-sm text-slate-700">
+          Engagement, task completion and feedback over time – to see who really
+          shows up.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section
         id="for-employers"
