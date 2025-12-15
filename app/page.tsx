@@ -1,10 +1,93 @@
 'use client';
 
-import Image from "next/image";
 import { useState } from "react";
+import Image from "next/image";
+
+type EmployerCard = {
+  id: string;
+  label: string;
+  icon: string;
+  title: string;
+  description: string;
+  modalTitle: string;
+  modalBody: string;
+};
+
+const employerCards: EmployerCard[] = [
+  {
+    id: "readiness",
+    label: "Readiness at a glance",
+    icon: "📊",
+    title: "See who is really ready – not just who has a CV.",
+    description:
+      "Language level, cultural readiness and reliability signals in one simple view.",
+    modalTitle: "One profile that shows real readiness.",
+    modalBody: `Mit Evolgrit sehen Sie nicht nur einen Lebenslauf:
+
+• Sprachlevel und Selbstvertrauen – basierend auf echten Aufgaben.
+• Kulturelle Bereitschaft – Alltag, Arbeit und Teamdynamik.
+• Zuverlässigkeitssignale – Teilnahme, Aufgabenerfüllung, Engagement.
+
+So erkennen Sie auf einen Blick, welche Kandidat:innen wirklich für Ihre Rollen vorbereitet sind – nicht nur, wer ein Zertifikat besitzt.`,
+  },
+  {
+    id: "risk",
+    label: "Onboarding support",
+    icon: "🧭",
+    title: "Reduce onboarding risk for you and your team.",
+    description:
+      "Structured support before and after arrival – so people actually stay.",
+    modalTitle: "Weniger Onboarding-Risiko, mehr Stabilität.",
+    modalBody: `Evolgrit begleitet internationale Talente schon vor dem ersten Vertrag:
+
+• Vorbereitung auf Arbeitsalltag, Schichtpläne und Kommunikation im Team.
+• Klärung von Papieren, Wohnung, Versicherungen und Behördenwegen.
+• Mentoring in den ersten Wochen im Job – sprachlich und kulturell.
+
+Das senkt Ihr Risiko im Onboarding und erhöht die Chance, dass neue Mitarbeitende langfristig bleiben.`,
+  },
+  {
+    id: "pilots",
+    label: "Pilot cohorts",
+    icon: "🧪",
+    title: "Start with focused pilot cohorts.",
+    description:
+      "Align roles, locations and timelines – and learn together in small steps.",
+    modalTitle: "Gemeinsam mit Pilotkohorten starten.",
+    modalBody: `Wir beginnen nicht mit Hunderten Profilen, sondern mit klaren Pilotkohorten:
+
+• Ausrichtung auf Ihre Rollen (z.B. Logistik, Pflege, Busfahrer:innen).
+• Abstimmung auf Standorte, Schichten und Saisonverläufe.
+• Gemeinsame Definition von Sprache, Skills und Unterstützung.
+
+So können Sie das Modell im Kleinen testen, bevor Sie es skalieren.`,
+  },
+  {
+    id: "pipeline",
+    label: "Repeatable pipeline",
+    icon: "🔁",
+    title: "Build a repeatable international talent pipeline.",
+    description:
+      "Plug Evolgrit into your existing hiring process – not a separate universe.",
+    modalTitle: "Eine wiederholbare Pipeline für internationale Talente.",
+    modalBody: `In späteren Phasen kann Evolgrit in Ihre bestehende Talent-Pipeline integriert werden:
+
+• Gemeinsame Definition von Rollenprofilen und Anforderungen.
+• Regelmäßige Kohorten, die zu Ihren Einstellungszyklen passen.
+• Transparente Kennzahlen zu Sprache, Fortschritt und Verbleib.
+
+Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiederholbares System.`,
+  },
+];
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
+    null
+  );
+  const activeEmployerCard = employerCards.find(
+    (card) => card.id === openEmployerCardId
+  );
   // EXAMPLE JOURNEYS – IMAGE CARDS
   const journeyCards = [
     {
@@ -1025,69 +1108,137 @@ className="flex items-center gap-2 cursor-pointer"
         </div>
       </section>
 
-      {/* FOR EMPLOYERS SECTION */}
       <section
         id="for-employers"
-        className="scroll-mt-24 max-w-6xl mx-auto mt-24 px-5 mb-24"
+        className="bg-slate-50 py-16 sm:py-20"
       >
-        <div className="grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center">
-          <div>
-            <h2 className="text-3xl font-semibold text-slate-900 mb-4">
-              For employers who need international talent to actually stay.
-            </h2>
-            <p className="text-slate-600 mb-6 text-sm sm:text-base">
-              Evolgrit gives you access to motivated international candidates
-              who are not only learning German – they are actively preparing
-              for life and work in your organisation.
-            </p>
+        <div className="max-w-6xl mx-auto px-4 lg:px-6">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.18em] text-slate-400 uppercase">
+                For employers
+              </p>
+              <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">
+                For employers who need international talent to actually stay.
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
+                Evolgrit gives you access to motivated international candidates who are
+                not only learning German – they are actively preparing for life and
+                work in your organisation.
+              </p>
+            </div>
 
-            <ul className="text-slate-600 space-y-2 text-sm">
-              <li>• Pre-screened candidates with transparent progress.</li>
-              <li>• One place to see language level, skills and readiness.</li>
-              <li>• Reduced onboarding risk through structured support.</li>
-              <li>• A partner who understands both talent and employers.</li>
-            </ul>
-            <p className="mt-4 text-sm text-slate-600">
-              With Evolgrit you don&apos;t just get a CV – you see:
-            </p>
-            <ul className="mt-2 text-sm text-slate-600 space-y-1">
-              <li>• 🔵 Language level &amp; confidence</li>
-              <li>• 🟢 Cultural readiness (everyday life &amp; workplace)</li>
-              <li>• 🟣 Reliability signals (attendance, task completion)</li>
-            </ul>
+            <a
+              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+              className="hidden sm:inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+            >
+              Talk to us about hiring
+            </a>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-sm space-y-3">
-            <h3 className="font-semibold text-slate-900">
-              What you can expect as a partner
-            </h3>
-            <p className="text-slate-600">
-              We start small with pilot cohorts and align the program with your
-              roles, locations and timelines. You get clear expectations on
-              language, skills and support.
-            </p>
-            <p className="text-slate-600">
-              In later stages, Evolgrit can plug into your existing talent
-              pipeline and help you build a repeatable model for international
-              hiring.
-            </p>
-            <div className="pt-2 flex flex-wrap gap-3">
-              <a
-                href="mailto:info@evolgrit.com?subject=Evolgrit%20Employer%20Partnership"
-                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
-              >
-                Talk to us about hiring
-              </a>
-              <a
-                href="mailto:info@evolgrit.com?subject=Employer%20intro%20call"
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-50"
-              >
-                Book an employer intro call
-              </a>
+          {/* Swipeable cards */}
+          <div className="relative">
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible snap-x snap-mandatory">
+              {employerCards.map((card) => (
+                <article
+                  key={card.id}
+                  onClick={() => setOpenEmployerCardId(card.id)}
+                  className="group snap-center shrink-0 w-[80%] sm:w-[320px] md:w-1/4 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 cursor-pointer relative flex flex-col justify-between p-5"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900 text-base text-slate-50">
+                      <span aria-hidden="true">{card.icon}</span>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                        {card.label}
+                      </p>
+                      <h3 className="text-sm font-semibold text-slate-900">
+                        {card.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600">
+                    {card.description}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenEmployerCardId(card.id);
+                    }}
+                    aria-label={`Open details for: ${card.title}`}
+                    className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-lg font-medium text-slate-900 shadow-sm group-hover:bg-slate-900 group-hover:text-slate-50 transition-colors"
+                  >
+                    +
+                  </button>
+                </article>
+              ))}
             </div>
+          </div>
+
+          {/* Mobile CTA unterhalb der Cards */}
+          <div className="mt-6 sm:hidden">
+            <a
+              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+              className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+            >
+              Talk to us about hiring
+            </a>
           </div>
         </div>
       </section>
+      {activeEmployerCard && (
+        <div
+          className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="employer-modal-title"
+        >
+          <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+            <button
+              type="button"
+              onClick={() => setOpenEmployerCardId(null)}
+              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+              aria-label="Close details"
+            >
+              ×
+            </button>
+
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+              {activeEmployerCard.label}
+            </p>
+            <h3
+              id="employer-modal-title"
+              className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+            >
+              {activeEmployerCard.modalTitle}
+            </h3>
+            <p className="mt-3 whitespace-pre-line text-sm text-slate-600">
+              {activeEmployerCard.modalBody}
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a
+                href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+              >
+                Speak with an employer specialist
+              </a>
+              <button
+                type="button"
+                onClick={() => setOpenEmployerCardId(null)}
+                className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 {/* EMPLOYER TESTIMONIAL – SABRINA */}
 <section className="max-w-6xl mx-auto mt-10 px-5">
   <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 sm:p-7 flex flex-col sm:flex-row gap-5 items-start">
