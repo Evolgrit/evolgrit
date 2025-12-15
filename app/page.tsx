@@ -78,6 +78,8 @@ So können Sie das Modell im Kleinen testen, bevor Sie es skalieren.`,
 
 Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiederholbares System.`,
   },
+];
+
 const getToKnowCards = [
   {
     id: "language-jobs",
@@ -205,10 +207,6 @@ export default function Home() {
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
-  const [openPathwayId, setOpenPathwayId] = useState<string | null>(null);
-  const activePathwayCard = pathwaysCards.find(
-    (card) => card.id === openPathwayId
-  );
   // EXAMPLE JOURNEYS – IMAGE CARDS
   const journeyCards = [
     {
@@ -249,66 +247,6 @@ export default function Home() {
         "Combined German with scanner & system vocabulary and safety language – now working in a logistics hub with room to grow.",
     },
   ] as const;
-  // GET TO KNOW EVOLGRIT – 7 PILLARS
-  const getToKnowCards = [
-    {
-      id: "language-jobs",
-      label: "Language · Jobs",
-      title: "Learn German where you actually use it.",
-      description:
-        "Job-specific German for care, logistics, childcare and drivers – built into every step of the journey.",
-      image: "/know-language-jobs.jpg",
-    },
-    {
-      id: "ai-coach",
-      label: "AI coach",
-      title: "A language coach that never sleeps.",
-      description:
-        "Practice speaking, get corrections and explanations in the app – anytime between live sessions.",
-      image: "/know-ai-coach.jpg",
-    },
-    {
-      id: "documents-hub",
-      label: "Documents & bureaucracy",
-      title: "Finally understand the paperwork.",
-      description:
-        "Store your documents, get checklists and reminders for visas, contracts, insurance and more.",
-      image: "/know-documents-hub.jpg",
-    },
-    {
-      id: "everyday-life",
-      label: "Everyday life",
-      title: "Learn how Germany really works.",
-      description:
-        "Supermarket, doctors, public transport, appointments – practice real situations for your new life.",
-      image: "/know-everyday-life.jpg",
-    },
-    {
-      id: "family-housing",
-      label: "Family & housing",
-      title: "Support for you and your family.",
-      description:
-        "Guidance for school onboarding, childcare, housing search and understanding local systems.",
-      image: "/know-family-housing.jpg",
-    },
-    {
-      id: "life-sessions",
-      label: "Live sessions",
-      title: "Weekly live sessions that keep you going.",
-      description:
-        "Real talk about life in Germany, culture, mindset and next steps – not only grammar.",
-      image: "/know-life-sessions.jpg",
-    },
-    {
-      id: "mentors-cohort",
-      label: "Mentors & cohort",
-      title: "You never walk this journey alone.",
-      description:
-        "Mentors, peers and partner employers walk with you from first words to first working day.",
-      image: "/know-mentors-cohort.jpg",
-    },
-  ] as const;
-
   return (
     <div 
     id="top"
@@ -629,18 +567,16 @@ className="flex items-center gap-2 cursor-pointer"
 
   {/* Cards wrapper: swipe on mobile, grid on desktop */}
   <div className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:pb-0">
-    {pathwayCards.map((card, index) => (
+    {pathwaysCards.map((card) => (
       <article
         key={card.id}
-        onClick={() => setOpenPathwayId(card.id)}
-        className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+        className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
       >
         <div className="relative aspect-[3/4.5]">
           <Image
             src={card.image}
             alt={card.title}
             fill
-            priority={index === 0}
             className="object-cover"
             sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 75vw"
           />
@@ -648,7 +584,7 @@ className="flex items-center gap-2 cursor-pointer"
           <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-7 text-slate-50">
             <div>
               <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-200/85">
-                {card.badge}
+                {card.label}
               </p>
               <h3 className="mt-3 text-[15px] sm:text-[17px] font-semibold leading-snug">
                 {card.title}
@@ -657,12 +593,8 @@ className="flex items-center gap-2 cursor-pointer"
             </div>
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setOpenPathwayId(card.id);
-              }}
-              aria-label={`Open details for: ${card.title}`}
               className="self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-lg shadow-md shadow-slate-900/40 hover:bg-white transition"
+              aria-label="More about this pathway"
             >
               +
             </button>
@@ -672,46 +604,7 @@ className="flex items-center gap-2 cursor-pointer"
     ))}
   </div>
 </section>
-{activePathwayCard && (
-  <div
-    className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="pathway-modal-title"
-  >
-    <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-xl p-6 sm:p-8">
-      <button
-        type="button"
-        onClick={() => setOpenPathwayId(null)}
-        className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
-        aria-label="Close details"
-      >
-        ×
-      </button>
-      <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-        {activePathwayCard.badge}
-      </p>
-      <h3
-        id="pathway-modal-title"
-        className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
-      >
-        {activePathwayCard.modalTitle}
-      </h3>
-      <p className="mt-3 whitespace-pre-line text-sm text-slate-600">
-        {activePathwayCard.modalBody}
-      </p>
-      <div className="mt-5 flex justify-end">
-        <button
-          type="button"
-          onClick={() => setOpenPathwayId(null)}
-          className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+{/* No modal for pathways in this version */}
 
 <section
   aria-labelledby="example-journeys-heading"
@@ -892,83 +785,78 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 
-      <section
-        aria-labelledby="get-to-know-heading"
-        className="max-w-6xl mx-auto px-4 lg:px-6 py-16"
+{/* GET TO KNOW EVOLGRIT */}
+<section
+  id="get-to-know"
+  aria-labelledby="get-to-know-title"
+  className="bg-slate-50 py-16 sm:py-20"
+>
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="flex items-baseline justify-between gap-4">
+      <div>
+        <h2
+          id="get-to-know-title"
+          className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900"
+        >
+          Get to know Evolgrit.
+        </h2>
+        <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-xl">
+          Seven pillars that make Evolgrit more than a language course – from AI
+          support to family help, documents and real-life mentoring.
+        </p>
+      </div>
+      <a
+        href="#how-it-works"
+        className="hidden sm:inline-flex items-center text-xs font-medium text-blue-600 hover:text-blue-700"
       >
-        <div className="mb-8 flex items-baseline justify-between gap-4">
-          <div>
-            <h2
-              id="get-to-know-heading"
-              className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900"
-            >
-              Get to know Evolgrit.
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-2xl">
-              Seven pillars that make Evolgrit more than a language course – from AI
-              support to family help, documents and real-life mentoring.
-            </p>
+        Learn how Evolgrit works&nbsp;→
+      </a>
+    </div>
+
+    {/* Horizontale, swipebare Kartenleiste */}
+    <div className="mt-8 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory">
+      {getToKnowCards.map((card) => (
+        <article
+          key={card.id}
+          className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+        >
+          <div className="relative aspect-[4/5]">
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              sizes="(min-width:1024px) 360px, (min-width:768px) 60vw, 82vw"
+              className="object-cover"
+            />
+            {/* dunkler Verlauf für bessere Lesbarkeit */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/10" />
+
+            <div className="absolute inset-x-5 bottom-4 sm:bottom-6">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                {card.label}
+              </p>
+              <h3 className="mt-1 text-base sm:text-lg font-semibold leading-snug">
+                {card.title}
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-3">
+                {card.description}
+              </p>
+            </div>
           </div>
-          <a
-            href="#how-it-works"
-            className="hidden sm:inline-flex text-xs font-medium text-slate-500 hover:text-slate-900"
+
+          {/* Plus-Button wie bei Apple, ohne spezielle Funktion (noch) */}
+          <button
+            type="button"
+            className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-sm ring-1 ring-slate-200/80 transition group-hover:scale-105 group-hover:bg-white"
+            aria-label="More about this Evolgrit feature"
           >
-            Learn how Evolgrit works →
-          </a>
-        </div>
-
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible">
-          {getToKnowCards.map((card) => (
-            <article
-              key={card.id}
-              className="snap-center shrink-0 w-[80%] sm:w-[55%] md:w-auto md:shrink bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden relative group"
-            >
-              <div className="relative aspect-[3/4]">
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 80vw"
-                />
-                {/* Gradient für Lesbarkeit */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/35 to-slate-900/5" />
-
-                {/* Text-Overlay */}
-                <div className="absolute inset-4 flex flex-col justify-end">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-200/80">
-                    {card.label}
-                  </p>
-                  <h3 className="mt-2 text-base sm:text-lg font-semibold text-white">
-                    {card.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-100/85">
-                    {card.description}
-                  </p>
-                </div>
-
-                {/* Plus-Button */}
-                <button
-                  type="button"
-                  className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-slate-900 shadow-md shadow-slate-900/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-                  aria-label={card.title}
-                >
-                  <span className="text-xl leading-none">+</span>
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-4 sm:hidden">
-          <a
-            href="#how-it-works"
-            className="inline-flex text-xs font-medium text-slate-500 hover:text-slate-900"
-          >
-            Learn how Evolgrit works →
-          </a>
-        </div>
-      </section>
+            <span className="text-lg leading-none">+</span>
+          </button>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* PRODUCT SECTION */}
 <section
