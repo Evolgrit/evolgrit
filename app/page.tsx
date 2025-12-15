@@ -204,6 +204,8 @@ export default function Home() {
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
     null
   );
+  const [activePathway, setActivePathway] =
+    useState<(typeof pathwaysCards)[number] | null>(null);
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
@@ -565,46 +567,82 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  {/* Cards wrapper: swipe on mobile, grid on desktop */}
-  <div className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:pb-0">
-    {pathwaysCards.map((card) => (
-      <article
-        key={card.id}
-        className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
-      >
-        <div className="relative aspect-[3/4.5]">
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 75vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/35 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-7 text-slate-50">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-200/85">
+  {/* PATHWAYS – SLIDER */}
+  <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
+    <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+      {pathwaysCards.map((card) => (
+        <article
+          key={card.id}
+          className="group snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <div className="relative h-80">
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              sizes="(min-width: 1024px) 380px, (min-width: 768px) 360px, 80vw"
+              className="object-cover"
+            />
+
+            {/* Gradient, damit der Text lesbar bleibt */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-slate-950/0" />
+
+            <div className="absolute inset-x-4 bottom-4 space-y-2">
+              <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/75">
                 {card.label}
               </p>
-              <h3 className="mt-3 text-[15px] sm:text-[17px] font-semibold leading-snug">
+              <h3 className="text-sm sm:text-base font-semibold leading-snug">
                 {card.title}
               </h3>
-              <p className="mt-2 text-sm text-slate-100/85">{card.description}</p>
+              <p className="text-xs sm:text-[13px] text-slate-100/85 leading-relaxed line-clamp-3">
+                {card.description}
+              </p>
             </div>
+
+            {/* Plus-Button für Details (Modal) */}
             <button
               type="button"
-              className="self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-lg shadow-md shadow-slate-900/40 hover:bg-white transition"
-              aria-label="More about this pathway"
+              onClick={() => setActivePathway(card)}
+              className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-xl shadow-sm hover:bg-white"
+              aria-label={`More about ${card.title}`}
             >
               +
             </button>
           </div>
-        </div>
-      </article>
-    ))}
+        </article>
+      ))}
+    </div>
   </div>
 </section>
-{/* No modal for pathways in this version */}
+{activePathway && (
+  <div
+    className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pathway-modal-title"
+  >
+    <div className="relative w-full max-w-xl rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+      <button
+        type="button"
+        onClick={() => setActivePathway(null)}
+        className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+        aria-label="Close details"
+      >
+        ×
+      </button>
+      <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+        {activePathway.label}
+      </p>
+      <h3
+        id="pathway-modal-title"
+        className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+      >
+        {activePathway.title}
+      </h3>
+      <p className="mt-3 text-sm text-slate-600">{activePathway.description}</p>
+    </div>
+  </div>
+)}
 
 <section
   aria-labelledby="example-journeys-heading"
