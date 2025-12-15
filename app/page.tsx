@@ -1317,56 +1317,6 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       </section>
-      {/* LEARNER STORY – TINA */}
-      <section className="max-w-6xl mx-auto px-5 mt-10 sm:mt-12">
-        <div className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden grid md:grid-cols-[minmax(0,1.2fr),minmax(0,1fr)]">
-          {/* Bildseite */}
-          <div className="relative h-64 sm:h-80 md:h-full">
-            <Image
-              src="/tina-kindergarten.jpg"
-              alt="Tina arbeitet mit Kindern in einem Kindergarten in Deutschland"
-              fill
-              sizes="(min-width: 1024px) 480px, (min-width: 768px) 60vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-
-          {/* Textseite */}
-          <div className="p-6 sm:p-8 flex flex-col justify-center gap-4">
-            <div className="space-y-2">
-              <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-emerald-600">
-                Learner story · Childcare
-              </p>
-              <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
-                Tina · 24 · von Kosovo → Kindergartenassistentin in Berlin
-              </h3>
-              <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed">
-                In nur drei Wochen ist Tina von unsicherem Deutsch zu einer Kollegin
-                geworden, die Kinder, Eltern und Team sicher durch den Alltag
-                begleitet – als wäre sie schon seit Jahren dabei.
-              </p>
-            </div>
-
-            <p className="text-sm sm:text-[15px] text-slate-800 italic">
-              „Vor Evolgrit hatte ich Angst vor Gesprächen mit Eltern. Jetzt kann ich
-              den Tag erklären, Wünsche verstehen und Konflikte ruhig ansprechen –
-              auf Deutsch.“
-            </p>
-
-            <div className="mt-1 flex flex-wrap gap-2 text-[11px] text-slate-500">
-              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1">
-                Alltagssprache mit Eltern
-              </span>
-              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1">
-                Kultur &amp; Erwartungen verstehen
-              </span>
-              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1">
-                Unterstützung durch Mentor:innen
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
 {/* BRANDING SECTION */}
 <section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
   <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
