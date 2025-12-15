@@ -80,6 +80,125 @@ Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiede
   },
 ];
 
+type PathwayCard = {
+  id: string;
+  badge: string;
+  title: string;
+  description: string;
+  image: string;
+  modalTitle: string;
+  modalBody: string;
+};
+
+const pathwayCards: PathwayCard[] = [
+  {
+    id: "crafts",
+    badge: "CRAFTS · CONSTRUCTION",
+    title: "Crafts & construction: Build Germany’s future with your hands.",
+    description:
+      "You like working with your hands and seeing real results. Evolgrit trains your German for tools, safety and construction sites – and helps you into your first job in trades and construction.",
+    image: "/pathways-crafts.jpg",
+    modalTitle: "Pathway: Crafts & construction",
+    modalBody: `You help build and repair the places where people live and work – from houses to public buildings.
+
+• German for tools, materials and safety instructions on construction sites.
+• Typical situations: briefing with your foreman, safety checks, working with colleagues from different countries.
+• Support with contracts, housing and local registration when you arrive.
+• Next steps: entry-level roles in carpentry, construction or renovation teams.`,
+  },
+  {
+    id: "facility",
+    badge: "FACILITY · BUILDING SERVICES",
+    title: "Facility & building services: Keep homes and workplaces running.",
+    description:
+      "From small repairs to safety checks – with Evolgrit you learn the German for maintenance requests, tools and documentation, and we guide you into caretaker and building services roles.",
+    image: "/pathways-facility.jpg",
+    modalTitle: "Pathway: Facility & building services",
+    modalBody: `You keep buildings safe and functional – in housing, schools, offices oder hospitals.
+
+• German for maintenance requests, repair reports and safety checks.
+• Typical situations: talking to tenants, documenting issues, coordinating with external companies.
+• Help with paperwork for insurance, rental contracts and local authorities.
+• Next steps: caretaker, building services assistant or maintenance support.`,
+  },
+  {
+    id: "hospitality",
+    badge: "HOSPITALITY · GASTRONOMY",
+    title:
+      "Hospitality & gastronomy: Create places where people feel welcome.",
+    description:
+      "You enjoy working with people. Evolgrit trains your German for orders, menus, teamwork and shift plans – so you can start in cafés, restaurants or hotels.",
+    image: "/pathways-hospitality.jpg",
+    modalTitle: "Pathway: Hospitality & gastronomy",
+    modalBody: `You create spaces where guests feel welcome and looked after.
+
+• German for orders, menus, allergens and bills.
+• Typical situations: busy shifts, teamwork with kitchen and service, handling guest questions politely.
+• Support with working hours, mini-job vs. full-time contracts and tip rules.
+• Next steps: café, restaurant or hotel roles in service and bar.`,
+  },
+  {
+    id: "engineering",
+    badge: "ENGINEERING · PRODUCTION",
+    title:
+      "Engineering & production: Use your technical skills in European industry.",
+    description:
+      "You bring technical or engineering experience. Evolgrit helps you talk about machines, processes and safety in German – and prepares you for entry-level roles in production and technical support.",
+    image: "/pathways-engineering.jpg",
+    modalTitle: "Pathway: Engineering & production",
+    modalBody: `You bring technical skills – we help you use them in German industry.
+
+• German for machines, processes, quality checks and safety rules.
+• Typical situations: handover between shifts, solving technical issues, explaining steps to colleagues and supervisors.
+• Guidance on recognising when you need formal recognition of your degree – and when not.
+• Next steps: assistant engineer, technical support or production technician roles.`,
+  },
+  {
+    id: "logistics",
+    badge: "Logistics · Warehouses & delivery",
+    title: "Logistics: Build a stable start, fast.",
+    description:
+      "You enjoy movement, teamwork and clear structures. With Evolgrit you learn the German you need for warehouses, scanners, deliveries and safety – and we help you into your first contract in Germany.",
+    image: "/pathways-logistics.jpg",
+    modalTitle: "Pathway: Logistics",
+    modalBody: `You keep goods moving through Germany’s warehouses and delivery networks.
+
+• German for scanners, warehouse systems, delivery notes and safety rules.
+• Typical situations: shift handovers, checking goods, coordinating with dispatch and drivers.
+• Support with accommodation near your site and understanding shift plans and contracts.
+• Next steps: warehouse associate, logistics coordinator or delivery lead.`,
+  },
+  {
+    id: "drivers",
+    badge: "Professional drivers · People & goods",
+    title: "Professional driver: Move people and goods across Europe.",
+    description:
+      "You like the road and responsibility. Evolgrit helps you with German for routes, passengers, shift plans and safety briefings – so you can start in local transport or regional logistics.",
+    image: "/pathways-drivers.jpg",
+    modalTitle: "Pathway: Professional drivers",
+    modalBody: `You take people and goods where they need to go.
+
+• German for route planning, announcements, dispatch instructions and passenger service.
+• Typical situations: solving delays, dealing with passengers, working with dispatch and mechanics.
+• Help with licenses, medical checks and housing near depots.
+• Next steps: bus, van oder regional logistics driver roles.`,
+  },
+  {
+    id: "care",
+    badge: "Childcare & Care · Families & communities",
+    title: "Childcare & care: Support families and feel at home.",
+    description:
+      "You love working with people. Evolgrit prepares you for conversations with children, parents, colleagues and patients – plus cultural modules for trust, empathy and everyday life in Germany.",
+    image: "/pathways-care.jpg",
+    modalTitle: "Pathway: Childcare & care",
+    modalBody: `You support families, the elderly or patients in everyday life.
+
+• German for conversations with parents, colleagues, residents and doctors.
+• Typical situations: handovers, emergencies, cultural nuances in care.
+• Support with recognising qualifications, understanding contracts and housing for families.
+• Next steps: childcare assistant, entry-level care roles or community support.`,
+  },
+];
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
@@ -87,6 +206,10 @@ export default function Home() {
   );
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
+  );
+  const [openPathwayId, setOpenPathwayId] = useState<string | null>(null);
+  const activePathwayCard = pathwayCards.find(
+    (card) => card.id === openPathwayId
   );
   // EXAMPLE JOURNEYS – IMAGE CARDS
   const journeyCards = [
@@ -508,106 +631,90 @@ className="flex items-center gap-2 cursor-pointer"
 
   {/* Cards wrapper: swipe on mobile, grid on desktop */}
   <div className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:pb-0">
-    {/* Logistics card */}
-    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src="/pathways-logistics.jpg"
-          alt="International logistics team in a warehouse"
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
-          Logistics · Warehouses &amp; delivery
-        </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-          Logistics: Build a stable start, fast.
-        </h3>
-        <p className="text-sm text-slate-600 flex-1">
-          You enjoy movement, teamwork and clear structures. With Evolgrit you
-          learn the German you need for warehouses, scanners, deliveries and
-          safety – and we help you into your first contract in Germany.
-        </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See logistics pathway"
-        >
-          +
-        </a>
-      </div>
-    </article>
-
-    {/* Professional drivers card */}
-    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        <Image
-          src="/pathways-drivers.jpg"
-          alt="Professional bus driver in the driver seat"
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
-          Professional drivers · People &amp; goods
-        </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-          Professional driver: Move people and goods across Europe.
-        </h3>
-        <p className="text-sm text-slate-600 flex-1">
-          You like the road and responsibility. Evolgrit helps you with German
-          for routes, passengers, shift plans and safety briefings – so you can
-          start in local transport or regional logistics.
-        </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See professional driver pathway"
-        >
-          +
-        </a>
-      </div>
-    </article>
-
-    {/* Childcare & care card */}
-    <article className="snap-center shrink-0 w-[85%] md:w-auto md:shrink-0 md:snap-none rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src="/pathways-care.jpg"
-          alt="Childcare and care professionals with children and patients"
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase mb-1">
-          Childcare &amp; Care · Families &amp; communities
-        </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-          Childcare &amp; care: Support families and feel at home.
-        </h3>
-        <p className="text-sm text-slate-600 flex-1">
-          You love working with people. Evolgrit prepares you for conversations
-          with children, parents, colleagues and patients – plus cultural
-          modules for trust, empathy and everyday life in Germany.
-        </p>
-        <a
-          href="#phase-2"
-          className="mt-4 self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-xl leading-none shadow-md shadow-slate-900/30 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900"
-          aria-label="See childcare and care pathway"
-        >
-          +
-        </a>
-      </div>
-    </article>
+    {pathwayCards.map((card, index) => (
+      <article
+        key={card.id}
+        onClick={() => setOpenPathwayId(card.id)}
+        className="snap-center shrink-0 w-[75%] md:w-auto md:shrink-0 rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col group transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+      >
+        <div className="relative aspect-[3/4.5]">
+          <Image
+            src={card.image}
+            alt={card.title}
+            fill
+            priority={index === 0}
+            className="object-cover"
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 75vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/35 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-7 text-slate-50">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-200/85">
+                {card.badge}
+              </p>
+              <h3 className="mt-3 text-[15px] sm:text-[17px] font-semibold leading-snug">
+                {card.title}
+              </h3>
+              <p className="mt-2 text-sm text-slate-100/85">{card.description}</p>
+            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenPathwayId(card.id);
+              }}
+              aria-label={`Open details for: ${card.title}`}
+              className="self-end inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-lg shadow-md shadow-slate-900/40 hover:bg-white transition"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
+{activePathwayCard && (
+  <div
+    className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pathway-modal-title"
+  >
+    <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+      <button
+        type="button"
+        onClick={() => setOpenPathwayId(null)}
+        className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+        aria-label="Close details"
+      >
+        ×
+      </button>
+      <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+        {activePathwayCard.badge}
+      </p>
+      <h3
+        id="pathway-modal-title"
+        className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+      >
+        {activePathwayCard.modalTitle}
+      </h3>
+      <p className="mt-3 whitespace-pre-line text-sm text-slate-600">
+        {activePathwayCard.modalBody}
+      </p>
+      <div className="mt-5 flex justify-end">
+        <button
+          type="button"
+          onClick={() => setOpenPathwayId(null)}
+          className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 <section
   aria-labelledby="example-journeys-heading"
   className="max-w-6xl mx-auto px-4 lg:px-6 py-16"
