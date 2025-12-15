@@ -780,47 +780,45 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 
   {/* PATHWAYS – SLIDER */}
-  <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
+  <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6 mt-10 sm:mt-12">
     <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
       {pathwaysCards.map((card) => (
         <article
           key={card.id}
-          className="group snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg pb-14 sm:pb-16"
+          className="group relative snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg pb-14 sm:pb-16"
         >
-          <div className="relative h-80">
+          <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src={card.image}
               alt={card.title}
               fill
-              sizes="(min-width: 1024px) 380px, (min-width: 768px) 360px, 80vw"
               className="object-cover"
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
             />
-
-            {/* Gradient, damit der Text lesbar bleibt */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-slate-950/0" />
-
-            <div className="absolute inset-x-4 bottom-4 space-y-2">
-              <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-slate-200/75">
-                {card.label}
-              </p>
-              <h3 className="text-sm sm:text-base font-semibold leading-snug">
-                {card.title}
-              </h3>
-              <p className="text-xs sm:text-[13px] text-slate-100/85 leading-relaxed line-clamp-3">
-                {card.description}
-              </p>
-            </div>
-
-            {/* Plus-Button für Details (Modal) */}
-            <button
-              type="button"
-              onClick={() => setActivePathway(card)}
-              className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 text-xl shadow-sm hover:bg-white"
-              aria-label={`More about ${card.title}`}
-            >
-              +
-            </button>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/45 to-transparent" />
           </div>
+
+          <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-7 text-white">
+            <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-200">
+              {card.label}
+            </p>
+            <h3 className="mt-2 text-lg sm:text-xl font-semibold leading-snug">
+              {card.title}
+            </h3>
+            <p className="mt-2 text-sm sm:text-[15px] leading-relaxed text-slate-100/90">
+              {card.description}
+            </p>
+          </div>
+
+          {/* Plus-Button für Details (Modal) */}
+          <button
+            type="button"
+            onClick={() => setActivePathway(card)}
+            className="absolute bottom-4 right-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 text-xl shadow-sm transition hover:scale-105"
+            aria-label={`More about ${card.title}`}
+          >
+            +
+          </button>
         </article>
       ))}
     </div>
