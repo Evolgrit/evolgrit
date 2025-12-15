@@ -787,7 +787,7 @@ className="flex items-center gap-2 cursor-pointer"
           key={card.id}
           className="group relative snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg pb-14 sm:pb-16"
         >
-          <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="relative aspect-[3/4] overflow-hidden">
             <Image
               src={card.image}
               alt={card.title}
