@@ -5,6 +5,46 @@ import { useState } from "react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // EXAMPLE JOURNEYS – IMAGE CARDS
+  const journeyCards = [
+    {
+      id: "lucia",
+      name: "Lucía",
+      age: "27",
+      country: "Spain",
+      flag: "🇪🇸",
+      route: "Childcare assistant",
+      image: "/journey-lucia.jpg",
+      short:
+        "Started with A2 German and several years of childcare experience from Spain.",
+      result:
+        "In 9 months: B1, cultural modules for working with parents and colleagues, first job as a childcare assistant in a Kindergarten.",
+    },
+    {
+      id: "mihai",
+      name: "Mihai",
+      age: "32",
+      country: "Romania",
+      flag: "🇷🇴",
+      route: "Bus driver",
+      image: "/journey-mihai.jpg",
+      short: "Strong driving experience, but low confidence in German.",
+      result:
+        "Evolgrit focused on job phrases, shift plans and passenger situations – now working as a bus driver in local public transport.",
+    },
+    {
+      id: "eleni",
+      name: "Eleni",
+      age: "24",
+      country: "Greece",
+      flag: "🇬🇷",
+      route: "Warehouse & logistics",
+      image: "/journey-eleni.jpg",
+      short: "Tech-savvy and used to English, but new to German.",
+      result:
+        "Combined German with scanner & system vocabulary and safety language – now working in a logistics hub with room to grow.",
+    },
+  ] as const;
   // GET TO KNOW EVOLGRIT – 7 PILLARS
   const getToKnowCards = [
     {
@@ -485,90 +525,57 @@ className="flex items-center gap-2 cursor-pointer"
     </article>
   </div>
 </section>
-{/* EXAMPLE JOURNEYS – TYPICAL PATHS */}
-<section className="max-w-6xl mx-auto mt-24 px-5">
-  <div className="text-center max-w-2xl mx-auto mb-8">
-    <h2 className="text-3xl font-semibold text-slate-900 mb-3">
+<section
+  aria-labelledby="example-journeys-heading"
+  className="max-w-6xl mx-auto px-4 lg:px-6 py-16"
+>
+  <div className="mb-8 text-center">
+    <h2
+      id="example-journeys-heading"
+      className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900"
+    >
       Example journeys with Evolgrit.
     </h2>
-    <p className="text-sm sm:text-base text-slate-600">
-      These stories are typical paths – not promises. They show how language,
-      culture and work can grow together over 6–12 months.
+    <p className="mt-2 text-sm text-slate-500 max-w-2xl mx-auto">
+      These stories are typical paths – not promises. They show how language, culture
+      and work can grow together over 6–12 months.
     </p>
   </div>
 
-  <div className="space-y-4">
-    {/* Lucía – Spain */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
-      <div className="flex flex-col items-center gap-2 shrink-0">
-        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
-          L
+  <div className="grid gap-6 md:grid-cols-3">
+    {journeyCards.map((card) => (
+      <article
+        key={card.id}
+        className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col"
+      >
+        <div className="relative aspect-[4/3]">
+          <Image
+            src={card.image}
+            alt={`${card.name} – ${card.route}`}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          />
         </div>
-        <span className="text-xs text-slate-500">🇪🇸 Spain</span>
-      </div>
-      <div className="space-y-1 text-sm">
-        <p className="font-semibold text-slate-900">
-          Lucía · 27 · from Spain → Childcare assistant
-        </p>
-        <p className="text-slate-600">
-          Started with A2 German and several years of childcare experience from
-          Spain.
-        </p>
-        <p className="text-slate-600">
-          In 9 months: B1, cultural modules for working with parents and
-          colleagues, first job as a childcare assistant in a Kindergarten.
-        </p>
-      </div>
-    </div>
 
-    {/* Mihai – Romania */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
-      <div className="flex flex-col items-center gap-2 shrink-0">
-        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
-          M
+        <div className="flex-1 px-5 pb-5 pt-4 flex flex-col">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
+            <span className="mr-1">{card.flag}</span>
+            {card.country}
+          </p>
+          <h3 className="text-sm font-semibold text-slate-900 mb-1">
+            {card.name} · {card.age} · from {card.country} → {card.route}
+          </h3>
+          <p className="text-xs text-slate-600 mb-1">{card.short}</p>
+          <p className="text-xs text-slate-600">{card.result}</p>
         </div>
-        <span className="text-xs text-slate-500">🇷🇴 Romania</span>
-      </div>
-      <div className="space-y-1 text-sm">
-        <p className="font-semibold text-slate-900">
-          Mihai · 32 · from Romania → Bus driver
-        </p>
-        <p className="text-slate-600">
-          Strong driving experience, but low confidence in German.
-        </p>
-        <p className="text-slate-600">
-          Evolgrit focused on job phrases, shift plans and passenger
-          situations – now working as a bus driver in local public transport.
-        </p>
-      </div>
-    </div>
-
-    {/* Eleni – Greece */}
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex gap-4 items-start">
-      <div className="flex flex-col items-center gap-2 shrink-0">
-        <div className="h-10 w-10 rounded-full bg-slate-900 text-slate-50 flex items-center justify-center text-sm font-semibold">
-          E
-        </div>
-        <span className="text-xs text-slate-500">🇬🇷 Greece</span>
-      </div>
-      <div className="space-y-1 text-sm">
-        <p className="font-semibold text-slate-900">
-          Eleni · 24 · from Greece → Warehouse &amp; logistics
-        </p>
-        <p className="text-slate-600">
-          Tech-savvy and used to English, but new to German.
-        </p>
-        <p className="text-slate-600">
-          Combined German with scanner &amp; system language and safety vocabulary –
-          now working in a logistics hub with room to grow.
-        </p>
-      </div>
-    </div>
+      </article>
+    ))}
   </div>
 
-  <p className="mt-3 text-[11px] text-slate-500">
-    These are illustrative stories based on typical learner profiles. Actual
-    outcomes depend on each person&apos;s situation and effort.
+  <p className="mt-4 text-[11px] text-slate-400 text-center">
+    These are illustrative stories based on typical learner profiles. Actual outcomes
+    depend on each person&apos;s situation and effort.
   </p>
 </section>
 {/* WHY EVOLGRIT – NOT A NORMAL COURSE */}
