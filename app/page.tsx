@@ -1012,16 +1012,30 @@ className="flex items-center gap-2 cursor-pointer"
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       {howItWorksSteps.map((step, index) => {
         const isActive = activeHowStep === step.step;
+        const toggle = () =>
+          setActiveHowStep(isActive ? null : step.step);
+
         return (
-          <button
-            type="button"
+          <article
             key={step.step}
-            onClick={() =>
-              setActiveHowStep(isActive ? null : step.step)
-            }
-            className={`relative w-full text-left rounded-3xl border border-slate-200 bg-white shadow-sm p-6 space-y-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 cursor-pointer ${
-              isActive ? "shadow-md" : ""
-            }`}
+            role="button"
+            tabIndex={0}
+            onClick={toggle}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle();
+              }
+            }}
+            className={[
+              "group relative w-full text-left",
+              "rounded-3xl border border-slate-200 bg-white shadow-sm",
+              "p-6 pb-14 space-y-3",
+              "transition-transform duration-200",
+              "hover:-translate-y-1 hover:shadow-lg",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
+              isActive ? "shadow-md" : "",
+            ].join(" ")}
           >
             <div className="flex items-center gap-3">
               <div className="h-9 w-9 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold">
@@ -1031,31 +1045,42 @@ className="flex items-center gap-2 cursor-pointer"
                 STEP {step.step}
               </span>
             </div>
+
             <div className="space-y-2 pr-10">
-              <h3 className="text-sm font-semibold text-slate-900">
-                {step.title}
-              </h3>
+              <h3 className="text-sm font-semibold text-slate-900">{step.title}</h3>
               <p
-                className={`text-sm text-slate-500 leading-relaxed transition-all duration-200 ${
-                  isActive ? "line-clamp-none" : "line-clamp-3"
-                }`}
+                className={[
+                  "text-sm text-slate-500 leading-relaxed transition-all duration-200",
+                  isActive ? "line-clamp-none" : "line-clamp-3",
+                ].join(" ")}
               >
                 {step.body}
               </p>
             </div>
+
             <div className="pt-3 mt-2 border-t border-slate-100 text-sm text-blue-600 inline-flex items-center gap-1">
               <span>Learn more</span>
               <span aria-hidden="true">→</span>
             </div>
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none absolute bottom-4 right-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition-transform duration-200 ${
-                isActive ? "rotate-45" : ""
-              }`}
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggle();
+              }}
+              aria-label={isActive ? "Close details" : "Open details"}
+              className={[
+                "absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center",
+                "rounded-full border border-slate-200 bg-white text-lg font-medium text-slate-900 shadow-sm",
+                "transition-colors",
+                "group-hover:bg-slate-900 group-hover:text-slate-50",
+                isActive ? "rotate-45" : "",
+              ].join(" ")}
             >
               +
-            </span>
-          </button>
+            </button>
+          </article>
         );
       })}
     </div>
