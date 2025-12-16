@@ -526,17 +526,19 @@ className="flex items-center gap-2 cursor-pointer"
           <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
             <p className="text-xs text-slate-500">Language progress</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">+38%</p>
-            <p className="text-xs text-slate-500">over 12 weeks</p>
+            <p className="mt-0.5 text-xs text-slate-500">over 12 weeks</p>
           </div>
+
           <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
             <p className="text-xs text-slate-500">Job-ready profiles</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">24</p>
-            <p className="text-xs text-slate-500">of 32 learners</p>
+            <p className="mt-0.5 text-xs text-slate-500">of 32 learners</p>
           </div>
+
           <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
             <p className="text-xs text-slate-500">Employer matches</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">17</p>
-            <p className="text-xs text-slate-500">active pipelines</p>
+            <p className="mt-0.5 text-xs text-slate-500">active pipelines</p>
           </div>
         </div>
 
