@@ -1462,16 +1462,21 @@ className="flex items-center gap-2 cursor-pointer"
         </div>
       </section>
 {/* BRANDING SECTION */}
-<section className="max-w-3xl mx-auto mt-10 text-slate-700 leading-relaxed">
-  <h2 className="text-2xl font-semibold mb-4">What is Evolgrit?</h2>
-  <p className="mb-3">
-    We believe every person can improve their future — through evolution{" "}
-    <em>(Evol-)</em> and grit <em>(-grit)</em>.
-  </p>
-  <p>
-    Evolgrit stands for the ability to keep going despite challenges, to
-    learn, to grow and to build a new life.
-  </p>
+<section className="mt-12 px-5">
+  <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900 text-slate-50 px-8 py-10 sm:px-12 sm:py-14 shadow-xl text-center space-y-4">
+    <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+      What is Evolgrit?
+    </h2>
+    <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+      We believe every person can improve their future — through evolution{" "}
+      <span className="italic font-medium text-slate-100">Evol-</span> and grit{" "}
+      <span className="italic font-medium text-slate-100">-grit</span>. It’s the ability to keep going despite
+      challenges, to learn, to grow and to build a new life.
+    </p>
+    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+      Built with patience, courage and consistency.
+    </p>
+  </div>
 </section>
       {/* FINAL CTA BAR */}
       <section className="max-w-6xl mx-auto mt-16 px-5">
