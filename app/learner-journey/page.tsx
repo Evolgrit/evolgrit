@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function LearnerJourneyPage() {
@@ -12,7 +13,7 @@ export default function LearnerJourneyPage() {
         <div className="max-w-6xl mx-auto px-5 py-4">
           <nav className="flex items-center justify-between gap-4">
             {/* Logo + Title */}
-<a
+<Link
   href="/"
   className="flex items-center gap-2 cursor-pointer"
 >
@@ -27,38 +28,38 @@ export default function LearnerJourneyPage() {
       Language · Jobs · AI
     </div>
   </div>
-</a>
+</Link>
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
                 EN
               </div>
 
-              <a
+              <Link
                 href="/#product"
                 className="text-slate-500 hover:text-slate-900"
               >
                 Product
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#how-it-works"
                 className="text-slate-500 hover:text-slate-900"
               >
                 How it works
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#for-employers"
                 className="text-slate-500 hover:text-slate-900"
               >
                 For employers
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/login"
                 className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm"
               >
                 Log in
-              </a>
+              </Link>
               <a
                 href="mailto:info@evolgrit.com?subject=Evolgrit%20beta%20waitlist"
                 className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
@@ -93,36 +94,36 @@ export default function LearnerJourneyPage() {
                 </div>
               </div>
 
-              <a
+              <Link
                 href="/#product"
                 className="block text-slate-700 hover:text-slate-900"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Product
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#how-it-works"
                 className="block text-slate-700 hover:text-slate-900"
                 onClick={() => setIsMenuOpen(false)}
               >
                 How it works
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#for-employers"
                 className="block text-slate-700 hover:text-slate-900"
                 onClick={() => setIsMenuOpen(false)}
               >
                 For employers
-              </a>
+              </Link>
 
               <div className="pt-2 flex gap-2">
-                <a
+                <Link
                   href="/login"
                   className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm flex items-center justify-center text-slate-700"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Log in
-                </a>
+                </Link>
                 <a
                   href="mailto:info@evolgrit.com?subject=Evolgrit%20beta%20waitlist"
                   className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 flex items-center justify-center"
