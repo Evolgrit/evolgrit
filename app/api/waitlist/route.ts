@@ -44,10 +44,15 @@ export async function POST(req: Request) {
     if (error) {
       const msg = (error.message || "").toLowerCase();
       const isDup = msg.includes("duplicate") || msg.includes("unique");
+
       if (isDup) {
         return NextResponse.json({ ok: true, duplicate: true }, { status: 200 });
       }
-      return NextResponse.json({ ok: false, error: "DB error" }, { status: 500 });
+
+      return NextResponse.json(
+        { ok: false, error: `Supabase insert failed: ${error.message}` },
+        { status: 500 }
+      );
     }
 
     const from = process.env.RESEND_FROM!;
@@ -66,7 +71,9 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });
-  } catch {
-    return NextResponse.json({ ok: false, error: "Unexpected error" }, { status: 500 });
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : typeof err === "string" ? err : "Unexpected error";
+    return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }
