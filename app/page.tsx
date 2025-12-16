@@ -284,6 +284,44 @@ const learnersGetHighlights = [
     body: "A clear next step: job, apprenticeship or further training.",
   },
 ] as const;
+const phases = [
+  {
+    id: "1",
+    label: "PHASE 1 · ARRIVAL & FOUNDATIONS",
+    title: "Land softly in Germany.",
+    bullets: [
+      "Orientation, onboarding and a first language baseline.",
+      "Everyday German for living and basic work situations.",
+      "Early contact with mentors and a peer community.",
+    ],
+    tag: "Everyday confidence",
+    tone: "blue",
+  },
+  {
+    id: "2",
+    label: "PHASE 2 · DEEPENING & PRACTICE",
+    title: "Practice for real jobs and real life.",
+    bullets: [
+      "Job-related German with scenarios and role plays.",
+      "Job-specific language for logistics, care & childcare.",
+      "Changing formats and regular feedback from mentors & AI-coach.",
+    ],
+    tag: "Work-ready language",
+    tone: "emerald",
+  },
+  {
+    id: "3",
+    label: "PHASE 3 · JOB-READY & MATCHING",
+    title: "Move confidently into work.",
+    bullets: [
+      "Interview preparation and workplace communication.",
+      "Matching with partner employers or education partners.",
+      "Clear next steps: job, apprenticeship or further training.",
+    ],
+    tag: "Job-ready & matched",
+    tone: "violet",
+  },
+] as const;
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
@@ -292,6 +330,7 @@ export default function Home() {
   const [activePathway, setActivePathway] =
     useState<(typeof pathwaysCards)[number] | null>(null);
   const [activeHowStep, setActiveHowStep] = useState<string | null>(null);
+  const [activePhase, setActivePhase] = useState<"1" | "2" | "3" | null>(null);
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
@@ -1138,92 +1177,115 @@ className="flex items-center gap-2 cursor-pointer"
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 text-sm">
-          {/* Phase 1 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-sm font-semibold">
-                1
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 1 · Arrival &amp; foundations
-                </p>
-                <h3 className="font-semibold text-slate-900">
-                  Land softly in Germany.
-                </h3>
-              </div>
-            </div>
+          {phases.map((p, idx) => {
+            const isActive = activePhase === p.id;
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Orientation, onboarding and a first language baseline.</li>
-              <li>• Everyday German for living and basic work situations.</li>
-              <li>• Early contact with mentors and a peer community.</li>
-            </ul>
+            const toneStyles =
+              p.tone === "blue"
+                ? {
+                    badge: "bg-blue-600/10 text-blue-600",
+                    tag: "bg-blue-50 text-blue-700",
+                  }
+                : p.tone === "emerald"
+                ? {
+                    badge: "bg-emerald-500/10 text-emerald-600",
+                    tag: "bg-emerald-50 text-emerald-700",
+                  }
+                : {
+                    badge: "bg-violet-500/10 text-violet-600",
+                    tag: "bg-violet-50 text-violet-700",
+                  };
 
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 text-[11px] px-3 py-1">
-                Everyday confidence
-              </span>
-            </div>
-          </div>
+            const toggle = () => setActivePhase(isActive ? null : p.id);
 
-          {/* Phase 2 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm font-semibold">
-                2
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 2 · Deepening &amp; practice
-                </p>
-                <h3 className="font-semibold text-slate-900">
-                  Practice for real jobs and real life.
-                </h3>
-              </div>
-            </div>
+            return (
+              <article
+                key={p.id}
+                role="button"
+                tabIndex={0}
+                onClick={toggle}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggle();
+                  }
+                }}
+                className={[
+                  "group relative rounded-3xl border border-slate-200 bg-white shadow-sm",
+                  "p-6 pb-14 flex flex-col gap-4",
+                  "transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
+                ].join(" ")}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={[
+                      "h-10 w-10 rounded-2xl flex items-center justify-center text-sm font-semibold",
+                      toneStyles.badge,
+                    ].join(" ")}
+                  >
+                    {idx + 1}
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                      {p.label}
+                    </p>
+                    <h3 className="font-semibold text-slate-900">{p.title}</h3>
+                  </div>
+                </div>
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Job-related German with scenarios and role plays.</li>
-              <li>• Job-specific language for logistics, care &amp; childcare.</li>
-              <li>• Changing formats and regular feedback from mentors &amp; AI-coach.</li>
-            </ul>
+                <ul className="space-y-1.5 text-slate-600 text-sm">
+                  {p.bullets.map((b, i) => (
+                    <li
+                      key={i}
+                      className={[
+                        "transition-all duration-200",
+                        isActive ? "opacity-100" : i > 0 ? "hidden" : "",
+                      ].join(" ")}
+                    >
+                      • {b}
+                    </li>
+                  ))}
+                </ul>
 
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-[11px] px-3 py-1">
-                Work-ready language
-              </span>
-            </div>
-          </div>
+                <div className="mt-auto pt-2">
+                  <span
+                    className={[
+                      "inline-flex items-center rounded-full text-[11px] px-3 py-1",
+                      toneStyles.tag,
+                    ].join(" ")}
+                  >
+                    {p.tag}
+                  </span>
+                </div>
 
-          {/* Phase 3 */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-sm font-semibold">
-                3
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Phase 3 · Job-ready &amp; matching
-                </p>
-                <h3 className="font-semibold text-slate-900">
-                  Move confidently into work.
-                </h3>
-              </div>
-            </div>
+                <div className="pt-3 mt-2 border-t border-slate-100 text-sm text-blue-600 inline-flex items-center gap-1">
+                  <span>{isActive ? "Show less" : "Learn more"}</span>
+                  <span aria-hidden="true">→</span>
+                </div>
 
-            <ul className="space-y-1.5 text-slate-600 text-sm">
-              <li>• Interview preparation and workplace communication.</li>
-              <li>• Matching with partner employers or education partners.</li>
-              <li>• Clear next steps: job, apprenticeship or further training.</li>
-            </ul>
-
-            <div className="mt-auto pt-2">
-              <span className="inline-flex items-center rounded-full bg-violet-50 text-violet-700 text-[11px] px-3 py-1">
-                Job-ready &amp; matched
-              </span>
-            </div>
-          </div>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggle();
+                  }}
+                  aria-label={
+                    isActive ? "Close phase details" : "Open phase details"
+                  }
+                  className={[
+                    "absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center",
+                    "rounded-full border border-slate-200 bg-white text-lg font-medium text-slate-900 shadow-sm",
+                    "transition-colors",
+                    "group-hover:bg-slate-900 group-hover:text-slate-50",
+                    isActive ? "rotate-45" : "",
+                  ].join(" ")}
+                >
+                  +
+                </button>
+              </article>
+            );
+          })}
         </div>
       </section>
 
