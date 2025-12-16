@@ -21,6 +21,17 @@ export async function POST(req: Request) {
     const supabase = getSupabase();
     const resend = getResend();
     const body = await req.json();
+    return NextResponse.json(
+      {
+        ok: false,
+        debug: {
+          supabase_url: process.env.SUPABASE_URL || null,
+          has_service_role: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
+          has_resend_key: Boolean(process.env.RESEND_API_KEY),
+        },
+      },
+      { status: 500 }
+    );
 
     const full_name = String(body.full_name ?? "").trim();
     const email = String(body.email ?? "").trim().toLowerCase();
