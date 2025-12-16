@@ -1525,19 +1525,22 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       </section>
-{/* BRANDING SECTION */}
-<section className="mt-12 px-5">
-  <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900 text-slate-50 px-8 py-10 sm:px-12 sm:py-14 shadow-xl text-center space-y-4">
+{/* BRAND HERO – WHAT IS EVOLGRIT */}
+<section className="max-w-6xl mx-auto mt-16 px-5 mb-14 sm:mb-20">
+  <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900 text-slate-50 shadow-xl px-8 py-8 sm:px-12 sm:py-10 text-center">
     <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
       What is Evolgrit?
     </h2>
-    <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+
+    <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
       We believe every person can improve their future — through evolution{" "}
-      <span className="italic font-medium text-slate-100">Evol-</span> and grit{" "}
-      <span className="italic font-medium text-slate-100">-grit</span>. It’s the ability to keep going despite
-      challenges, to learn, to grow and to build a new life.
+      <span className="italic">(Evol-)</span> and grit{" "}
+      <span className="italic">(-grit)</span>.
+      <br className="hidden sm:block" />
+      Evolgrit is the ability to keep going, to learn, to grow — and to build a new life.
     </p>
-    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+
+    <p className="mt-6 text-[11px] uppercase tracking-[0.28em] text-slate-500">
       Built with patience, courage and consistency.
     </p>
   </div>
