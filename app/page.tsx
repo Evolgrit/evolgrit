@@ -431,7 +431,7 @@ className="flex items-center gap-2 cursor-pointer"
                     href="/waitlist"
                     className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
                   >
-                    Join waitlist
+                    Join learner waitlist
                   </a>
             </div>
 
@@ -496,7 +496,7 @@ className="flex items-center gap-2 cursor-pointer"
     className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 flex items-center justify-center"
     onClick={() => setIsMenuOpen(false)}
   >
-    Join waitlist
+    Join learner waitlist
   </a>
 </div>
             </div>
