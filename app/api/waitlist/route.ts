@@ -53,9 +53,11 @@ export async function POST(req: Request) {
     };
 
     const res = await supabase.from("waitlist_signups").insert(payload);
+    const insertError = res.error;
 
-    if (res.error) {
-      const msg = (res.error.message ?? "").toLowerCase();
+    if (insertError !== null) {
+      const message = insertError?.message ?? "";
+      const msg = message.toLowerCase();
       const isDup = msg.includes("duplicate") || msg.includes("unique");
 
       if (isDup) {
@@ -63,7 +65,7 @@ export async function POST(req: Request) {
       }
 
       return NextResponse.json(
-        { ok: false, error: `Supabase insert failed: ${res.error.message}` },
+        { ok: false, error: `Supabase insert failed: ${message}` },
         { status: 500 }
       );
     }
