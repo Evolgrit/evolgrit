@@ -282,13 +282,13 @@ export default function Home() {
         "Combined German with scanner & system vocabulary and safety language – now working in a logistics hub with room to grow.",
     },
   ] as const;
-  const howItWorksSteps = [
-    {
-      step: "01",
-      title: "Onboarding & profiling",
-      body:
-        "Learners share their background, target role and current language level – so we can tailor their journey.",
-    },
+const howItWorksSteps = [
+  {
+    step: "01",
+    title: "Onboarding & profiling",
+    body:
+      "Learners share their background, target role and current language level – so we can tailor their journey.",
+  },
     {
       step: "02",
       title: "Hybrid learning program",
@@ -304,10 +304,36 @@ export default function Home() {
     {
       step: "04",
       title: "Matching & next steps",
-      body:
-        "We connect learners with partner employers or education paths – always aligned with skills, language and personal goals.",
-    },
-  ] as const;
+    body:
+      "We connect learners with partner employers or education paths – always aligned with skills, language and personal goals.",
+  },
+] as const;
+const learnersGetHighlights = [
+  {
+    id: "structure",
+    icon: "✓",
+    title: "Multi-month structure",
+    body: "A clear multi-month structure with defined phases.",
+  },
+  {
+    id: "formats",
+    icon: "↺",
+    title: "Changing formats",
+    body: "Regular changes in task formats to keep motivation high.",
+  },
+  {
+    id: "mentoring",
+    icon: "★",
+    title: "Live mentoring",
+    body: "Live mentoring for language, culture and career questions.",
+  },
+  {
+    id: "next-step",
+    icon: "→",
+    title: "Clear next step",
+    body: "A clear next step: job, apprenticeship or further training.",
+  },
+] as const;
   return (
     <div 
     id="top"
@@ -982,35 +1008,59 @@ className="flex items-center gap-2 cursor-pointer"
       </h2>
     </div>
 
-    <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      {howItWorksSteps.map((step) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {howItWorksSteps.map((step, index) => (
         <article
           key={step.step}
-          className="rounded-3xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6 space-y-3"
+          className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 space-y-3 transition-shadow hover:shadow-md"
         >
-          <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-slate-500">
-            Step {step.step}
-          </span>
-          <h3 className="text-sm font-semibold text-slate-900">
-            {step.title}
-          </h3>
-          <p className="text-sm text-slate-500 leading-relaxed">
-            {step.body}
-          </p>
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold">
+              {index + 1}
+            </div>
+            <span className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              Step {step.step}
+            </span>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-sm font-semibold text-slate-900">
+              {step.title}
+            </h3>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              {step.body}
+            </p>
+          </div>
+          <div className="pt-3 mt-2 border-t border-slate-100">
+            <span className="text-sm text-blue-600 inline-flex items-center gap-1">
+              Learn more <span aria-hidden="true">→</span>
+            </span>
+          </div>
         </article>
       ))}
     </div>
 
-    <div className="mt-10 rounded-3xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
-      <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-2">
+    <div className="mt-10">
+      <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-4">
         What learners get with Evolgrit
       </h3>
-      <ul className="text-sm text-slate-500 leading-relaxed space-y-1.5">
-        <li>• A clear multi-month structure with defined phases.</li>
-        <li>• Regular changes in task formats to keep motivation high.</li>
-        <li>• Live mentoring for language, culture and career questions.</li>
-        <li>• A clear next step: job, apprenticeship or further training.</li>
-      </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        {learnersGetHighlights.map((item) => (
+          <article
+            key={item.id}
+            className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 space-y-2 transition-shadow hover:shadow-md"
+          >
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-xs text-slate-600">
+                {item.icon}
+              </div>
+              <h4 className="text-sm font-semibold text-slate-900">
+                {item.title}
+              </h4>
+            </div>
+            <p className="text-sm text-slate-500 leading-relaxed">{item.body}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>
