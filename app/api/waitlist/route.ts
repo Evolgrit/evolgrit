@@ -2,15 +2,24 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url) throw new Error("SUPABASE_URL is required");
+  if (!key) throw new Error("SUPABASE_SERVICE_ROLE_KEY is required");
+  return createClient(url, key);
+}
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error("RESEND_API_KEY is required");
+  return new Resend(apiKey);
+}
 
 export async function POST(req: Request) {
   try {
+    const supabase = getSupabase();
+    const resend = getResend();
     const body = await req.json();
 
     const full_name = String(body.full_name ?? "").trim();
