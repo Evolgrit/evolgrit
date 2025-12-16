@@ -1,0 +1,63 @@
+import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
+
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+const resend = new Resend(process.env.RESEND_API_KEY!);
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+
+    const full_name = String(body.full_name ?? "").trim();
+    const email = String(body.email ?? "").trim().toLowerCase();
+
+    if (!full_name || !email.includes("@")) {
+      return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
+    }
+
+    const payload = {
+      full_name,
+      email,
+      country: body.country?.trim?.() || null,
+      target: body.target || null,
+      german_level: body.german_level || null,
+      start_timeframe: body.start_timeframe || null,
+      whatsapp: body.whatsapp?.trim?.() || null,
+    };
+
+    const { error } = await supabase.from("waitlist_signups").insert(payload);
+
+    if (error) {
+      const msg = (error.message || "").toLowerCase();
+      const isDup = msg.includes("duplicate") || msg.includes("unique");
+      if (isDup) {
+        return NextResponse.json({ ok: true, duplicate: true }, { status: 200 });
+      }
+      return NextResponse.json({ ok: false, error: "DB error" }, { status: 500 });
+    }
+
+    const from = process.env.RESEND_FROM!;
+    await resend.emails.send({
+      from,
+      to: email,
+      subject: "You’re on the Evolgrit learner waitlist",
+      html: `
+        <div style="font-family: ui-sans-serif, system-ui; line-height: 1.6;">
+          <h2 style="margin:0 0 8px;">You’re on the list 🎉</h2>
+          <p style="margin:0 0 12px;">Hi ${full_name.split(" ")[0] || full_name}, thanks for joining the Evolgrit learner waitlist.</p>
+          <p style="margin:0 0 12px;"><strong>What happens next:</strong> We’ll email you when the next cohort opens. No spam.</p>
+          <p style="margin:18px 0 0; color:#64748b; font-size:12px;">If you didn’t sign up, you can ignore this email.</p>
+        </div>
+      `,
+    });
+
+    return NextResponse.json({ ok: true }, { status: 200 });
+  } catch {
+    return NextResponse.json({ ok: false, error: "Unexpected error" }, { status: 500 });
+  }
+}

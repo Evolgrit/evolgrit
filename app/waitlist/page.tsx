@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
 
 type FormState = {
   full_name: string;
@@ -64,15 +63,28 @@ export default function WaitlistPage() {
       whatsapp: form.whatsapp.trim() || null,
     };
 
-    const { error } = await supabase.from("waitlist_signups").insert(payload);
+    const res = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    if (error) {
-      const msg =
-        error.message?.toLowerCase().includes("duplicate") ||
-        error.message?.toLowerCase().includes("unique")
-          ? "You’re already on the list with this email."
-          : "Something went wrong. Please try again in a moment.";
-      setStatus({ type: "error", message: msg });
+    const data = await res.json();
+
+    if (!res.ok || !data.ok) {
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again in a moment.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (data.duplicate) {
+      setStatus({
+        type: "error",
+        message: "You’re already on the list with this email.",
+      });
       setIsSubmitting(false);
       return;
     }
