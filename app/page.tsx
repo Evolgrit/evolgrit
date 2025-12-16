@@ -427,9 +427,12 @@ className="flex items-center gap-2 cursor-pointer"
   >
     Log in
   </a>
-                  <button className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700">
-                Join waitlist
-              </button>
+                  <a
+                    href="/waitlist"
+                    className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
+                  >
+                    Join waitlist
+                  </a>
             </div>
 
             {/* Mobile hamburger */}
@@ -488,12 +491,13 @@ className="flex items-center gap-2 cursor-pointer"
   >
     Log in
   </a>
-  <button
-    className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
+  <a
+    href="/waitlist"
+    className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 flex items-center justify-center"
     onClick={() => setIsMenuOpen(false)}
   >
     Join waitlist
-  </button>
+  </a>
 </div>
             </div>
           )}
@@ -532,12 +536,22 @@ className="flex items-center gap-2 cursor-pointer"
           Join learner waitlist
         </a>
         <a
-          href="#how-it-works"
+          href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
           className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-400"
         >
-          See how it works
+          Talk to us about hiring
         </a>
       </div>
+
+      <a
+        href="#how-it-works"
+        className="mt-3 inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900"
+      >
+        See how it works
+        <span className="ml-1" aria-hidden="true">
+          →
+        </span>
+      </a>
 
       <p className="mt-4 text-xs uppercase tracking-[0.16em] text-slate-400">
         Built for people first – shaped together with learners and employers.
@@ -1559,18 +1573,25 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
           <div className="flex flex-wrap gap-3">
             <a
-              href="mailto:info@evolgrit.com?subject=Join%20Evolgrit%20beta"
+              href="/waitlist"
               className="rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
             >
-              Join the beta waitlist
+              Join learner waitlist
             </a>
             <a
-              href="mailto:info@evolgrit.com?subject=Evolgrit%20intro%20call"
+              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
               className="rounded-full border border-slate-500 px-4 py-2 text-sm font-medium text-slate-50 hover:bg-slate-800"
             >
-              Book an intro call
+              Talk to us about hiring
             </a>
           </div>
+          <a
+            href="mailto:info@evolgrit.com?subject=Mentor%20at%20Evolgrit"
+            className="text-xs font-medium text-slate-300 hover:text-slate-50 inline-flex items-center gap-1"
+          >
+            Become a mentor
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </section>
             </main>
