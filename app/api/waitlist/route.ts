@@ -35,7 +35,9 @@ export async function POST(req: Request) {
       country: body.country?.trim?.() || null,
       target: body.target || null,
       german_level: body.german_level || null,
-      start_timeframe: body.start_timeframe || null,
+      start_timeframe: body.start_timeframe
+        ? body.start_timeframe.replace("–", "-")
+        : null,
       whatsapp: body.whatsapp?.trim?.() || null,
     };
 
