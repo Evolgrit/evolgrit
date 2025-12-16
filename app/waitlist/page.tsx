@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 type FormState = {
@@ -32,10 +32,20 @@ export default function WaitlistPage() {
     | { type: "success" }
     | { type: "error"; message: string }
   >({ type: "idle" });
+  const successRef = useRef<HTMLDivElement | null>(null);
 
   const canSubmit = useMemo(() => {
     return form.full_name.trim().length > 1 && form.email.trim().includes("@");
   }, [form.full_name, form.email]);
+
+  useEffect(() => {
+    if (status.type === "success") {
+      successRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [status.type]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -90,8 +100,18 @@ export default function WaitlistPage() {
 
           <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
             {status.type === "success" && (
-              <div className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                Thanks — you’re on the list. We’ll contact you when a spot opens.
+              <div
+                ref={successRef}
+                className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900"
+              >
+                <p className="font-semibold">You’re on the list 🎉</p>
+                <p className="mt-1 text-emerald-800">
+                  Thanks for joining the Evolgrit learner waitlist.
+                </p>
+                <p className="mt-2 text-emerald-800">
+                  <strong>What happens next:</strong> We’ll review your details
+                  and email you when the next cohort opens. No spam.
+                </p>
               </div>
             )}
 
@@ -250,7 +270,9 @@ export default function WaitlistPage() {
               </div>
 
               <p className="text-xs text-slate-500">
-                By joining, you agree that we may contact you about Evolgrit cohorts.
+                We’ll only use your details to contact you about Evolgrit
+                cohorts. You can unsubscribe at any time. Your data will never
+                be shared.
               </p>
             </form>
           </div>
