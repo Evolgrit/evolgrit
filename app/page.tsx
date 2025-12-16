@@ -485,7 +485,7 @@ className="flex items-center gap-2 cursor-pointer"
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3">
         <a
           href="/waitlist"
           className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/50"
@@ -500,7 +500,7 @@ className="flex items-center gap-2 cursor-pointer"
         </a>
       </div>
 
-      <p className="text-xs uppercase tracking-[0.16em] text-slate-400">
+      <p className="mt-4 text-xs uppercase tracking-[0.16em] text-slate-400">
         Built for people first – shaped together with learners and employers.
       </p>
     </div>
@@ -522,25 +522,25 @@ className="flex items-center gap-2 cursor-pointer"
           </span>
         </div>
 
-        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-          <div>
-            <dt className="text-slate-500">Language progress</dt>
-            <dd className="mt-1 text-lg font-semibold text-slate-900">+38%</dd>
-            <p className="mt-0.5 text-xs text-slate-500">over 12 weeks</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
+            <p className="text-xs text-slate-500">Language progress</p>
+            <p className="mt-1 text-lg font-semibold text-slate-900">+38%</p>
+            <p className="text-xs text-slate-500">over 12 weeks</p>
           </div>
-          <div>
-            <dt className="text-slate-500">Job-ready profiles</dt>
-            <dd className="mt-1 text-lg font-semibold text-slate-900">24</dd>
-            <p className="mt-0.5 text-xs text-slate-500">of 32 learners</p>
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
+            <p className="text-xs text-slate-500">Job-ready profiles</p>
+            <p className="mt-1 text-lg font-semibold text-slate-900">24</p>
+            <p className="text-xs text-slate-500">of 32 learners</p>
           </div>
-          <div>
-            <dt className="text-slate-500">Employer matches</dt>
-            <dd className="mt-1 text-lg font-semibold text-slate-900">17</dd>
-            <p className="mt-0.5 text-xs text-slate-500">active pipelines</p>
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
+            <p className="text-xs text-slate-500">Employer matches</p>
+            <p className="mt-1 text-lg font-semibold text-slate-900">17</p>
+            <p className="text-xs text-slate-500">active pipelines</p>
           </div>
-        </dl>
+        </div>
 
-        <div className="rounded-2xl bg-slate-50 px-4 py-3 text-xs text-slate-600 leading-relaxed">
+        <div className="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-xs text-slate-600 leading-relaxed">
           Top signals: B1+/B2 learners with care, logistics &amp; hospitality background – plus a
           new cultural readiness score.
         </div>
