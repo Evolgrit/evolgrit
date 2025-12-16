@@ -52,12 +52,10 @@ export async function POST(req: Request) {
       whatsapp: body.whatsapp?.trim?.() || null,
     };
 
-    const { error: insertError } = await supabase
-      .from("waitlist_signups")
-      .insert(payload);
+    const res = await supabase.from("waitlist_signups").insert(payload);
 
-    if (insertError) {
-      const msg = (insertError.message || "").toLowerCase();
+    if (res.error) {
+      const msg = (res.error.message ?? "").toLowerCase();
       const isDup = msg.includes("duplicate") || msg.includes("unique");
 
       if (isDup) {
@@ -65,7 +63,7 @@ export async function POST(req: Request) {
       }
 
       return NextResponse.json(
-        { ok: false, error: `Supabase insert failed: ${insertError.message}` },
+        { ok: false, error: `Supabase insert failed: ${res.error.message}` },
         { status: 500 }
       );
     }
