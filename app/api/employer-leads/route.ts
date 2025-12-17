@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 function normalizeRoles(s: string) {
   const x = s.toLowerCase();
@@ -52,6 +53,37 @@ export async function POST(req: Request) {
       }
       return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
     }
+
+    const resend = new Resend(process.env.RESEND_API_KEY!);
+    const from = process.env.RESEND_FROM!;
+
+    await resend.emails.send({
+      from,
+      to: email,
+      subject: "Thanks — we received your Evolgrit employer request",
+      html: `
+        <div style="font-family: ui-sans-serif, system-ui; line-height: 1.6;">
+          <h2 style="margin:0 0 8px;">Thanks — we got it.</h2>
+          <p style="margin:0 0 12px;">
+            We received your employer interest for <strong>${company.replace(/</g, "&lt;")}</strong>.
+          </p>
+          <p style="margin:0 0 12px;">
+            <strong>Role types:</strong> ${role_types.replace(/</g, "&lt;")}
+          </p>
+          <p style="margin:0 0 12px;">
+            We’ll reply with pilot options and next steps shortly.
+          </p>
+          <p style="color:#64748b;font-size:12px;margin-top:18px;">
+            If you didn’t submit this request, you can ignore this email.
+          </p>
+        </div>
+      `,
+    });
+
+    await supabase
+      .from("employer_leads")
+      .update({ email_confirmed_at: new Date().toISOString() })
+      .eq("email", email);
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {

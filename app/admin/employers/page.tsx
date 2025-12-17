@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import { CopyEmailButton } from "../waitlist/CopyEmailButton";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -9,7 +10,7 @@ const supabase = createClient(
 export default async function AdminEmployersPage() {
   const { data, error } = await supabase
     .from("employer_leads")
-    .select("created_at, company, role_types, email, followup_2d_sent_at")
+    .select("created_at, company, role_types, email, email_confirmed_at, followup_2d_sent_at")
     .order("created_at", { ascending: false })
     .limit(500);
 
@@ -59,6 +60,7 @@ export default async function AdminEmployersPage() {
                 <th className="p-3 text-left">Company</th>
                 <th className="p-3 text-left">Role types</th>
                 <th className="p-3 text-left">Email</th>
+                <th className="p-3 text-left whitespace-nowrap">Confirmed</th>
                 <th className="p-3 text-left whitespace-nowrap">Follow-up</th>
               </tr>
             </thead>
@@ -68,7 +70,15 @@ export default async function AdminEmployersPage() {
                   <td className="p-3 whitespace-nowrap">{new Date(r.created_at).toLocaleString()}</td>
                   <td className="p-3">{r.company}</td>
                   <td className="p-3">{r.role_types}</td>
-                  <td className="p-3">{r.email}</td>
+                  <td className="p-3">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-slate-700">{r.email}</span>
+                      <CopyEmailButton email={r.email} />
+                    </div>
+                  </td>
+                  <td className="p-3 whitespace-nowrap">
+                    {r.email_confirmed_at ? "Sent" : "—"}
+                  </td>
                   <td className="p-3 whitespace-nowrap">
                     {r.followup_2d_sent_at ? "Sent" : "—"}
                   </td>
@@ -76,7 +86,7 @@ export default async function AdminEmployersPage() {
               ))}
               {(!data || data.length === 0) && (
                 <tr>
-                  <td className="p-6 text-slate-500" colSpan={4}>
+                  <td className="p-6 text-slate-500" colSpan={6}>
                     No employer leads yet.
                   </td>
                 </tr>

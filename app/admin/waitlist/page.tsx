@@ -183,6 +183,7 @@ export default async function AdminWaitlistPage({
               <tr>
                 <th className="p-3 text-left whitespace-nowrap">Created</th>
                 <th className="p-3 text-left">Status</th>
+                <th className="p-3 text-left whitespace-nowrap">Follow-up</th>
                 <th className="p-3 text-left">Name</th>
                 <th className="p-3 text-left">Email</th>
                 <th className="p-3 text-left">Country</th>
@@ -213,6 +214,9 @@ export default async function AdminWaitlistPage({
                       <ContactedToggle id={r.id} initial={Boolean(r.contacted)} />
                     </div>
                   </td>
+                  <td className="p-3 whitespace-nowrap">
+                    {r.followup_3d_sent_at ? "Sent" : "—"}
+                  </td>
                   <td className="p-3">{r.full_name}</td>
                   <td className="p-3">
                     <div className="flex items-center gap-2">
@@ -229,7 +233,7 @@ export default async function AdminWaitlistPage({
               ))}
               {(!data || data.length === 0) && (
                 <tr>
-                  <td className="p-6 text-slate-500" colSpan={9}>
+                  <td className="p-6 text-slate-500" colSpan={10}>
                     No signups yet.
                   </td>
                 </tr>
