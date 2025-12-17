@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import { unstable_noStore as noStore } from "next/cache";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -13,6 +15,7 @@ export default async function AdminWaitlistPage({
 }: {
   searchParams?: { target?: string; level?: string; time?: string };
 }) {
+  noStore();
   let query = supabase
     .from("waitlist_signups")
     .select("created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp")
@@ -24,9 +27,9 @@ export default async function AdminWaitlistPage({
   const time = searchParams?.time?.trim();
   console.log({ target, level, time });
 
-  if (target) query = query.eq("target", target);
-  if (level) query = query.eq("german_level", level);
-  if (time) query = query.eq("start_timeframe", time);
+  if (target) query = query.ilike("target", target);
+  if (level) query = query.ilike("german_level", level);
+  if (time) query = query.ilike("start_timeframe", time);
 
   const { data, error } = await query;
 
