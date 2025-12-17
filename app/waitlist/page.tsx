@@ -313,10 +313,35 @@ export default function WaitlistPage() {
                 <p className="mt-1 text-emerald-800">
                   Thanks for joining the Evolgrit learner waitlist.
                 </p>
-                <p className="mt-2 text-emerald-800">
-                  <strong>What happens next:</strong> We’ll review your details
-                  and email you when the next cohort opens. No spam.
+
+                <div className="mt-3 rounded-xl border border-emerald-200/60 bg-white/60 px-4 py-3 text-emerald-900">
+                  <p className="text-xs uppercase tracking-[0.18em] text-emerald-700/80">
+                    What happens next
+                  </p>
+                  <ul className="mt-2 space-y-1 text-sm text-emerald-900">
+                    <li>• We review your details and cohort fit.</li>
+                    <li>• We email you when the next cohort opens.</li>
+                  </ul>
+                </div>
+
+                <p className="mt-3 text-xs text-emerald-800">
+                  No spam. You can unsubscribe at any time. Your data is never shared.
                 </p>
+
+                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                  <Link
+                    href="/"
+                    className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+                  >
+                    Back to homepage
+                  </Link>
+                  <a
+                    href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+                    className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:border-slate-400"
+                  >
+                    For employers: talk to us →
+                  </a>
+                </div>
               </div>
             )}
 
@@ -340,7 +365,7 @@ export default function WaitlistPage() {
                     className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="Your name"
                     required
-                    disabled={status.type === "success"}
+                    disabled={status.type === "success" || isSubmitting}
                   />
                 </div>
 
@@ -358,7 +383,7 @@ export default function WaitlistPage() {
                     placeholder="you@email.com"
                     required
                     autoFocus
-                    disabled={status.type === "success"}
+                    disabled={status.type === "success" || isSubmitting}
                   />
                 </div>
 
@@ -375,7 +400,7 @@ export default function WaitlistPage() {
                     className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="Start typing… (e.g., deu → Germany)"
                     autoComplete="country-name"
-                    disabled={status.type === "success"}
+                    disabled={status.type === "success" || isSubmitting}
                   />
 
                   <datalist id="countries">
@@ -399,6 +424,7 @@ export default function WaitlistPage() {
                         }))
                       }
                       className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      disabled={status.type === "success" || isSubmitting}
                     >
                       <option value="">Select…</option>
                       <option value="Job">Job</option>
@@ -420,6 +446,7 @@ export default function WaitlistPage() {
                         }))
                       }
                       className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      disabled={status.type === "success" || isSubmitting}
                     >
                       <option value="">Select…</option>
                       <option value="A0">A0</option>
@@ -446,6 +473,7 @@ export default function WaitlistPage() {
                       }))
                     }
                     className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    disabled={status.type === "success" || isSubmitting}
                   >
                     <option value="">Select…</option>
                     <option value="0–3 months">0–3 months</option>
@@ -465,6 +493,7 @@ export default function WaitlistPage() {
                     }
                     className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="+49 …"
+                    disabled={status.type === "success" || isSubmitting}
                   />
                 </div>
               </div>
@@ -472,7 +501,7 @@ export default function WaitlistPage() {
               <div className="pt-2 flex flex-col sm:flex-row gap-3">
                 <button
                   type="submit"
-                  disabled={!canSubmit || isSubmitting}
+                  disabled={!canSubmit || isSubmitting || status.type === "success"}
                   className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Joining…" : "Join learner waitlist"}
