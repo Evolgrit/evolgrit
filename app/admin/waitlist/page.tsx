@@ -6,12 +6,26 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export default async function AdminWaitlistPage() {
-  const { data, error } = await supabase
+export default async function AdminWaitlistPage({
+  searchParams,
+}: {
+  searchParams?: { target?: string; level?: string; time?: string };
+}) {
+  let query = supabase
     .from("waitlist_signups")
     .select("created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp")
     .order("created_at", { ascending: false })
-    .limit(300);
+    .limit(500);
+
+  const target = searchParams?.target?.trim();
+  const level = searchParams?.level?.trim();
+  const time = searchParams?.time?.trim();
+
+  if (target) query = query.eq("target", target);
+  if (level) query = query.eq("german_level", level);
+  if (time) query = query.eq("start_timeframe", time);
+
+  const { data, error } = await query;
 
   if (error) {
     return (
@@ -33,6 +47,59 @@ export default async function AdminWaitlistPage() {
             <p className="mt-1 text-sm text-slate-600">
               Latest {data?.length ?? 0} entries
             </p>
+            <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:items-center">
+              <form className="flex flex-col sm:flex-row gap-3 sm:items-center" method="GET">
+                <select
+                  name="target"
+                  defaultValue={target ?? ""}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                >
+                  <option value="">All targets</option>
+                  <option value="Job">Job</option>
+                  <option value="Apprenticeship">Apprenticeship</option>
+                  <option value="Further training">Further training</option>
+                </select>
+
+                <select
+                  name="level"
+                  defaultValue={level ?? ""}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                >
+                  <option value="">All levels</option>
+                  <option value="A0">A0</option>
+                  <option value="A1">A1</option>
+                  <option value="A2">A2</option>
+                  <option value="B1">B1</option>
+                  <option value="B2">B2</option>
+                  <option value="C1">C1</option>
+                </select>
+
+                <select
+                  name="time"
+                  defaultValue={time ?? ""}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                >
+                  <option value="">All timeframes</option>
+                  <option value="0-3 months">0-3 months</option>
+                  <option value="3-6 months">3-6 months</option>
+                  <option value="6-12 months">6-12 months</option>
+                </select>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+                >
+                  Apply
+                </button>
+
+                <a
+                  href="/admin/waitlist"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
+                >
+                  Reset
+                </a>
+              </form>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <a
