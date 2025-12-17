@@ -34,12 +34,20 @@ export default async function AdminWaitlistPage() {
               Latest {data?.length ?? 0} entries
             </p>
           </div>
-          <Link
-            href="/"
-            className="text-sm text-slate-500 hover:text-slate-900"
-          >
-            Back to site →
-          </Link>
+          <div className="flex items-center gap-4">
+            <a
+              href="/api/admin/waitlist.csv"
+              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
+            >
+              Export CSV
+            </a>
+            <Link
+              href="/"
+              className="text-sm text-slate-500 hover:text-slate-900"
+            >
+              Back to site →
+            </Link>
+          </div>
         </div>
 
         <div className="mt-6 overflow-auto rounded-2xl border border-slate-200 bg-white">
