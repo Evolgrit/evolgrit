@@ -9,9 +9,23 @@ function requireCronAuth(req: Request) {
 }
 
 export async function GET(req: Request) {
-  if (!requireCronAuth(req)) {
-    return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = req.headers.get("authorization") || "";
+  const secret = process.env.CRON_SECRET || "";
+
+  return NextResponse.json(
+    {
+      ok: false,
+      debug: {
+        auth_header_present: Boolean(auth),
+        auth_prefix: auth.slice(0, 12),
+        cron_secret_present: Boolean(secret),
+        cron_secret_len: secret.length,
+        match: auth === `Bearer ${secret}`,
+      },
+    },
+    { status: 401 }
+  );
+}
 
   const supabase = createClient(
     process.env.SUPABASE_URL!,
