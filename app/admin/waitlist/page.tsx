@@ -16,6 +16,28 @@ export default async function AdminWaitlistPage({
   searchParams?: { target?: string; level?: string; time?: string };
 }) {
   noStore();
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const sevenDaysAgo = new Date(now);
+  sevenDaysAgo.setDate(now.getDate() - 7);
+
+  const startOfTodayISO = startOfToday.toISOString();
+  const sevenDaysAgoISO = sevenDaysAgo.toISOString();
+
+  const [{ count: totalCount }, { count: todayCount }, { count: weekCount }] =
+    await Promise.all([
+      supabase
+        .from("waitlist_signups")
+        .select("*", { count: "exact", head: true }),
+      supabase
+        .from("waitlist_signups")
+        .select("*", { count: "exact", head: true })
+        .gte("created_at", startOfTodayISO),
+      supabase
+        .from("waitlist_signups")
+        .select("*", { count: "exact", head: true })
+        .gte("created_at", sevenDaysAgoISO),
+    ]);
   let query = supabase
     .from("waitlist_signups")
     .select("created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp")
@@ -47,7 +69,7 @@ export default async function AdminWaitlistPage({
   return (
     <main className="min-h-screen bg-slate-50 p-6 text-slate-900">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-baseline justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold">Admin · Waitlist signups</h1>
             <p className="mt-1 text-sm text-slate-600">
@@ -107,7 +129,22 @@ export default async function AdminWaitlistPage({
               </form>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Total</p>
+              <p className="text-lg font-semibold text-slate-900">{totalCount ?? 0}</p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Today</p>
+              <p className="text-lg font-semibold text-slate-900">{todayCount ?? 0}</p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Last 7 days</p>
+              <p className="text-lg font-semibold text-slate-900">{weekCount ?? 0}</p>
+            </div>
+
             <a
               href="/api/admin/waitlist.csv"
               className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
