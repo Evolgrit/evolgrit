@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { unstable_noStore as noStore } from "next/cache";
 import { ContactedToggle } from "./ContactedToggle";
+import { CopyEmailButton } from "./CopyEmailButton";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -81,7 +82,7 @@ export default async function AdminWaitlistPage({
             <p className="mt-1 text-sm text-slate-600">
               Latest {data?.length ?? 0} entries
             </p>
-            <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:items-center">
+            <div className="mt-4 sticky top-0 z-10 bg-slate-50/90 backdrop-blur border-b border-slate-100 py-3">
               <form className="flex flex-col sm:flex-row gap-3 sm:items-center" method="GET">
                 <select
                   name="target"
@@ -198,10 +199,27 @@ export default async function AdminWaitlistPage({
                     {new Date(r.created_at).toLocaleString()}
                   </td>
                   <td className="p-3 whitespace-nowrap">
-                    <ContactedToggle id={r.id} initial={Boolean(r.contacted)} />
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={[
+                          "inline-flex items-center rounded-full px-2 py-[2px] text-[11px] border",
+                          r.contacted
+                            ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                            : "bg-slate-50 text-slate-600 border-slate-200",
+                        ].join(" ")}
+                      >
+                        {r.contacted ? "Contacted" : "Open"}
+                      </span>
+                      <ContactedToggle id={r.id} initial={Boolean(r.contacted)} />
+                    </div>
                   </td>
                   <td className="p-3">{r.full_name}</td>
-                  <td className="p-3">{r.email}</td>
+                  <td className="p-3">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-slate-700">{r.email}</span>
+                      <CopyEmailButton email={r.email} />
+                    </div>
+                  </td>
                   <td className="p-3">{r.country ?? ""}</td>
                   <td className="p-3">{r.target ?? ""}</td>
                   <td className="p-3">{r.german_level ?? ""}</td>
