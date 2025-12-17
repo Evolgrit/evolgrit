@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { CopyEmailButton } from "./waitlist/CopyEmailButton";
+import { CopyAllEmailsButton } from "./CopyAllEmailsButton";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -35,6 +36,8 @@ export default async function AdminHomePage() {
       .order("created_at", { ascending: false })
       .limit(50),
   ]);
+  const learnerEmails = (learners ?? []).map((r) => r.email);
+  const employerEmails = (employers ?? []).map((r) => r.email);
 
   return (
     <main className="min-h-screen bg-slate-50 p-6 text-slate-900">
@@ -46,7 +49,9 @@ export default async function AdminHomePage() {
               Learners + Employers overview (latest 50 each)
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <CopyAllEmailsButton label="Copy learner emails" emails={learnerEmails} />
+            <CopyAllEmailsButton label="Copy employer emails" emails={employerEmails} />
             <Link href="/admin/waitlist" className="text-sm text-slate-600 hover:text-slate-900">Waitlist →</Link>
             <Link href="/admin/employers" className="text-sm text-slate-600 hover:text-slate-900">Employers →</Link>
             <Link href="/" className="text-sm text-slate-600 hover:text-slate-900">Back to site →</Link>
