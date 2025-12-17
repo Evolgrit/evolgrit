@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 
@@ -20,6 +22,7 @@ export default async function AdminWaitlistPage({
   const target = searchParams?.target?.trim();
   const level = searchParams?.level?.trim();
   const time = searchParams?.time?.trim();
+  console.log({ target, level, time });
 
   if (target) query = query.eq("target", target);
   if (level) query = query.eq("german_level", level);
