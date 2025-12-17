@@ -7,6 +7,21 @@ const supabase = createClient(
 );
 
 export default async function AdminHomePage() {
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+
+  const [
+    { count: learnersTotal },
+    { count: employersTotal },
+    { count: learnersToday },
+    { count: employersToday },
+  ] = await Promise.all([
+    supabase.from("waitlist_signups").select("*", { count: "exact", head: true }),
+    supabase.from("employer_leads").select("*", { count: "exact", head: true }),
+    supabase.from("waitlist_signups").select("*", { count: "exact", head: true }).gte("created_at", startOfToday),
+    supabase.from("employer_leads").select("*", { count: "exact", head: true }).gte("created_at", startOfToday),
+  ]);
+
   const [{ data: learners }, { data: employers }] = await Promise.all([
     supabase
       .from("waitlist_signups")
@@ -34,6 +49,28 @@ export default async function AdminHomePage() {
             <Link href="/admin/waitlist" className="text-sm text-slate-600 hover:text-slate-900">Waitlist →</Link>
             <Link href="/admin/employers" className="text-sm text-slate-600 hover:text-slate-900">Employers →</Link>
             <Link href="/" className="text-sm text-slate-600 hover:text-slate-900">Back to site →</Link>
+          </div>
+        </div>
+        <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Learners</p>
+            <p className="mt-1 text-xl font-semibold text-slate-900">{learnersTotal ?? 0}</p>
+            <p className="mt-0.5 text-xs text-slate-500">total</p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Learners</p>
+            <p className="mt-1 text-xl font-semibold text-slate-900">{learnersToday ?? 0}</p>
+            <p className="mt-0.5 text-xs text-slate-500">today</p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Employers</p>
+            <p className="mt-1 text-xl font-semibold text-slate-900">{employersTotal ?? 0}</p>
+            <p className="mt-0.5 text-xs text-slate-500">total</p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Employers</p>
+            <p className="mt-1 text-xl font-semibold text-slate-900">{employersToday ?? 0}</p>
+            <p className="mt-0.5 text-xs text-slate-500">today</p>
           </div>
         </div>
 
