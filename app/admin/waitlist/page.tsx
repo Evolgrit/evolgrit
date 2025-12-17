@@ -50,11 +50,14 @@ export default async function AdminWaitlistPage({
   const target = searchParams?.target?.trim();
   const level = searchParams?.level?.trim();
   const time = searchParams?.time?.trim();
+  const contacted = searchParams?.contacted?.trim();
   console.log({ target, level, time });
 
   if (target) query = query.ilike("target", target);
   if (level) query = query.ilike("german_level", level);
   if (time) query = query.ilike("start_timeframe", time);
+  if (contacted === "1") query = query.eq("contacted", true);
+  if (contacted === "0") query = query.eq("contacted", false);
 
   const { data, error } = await query;
 
@@ -114,6 +117,16 @@ export default async function AdminWaitlistPage({
                   <option value="0-3 months">0-3 months</option>
                   <option value="3-6 months">3-6 months</option>
                   <option value="6-12 months">6-12 months</option>
+                </select>
+
+                <select
+                  name="contacted"
+                  defaultValue={searchParams?.contacted ?? ""}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                >
+                  <option value="">All statuses</option>
+                  <option value="0">Open</option>
+                  <option value="1">Contacted</option>
                 </select>
 
                 <button
