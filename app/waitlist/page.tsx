@@ -335,12 +335,12 @@ export default function WaitlistPage() {
                   >
                     Back to homepage
                   </Link>
-                  <a
-                    href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+                  <Link
+                    href="/employers"
                     className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:border-slate-400"
                   >
                     For employers: talk to us →
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}

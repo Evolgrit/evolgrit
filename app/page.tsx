@@ -536,12 +536,12 @@ className="flex items-center gap-2 cursor-pointer"
         >
           Join learner waitlist
         </a>
-        <a
+        <Link
           href="/employers"
           className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-400"
         >
           Talk to us about hiring
-        </a>
+        </Link>
       </div>
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl">
         <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3">
@@ -1450,12 +1450,12 @@ className="flex items-center gap-2 cursor-pointer"
 
           {/* Mobile CTA unterhalb der Cards */}
           <div className="mt-6 sm:hidden">
-      <Link
-        href="/employers"
-        className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
-      >
-        Talk to us about hiring
-      </Link>
+            <Link
+              href="/employers"
+              className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+            >
+              Talk to us about hiring
+            </Link>
           </div>
         </div>
       </section>
@@ -1593,12 +1593,12 @@ className="flex items-center gap-2 cursor-pointer"
             >
               Join learner waitlist
             </a>
-            <a
-              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+            <Link
+              href="/employers"
               className="rounded-full border border-slate-500 px-4 py-2 text-sm font-medium text-slate-50 hover:bg-slate-800"
             >
               Talk to us about hiring
-            </a>
+            </Link>
           </div>
           <a
             href="mailto:info@evolgrit.com?subject=Mentor%20at%20Evolgrit"
