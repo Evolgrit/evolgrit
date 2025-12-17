@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type EmployerCard = {
   id: string;
@@ -536,7 +537,7 @@ className="flex items-center gap-2 cursor-pointer"
           Join learner waitlist
         </a>
         <a
-          href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+          href="/employers"
           className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-400"
         >
           Talk to us about hiring
@@ -1396,12 +1397,12 @@ className="flex items-center gap-2 cursor-pointer"
               </p>
             </div>
 
-            <a
-              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+            <Link
+              href="/employers"
               className="hidden sm:inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
             >
               Talk to us about hiring
-            </a>
+            </Link>
           </div>
 
           {/* Swipeable cards */}
@@ -1449,12 +1450,12 @@ className="flex items-center gap-2 cursor-pointer"
 
           {/* Mobile CTA unterhalb der Cards */}
           <div className="mt-6 sm:hidden">
-            <a
-              href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
-              className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
-            >
-              Talk to us about hiring
-            </a>
+      <Link
+        href="/employers"
+        className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+      >
+        Talk to us about hiring
+      </Link>
           </div>
         </div>
       </section>
