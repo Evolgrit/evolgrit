@@ -69,11 +69,19 @@ export async function GET(req: Request) {
   }
 
   const csv = toCSV(data ?? []);
-  return new NextResponse(csv, {
+
+  // Excel-friendly UTF-8 BOM
+  const bom = "\uFEFF";
+  const content = bom + csv;
+
+  const stamp = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const filename = `evolgrit-waitlist-${stamp}.csv`;
+
+  return new NextResponse(content, {
     status: 200,
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="evolgrit-waitlist.csv"`,
+      "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },
   });
