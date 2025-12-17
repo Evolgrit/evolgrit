@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import { CopyEmailButton } from "./waitlist/CopyEmailButton";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -109,7 +110,12 @@ export default async function AdminHomePage() {
                   <tr key={i} className="border-t border-slate-100">
                     <td className="p-3 whitespace-nowrap">{new Date(r.created_at).toLocaleString()}</td>
                     <td className="p-3">{r.full_name}</td>
-                    <td className="p-3">{r.email}</td>
+                  <td className="p-3">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-slate-700">{r.email}</span>
+                      <CopyEmailButton email={r.email} />
+                    </div>
+                  </td>
                     <td className="p-3">{r.target ?? ""}</td>
                     <td className="p-3">{r.german_level ?? ""}</td>
                     <td className="p-3">{r.start_timeframe ?? ""}</td>
@@ -146,7 +152,12 @@ export default async function AdminHomePage() {
                     <td className="p-3 whitespace-nowrap">{new Date(r.created_at).toLocaleString()}</td>
                     <td className="p-3">{r.company}</td>
                     <td className="p-3">{r.role_types}</td>
-                    <td className="p-3">{r.email}</td>
+                    <td className="p-3">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs text-slate-700">{r.email}</span>
+                        <CopyEmailButton email={r.email} />
+                      </div>
+                    </td>
                   </tr>
                 ))}
                 {(!employers || employers.length === 0) && (
