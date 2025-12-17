@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/learner-followup-3d",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}
