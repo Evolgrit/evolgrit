@@ -14,7 +14,7 @@ const supabase = createClient(
 export default async function AdminWaitlistPage({
   searchParams,
 }: {
-  searchParams?: { target?: string; level?: string; time?: string };
+  searchParams?: { target?: string; level?: string; time?: string; contacted?: string };
 }) {
   noStore();
   const now = new Date();
