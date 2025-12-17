@@ -4,6 +4,7 @@ export const revalidate = 0;
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { unstable_noStore as noStore } from "next/cache";
+import { ContactedToggle } from "./ContactedToggle";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -40,7 +41,9 @@ export default async function AdminWaitlistPage({
     ]);
   let query = supabase
     .from("waitlist_signups")
-    .select("created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp")
+    .select(
+      "id, created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp, contacted, contacted_at"
+    )
     .order("created_at", { ascending: false })
     .limit(500);
 
@@ -165,6 +168,7 @@ export default async function AdminWaitlistPage({
             <thead className="bg-slate-50 text-slate-600">
               <tr>
                 <th className="p-3 text-left whitespace-nowrap">Created</th>
+                <th className="p-3 text-left">Status</th>
                 <th className="p-3 text-left">Name</th>
                 <th className="p-3 text-left">Email</th>
                 <th className="p-3 text-left">Country</th>
@@ -180,6 +184,9 @@ export default async function AdminWaitlistPage({
                   <td className="p-3 whitespace-nowrap">
                     {new Date(r.created_at).toLocaleString()}
                   </td>
+                  <td className="p-3 whitespace-nowrap">
+                    <ContactedToggle id={r.id} initial={Boolean(r.contacted)} />
+                  </td>
                   <td className="p-3">{r.full_name}</td>
                   <td className="p-3">{r.email}</td>
                   <td className="p-3">{r.country ?? ""}</td>
@@ -191,7 +198,7 @@ export default async function AdminWaitlistPage({
               ))}
               {(!data || data.length === 0) && (
                 <tr>
-                  <td className="p-6 text-slate-500" colSpan={8}>
+                  <td className="p-6 text-slate-500" colSpan={9}>
                     No signups yet.
                   </td>
                 </tr>
