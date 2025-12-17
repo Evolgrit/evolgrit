@@ -1,5 +1,9 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import { unstable_noStore as noStore } from "next/cache";
 import { CopyEmailButton } from "../waitlist/CopyEmailButton";
 
 const supabase = createClient(
@@ -8,6 +12,7 @@ const supabase = createClient(
 );
 
 export default async function AdminEmployersPage() {
+  noStore();
   const { data, error } = await supabase
     .from("employer_leads")
     .select("created_at, company, role_types, email, email_confirmed_at, followup_2d_sent_at")
