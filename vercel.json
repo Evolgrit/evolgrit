@@ -1,8 +1,6 @@
 {
   "crons": [
-    {
-      "path": "/api/cron/learner-followup-3d",
-      "schedule": "0 9 * * *"
-    }
+    { "path": "/api/cron/learner-followup-3d", "schedule": "0 9 * * *" },
+    { "path": "/api/cron/employer-followup-2d", "schedule": "15 9 * * *" }
   ]
 }

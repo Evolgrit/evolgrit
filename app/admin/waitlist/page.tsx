@@ -43,7 +43,7 @@ export default async function AdminWaitlistPage({
   let query = supabase
     .from("waitlist_signups")
     .select(
-      "id, created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp, contacted, contacted_at"
+      "id, created_at, full_name, email, country, target, german_level, start_timeframe, whatsapp, contacted, contacted_at, followup_3d_sent_at"
     )
     .order("created_at", { ascending: false })
     .limit(500);

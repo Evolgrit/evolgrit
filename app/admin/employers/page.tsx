@@ -9,7 +9,7 @@ const supabase = createClient(
 export default async function AdminEmployersPage() {
   const { data, error } = await supabase
     .from("employer_leads")
-    .select("created_at, company, role_types, email")
+    .select("created_at, company, role_types, email, followup_2d_sent_at")
     .order("created_at", { ascending: false })
     .limit(500);
 
@@ -59,6 +59,7 @@ export default async function AdminEmployersPage() {
                 <th className="p-3 text-left">Company</th>
                 <th className="p-3 text-left">Role types</th>
                 <th className="p-3 text-left">Email</th>
+                <th className="p-3 text-left whitespace-nowrap">Follow-up</th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +69,9 @@ export default async function AdminEmployersPage() {
                   <td className="p-3">{r.company}</td>
                   <td className="p-3">{r.role_types}</td>
                   <td className="p-3">{r.email}</td>
+                  <td className="p-3 whitespace-nowrap">
+                    {r.followup_2d_sent_at ? "Sent" : "—"}
+                  </td>
                 </tr>
               ))}
               {(!data || data.length === 0) && (
