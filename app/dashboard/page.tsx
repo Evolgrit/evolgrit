@@ -37,6 +37,15 @@ export default async function DashboardPage() {
             </p>
           </div>
         </div>
+
+        <div className="mt-4">
+          <a
+            href="/dashboard/profile"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700"
+          >
+            Edit profile →
+          </a>
+        </div>
       </div>
     </main>
   );
