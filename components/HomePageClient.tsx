@@ -1672,9 +1672,9 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
                   onSelect(card);
                 }
               }}
-              className="group cursor-pointer snap-start shrink-0 min-w-[82%] sm:min-w-[360px] md:min-w-[420px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+              className="group cursor-pointer snap-start shrink-0 min-w-[82%] sm:min-w-[360px] md:min-w-[320px] lg:min-w-[340px] xl:min-w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-t-3xl">
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -1684,14 +1684,14 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
                 />
               </div>
 
-              <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
+              <div className="flex flex-col gap-2 px-5 pb-5 pt-3">
                 <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
                   {card.label}
                 </p>
-                <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
+                <h3 className="text-base font-semibold text-slate-900 leading-snug">
                   {card.title}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
                   {card.description}
                 </p>
                 <div className="pt-2 border-t border-slate-100">
