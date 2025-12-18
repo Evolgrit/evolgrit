@@ -1602,34 +1602,31 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
     return () => el.removeEventListener("scroll", updateEdges);
   }, []);
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     const el = scrollRef.current;
     if (!el) return;
     dragState.current = {
       isDragging: true,
-      startX: event.clientX,
+      startX: event.pageX - el.offsetLeft,
       scrollLeft: el.scrollLeft,
       dragged: false,
     };
     setIsDragging(true);
-    el.setPointerCapture?.(event.pointerId);
   };
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const el = scrollRef.current;
     if (!el || !dragState.current.isDragging) return;
-    const delta = event.clientX - dragState.current.startX;
+    event.preventDefault();
+    const x = event.pageX - el.offsetLeft;
+    const delta = x - dragState.current.startX;
     if (Math.abs(delta) > 4) {
       dragState.current.dragged = true;
     }
-    el.scrollLeft = dragState.current.scrollLeft - delta;
+    el.scrollLeft = dragState.current.scrollLeft - delta * 1.2;
   };
 
-  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollRef.current;
-    if (el && dragState.current.isDragging) {
-      el.releasePointerCapture?.(event.pointerId);
-    }
+  const endDrag = () => {
     dragState.current.isDragging = false;
     setIsDragging(false);
     setTimeout(() => {
@@ -1657,15 +1654,11 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
       <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
         <div
           ref={scrollRef}
-          className={`flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:pb-6 ${baseCursor} md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:snap-none md:cursor-default`}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={endDrag}
-          onPointerLeave={(event) => {
-            if (dragState.current.isDragging) {
-              endDrag(event);
-            }
-          }}
+          className={`flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide select-none ${baseCursor}`}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={endDrag}
+          onMouseLeave={endDrag}
         >
           {cards.map((card) => (
             <article
@@ -1679,7 +1672,7 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
                   onSelect(card);
                 }
               }}
-              className="group cursor-pointer snap-center shrink-0 w-[82%] sm:w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 md:w-auto md:shrink"
+              className="group cursor-pointer snap-start shrink-0 min-w-[82%] sm:min-w-[360px] md:min-w-[420px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
                 <Image
