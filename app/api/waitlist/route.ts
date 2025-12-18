@@ -123,7 +123,7 @@ export async function POST(req: Request) {
         <div style="font-family: ui-sans-serif, system-ui; line-height: 1.6;">
           <h2 style="margin:0 0 8px;">You’re on the list 🎉</h2>
           <p style="margin:0 0 12px;">Hi ${full_name.split(" ")[0] || full_name}, thanks for joining the Evolgrit learner waitlist.</p>
-          <p style="margin:0 0 12px;"><strong>What happens next:</strong> We’ll email you when the next cohort opens. No spam.</p>
+          <p style="margin:0 0 12px;"><strong>What happens next:</strong> We’ll email you when the next batch opens. No spam.</p>
           <p style="margin:18px 0 0; color:#64748b; font-size:12px;">If you didn’t sign up, you can ignore this email.</p>
         </div>
       `,

@@ -69,7 +69,7 @@ export default function EmployersPage() {
 
             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Pilot cohorts
+                Pilot batches
               </p>
               <p className="mt-1 text-sm font-semibold text-slate-900">
                 Start small, learn fast

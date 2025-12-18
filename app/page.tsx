@@ -49,9 +49,9 @@ Das senkt Ihr Risiko im Onboarding und erhöht die Chance, dass neue Mitarbeiten
   },
   {
     id: "pilots",
-    label: "Pilot cohorts",
+    label: "Pilot batches",
     icon: "🧪",
-    title: "Start with focused pilot cohorts.",
+    title: "Start with focused pilot batches.",
     description:
       "Align roles, locations and timelines – and learn together in small steps.",
     modalTitle: "Gemeinsam mit Pilotkohorten starten.",
@@ -165,8 +165,8 @@ const getToKnowCards = [
   },
   {
     id: "mentors-cohort",
-    label: "Mentors · Cohort",
-    title: "Mentors and a cohort you can grow with.",
+    label: "Mentors · Batch",
+    title: "Mentors and a batch you can grow with.",
     description:
       "Learn together with peers, mentors and employers in one loop – with real people, not just an app.",
     image: "/know-mentors-cohort.jpg",
@@ -573,16 +573,16 @@ className="flex items-center gap-2 cursor-pointer"
       </p>
     </div>
 
-    {/* Right: Cohort overview card */}
+    {/* Right: Batch overview card */}
     <aside className="w-full max-w-md lg:ml-auto">
       <div className="rounded-3xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-sm p-5 sm:p-6 space-y-5">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs font-semibold tracking-[0.18em] text-slate-400">
-              EVOLGRIT · COHORT OVERVIEW
+              EVOLGRIT · BATCH OVERVIEW
             </p>
             <p className="mt-1 text-sm font-semibold text-slate-900">
-              Q1 · Preview cohort
+              Q1 · Preview batch
             </p>
           </div>
           <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
@@ -1579,7 +1579,7 @@ className="flex items-center gap-2 cursor-pointer"
         <div className="rounded-2xl bg-slate-900 text-slate-50 px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-1">
-              Ready to shape the next Evolgrit cohort?
+              Ready to shape the next Evolgrit batch?
             </h2>
             <p className="text-slate-300 text-sm sm:text-base">
               Whether you&apos;re a learner, employer or mentor – we&apos;d

@@ -299,7 +299,7 @@ export default function WaitlistPage() {
               Join the Evolgrit learner waitlist
             </h1>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Takes ~45 seconds. We’ll reach out when the next cohort opens.
+              Takes ~45 seconds. We’ll reach out when the next batch opens.
             </p>
           </div>
 
@@ -319,8 +319,8 @@ export default function WaitlistPage() {
                     What happens next
                   </p>
                   <ul className="mt-2 space-y-1 text-sm text-emerald-900">
-                    <li>• We review your details and cohort fit.</li>
-                    <li>• We email you when the next cohort opens.</li>
+                    <li>• We review your details and batch fit.</li>
+                    <li>• We email you when the next batch opens.</li>
                   </ul>
                 </div>
 
@@ -517,7 +517,7 @@ export default function WaitlistPage() {
 
               <p className="text-xs text-slate-500">
                 We’ll only use your details to contact you about Evolgrit
-                cohorts. You can unsubscribe at any time. Your data will never
+                batches. You can unsubscribe at any time. Your data will never
                 be shared.
               </p>
             </form>
