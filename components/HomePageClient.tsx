@@ -959,8 +959,8 @@ className="flex items-center gap-2 cursor-pointer"
         →
       </button>
 
-      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-16 bg-gradient-to-r from-white via-white/80 to-transparent md:block" />
-      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-16 bg-gradient-to-l from-white via-white/80 to-transparent md:block" />
+      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white/70 to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white/70 to-transparent lg:block" />
     </div>
   </div>
 </section>
