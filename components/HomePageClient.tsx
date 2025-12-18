@@ -1672,9 +1672,9 @@ function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
                   onSelect(card);
                 }
               }}
-              className="group cursor-pointer snap-start shrink-0 min-w-[82%] sm:min-w-[360px] md:min-w-[320px] lg:min-w-[340px] xl:min-w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+              className="group cursor-pointer snap-start shrink-0 w-[78%] sm:w-[68%] md:w-[320px] lg:w-[340px] xl:w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-t-3xl">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
                 <Image
                   src={card.image}
                   alt={card.title}
