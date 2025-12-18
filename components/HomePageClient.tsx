@@ -968,31 +968,40 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 {activePathway && (
-  <div
-    className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="pathway-modal-title"
-  >
-    <div className="relative w-full max-w-xl rounded-3xl bg-white shadow-xl p-6 sm:p-8">
-      <button
-        type="button"
-        onClick={() => setActivePathway(null)}
-        className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
-        aria-label="Close details"
-      >
-        ×
-      </button>
-      <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-        {activePathway.label}
-      </p>
-      <h3
-        id="pathway-modal-title"
-        className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
-      >
-        {activePathway.title}
-      </h3>
-      <p className="mt-3 text-sm text-slate-600">{activePathway.description}</p>
+  <div className="fixed inset-0 z-40">
+    <button
+      type="button"
+      onClick={() => setActivePathway(null)}
+      className="absolute inset-0 bg-white/70 backdrop-blur-xl active:cursor-pointer"
+      aria-label="Close pathways details overlay"
+    />
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+    <div
+      className="relative z-10 flex min-h-full items-center justify-center px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pathway-modal-title"
+    >
+      <div className="relative w-full max-w-xl rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+        <button
+          type="button"
+          onClick={() => setActivePathway(null)}
+          className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+          aria-label="Close details"
+        >
+          ×
+        </button>
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+          {activePathway.label}
+        </p>
+        <h3
+          id="pathway-modal-title"
+          className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+        >
+          {activePathway.title}
+        </h3>
+        <p className="mt-3 text-sm text-slate-600">{activePathway.description}</p>
+      </div>
     </div>
   </div>
 )}
@@ -1600,54 +1609,63 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       </section>
-      {activeEmployerCard && (
-        <div
-          className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/60 px-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="employer-modal-title"
+{activeEmployerCard && (
+  <div className="fixed inset-0 z-40">
+    <button
+      type="button"
+      onClick={() => setOpenEmployerCardId(null)}
+      className="absolute inset-0 bg-white/70 backdrop-blur-xl active:cursor-pointer"
+      aria-label="Close employer details overlay"
+    />
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+    <div
+      className="relative z-10 flex min-h-full items-center justify-center px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="employer-modal-title"
+    >
+      <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+        <button
+          type="button"
+          onClick={() => setOpenEmployerCardId(null)}
+          className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+          aria-label="Close details"
         >
-          <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-xl p-6 sm:p-8">
-            <button
-              type="button"
-              onClick={() => setOpenEmployerCardId(null)}
-              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
-              aria-label="Close details"
-            >
-              ×
-            </button>
+          ×
+        </button>
 
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-              {activeEmployerCard.label}
-            </p>
-            <h3
-              id="employer-modal-title"
-              className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
-            >
-              {activeEmployerCard.modalTitle}
-            </h3>
-            <p className="mt-3 whitespace-pre-line text-sm text-slate-600">
-              {activeEmployerCard.modalBody}
-            </p>
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+          {activeEmployerCard.label}
+        </p>
+        <h3
+          id="employer-modal-title"
+          className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+        >
+          {activeEmployerCard.modalTitle}
+        </h3>
+        <p className="mt-3 whitespace-pre-line text-sm text-slate-600">
+          {activeEmployerCard.modalBody}
+        </p>
 
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a
-                href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
-                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
-              >
-                Speak with an employer specialist
-              </a>
-              <button
-                type="button"
-                onClick={() => setOpenEmployerCardId(null)}
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-              >
-                Close
-              </button>
-            </div>
-          </div>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a
+            href="mailto:info@evolgrit.com?subject=Evolgrit%20for%20employers"
+            className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
+          >
+            Speak with an employer specialist
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpenEmployerCardId(null)}
+            className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Close
+          </button>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
       {/* EMPLOYER TESTIMONIAL – Sabrina & Tina */}
       <section className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 pt-12 sm:pt-16">
         <div className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden">
