@@ -6,9 +6,9 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const navItems = [
   { label: "Overview", href: "/dashboard" },
-  { label: "My journey", href: "/dashboard" },
-  { label: "Learning modules", href: "/dashboard" },
-  { label: "Mentor sessions", href: "/dashboard" },
+  { label: "My journey", href: "/dashboard/journey" },
+  { label: "Learning modules", href: "/dashboard/modules" },
+  { label: "Mentor sessions", href: "/dashboard/mentors" },
   { label: "Jobs & opportunities", href: "/dashboard" },
   { label: "Documents", href: "/dashboard" },
   { label: "Profile", href: "/dashboard/profile" },
