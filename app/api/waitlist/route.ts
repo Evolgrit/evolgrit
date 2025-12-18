@@ -115,18 +115,47 @@ export async function POST(req: Request) {
     }
 
     const from = process.env.RESEND_FROM!;
+    const firstName = (full_name || "").split(" ")[0] || "there";
+
     await resend.emails.send({
       from,
       to: email,
-      subject: "You’re on the Evolgrit learner waitlist",
+      replyTo: "hello@evolgrit.com",
+      subject: "You’re on the Evolgrit batch list",
+      text: `Hi ${firstName},
+
+thanks for joining the Evolgrit learner batch list.
+
+What happens next:
+- We review your goals, level and timing
+- We group learners into the right batch
+- We email you when your batch opens
+
+No spam. If anything changes, just reply to this email.
+
+— Daniel
+Evolgrit
+`,
       html: `
-        <div style="font-family: ui-sans-serif, system-ui; line-height: 1.6;">
-          <h2 style="margin:0 0 8px;">You’re on the list 🎉</h2>
-          <p style="margin:0 0 12px;">Hi ${full_name.split(" ")[0] || full_name}, thanks for joining the Evolgrit learner waitlist.</p>
-          <p style="margin:0 0 12px;"><strong>What happens next:</strong> We’ll email you when the next batch opens. No spam.</p>
-          <p style="margin:18px 0 0; color:#64748b; font-size:12px;">If you didn’t sign up, you can ignore this email.</p>
-        </div>
-      `,
+  <div style="font-family: ui-sans-serif, system-ui; line-height:1.6;">
+    <h2 style="margin:0 0 8px;">You’re on the batch list 👋</h2>
+    <p style="margin:0 0 12px;">Hi ${firstName}, thanks for joining the Evolgrit learner batch list.</p>
+
+    <div style="margin:14px 0; padding:12px 14px; border:1px solid #e2e8f0; border-radius:12px; background:#f8fafc;">
+      <p style="margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#64748b;">What happens next</p>
+      <ul style="margin:8px 0 0; padding-left:18px;">
+        <li>We review your goals, level and timing</li>
+        <li>We group learners into the right batch</li>
+        <li>We email you when your batch opens</li>
+      </ul>
+    </div>
+
+    <p style="margin:0 0 10px;">No spam. If anything changes, just reply to this email.</p>
+    <p style="margin:18px 0 0; color:#64748b; font-size:12px;">If you didn’t sign up, you can ignore this email.</p>
+
+    <p style="margin:18px 0 0;"><strong>Daniel</strong><br/>Founder, Evolgrit</p>
+  </div>
+  `,
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });

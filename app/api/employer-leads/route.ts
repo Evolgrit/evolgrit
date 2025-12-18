@@ -60,24 +60,43 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from,
       to: email,
+      replyTo: "hello@evolgrit.com",
       subject: "Thanks — we received your Evolgrit employer request",
+      text: `Hi,
+
+thanks for reaching out to Evolgrit.
+
+We received:
+Company: ${company}
+Role types: ${role_types}
+
+What happens next:
+- We check upcoming batches and fit
+- We reply with concrete pilot options and next steps
+
+If this is time-sensitive, just reply to this email.
+
+— Daniel
+Evolgrit
+`,
       html: `
-        <div style="font-family: ui-sans-serif, system-ui; line-height: 1.6;">
-          <h2 style="margin:0 0 8px;">Thanks — we got it.</h2>
-          <p style="margin:0 0 12px;">
-            We received your employer interest for <strong>${company.replace(/</g, "&lt;")}</strong>.
-          </p>
-          <p style="margin:0 0 12px;">
-            <strong>Role types:</strong> ${role_types.replace(/</g, "&lt;")}
-          </p>
-          <p style="margin:0 0 12px;">
-            We’ll reply with pilot options and next steps shortly.
-          </p>
-          <p style="color:#64748b;font-size:12px;margin-top:18px;">
-            If you didn’t submit this request, you can ignore this email.
-          </p>
-        </div>
-      `,
+  <div style="font-family: ui-sans-serif, system-ui; line-height:1.6;">
+    <h2 style="margin:0 0 8px;">Thanks — we got it.</h2>
+    <p style="margin:0 0 10px;">We received your employer request.</p>
+
+    <div style="margin:14px 0; padding:12px 14px; border:1px solid #e2e8f0; border-radius:12px; background:#f8fafc;">
+      <p style="margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#64748b;">Details</p>
+      <p style="margin:8px 0 0;"><strong>Company:</strong> ${company.replace(/</g, "&lt;")}</p>
+      <p style="margin:6px 0 0;"><strong>Role types:</strong> ${role_types.replace(/</g, "&lt;")}</p>
+    </div>
+
+    <p style="margin:0 0 10px;"><strong>What happens next:</strong> we’ll review your needs and reply with concrete pilot options and next steps.</p>
+    <p style="margin:0 0 10px;">If this is time-sensitive, just reply to this email.</p>
+
+    <p style="margin:18px 0 0; color:#64748b; font-size:12px;">If you didn’t submit this request, you can ignore this email.</p>
+    <p style="margin:18px 0 0;"><strong>Daniel</strong><br/>Founder, Evolgrit</p>
+  </div>
+  `,
     });
 
     await supabase
