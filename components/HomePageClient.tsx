@@ -556,21 +556,6 @@ className="flex items-center gap-2 cursor-pointer"
           Talk to us about hiring
         </Link>
       </div>
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl">
-        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Language</p>
-          <p className="mt-1 text-sm font-semibold text-slate-900">+38% progress</p>
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Profiles</p>
-          <p className="mt-1 text-sm font-semibold text-slate-900">24/32 job-ready</p>
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Matches</p>
-          <p className="mt-1 text-sm font-semibold text-slate-900">17 active</p>
-        </div>
-      </div>
-
       <a
         href="#how-it-works"
         className="mt-3 inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900"
