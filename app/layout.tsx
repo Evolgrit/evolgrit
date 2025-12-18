@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -11,11 +12,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: 'Evolgrit – KI-gestütztes Deutschlernen & Job-Coaching',
+export const metadata: Metadata = {
+  metadataBase: new URL("https://evolgrit.com"),
+  title: {
+    default: "Evolgrit – AI-powered German learning & job readiness for international talent",
+    template: "%s | Evolgrit",
+  },
   description:
-    'Evolgrit hilft internationalen Talenten, in Deutschland sprachlich anzukommen und den richtigen Job zu finden.',
-}
+    "Evolgrit prepares international talent for Germany with AI-powered German learning, cultural readiness, and employer matching.",
+  openGraph: {
+    type: "website",
+    url: "https://evolgrit.com",
+    siteName: "Evolgrit",
+    title: "Evolgrit – AI-powered German learning & job readiness for international talent",
+    description:
+      "AI-powered German learning, cultural readiness, and job preparation — so international talent can truly arrive and stay in Germany.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Evolgrit",
+    description:
+      "AI-powered German learning, cultural readiness, and job preparation for international talent in Germany.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 export default function RootLayout({
   children,
 }: Readonly<{

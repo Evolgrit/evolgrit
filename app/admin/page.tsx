@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { CopyEmailButton } from "./waitlist/CopyEmailButton";
 import { CopyAllEmailsButton } from "./CopyAllEmailsButton";
+
+export const metadata: Metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false },
+};
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,

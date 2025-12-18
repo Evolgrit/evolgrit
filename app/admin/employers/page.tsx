@@ -1,10 +1,16 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { unstable_noStore as noStore } from "next/cache";
 import { CopyEmailButton } from "../waitlist/CopyEmailButton";
+
+export const metadata: Metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false },
+};
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
