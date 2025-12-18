@@ -837,9 +837,8 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-{/* PATHWAYS – Apple-style cards with swipe on mobile */}
+{/* PATHWAYS – Apple-style cards */}
 <section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
-  {/* Headline + intro */}
   <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
     <div>
       <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
@@ -861,49 +860,52 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  {/* PATHWAYS – SLIDER */}
-  <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6 mt-10 sm:mt-12">
-    <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-      {pathwaysCards.map((card) => (
-        <article
-          key={card.id}
-          className="group relative snap-center shrink-0 w-[80%] sm:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm border border-slate-800/60 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg pb-14 sm:pb-16"
-        >
-          <div className="relative aspect-[3/4] overflow-hidden">
-            <Image
-              src={card.image}
-              alt={card.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 85vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/45 to-transparent" />
-          </div>
+  <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {pathwaysCards.map((card) => (
+      <article
+        key={card.id}
+        role="button"
+        tabIndex={0}
+        onClick={() => setActivePathway(card)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setActivePathway(card);
+          }
+        }}
+        className="group cursor-pointer rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+      >
+        <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
+          <Image
+            src={card.image}
+            alt={card.title}
+            fill
+            className="object-cover"
+            sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+          />
+        </div>
 
-          <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-7 text-white">
-            <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-200">
-              {card.label}
-            </p>
-            <h3 className="mt-2 text-lg sm:text-xl font-semibold leading-snug">
-              {card.title}
-            </h3>
-            <p className="mt-2 text-sm sm:text-[15px] leading-relaxed text-slate-100/90">
-              {card.description}
-            </p>
+        <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+            {card.label}
+          </p>
+          <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
+            {card.title}
+          </h3>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            {card.description}
+          </p>
+          <div className="pt-2 border-t border-slate-100">
+            <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+              Learn more
+              <span className="ml-1 text-base" aria-hidden="true">
+                →
+              </span>
+            </span>
           </div>
-
-          {/* Plus-Button für Details (Modal) */}
-          <button
-            type="button"
-            onClick={() => setActivePathway(card)}
-            className="absolute bottom-4 right-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 text-xl shadow-sm transition hover:scale-105"
-            aria-label={`More about ${card.title}`}
-          >
-            +
-          </button>
-        </article>
-      ))}
-    </div>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
 {activePathway && (
