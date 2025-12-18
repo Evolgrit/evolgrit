@@ -330,6 +330,19 @@ export default function HomePageClient() {
   );
   const [activePathway, setActivePathway] =
     useState<(typeof pathwaysCards)[number] | null>(null);
+  const pathwaysScrollRef = useRef<HTMLDivElement | null>(null);
+  const [pathwaysEdges, setPathwaysEdges] = useState({
+    atStart: true,
+    atEnd: false,
+  });
+  useEffect(() => {
+    const el = pathwaysScrollRef.current;
+    if (!el) return;
+    setPathwaysEdges({
+      atStart: el.scrollLeft <= 8,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
+    });
+  }, []);
   const [activeHowStep, setActiveHowStep] = useState<string | null>(null);
 const [activePhase, setActivePhase] = useState<"1" | "2" | "3" | null>(null);
   const activeEmployerCard = employerCards.find(
@@ -860,7 +873,96 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  <PathwaysCarousel cards={pathwaysCards} onSelect={setActivePathway} />
+  <div className="relative mt-6">
+    <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
+      <div
+        ref={pathwaysScrollRef}
+        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+        onScroll={() => {
+          const el = pathwaysScrollRef.current;
+          if (!el) return;
+          const { scrollLeft, scrollWidth, clientWidth } = el;
+          setPathwaysEdges({
+            atStart: scrollLeft <= 8,
+            atEnd: scrollLeft + clientWidth >= scrollWidth - 8,
+          });
+        }}
+      >
+        {pathwaysCards.map((card) => (
+          <article
+            key={card.id}
+            role="button"
+            tabIndex={0}
+            onClick={() => setActivePathway(card)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                setActivePathway(card);
+              }
+            }}
+            className="flex w-[82%] sm:w-[60%] md:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+          >
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                className="object-cover"
+                sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+              />
+            </div>
+            <div className="flex flex-col gap-2 px-5 pb-5 pt-4">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                {card.label}
+              </p>
+              <h3 className="text-base font-semibold text-slate-900 leading-snug">
+                {card.title}
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
+                {card.description}
+              </p>
+              <div className="pt-2 border-t border-slate-100">
+                <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                  Learn more
+                  <span className="ml-1 text-base" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          const el = pathwaysScrollRef.current;
+          if (!el) return;
+          el.scrollBy({ left: -el.clientWidth * 0.8, behavior: "smooth" });
+        }}
+        className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${pathwaysEdges.atStart ? "opacity-0 pointer-events-none" : ""}`}
+        aria-label="Scroll pathways left"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          const el = pathwaysScrollRef.current;
+          if (!el) return;
+          el.scrollBy({ left: el.clientWidth * 0.8, behavior: "smooth" });
+        }}
+        className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${pathwaysEdges.atEnd ? "opacity-0 pointer-events-none" : ""}`}
+        aria-label="Scroll pathways right"
+      >
+        →
+      </button>
+
+      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-16 bg-gradient-to-r from-white via-white/80 to-transparent md:block" />
+      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-16 bg-gradient-to-l from-white via-white/80 to-transparent md:block" />
+    </div>
+  </div>
 </section>
 {activePathway && (
   <div
@@ -1566,171 +1668,6 @@ className="flex items-center gap-2 cursor-pointer"
         </div>
       </section>
             </main>
-    </div>
-  );
-}
-
-type PathwaysCarouselProps = {
-  cards: typeof pathwaysCards;
-  onSelect: (card: (typeof pathwaysCards)[number]) => void;
-};
-
-function PathwaysCarousel({ cards, onSelect }: PathwaysCarouselProps) {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const dragState = useRef({
-    isDragging: false,
-    startX: 0,
-    scrollLeft: 0,
-    dragged: false,
-  });
-  const [isDragging, setIsDragging] = useState(false);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const updateEdges = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = el;
-      setAtStart(scrollLeft <= 8);
-      setAtEnd(scrollLeft + clientWidth >= scrollWidth - 8);
-    };
-
-    updateEdges();
-    el.addEventListener("scroll", updateEdges);
-    return () => el.removeEventListener("scroll", updateEdges);
-  }, []);
-
-  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    dragState.current = {
-      isDragging: true,
-      startX: event.pageX - el.offsetLeft,
-      scrollLeft: el.scrollLeft,
-      dragged: false,
-    };
-    setIsDragging(true);
-  };
-
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const el = scrollRef.current;
-    if (!el || !dragState.current.isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - el.offsetLeft;
-    const delta = x - dragState.current.startX;
-    if (Math.abs(delta) > 4) {
-      dragState.current.dragged = true;
-    }
-    el.scrollLeft = dragState.current.scrollLeft - delta * 1.2;
-  };
-
-  const endDrag = () => {
-    dragState.current.isDragging = false;
-    setIsDragging(false);
-    setTimeout(() => {
-      dragState.current.dragged = false;
-    }, 50);
-  };
-
-  const scrollByAmount = (direction: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const amount = el.clientWidth * 0.8 * direction;
-    el.scrollBy({ left: amount, behavior: "smooth" });
-  };
-
-  const handleCardClick = (card: (typeof pathwaysCards)[number]) => {
-    if (dragState.current.dragged) return;
-    onSelect(card);
-  };
-
-  const baseCursor = isDragging ? "cursor-grabbing" : "cursor-grab";
-
-  return (
-    <div className="mt-6 relative">
-      <p className="mb-2 text-xs text-slate-400 sm:hidden">Swipe →</p>
-      <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
-        <div
-          ref={scrollRef}
-          className={`flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide select-none ${baseCursor}`}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={endDrag}
-          onMouseLeave={endDrag}
-        >
-          {cards.map((card) => (
-            <article
-              key={card.id}
-              role="button"
-              tabIndex={0}
-              onClick={() => handleCardClick(card)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  onSelect(card);
-                }
-              }}
-              className="group cursor-pointer snap-start shrink-0 w-[78%] sm:w-[68%] md:w-[320px] lg:w-[340px] xl:w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2 px-5 pb-5 pt-3">
-                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
-                  {card.label}
-                </p>
-                <h3 className="text-base font-semibold text-slate-900 leading-snug">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
-                  {card.description}
-                </p>
-                <div className="pt-2 border-t border-slate-100">
-                  <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
-                    Learn more
-                    <span className="ml-1 text-base" aria-hidden="true">
-                      →
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => scrollByAmount(-1)}
-          className={`hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
-            atStart ? "opacity-0 pointer-events-none" : ""
-          }`}
-          aria-label="Scroll pathways left"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByAmount(1)}
-          className={`hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
-            atEnd ? "opacity-0 pointer-events-none" : ""
-          }`}
-          aria-label="Scroll pathways right"
-        >
-          →
-        </button>
-
-        <div className="pointer-events-none absolute inset-y-5 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent hidden md:block" />
-        <div className="pointer-events-none absolute inset-y-5 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent hidden md:block" />
-      </div>
     </div>
   );
 }
