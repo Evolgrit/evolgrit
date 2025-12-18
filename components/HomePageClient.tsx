@@ -860,52 +860,56 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {pathwaysCards.map((card) => (
-      <article
-        key={card.id}
-        role="button"
-        tabIndex={0}
-        onClick={() => setActivePathway(card)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setActivePathway(card);
-          }
-        }}
-        className="group cursor-pointer rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
-      >
-        <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            className="object-cover"
-            sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-          />
-        </div>
+  <p className="mt-3 text-xs text-slate-400 sm:hidden">Swipe →</p>
 
-        <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
-            {card.label}
-          </p>
-          <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
-            {card.title}
-          </h3>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            {card.description}
-          </p>
-          <div className="pt-2 border-t border-slate-100">
-            <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
-              Learn more
-              <span className="ml-1 text-base" aria-hidden="true">
-                →
-              </span>
-            </span>
+  <div className="mt-6 -mx-5 px-5 sm:-mx-6 sm:px-6">
+    <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:snap-none md:pb-0">
+      {pathwaysCards.map((card) => (
+        <article
+          key={card.id}
+          role="button"
+          tabIndex={0}
+          onClick={() => setActivePathway(card)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActivePathway(card);
+            }
+          }}
+          className="group cursor-pointer snap-center shrink-0 w-[82%] sm:w-[360px] rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 md:w-auto md:shrink"
+        >
+          <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              className="object-cover"
+              sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+            />
           </div>
-        </div>
-      </article>
-    ))}
+
+          <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+              {card.label}
+            </p>
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
+              {card.title}
+            </h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {card.description}
+            </p>
+            <div className="pt-2 border-t border-slate-100">
+              <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                Learn more
+                <span className="ml-1 text-base" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 {activePathway && (
