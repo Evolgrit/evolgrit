@@ -344,7 +344,25 @@ export default function HomePageClient() {
     });
   }, []);
   const [activeHowStep, setActiveHowStep] = useState<string | null>(null);
-const [activePhase, setActivePhase] = useState<"1" | "2" | "3" | null>(null);
+  const [activePhase, setActivePhase] = useState<"1" | "2" | "3" | null>(null);
+  const journeysScrollRef = useRef<HTMLDivElement | null>(null);
+  const journeyDragState = useRef({
+    isDragging: false,
+    startX: 0,
+    scrollLeft: 0,
+  });
+  const [journeysEdges, setJourneysEdges] = useState({
+    atStart: true,
+    atEnd: false,
+  });
+  useEffect(() => {
+    const el = journeysScrollRef.current;
+    if (!el) return;
+    setJourneysEdges({
+      atStart: el.scrollLeft <= 8,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
+    });
+  }, []);
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
@@ -996,35 +1014,115 @@ className="flex items-center gap-2 cursor-pointer"
     </p>
   </div>
 
-  <div className="grid gap-6 md:grid-cols-3">
-    {journeyCards.map((card) => (
-      <article
-        key={card.id}
-        className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col"
-      >
-        <div className="relative aspect-[4/3]">
-          <Image
-            src={card.image}
-            alt={`${card.name} – ${card.route}`}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+  <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
+    <div
+      ref={journeysScrollRef}
+      className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide cursor-grab"
+      onMouseDown={(event) => {
+        const el = journeysScrollRef.current;
+        if (!el) return;
+        journeyDragState.current.isDragging = true;
+        journeyDragState.current.startX = event.pageX - el.offsetLeft;
+        journeyDragState.current.scrollLeft = el.scrollLeft;
+      }}
+      onMouseMove={(event) => {
+        const el = journeysScrollRef.current;
+        if (!el || !journeyDragState.current.isDragging) return;
+        event.preventDefault();
+        const x = event.pageX - el.offsetLeft;
+        el.scrollLeft =
+          journeyDragState.current.scrollLeft - (x - journeyDragState.current.startX) * 1.2;
+      }}
+      onMouseUp={() => {
+        journeyDragState.current.isDragging = false;
+      }}
+      onMouseLeave={() => {
+        journeyDragState.current.isDragging = false;
+      }}
+      onScroll={() => {
+        const el = journeysScrollRef.current;
+        if (!el) return;
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        setJourneysEdges({
+          atStart: scrollLeft <= 8,
+          atEnd: scrollLeft + clientWidth >= scrollWidth - 8,
+        });
+      }}
+    >
+      {journeyCards.map((card) => (
+        <article
+          key={card.id}
+          className="relative flex w-[82%] sm:w-[60%] md:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
+        >
+          <Link
+            href="/learner-journey"
+            className="absolute inset-0 z-10"
+            aria-label={`Learn more about ${card.name}'s journey`}
           />
-        </div>
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={card.image}
+              alt={`${card.name} – ${card.route}`}
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </div>
 
-        <div className="flex-1 px-5 pb-5 pt-4 flex flex-col">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">
-            <span className="mr-1">{card.flag}</span>
-            {card.country}
-          </p>
-          <h3 className="text-sm font-semibold text-slate-900 mb-1">
-            {card.name} · {card.age} · from {card.country} → {card.route}
-          </h3>
-          <p className="text-xs text-slate-600 mb-1">{card.short}</p>
-          <p className="text-xs text-slate-600">{card.result}</p>
-        </div>
-      </article>
-    ))}
+          <div className="relative z-20 flex flex-col gap-2 px-5 pb-5 pt-4">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              <span className="mr-1">{card.flag}</span>
+              {card.country}
+            </p>
+            <h3 className="text-sm font-semibold text-slate-900 leading-snug">
+              {card.name} · {card.age} · from {card.country} → {card.route}
+            </h3>
+            <p className="text-xs text-slate-600">{card.short}</p>
+            <p className="text-xs text-slate-600">{card.result}</p>
+            <div className="pt-2 border-t border-slate-100">
+              <span className="inline-flex items-center text-sm font-medium text-blue-600">
+                Learn more
+                <span className="ml-1 text-base" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <button
+      type="button"
+      onClick={() => {
+        const el = journeysScrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: -el.clientWidth * 0.8, behavior: "smooth" });
+      }}
+      className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+        journeysEdges.atStart ? "opacity-0 pointer-events-none" : ""
+      }`}
+      aria-label="Scroll journeys left"
+    >
+      ←
+    </button>
+    <button
+      type="button"
+      onClick={() => {
+        const el = journeysScrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: el.clientWidth * 0.8, behavior: "smooth" });
+      }}
+      className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+        journeysEdges.atEnd ? "opacity-0 pointer-events-none" : ""
+      }`}
+      aria-label="Scroll journeys right"
+    >
+      →
+    </button>
+
+    <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white/70 to-transparent lg:block" />
+    <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white/70 to-transparent lg:block" />
   </div>
 
   <p className="mt-4 text-[11px] text-slate-400 text-center">
