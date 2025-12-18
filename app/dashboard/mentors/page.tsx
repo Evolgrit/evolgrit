@@ -9,13 +9,6 @@ type ChatThread = {
   mentor_role: string | null;
 };
 
-type ChatMessage = {
-  id: string;
-  sender: string | null;
-  content: string | null;
-  created_at: string;
-};
-
 function formatTime(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "now";
@@ -32,7 +25,7 @@ export default async function MentorsPage() {
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/login");
 
-  let threadRes = await supabase
+  const threadRes = await supabase
     .from("chat_threads")
     .select("id, mentor_name, mentor_role")
     .eq("user_id", data.user.id)

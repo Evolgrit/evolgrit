@@ -3,16 +3,6 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import NewJourneyEvent from "./new-event";
 
-type JourneyEvent = {
-  id: string;
-  title: string | null;
-  detail: string | null;
-  event_date: string | null;
-  created_at: string;
-  status: string | null;
-  phase: string | null;
-};
-
 const statusClasses: Record<string, string> = {
   completed: "bg-emerald-50 text-emerald-700 border-emerald-100",
   recorded: "bg-slate-50 text-slate-600 border-slate-100",
