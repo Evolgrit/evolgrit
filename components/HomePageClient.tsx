@@ -1236,7 +1236,7 @@ className="flex items-center gap-2 cursor-pointer"
     />
     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
     <div className="relative z-10 flex min-h-full items-center justify-center px-4 py-8">
-      <div className="relative w-full max-w-3xl rounded-3xl bg-white shadow-2xl p-6 sm:p-8 space-y-4">
+      <div className="relative w-full max-w-5xl rounded-[32px] bg-white shadow-2xl p-6 sm:p-8">
         <button
           type="button"
           onClick={() => setActivePathwayModal(null)}
@@ -1245,17 +1245,21 @@ className="flex items-center gap-2 cursor-pointer"
         >
           ×
         </button>
-        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-          {activePathwayModal.label}
-        </p>
-        <h3
-          id="pathway-modal-title"
-          className="text-xl sm:text-2xl font-semibold text-slate-900"
-        >
-          {activePathwayModal.title}
-        </h3>
-        <p className="text-sm text-slate-600">{activePathwayModal.intro}</p>
-        <div className="mt-4 max-h-[65vh] overflow-y-auto space-y-6 pr-1">
+        <div className="max-h-[70vh] overflow-y-auto pr-1 space-y-6">
+          <div className="space-y-2 pt-2">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              {activePathwayModal.label}
+            </p>
+            <h3
+              id="pathway-modal-title"
+              className="text-2xl sm:text-[28px] font-semibold text-slate-900"
+            >
+              {activePathwayModal.title}
+            </h3>
+            <p className="text-sm sm:text-base text-slate-600">
+              {activePathwayModal.intro}
+            </p>
+          </div>
           {activePathwayModal.panels.map((panel) => (
             <div key={panel.id} className="space-y-3">
               <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
@@ -1275,21 +1279,21 @@ className="flex items-center gap-2 cursor-pointer"
               </ul>
             </div>
           ))}
-        </div>
-        <div className="pt-4 flex flex-wrap gap-3">
-          <Link
-            href="/waitlist"
-            className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-          >
-            Join learner waitlist
-          </Link>
-          <button
-            type="button"
-            onClick={() => setActivePathwayModal(null)}
-            className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Close
-          </button>
+          <div className="pt-2 flex flex-wrap gap-3">
+            <Link
+              href="/waitlist"
+              className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+            >
+              Join learner waitlist
+            </Link>
+            <button
+              type="button"
+              onClick={() => setActivePathwayModal(null)}
+              className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
