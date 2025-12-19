@@ -233,6 +233,66 @@ const pathwaysCards = [
     image: "/pathways-care.jpg",
   },
 ] as const;
+
+const evolgritPhases = [
+  {
+    id: "phase-1",
+    label: "PHASE 1",
+    title: "Arrival & foundations",
+    summary: "Land softly: orientation, everyday German and a peer group that stays with you.",
+  },
+  {
+    id: "phase-2",
+    label: "PHASE 2",
+    title: "Practice & deepening",
+    summary: "Real job scenarios, cultural coaching and switching formats to keep energy high.",
+  },
+  {
+    id: "phase-3",
+    label: "PHASE 3",
+    title: "Job-ready & matching",
+    summary: "Mentors, employer signals and matching into work or education paths.",
+  },
+] as const;
+
+const evolgritSteps = [
+  {
+    id: "step-1",
+    number: "01",
+    title: "Onboarding & profiling",
+    description:
+      "We understand your story, level and goals so the batch plan fits you from day one.",
+    outcome: "Ready to start Phase 1",
+    colSpan: "md:col-span-3 md:col-start-1",
+  },
+  {
+    id: "step-2",
+    number: "02",
+    title: "Hybrid learning blocks",
+    description:
+      "Language, culture and job tasks blend across app practice, mentor feedback and live check-ins.",
+    outcome: "Momentum inside Phase 2",
+    colSpan: "md:col-span-3 md:col-start-4",
+  },
+  {
+    id: "step-3",
+    number: "03",
+    title: "Progress & readiness signals",
+    description:
+      "We track language, everyday life and reliability so mentors and employers know when you’re ready.",
+    outcome: "Clear readiness scores",
+    colSpan: "md:col-span-3 md:col-start-7",
+  },
+  {
+    id: "step-4",
+    number: "04",
+    title: "Matching & next steps",
+    description:
+      "Batch graduates move into roles, apprenticeships or further training with partner employers.",
+    outcome: "Confident transition",
+    colSpan: "md:col-span-3 md:col-start-10",
+  },
+] as const;
 const howItWorksSteps = [
   {
     step: "01",
@@ -1213,6 +1273,69 @@ className="flex items-center gap-2 cursor-pointer"
           </button>
         </article>
       ))}
+    </div>
+  </div>
+</section>
+
+<section className="bg-white py-16 sm:py-20">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="text-center space-y-3 mb-10">
+      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+        Evolgrit journey
+      </p>
+      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+        A calm three-phase journey.
+      </h2>
+      <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
+        From arrival to job-ready, Evolgrit keeps learners moving step by step without
+        burning out.
+      </p>
+    </div>
+
+    <div className="grid gap-5 md:grid-cols-3">
+      {evolgritPhases.map((phase) => (
+        <article
+          key={phase.id}
+          className="rounded-3xl bg-white border border-slate-200 shadow-sm p-6 space-y-2"
+        >
+          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+            {phase.label}
+          </p>
+          <h3 className="text-lg font-semibold text-slate-900">
+            {phase.title}
+          </h3>
+          <p className="text-sm text-slate-600">{phase.summary}</p>
+        </article>
+      ))}
+    </div>
+
+    <div className="mt-10 relative">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white/80 to-transparent md:hidden" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white/80 to-transparent md:hidden" />
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-12 md:gap-4 md:overflow-visible md:snap-none">
+        {evolgritSteps.map((step) => (
+          <article
+            key={step.id}
+            className={`rounded-3xl border border-slate-200 bg-white shadow-sm p-5 flex flex-col gap-3 shrink-0 w-[80%] sm:w-[60%] md:w-auto snap-start ${step.colSpan}`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white text-sm font-semibold">
+                {step.number}
+              </div>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+                Step {step.number}
+              </p>
+            </div>
+            <h4 className="text-sm font-semibold text-slate-900">{step.title}</h4>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {step.description}
+            </p>
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+              {step.outcome}
+            </p>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>
