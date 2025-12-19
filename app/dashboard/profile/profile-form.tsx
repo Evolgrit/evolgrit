@@ -109,6 +109,7 @@ export default function ProfileForm({ initialProfile }: { initialProfile: Profil
       <div className="flex items-center gap-4">
         <div className="h-16 w-16 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
           {form.avatar_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img src={form.avatar_url} alt="Avatar" className="h-full w-full object-cover" />
           ) : (
             <div className="h-full w-full flex items-center justify-center text-xs text-slate-400">
