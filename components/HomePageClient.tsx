@@ -1245,7 +1245,7 @@ className="flex items-center gap-2 cursor-pointer"
         >
           ×
         </button>
-        <div className="max-h-[min(820px,calc(100vh-64px))] overflow-y-auto px-6 sm:px-10 py-10 space-y-10 scrollbar-gutter-stable">
+        <div className="max-h-[min(820px,calc(100vh-64px))] overflow-y-auto px-6 sm:px-10 py-10 space-y-10">
           <div className="space-y-3 pt-6">
             <p className="text-xs uppercase tracking-[0.22em] text-slate-500">
               {activePathwayModal.label}

@@ -77,6 +77,14 @@ const phaseCards = [
   },
 ] as const;
 
+type CompletionFieldKey =
+  | "full_name"
+  | "german_level"
+  | "birthday"
+  | "mother_tongue"
+  | "current_country"
+  | "avatar_url";
+
 function phaseToneClasses(
   tone: "blue" | "emerald" | "violet"
 ): { badge: string; tag: string } {
@@ -107,9 +115,30 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, german_level")
+    .select(
+      "full_name, german_level, avatar_url, birthday, mother_tongue, current_country"
+    )
     .eq("id", data.user.id)
     .single();
+
+  const completenessFields: Array<{ key: CompletionFieldKey; label: string }> = [
+    { key: "full_name", label: "Add your name" },
+    { key: "german_level", label: "Set your German level" },
+    { key: "birthday", label: "Add your birthday" },
+    { key: "mother_tongue", label: "Add mother tongue" },
+    { key: "current_country", label: "Add current country" },
+    { key: "avatar_url", label: "Upload a profile photo" },
+  ];
+  const totalFields = completenessFields.length;
+  const completedCount = completenessFields.filter(
+    ({ key }) => Boolean(profile?.[key])
+  ).length;
+  const completeness = totalFields
+    ? Math.round((completedCount / totalFields) * 100)
+    : 0;
+  const nextField = completenessFields.find(
+    ({ key }) => !profile?.[key]
+  );
 
   return (
     <div className="space-y-6">
@@ -201,6 +230,42 @@ export default async function DashboardPage() {
             </div>
           </div>
         </article>
+      </section>
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+              Onboarding status
+            </p>
+            <h3 className="text-lg font-semibold text-slate-900">
+              {completedCount} / {totalFields} details complete
+            </h3>
+            <p className="text-sm text-slate-600">
+              {nextField
+                ? `Next: ${nextField.label}.`
+                : "Everything looks complete. Great job!"}
+            </p>
+          </div>
+          <Link
+            href="/dashboard/profile"
+            className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+          >
+            Complete profile →
+          </Link>
+        </div>
+        <div className="mt-4">
+          <div className="flex items-center justify-between text-xs text-slate-500">
+            <span>Progress</span>
+            <span>{completeness}%</span>
+          </div>
+          <div className="mt-2 h-2 rounded-full bg-slate-100">
+            <div
+              className="h-full rounded-full bg-slate-900 transition-all"
+              style={{ width: `${completeness}%` }}
+            />
+          </div>
+        </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
