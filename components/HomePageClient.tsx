@@ -293,58 +293,7 @@ const evolgritSteps = [
     colSpan: "md:col-span-3 md:col-start-10",
   },
 ] as const;
-const howItWorksSteps = [
-  {
-    step: "01",
-    title: "Onboarding & profiling",
-    body:
-      "Learners share their background, target role and current language level – so we can tailor their journey.",
-  },
-  {
-    step: "02",
-    title: "Hybrid learning program",
-    body:
-      "Language and culture are practiced in job-related situations with a mix of digital tasks and live mentor sessions.",
-  },
-  {
-    step: "03",
-    title: "Progress & readiness",
-    body:
-      "We continuously track progress and flag when someone is ready for interviews and new opportunities.",
-  },
-  {
-    step: "04",
-    title: "Matching & next steps",
-    body:
-      "We connect learners with partner employers or education paths – always aligned with skills, language and personal goals.",
-  },
-] as const;
-const learnersGetHighlights = [
-  {
-    id: "structure",
-    icon: "✓",
-    title: "Multi-month structure",
-    body: "A clear multi-month structure with defined phases.",
-  },
-  {
-    id: "formats",
-    icon: "↺",
-    title: "Changing formats",
-    body: "Regular changes in task formats to keep motivation high.",
-  },
-  {
-    id: "mentoring",
-    icon: "★",
-    title: "Live mentoring",
-    body: "Live mentoring for language, culture and career questions.",
-  },
-  {
-    id: "next-step",
-    icon: "→",
-    title: "Clear next step",
-    body: "A clear next step: job, apprenticeship or further training.",
-  },
-] as const;
+
 const phases = [
   {
     id: "1",
@@ -383,6 +332,32 @@ const phases = [
     tone: "violet",
   },
 ] as const;
+const learnersGetHighlights = [
+  {
+    id: "structure",
+    icon: "✓",
+    title: "Multi-month structure",
+    body: "A clear multi-month structure with defined phases.",
+  },
+  {
+    id: "formats",
+    icon: "↺",
+    title: "Changing formats",
+    body: "Regular changes in task formats to keep motivation high.",
+  },
+  {
+    id: "mentoring",
+    icon: "★",
+    title: "Live mentoring",
+    body: "Live mentoring for language, culture and career questions.",
+  },
+  {
+    id: "next-step",
+    icon: "→",
+    title: "Clear next step",
+    body: "A clear next step: job, apprenticeship or further training.",
+  },
+] as const;
 export default function HomePageClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
@@ -403,7 +378,6 @@ export default function HomePageClient() {
       atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
     });
   }, []);
-  const [activeHowStep, setActiveHowStep] = useState<string | null>(null);
   const [activePhase, setActivePhase] = useState<"1" | "2" | "3" | null>(null);
   const journeysScrollRef = useRef<HTMLDivElement | null>(null);
   const journeyDragState = useRef({
@@ -506,7 +480,7 @@ className="flex items-center gap-2 cursor-pointer"
               <a href="#product" className="text-slate-500 hover:text-slate-900">
                 Product
               </a>
-              <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+              <a href="#journey" className="text-slate-500 hover:text-slate-900">
                 How it works
               </a>
               <a href="#for-employers" className="text-slate-500 hover:text-slate-900">
@@ -561,7 +535,7 @@ className="flex items-center gap-2 cursor-pointer"
                 Product
               </a>
               <a
-                href="#how-it-works"
+                href="#journey"
                 className="block text-slate-700 hover:text-slate-900"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -635,7 +609,7 @@ className="flex items-center gap-2 cursor-pointer"
         </Link>
       </div>
       <a
-        href="#how-it-works"
+        href="#journey"
         className="mt-3 inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900"
       >
         See how it works
@@ -930,7 +904,7 @@ className="flex items-center gap-2 cursor-pointer"
       </p>
     </div>
     <div className="hidden sm:flex items-center gap-3 text-sm">
-      <a href="#how-it-works" className="text-slate-500 hover:text-slate-900">
+      <a href="#journey" className="text-slate-500 hover:text-slate-900">
         Learn how Evolgrit works →
       </a>
     </div>
@@ -1225,7 +1199,7 @@ className="flex items-center gap-2 cursor-pointer"
         </p>
       </div>
       <a
-        href="#how-it-works"
+        href="#journey"
         className="hidden sm:inline-flex items-center text-xs font-medium text-blue-600 hover:text-blue-700"
       >
         Learn how Evolgrit works&nbsp;→
@@ -1277,7 +1251,7 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 
-<section className="bg-white py-16 sm:py-20">
+<section id="journey" className="bg-white py-16 sm:py-20 scroll-mt-24">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
     <div className="text-center space-y-3 mb-10">
       <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -1340,131 +1314,44 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 
-{/* HOW IT WORKS SECTION */}
-<section id="how-it-works" className="scroll-mt-24 py-16 sm:py-20">
-  <div className="max-w-6xl mx-auto px-6 sm:px-8">
-    <div className="text-center space-y-2 mb-10">
-      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-        Learner journey
-      </p>
-      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
-        How Evolgrit works for learners
-      </h2>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-      {howItWorksSteps.map((step, index) => {
-        const isActive = activeHowStep === step.step;
-        const toggle = () =>
-          setActiveHowStep(isActive ? null : step.step);
-
-        return (
-          <article
-            key={step.step}
-            role="button"
-            tabIndex={0}
-            onClick={toggle}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                toggle();
-              }
-            }}
-            className={[
-              "group relative w-full text-left",
-              "rounded-3xl border border-slate-200 bg-white shadow-sm",
-              "p-6 pb-14 space-y-3",
-              "transition-transform duration-200",
-              "hover:-translate-y-1 hover:shadow-lg",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
-              isActive ? "shadow-md" : "",
-            ].join(" ")}
-          >
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold">
-                {index + 1}
-              </div>
-              <span className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                STEP {step.step}
-              </span>
+<section className="py-16 sm:py-20">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-4">
+      What learners get with Evolgrit
+    </h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {learnersGetHighlights.map((item) => (
+        <article
+          key={item.id}
+          className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 space-y-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <div className="flex flex-col gap-3">
+            <div className="h-8 w-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-xs text-slate-600">
+              {item.icon}
             </div>
-
-            <div className="space-y-2 pr-10">
-              <h3 className="text-sm font-semibold text-slate-900">{step.title}</h3>
-              <p
-                className={[
-                  "text-sm text-slate-500 leading-relaxed transition-all duration-200",
-                  isActive ? "line-clamp-none" : "line-clamp-3",
-                ].join(" ")}
-              >
-                {step.body}
+            <div>
+              <h4 className="text-sm font-semibold text-slate-900">
+                {item.title}
+              </h4>
+              <p className="text-sm text-slate-500 leading-relaxed">
+                {item.body}
               </p>
             </div>
-
-            <div className="pt-3 mt-2 border-t border-slate-100 text-sm text-blue-600 inline-flex items-center gap-1">
-              <span>Learn more</span>
-              <span aria-hidden="true">→</span>
-            </div>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggle();
-              }}
-              aria-label={isActive ? "Close details" : "Open details"}
-              className={[
-                "absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center",
-                "rounded-full border border-slate-200 bg-white text-lg font-medium text-slate-900 shadow-sm",
-                "transition-colors",
-                "group-hover:bg-slate-900 group-hover:text-slate-50",
-                isActive ? "rotate-45" : "",
-              ].join(" ")}
-            >
-              +
-            </button>
-          </article>
-        );
-      })}
-    </div>
-
-    <div className="mt-10">
-      <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-4">
-        What learners get with Evolgrit
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-        {learnersGetHighlights.map((item) => (
-          <article
-            key={item.id}
-            className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 space-y-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <div className="flex flex-col gap-3">
-              <div className="h-8 w-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-xs text-slate-600">
-                {item.icon}
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900">
-                  {item.title}
-                </h4>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  {item.body}
-                </p>
-              </div>
-            </div>
-            <div className="pt-3 border-t border-slate-100">
-              <span className="inline-flex items-center text-sm font-medium text-blue-600">
-                Learn more
-                <span className="ml-1" aria-hidden="true">
-                  →
-                </span>
+          </div>
+          <div className="pt-3 border-t border-slate-100">
+            <span className="inline-flex items-center text-sm font-medium text-blue-600">
+              Learn more
+              <span className="ml-1" aria-hidden="true">
+                →
               </span>
-            </div>
-          </article>
-        ))}
-      </div>
+            </span>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
+
       {/* PROGRAM TIMELINE SECTION */}
       {/* PROGRAM TIMELINE / THREE PHASES */}
       <section className="max-w-6xl mx-auto mt-24 px-5">
