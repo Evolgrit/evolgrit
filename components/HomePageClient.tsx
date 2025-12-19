@@ -887,30 +887,32 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 {/* PATHWAYS – Apple-style cards */}
-<section id="pathways" className="max-w-6xl mx-auto mt-24 px-5">
-  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-    <div>
-      <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
-        Unlock your future in Germany
-      </h2>
-      <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
-        Turn your experience into a real life in Germany – with language,
-        culture and job support on one Evolgrit journey.
-      </p>
-      <p className="mt-1 text-[13px] text-slate-500 max-w-xl">
-        Choose a pathway that fits your strengths. Evolgrit walks beside you
-        from first words to your first working day.
-      </p>
-    </div>
-    <div className="hidden sm:flex items-center gap-3 text-sm">
-      <a href="#journey" className="text-slate-500 hover:text-slate-900">
-        Learn how Evolgrit works →
-      </a>
+<section id="pathways" className="mt-24">
+  <div className="max-w-6xl mx-auto px-5">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
+          Unlock your future in Germany
+        </h2>
+        <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+          Turn your experience into a real life in Germany – with language,
+          culture and job support on one Evolgrit journey.
+        </p>
+        <p className="mt-1 text-[13px] text-slate-500 max-w-xl">
+          Choose a pathway that fits your strengths. Evolgrit walks beside you
+          from first words to your first working day.
+        </p>
+      </div>
+      <div className="hidden sm:flex items-center gap-3 text-sm">
+        <a href="#journey" className="text-slate-500 hover:text-slate-900">
+          Learn how Evolgrit works →
+        </a>
+      </div>
     </div>
   </div>
 
-  <div className="relative mt-6">
-    <div className="relative -mx-5 px-5 sm:-mx-6 sm:px-6">
+  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-6">
+    <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={pathwaysScrollRef}
         className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
@@ -995,8 +997,8 @@ className="flex items-center gap-2 cursor-pointer"
         →
       </button>
 
-      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white/70 to-transparent lg:block" />
-      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white/70 to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white to-transparent lg:block" />
     </div>
   </div>
 </section>
