@@ -378,6 +378,24 @@ export default function HomePageClient() {
       atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
     });
   }, []);
+  const getToKnowScrollRef = useRef<HTMLDivElement | null>(null);
+  const getToKnowDragState = useRef({
+    isDragging: false,
+    startX: 0,
+    scrollLeft: 0,
+  });
+  const [getToKnowEdges, setGetToKnowEdges] = useState({
+    atStart: true,
+    atEnd: false,
+  });
+  useEffect(() => {
+    const el = getToKnowScrollRef.current;
+    if (!el) return;
+    setGetToKnowEdges({
+      atStart: el.scrollLeft <= 8,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
+    });
+  }, []);
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
@@ -1186,48 +1204,113 @@ className="flex items-center gap-2 cursor-pointer"
         Learn how Evolgrit works&nbsp;→
       </a>
     </div>
+  </div>
 
-    {/* Horizontale, swipebare Kartenleiste */}
-    <div className="mt-8 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory">
-      {getToKnowCards.map((card) => (
-        <article
-          key={card.id}
-          className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16"
-        >
-          <div className="relative aspect-[4/5]">
-            <Image
-              src={card.image}
-              alt={card.title}
-              fill
-              sizes="(min-width:1024px) 360px, (min-width:768px) 60vw, 82vw"
-              className="object-cover"
-            />
-            {/* dunkler Verlauf für bessere Lesbarkeit */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/10" />
-
-            <div className="absolute inset-x-5 bottom-4 sm:bottom-6">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
-                {card.label}
-              </p>
-              <h3 className="mt-1 text-base sm:text-lg font-semibold leading-snug">
-                {card.title}
-              </h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-3">
-                {card.description}
-              </p>
-            </div>
-          </div>
-
-          {/* Plus-Button wie bei Apple, ohne spezielle Funktion (noch) */}
-          <button
-            type="button"
-            className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-sm ring-1 ring-slate-200/80 transition group-hover:scale-105 group-hover:bg-white"
-            aria-label="More about this Evolgrit feature"
+  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-8">
+    <div className="relative px-4 sm:px-6 lg:px-10">
+      <div
+        ref={getToKnowScrollRef}
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide cursor-grab"
+        onMouseDown={(event) => {
+          const el = getToKnowScrollRef.current;
+          if (!el) return;
+          getToKnowDragState.current.isDragging = true;
+          getToKnowDragState.current.startX = event.pageX - el.offsetLeft;
+          getToKnowDragState.current.scrollLeft = el.scrollLeft;
+        }}
+        onMouseMove={(event) => {
+          const el = getToKnowScrollRef.current;
+          if (!el || !getToKnowDragState.current.isDragging) return;
+          event.preventDefault();
+          const x = event.pageX - el.offsetLeft;
+          el.scrollLeft =
+            getToKnowDragState.current.scrollLeft - (x - getToKnowDragState.current.startX) * 1.1;
+        }}
+        onMouseUp={() => {
+          getToKnowDragState.current.isDragging = false;
+        }}
+        onMouseLeave={() => {
+          getToKnowDragState.current.isDragging = false;
+        }}
+        onScroll={() => {
+          const el = getToKnowScrollRef.current;
+          if (!el) return;
+          const { scrollLeft, scrollWidth, clientWidth } = el;
+          setGetToKnowEdges({
+            atStart: scrollLeft <= 8,
+            atEnd: scrollLeft + clientWidth >= scrollWidth - 8,
+          });
+        }}
+      >
+        {getToKnowCards.map((card) => (
+          <article
+            key={card.id}
+            className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16"
           >
-            <span className="text-lg leading-none">+</span>
-          </button>
-        </article>
-      ))}
+            <div className="relative aspect-[4/5]">
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                sizes="(min-width:1024px) 360px, (min-width:768px) 60vw, 82vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/10" />
+
+              <div className="absolute inset-x-5 bottom-4 sm:bottom-6">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                  {card.label}
+                </p>
+                <h3 className="mt-1 text-base sm:text-lg font-semibold leading-snug">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-3">
+                  {card.description}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-sm ring-1 ring-slate-200/80 transition group-hover:scale-105 group-hover:bg-white"
+              aria-label="More about this Evolgrit feature"
+            >
+              <span className="text-lg leading-none">+</span>
+            </button>
+          </article>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+          getToKnowEdges.atStart ? "opacity-0 pointer-events-none" : ""
+        }`}
+        onClick={() => {
+          const el = getToKnowScrollRef.current;
+          if (!el) return;
+          el.scrollBy({ left: -el.clientWidth * 0.8, behavior: "smooth" });
+        }}
+        aria-label="Scroll carousel left"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+          getToKnowEdges.atEnd ? "opacity-0 pointer-events-none" : ""
+        }`}
+        onClick={() => {
+          const el = getToKnowScrollRef.current;
+          if (!el) return;
+          el.scrollBy({ left: el.clientWidth * 0.8, behavior: "smooth" });
+        }}
+        aria-label="Scroll carousel right"
+      >
+        →
+      </button>
+      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-slate-50 to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-slate-50 to-transparent lg:block" />
     </div>
   </div>
 </section>
