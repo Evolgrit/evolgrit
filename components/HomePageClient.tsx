@@ -289,6 +289,21 @@ const getToKnowModalContent: Record<string, GetToKnowModalContent> = {
   },
 };
 
+type PathwayModalPanel = {
+  id: string;
+  eyebrow: string;
+  image: string;
+  bullets: string[];
+};
+
+type PathwayModalContent = {
+  id: string;
+  label: string;
+  title: string;
+  intro: string;
+  panels: PathwayModalPanel[];
+};
+
 const pathwaysCards = [
   {
     id: "crafts",
@@ -349,6 +364,284 @@ const pathwaysCards = [
     image: "/pathways-care.jpg",
   },
 ] as const;
+
+const pathwaysModalContent: Record<string, PathwayModalContent> = {
+  crafts: {
+    id: "crafts",
+    label: "Crafts · Construction",
+    title: "Crafts & construction: Build Germany’s future with your hands.",
+    intro:
+      "From tools to safety inductions, Evolgrit helps you speak confidently on construction sites and in renovation teams.",
+    panels: [
+      {
+        id: "crafts-1",
+        eyebrow: "Tools & safety German",
+        image: "/pathways-crafts.jpg",
+        bullets: [
+          "Understand instructions for tools, scaffolding and protective gear",
+          "Know how to confirm safety steps before each shift",
+          "Respond to supervisors without guessing",
+        ],
+      },
+      {
+        id: "crafts-2",
+        eyebrow: "On-site coordination",
+        image: "/pathways-crafts.jpg",
+        bullets: [
+          "Daily stand-up phrases with mixed international teams",
+          "Learn how to flag delays, material issues and hazards",
+          "Practice delivery check-ins and paperwork words",
+        ],
+      },
+      {
+        id: "crafts-3",
+        eyebrow: "Next steps",
+        image: "/pathways-crafts.jpg",
+        bullets: [
+          "Guidance for recognition if you have prior certificates",
+          "Matching into entry roles in carpentry, construction, renovation",
+          "Mentors follow during the first contracts",
+        ],
+      },
+    ],
+  },
+  facility: {
+    id: "facility",
+    label: "Facility · Building services",
+    title: "Facility & building services: Keep homes and workplaces running.",
+    intro:
+      "Caretakers and building service teams need German for tickets, safety checks and coordination with residents.",
+    panels: [
+      {
+        id: "facility-1",
+        eyebrow: "Maintenance tickets",
+        image: "/pathways-facility.jpg",
+        bullets: [
+          "Phrase lists for repair reports and status updates",
+          "How to talk with tenants about urgent issues",
+          "Templates for closing a job without mistakes",
+        ],
+      },
+      {
+        id: "facility-2",
+        eyebrow: "Safety & documentation",
+        image: "/pathways-facility.jpg",
+        bullets: [
+          "German words for inspections, fire safety and lifts",
+          "Practice filling out checklists clearly",
+          "Understand supplier conversations and quotes",
+        ],
+      },
+      {
+        id: "facility-3",
+        eyebrow: "Arrival support",
+        image: "/pathways-facility.jpg",
+        bullets: [
+          "Help with Anmeldung, insurance, doctor and office appointments",
+          "Mentors explain how caretaker schedules really work",
+          "Plan your first months with less stress",
+        ],
+      },
+    ],
+  },
+  hospitality: {
+    id: "hospitality",
+    label: "Hospitality · Gastronomy",
+    title:
+      "Hospitality & gastronomy: Create places where people feel welcome.",
+    intro:
+      "Service German, menu language and cultural habits in cafés, restaurants and hotels.",
+    panels: [
+      {
+        id: "hospitality-1",
+        eyebrow: "Guest interactions",
+        image: "/pathways-hospitality.jpg",
+        bullets: [
+          "Handle orders, allergies and polite corrections with ease",
+          "Learn typical phrases for busy shifts",
+          "Know how to respond to feedback or complaints calmly",
+        ],
+      },
+      {
+        id: "hospitality-2",
+        eyebrow: "Team communication",
+        image: "/pathways-hospitality.jpg",
+        bullets: [
+          "Bridge between kitchen and service terms",
+          "Talk about shift swaps, tips and mini-job rules",
+          "Scripts for explaining specials or menus to tourists",
+        ],
+      },
+      {
+        id: "hospitality-3",
+        eyebrow: "First day confidence",
+        image: "/pathways-hospitality.jpg",
+        bullets: [
+          "Role-play openings, closings and checklist routines",
+          "Understand uniforms, hygiene and onboarding briefs",
+          "Connect with mentors who worked in service before",
+        ],
+      },
+    ],
+  },
+  engineering: {
+    id: "engineering",
+    label: "Engineering · Production",
+    title:
+      "Engineering & production: Use your technical skills in European industry.",
+    intro:
+      "Translate your technical experience into clear German for factories, workshops or tech support teams.",
+    panels: [
+      {
+        id: "engineering-1",
+        eyebrow: "Machine & process language",
+        image: "/pathways-engineering.jpg",
+        bullets: [
+          "Vocabulary for sensors, tooling and quality checks",
+          "Explain stoppages or parameter changes precisely",
+          "Understand instructions from shift leaders",
+        ],
+      },
+      {
+        id: "engineering-2",
+        eyebrow: "Problem solving",
+        image: "/pathways-engineering.jpg",
+        bullets: [
+          "Describe faults, errors and quick fixes in German",
+          "Practice handover conversations between shifts",
+          "Learn how to escalate to engineers or suppliers",
+        ],
+      },
+      {
+        id: "engineering-3",
+        eyebrow: "Career pathways",
+        image: "/pathways-engineering.jpg",
+        bullets: [
+          "When to seek recognition for degrees",
+          "Build a path from assistant to technician",
+          "Mentors coach for interviews with technical recruiters",
+        ],
+      },
+    ],
+  },
+  logistics: {
+    id: "logistics",
+    label: "Logistics · Warehouses & delivery",
+    title: "Logistics: Build a stable start, fast.",
+    intro:
+      "Warehouse workflows, scanner language and safety culture in German.",
+    panels: [
+      {
+        id: "logistics-1",
+        eyebrow: "Scanner & systems",
+        image: "/pathways-logistics.jpg",
+        bullets: [
+          "Key commands for handhelds, SAP and pick-by-voice",
+          "Practice status updates while moving fast",
+          "Learn how to explain errors or missing items",
+        ],
+      },
+      {
+        id: "logistics-2",
+        eyebrow: "Team rhythm",
+        image: "/pathways-logistics.jpg",
+        bullets: [
+          "Talk about shift plans, overtime and handovers",
+          "Cultural tips for teamwork and warehouse leaders",
+          "Short scripts for safety reminders",
+        ],
+      },
+      {
+        id: "logistics-3",
+        eyebrow: "First contracts",
+        image: "/pathways-logistics.jpg",
+        bullets: [
+          "Help with housing near industrial areas",
+          "Checklist for health insurance and Anmeldung",
+          "Matching into partner logistics hubs",
+        ],
+      },
+    ],
+  },
+  drivers: {
+    id: "drivers",
+    label: "Professional drivers · People & goods",
+    title: "Professional driver: Move people and goods across Europe.",
+    intro:
+      "Route communication, passenger announcements and dispatch language become second nature.",
+    panels: [
+      {
+        id: "drivers-1",
+        eyebrow: "On the road",
+        image: "/pathways-drivers.jpg",
+        bullets: [
+          "Announce stops, delays and safety information clearly",
+          "Handle ticket checks and friendly small talk",
+          "Learn polite phrases for busy or stressful moments",
+        ],
+      },
+      {
+        id: "drivers-2",
+        eyebrow: "Control center",
+        image: "/pathways-drivers.jpg",
+        bullets: [
+          "Talk with dispatch about routes and shift swaps",
+          "Explain incidents or mechanical issues quickly",
+          "Understand paperwork for cross-border trips",
+        ],
+      },
+      {
+        id: "drivers-3",
+        eyebrow: "Life setup",
+        image: "/pathways-drivers.jpg",
+        bullets: [
+          "Get guidance on German driving regulations",
+          "Checklists for medicals, licenses and housing",
+          "Mentors who drove professionally already",
+        ],
+      },
+    ],
+  },
+  care: {
+    id: "care",
+    label: "Childcare & care · Families & communities",
+    title: "Childcare & care: Support families and feel at home.",
+    intro:
+      "Language for talking with parents, residents and colleagues with warmth and clarity.",
+    panels: [
+      {
+        id: "care-1",
+        eyebrow: "Daily routines",
+        image: "/pathways-care.jpg",
+        bullets: [
+          "Explain activities, meals and progress in plain German",
+          "Role-play parent drop-off and pick-up conversations",
+          "Learn words for medical or emotional topics",
+        ],
+      },
+      {
+        id: "care-2",
+        eyebrow: "Team & documentation",
+        image: "/pathways-care.jpg",
+        bullets: [
+          "Practice reporting observations to colleagues",
+          "Fill out shift notes, medication logs and incident forms",
+          "Understand cultural expectations around care",
+        ],
+      },
+      {
+        id: "care-3",
+        eyebrow: "Arrive with confidence",
+        image: "/pathways-care.jpg",
+        bullets: [
+          "Guidance for recognition or bridging courses",
+          "Support with housing near schools or facilities",
+          "Smooth matching with partner employers",
+        ],
+      },
+    ],
+  },
+};
 
 const evolgritPhases = [
   {
@@ -459,8 +752,8 @@ export default function HomePageClient() {
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
     null
   );
-  const [activePathway, setActivePathway] =
-    useState<(typeof pathwaysCards)[number] | null>(null);
+  const [activePathwayModal, setActivePathwayModal] =
+    useState<PathwayModalContent | null>(null);
   const pathwaysScrollRef = useRef<HTMLDivElement | null>(null);
   const [pathwaysEdges, setPathwaysEdges] = useState({
     atStart: true,
@@ -514,6 +807,26 @@ export default function HomePageClient() {
       atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
     });
   }, []);
+  useEffect(() => {
+    if (!activePathwayModal) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [activePathwayModal]);
+  useEffect(() => {
+    if (!activePathwayModal) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActivePathwayModal(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activePathwayModal]);
   useEffect(() => {
     if (!activeGetToKnowModal) return;
     const originalOverflow = document.body.style.overflow;
@@ -1064,50 +1377,62 @@ className="flex items-center gap-2 cursor-pointer"
           });
         }}
       >
-        {pathwaysCards.map((card) => (
-          <article
-            key={card.id}
-            role="button"
-            tabIndex={0}
-            onClick={() => setActivePathway(card)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                setActivePathway(card);
-              }
-            }}
-            className="flex w-[82%] sm:w-[60%] md:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 cursor-pointer"
-          >
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                className="object-cover"
-                sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-              />
-            </div>
-            <div className="flex flex-col gap-2 px-5 pb-5 pt-4">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                {card.label}
-              </p>
-              <h3 className="text-base font-semibold text-slate-900 leading-snug">
-                {card.title}
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
-                {card.description}
-              </p>
-              <div className="pt-2 border-t border-slate-100">
-                <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
-                  Learn more
-                  <span className="ml-1 text-base" aria-hidden="true">
-                    →
-                  </span>
-                </span>
+        {pathwaysCards.map((card) => {
+          const modalDetail = pathwaysModalContent[card.id];
+          const isInteractive = Boolean(modalDetail);
+          return (
+            <article
+              key={card.id}
+              role={isInteractive ? "button" : undefined}
+              tabIndex={isInteractive ? 0 : -1}
+              onClick={() => {
+                if (!modalDetail) return;
+                setActivePathwayModal(modalDetail);
+              }}
+              onKeyDown={(event) => {
+                if (!modalDetail) return;
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setActivePathwayModal(modalDetail);
+                }
+              }}
+              className={`flex w-[82%] sm:w-[60%] md:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 ${
+                isInteractive ? "cursor-pointer" : ""
+              }`}
+            >
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                />
               </div>
-            </div>
-          </article>
-        ))}
+              <div className="flex flex-col gap-2 px-5 pb-5 pt-4">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  {card.label}
+                </p>
+                <h3 className="text-base font-semibold text-slate-900 leading-snug">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
+                  {card.description}
+                </p>
+                {isInteractive && (
+                  <div className="pt-2 border-t border-slate-100">
+                    <span className="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                      Learn more
+                      <span className="ml-1 text-base" aria-hidden="true">
+                        →
+                      </span>
+                    </span>
+                  </div>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <button
@@ -1140,40 +1465,71 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
-{activePathway && (
-  <div className="fixed inset-0 z-40">
+{activePathwayModal && (
+  <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
     <button
       type="button"
-      onClick={() => setActivePathway(null)}
-      className="absolute inset-0 bg-white/70 backdrop-blur-xl active:cursor-pointer"
-      aria-label="Close pathways details overlay"
+      onClick={() => setActivePathwayModal(null)}
+      className="absolute inset-0 bg-white/70 backdrop-blur-xl"
+      aria-label="Close pathway overlay"
     />
     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
-    <div
-      className="relative z-10 flex min-h-full items-center justify-center px-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pathway-modal-title"
-    >
-      <div className="relative w-full max-w-xl rounded-3xl bg-white shadow-xl p-6 sm:p-8">
+    <div className="relative z-10 flex min-h-full items-center justify-center px-4 py-8">
+      <div className="relative w-full max-w-3xl rounded-3xl bg-white shadow-2xl p-6 sm:p-8 space-y-4">
         <button
           type="button"
-          onClick={() => setActivePathway(null)}
+          onClick={() => setActivePathwayModal(null)}
           className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
-          aria-label="Close details"
+          aria-label="Close"
         >
           ×
         </button>
         <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-          {activePathway.label}
+          {activePathwayModal.label}
         </p>
         <h3
           id="pathway-modal-title"
-          className="mt-2 text-xl sm:text-2xl font-semibold text-slate-900"
+          className="text-xl sm:text-2xl font-semibold text-slate-900"
         >
-          {activePathway.title}
+          {activePathwayModal.title}
         </h3>
-        <p className="mt-3 text-sm text-slate-600">{activePathway.description}</p>
+        <p className="text-sm text-slate-600">{activePathwayModal.intro}</p>
+        <div className="mt-4 max-h-[65vh] overflow-y-auto space-y-6 pr-1">
+          {activePathwayModal.panels.map((panel) => (
+            <div key={panel.id} className="space-y-3">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+                {panel.eyebrow}
+              </p>
+              <Image
+                src={panel.image}
+                alt={panel.eyebrow}
+                width={1200}
+                height={800}
+                className="w-full rounded-2xl border border-slate-200 object-cover"
+              />
+              <ul className="list-disc space-y-1 text-sm text-slate-600 pl-4">
+                {panel.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="pt-4 flex flex-wrap gap-3">
+          <Link
+            href="/waitlist"
+            className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+          >
+            Join learner waitlist
+          </Link>
+          <button
+            type="button"
+            onClick={() => setActivePathwayModal(null)}
+            className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>
