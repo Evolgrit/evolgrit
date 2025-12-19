@@ -1231,38 +1231,38 @@ className="flex items-center gap-2 cursor-pointer"
     <button
       type="button"
       onClick={() => setActivePathwayModal(null)}
-      className="absolute inset-0 bg-white/70 backdrop-blur-xl"
+      className="absolute inset-0 bg-white/60 backdrop-blur-xl"
       aria-label="Close pathway overlay"
     />
-    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/45 to-white/70" />
     <div className="relative z-10 flex min-h-full items-center justify-center px-4 py-8">
-      <div className="relative w-full max-w-5xl rounded-[32px] bg-white shadow-2xl p-6 sm:p-8">
+      <div className="relative w-[min(980px,calc(100vw-48px))] max-h-[min(820px,calc(100vh-64px))] overflow-hidden rounded-[32px] bg-white shadow-2xl">
         <button
           type="button"
           onClick={() => setActivePathwayModal(null)}
-          className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+          className="absolute right-4 top-4 z-20 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
           aria-label="Close"
         >
           ×
         </button>
-        <div className="max-h-[70vh] overflow-y-auto pr-1 space-y-6">
-          <div className="space-y-2 pt-2">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+        <div className="max-h-[min(820px,calc(100vh-64px))] overflow-y-auto px-6 sm:px-10 py-10 space-y-10 scrollbar-gutter-stable">
+          <div className="space-y-3 pt-6">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-500">
               {activePathwayModal.label}
             </p>
             <h3
               id="pathway-modal-title"
-              className="text-2xl sm:text-[28px] font-semibold text-slate-900"
+              className="text-4xl md:text-5xl font-semibold leading-[1.05] text-slate-900"
             >
               {activePathwayModal.title}
             </h3>
-            <p className="text-sm sm:text-base text-slate-600">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
               {activePathwayModal.intro}
             </p>
           </div>
           {activePathwayModal.panels.map((panel) => (
-            <div key={panel.id} className="space-y-3">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+            <div key={panel.id} className="space-y-3 max-w-[720px] mx-auto">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500">
                 {panel.eyebrow}
               </p>
               <Image
@@ -1270,16 +1270,16 @@ className="flex items-center gap-2 cursor-pointer"
                 alt={panel.eyebrow}
                 width={1200}
                 height={800}
-                className="w-full rounded-2xl border border-slate-200 object-cover"
+                className="w-full h-[260px] md:h-[320px] rounded-3xl border border-slate-200 object-cover"
               />
-              <ul className="list-disc space-y-1 text-sm text-slate-600 pl-4">
+              <ul className="list-disc space-y-1.5 text-sm text-slate-600 pl-4">
                 {panel.bullets.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
             </div>
           ))}
-          <div className="pt-2 flex flex-wrap gap-3">
+          <div className="pt-2 flex flex-wrap gap-3 justify-center">
             <Link
               href="/waitlist"
               className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
