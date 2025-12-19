@@ -173,6 +173,122 @@ const getToKnowCards = [
   },
 ] as const;
 
+type GetToKnowModalPanel = {
+  id: string;
+  eyebrow: string;
+  image: string;
+  bullets: string[];
+};
+
+type GetToKnowModalContent = {
+  id: string;
+  label: string;
+  title: string;
+  intro: string;
+  panels: GetToKnowModalPanel[];
+};
+
+const getToKnowModalContent: Record<string, GetToKnowModalContent> = {
+  documents: {
+    id: "documents",
+    label: "Documents · Bureaucracy",
+    title: "Finally understand the paperwork.",
+    intro:
+      "We help you collect, translate and organize the documents that matter — so you move faster and avoid costly mistakes.",
+    panels: [
+      {
+        id: "documents-1",
+        eyebrow: "Recognition & forms",
+        image: "/get-to-know/gettoknow-documents-paperwork.jpg",
+        bullets: [
+          "Step-by-step checklists for your case",
+          "Reminders for deadlines, appointments, renewals",
+          "Clear explanations in simple German",
+        ],
+      },
+      {
+        id: "documents-2",
+        eyebrow: "Everything in one place",
+        image: "/get-to-know/gettoknow-documents-paperwork.jpg",
+        bullets: [
+          "Upload and store key documents",
+          "Share a secure link with mentors (optional)",
+        ],
+      },
+      {
+        id: "documents-3",
+        eyebrow: "Less stress, more momentum",
+        image: "/get-to-know/gettoknow-documents-paperwork.jpg",
+        bullets: ["Know what's next, even if the system feels complex"],
+      },
+    ],
+  },
+  "family-housing": {
+    id: "family-housing",
+    label: "Family · Housing",
+    title: "Support for you and your family.",
+    intro:
+      "If you move with family, integration is a team sport. Evolgrit helps you handle the first weeks smoothly.",
+    panels: [
+      {
+        id: "family-1",
+        eyebrow: "School & childcare",
+        image: "/get-to-know/gettoknow-family-support.jpg",
+        bullets: [
+          "Guidance for school onboarding and Kita registration",
+          "What to prepare before you arrive",
+        ],
+      },
+      {
+        id: "family-2",
+        eyebrow: "Housing & everyday setup",
+        image: "/get-to-know/gettoknow-family-support.jpg",
+        bullets: [
+          "Basics: Anmeldung, insurance, appointments",
+          "Checklists for moving-in and first month",
+        ],
+      },
+      {
+        id: "family-3",
+        eyebrow: "One plan, not 10 apps",
+        image: "/get-to-know/gettoknow-family-support.jpg",
+        bullets: ["A single roadmap for your whole household"],
+      },
+    ],
+  },
+  "language-jobs": {
+    id: "language-jobs",
+    label: "Language · Jobs",
+    title: "Learn German where you actually use it.",
+    intro:
+      "Job-specific German and real-life scenarios — so language becomes confidence on the job.",
+    panels: [
+      {
+        id: "language-1",
+        eyebrow: "Real scenarios",
+        image: "/get-to-know/gettoknow-job-language-busstop.jpg",
+        bullets: [
+          "Shift handovers, safety briefings, customer conversations",
+        ],
+      },
+      {
+        id: "language-2",
+        eyebrow: "Role-based vocabulary",
+        image: "/get-to-know/gettoknow-job-language-busstop.jpg",
+        bullets: [
+          "Drivers, logistics, care, hospitality — tailored pathways",
+        ],
+      },
+      {
+        id: "language-3",
+        eyebrow: "Ready for day one",
+        image: "/get-to-know/gettoknow-job-language-busstop.jpg",
+        bullets: ["Less guessing, more clarity in real situations"],
+      },
+    ],
+  },
+};
+
 const pathwaysCards = [
   {
     id: "crafts",
@@ -388,6 +504,8 @@ export default function HomePageClient() {
     atStart: true,
     atEnd: false,
   });
+  const [activeGetToKnowModal, setActiveGetToKnowModal] =
+    useState<GetToKnowModalContent | null>(null);
   useEffect(() => {
     const el = getToKnowScrollRef.current;
     if (!el) return;
@@ -396,6 +514,26 @@ export default function HomePageClient() {
       atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
     });
   }, []);
+  useEffect(() => {
+    if (!activeGetToKnowModal) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [activeGetToKnowModal]);
+  useEffect(() => {
+    if (!activeGetToKnowModal) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveGetToKnowModal(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeGetToKnowModal]);
   const activeEmployerCard = employerCards.find(
     (card) => card.id === openEmployerCardId
   );
@@ -1244,43 +1382,62 @@ className="flex items-center gap-2 cursor-pointer"
           });
         }}
       >
-        {getToKnowCards.map((card) => (
-          <article
-            key={card.id}
-            className="group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16"
-          >
-            <div className="relative aspect-[4/5]">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                sizes="(min-width:1024px) 360px, (min-width:768px) 60vw, 82vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/10" />
-
-              <div className="absolute inset-x-5 bottom-4 sm:bottom-6">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
-                  {card.label}
-                </p>
-                <h3 className="mt-1 text-base sm:text-lg font-semibold leading-snug">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-3">
-                  {card.description}
-                </p>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="absolute bottom-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-sm ring-1 ring-slate-200/80 transition group-hover:scale-105 group-hover:bg-white"
-              aria-label="More about this Evolgrit feature"
+        {getToKnowCards.map((card) => {
+          const modalDetail = getToKnowModalContent[card.id];
+          const isInteractive = Boolean(modalDetail);
+          return (
+            <article
+              key={card.id}
+              role={isInteractive ? "button" : undefined}
+              tabIndex={isInteractive ? 0 : -1}
+              onClick={() => {
+                if (!modalDetail) return;
+                setActiveGetToKnowModal(modalDetail);
+              }}
+              onKeyDown={(event) => {
+                if (!modalDetail) return;
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setActiveGetToKnowModal(modalDetail);
+                }
+              }}
+              className={`group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16 ${
+                isInteractive ? "cursor-pointer" : ""
+              }`}
             >
-              <span className="text-lg leading-none">+</span>
-            </button>
-          </article>
-        ))}
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(min-width:1024px) 360px, (min-width:768px) 60vw, 82vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/10" />
+
+                <div className="absolute inset-x-5 bottom-4 sm:bottom-6">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                    {card.label}
+                  </p>
+                  <h3 className="mt-1 text-base sm:text-lg font-semibold leading-snug">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-3">
+                    {card.description}
+                  </p>
+                  {isInteractive && (
+                    <div className="mt-3 pt-2 border-t border-white/20 text-xs sm:text-sm font-medium text-slate-100/90 inline-flex items-center gap-1">
+                      Learn more
+                      <span aria-hidden="true" className="text-base">
+                        →
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <button
@@ -1316,6 +1473,72 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+{activeGetToKnowModal && (
+  <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
+    <button
+      type="button"
+      onClick={() => setActiveGetToKnowModal(null)}
+      className="absolute inset-0 bg-white/70 backdrop-blur-xl"
+      aria-label="Close get to know overlay"
+    />
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+    <div className="relative z-10 flex min-h-full items-center justify-center px-4 py-8">
+      <div className="relative w-full max-w-3xl rounded-3xl bg-white shadow-2xl p-6 sm:p-8 space-y-4">
+        <button
+          type="button"
+          onClick={() => setActiveGetToKnowModal(null)}
+          className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+          {activeGetToKnowModal.label}
+        </p>
+        <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">
+          {activeGetToKnowModal.title}
+        </h3>
+        <p className="text-sm text-slate-600">{activeGetToKnowModal.intro}</p>
+        <div className="mt-4 max-h-[65vh] overflow-y-auto space-y-6 pr-1">
+          {activeGetToKnowModal.panels.map((panel) => (
+            <div key={panel.id} className="space-y-3">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+                {panel.eyebrow}
+              </p>
+              <Image
+                src={panel.image}
+                alt={panel.eyebrow}
+                width={1200}
+                height={800}
+                className="w-full rounded-2xl border border-slate-200 object-cover"
+              />
+              <ul className="list-disc space-y-1 text-sm text-slate-600 pl-4">
+                {panel.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="pt-4 flex flex-wrap gap-3">
+          <Link
+            href="/waitlist"
+            className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+          >
+            Join learner waitlist
+          </Link>
+          <button
+            type="button"
+            onClick={() => setActiveGetToKnowModal(null)}
+            className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
 <section id="journey" className="bg-white py-16 sm:py-20 scroll-mt-24">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
