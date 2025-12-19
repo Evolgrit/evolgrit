@@ -366,277 +366,38 @@ const pathwaysCards = [
 ] as const;
 
 const pathwaysModalContent: Record<string, PathwayModalContent> = {
-  crafts: {
-    id: "crafts",
-    label: "Crafts · Construction",
-    title: "Crafts & construction: Build Germany’s future with your hands.",
-    intro:
-      "From tools to safety inductions, Evolgrit helps you speak confidently on construction sites and in renovation teams.",
-    panels: [
-      {
-        id: "crafts-1",
-        eyebrow: "Tools & safety German",
-        image: "/pathways-crafts.jpg",
-        bullets: [
-          "Understand instructions for tools, scaffolding and protective gear",
-          "Know how to confirm safety steps before each shift",
-          "Respond to supervisors without guessing",
-        ],
-      },
-      {
-        id: "crafts-2",
-        eyebrow: "On-site coordination",
-        image: "/pathways-crafts.jpg",
-        bullets: [
-          "Daily stand-up phrases with mixed international teams",
-          "Learn how to flag delays, material issues and hazards",
-          "Practice delivery check-ins and paperwork words",
-        ],
-      },
-      {
-        id: "crafts-3",
-        eyebrow: "Next steps",
-        image: "/pathways-crafts.jpg",
-        bullets: [
-          "Guidance for recognition if you have prior certificates",
-          "Matching into entry roles in carpentry, construction, renovation",
-          "Mentors follow during the first contracts",
-        ],
-      },
-    ],
-  },
-  facility: {
-    id: "facility",
-    label: "Facility · Building services",
-    title: "Facility & building services: Keep homes and workplaces running.",
-    intro:
-      "Caretakers and building service teams need German for tickets, safety checks and coordination with residents.",
-    panels: [
-      {
-        id: "facility-1",
-        eyebrow: "Maintenance tickets",
-        image: "/pathways-facility.jpg",
-        bullets: [
-          "Phrase lists for repair reports and status updates",
-          "How to talk with tenants about urgent issues",
-          "Templates for closing a job without mistakes",
-        ],
-      },
-      {
-        id: "facility-2",
-        eyebrow: "Safety & documentation",
-        image: "/pathways-facility.jpg",
-        bullets: [
-          "German words for inspections, fire safety and lifts",
-          "Practice filling out checklists clearly",
-          "Understand supplier conversations and quotes",
-        ],
-      },
-      {
-        id: "facility-3",
-        eyebrow: "Arrival support",
-        image: "/pathways-facility.jpg",
-        bullets: [
-          "Help with Anmeldung, insurance, doctor and office appointments",
-          "Mentors explain how caretaker schedules really work",
-          "Plan your first months with less stress",
-        ],
-      },
-    ],
-  },
-  hospitality: {
-    id: "hospitality",
-    label: "Hospitality · Gastronomy",
-    title:
-      "Hospitality & gastronomy: Create places where people feel welcome.",
-    intro:
-      "Service German, menu language and cultural habits in cafés, restaurants and hotels.",
-    panels: [
-      {
-        id: "hospitality-1",
-        eyebrow: "Guest interactions",
-        image: "/pathways-hospitality.jpg",
-        bullets: [
-          "Handle orders, allergies and polite corrections with ease",
-          "Learn typical phrases for busy shifts",
-          "Know how to respond to feedback or complaints calmly",
-        ],
-      },
-      {
-        id: "hospitality-2",
-        eyebrow: "Team communication",
-        image: "/pathways-hospitality.jpg",
-        bullets: [
-          "Bridge between kitchen and service terms",
-          "Talk about shift swaps, tips and mini-job rules",
-          "Scripts for explaining specials or menus to tourists",
-        ],
-      },
-      {
-        id: "hospitality-3",
-        eyebrow: "First day confidence",
-        image: "/pathways-hospitality.jpg",
-        bullets: [
-          "Role-play openings, closings and checklist routines",
-          "Understand uniforms, hygiene and onboarding briefs",
-          "Connect with mentors who worked in service before",
-        ],
-      },
-    ],
-  },
-  engineering: {
-    id: "engineering",
-    label: "Engineering · Production",
-    title:
-      "Engineering & production: Use your technical skills in European industry.",
-    intro:
-      "Translate your technical experience into clear German for factories, workshops or tech support teams.",
-    panels: [
-      {
-        id: "engineering-1",
-        eyebrow: "Machine & process language",
-        image: "/pathways-engineering.jpg",
-        bullets: [
-          "Vocabulary for sensors, tooling and quality checks",
-          "Explain stoppages or parameter changes precisely",
-          "Understand instructions from shift leaders",
-        ],
-      },
-      {
-        id: "engineering-2",
-        eyebrow: "Problem solving",
-        image: "/pathways-engineering.jpg",
-        bullets: [
-          "Describe faults, errors and quick fixes in German",
-          "Practice handover conversations between shifts",
-          "Learn how to escalate to engineers or suppliers",
-        ],
-      },
-      {
-        id: "engineering-3",
-        eyebrow: "Career pathways",
-        image: "/pathways-engineering.jpg",
-        bullets: [
-          "When to seek recognition for degrees",
-          "Build a path from assistant to technician",
-          "Mentors coach for interviews with technical recruiters",
-        ],
-      },
-    ],
-  },
-  logistics: {
-    id: "logistics",
-    label: "Logistics · Warehouses & delivery",
-    title: "Logistics: Build a stable start, fast.",
-    intro:
-      "Warehouse workflows, scanner language and safety culture in German.",
-    panels: [
-      {
-        id: "logistics-1",
-        eyebrow: "Scanner & systems",
-        image: "/pathways-logistics.jpg",
-        bullets: [
-          "Key commands for handhelds, SAP and pick-by-voice",
-          "Practice status updates while moving fast",
-          "Learn how to explain errors or missing items",
-        ],
-      },
-      {
-        id: "logistics-2",
-        eyebrow: "Team rhythm",
-        image: "/pathways-logistics.jpg",
-        bullets: [
-          "Talk about shift plans, overtime and handovers",
-          "Cultural tips for teamwork and warehouse leaders",
-          "Short scripts for safety reminders",
-        ],
-      },
-      {
-        id: "logistics-3",
-        eyebrow: "First contracts",
-        image: "/pathways-logistics.jpg",
-        bullets: [
-          "Help with housing near industrial areas",
-          "Checklist for health insurance and Anmeldung",
-          "Matching into partner logistics hubs",
-        ],
-      },
-    ],
-  },
   drivers: {
     id: "drivers",
     label: "Professional drivers · People & goods",
     title: "Professional driver: Move people and goods across Europe.",
     intro:
-      "Route communication, passenger announcements and dispatch language become second nature.",
+      "You like the road and responsibility. Evolgrit helps you with German for routes, passengers, shift plans and safety briefings — so you can start in local transport or regional logistics.",
     panels: [
       {
         id: "drivers-1",
-        eyebrow: "On the road",
-        image: "/pathways-drivers.jpg",
+        eyebrow: "Professional drivers · People & goods",
+        image: "/get-to-know/gettoknow-documents-paperwork.jpg",
         bullets: [
-          "Announce stops, delays and safety information clearly",
-          "Handle ticket checks and friendly small talk",
-          "Learn polite phrases for busy or stressful moments",
+          "Understand contracts, insurance and work rules",
+          "Checklists for permits, onboarding and paperwork",
         ],
       },
       {
         id: "drivers-2",
-        eyebrow: "Control center",
-        image: "/pathways-drivers.jpg",
+        eyebrow: "Support for you and your family",
+        image: "/get-to-know/gettoknow-family-support.jpg",
         bullets: [
-          "Talk with dispatch about routes and shift swaps",
-          "Explain incidents or mechanical issues quickly",
-          "Understand paperwork for cross-border trips",
+          "School onboarding, childcare and housing setup",
+          "What to prepare before you arrive",
         ],
       },
       {
         id: "drivers-3",
-        eyebrow: "Life setup",
-        image: "/pathways-drivers.jpg",
+        eyebrow: "Job language — day one ready",
+        image: "/get-to-know/gettoknow-job-language-busstop.jpg",
         bullets: [
-          "Get guidance on German driving regulations",
-          "Checklists for medicals, licenses and housing",
-          "Mentors who drove professionally already",
-        ],
-      },
-    ],
-  },
-  care: {
-    id: "care",
-    label: "Childcare & care · Families & communities",
-    title: "Childcare & care: Support families and feel at home.",
-    intro:
-      "Language for talking with parents, residents and colleagues with warmth and clarity.",
-    panels: [
-      {
-        id: "care-1",
-        eyebrow: "Daily routines",
-        image: "/pathways-care.jpg",
-        bullets: [
-          "Explain activities, meals and progress in plain German",
-          "Role-play parent drop-off and pick-up conversations",
-          "Learn words for medical or emotional topics",
-        ],
-      },
-      {
-        id: "care-2",
-        eyebrow: "Team & documentation",
-        image: "/pathways-care.jpg",
-        bullets: [
-          "Practice reporting observations to colleagues",
-          "Fill out shift notes, medication logs and incident forms",
-          "Understand cultural expectations around care",
-        ],
-      },
-      {
-        id: "care-3",
-        eyebrow: "Arrive with confidence",
-        image: "/pathways-care.jpg",
-        bullets: [
-          "Guidance for recognition or bridging courses",
-          "Support with housing near schools or facilities",
-          "Smooth matching with partner employers",
+          "Route talk, passenger communication, safety briefings",
+          "Shift handovers and real scenarios",
         ],
       },
     ],
