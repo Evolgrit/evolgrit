@@ -13,13 +13,30 @@ const STAGE_FIELDS: Record<
     title: "Tell us about your language basics",
     helper: "We calibrate your first phase using your language experience.",
     fields: [
-      { name: "full_name", label: "Full name", type: "text", placeholder: "Your name" },
-      { name: "mother_tongue", label: "Mother tongue", type: "text", placeholder: "e.g., Spanish" },
-      { name: "other_languages", label: "Other languages", type: "text", placeholder: "Optional" },
+      {
+        name: "full_name",
+        label: "Full name",
+        type: "text",
+        placeholder: "Your name",
+        required: true,
+      },
+      {
+        name: "mother_tongue",
+        label: "Mother tongue",
+        type: "text",
+        placeholder: "e.g., Spanish",
+      },
+      {
+        name: "other_languages",
+        label: "Other languages",
+        type: "text",
+        placeholder: "Optional",
+      },
       {
         name: "german_level",
         label: "German level",
         type: "select",
+        required: true,
         options: [
           { value: "A0", label: "A0" },
           { value: "A1", label: "A1" },
@@ -36,9 +53,21 @@ const STAGE_FIELDS: Record<
     title: "Where are you coming from?",
     helper: "A bit of context helps mentors support you better.",
     fields: [
-      { name: "current_country", label: "Current country", type: "text", placeholder: "Where you live now" },
-      { name: "origin_country", label: "Country of origin", type: "text", placeholder: "Where you grew up" },
-      { name: "birthday", label: "Birthday", type: "date" },
+      {
+        name: "current_country",
+        label: "Current country",
+        type: "text",
+        placeholder: "Where you live now",
+        required: true,
+      },
+      {
+        name: "origin_country",
+        label: "Country of origin",
+        type: "text",
+        placeholder: "Where you grew up",
+        required: true,
+      },
+      { name: "birthday", label: "Birthday", type: "date", required: true },
     ],
   },
   goal: {
@@ -49,6 +78,7 @@ const STAGE_FIELDS: Record<
         name: "target",
         label: "Target",
         type: "select",
+        required: true,
         options: [
           { value: "Job", label: "Job" },
           { value: "Apprenticeship", label: "Apprenticeship" },
