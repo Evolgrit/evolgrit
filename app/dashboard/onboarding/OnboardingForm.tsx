@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { COUNTRIES } from "@/lib/countries";
+const countryFieldNames = new Set(["current_country", "origin_country"]);
 
 export type OnboardingField = {
   name: string;
@@ -38,11 +40,30 @@ export function OnboardingForm({
     string,
     HTMLInputElement | HTMLSelectElement | null
   >>({});
+  const [activeSuggestions, setActiveSuggestions] = useState<
+    Record<string, string[]>
+  >({});
+  const [highlightIndex, setHighlightIndex] = useState<
+    Record<string, number>
+  >({});
 
   const handleChange = (name: string, value: string) => {
     setFormState((prev) => ({ ...prev, [name]: value }));
     if (fieldErrors[name]) {
       setFieldErrors((prev) => {
+        const updated = { ...prev };
+        delete updated[name];
+        return updated;
+      });
+    }
+    if (value && value.length > 0 && countryFieldNames.has(name)) {
+      const subset = COUNTRIES.filter((country) =>
+        country.toLowerCase().includes(value.toLowerCase())
+      ).slice(0, 6);
+      setActiveSuggestions((prev) => ({ ...prev, [name]: subset }));
+      setHighlightIndex((prev) => ({ ...prev, [name]: 0 }));
+    } else if (countryFieldNames.has(name)) {
+      setActiveSuggestions((prev) => {
         const updated = { ...prev };
         delete updated[name];
         return updated;
@@ -149,11 +170,84 @@ export function OnboardingForm({
                     ? "border-rose-300 focus:ring-rose-200"
                     : "border-slate-200 focus:ring-slate-300"
                 }`}
+                onKeyDown={(event) => {
+                  if (!activeSuggestions[field.name]?.length) return;
+                  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                    event.preventDefault();
+                    setHighlightIndex((prev) => {
+                      const items = activeSuggestions[field.name] ?? [];
+                      if (!items.length) return prev;
+                      const delta = event.key === "ArrowDown" ? 1 : -1;
+                      const next =
+                        ((prev[field.name] ?? 0) + delta + items.length) %
+                        items.length;
+                      return { ...prev, [field.name]: next };
+                    });
+                  } else if (event.key === "Enter") {
+                    const items = activeSuggestions[field.name] ?? [];
+                    const selected =
+                      items[(highlightIndex[field.name] ?? 0)] ?? null;
+                    if (selected) {
+                      event.preventDefault();
+                      handleChange(field.name, selected);
+                      setActiveSuggestions((prev) => {
+                        const updated = { ...prev };
+                        delete updated[field.name];
+                        return updated;
+                      });
+                      setHighlightIndex((prev) => {
+                        const updated = { ...prev };
+                        delete updated[field.name];
+                        return updated;
+                      });
+                    }
+                  } else if (event.key === "Escape") {
+                    setActiveSuggestions((prev) => {
+                      const updated = { ...prev };
+                      delete updated[field.name];
+                      return updated;
+                    });
+                  }
+                }}
+                onFocus={() => {
+                  const value = formState[field.name];
+                  if (countryFieldNames.has(field.name) && value) {
+                    handleChange(field.name, value);
+                  }
+                }}
               />
             )}
             {fieldErrors[field.name] && (
               <p className="text-xs text-rose-600">{fieldErrors[field.name]}</p>
             )}
+            {countryFieldNames.has(field.name) &&
+              activeSuggestions[field.name]?.length ? (
+              <div className="relative z-20">
+                <ul className="absolute mt-1 w-full rounded-2xl border border-slate-200 bg-white shadow-lg">
+                  {activeSuggestions[field.name].map((suggestion, index) => (
+                    <li
+                      key={suggestion}
+                      className={`px-4 py-2 text-sm text-slate-900 transition ${
+                        highlightIndex[field.name] === index
+                          ? "bg-slate-100"
+                          : "bg-white hover:bg-slate-50"
+                      }`}
+                      onMouseDown={(event) => {
+                        event.preventDefault();
+                        handleChange(field.name, suggestion);
+                        setActiveSuggestions((prev) => {
+                          const updated = { ...prev };
+                          delete updated[field.name];
+                          return updated;
+                        });
+                      }}
+                    >
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         ))}
       </div>
