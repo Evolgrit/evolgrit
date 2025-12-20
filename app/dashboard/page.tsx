@@ -77,14 +77,6 @@ const phaseCards = [
   },
 ] as const;
 
-type CompletionFieldKey =
-  | "full_name"
-  | "german_level"
-  | "birthday"
-  | "mother_tongue"
-  | "current_country"
-  | "avatar_url";
-
 function phaseToneClasses(
   tone: "blue" | "emerald" | "violet"
 ): { badge: string; tag: string } {
@@ -113,32 +105,29 @@ export default async function DashboardPage() {
 
   if (!data.user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select(
-      "full_name, german_level, avatar_url, birthday, mother_tongue, current_country"
-    )
-    .eq("id", data.user.id)
-    .single();
+  const [{ data: profile }, { data: onboarding }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("full_name, german_level")
+      .eq("id", data.user.id)
+      .single(),
+    supabase
+      .from("v_onboarding_progress")
+      .select("completed, total")
+      .eq("user_id", data.user.id)
+      .maybeSingle(),
+  ]);
 
-  const completenessFields: Array<{ key: CompletionFieldKey; label: string }> = [
-    { key: "full_name", label: "Add your name" },
-    { key: "german_level", label: "Set your German level" },
-    { key: "birthday", label: "Add your birthday" },
-    { key: "mother_tongue", label: "Add mother tongue" },
-    { key: "current_country", label: "Add current country" },
-    { key: "avatar_url", label: "Upload a profile photo" },
-  ];
-  const totalFields = completenessFields.length;
-  const completedCount = completenessFields.filter(
-    ({ key }) => Boolean(profile?.[key])
-  ).length;
-  const completeness = totalFields
-    ? Math.round((completedCount / totalFields) * 100)
-    : 0;
-  const nextField = completenessFields.find(
-    ({ key }) => !profile?.[key]
+  const onboardingTotal = onboarding?.total ?? 8;
+  const onboardingCompleted = Math.min(
+    onboarding?.completed ?? 0,
+    onboardingTotal
   );
+  const onboardingDone =
+    onboardingTotal > 0 && onboardingCompleted >= onboardingTotal;
+  const onboardingPercent = onboardingTotal
+    ? Math.round((onboardingCompleted / onboardingTotal) * 100)
+    : 0;
 
   return (
     <div className="space-y-6">
@@ -239,30 +228,36 @@ export default async function DashboardPage() {
               Onboarding status
             </p>
             <h3 className="text-lg font-semibold text-slate-900">
-              {completedCount} / {totalFields} details complete
+              {onboardingCompleted} / {onboardingTotal} details complete
             </h3>
             <p className="text-sm text-slate-600">
-              {nextField
-                ? `Next: ${nextField.label}.`
-                : "Everything looks complete. Great job!"}
+              {onboardingDone
+                ? "You’re ready for matching."
+                : "Finish onboarding to unlock tailored roles."}
             </p>
           </div>
-          <Link
-            href="/dashboard/profile"
-            className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
-          >
-            Complete profile →
-          </Link>
+          {onboardingDone ? (
+            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+              Complete
+            </span>
+          ) : (
+            <Link
+              href="/dashboard/onboarding"
+              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+            >
+              Continue onboarding →
+            </Link>
+          )}
         </div>
         <div className="mt-4">
           <div className="flex items-center justify-between text-xs text-slate-500">
             <span>Progress</span>
-            <span>{completeness}%</span>
+            <span>{onboardingPercent}%</span>
           </div>
           <div className="mt-2 h-2 rounded-full bg-slate-100">
             <div
               className="h-full rounded-full bg-slate-900 transition-all"
-              style={{ width: `${completeness}%` }}
+              style={{ width: `${onboardingPercent}%` }}
             />
           </div>
         </div>
