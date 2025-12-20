@@ -103,10 +103,24 @@ export function OnboardingForm({
       return;
     }
 
-    const payload: Record<string, string> = {};
+    const payload: Record<string, string | null> = {
+      current_country: formState.current_country?.trim() || null,
+      origin_country: formState.origin_country?.trim() || null,
+      birthday: formState.birthday?.trim() || null,
+    };
     fields.forEach((field) => {
-      payload[field.name] = formState[field.name] ?? "";
+      if (
+        field.name === "current_country" ||
+        field.name === "origin_country" ||
+        field.name === "birthday"
+      ) {
+        return;
+      }
+      payload[field.name] = formState[field.name]?.trim() || null;
     });
+    if (process.env.NODE_ENV !== "production") {
+      console.log("payload", payload);
+    }
 
     const { error } = await supabase
       .from("profiles")
