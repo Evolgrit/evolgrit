@@ -1,12 +1,13 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { OnboardingForm, OnboardingField } from "./OnboardingForm";
-
-const BASICS_THRESHOLD = 3;
-const BACKGROUND_THRESHOLD = 6;
+import {
+  OnboardingForm,
+  OnboardingField,
+  OnboardingStage,
+} from "./OnboardingForm";
 
 const STAGE_FIELDS: Record<
-  "basics" | "background" | "goal",
+  OnboardingStage,
   { title: string; helper: string; fields: OnboardingField[] }
 > = {
   basics: {
@@ -25,6 +26,7 @@ const STAGE_FIELDS: Record<
         label: "Mother tongue",
         type: "text",
         placeholder: "e.g., Spanish",
+        required: true,
       },
       {
         name: "other_languages",
@@ -105,7 +107,7 @@ export default async function OnboardingPage() {
       .maybeSingle(),
     supabase
       .from("v_onboarding_progress")
-      .select("completed, total")
+      .select("completed, total, next_step, is_complete")
       .eq("user_id", data.user.id)
       .maybeSingle(),
   ]);
@@ -113,14 +115,14 @@ export default async function OnboardingPage() {
   const total = progress?.total ?? 8;
   const completed = Math.min(progress?.completed ?? 0, total);
 
-  if (total > 0 && completed >= total) {
+  if (progress?.next_step === "done" || progress?.is_complete) {
     redirect("/dashboard?onboarding=done");
   }
 
-  let stage: "basics" | "background" | "goal";
-  if (completed < BASICS_THRESHOLD) stage = "basics";
-  else if (completed < BACKGROUND_THRESHOLD) stage = "background";
-  else stage = "goal";
+  const stage: OnboardingStage =
+    progress?.next_step && progress.next_step !== "done"
+      ? (progress.next_step as OnboardingStage)
+      : "basics";
 
   const stageConfig = STAGE_FIELDS[stage];
 
@@ -138,7 +140,11 @@ export default async function OnboardingPage() {
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <OnboardingForm fields={stageConfig.fields} initialValues={profile ?? {}} />
+          <OnboardingForm
+            fields={stageConfig.fields}
+            initialValues={profile ?? {}}
+            currentStage={stage}
+          />
         </div>
       </div>
     </main>

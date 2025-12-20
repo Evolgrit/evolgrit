@@ -5,6 +5,18 @@ import { useMemo, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { COUNTRIES } from "@/lib/countries";
 const countryFieldNames = new Set(["current_country", "origin_country"]);
+export type OnboardingStage = "basics" | "background" | "goal";
+const FIELD_LABELS: Record<string, string> = {
+  full_name: "Full name",
+  mother_tongue: "Mother tongue",
+  other_languages: "Other languages",
+  german_level: "German level",
+  current_country: "Current country",
+  origin_country: "Country of origin",
+  birthday: "Birthday",
+  target: "Target",
+  avatar_url: "Profile photo",
+};
 
 export type OnboardingField = {
   name: string;
@@ -18,9 +30,11 @@ export type OnboardingField = {
 export function OnboardingForm({
   fields,
   initialValues,
+  currentStage,
 }: {
   fields: OnboardingField[];
   initialValues: Record<string, string | null | undefined>;
+  currentStage: OnboardingStage;
 }) {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const router = useRouter();
@@ -32,10 +46,10 @@ export function OnboardingForm({
     });
     return state;
   });
-  const [saving, setSaving] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [infoMessage, setInfoMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const [saved, setSaved] = useState(false);
   const fieldRefs = useRef<Record<
     string,
     HTMLInputElement | HTMLSelectElement | null
@@ -73,7 +87,7 @@ export function OnboardingForm({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (saving) return;
+    if (isSaving) return;
     const validationErrors: Record<string, string> = {};
     fields.forEach((field) => {
       if (!field.required) return;
@@ -93,30 +107,21 @@ export function OnboardingForm({
       return;
     }
 
-    setSaving(true);
+    setIsSaving(true);
     setMessage(null);
+    setInfoMessage(null);
 
     const { data } = await supabase.auth.getUser();
     if (!data.user) {
       setMessage("Session expired. Please log in again.");
-      setSaving(false);
+      setIsSaving(false);
       return;
     }
 
-    const payload: Record<string, string | null> = {
-      current_country: formState.current_country?.trim() || null,
-      origin_country: formState.origin_country?.trim() || null,
-      birthday: formState.birthday?.trim() || null,
-    };
+    const payload: Record<string, string | null> = {};
     fields.forEach((field) => {
-      if (
-        field.name === "current_country" ||
-        field.name === "origin_country" ||
-        field.name === "birthday"
-      ) {
-        return;
-      }
-      payload[field.name] = formState[field.name]?.trim() || null;
+      const value = formState[field.name]?.trim() || null;
+      payload[field.name] = value;
     });
     if (process.env.NODE_ENV !== "production") {
       console.log("payload", payload);
@@ -129,17 +134,44 @@ export function OnboardingForm({
 
     if (error) {
       setMessage(error.message);
-      setSaving(false);
+      setIsSaving(false);
       return;
     }
 
-    setMessage(null);
-    setSaved(true);
-    setSaving(false);
-    setTimeout(() => {
-      setSaved(false);
-      router.refresh();
-    }, 600);
+    const { data: progressRow, error: progressError } = await supabase
+      .from("v_onboarding_progress")
+      .select("next_step, missing_fields")
+      .eq("user_id", data.user.id)
+      .maybeSingle();
+
+    if (progressError) {
+      setMessage(progressError.message);
+      setIsSaving(false);
+      return;
+    }
+
+    if (progressRow?.next_step === "done") {
+      router.replace("/dashboard?onboarding=done");
+      return;
+    }
+
+    if (progressRow?.next_step && progressRow.next_step !== currentStage) {
+      router.replace("/dashboard/onboarding");
+      return;
+    }
+
+    if (progressRow?.next_step === currentStage) {
+      if (progressRow.missing_fields?.length) {
+        const friendly = progressRow.missing_fields
+.map((field: string) => FIELD_LABELS[field] ?? field)
+          .join(", ");
+        setInfoMessage(`Missing: ${friendly}`);
+      } else {
+        setInfoMessage(null);
+      }
+    }
+
+    setIsSaving(false);
   };
 
   return (
@@ -275,14 +307,17 @@ export function OnboardingForm({
       <div className="space-y-2">
         <button
           type="submit"
-          disabled={saving || saved}
+          disabled={isSaving}
           className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {saving ? "Saving…" : saved ? "Saved" : "Save & continue →"}
+          {isSaving ? "Saving…" : "Save & continue →"}
         </button>
         <p className="text-xs text-slate-500">
           All required fields must be filled to continue.
         </p>
+        {infoMessage && (
+          <p className="text-xs font-medium text-slate-600">{infoMessage}</p>
+        )}
       </div>
     </form>
   );
