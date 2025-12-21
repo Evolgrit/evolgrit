@@ -1142,12 +1142,12 @@ className="flex items-center gap-2 cursor-pointer"
           });
         }}
       >
-        {pathwaysCards.map((card) => {
+        {pathwaysCards.map((card, index) => {
           const modalDetail = pathwaysModalContent[card.id];
           const isInteractive = Boolean(modalDetail);
           return (
+            <Reveal key={card.id} delayMs={index * 120}>
             <article
-              key={card.id}
               role={isInteractive ? "button" : undefined}
               tabIndex={isInteractive ? 0 : -1}
               onClick={() => {
@@ -1196,6 +1196,7 @@ className="flex items-center gap-2 cursor-pointer"
                 )}
               </div>
             </article>
+            </Reveal>
           );
         })}
       </div>
@@ -1509,12 +1510,12 @@ className="flex items-center gap-2 cursor-pointer"
           });
         }}
       >
-        {getToKnowCards.map((card) => {
+        {getToKnowCards.map((card, index) => {
           const modalDetail = getToKnowModalContent[card.id];
           const isInteractive = Boolean(modalDetail);
           return (
+            <Reveal key={card.id} delayMs={index * 120}>
             <article
-              key={card.id}
               role={isInteractive ? "button" : undefined}
               tabIndex={isInteractive ? 0 : -1}
               onClick={() => {
@@ -1563,6 +1564,7 @@ className="flex items-center gap-2 cursor-pointer"
                 </div>
               </div>
             </article>
+            </Reveal>
           );
         })}
       </div>
@@ -1874,9 +1876,9 @@ className="flex items-center gap-2 cursor-pointer"
           {/* Swipeable cards */}
           <div className="relative">
             <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible snap-x snap-mandatory">
-              {employerCards.map((card) => (
+              {employerCards.map((card, index) => (
+                <Reveal key={card.id} delayMs={index * 120}>
                 <article
-                  key={card.id}
                   onClick={() => setOpenEmployerCardId(card.id)}
                   className="group snap-center shrink-0 w-[80%] sm:w-[320px] md:w-1/4 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 cursor-pointer relative flex flex-col justify-between p-5 pb-14 sm:pb-16"
                 >
@@ -1910,6 +1912,7 @@ className="flex items-center gap-2 cursor-pointer"
                     +
                   </button>
                 </article>
+                </Reveal>
               ))}
             </div>
           </div>
