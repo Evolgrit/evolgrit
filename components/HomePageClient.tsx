@@ -1875,12 +1875,16 @@ className="flex items-center gap-2 cursor-pointer"
 
           {/* Swipeable cards */}
           <div className="relative">
-            <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible snap-x snap-mandatory">
-              {employerCards.map((card, index) => (
-                <Reveal key={card.id} delayMs={index * 120}>
+            <Reveal
+              staggerChildren
+              staggerMs={120}
+              className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible snap-x snap-mandatory"
+            >
+              {employerCards.map((card) => (
                 <article
                   onClick={() => setOpenEmployerCardId(card.id)}
                   className="group snap-center shrink-0 w-[80%] sm:w-[320px] md:w-1/4 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 cursor-pointer relative flex flex-col justify-between p-5 pb-14 sm:pb-16"
+                  key={card.id}
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900 text-base text-slate-50">
@@ -1912,9 +1916,8 @@ className="flex items-center gap-2 cursor-pointer"
                     +
                   </button>
                 </article>
-                </Reveal>
               ))}
-            </div>
+            </Reveal>
           </div>
 
           {/* Mobile CTA unterhalb der Cards */}

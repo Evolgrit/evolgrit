@@ -1,14 +1,40 @@
 "use client";
 
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import {
+  Children,
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type RevealProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delayMs?: number;
+  durationMs?: number;
+  distance?: number;
+  once?: boolean;
+  threshold?: number;
+  staggerChildren?: boolean;
+  staggerMs?: number;
 };
 
-export function Reveal({ children, className, delayMs = 0 }: RevealProps) {
+export function Reveal({
+  children,
+  className,
+  delayMs = 0,
+  durationMs = 700,
+  distance = 10,
+  once = true,
+  threshold = 0.15,
+  staggerChildren = false,
+  staggerMs = 120,
+}: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -31,26 +57,52 @@ export function Reveal({ children, className, delayMs = 0 }: RevealProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.disconnect();
+            if (once) {
+              observer.unobserve(entry.target);
+            }
+          } else if (!once) {
+            setIsVisible(false);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold }
     );
 
     observer.observe(node);
 
     return () => observer.disconnect();
-  }, []);
+  }, [once, threshold]);
 
-  const durationMs = 800;
+  const transitionDelay = prefersReducedMotion
+    ? undefined
+    : `calc(${delayMs}ms + var(--reveal-stagger-index, 0) * ${staggerMs}ms)`;
+
   const baseStyle: CSSProperties = prefersReducedMotion
-    ? {}
+    ? { transition: "opacity 150ms linear" }
     : {
-        transition: `opacity ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1)`,
-        transitionDelay: `${delayMs}ms`,
-        transform: isVisible ? "translateY(0px)" : "translateY(10px)",
+        transition: `opacity ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1), filter ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1)`,
+        transitionDelay,
+        transform: isVisible ? "translateY(0px)" : `translateY(${distance}px)`,
+        filter: isVisible ? "blur(0px)" : "blur(6px)",
       };
+
+  const processedChildren =
+    staggerChildren && !prefersReducedMotion
+      ? Children.map(children, (child, index) => {
+          if (!isValidElement(child)) return child;
+          const el = child as ReactElement<{ style?: CSSProperties }>;
+          const existingStyle = el.props.style ?? {};
+          const styleWithVar: CSSProperties & {
+            "--reveal-stagger-index"?: number;
+          } = {
+            ...existingStyle,
+            "--reveal-stagger-index": index,
+          };
+          return cloneElement(el, {
+            style: styleWithVar,
+          });
+        })
+      : children;
 
   return (
     <div
@@ -60,7 +112,7 @@ export function Reveal({ children, className, delayMs = 0 }: RevealProps) {
       } ${className ?? ""}`}
       style={baseStyle}
     >
-      {children}
+      {processedChildren}
     </div>
   );
 }
