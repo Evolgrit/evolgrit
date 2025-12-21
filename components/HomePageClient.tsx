@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
 
 type EmployerCard = {
   id: string;
@@ -783,8 +784,9 @@ className="flex items-center gap-2 cursor-pointer"
 
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-5 pt-10 pb-24">
-    
+
 {/* HERO – MAIN MISSION + COHORT STATS */}
+<Reveal>
 <section className="border-b border-slate-100 bg-gradient-to-b from-slate-50/80 to-white">
   <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] items-start">
     {/* Left: Mission & CTAs */}
@@ -879,6 +881,7 @@ className="flex items-center gap-2 cursor-pointer"
     </aside>
   </div>
 </section>
+</Reveal>
 
       {/* LEARNER STORY – TINA */}
       <section
@@ -1099,6 +1102,7 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 {/* PATHWAYS – Apple-style cards */}
+<Reveal>
 <section id="pathways" className="mt-24">
   <div className="max-w-6xl mx-auto px-5">
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -1226,6 +1230,7 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+</Reveal>
 {activePathwayModal && (
   <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
     <button
@@ -1434,6 +1439,7 @@ className="flex items-center gap-2 cursor-pointer"
   </p>
 </section>
 {/* GET TO KNOW EVOLGRIT */}
+<Reveal>
 <section
   id="get-to-know"
   aria-labelledby="get-to-know-title"
@@ -1594,6 +1600,7 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+</Reveal>
 {activeGetToKnowModal && (
   <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
     <button
@@ -1661,6 +1668,7 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 )}
 
+<Reveal>
 <section id="journey" className="bg-white py-16 sm:py-20 scroll-mt-24">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
     <div className="text-center space-y-3 mb-10">
@@ -1743,6 +1751,7 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 </section>
+</Reveal>
 {activeJourneyPhase && (
   <div className="fixed inset-0 z-40">
     <button
@@ -1832,8 +1841,7 @@ className="flex items-center gap-2 cursor-pointer"
   </div>
 </section>
 
-
-
+      <Reveal>
       <section
         id="for-employers"
         className="bg-slate-50 py-16 sm:py-20"
@@ -1917,6 +1925,7 @@ className="flex items-center gap-2 cursor-pointer"
           </div>
         </div>
       </section>
+      </Reveal>
 {activeEmployerCard && (
   <div className="fixed inset-0 z-40">
     <button
