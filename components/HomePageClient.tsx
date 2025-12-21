@@ -1131,7 +1131,7 @@ className="flex items-center gap-2 cursor-pointer"
     <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={pathwaysScrollRef}
-        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6"
         onScroll={() => {
           const el = pathwaysScrollRef.current;
           if (!el) return;
@@ -1161,24 +1161,24 @@ className="flex items-center gap-2 cursor-pointer"
                   setActivePathwayModal(modalDetail);
                 }
               }}
-              className={`flex w-[82%] sm:w-[60%] md:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 ${
+              className={`flex w-[280px] sm:w-[320px] lg:w-[340px] xl:w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 ${
                 isInteractive ? "cursor-pointer" : ""
               }`}
             >
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                 <Image
                   src={card.image}
                   alt={card.title}
                   fill
                   className="object-cover"
-                  sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                  sizes="(min-width:1024px) 360px, (min-width:768px) 320px, 280px"
                 />
               </div>
               <div className="flex flex-col gap-2 px-5 pb-5 pt-4">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400 whitespace-nowrap overflow-hidden text-ellipsis">
                   {card.label}
                 </p>
-                <h3 className="text-base font-semibold text-slate-900 leading-snug">
+                <h3 className="text-base font-semibold text-slate-900 leading-snug line-clamp-3">
                   {card.title}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
