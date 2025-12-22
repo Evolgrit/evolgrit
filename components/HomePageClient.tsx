@@ -1132,11 +1132,11 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  <div className="relative -mx-5 sm:-mx-8 mt-6">
-    <div className="relative px-5 sm:px-8">
+  <div className="relative -mx-4 sm:-mx-6 lg:-mx-10 mt-6">
+    <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={pathwaysScrollRef}
-        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-5 sm:scroll-px-8 select-none cursor-grab active:cursor-grabbing"
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6 sm:scroll-px-8 select-none cursor-grab active:cursor-grabbing"
         onMouseDown={(event) => {
           const el = pathwaysScrollRef.current;
           if (!el) return;
@@ -1253,8 +1253,8 @@ className="flex items-center gap-2 cursor-pointer"
         →
       </button>
 
-      <div className="pointer-events-none absolute inset-y-2 left-0 w-10 bg-gradient-to-r from-white via-white/80 to-transparent rounded-r-[24px]" />
-      <div className="pointer-events-none absolute inset-y-2 right-0 w-10 bg-gradient-to-l from-white via-white/80 to-transparent rounded-l-[24px]" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-12 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-12 bg-gradient-to-l from-white/95 via-white/70 to-transparent" />
     </div>
   </div>
 </section>
@@ -1457,8 +1457,8 @@ className="flex items-center gap-2 cursor-pointer"
       →
     </button>
 
-    <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white/70 to-transparent lg:block" />
-    <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white/70 to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-12 bg-gradient-to-r from-slate-50/90 via-slate-50/60 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-12 bg-gradient-to-l from-slate-50/90 via-slate-50/60 to-transparent" />
   </div>
 
   <p className="mt-4 text-[11px] text-slate-400 text-center">
@@ -1500,11 +1500,11 @@ className="flex items-center gap-2 cursor-pointer"
       </a>
     </div>
   </div>
-  <div className="relative -mx-5 sm:-mx-8 mt-8">
-    <div className="relative px-5 sm:px-8">
+  <div className="relative -mx-4 sm:-mx-6 lg:-mx-10 mt-8">
+    <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={getToKnowScrollRef}
-        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-5 sm:scroll-px-8 cursor-grab active:cursor-grabbing select-none"
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6 sm:scroll-px-8 cursor-grab active:cursor-grabbing select-none"
         onMouseDown={(event) => {
           const el = getToKnowScrollRef.current;
           if (!el) return;
