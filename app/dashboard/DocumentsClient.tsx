@@ -43,6 +43,7 @@ type DocumentRecord = {
   bucket_id: string;
   object_path: string;
   category: string;
+  doc_type: string | null;
   file_name: string;
   mime_type: string | null;
   size_bytes: number | null;
@@ -59,13 +60,7 @@ type UploadTask = {
   message?: string;
 };
 
-export default function DocumentsClient({
-  initialDocuments,
-  userId,
-}: {
-  initialDocuments: DocumentRecord[];
-  userId: string;
-}) {
+export default function DocumentsClient({ initialDocuments }: { initialDocuments: DocumentRecord[] }) {
   const supabase = createSupabaseBrowserClient();
   const [documents, setDocuments] = useState<DocumentRecord[]>(initialDocuments);
   const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
@@ -164,18 +159,27 @@ export default function DocumentsClient({
     }
 
     const taskId = createUploadTask(categoryId, file.name);
-    const safeName = file.name.replace(/[^a-zA-Z0-9.\\-]/g, "_");
     const docId = replaceDoc?.id ?? crypto.randomUUID();
-    const objectPath = `${userId}/${categoryId}/${docId}-${safeName}`;
+    const docType = getDocType(file.type);
     let uploadCompleted = false;
+    let objectPath = "";
     try {
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (authError || !authData.user) {
+        throw new Error(authError?.message || "Not authenticated");
+      }
+      const authedUserId = authData.user.id;
+      objectPath = `${authedUserId}/${categoryId}/${crypto.randomUUID()}-${file.name}`;
       const uploadOptions = replaceDoc
         ? { contentType: file.type, upsert: true }
         : { contentType: file.type };
       const { error: uploadError } = await supabase.storage
         .from("documents")
         .upload(objectPath, file, uploadOptions);
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        console.error("documents storage upload error", uploadError);
+        throw uploadError;
+      }
       uploadCompleted = true;
 
       if (replaceDoc) {
@@ -185,10 +189,11 @@ export default function DocumentsClient({
             category: categoryId,
             bucket_id: "documents",
             object_path: objectPath,
+            doc_type: docType,
             file_name: file.name,
             mime_type: file.type,
             size_bytes: file.size,
-            status: "active",
+            status: "uploaded",
           })
           .eq("id", replaceDoc.id)
           .select()
@@ -208,19 +213,32 @@ export default function DocumentsClient({
           .from("documents")
           .insert({
             id: docId,
-            user_id: userId,
+            user_id: authedUserId,
             category: categoryId,
             bucket_id: "documents",
             object_path: objectPath,
+            doc_type: docType,
             file_name: file.name,
             mime_type: file.type,
             size_bytes: file.size,
-            status: "active",
+            status: "uploaded",
           })
           .select()
           .single();
         if (insertError || !inserted) {
-          console.error("documents insert error", insertError?.message);
+          console.error("documents insert error", {
+            code: insertError?.code,
+            message: insertError?.message,
+            details: insertError?.details,
+            hint: insertError?.hint,
+            payload: {
+              user_id: authedUserId,
+              category: categoryId,
+              bucket_id: "documents",
+              object_path: objectPath,
+              doc_type: docType,
+            },
+          });
           await supabase.storage.from("documents").remove([objectPath]);
           finishUploadTask(taskId, "error", "Metadata save failed");
           const metaMessage =
@@ -513,4 +531,11 @@ function formatType(mime: string | null) {
   if (mime.includes("png")) return "PNG";
   if (mime.includes("jpg") || mime.includes("jpeg")) return "JPG";
   return mime.split("/")[1]?.toUpperCase() ?? "FILE";
+}
+
+function getDocType(mime: string | null) {
+  if (!mime) return "other";
+  if (mime.toLowerCase().includes("pdf")) return "pdf";
+  if (mime.toLowerCase().startsWith("image/")) return "image";
+  return "other";
 }
