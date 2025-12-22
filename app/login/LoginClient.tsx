@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import PasswordField from "@/components/ui/PasswordField";
 
 type Status = "idle" | "loading" | "success" | "error";
 type InviteState = "unknown" | "none" | "pending" | "approved";
@@ -87,10 +88,13 @@ export default function LoginClient() {
     if (typeof document === "undefined") return;
     const style = document.createElement("style");
     style.innerHTML = `
-      input:-webkit-autofill {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus {
         -webkit-text-fill-color: #0f172a !important;
         box-shadow: 0 0 0px 1000px #ffffff inset;
         caret-color: #0f172a;
+        transition: background-color 5000s ease-in-out 0s;
       }
     `;
     document.head.appendChild(style);
@@ -411,12 +415,12 @@ export default function LoginClient() {
                   onBlur={() => checkEmployerState(loginEmail)}
                   placeholder="you@company.com"
                 />
-                <TextInput
+                <PasswordField
                   label="Password"
-                  type="password"
                   required
                   value={loginPassword}
                   onChange={setLoginPassword}
+                  autoComplete="current-password"
                   placeholder="Password"
                 />
                 {inviteState === "pending" && (
@@ -496,9 +500,8 @@ export default function LoginClient() {
                     onChange={setLoginEmail}
                     placeholder="you@email.com"
                   />
-                  <TextInput
+                  <PasswordField
                     label="Password"
-                    type="password"
                     required
                     autoComplete="current-password"
                     value={loginPassword}
@@ -570,14 +573,15 @@ export default function LoginClient() {
                   onChange={setSignupEmail}
                   placeholder="you@email.com"
                 />
-                <TextInput
+                <PasswordField
                   label="Password"
-                  type="password"
                   required
                   autoComplete="new-password"
                   value={signupPassword}
                   onChange={setSignupPassword}
                   placeholder="Create a password"
+                  minLength={12}
+                  showCopy
                 />
                 <PasswordChecklist rules={passwordRules} />
                 <ActionButton

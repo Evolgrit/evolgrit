@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import PasswordField from "@/components/ui/PasswordField";
 
 export default function ResetPasswordPage() {
   const supabase = createSupabaseBrowserClient();
@@ -74,30 +75,22 @@ export default function ResetPasswordPage() {
           Choose a strong password to secure your account.
         </p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4" hidden={!sessionReady}>
-          <div>
-            <label className="text-sm font-medium text-slate-900">New password</label>
-            <input
-              type="password"
-              required
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              autoComplete="new-password"
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-              placeholder="Enter new password"
-            />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-slate-900">Confirm password</label>
-            <input
-              type="password"
-              required
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              autoComplete="new-password"
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-              placeholder="Confirm new password"
-            />
-          </div>
+          <PasswordField
+            label="New password"
+            required
+            autoComplete="new-password"
+            value={newPassword}
+            onChange={setNewPassword}
+            placeholder="Enter new password"
+          />
+          <PasswordField
+            label="Confirm password"
+            required
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+            placeholder="Confirm new password"
+          />
           <button
             type="submit"
             disabled={status === "saving"}
