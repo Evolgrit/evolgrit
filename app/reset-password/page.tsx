@@ -16,7 +16,7 @@ export default function ResetPasswordPage() {
     let mounted = true;
     supabase.auth.getUser().then(({ data }) => {
       if (!mounted) return;
-      if (!data.user) router.replace("/login");
+      if (!data.user) router.replace("/forgot-password");
     });
     return () => {
       mounted = false;
