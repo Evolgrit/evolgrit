@@ -77,6 +77,16 @@ const phaseCards = [
   },
 ] as const;
 
+function normalizePhaseKey(value?: string | null) {
+  if (!value) return "";
+  return value.toLowerCase().replace(/\s+/g, "");
+}
+
+function isPhaseOnePhase(value?: string | null) {
+  const key = normalizePhaseKey(value);
+  return key.includes("phase1") || key.includes("phase_1");
+}
+
 function phaseToneClasses(
   tone: "blue" | "emerald" | "violet"
 ): { badge: string; tag: string } {
@@ -113,10 +123,66 @@ export default async function DashboardPage() {
       .single(),
     supabase
       .from("v_onboarding_progress")
-      .select("completed, total")
+      .select("completed, total, is_complete")
       .eq("user_id", data.user.id)
       .maybeSingle(),
   ]);
+
+  if (onboarding?.is_complete) {
+    const { data: existing } = await supabase
+      .from("journey_events")
+      .select("id")
+      .eq("user_id", data.user.id)
+      .eq("type", "onboarding_complete")
+      .maybeSingle();
+
+    if (!existing) {
+      await supabase.from("journey_events").insert({
+        user_id: data.user.id,
+        type: "onboarding_complete",
+        title: "Onboarding completed",
+        detail:
+          "All onboarding details are in place. Time to focus on learning modules.",
+        status: "completed",
+        phase: "Phase 1",
+        metadata: {
+          completed: onboarding.completed ?? 0,
+          total: onboarding.total ?? 0,
+        },
+        event_date: new Date().toISOString(),
+      });
+    }
+  }
+
+  const { data: modulePhases } = await supabase
+    .from("modules")
+    .select("id, phase");
+
+  const phaseOneIds =
+    modulePhases
+      ?.filter((module) => isPhaseOnePhase(module.phase))
+      .map((module) => module.id) ?? [];
+
+  let phaseOneProgress: { module_id: string; status: string }[] = [];
+  if (phaseOneIds.length > 0) {
+    const { data: progressRows } = await supabase
+      .from("module_progress")
+      .select("module_id, status")
+      .eq("user_id", data.user.id)
+      .in("module_id", phaseOneIds);
+    phaseOneProgress = progressRows ?? [];
+  }
+
+  const modulesTotal = phaseOneIds.length;
+  const modulesCompleted = phaseOneProgress.filter(
+    (row) => row.status === "completed"
+  ).length;
+  const modulesSummaryLabel =
+    modulesTotal > 0 ? `${modulesCompleted} / ${modulesTotal}` : "—";
+  const modulesSummaryHelper =
+    modulesTotal > 0 && modulesCompleted >= modulesTotal
+      ? "All priority modules done"
+      : "Keep momentum tonight";
 
   const onboardingTotal = onboarding?.total ?? 8;
   const onboardingCompleted = Math.min(
@@ -175,8 +241,12 @@ export default async function DashboardPage() {
               <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
                 Modules this week
               </p>
-              <p className="mt-1 text-lg font-semibold text-slate-900">2 / 3</p>
-              <p className="text-xs text-slate-500">Keep momentum tonight</p>
+              <p className="mt-1 text-lg font-semibold text-slate-900">
+                {modulesSummaryLabel}
+              </p>
+              <p className="text-xs text-slate-500">
+                {modulesSummaryHelper}
+              </p>
             </div>
           </div>
         </article>
