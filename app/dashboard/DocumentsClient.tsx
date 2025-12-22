@@ -27,6 +27,8 @@ const categories = [
   },
 ] as const;
 
+const categorySet = new Set(categories.map((cat) => cat.id));
+
 const allowedMimeTypes = [
   "application/pdf",
   "image/png",
@@ -155,12 +157,16 @@ export default function DocumentsClient({
       showMessage("error", "File is larger than 25 MB.");
       return;
     }
+    if (!categorySet.has(categoryId as (typeof categories)[number]["id"])) {
+      showMessage("error", "Unsupported category.");
+      return;
+    }
 
     const taskId = createUploadTask(categoryId, file.name);
     try {
       const safeName = file.name.replace(/[^a-zA-Z0-9.\\-]/g, "_");
       const docId = replaceDoc?.id ?? crypto.randomUUID();
-      const storagePath = `documents/${userId}/${categoryId}/${docId}-${safeName}`;
+      const storagePath = `${userId}/${categoryId}/${docId}-${safeName}`;
       const uploadOptions = replaceDoc
         ? { contentType: file.type, upsert: true }
         : { contentType: file.type };
@@ -215,8 +221,10 @@ export default function DocumentsClient({
       finishUploadTask(taskId, "done");
     } catch (error) {
       console.error(error);
-      finishUploadTask(taskId, "error", "Upload failed");
-      showMessage("error", "Upload failed. Please try again.");
+      const message =
+        error instanceof Error && error.message ? error.message : "Upload failed";
+      finishUploadTask(taskId, "error", message);
+      showMessage("error", message);
     }
   }
 
