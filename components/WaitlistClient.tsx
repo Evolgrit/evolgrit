@@ -97,10 +97,10 @@ export default function WaitlistClient() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 px-5 py-16 sm:py-20">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 px-4 py-12 sm:px-5 sm:py-16">
       <div className="max-w-6xl mx-auto">
         <div className="max-w-xl mx-auto">
-          <div className="mb-8 text-center">
+          <div className="mb-6 text-center">
             <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
               Learner waitlist
             </p>
@@ -112,11 +112,11 @@ export default function WaitlistClient() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
+          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm p-4 sm:p-6">
             {status.type === "success" && (
               <div
                 ref={successRef}
-                className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900"
+                className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"
               >
                 <p className="font-semibold">You’re on the list 🎉</p>
                 <p className="mt-1 text-emerald-800">
@@ -160,10 +160,10 @@ export default function WaitlistClient() {
               </div>
             )}
 
-            <form onSubmit={onSubmit} className="space-y-5">
-              <div className="grid gap-4">
+            <form onSubmit={onSubmit} className="space-y-4">
+              <div className="grid gap-3">
                 <div>
-                  <label className="text-sm font-medium text-slate-900">
+                  <label className="text-xs font-medium text-slate-900">
                     Full name *
                   </label>
                   <input
@@ -171,7 +171,7 @@ export default function WaitlistClient() {
                     onChange={(e) =>
                       setForm((s) => ({ ...s, full_name: e.target.value }))
                     }
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="Your name"
                     required
                     disabled={status.type === "success" || isSubmitting}
@@ -179,7 +179,7 @@ export default function WaitlistClient() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-slate-900">
+                  <label className="text-xs font-medium text-slate-900">
                     Email *
                   </label>
                   <input
@@ -188,7 +188,7 @@ export default function WaitlistClient() {
                     onChange={(e) =>
                       setForm((s) => ({ ...s, email: e.target.value }))
                     }
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="you@email.com"
                     required
                     autoFocus
@@ -197,7 +197,7 @@ export default function WaitlistClient() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-slate-900">
+                  <label className="text-xs font-medium text-slate-900">
                     Current country
                   </label>
                   <input
@@ -206,7 +206,7 @@ export default function WaitlistClient() {
                     onChange={(e) =>
                       setForm((s) => ({ ...s, country: e.target.value }))
                     }
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="Start typing… (e.g., deu → Germany)"
                     autoComplete="country-name"
                     disabled={status.type === "success" || isSubmitting}
@@ -219,9 +219,9 @@ export default function WaitlistClient() {
                   </datalist>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div>
-                    <label className="text-sm font-medium text-slate-900">
+                    <label className="text-xs font-medium text-slate-900">
                       Target in Germany
                     </label>
                     <select
@@ -232,7 +232,7 @@ export default function WaitlistClient() {
                           target: e.target.value as FormState["target"],
                         }))
                       }
-                      className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                       disabled={status.type === "success" || isSubmitting}
                     >
                       <option value="">Select…</option>
@@ -243,7 +243,7 @@ export default function WaitlistClient() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-slate-900">
+                    <label className="text-xs font-medium text-slate-900">
                       German level
                     </label>
                     <select
@@ -254,7 +254,7 @@ export default function WaitlistClient() {
                           german_level: e.target.value as FormState["german_level"],
                         }))
                       }
-                      className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                       disabled={status.type === "success" || isSubmitting}
                     >
                       <option value="">Select…</option>
@@ -268,46 +268,48 @@ export default function WaitlistClient() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-slate-900">
-                    Start timeframe
-                  </label>
-                  <select
-                    value={form.start_timeframe}
-                    onChange={(e) =>
-                      setForm((s) => ({
-                        ...s,
-                        start_timeframe:
-                          e.target.value as FormState["start_timeframe"],
-                      }))
-                    }
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                    disabled={status.type === "success" || isSubmitting}
-                  >
-                    <option value="">Select…</option>
-                    <option value="0–3 months">0–3 months</option>
-                    <option value="3–6 months">3–6 months</option>
-                    <option value="6–12 months">6–12 months</option>
-                  </select>
-                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label className="text-xs font-medium text-slate-900">
+                      Start timeframe
+                    </label>
+                    <select
+                      value={form.start_timeframe}
+                      onChange={(e) =>
+                        setForm((s) => ({
+                          ...s,
+                          start_timeframe:
+                            e.target.value as FormState["start_timeframe"],
+                        }))
+                      }
+                      className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      disabled={status.type === "success" || isSubmitting}
+                    >
+                      <option value="">Select…</option>
+                      <option value="0–3 months">0–3 months</option>
+                      <option value="3–6 months">3–6 months</option>
+                      <option value="6–12 months">6–12 months</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="text-sm font-medium text-slate-900">
-                    WhatsApp (optional)
-                  </label>
-                  <input
-                    value={form.whatsapp}
-                    onChange={(e) =>
-                      setForm((s) => ({ ...s, whatsapp: e.target.value }))
-                    }
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                    placeholder="+49 …"
-                    disabled={status.type === "success" || isSubmitting}
-                  />
+                  <div>
+                    <label className="text-xs font-medium text-slate-900">
+                      WhatsApp (optional)
+                    </label>
+                    <input
+                      value={form.whatsapp}
+                      onChange={(e) =>
+                        setForm((s) => ({ ...s, whatsapp: e.target.value }))
+                      }
+                      className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                      placeholder="+49 …"
+                      disabled={status.type === "success" || isSubmitting}
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+              <div className="pt-1 flex flex-col sm:flex-row gap-3">
                 <button
                   type="submit"
                   disabled={!canSubmit || isSubmitting || status.type === "success"}
