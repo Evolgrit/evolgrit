@@ -84,6 +84,22 @@ export default function LoginClient() {
   const [oauthMessage, setOauthMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
+    const style = document.createElement("style");
+    style.innerHTML = `
+      input:-webkit-autofill {
+        -webkit-text-fill-color: #0f172a !important;
+        box-shadow: 0 0 0px 1000px #ffffff inset;
+        caret-color: #0f172a;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isEmployer) return;
     setInviteState("unknown");
   }, [loginEmail, magicEmail, isEmployer]);
@@ -429,7 +445,7 @@ export default function LoginClient() {
                     value={magicEmail}
                     onChange={(e) => setMagicEmail(e.target.value)}
                     onBlur={() => checkEmployerState(magicEmail)}
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 caret-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
                     placeholder="you@company.com"
                   />
                   <ActionButton
@@ -629,7 +645,7 @@ function TextInput({
         onBlur={onBlur}
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 caret-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
       />
     </label>
   );
@@ -643,7 +659,7 @@ function TextareaInput({ label, value, onChange, placeholder }: TextareaInputPro
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 caret-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
         rows={3}
       />
     </label>
