@@ -5,11 +5,12 @@ import DocumentsClient from "../DocumentsClient";
 type DocumentRow = {
   id: string;
   category: string;
-  path: string;
-  filename: string;
+  storage_path: string;
+  file_name: string;
   mime_type: string | null;
-  size: number | null;
+  size_bytes: number | null;
   created_at: string;
+  title: string | null;
 };
 
 export default async function DocumentsPage() {
@@ -19,7 +20,9 @@ export default async function DocumentsPage() {
 
   const { data: documents } = await supabase
     .from("documents")
-    .select("id, category, path, filename, mime_type, size, created_at")
+    .select(
+      "id, category, storage_path, file_name, mime_type, size_bytes, created_at, title"
+    )
     .eq("user_id", data.user.id)
     .order("created_at", { ascending: false });
 
