@@ -71,6 +71,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
   const [previewDoc, setPreviewDoc] = useState<{ url: string; record: DocumentRecord } | null>(
     null
   );
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   const docsByCategory = useMemo(() => {
     return categories.map((category) => ({
@@ -207,7 +208,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
         setDocuments((prev) =>
           prev.map((doc) => (doc.id === replaceDoc.id ? (updated as DocumentRecord) : doc))
         );
-        showMessage("success", `${file.name} replaced.`);
+        showMessage("success", "Document ready.");
       } else {
         const { data: inserted, error: insertError } = await supabase
           .from("documents")
@@ -248,7 +249,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
         }
 
         setDocuments((prev) => [inserted as DocumentRecord, ...prev]);
-        showMessage("success", `${file.name} uploaded.`);
+        showMessage("success", "Document ready.");
       }
 
       finishUploadTask(taskId, "done");
@@ -280,15 +281,25 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
     }
   }
 
+  useEffect(() => {
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setPreviewDoc(null);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   async function handleView(doc: DocumentRecord) {
     const { data, error } = await supabase.storage
       .from("documents")
-      .createSignedUrl(doc.object_path, 120);
+      .createSignedUrl(doc.object_path, 600);
     if (error || !data?.signedUrl) {
       showMessage("error", "Could not create download link.");
       return;
     }
-    if (doc.mime_type?.startsWith("image/")) {
+    if (doc.mime_type?.startsWith("image/") || doc.mime_type === "application/pdf") {
       setPreviewDoc({ url: data.signedUrl, record: doc });
     } else {
       window.open(data.signedUrl, "_blank", "noopener,noreferrer");
@@ -387,11 +398,11 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
           ))}
       </div>
 
-      <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
-        {docsByCategory
-          .filter((category) => category.id === activeCategory)
-          .map((category) => (
-            <article key={category.id} className="space-y-5">
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+            {docsByCategory
+              .filter((category) => category.id === activeCategory)
+              .map((category) => (
+                <article key={category.id} className="space-y-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -419,10 +430,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
               ) : (
                 <div className="space-y-3">
                   {category.documents.map((doc) => (
-                    <div
-                      key={doc.id}
-                      className="rounded-2xl border border-slate-200 bg-white p-4 text-sm"
-                    >
+                    <div key={doc.id} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm">
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
                           <p className="font-medium text-slate-900">{doc.file_name}</p>
@@ -431,7 +439,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
                           </p>
                         </div>
                         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                          {formatType(doc.mime_type)}
+                          {formatDocType(doc.doc_type)}
                         </span>
                       </div>
                       <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
@@ -453,10 +461,26 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleDelete(doc)}
-                          className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-700 hover:border-rose-300"
+                          onClick={() => {
+                            if (pendingDeleteId === doc.id) {
+                              setPendingDeleteId(null);
+                              handleDelete(doc);
+                            } else {
+                              setPendingDeleteId(doc.id);
+                              window.setTimeout(() => {
+                                setPendingDeleteId((current) =>
+                                  current === doc.id ? null : current
+                                );
+                              }, 5000);
+                            }
+                          }}
+                          className={`rounded-full border px-3 py-1 ${
+                            pendingDeleteId === doc.id
+                              ? "border-rose-400 bg-rose-50 text-rose-700"
+                              : "border-rose-200 bg-rose-50 text-rose-700 hover:border-rose-300"
+                          }`}
                         >
-                          Delete
+                          {pendingDeleteId === doc.id ? "Confirm delete" : "Delete"}
                         </button>
                       </div>
                     </div>
@@ -475,29 +499,48 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
             className="absolute inset-0 cursor-default"
             onClick={() => setPreviewDoc(null)}
           />
-          <div className="relative z-10 max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
-            <button
-              type="button"
-              className="absolute right-4 top-4 rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-600 hover:bg-slate-200"
-              onClick={() => setPreviewDoc(null)}
-            >
-              Close
-            </button>
-            <div className="mt-4">
-              <p className="text-sm font-semibold text-slate-900">{previewDoc.record.file_name}</p>
-              <p className="text-xs text-slate-500">
-                {formatBytes(previewDoc.record.size_bytes ?? 0)} ·{" "}
-                {formatDate(previewDoc.record.created_at)}
-              </p>
+          <div className="relative z-10 max-w-5xl w-full rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-900">{previewDoc.record.file_name}</p>
+                <p className="text-xs text-slate-500">
+                  {formatBytes(previewDoc.record.size_bytes ?? 0)} · {formatDate(previewDoc.record.created_at)}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  href={previewDoc.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-700 hover:border-slate-300"
+                >
+                  Download
+                </a>
+                <button
+                  type="button"
+                  className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-600 hover:bg-slate-200"
+                  onClick={() => setPreviewDoc(null)}
+                >
+                  Close
+                </button>
+              </div>
             </div>
             <div className="mt-4">
-              <Image
-                src={previewDoc.url}
-                alt={previewDoc.record.file_name}
-                width={900}
-                height={600}
-                className="h-full w-full rounded-2xl border border-slate-200 object-contain"
-              />
+              {previewDoc.record.mime_type === "application/pdf" ? (
+                <iframe
+                  src={previewDoc.url}
+                  className="h-[80vh] w-full rounded-2xl border border-slate-200"
+                  title={previewDoc.record.file_name}
+                />
+              ) : (
+                <Image
+                  src={previewDoc.url}
+                  alt={previewDoc.record.file_name}
+                  width={1200}
+                  height={800}
+                  className="mx-auto max-h-[80vh] w-auto rounded-2xl border border-slate-200 object-contain"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -525,17 +568,15 @@ function formatDate(dateString: string) {
   });
 }
 
-function formatType(mime: string | null) {
-  if (!mime) return "FILE";
-  if (mime === "application/pdf") return "PDF";
-  if (mime.includes("png")) return "PNG";
-  if (mime.includes("jpg") || mime.includes("jpeg")) return "JPG";
-  return mime.split("/")[1]?.toUpperCase() ?? "FILE";
-}
-
 function getDocType(mime: string | null) {
   if (!mime) return "other";
   if (mime.toLowerCase().includes("pdf")) return "pdf";
   if (mime.toLowerCase().startsWith("image/")) return "image";
   return "other";
+}
+
+function formatDocType(type: string | null) {
+  if (type === "pdf") return "PDF";
+  if (type === "image") return "IMG";
+  return "FILE";
 }
