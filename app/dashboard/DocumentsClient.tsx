@@ -40,13 +40,14 @@ const MAX_FILE_BYTES = 25 * 1024 * 1024;
 
 type DocumentRecord = {
   id: string;
+  bucket_id: string;
+  object_path: string;
   category: string;
-  storage_path: string;
   file_name: string;
   mime_type: string | null;
   size_bytes: number | null;
+  status: string | null;
   created_at: string;
-  title: string | null;
 };
 
 type UploadTask = {
@@ -165,7 +166,7 @@ export default function DocumentsClient({
     const taskId = createUploadTask(categoryId, file.name);
     const safeName = file.name.replace(/[^a-zA-Z0-9.\\-]/g, "_");
     const docId = replaceDoc?.id ?? crypto.randomUUID();
-    const storagePath = `${userId}/${categoryId}/${docId}-${safeName}`;
+    const objectPath = `${userId}/${categoryId}/${docId}-${safeName}`;
     let uploadCompleted = false;
     try {
       const uploadOptions = replaceDoc
@@ -173,7 +174,7 @@ export default function DocumentsClient({
         : { contentType: file.type };
       const { error: uploadError } = await supabase.storage
         .from("documents")
-        .upload(storagePath, file, uploadOptions);
+        .upload(objectPath, file, uploadOptions);
       if (uploadError) throw uploadError;
       uploadCompleted = true;
 
@@ -182,18 +183,20 @@ export default function DocumentsClient({
           .from("documents")
           .update({
             category: categoryId,
-            storage_path: storagePath,
+            bucket_id: "documents",
+            object_path: objectPath,
             file_name: file.name,
             mime_type: file.type,
             size_bytes: file.size,
+            status: "active",
           })
           .eq("id", replaceDoc.id)
           .select()
           .single();
         if (updateError || !updated) throw updateError;
 
-        if (replaceDoc.storage_path !== storagePath) {
-          await supabase.storage.from("documents").remove([replaceDoc.storage_path]);
+        if (replaceDoc.object_path !== objectPath) {
+          await supabase.storage.from("documents").remove([replaceDoc.object_path]);
         }
 
         setDocuments((prev) =>
@@ -207,18 +210,22 @@ export default function DocumentsClient({
             id: docId,
             user_id: userId,
             category: categoryId,
-            storage_path: storagePath,
+            bucket_id: "documents",
+            object_path: objectPath,
             file_name: file.name,
             mime_type: file.type,
             size_bytes: file.size,
+            status: "active",
           })
           .select()
           .single();
         if (insertError || !inserted) {
           console.error("documents insert error", insertError?.message);
-          await supabase.storage.from("documents").remove([storagePath]);
+          await supabase.storage.from("documents").remove([objectPath]);
           finishUploadTask(taskId, "error", "Metadata save failed");
-          showMessage("error", "Uploaded to storage, but metadata save failed.");
+          const metaMessage =
+            insertError?.message || "Uploaded to storage, but metadata save failed.";
+          showMessage("error", metaMessage);
           return;
         }
 
@@ -232,7 +239,7 @@ export default function DocumentsClient({
       const message =
         error instanceof Error && error.message ? error.message : "Upload failed";
       if (uploadCompleted && !replaceDoc) {
-        await supabase.storage.from("documents").remove([storagePath]);
+        await supabase.storage.from("documents").remove([objectPath]);
       }
       finishUploadTask(taskId, "error", message);
       showMessage("error", message);
@@ -243,7 +250,7 @@ export default function DocumentsClient({
     try {
       const { error: storageError } = await supabase.storage
         .from("documents")
-        .remove([doc.storage_path]);
+        .remove([doc.object_path]);
       if (storageError) throw storageError;
 
       await supabase.from("documents").delete().eq("id", doc.id);
@@ -258,7 +265,7 @@ export default function DocumentsClient({
   async function handleView(doc: DocumentRecord) {
     const { data, error } = await supabase.storage
       .from("documents")
-      .createSignedUrl(doc.storage_path, 120);
+      .createSignedUrl(doc.object_path, 120);
     if (error || !data?.signedUrl) {
       showMessage("error", "Could not create download link.");
       return;
