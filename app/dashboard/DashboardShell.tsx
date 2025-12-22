@@ -45,6 +45,50 @@ export default function DashboardShell({
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <div className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 py-4 backdrop-blur lg:hidden">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              Evolgrit
+            </p>
+            <p className="text-base font-semibold text-slate-900">Learner hub</p>
+          </div>
+          <Link
+            href="/dashboard/profile"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+          >
+            <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 text-[11px] font-semibold text-slate-700">
+              {profileAvatar ? (
+                <Image
+                  src={profileAvatar}
+                  alt={profileName}
+                  width={32}
+                  height={32}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                initials
+              )}
+            </span>
+            <span className="text-xs text-blue-600">Profile →</span>
+          </Link>
+        </div>
+
+        <nav className="mt-3 flex snap-x gap-2 overflow-x-auto pb-1 text-sm font-medium text-slate-600 [-webkit-overflow-scrolling:touch]">
+          {navWithState.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`whitespace-nowrap rounded-full px-4 py-2 transition ${
+                item.active ? "bg-slate-900/5 text-slate-900" : "hover:text-slate-900"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
       <div className="mx-auto flex min-h-screen max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <aside className="hidden w-64 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:flex">
           <div>
