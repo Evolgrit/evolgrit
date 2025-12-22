@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
@@ -522,18 +522,96 @@ export default function HomePageClient() {
     startX: 0,
     scrollLeft: 0,
   });
-  const [pathwaysEdges, setPathwaysEdges] = useState({
+  const [pathwaysCarousel, setPathwaysCarousel] = useState({
     atStart: true,
     atEnd: false,
+    canScroll: false,
+    step: 0,
   });
+  const prevPathwaysDisabled =
+    !pathwaysCarousel.canScroll || pathwaysCarousel.atStart;
+  const nextPathwaysDisabled =
+    !pathwaysCarousel.canScroll || pathwaysCarousel.atEnd;
+  const scrollByCard = (
+    ref: RefObject<HTMLDivElement | null>,
+    step: number,
+    direction: 1 | -1
+  ) => {
+    const el = ref.current;
+    if (!el || !step) return;
+    el.scrollBy({ left: step * direction, behavior: "smooth" });
+  };
+
+  const updatePathwaysCarousel = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const el = pathwaysScrollRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const canScroll = scrollWidth > clientWidth + 2;
+    const atStart = scrollLeft <= 2;
+    const atEnd = scrollLeft + clientWidth >= scrollWidth - 2;
+    let step = 0;
+    const firstItem = el.querySelector<HTMLElement>("[data-carousel-item]");
+    if (firstItem) {
+      const style = window.getComputedStyle(el);
+      const gapValue = style.columnGap || style.gap || "0";
+      const gap = parseFloat(gapValue) || 0;
+      step = firstItem.getBoundingClientRect().width + gap;
+    }
+    setPathwaysCarousel((prev) => {
+      if (
+        prev.atStart === atStart &&
+        prev.atEnd === atEnd &&
+        prev.canScroll === canScroll &&
+        Math.abs(prev.step - step) < 0.5
+      ) {
+        return prev;
+      }
+      return { atStart, atEnd, canScroll, step };
+    });
+  }, []);
+
   useEffect(() => {
     const el = pathwaysScrollRef.current;
     if (!el) return;
-    setPathwaysEdges({
-      atStart: el.scrollLeft <= 8,
-      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
+
+    updatePathwaysCarousel();
+
+    const handleScroll = () => updatePathwaysCarousel();
+    const handleResize = () => updatePathwaysCarousel();
+
+    el.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => updatePathwaysCarousel())
+        : null;
+    resizeObserver?.observe(el);
+
+    const fonts = (document as Document & { fonts?: FontFaceSet }).fonts;
+    const handleFonts = () => updatePathwaysCarousel();
+    fonts?.addEventListener("loadingdone", handleFonts);
+
+    const handleImageLoad = () => updatePathwaysCarousel();
+    const images = Array.from(el.querySelectorAll("img"));
+    images.forEach((img) => {
+      if (img.complete) return;
+      img.addEventListener("load", handleImageLoad, { once: true });
+      img.addEventListener("error", handleImageLoad, { once: true });
     });
-  }, []);
+
+    const timeout = window.setTimeout(updatePathwaysCarousel, 200);
+
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      resizeObserver?.disconnect();
+      fonts?.removeEventListener("loadingdone", handleFonts);
+      window.clearTimeout(timeout);
+    };
+  }, [updatePathwaysCarousel]);
+
   const [activeJourneyPhase, setActiveJourneyPhase] =
     useState<(typeof evolgritPhases)[number] | null>(null);
   const journeysScrollRef = useRef<HTMLDivElement | null>(null);
@@ -560,20 +638,86 @@ export default function HomePageClient() {
     startX: 0,
     scrollLeft: 0,
   });
-  const [getToKnowEdges, setGetToKnowEdges] = useState({
+  const [getToKnowCarousel, setGetToKnowCarousel] = useState({
     atStart: true,
     atEnd: false,
+    canScroll: false,
+    step: 0,
   });
-  const [activeGetToKnowModal, setActiveGetToKnowModal] =
-    useState<GetToKnowModalContent | null>(null);
+  const prevGetToKnowDisabled =
+    !getToKnowCarousel.canScroll || getToKnowCarousel.atStart;
+  const nextGetToKnowDisabled =
+    !getToKnowCarousel.canScroll || getToKnowCarousel.atEnd;
+  const updateGetToKnowCarousel = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const el = getToKnowScrollRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const canScroll = scrollWidth > clientWidth + 2;
+    const atStart = scrollLeft <= 2;
+    const atEnd = scrollLeft + clientWidth >= scrollWidth - 2;
+    let step = 0;
+    const firstItem = el.querySelector<HTMLElement>("[data-carousel-item]");
+    if (firstItem) {
+      const style = window.getComputedStyle(el);
+      const gapValue = style.columnGap || style.gap || "0";
+      const gap = parseFloat(gapValue) || 0;
+      step = firstItem.getBoundingClientRect().width + gap;
+    }
+    setGetToKnowCarousel((prev) => {
+      if (
+        prev.atStart === atStart &&
+        prev.atEnd === atEnd &&
+        prev.canScroll === canScroll &&
+        Math.abs(prev.step - step) < 0.5
+      ) {
+        return prev;
+      }
+      return { atStart, atEnd, canScroll, step };
+    });
+  }, []);
   useEffect(() => {
     const el = getToKnowScrollRef.current;
     if (!el) return;
-    setGetToKnowEdges({
-      atStart: el.scrollLeft <= 8,
-      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
+
+    updateGetToKnowCarousel();
+
+    const handleScroll = () => updateGetToKnowCarousel();
+    const handleResize = () => updateGetToKnowCarousel();
+
+    el.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => updateGetToKnowCarousel())
+        : null;
+    resizeObserver?.observe(el);
+
+    const fonts = (document as Document & { fonts?: FontFaceSet }).fonts;
+    const handleFonts = () => updateGetToKnowCarousel();
+    fonts?.addEventListener("loadingdone", handleFonts);
+
+    const handleImageLoad = () => updateGetToKnowCarousel();
+    const images = Array.from(el.querySelectorAll("img"));
+    images.forEach((img) => {
+      if (img.complete) return;
+      img.addEventListener("load", handleImageLoad, { once: true });
+      img.addEventListener("error", handleImageLoad, { once: true });
     });
-  }, []);
+
+    const timeout = window.setTimeout(updateGetToKnowCarousel, 200);
+
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      resizeObserver?.disconnect();
+      fonts?.removeEventListener("loadingdone", handleFonts);
+      window.clearTimeout(timeout);
+    };
+  }, [updateGetToKnowCarousel]);
+  const [activeGetToKnowModal, setActiveGetToKnowModal] =
+    useState<GetToKnowModalContent | null>(null);
   useEffect(() => {
     if (!activePathwayModal) return;
     const originalOverflow = document.body.style.overflow;
@@ -1160,15 +1304,6 @@ className="flex items-center gap-2 cursor-pointer"
         onMouseLeave={() => {
           pathwaysDragState.current.isDragging = false;
         }}
-        onScroll={() => {
-          const el = pathwaysScrollRef.current;
-          if (!el) return;
-          const { scrollLeft, scrollWidth, clientWidth } = el;
-          setPathwaysEdges({
-            atStart: scrollLeft <= 8,
-            atEnd: scrollLeft + clientWidth >= scrollWidth - 8,
-          });
-        }}
       >
         {pathwaysCards.map((card, index) => {
           const modalDetail = pathwaysModalContent[card.id];
@@ -1176,6 +1311,7 @@ className="flex items-center gap-2 cursor-pointer"
           return (
             <Reveal key={card.id} delayMs={index * 120}>
             <article
+              data-carousel-item
               role={isInteractive ? "button" : undefined}
               tabIndex={isInteractive ? 0 : -1}
               onClick={() => {
@@ -1231,24 +1367,20 @@ className="flex items-center gap-2 cursor-pointer"
 
       <button
         type="button"
-        onClick={() => {
-          const el = pathwaysScrollRef.current;
-          if (!el) return;
-          el.scrollBy({ left: -el.clientWidth * 0.8, behavior: "smooth" });
-        }}
-        className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${pathwaysEdges.atStart ? "opacity-0 pointer-events-none" : ""}`}
+        onClick={() => scrollByCard(pathwaysScrollRef, pathwaysCarousel.step, -1)}
+        className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+          prevPathwaysDisabled ? "opacity-0 pointer-events-none" : ""
+        }`}
         aria-label="Scroll pathways left"
       >
         ←
       </button>
       <button
         type="button"
-        onClick={() => {
-          const el = pathwaysScrollRef.current;
-          if (!el) return;
-          el.scrollBy({ left: el.clientWidth * 0.8, behavior: "smooth" });
-        }}
-        className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${pathwaysEdges.atEnd ? "opacity-0 pointer-events-none" : ""}`}
+        onClick={() => scrollByCard(pathwaysScrollRef, pathwaysCarousel.step, 1)}
+        className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
+          nextPathwaysDisabled ? "opacity-0 pointer-events-none" : ""
+        }`}
         aria-label="Scroll pathways right"
       >
         →
@@ -1529,15 +1661,6 @@ className="flex items-center gap-2 cursor-pointer"
         onMouseLeave={() => {
           getToKnowDragState.current.isDragging = false;
         }}
-        onScroll={() => {
-          const el = getToKnowScrollRef.current;
-          if (!el) return;
-          const { scrollLeft, scrollWidth, clientWidth } = el;
-          setGetToKnowEdges({
-            atStart: scrollLeft <= 8,
-            atEnd: scrollLeft + clientWidth >= scrollWidth - 8,
-          });
-        }}
       >
         {getToKnowCards.map((card, index) => {
           const modalDetail = getToKnowModalContent[card.id];
@@ -1545,6 +1668,7 @@ className="flex items-center gap-2 cursor-pointer"
           return (
             <Reveal key={card.id} delayMs={index * 120}>
             <article
+              data-carousel-item
               role={isInteractive ? "button" : undefined}
               tabIndex={isInteractive ? 0 : -1}
               onClick={() => {
@@ -1601,13 +1725,11 @@ className="flex items-center gap-2 cursor-pointer"
       <button
         type="button"
         className={`hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
-          getToKnowEdges.atStart ? "opacity-0 pointer-events-none" : ""
+          prevGetToKnowDisabled ? "opacity-0 pointer-events-none" : ""
         }`}
-        onClick={() => {
-          const el = getToKnowScrollRef.current;
-          if (!el) return;
-          el.scrollBy({ left: -el.clientWidth * 0.8, behavior: "smooth" });
-        }}
+        onClick={() =>
+          scrollByCard(getToKnowScrollRef, getToKnowCarousel.step, -1)
+        }
         aria-label="Scroll carousel left"
       >
         ←
@@ -1615,13 +1737,11 @@ className="flex items-center gap-2 cursor-pointer"
       <button
         type="button"
         className={`hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 ${
-          getToKnowEdges.atEnd ? "opacity-0 pointer-events-none" : ""
+          nextGetToKnowDisabled ? "opacity-0 pointer-events-none" : ""
         }`}
-        onClick={() => {
-          const el = getToKnowScrollRef.current;
-          if (!el) return;
-          el.scrollBy({ left: el.clientWidth * 0.8, behavior: "smooth" });
-        }}
+        onClick={() =>
+          scrollByCard(getToKnowScrollRef, getToKnowCarousel.step, 1)
+        }
         aria-label="Scroll carousel right"
       >
         →
