@@ -517,6 +517,11 @@ export default function HomePageClient() {
   const [activePathwayModal, setActivePathwayModal] =
     useState<PathwayModalContent | null>(null);
   const pathwaysScrollRef = useRef<HTMLDivElement | null>(null);
+  const pathwaysDragState = useRef({
+    isDragging: false,
+    startX: 0,
+    scrollLeft: 0,
+  });
   const [pathwaysEdges, setPathwaysEdges] = useState({
     atStart: true,
     atEnd: false,
@@ -1127,11 +1132,33 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-6">
-    <div className="relative px-4 sm:px-6 lg:px-10">
+  <div className="relative -mx-5 sm:-mx-8 mt-6">
+    <div className="relative px-5 sm:px-8">
       <div
         ref={pathwaysScrollRef}
-        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6"
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-5 sm:scroll-px-8 select-none cursor-grab active:cursor-grabbing"
+        onMouseDown={(event) => {
+          const el = pathwaysScrollRef.current;
+          if (!el) return;
+          pathwaysDragState.current.isDragging = true;
+          pathwaysDragState.current.startX = event.pageX - el.offsetLeft;
+          pathwaysDragState.current.scrollLeft = el.scrollLeft;
+        }}
+        onMouseMove={(event) => {
+          const el = pathwaysScrollRef.current;
+          if (!el || !pathwaysDragState.current.isDragging) return;
+          event.preventDefault();
+          const x = event.pageX - el.offsetLeft;
+          el.scrollLeft =
+            pathwaysDragState.current.scrollLeft -
+            (x - pathwaysDragState.current.startX);
+        }}
+        onMouseUp={() => {
+          pathwaysDragState.current.isDragging = false;
+        }}
+        onMouseLeave={() => {
+          pathwaysDragState.current.isDragging = false;
+        }}
         onScroll={() => {
           const el = pathwaysScrollRef.current;
           if (!el) return;
@@ -1226,8 +1253,8 @@ className="flex items-center gap-2 cursor-pointer"
         →
       </button>
 
-      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-white to-transparent lg:block" />
-      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-white to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-10 bg-gradient-to-r from-white via-white/80 to-transparent rounded-r-[24px]" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-10 bg-gradient-to-l from-white via-white/80 to-transparent rounded-l-[24px]" />
     </div>
   </div>
 </section>
