@@ -1132,8 +1132,9 @@ className="flex items-center gap-2 cursor-pointer"
     </div>
   </div>
 
-  <div className="relative -mx-4 sm:-mx-6 lg:-mx-10 mt-6">
-    <div className="relative px-4 sm:px-6 lg:px-10">
+  <div className="mt-6">
+    <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
+      <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={pathwaysScrollRef}
         className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6 sm:scroll-px-8 select-none cursor-grab active:cursor-grabbing"
@@ -1253,8 +1254,9 @@ className="flex items-center gap-2 cursor-pointer"
         →
       </button>
 
-      <div className="pointer-events-none absolute inset-y-2 left-0 w-12 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-2 right-0 w-12 bg-gradient-to-l from-white/95 via-white/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-12 bg-gradient-to-r from-white/70 via-white/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-12 bg-gradient-to-l from-white/70 via-white/40 to-transparent" />
+      </div>
     </div>
   </div>
 </section>
@@ -1500,8 +1502,9 @@ className="flex items-center gap-2 cursor-pointer"
       </a>
     </div>
   </div>
-  <div className="relative -mx-4 sm:-mx-6 lg:-mx-10 mt-8">
-    <div className="relative px-4 sm:px-6 lg:px-10">
+  <div className="mt-8">
+    <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
+      <div className="relative px-4 sm:px-6 lg:px-10">
       <div
         ref={getToKnowScrollRef}
         className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-6 sm:scroll-px-8 cursor-grab active:cursor-grabbing select-none"
@@ -1623,8 +1626,9 @@ className="flex items-center gap-2 cursor-pointer"
       >
         →
       </button>
-      <div className="pointer-events-none absolute inset-y-2 left-0 w-10 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent rounded-r-[24px]" />
-      <div className="pointer-events-none absolute inset-y-2 right-0 w-10 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent rounded-l-[24px]" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-12 bg-gradient-to-r from-slate-50/70 via-slate-50/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-12 bg-gradient-to-l from-slate-50/70 via-slate-50/40 to-transparent" />
+      </div>
     </div>
   </div>
 </section>
