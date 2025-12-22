@@ -10,8 +10,8 @@ const navItems = [
   { label: "My journey", href: "/dashboard/journey" },
   { label: "Learning modules", href: "/dashboard/modules" },
   { label: "Mentor sessions", href: "/dashboard/mentors" },
-  { label: "Jobs & opportunities", href: "/dashboard" },
-  { label: "Documents", href: "/dashboard" },
+  { label: "Jobs & opportunities", href: "/dashboard/jobs" },
+  { label: "Documents", href: "/dashboard/documents" },
   { label: "Profile", href: "/dashboard/profile" },
 ];
 
