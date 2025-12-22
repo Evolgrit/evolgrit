@@ -1500,12 +1500,11 @@ className="flex items-center gap-2 cursor-pointer"
       </a>
     </div>
   </div>
-
-  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-8">
-    <div className="relative px-4 sm:px-6 lg:px-10">
+  <div className="relative -mx-5 sm:-mx-8 mt-8">
+    <div className="relative px-5 sm:px-8">
       <div
         ref={getToKnowScrollRef}
-        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide cursor-grab"
+        className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-px-5 sm:scroll-px-8 cursor-grab active:cursor-grabbing select-none"
         onMouseDown={(event) => {
           const el = getToKnowScrollRef.current;
           if (!el) return;
@@ -1556,7 +1555,7 @@ className="flex items-center gap-2 cursor-pointer"
                   setActiveGetToKnowModal(modalDetail);
                 }
               }}
-              className={`group relative shrink-0 snap-center w-[82%] sm:w-[60%] md:w-[360px] lg:w-[380px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16 ${
+              className={`group relative shrink-0 snap-center w-[280px] sm:w-[320px] lg:w-[360px] rounded-3xl bg-slate-900 text-slate-50 overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl pb-14 sm:pb-16 ${
                 isInteractive ? "cursor-pointer" : ""
               }`}
             >
@@ -1624,8 +1623,8 @@ className="flex items-center gap-2 cursor-pointer"
       >
         →
       </button>
-      <div className="pointer-events-none absolute inset-y-4 left-0 hidden w-12 bg-gradient-to-r from-slate-50 to-transparent lg:block" />
-      <div className="pointer-events-none absolute inset-y-4 right-0 hidden w-12 bg-gradient-to-l from-slate-50 to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-y-2 left-0 w-10 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent rounded-r-[24px]" />
+      <div className="pointer-events-none absolute inset-y-2 right-0 w-10 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent rounded-l-[24px]" />
     </div>
   </div>
 </section>
