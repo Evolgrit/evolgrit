@@ -56,6 +56,7 @@ export default function LoginClient() {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupStatus, setSignupStatus] = useState<Status>("idle");
   const [signupMessage, setSignupMessage] = useState<string | null>(null);
+  const passwordRules = getPasswordRules(signupPassword);
 
   const [magicEmail, setMagicEmail] = useState("");
   const [magicStatus, setMagicStatus] = useState<Status>("idle");
@@ -78,6 +79,9 @@ export default function LoginClient() {
   const [accessMessage, setAccessMessage] = useState<string | null>(null);
 
   const [showLearnerMagic, setShowLearnerMagic] = useState(false);
+  const [oauthStatus, setOauthStatus] =
+    useState<"success" | "error" | "warning">("success");
+  const [oauthMessage, setOauthMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isEmployer) return;
@@ -150,6 +154,37 @@ export default function LoginClient() {
       console.error("signup unexpected error", err);
       setSignupMessage("Unable to create account. Please try again.");
       setSignupStatus("error");
+    }
+  }
+
+  function buildRedirectUrl() {
+    if (typeof window === "undefined") return undefined;
+    return `${window.location.origin}/auth/callback`;
+  }
+
+  async function handleProviderLogin(provider: "google" | "apple") {
+    if (typeof window === "undefined") return;
+    setOauthStatus("success");
+    setOauthMessage(null);
+    try {
+      const redirectTo = buildRedirectUrl();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: redirectTo ? { redirectTo } : undefined,
+      });
+      if (error) {
+        throw error;
+      }
+      setOauthStatus("success");
+      setOauthMessage("Redirecting…");
+    } catch (error) {
+      console.error("oauth login error", error);
+      setOauthStatus("error");
+      setOauthMessage(
+        error instanceof Error && error.message
+          ? error.message
+          : "Provider not configured yet."
+      );
     }
   }
 
@@ -252,8 +287,8 @@ export default function LoginClient() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-5 py-16">
-      <div className="mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <main className="min-h-screen bg-slate-50 px-4 py-12 md:px-5 md:py-16">
+      <div className="mx-auto w-full max-w-[340px] md:max-w-md rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-8">
         <h1 className="text-xl font-semibold text-slate-900">
           {isEmployer
             ? "Evolgrit employer access"
@@ -292,7 +327,7 @@ export default function LoginClient() {
 
         {isEmployer ? (
           inviteState === "none" ? (
-            <form onSubmit={sendAccessRequest} className="mt-6 space-y-4">
+            <form onSubmit={sendAccessRequest} className="mt-6 space-y-3 md:space-y-4">
               <TextInput
                 label="Company name"
                 required
@@ -350,7 +385,7 @@ export default function LoginClient() {
             </form>
           ) : (
             <>
-              <form onSubmit={handleLogin} className="mt-6 space-y-4">
+              <form onSubmit={handleLogin} className="mt-6 space-y-3 md:space-y-4">
                 <TextInput
                   label="Email"
                   type="email"
@@ -385,7 +420,7 @@ export default function LoginClient() {
               {showMagicLink && (
                 <form
                   onSubmit={handleMagicLink}
-                  className="mt-6 space-y-3 border-t border-slate-100 pt-4"
+                  className="mt-6 space-y-2.5 border-t border-slate-100 pt-4 md:space-y-3"
                 >
                   <p className="text-sm font-medium text-slate-900">Magic link</p>
                   <input
@@ -435,7 +470,7 @@ export default function LoginClient() {
           <>
             {activeTab === "login" ? (
               <>
-                <form onSubmit={handleLogin} className="mt-6 space-y-4">
+                <form onSubmit={handleLogin} className="mt-6 space-y-3 md:space-y-4">
                   <TextInput
                     label="Email"
                     type="email"
@@ -480,7 +515,7 @@ export default function LoginClient() {
                 {showLearnerMagic && (
                   <form
                     onSubmit={handleMagicLink}
-                    className="mt-6 space-y-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                    className="mt-6 space-y-2.5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 md:space-y-3"
                   >
                     <p className="text-sm font-medium text-slate-900">
                       Send a one-time login link
@@ -509,7 +544,7 @@ export default function LoginClient() {
                 )}
               </>
             ) : (
-              <form onSubmit={handleSignup} className="mt-6 space-y-4">
+              <form onSubmit={handleSignup} className="mt-6 space-y-3 md:space-y-4">
                 <TextInput
                   label="Email"
                   type="email"
@@ -528,17 +563,41 @@ export default function LoginClient() {
                   onChange={setSignupPassword}
                   placeholder="Create a password"
                 />
+                <PasswordChecklist rules={passwordRules} />
                 <ActionButton
                   text="Create account"
                   loadingText="Creating…"
                   type="submit"
                   loading={signupStatus === "loading"}
+                  disabled={!passwordRules.allValid}
                 />
                 {signupMessage && (
                   <Banner
                     kind={signupStatus === "success" ? "success" : "error"}
                     message={signupMessage}
                   />
+                )}
+                {!isEmployer && (
+                  <div className="space-y-2.5">
+                    <div className="py-2 text-center text-xs uppercase tracking-[0.2em] text-slate-400">
+                      or
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleProviderLogin("google")}
+                      className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+                    >
+                      Continue with Google
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleProviderLogin("apple")}
+                      className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+                    >
+                      Continue with Apple
+                    </button>
+                    {oauthMessage && <Banner kind={oauthStatus} message={oauthMessage} />}
+                  </div>
                 )}
               </form>
             )}
@@ -602,7 +661,6 @@ function ActionButton({ text, loadingText, type = "button", loading, disabled }:
     </button>
   );
 }
-
 function Banner({ kind, message }: BannerProps) {
   const styles =
     kind === "success"
@@ -626,4 +684,51 @@ function mapSupabaseError(message: string) {
     return "Too many attempts. Please try again in a moment.";
   if (normalized.includes("password")) return "Please check your password and try again.";
   return "Something went wrong. Please try again.";
+}
+
+type PasswordRules = {
+  length: boolean;
+  upper: boolean;
+  lower: boolean;
+  number: boolean;
+  symbol: boolean;
+  allValid: boolean;
+};
+
+function getPasswordRules(value: string): PasswordRules {
+  const length = value.length >= 12;
+  const upper = /[A-Z]/.test(value);
+  const lower = /[a-z]/.test(value);
+  const number = /[0-9]/.test(value);
+  const symbol = /[^A-Za-z0-9]/.test(value);
+  const allValid = length && upper && lower && number && symbol;
+  return { length, upper, lower, number, symbol, allValid };
+}
+
+function PasswordChecklist({ rules }: { rules: PasswordRules }) {
+  const items = [
+    { label: "12+ characters", valid: rules.length },
+    { label: "Uppercase letter", valid: rules.upper },
+    { label: "Lowercase letter", valid: rules.lower },
+    { label: "Number", valid: rules.number },
+    { label: "Symbol", valid: rules.symbol },
+  ];
+  return (
+    <div className="space-y-1.5 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-xs text-slate-600">
+      {items.map((item) => (
+        <p key={item.label} className="flex items-center gap-2">
+          <span
+            className={`inline-flex h-4 w-4 items-center justify-center rounded-full border ${
+              item.valid
+                ? "border-emerald-400 bg-emerald-100 text-emerald-700"
+                : "border-slate-200 text-slate-400"
+            } text-[10px] font-semibold`}
+          >
+            {item.valid ? "✓" : "○"}
+          </span>
+          {item.label}
+        </p>
+      ))}
+    </div>
+  );
 }
