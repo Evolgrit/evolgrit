@@ -163,10 +163,11 @@ export default function DocumentsClient({
     }
 
     const taskId = createUploadTask(categoryId, file.name);
+    const safeName = file.name.replace(/[^a-zA-Z0-9.\\-]/g, "_");
+    const docId = replaceDoc?.id ?? crypto.randomUUID();
+    const storagePath = `${userId}/${categoryId}/${docId}-${safeName}`;
+    let uploadCompleted = false;
     try {
-      const safeName = file.name.replace(/[^a-zA-Z0-9.\\-]/g, "_");
-      const docId = replaceDoc?.id ?? crypto.randomUUID();
-      const storagePath = `${userId}/${categoryId}/${docId}-${safeName}`;
       const uploadOptions = replaceDoc
         ? { contentType: file.type, upsert: true }
         : { contentType: file.type };
@@ -174,6 +175,7 @@ export default function DocumentsClient({
         .from("documents")
         .upload(storagePath, file, uploadOptions);
       if (uploadError) throw uploadError;
+      uploadCompleted = true;
 
       if (replaceDoc) {
         const { data: updated, error: updateError } = await supabase
@@ -212,7 +214,13 @@ export default function DocumentsClient({
           })
           .select()
           .single();
-        if (insertError || !inserted) throw insertError;
+        if (insertError || !inserted) {
+          console.error("documents insert error", insertError?.message);
+          await supabase.storage.from("documents").remove([storagePath]);
+          finishUploadTask(taskId, "error", "Metadata save failed");
+          showMessage("error", "Uploaded to storage, but metadata save failed.");
+          return;
+        }
 
         setDocuments((prev) => [inserted as DocumentRecord, ...prev]);
         showMessage("success", `${file.name} uploaded.`);
@@ -223,6 +231,9 @@ export default function DocumentsClient({
       console.error(error);
       const message =
         error instanceof Error && error.message ? error.message : "Upload failed";
+      if (uploadCompleted && !replaceDoc) {
+        await supabase.storage.from("documents").remove([storagePath]);
+      }
       finishUploadTask(taskId, "error", message);
       showMessage("error", message);
     }
