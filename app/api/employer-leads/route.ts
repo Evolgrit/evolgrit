@@ -24,6 +24,10 @@ export async function POST(req: Request) {
     const company = String(body.company ?? "").trim();
     const role_types = String(body.role_types ?? "").trim();
     const email = String(body.email ?? "").trim().toLowerCase();
+    const contact_name = String(body.contact_name ?? "").trim();
+    const phone = String(body.phone ?? "").trim();
+    const industry = String(body.industry ?? "").trim();
+    const notes = String(body.notes ?? "").trim();
 
     if (!company || !role_types || !email.includes("@")) {
       return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
@@ -43,6 +47,10 @@ export async function POST(req: Request) {
       normalized_roles,
       email,
       priority,
+      contact_name: contact_name || null,
+      phone: phone || null,
+      industry: industry || null,
+      notes: notes || null,
     });
 
     if (error) {
@@ -57,12 +65,13 @@ export async function POST(req: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY!);
     const from = process.env.RESEND_FROM!;
 
-    await resend.emails.send({
-      from,
-      to: email,
-      replyTo: "hello@evolgrit.com",
-      subject: "Thanks — we received your Evolgrit employer request",
-      text: `Hi,
+    try {
+      await resend.emails.send({
+        from,
+        to: email,
+        replyTo: "hello@evolgrit.com",
+        subject: "Thanks — we received your Evolgrit employer request",
+        text: `Hi,
 
 thanks for reaching out to Evolgrit.
 
@@ -79,7 +88,7 @@ If this is time-sensitive, just reply to this email.
 — Daniel
 Evolgrit
 `,
-      html: `
+        html: `
   <div style="font-family: ui-sans-serif, system-ui; line-height:1.6;">
     <h2 style="margin:0 0 8px;">Thanks — we got it.</h2>
     <p style="margin:0 0 10px;">We received your employer request.</p>
@@ -97,7 +106,34 @@ Evolgrit
     <p style="margin:18px 0 0;"><strong>Daniel</strong><br/>Founder, Evolgrit</p>
   </div>
   `,
-    });
+      });
+    } catch (emailError) {
+      console.error("employer lead ack email error", emailError);
+    }
+
+    try {
+      await resend.emails.send({
+        from,
+        to: process.env.ADMIN_EMAIL || "info@evolgrit.com",
+        replyTo: email,
+        subject: `New employer application: ${company}`,
+        html: `
+  <div style="font-family: ui-sans-serif, system-ui; line-height:1.6;">
+    <h2 style="margin:0 0 8px;">New employer application</h2>
+    <p><strong>Company:</strong> ${company.replace(/</g, "&lt;")}</p>
+    <p><strong>Contact:</strong> ${contact_name || "—"}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Phone:</strong> ${phone || "—"}</p>
+    <p><strong>Industry:</strong> ${industry || "—"}</p>
+    <p><strong>Roles:</strong> ${role_types.replace(/</g, "&lt;")}</p>
+    <p><strong>Notes:</strong><br/>${notes ? notes.replace(/</g, "&lt;").replace(/\\n/g, "<br/>") : "—"}</p>
+    <p style="margin-top:12px;font-size:12px;color:#64748b;">Received at ${new Date().toLocaleString()}</p>
+  </div>
+        `,
+      });
+    } catch (emailError) {
+      console.error("admin notification email error", emailError);
+    }
 
     await supabase
       .from("employer_leads")

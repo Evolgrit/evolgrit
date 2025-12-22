@@ -1,75 +1,95 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function ResetPasswordPage() {
   const supabase = createSupabaseBrowserClient();
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [message, setMessage] = useState<string | null>(null);
+  const router = useRouter();
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [status, setStatus] = useState<"idle" | "saving">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (!mounted) return;
+      if (!data.user) router.replace("/login");
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [router, supabase]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus("sending");
-    setMessage(null);
-    try {
-      const origin = window.location.origin;
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${origin}/auth/callback`,
-      });
-      if (error) {
-        throw error;
-      }
-      setStatus("sent");
-      setMessage("Password reset email sent. Check your inbox.");
-    } catch (error) {
-      console.error("reset password error", error);
-      setStatus("error");
-      setMessage(
-        error instanceof Error ? error.message : "Unable to send reset email."
-      );
+    setError(null);
+    if (newPassword.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
     }
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setStatus("saving");
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+    if (updateError) {
+      console.error("reset password update error", updateError);
+      setError(updateError.message || "Unable to set password.");
+      setStatus("idle");
+      return;
+    }
+    router.replace("/dashboard");
   }
 
   return (
     <main className="min-h-screen bg-slate-50 px-5 py-16">
       <div className="mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-xl font-semibold text-slate-900">Reset password</h1>
+        <h1 className="text-xl font-semibold text-slate-900">Set a new password</h1>
         <p className="mt-2 text-sm text-slate-600">
-          Enter your email address and we’ll send you a reset link.
+          Choose a strong password to secure your account.
         </p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="text-sm font-medium text-slate-900">Email</label>
+            <label className="text-sm font-medium text-slate-900">New password</label>
             <input
-              type="email"
+              type="password"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              inputMode="email"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              autoComplete="new-password"
               className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-              placeholder="you@email.com"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-slate-900">Confirm password</label>
+            <input
+              type="password"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              autoComplete="new-password"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+              placeholder="Confirm new password"
             />
           </div>
           <button
             type="submit"
-            disabled={status === "sending"}
+            disabled={status === "saving"}
             className="w-full rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
           >
-            {status === "sending" ? "Sending…" : "Send reset link"}
+            {status === "saving" ? "Updating…" : "Set password"}
           </button>
         </form>
-        {message && (
-          <div
-            className={`mt-4 rounded-2xl border px-4 py-3 text-sm ${
-              status === "sent"
-                ? "border-emerald-200 bg-emerald-50 text-emerald-900"
-                : "border-rose-200 bg-rose-50 text-rose-900"
-            }`}
-          >
-            {message}
+        {error && (
+          <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900">
+            {error}
           </div>
         )}
       </div>
