@@ -11,13 +11,32 @@ export default function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "saving">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [sessionReady, setSessionReady] = useState(false);
 
   useEffect(() => {
     let mounted = true;
-    supabase.auth.getUser().then(({ data }) => {
-      if (!mounted) return;
-      if (!data.user) router.replace("/forgot-password");
-    });
+    async function ensureSession() {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        if (mounted) setSessionReady(true);
+        return;
+      }
+      if (typeof window !== "undefined" && window.location.hash) {
+        const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+        const access_token = params.get("access_token");
+        const refresh_token = params.get("refresh_token");
+        if (access_token && refresh_token) {
+          await supabase.auth.setSession({ access_token, refresh_token });
+          const { data: sessionData } = await supabase.auth.getSession();
+          if (sessionData.session) {
+            if (mounted) setSessionReady(true);
+            return;
+          }
+        }
+      }
+      router.replace("/forgot-password");
+    }
+    ensureSession();
     return () => {
       mounted = false;
     };
@@ -54,7 +73,7 @@ export default function ResetPasswordPage() {
         <p className="mt-2 text-sm text-slate-600">
           Choose a strong password to secure your account.
         </p>
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4" hidden={!sessionReady}>
           <div>
             <label className="text-sm font-medium text-slate-900">New password</label>
             <input
@@ -91,6 +110,9 @@ export default function ResetPasswordPage() {
           <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900">
             {error}
           </div>
+        )}
+        {!sessionReady && (
+          <div className="mt-6 text-center text-sm text-slate-500">Preparing reset link…</div>
         )}
       </div>
     </main>

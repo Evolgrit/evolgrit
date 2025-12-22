@@ -14,9 +14,8 @@ export default function ForgotPasswordPage() {
     setStatus("sending");
     setMessage(null);
     try {
-      const origin = window.location.origin;
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: "https://evolgrit.com/reset-password",
       });
       if (error) throw error;
       setStatus("sent");
