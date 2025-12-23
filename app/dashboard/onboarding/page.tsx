@@ -3,12 +3,13 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import OnboardingForm from "./OnboardingForm";
 
 type ProfileRow = {
+  role: "learner" | "employer" | "admin" | string | null;
   full_name: string | null;
   current_country: string | null;
   target_in_germany: string | null;
   start_timeframe: string | null;
   onboarding_completed_at: string | null;
-  role: string | null;
+  target_roles: string[] | null;
 };
 
 export default async function OnboardingPage() {
@@ -31,12 +32,13 @@ export default async function OnboardingPage() {
         "start_timeframe",
         "onboarding_completed_at",
         "role",
+        "target_roles",
       ].join(",")
     )
     .eq("id", user.id)
     .single();
 
-  const profileRow = profileRes.data;
+  const profileRow = profileRes.data as ProfileRow | null;
   const profileError = profileRes.error;
 
   const { data: progressRow } = await supabase
@@ -47,6 +49,14 @@ export default async function OnboardingPage() {
 
   if (profileError) {
     console.error("Profile load error", profileError);
+  }
+
+  if (profileRow?.role && profileRow.role !== "learner") {
+    redirect(profileRow.role === "employer" ? "/employer" : "/admin");
+  }
+
+  if (profileRow?.onboarding_completed_at) {
+    redirect("/dashboard?onboarding=done");
   }
 
   if (progressRow?.next_step === "done" || progressRow?.is_complete) {
