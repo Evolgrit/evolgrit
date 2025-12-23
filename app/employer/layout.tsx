@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import EmployerShell from "./EmployerShell";
 
 export default async function EmployerLayout({
   children,
@@ -13,7 +14,7 @@ export default async function EmployerLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, full_name, avatar_url")
     .eq("id", data.user.id)
     .single();
 
@@ -21,5 +22,21 @@ export default async function EmployerLayout({
     redirect(profile?.role === "admin" ? "/admin" : "/dashboard");
   }
 
-  return <div className="min-h-screen bg-slate-50">{children}</div>;
+  return (
+    <EmployerShell
+      profileName={profile?.full_name ?? "Employer"}
+      profileAvatar={profile?.avatar_url ?? null}
+      initials={getInitials(profile?.full_name) || "EH"}
+    >
+      {children}
+    </EmployerShell>
+  );
+}
+
+function getInitials(name?: string | null) {
+  if (!name) return "";
+  const parts = name.trim().split(" ");
+  const [first, second] = parts;
+  if (first && second) return `${first[0]}${second[0]}`.toUpperCase();
+  return first?.slice(0, 2).toUpperCase() ?? "";
 }
