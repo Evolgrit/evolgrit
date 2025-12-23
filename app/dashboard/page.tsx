@@ -87,7 +87,17 @@ type WeeklyCheckinRow = {
   hours: number | null;
   wins: string | null;
   blockers: string | null;
-  submitted_at: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+type CheckinSummary = {
+  mood: string | null;
+  hours: number | null;
+  wins: string | null;
+  blockers: string | null;
+  created_at: string | null;
+  updated_at: string | null;
 };
 
 function getWeekStart(date = new Date()) {
@@ -141,11 +151,14 @@ async function submitWeeklyCheckinAction(formData: FormData) {
       { onConflict: "user_id,week_start" }
     );
 
-  await supabase.from("readiness_events").insert({
+  const { error: eventError } = await supabase.from("readiness_events").insert({
     user_id: data.user.id,
     type: "weekly_checkin_submitted",
     metadata: { week_start: weekStartIso },
   });
+  if (eventError) {
+    console.error("weekly_checkin_submitted event error", eventError);
+  }
 
   revalidatePath("/dashboard");
 }
@@ -214,7 +227,7 @@ export default async function DashboardPage() {
       weekIsoList.length
         ? supabase
             .from("weekly_checkins")
-            .select("week_start, mood, hours, wins, blockers, submitted_at")
+            .select("week_start, mood, hours, wins, blockers, created_at, updated_at")
             .eq("user_id", data.user.id)
             .in("week_start", weekIsoList)
         : Promise.resolve({ data: [] as WeeklyCheckinRow[] }),
@@ -228,11 +241,23 @@ export default async function DashboardPage() {
   );
   const weeklyTimeline: WeekCheckin[] = weekDates.map((date, index) => {
     const iso = weekIsoList[index];
+    const row = weeklyCheckinsMap.get(iso) as WeeklyCheckinRow | undefined;
+    const checkin: CheckinSummary | undefined = row
+      ? {
+          mood: row.mood ?? null,
+          hours: row.hours ?? null,
+          wins: row.wins ?? null,
+          blockers: row.blockers ?? null,
+          created_at: row.created_at ?? null,
+          updated_at: row.updated_at ?? null,
+        }
+      : undefined;
+
     return {
       weekStart: iso,
       label: getWeekLabel(date),
       isCurrent: iso === currentWeekIso,
-      checkin: weeklyCheckinsMap.get(iso),
+      checkin,
     };
   });
 
