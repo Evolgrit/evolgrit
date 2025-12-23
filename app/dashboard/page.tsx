@@ -2,6 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import WeeklyCheckinCard, {
+  type WeekCheckin,
+} from "./WeeklyCheckinCard";
 
 const todayTasks = [
   {
@@ -78,14 +81,8 @@ const phaseCards = [
   },
 ] as const;
 
-const moodOptions = [
-  { value: "energized", label: "Energized" },
-  { value: "steady", label: "Steady" },
-  { value: "stretched", label: "Stretched" },
-  { value: "tired", label: "Tired" },
-] as const;
-
 type WeeklyCheckinRow = {
+  week_start: string | null;
   mood: string | null;
   hours: number | null;
   wins: string | null;
@@ -115,8 +112,11 @@ async function submitWeeklyCheckinAction(formData: FormData) {
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/login");
 
-  const weekStart = getWeekStart();
-  const weekStartIso = weekStart.toISOString().slice(0, 10);
+  const submittedWeek =
+    (formData.get("weekStart") as string | null) ?? undefined;
+  const weekStartDate = submittedWeek ? new Date(submittedWeek) : getWeekStart();
+  weekStartDate.setHours(0, 0, 0, 0);
+  const weekStartIso = weekStartDate.toISOString().slice(0, 10);
 
   const mood = (formData.get("mood") as string | null)?.trim() || null;
   const hoursValue = formData.get("hours");
@@ -189,9 +189,17 @@ export default async function DashboardPage() {
   if (!data.user) redirect("/login");
 
   const weekStartDate = getWeekStart();
-  const weekStartIso = weekStartDate.toISOString().slice(0, 10);
+  const weekDates = Array.from({ length: 6 }, (_, index) => {
+    const date = new Date(weekStartDate);
+    date.setDate(date.getDate() - index * 7);
+    return date;
+  });
+  const weekIsoList = weekDates.map((date) =>
+    date.toISOString().slice(0, 10)
+  );
+  const currentWeekIso = weekIsoList[0];
 
-  const [{ data: profile }, { data: onboarding }, { data: weeklyCheckin }] =
+  const [{ data: profile }, { data: onboarding }, weekRowsRes] =
     await Promise.all([
       supabase
         .from("profiles")
@@ -203,13 +211,30 @@ export default async function DashboardPage() {
         .select("completed, total, is_complete")
         .eq("user_id", data.user.id)
         .maybeSingle(),
-      supabase
-        .from("weekly_checkins")
-        .select("mood, hours, wins, blockers, submitted_at")
-        .eq("user_id", data.user.id)
-        .eq("week_start", weekStartIso)
-        .maybeSingle<WeeklyCheckinRow>(),
+      weekIsoList.length
+        ? supabase
+            .from("weekly_checkins")
+            .select("week_start, mood, hours, wins, blockers, submitted_at")
+            .eq("user_id", data.user.id)
+            .in("week_start", weekIsoList)
+        : Promise.resolve({ data: [] as WeeklyCheckinRow[] }),
     ]);
+
+  const weeklyCheckinsMap = new Map<string, WeeklyCheckinRow>(
+    ((weekRowsRes.data as WeeklyCheckinRow[]) ?? []).map((row) => [
+      row.week_start as string,
+      row,
+    ])
+  );
+  const weeklyTimeline: WeekCheckin[] = weekDates.map((date, index) => {
+    const iso = weekIsoList[index];
+    return {
+      weekStart: iso,
+      label: getWeekLabel(date),
+      isCurrent: iso === currentWeekIso,
+      checkin: weeklyCheckinsMap.get(iso),
+    };
+  });
 
   if (onboarding?.is_complete) {
     const { data: existing } = await supabase
@@ -277,12 +302,6 @@ export default async function DashboardPage() {
   const onboardingPercent = onboardingTotal
     ? Math.round((onboardingCompleted / onboardingTotal) * 100)
     : 0;
-  const weekLabel = getWeekLabel(weekStartDate);
-  const weeklyMoodLabel = weeklyCheckin?.mood
-    ? moodOptions.find((option) => option.value === weeklyCheckin.mood)?.label ??
-      weeklyCheckin.mood
-    : "—";
-
   return (
     <div className="space-y-6">
       <section className="grid gap-6 lg:grid-cols-[1.35fr,0.9fr]">
@@ -339,123 +358,10 @@ export default async function DashboardPage() {
           </div>
         </article>
 
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-            Weekly check-in · Week of {weekLabel}
-          </p>
-          {weeklyCheckin ? (
-            <div className="mt-4 space-y-3">
-              <h3 className="text-lg font-semibold text-slate-900">
-                Submitted — thank you!
-              </h3>
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
-                <p className="font-semibold text-slate-900">
-                  Mood: {weeklyMoodLabel}
-                </p>
-                <p className="text-slate-600">
-                  Focus hours: {weeklyCheckin.hours ?? "—"}
-                </p>
-              </div>
-              {(weeklyCheckin.wins || weeklyCheckin.blockers) && (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                      Wins
-                    </p>
-                    <p className="mt-1 text-slate-700">
-                      {weeklyCheckin.wins || "No highlights shared."}
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                      Blockers
-                    </p>
-                    <p className="mt-1 text-slate-700">
-                      {weeklyCheckin.blockers || "No blockers noted."}
-                    </p>
-                  </div>
-                </div>
-              )}
-              <p className="text-xs text-slate-500">
-                Want to update it? Submit again and we’ll refresh your signals.
-              </p>
-              <form action={submitWeeklyCheckinAction} className="space-y-3">
-                <input type="hidden" name="overwrite" value="1" />
-                <button
-                  type="submit"
-                  className="w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:border-slate-400"
-                >
-                  Update check-in
-                </button>
-              </form>
-            </div>
-          ) : (
-            <form action={submitWeeklyCheckinAction} className="mt-4 space-y-4">
-              <p className="text-sm text-slate-600">
-                Take 30 seconds to reflect. This helps mentors and employers see
-                your rhythm.
-              </p>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-900">
-                  How do you feel this week?
-                </label>
-                <select
-                  name="mood"
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                  required
-                >
-                  <option value="">Select mood…</option>
-                  {moodOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-900">
-                  Focus hours (approx.)
-                </label>
-                <input
-                  name="hours"
-                  type="number"
-                  min="0"
-                  step="0.5"
-                  placeholder="e.g., 4.5"
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-900">
-                  Wins
-                </label>
-                <textarea
-                  name="wins"
-                  rows={2}
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                  placeholder="What felt good?"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-900">
-                  Blockers
-                </label>
-                <textarea
-                  name="blockers"
-                  rows={2}
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
-                  placeholder="What felt heavy or confusing?"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-              >
-                Submit check-in
-              </button>
-            </form>
-          )}
-        </article>
+        <WeeklyCheckinCard
+          weeks={weeklyTimeline}
+          action={submitWeeklyCheckinAction}
+        />
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
