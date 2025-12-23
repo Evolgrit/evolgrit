@@ -1,324 +1,765 @@
 "use client";
 
+import { useEffect, useMemo, useState, type Dispatch, type SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
-import { COUNTRIES } from "@/lib/countries";
-const countryFieldNames = new Set(["current_country", "origin_country"]);
-export type OnboardingStage = "basics" | "background" | "goal";
-const FIELD_LABELS: Record<string, string> = {
-  full_name: "Full name",
-  mother_tongue: "Mother tongue",
-  other_languages: "Other languages",
-  german_level: "German level",
-  current_country: "Current country",
-  origin_country: "Country of origin",
-  birthday: "Birthday",
-  target: "Target",
-  avatar_url: "Profile photo",
+
+type Stage = "basics" | "language" | "work";
+
+type WizardProps = {
+  userId: string;
+  stage: Stage | "background" | "goal" | string;
+  completion: { completed: number; total: number };
+  initialProfile: {
+    full_name: string;
+    current_country: string;
+    target_in_germany: string;
+    start_timeframe: string;
+  };
 };
 
-export type OnboardingField = {
-  name: string;
-  label: string;
-  type: "text" | "date" | "select";
-  required?: boolean;
-  placeholder?: string;
-  options?: { value: string; label: string }[];
+type ProfileLanguage = {
+  id: string;
+  kind: "mother" | "german" | "other";
+  language: string | null;
+  level: string | null;
 };
 
-export function OnboardingForm({
-  fields,
-  initialValues,
-  currentStage,
-}: {
-  fields: OnboardingField[];
-  initialValues: Record<string, string | null | undefined>;
-  currentStage: OnboardingStage;
-}) {
+type Skill = { id: string; skill: string | null };
+type Entry = { id: string; title: string | null; subtitle: string | null };
+
+const languageLevels = ["A0", "A1", "A2", "B1", "B2", "C1", "C2"];
+const targetOptions = ["Job", "Apprenticeship", "Further training"];
+const timeframeOptions = ["0-3 months", "3-6 months", "6-12 months", "12+ months"];
+
+const steps: Array<{
+  id: Stage;
+  title: string;
+  helper: string;
+}> = [
+  {
+    id: "basics",
+    title: "Let’s set up your job-ready profile",
+    helper: "These basics help mentors plan your first phase.",
+  },
+  {
+    id: "language",
+    title: "Language snapshot",
+    helper: "Tell us how you speak so we can match mentors.",
+  },
+  {
+    id: "work",
+    title: "Work readiness",
+    helper: "Show us your strengths so we can open the right batches.",
+  },
+];
+
+export default function OnboardingForm({
+  userId,
+  stage,
+  completion,
+  initialProfile,
+}: WizardProps) {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const router = useRouter();
-  const [formState, setFormState] = useState<Record<string, string>>(() => {
-    const state: Record<string, string> = {};
-    fields.forEach((field) => {
-      const raw = initialValues[field.name];
-      state[field.name] = typeof raw === "string" ? raw : "";
-    });
-    return state;
+  const resolvedStage: Stage =
+    stage === "language" || stage === "work"
+      ? (stage as Stage)
+      : stage === "background"
+      ? "language"
+      : stage === "goal"
+      ? "work"
+      : "basics";
+  const [currentStep, setCurrentStep] = useState<Stage>(resolvedStage);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Basics state
+  const [basics, setBasics] = useState(initialProfile);
+
+  // Language states
+  const [languages, setLanguages] = useState<ProfileLanguage[]>([]);
+  const [motherTongue, setMotherTongue] = useState("");
+  const [germanLevel, setGermanLevel] = useState("");
+  const [otherLangInput, setOtherLangInput] = useState({ language: "", level: "" });
+
+  // Work readiness
+  const [targetRoles, setTargetRoles] = useState<string[]>([]);
+  const [roleInput, setRoleInput] = useState("");
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [skillInput, setSkillInput] = useState("");
+  const [workEntries, setWorkEntries] = useState<Entry[]>([]);
+  const [educationEntries, setEducationEntries] = useState<Entry[]>([]);
+  const [workForm, setWorkForm] = useState({ company: "", role: "" });
+  const [educationForm, setEducationForm] = useState({
+    institution: "",
+    degree: "",
   });
-  const [isSaving, setIsSaving] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [infoMessage, setInfoMessage] = useState<string | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const fieldRefs = useRef<Record<
-    string,
-    HTMLInputElement | HTMLSelectElement | null
-  >>({});
-  const [activeSuggestions, setActiveSuggestions] = useState<
-    Record<string, string[]>
-  >({});
-  const [highlightIndex, setHighlightIndex] = useState<
-    Record<string, number>
-  >({});
 
-  const handleChange = (name: string, value: string) => {
-    setFormState((prev) => ({ ...prev, [name]: value }));
-    if (fieldErrors[name]) {
-      setFieldErrors((prev) => {
-        const updated = { ...prev };
-        delete updated[name];
-        return updated;
-      });
-    }
-    if (value && value.length > 0 && countryFieldNames.has(name)) {
-      const subset = COUNTRIES.filter((country) =>
-        country.toLowerCase().includes(value.toLowerCase())
-      ).slice(0, 6);
-      setActiveSuggestions((prev) => ({ ...prev, [name]: subset }));
-      setHighlightIndex((prev) => ({ ...prev, [name]: 0 }));
-    } else if (countryFieldNames.has(name)) {
-      setActiveSuggestions((prev) => {
-        const updated = { ...prev };
-        delete updated[name];
-        return updated;
-      });
-    }
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (isSaving) return;
-    const validationErrors: Record<string, string> = {};
-    fields.forEach((field) => {
-      if (!field.required) return;
-      const value = formState[field.name];
-      if (!value || !value.trim()) {
-        validationErrors[field.name] = "Required";
+  useEffect(() => {
+    async function loadData() {
+      const [
+        { data: langs },
+        { data: skillRows },
+        { data: workRows },
+        { data: eduRows },
+        { data: profileRow },
+      ] = await Promise.all([
+          supabase
+            .from("profile_languages")
+            .select("id, kind, language, level")
+            .eq("profile_id", userId),
+          supabase.from("profile_skills").select("id, skill").eq("profile_id", userId),
+          supabase
+            .from("work_experience_entries")
+            .select("id, company, title")
+            .eq("profile_id", userId)
+            .limit(3)
+            .order("created_at", { ascending: false }),
+          supabase
+            .from("education_entries")
+            .select("id, institution, degree")
+            .eq("profile_id", userId)
+            .limit(3)
+            .order("created_at", { ascending: false }),
+          supabase
+            .from("profiles")
+            .select("target_roles")
+            .eq("id", userId)
+            .maybeSingle(),
+        ]);
+      if (langs) {
+        setLanguages(langs as ProfileLanguage[]);
+        const mother = langs.find((l) => l.kind === "mother");
+        setMotherTongue(mother?.language ?? "");
+        const german = langs.find((l) => l.kind === "german");
+        setGermanLevel(german?.level ?? "");
       }
-    });
-    if (Object.keys(validationErrors).length > 0) {
-      setFieldErrors(validationErrors);
-      const firstKey = Object.keys(validationErrors)[0];
-      const ref = fieldRefs.current[firstKey];
-      if (ref) {
-        ref.scrollIntoView({ behavior: "smooth", block: "center" });
-        ref.focus({ preventScroll: true });
-      }
-      return;
+      if (skillRows) setSkills(skillRows as Skill[]);
+      if (workRows)
+        setWorkEntries(
+          workRows.map((row) => ({
+            id: row.id,
+            title: row.company,
+            subtitle: row.title,
+          }))
+        );
+      if (eduRows)
+        setEducationEntries(
+          eduRows.map((row) => ({
+            id: row.id,
+            title: row.institution,
+            subtitle: row.degree,
+          }))
+        );
+      const roles = (profileRow?.target_roles as string[] | null | undefined) ?? [];
+      setTargetRoles(roles);
     }
+    loadData();
+  }, [supabase, userId]);
 
-    setIsSaving(true);
-    setMessage(null);
-    setInfoMessage(null);
+  const stepIndex = steps.findIndex((s) => s.id === currentStep);
 
+  async function ensureSession() {
     const { data } = await supabase.auth.getUser();
-    if (!data.user) {
-      setMessage("Session expired. Please log in again.");
-      setIsSaving(false);
-      return;
-    }
+    if (!data.user) throw new Error("Session expired");
+    return data.user;
+  }
 
-    const payload: Record<string, string | null> = {};
-    fields.forEach((field) => {
-      const value = formState[field.name]?.trim() || null;
-      payload[field.name] = value;
+  async function handleBasicsNext() {
+    setSaving(true);
+    setError(null);
+    try {
+      await ensureSession();
+      const { error: updateError } = await supabase
+        .from("profiles")
+        .update({
+          full_name: basics.full_name || null,
+          current_country: basics.current_country || null,
+          target_in_germany: basics.target_in_germany || null,
+          start_timeframe: basics.start_timeframe || null,
+        })
+        .eq("id", userId);
+      if (updateError) throw updateError;
+      setCurrentStep("language");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to save basics.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function saveMotherTongue() {
+    const trimmed = motherTongue.trim();
+    const existing = languages.find((l) => l.kind === "mother");
+    const payload = {
+      id: existing?.id,
+      profile_id: userId,
+      kind: "mother",
+      language: trimmed || null,
+      level: null,
+    };
+    const { data, error } = await supabase
+      .from("profile_languages")
+      .upsert(payload, { onConflict: "id" })
+      .select()
+      .single();
+    if (error) throw error;
+    setLanguages((prev) => {
+      const others = prev.filter((l) => l.kind !== "mother");
+      return data ? [...others, data as ProfileLanguage] : others;
     });
-    if (process.env.NODE_ENV !== "production") {
-      console.log("payload", payload);
+  }
+
+  async function saveGermanLevel() {
+    const existing = languages.find((l) => l.kind === "german");
+    const payload = {
+      id: existing?.id,
+      profile_id: userId,
+      kind: "german",
+      language: "German",
+      level: germanLevel || null,
+    };
+    const { data, error } = await supabase
+      .from("profile_languages")
+      .upsert(payload, { onConflict: "id" })
+      .select()
+      .single();
+    if (error) throw error;
+    setLanguages((prev) => {
+      const others = prev.filter((l) => l.kind !== "german");
+      return data ? [...others, data as ProfileLanguage] : others;
+    });
+  }
+
+  async function addOtherLanguage() {
+    if (!otherLangInput.language.trim()) return;
+    const { data, error } = await supabase
+      .from("profile_languages")
+      .insert({
+        profile_id: userId,
+        kind: "other",
+        language: otherLangInput.language.trim(),
+        level: otherLangInput.level.trim() || null,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    setLanguages((prev) => [...prev, data as ProfileLanguage]);
+    setOtherLangInput({ language: "", level: "" });
+  }
+
+  async function removeLanguage(id: string) {
+    const { error } = await supabase.from("profile_languages").delete().eq("id", id);
+    if (error) throw error;
+    setLanguages((prev) => prev.filter((lang) => lang.id !== id));
+  }
+
+  async function handleLanguageNext() {
+    setSaving(true);
+    setError(null);
+    try {
+      await ensureSession();
+      await saveMotherTongue();
+      await saveGermanLevel();
+      setCurrentStep("work");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to save languages.");
+    } finally {
+      setSaving(false);
     }
+  }
 
-    const { error } = await supabase
-      .from("profiles")
-      .update(payload)
-      .eq("id", data.user.id);
+  async function addSkill() {
+    const trimmed = skillInput.trim();
+    if (!trimmed) return;
+    const { data, error } = await supabase
+      .from("profile_skills")
+      .insert({ profile_id: userId, skill: trimmed })
+      .select()
+      .single();
+    if (error) throw error;
+    setSkills((prev) => [...prev, data as Skill]);
+    setSkillInput("");
+  }
 
-    if (error) {
-      setMessage(error.message);
-      setIsSaving(false);
-      return;
-    }
+  async function removeSkill(id: string) {
+    const { error } = await supabase.from("profile_skills").delete().eq("id", id);
+    if (error) throw error;
+    setSkills((prev) => prev.filter((skill) => skill.id !== id));
+  }
 
-    const { data: progressRow, error: progressError } = await supabase
-      .from("v_onboarding_progress")
-      .select("next_step, missing_fields")
-      .eq("user_id", data.user.id)
-      .maybeSingle();
+  async function addWorkEntry() {
+    if (!workForm.company.trim() || !workForm.role.trim()) return;
+    const { data, error } = await supabase
+      .from("work_experience_entries")
+      .insert({
+        profile_id: userId,
+        company: workForm.company.trim(),
+        title: workForm.role.trim(),
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    setWorkEntries((prev) => [
+      ...prev,
+      { id: data.id, title: data.company, subtitle: data.title },
+    ]);
+    setWorkForm({ company: "", role: "" });
+  }
 
-    if (progressError) {
-      setMessage(progressError.message);
-      setIsSaving(false);
-      return;
-    }
+  async function addEducationEntry() {
+    if (!educationForm.institution.trim() || !educationForm.degree.trim()) return;
+    const { data, error } = await supabase
+      .from("education_entries")
+      .insert({
+        profile_id: userId,
+        institution: educationForm.institution.trim(),
+        degree: educationForm.degree.trim(),
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    setEducationEntries((prev) => [
+      ...prev,
+      { id: data.id, title: data.institution, subtitle: data.degree },
+    ]);
+    setEducationForm({ institution: "", degree: "" });
+  }
 
-    if (progressRow?.next_step === "done") {
-      router.replace("/dashboard?onboarding=done");
-      return;
-    }
+  async function handleFinish() {
+    setSaving(true);
+    setError(null);
+    try {
+      await ensureSession();
+      const { error: profileUpdateError } = await supabase
+        .from("profiles")
+        .update({
+          target_roles: targetRoles,
+          onboarding_completed_at: new Date().toISOString(),
+        })
+        .eq("id", userId);
+      if (profileUpdateError) throw profileUpdateError;
 
-    if (progressRow?.next_step && progressRow.next_step !== currentStage) {
-      router.replace("/dashboard/onboarding");
-      return;
-    }
-
-    if (progressRow?.next_step === currentStage) {
-      if (progressRow.missing_fields?.length) {
-        const friendly = progressRow.missing_fields
-.map((field: string) => FIELD_LABELS[field] ?? field)
-          .join(", ");
-        setInfoMessage(`Missing: ${friendly}`);
-      } else {
-        setInfoMessage(null);
+      const events = [];
+      events.push({ user_id: userId, type: "onboarding_completed" });
+      if (germanLevel) {
+        events.push({ user_id: userId, type: "language_german_set", metadata: { level: germanLevel } });
       }
+      if (skills.length >= 3) {
+        events.push({
+          user_id: userId,
+          type: "skills_added",
+          metadata: { count: skills.length },
+        });
+      }
+      if (workEntries.length) {
+        events.push({ user_id: userId, type: "work_added", metadata: { count: workEntries.length } });
+      }
+      if (events.length) {
+        await supabase.from("readiness_events").insert(events);
+      }
+      router.replace("/dashboard?onboarding=done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to complete onboarding.");
+    } finally {
+      setSaving(false);
     }
+  }
 
-    setIsSaving(false);
-  };
+  function addTargetRole() {
+    const trimmed = roleInput.trim();
+    if (!trimmed || targetRoles.includes(trimmed)) return;
+    setTargetRoles((prev) => [...prev, trimmed]);
+    setRoleInput("");
+  }
+
+  function removeTargetRole(role: string) {
+    setTargetRoles((prev) => prev.filter((r) => r !== role));
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-      <div className="space-y-4">
-        {fields.map((field) => (
-          <div key={field.name} className="space-y-2">
-            <label className="text-sm font-medium text-slate-900">
-              {field.label}
-            </label>
-            {field.type === "select" ? (
-              <select
-                value={formState[field.name] ?? ""}
-                onChange={(event) => handleChange(field.name, event.target.value)}
-                ref={(element) => {
-                  fieldRefs.current[field.name] = element;
-                }}
-                className={`w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 ${
-                  fieldErrors[field.name]
-                    ? "border-rose-300 focus:ring-rose-200"
-                    : "border-slate-200 focus:ring-slate-300"
-                }`}
-              >
-                <option value="">Select…</option>
-                {field.options?.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <input
-                type={field.type}
-                value={formState[field.name] ?? ""}
-                onChange={(event) => handleChange(field.name, event.target.value)}
-                ref={(element) => {
-                  fieldRefs.current[field.name] = element;
-                }}
-                placeholder={field.placeholder}
-                className={`w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 ${
-                  fieldErrors[field.name]
-                    ? "border-rose-300 focus:ring-rose-200"
-                    : "border-slate-200 focus:ring-slate-300"
-                }`}
-                onKeyDown={(event) => {
-                  if (!activeSuggestions[field.name]?.length) return;
-                  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-                    event.preventDefault();
-                    setHighlightIndex((prev) => {
-                      const items = activeSuggestions[field.name] ?? [];
-                      if (!items.length) return prev;
-                      const delta = event.key === "ArrowDown" ? 1 : -1;
-                      const next =
-                        ((prev[field.name] ?? 0) + delta + items.length) %
-                        items.length;
-                      return { ...prev, [field.name]: next };
-                    });
-                  } else if (event.key === "Enter") {
-                    const items = activeSuggestions[field.name] ?? [];
-                    const selected =
-                      items[(highlightIndex[field.name] ?? 0)] ?? null;
-                    if (selected) {
-                      event.preventDefault();
-                      handleChange(field.name, selected);
-                      setActiveSuggestions((prev) => {
-                        const updated = { ...prev };
-                        delete updated[field.name];
-                        return updated;
-                      });
-                      setHighlightIndex((prev) => {
-                        const updated = { ...prev };
-                        delete updated[field.name];
-                        return updated;
-                      });
-                    }
-                  } else if (event.key === "Escape") {
-                    setActiveSuggestions((prev) => {
-                      const updated = { ...prev };
-                      delete updated[field.name];
-                      return updated;
-                    });
-                  }
-                }}
-                onFocus={() => {
-                  const value = formState[field.name];
-                  if (countryFieldNames.has(field.name) && value) {
-                    handleChange(field.name, value);
-                  }
-                }}
-              />
-            )}
-            {fieldErrors[field.name] && (
-              <p className="text-xs text-rose-600">{fieldErrors[field.name]}</p>
-            )}
-            {countryFieldNames.has(field.name) &&
-              activeSuggestions[field.name]?.length ? (
-              <div className="relative z-20">
-                <ul className="absolute mt-1 w-full rounded-2xl border border-slate-200 bg-white shadow-lg">
-                  {activeSuggestions[field.name].map((suggestion, index) => (
-                    <li
-                      key={suggestion}
-                      className={`px-4 py-2 text-sm text-slate-900 transition ${
-                        highlightIndex[field.name] === index
-                          ? "bg-slate-100"
-                          : "bg-white hover:bg-slate-50"
-                      }`}
-                      onMouseDown={(event) => {
-                        event.preventDefault();
-                        handleChange(field.name, suggestion);
-                        setActiveSuggestions((prev) => {
-                          const updated = { ...prev };
-                          delete updated[field.name];
-                          return updated;
-                        });
-                      }}
-                    >
-                      {suggestion}
-                    </li>
-                  ))}
-                </ul>
+    <main className="min-h-screen bg-slate-50 px-5 py-10">
+      <div className="mx-auto max-w-3xl space-y-6">
+        <div>
+          <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+            Onboarding • {completion.completed} of {completion.total} complete
+          </p>
+          <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex items-center gap-2">
+                <span
+                  className={`h-8 w-8 rounded-full text-center text-xs font-semibold leading-8 ${
+                    index <= stepIndex
+                      ? "bg-slate-900 text-white"
+                      : "bg-slate-200 text-slate-500"
+                  }`}
+                >
+                  {index + 1}
+                </span>
+                {index < steps.length - 1 && (
+                  <span className="h-px w-8 bg-slate-200" aria-hidden="true" />
+                )}
               </div>
-            ) : null}
+            ))}
+          </div>
+          <h1 className="mt-4 text-3xl font-semibold text-slate-900">
+            {steps[stepIndex].title}
+          </h1>
+          <p className="mt-2 text-sm text-slate-600">{steps[stepIndex].helper}</p>
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          {currentStep === "basics" && (
+            <div className="space-y-4">
+              <InputField
+                label="Full name"
+                value={basics.full_name}
+                onChange={(v) => setBasics((prev) => ({ ...prev, full_name: v }))}
+              />
+              <InputField
+                label="Current country"
+                value={basics.current_country}
+                onChange={(v) => setBasics((prev) => ({ ...prev, current_country: v }))}
+              />
+              <SelectField
+                label="Target in Germany"
+                value={basics.target_in_germany}
+                onChange={(v) =>
+                  setBasics((prev) => ({ ...prev, target_in_germany: v }))
+                }
+                options={targetOptions}
+              />
+              <SelectField
+                label="Preferred start timeframe"
+                value={basics.start_timeframe}
+                onChange={(v) =>
+                  setBasics((prev) => ({ ...prev, start_timeframe: v }))
+                }
+                options={timeframeOptions}
+              />
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={handleBasicsNext}
+                  disabled={saving}
+                  className="w-full rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          )}
+
+          {currentStep === "language" && (
+            <div className="space-y-5">
+              <InputField
+                label="Mother tongue"
+                value={motherTongue}
+                onChange={setMotherTongue}
+              />
+              <SelectField
+                label="German level"
+                value={germanLevel}
+                onChange={setGermanLevel}
+                options={languageLevels}
+              />
+              <div>
+                <p className="text-sm font-medium text-slate-900">Other languages</p>
+                <div className="mt-2 space-y-2">
+                  {languages.filter((l) => l.kind === "other").map((lang) => (
+                    <div
+                      key={lang.id}
+                      className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-sm"
+                    >
+                      <span>
+                        {lang.language} {lang.level ? `· ${lang.level}` : ""}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeLanguage(lang.id)}
+                        className="text-xs text-slate-500 hover:text-rose-600"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  {languages.filter((l) => l.kind === "other").length === 0 && (
+                    <p className="text-xs text-slate-500">Add any extra languages.</p>
+                  )}
+                </div>
+                <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                  <input
+                    value={otherLangInput.language}
+                    onChange={(e) =>
+                      setOtherLangInput((prev) => ({
+                        ...prev,
+                        language: e.target.value,
+                      }))
+                    }
+                    placeholder="Language"
+                    className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  />
+                  <input
+                    value={otherLangInput.level}
+                    onChange={(e) =>
+                      setOtherLangInput((prev) => ({ ...prev, level: e.target.value }))
+                    }
+                    placeholder="Level"
+                    className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={addOtherLanguage}
+                    className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleLanguageNext}
+                disabled={saving}
+                className="w-full rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
+              >
+                Continue
+              </button>
+            </div>
+          )}
+
+          {currentStep === "work" && (
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm font-medium text-slate-900">Target roles</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {targetRoles.length === 0 && (
+                    <span className="text-xs text-slate-500">Add roles you are aiming for.</span>
+                  )}
+                  {targetRoles.map((role) => (
+                    <button
+                      key={role}
+                      type="button"
+                      onClick={() => removeTargetRole(role)}
+                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700 shadow-sm hover:border-slate-300"
+                    >
+                      {role} ×
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-3 flex gap-2">
+                  <input
+                    value={roleInput}
+                    onChange={(e) => setRoleInput(e.target.value)}
+                    placeholder="e.g., Childcare assistant"
+                    className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={addTargetRole}
+                    className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm font-medium text-slate-900">Skills</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {skills.length === 0 && (
+                    <span className="text-xs text-slate-500">
+                      Add a few skills so employers understand your strengths.
+                    </span>
+                  )}
+                  {skills.map((skill) => (
+                    <button
+                      key={skill.id}
+                      type="button"
+                      onClick={() => removeSkill(skill.id)}
+                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700 shadow-sm hover:border-slate-300"
+                    >
+                      {skill.skill} ×
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-3 flex gap-2">
+                  <input
+                    value={skillInput}
+                    onChange={(e) => setSkillInput(e.target.value)}
+                    placeholder="Add a skill"
+                    className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={addSkill}
+                    className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <QuickEntryCard
+                  title="Add education"
+                  entries={educationEntries}
+                  form={educationForm}
+                  onChange={(next) => {
+                    const value =
+                      typeof next === "function" ? next(educationForm) : next;
+                    setEducationForm({
+                      institution: value.institution ?? "",
+                      degree: value.degree ?? "",
+                    });
+                  }}
+                  onAdd={addEducationEntry}
+                  fields={[
+                    { name: "institution", placeholder: "Institution" },
+                    { name: "degree", placeholder: "Degree" },
+                  ]}
+                />
+                <QuickEntryCard
+                  title="Add work"
+                  entries={workEntries}
+                  form={workForm}
+                  onChange={(next) => {
+                    const value =
+                      typeof next === "function" ? next(workForm) : next;
+                    setWorkForm({
+                      company: value.company ?? "",
+                      role: value.role ?? "",
+                    });
+                  }}
+                  onAdd={addWorkEntry}
+                  fields={[
+                    { name: "company", placeholder: "Company" },
+                    { name: "role", placeholder: "Role" },
+                  ]}
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleFinish}
+                disabled={saving}
+                className="w-full rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
+              >
+                Finish onboarding
+              </button>
+            </div>
+          )}
+
+          {error && <p className="mt-4 text-sm text-rose-600">{error}</p>}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function InputField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-slate-900">{label}</label>
+      <input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+      />
+    </div>
+  );
+}
+
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-slate-900">{label}</label>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+      >
+        <option value="">Select…</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function QuickEntryCard({
+  title,
+  entries,
+  form,
+  onChange,
+  onAdd,
+  fields,
+}: {
+  title: string;
+  entries: Entry[];
+  form: Record<string, string>;
+  onChange: Dispatch<SetStateAction<Record<string, string>>>;
+  onAdd: () => Promise<void> | void;
+  fields: Array<{ name: string; placeholder: string }>;
+}) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <p className="text-sm font-semibold text-slate-900">{title}</p>
+      <div className="mt-3 space-y-2">
+        {entries.map((entry) => (
+          <div key={entry.id} className="rounded-xl border border-slate-100 bg-white px-3 py-2">
+            <p className="text-sm font-medium text-slate-900">{entry.title}</p>
+            <p className="text-xs text-slate-500">{entry.subtitle}</p>
           </div>
         ))}
-      </div>
-
-      {message && (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900">
-          {message}
-        </div>
-      )}
-
-      <div className="space-y-2">
-        <button
-          type="submit"
-          disabled={isSaving}
-          className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {isSaving ? "Saving…" : "Save & continue →"}
-        </button>
-        <p className="text-xs text-slate-500">
-          All required fields must be filled to continue.
-        </p>
-        {infoMessage && (
-          <p className="text-xs font-medium text-slate-600">{infoMessage}</p>
+        {entries.length === 0 && (
+          <p className="text-xs text-slate-500">No entries yet.</p>
         )}
       </div>
-    </form>
+      <div className="mt-3 space-y-2">
+        {fields.map((field) => (
+          <input
+            key={field.name}
+            value={form[field.name] ?? ""}
+            onChange={(event) =>
+              onChange((prev) => ({
+                ...prev,
+                [field.name]: event.target.value,
+              }))
+            }
+            placeholder={field.placeholder}
+            className="w-full rounded-2xl border border-white bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:outline-none focus:ring"
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={() => void onAdd()}
+        className="mt-3 w-full rounded-full bg-white px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm hover:bg-slate-100"
+      >
+        Quick add
+      </button>
+    </div>
   );
 }
