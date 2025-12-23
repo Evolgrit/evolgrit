@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
 
 function unauthorized() {
   return new NextResponse("Auth required", {
@@ -46,6 +47,14 @@ export async function POST(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
+
+  const actorId = await getAdminActorId();
+  await logAdminAudit({
+    actorId,
+    action: "waitlist_contacted_toggle",
+    target: id,
+    meta: { contacted },
+  });
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

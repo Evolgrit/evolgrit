@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
 
 // Requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.
 const supabaseAdmin = createClient(
@@ -9,6 +10,7 @@ const supabaseAdmin = createClient(
 
 export async function POST(request: Request) {
   try {
+    const actorId = await getAdminActorId();
     const { email } = await request.json();
     if (!email || typeof email !== "string") {
       return NextResponse.json(
@@ -50,6 +52,13 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    await logAdminAudit({
+      actorId,
+      action: "employer_invite_sent",
+      target: normalized,
+      meta: { source: "api/employer/invite" },
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {
