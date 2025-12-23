@@ -15,9 +15,13 @@ export default async function DashboardLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, avatar_url")
+    .select("full_name, avatar_url, role")
     .eq("id", data.user.id)
     .single();
+
+  if (profile?.role && profile.role !== "learner") {
+    redirect(profile.role === "admin" ? "/admin" : "/employer");
+  }
 
   return (
     <DashboardShell
