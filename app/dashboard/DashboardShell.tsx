@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ReactNode, useMemo } from "react";
-import { usePathname } from "next/navigation";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 const navItems = [
   { label: "Overview", href: "/dashboard" },
@@ -34,6 +35,8 @@ export default function DashboardShell({
   initials: string;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createSupabaseBrowserClient();
   const navWithState = useMemo(
     () =>
       navItems.map((item) => ({
@@ -42,6 +45,10 @@ export default function DashboardShell({
       })),
     [pathname]
   );
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -53,25 +60,13 @@ export default function DashboardShell({
             </p>
             <p className="text-base font-semibold text-slate-900">Learner hub</p>
           </div>
-          <Link
-            href="/dashboard/profile"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
-          >
-            <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 text-[11px] font-semibold text-slate-700">
-              {profileAvatar ? (
-                <Image
-                  src={profileAvatar}
-                  alt={profileName}
-                  width={32}
-                  height={32}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                initials
-              )}
-            </span>
-            <span className="text-xs text-blue-600">Profile →</span>
-          </Link>
+          <ProfileMenuButton
+            profileName={profileName}
+            profileAvatar={profileAvatar}
+            initials={initials}
+            onLogout={handleLogout}
+            compact
+          />
         </div>
 
         <nav className="mt-3 flex snap-x gap-2 overflow-x-auto pb-1 text-sm font-medium text-slate-600 [-webkit-overflow-scrolling:touch]">
@@ -140,6 +135,13 @@ export default function DashboardShell({
               Weekly mentor calls · AI coach · cultural readiness.
             </p>
           </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="mt-4 text-sm font-medium text-slate-500 hover:text-slate-900"
+          >
+            Log out
+          </button>
         </aside>
 
         <main className="flex-1">
@@ -154,34 +156,107 @@ export default function DashboardShell({
                 </h2>
               </div>
 
-              <Link
-                href="/dashboard/profile"
-                className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
-              >
-                <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 text-xs font-semibold text-slate-700">
-                  {profileAvatar ? (
-                    <Image
-                      src={profileAvatar}
-                      alt={profileName}
-                      width={40}
-                      height={40}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    initials
-                  )}
-                </span>
-                <div className="text-left">
-                  <p className="text-sm font-semibold text-slate-900">{profileName}</p>
-                  <p className="text-xs text-blue-600">Edit profile →</p>
-                </div>
-              </Link>
+              <ProfileMenuButton
+                profileName={profileName}
+                profileAvatar={profileAvatar}
+                initials={initials}
+                onLogout={handleLogout}
+              />
             </div>
           </div>
 
           <div className="mt-6">{children}</div>
         </main>
       </div>
+    </div>
+  );
+}
+
+function ProfileMenuButton({
+  profileName,
+  profileAvatar,
+  initials,
+  onLogout,
+  compact,
+}: {
+  profileName: string;
+  profileAvatar: string | null;
+  initials: string;
+  onLogout: () => Promise<void>;
+  compact?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function handleClick(event: MouseEvent) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className={`inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300 ${
+          compact ? "text-xs" : ""
+        }`}
+      >
+        <span
+          className={`flex items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 font-semibold text-slate-700 ${
+            compact ? "h-8 w-8 text-[11px]" : "h-10 w-10 text-xs"
+          }`}
+        >
+          {profileAvatar ? (
+            <Image
+              src={profileAvatar}
+              alt={profileName}
+              width={compact ? 32 : 40}
+              height={compact ? 32 : 40}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            initials
+          )}
+        </span>
+        <div className="text-left">
+          <p className={`font-semibold ${compact ? "text-xs" : "text-sm"}`}>
+            {profileName}
+          </p>
+          <p className="text-[11px] text-blue-600">
+            {open ? "Close" : "Profile"}
+          </p>
+        </div>
+      </button>
+      {open && (
+        <div className="absolute right-0 z-40 mt-2 w-48 rounded-2xl border border-slate-200 bg-white p-2 text-sm shadow-xl">
+          <Link
+            href="/dashboard/profile"
+            className="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-50"
+            onClick={() => setOpen(false)}
+          >
+            Profile
+          </Link>
+          <button
+            type="button"
+            onClick={async () => {
+              setOpen(false);
+              await onLogout();
+            }}
+            className="block w-full rounded-xl px-3 py-2 text-left text-slate-700 hover:bg-slate-50"
+          >
+            Log out
+          </button>
+        </div>
+      )}
     </div>
   );
 }
