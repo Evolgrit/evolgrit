@@ -15,6 +15,28 @@ export default async function ProfilePage() {
     .eq("id", data.user.id)
     .single();
 
+  const { data: languages } = await supabase
+    .from("profile_languages")
+    .select("id, kind, language, level")
+    .eq("profile_id", data.user.id);
+
+  const { data: skills } = await supabase
+    .from("profile_skills")
+    .select("id, skill")
+    .eq("profile_id", data.user.id);
+
+  const { data: education } = await supabase
+    .from("education_entries")
+    .select("id, institution, degree, start_date, end_date")
+    .eq("profile_id", data.user.id)
+    .order("start_date", { ascending: false });
+
+  const { data: work } = await supabase
+    .from("work_experience_entries")
+    .select("id, company, title, start_date, end_date")
+    .eq("profile_id", data.user.id)
+    .order("start_date", { ascending: false });
+
   return (
     <main className="min-h-screen bg-slate-50 px-5 py-10">
       <div className="max-w-3xl mx-auto">
@@ -32,7 +54,13 @@ export default async function ProfilePage() {
           </div>
 
           <div className="mt-6">
-            <ProfileForm initialProfile={profile ?? {}} />
+            <ProfileForm
+              initialProfile={profile ?? {}}
+              initialLanguages={languages ?? []}
+              initialSkills={skills ?? []}
+              initialEducation={education ?? []}
+              initialWork={work ?? []}
+            />
           </div>
         </div>
       </div>
