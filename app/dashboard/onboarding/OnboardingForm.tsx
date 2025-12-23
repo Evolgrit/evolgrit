@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState, type Dispatch, type SetStateAction } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import { useRouter } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
@@ -20,7 +26,7 @@ type WizardProps = {
 
 type ProfileLanguage = {
   id: string;
-  kind: "mother" | "german" | "other";
+  kind: "mother_tongue" | "german" | "other";
   language: string | null;
   level: string | null;
 };
@@ -29,7 +35,13 @@ type Skill = { id: string; skill: string | null };
 type Entry = { id: string; title: string | null; subtitle: string | null };
 
 const languageLevels = ["A0", "A1", "A2", "B1", "B2", "C1", "C2"];
-const targetOptions = ["Job", "Apprenticeship", "Further training"];
+const targetOptions = ["job", "apprenticeship", "training", "other"];
+const targetLabels: Record<string, string> = {
+  job: "Job",
+  apprenticeship: "Apprenticeship",
+  training: "Further training",
+  other: "Other",
+};
 const timeframeOptions = ["0-3 months", "3-6 months", "6-12 months", "12+ months"];
 
 const steps: Array<{
@@ -40,17 +52,17 @@ const steps: Array<{
   {
     id: "basics",
     title: "Let’s set up your job-ready profile",
-    helper: "These basics help mentors plan your first phase.",
+    helper: "This takes about 2 minutes. You can edit everything later.",
   },
   {
     id: "language",
     title: "Language snapshot",
-    helper: "Tell us how you speak so we can match mentors.",
+    helper: "We use this to place you in the right Batch and match you faster.",
   },
   {
     id: "work",
     title: "Work readiness",
-    helper: "Show us your strengths so we can open the right batches.",
+    helper: "Add what you can do — even if your German isn’t perfect yet.",
   },
 ];
 
@@ -73,9 +85,15 @@ export default function OnboardingForm({
   const [currentStep, setCurrentStep] = useState<Stage>(resolvedStage);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [stepError, setStepError] = useState<string | null>(null);
 
   // Basics state
-  const [basics, setBasics] = useState(initialProfile);
+  const [basics, setBasics] = useState({
+    full_name: initialProfile.full_name,
+    current_country: initialProfile.current_country,
+    target_in_germany: initialProfile.target_in_germany?.toLowerCase() ?? "",
+    start_timeframe: initialProfile.start_timeframe,
+  });
 
   // Language states
   const [languages, setLanguages] = useState<ProfileLanguage[]>([]);
@@ -95,6 +113,8 @@ export default function OnboardingForm({
     institution: "",
     degree: "",
   });
+  const [workAdded, setWorkAdded] = useState(false);
+  const [educationAdded, setEducationAdded] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -129,10 +149,17 @@ export default function OnboardingForm({
             .maybeSingle(),
         ]);
       if (langs) {
-        setLanguages(langs as ProfileLanguage[]);
-        const mother = langs.find((l) => l.kind === "mother");
+        const normalized = (langs as Array<
+          Omit<ProfileLanguage, "kind"> & { kind: string }
+        >).map((lang) => {
+          const nextKind =
+            lang.kind === "mother" ? "mother_tongue" : (lang.kind as ProfileLanguage["kind"]);
+          return { ...lang, kind: nextKind };
+        });
+        setLanguages(normalized);
+        const mother = normalized.find((l) => l.kind === "mother_tongue");
         setMotherTongue(mother?.language ?? "");
-        const german = langs.find((l) => l.kind === "german");
+        const german = normalized.find((l) => l.kind === "german");
         setGermanLevel(german?.level ?? "");
       }
       if (skillRows) setSkills(skillRows as Skill[]);
@@ -166,9 +193,23 @@ export default function OnboardingForm({
     return data.user;
   }
 
+  function validateBasics() {
+    if (!basics.full_name.trim()) return "Full name required.";
+    if (!basics.current_country.trim()) return "Current country required.";
+    if (!basics.target_in_germany) return "Select your goal in Germany.";
+    if (!basics.start_timeframe) return "Select your preferred start timeframe.";
+    return null;
+  }
+
   async function handleBasicsNext() {
+    const validationMessage = validateBasics();
+    if (validationMessage) {
+      setStepError(validationMessage);
+      return;
+    }
     setSaving(true);
     setError(null);
+    setStepError(null);
     try {
       await ensureSession();
       const { error: updateError } = await supabase
@@ -182,6 +223,7 @@ export default function OnboardingForm({
         .eq("id", userId);
       if (updateError) throw updateError;
       setCurrentStep("language");
+      setStepError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save basics.");
     } finally {
@@ -189,13 +231,19 @@ export default function OnboardingForm({
     }
   }
 
+  function validateLanguage() {
+    if (!motherTongue.trim()) return "Mother tongue required.";
+    if (!germanLevel) return "Select your German level.";
+    return null;
+  }
+
   async function saveMotherTongue() {
     const trimmed = motherTongue.trim();
-    const existing = languages.find((l) => l.kind === "mother");
+    const existing = languages.find((l) => l.kind === "mother_tongue");
     const payload = {
       id: existing?.id,
       profile_id: userId,
-      kind: "mother",
+      kind: "mother_tongue",
       language: trimmed || null,
       level: null,
     };
@@ -206,7 +254,7 @@ export default function OnboardingForm({
       .single();
     if (error) throw error;
     setLanguages((prev) => {
-      const others = prev.filter((l) => l.kind !== "mother");
+      const others = prev.filter((l) => l.kind !== "mother_tongue");
       return data ? [...others, data as ProfileLanguage] : others;
     });
   }
@@ -250,12 +298,21 @@ export default function OnboardingForm({
   }
 
   async function removeLanguage(id: string) {
-    const { error } = await supabase.from("profile_languages").delete().eq("id", id);
+    const { error } = await supabase
+      .from("profile_languages")
+      .delete()
+      .eq("id", id)
+      .eq("profile_id", userId);
     if (error) throw error;
     setLanguages((prev) => prev.filter((lang) => lang.id !== id));
   }
 
   async function handleLanguageNext() {
+    const validationMessage = validateLanguage();
+    if (validationMessage) {
+      setStepError(validationMessage);
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
@@ -263,6 +320,7 @@ export default function OnboardingForm({
       await saveMotherTongue();
       await saveGermanLevel();
       setCurrentStep("work");
+      setStepError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save languages.");
     } finally {
@@ -278,13 +336,28 @@ export default function OnboardingForm({
       .insert({ profile_id: userId, skill: trimmed })
       .select()
       .single();
-    if (error) throw error;
+    if (error) {
+      if (
+        error.message.toLowerCase().includes("duplicate") ||
+        error.message.toLowerCase().includes("unique")
+      ) {
+        setError("Skill already added.");
+        return;
+      }
+      throw error;
+    }
     setSkills((prev) => [...prev, data as Skill]);
     setSkillInput("");
+    setError(null);
+    setStepError(null);
   }
 
   async function removeSkill(id: string) {
-    const { error } = await supabase.from("profile_skills").delete().eq("id", id);
+    const { error } = await supabase
+      .from("profile_skills")
+      .delete()
+      .eq("id", id)
+      .eq("profile_id", userId);
     if (error) throw error;
     setSkills((prev) => prev.filter((skill) => skill.id !== id));
   }
@@ -300,12 +373,17 @@ export default function OnboardingForm({
       })
       .select()
       .single();
-    if (error) throw error;
+    if (error) {
+      setError(error.message);
+      return;
+    }
     setWorkEntries((prev) => [
       ...prev,
       { id: data.id, title: data.company, subtitle: data.title },
     ]);
     setWorkForm({ company: "", role: "" });
+    setWorkAdded(true);
+    setError(null);
   }
 
   async function addEducationEntry() {
@@ -319,15 +397,31 @@ export default function OnboardingForm({
       })
       .select()
       .single();
-    if (error) throw error;
+    if (error) {
+      setError(error.message);
+      return;
+    }
     setEducationEntries((prev) => [
       ...prev,
       { id: data.id, title: data.institution, subtitle: data.degree },
     ]);
     setEducationForm({ institution: "", degree: "" });
+    setEducationAdded(true);
+    setError(null);
+  }
+
+  function validateWorkReadiness() {
+    if (targetRoles.length < 1) return "Add at least one target role.";
+    if (skills.length < 3) return "Add at least three skills.";
+    return null;
   }
 
   async function handleFinish() {
+    const validationMessage = validateWorkReadiness();
+    if (validationMessage) {
+      setStepError(validationMessage);
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
@@ -344,7 +438,18 @@ export default function OnboardingForm({
       const events = [];
       events.push({ user_id: userId, type: "onboarding_completed" });
       if (germanLevel) {
-        events.push({ user_id: userId, type: "language_german_set", metadata: { level: germanLevel } });
+        events.push({
+          user_id: userId,
+          type: "language_german_set",
+          metadata: { level: germanLevel },
+        });
+      }
+      if (targetRoles.length) {
+        events.push({
+          user_id: userId,
+          type: "target_roles_set",
+          metadata: { count: targetRoles.length },
+        });
       }
       if (skills.length >= 3) {
         events.push({
@@ -353,8 +458,19 @@ export default function OnboardingForm({
           metadata: { count: skills.length },
         });
       }
-      if (workEntries.length) {
-        events.push({ user_id: userId, type: "work_added", metadata: { count: workEntries.length } });
+      if (workAdded) {
+        events.push({
+          user_id: userId,
+          type: "work_added",
+          metadata: { count: workEntries.length },
+        });
+      }
+      if (educationAdded) {
+        events.push({
+          user_id: userId,
+          type: "education_added",
+          metadata: { count: educationEntries.length },
+        });
       }
       if (events.length) {
         await supabase.from("readiness_events").insert(events);
@@ -372,20 +488,33 @@ export default function OnboardingForm({
     if (!trimmed || targetRoles.includes(trimmed)) return;
     setTargetRoles((prev) => [...prev, trimmed]);
     setRoleInput("");
+    setStepError(null);
   }
 
   function removeTargetRole(role: string) {
     setTargetRoles((prev) => prev.filter((r) => r !== role));
+    setStepError(null);
   }
 
   return (
     <main className="min-h-screen bg-slate-50 px-5 py-10">
       <div className="mx-auto max-w-3xl space-y-6">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-            Onboarding • {completion.completed} of {completion.total} complete
-          </p>
-          <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
+          <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-400">
+            <span>
+              Step {stepIndex + 1} of {steps.length}
+            </span>
+            <span>
+              {completion.completed} of {completion.total} details complete
+            </span>
+          </div>
+          <div className="mt-3 h-1.5 rounded-full bg-slate-200">
+            <div
+              className="h-full rounded-full bg-slate-900 transition-all"
+              style={{ width: `${((stepIndex + 1) / steps.length) * 100}%` }}
+            />
+          </div>
+          <div className="mt-4 flex items-center gap-2 text-sm text-slate-600">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center gap-2">
                 <span
@@ -428,7 +557,10 @@ export default function OnboardingForm({
                 onChange={(v) =>
                   setBasics((prev) => ({ ...prev, target_in_germany: v }))
                 }
-                options={targetOptions}
+                options={targetOptions.map((value) => ({
+                  value,
+                  label: targetLabels[value],
+                }))}
               />
               <SelectField
                 label="Preferred start timeframe"
@@ -436,7 +568,10 @@ export default function OnboardingForm({
                 onChange={(v) =>
                   setBasics((prev) => ({ ...prev, start_timeframe: v }))
                 }
-                options={timeframeOptions}
+                options={timeframeOptions.map((value) => ({
+                  value,
+                  label: value,
+                }))}
               />
               <div className="pt-2">
                 <button
@@ -462,7 +597,7 @@ export default function OnboardingForm({
                 label="German level"
                 value={germanLevel}
                 onChange={setGermanLevel}
-                options={languageLevels}
+                options={languageLevels.map((value) => ({ value, label: value }))}
               />
               <div>
                 <p className="text-sm font-medium text-slate-900">Other languages</p>
@@ -649,8 +784,8 @@ export default function OnboardingForm({
               </button>
             </div>
           )}
-
-          {error && <p className="mt-4 text-sm text-rose-600">{error}</p>}
+          {stepError && <p className="mt-4 text-sm text-rose-600">{stepError}</p>}
+          {error && <p className="mt-2 text-sm text-rose-600">{error}</p>}
         </div>
       </div>
     </main>
@@ -678,6 +813,8 @@ function InputField({
   );
 }
 
+type SelectOption = { value: string; label: string };
+
 function SelectField({
   label,
   value,
@@ -687,7 +824,7 @@ function SelectField({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  options: string[];
+  options: SelectOption[];
 }) {
   return (
     <div className="space-y-2">
@@ -699,8 +836,8 @@ function SelectField({
       >
         <option value="">Select…</option>
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

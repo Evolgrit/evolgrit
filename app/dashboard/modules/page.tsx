@@ -5,6 +5,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type ModuleRow = {
   id: string;
+  slug: string | null;
   phase: string | null;
   phase_label: string | null;
   title: string | null;
@@ -12,6 +13,7 @@ type ModuleRow = {
   kind: string | null;
   order_index: number | null;
   estimated_minutes: number | null;
+  is_active: boolean | null;
 };
 
 type ModuleProgressRow = {
@@ -100,6 +102,12 @@ async function completeModuleAction(formData: FormData) {
       { onConflict: "module_id,user_id" }
     );
 
+  await supabase.from("readiness_events").insert({
+    user_id: data.user.id,
+    type: "module_completed",
+    metadata: { module_id: moduleId },
+  });
+
   revalidatePath("/dashboard/modules");
   revalidatePath("/dashboard");
 }
@@ -113,8 +121,9 @@ export default async function ModulesPage() {
     supabase
       .from("modules")
       .select(
-        "id, phase, phase_label, title, description, kind, order_index, estimated_minutes"
+        "id, slug, phase, phase_label, title, description, kind, order_index, estimated_minutes, is_active"
       )
+      .eq("is_active", true)
       .order("phase", { ascending: true })
       .order("order_index", { ascending: true }),
     supabase
@@ -123,7 +132,10 @@ export default async function ModulesPage() {
       .eq("user_id", data.user.id),
   ]);
 
-  const modules: ModuleRow[] = moduleRows ?? [];
+  const modules: ModuleRow[] =
+    (moduleRows as ModuleRow[] | null)?.filter(
+      (module) => module.is_active ?? true
+    ) ?? [];
   const progressMap = new Map(
     (progressRows as ModuleProgressRow[] | null)?.map((row) => [
       row.module_id,
@@ -187,6 +199,7 @@ export default async function ModulesPage() {
                     module.estimated_minutes && module.estimated_minutes > 0
                       ? `${module.estimated_minutes} min`
                       : null;
+                  const moduleSlug = module.slug ?? module.id;
 
                   return (
                     <article
@@ -200,7 +213,7 @@ export default async function ModulesPage() {
                               {kindLabel}
                             </span>
                             {minutes && (
-                              <span className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                              <span className="text-xs text-slate-500">
                                 {minutes}
                               </span>
                             )}
@@ -263,6 +276,14 @@ export default async function ModulesPage() {
                             Great job — this module is complete.
                           </p>
                         )}
+                      </div>
+                      <div className="mt-4 text-sm">
+                        <Link
+                          href={`/dashboard/modules/${moduleSlug}`}
+                          className="text-blue-600 hover:text-blue-700"
+                        >
+                          Open module →
+                        </Link>
                       </div>
                     </article>
                   );

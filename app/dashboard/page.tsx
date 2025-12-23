@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const todayTasks = [
@@ -77,6 +78,78 @@ const phaseCards = [
   },
 ] as const;
 
+const moodOptions = [
+  { value: "energized", label: "Energized" },
+  { value: "steady", label: "Steady" },
+  { value: "stretched", label: "Stretched" },
+  { value: "tired", label: "Tired" },
+] as const;
+
+type WeeklyCheckinRow = {
+  mood: string | null;
+  hours: number | null;
+  wins: string | null;
+  blockers: string | null;
+  submitted_at: string | null;
+};
+
+function getWeekStart(date = new Date()) {
+  const weekStart = new Date(date);
+  const day = weekStart.getDay();
+  const diff = (day + 6) % 7;
+  weekStart.setHours(0, 0, 0, 0);
+  weekStart.setDate(weekStart.getDate() - diff);
+  return weekStart;
+}
+
+function getWeekLabel(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
+async function submitWeeklyCheckinAction(formData: FormData) {
+  "use server";
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) redirect("/login");
+
+  const weekStart = getWeekStart();
+  const weekStartIso = weekStart.toISOString().slice(0, 10);
+
+  const mood = (formData.get("mood") as string | null)?.trim() || null;
+  const hoursValue = formData.get("hours");
+  const hours =
+    typeof hoursValue === "string" && hoursValue.trim() !== ""
+      ? Number(hoursValue)
+      : null;
+  const wins = (formData.get("wins") as string | null)?.trim() || null;
+  const blockers = (formData.get("blockers") as string | null)?.trim() || null;
+
+  await supabase
+    .from("weekly_checkins")
+    .upsert(
+      {
+        user_id: data.user.id,
+        week_start: weekStartIso,
+        mood,
+        hours,
+        wins,
+        blockers,
+      },
+      { onConflict: "user_id,week_start" }
+    );
+
+  await supabase.from("readiness_events").insert({
+    user_id: data.user.id,
+    type: "weekly_checkin_submitted",
+    metadata: { week_start: weekStartIso },
+  });
+
+  revalidatePath("/dashboard");
+}
+
 function normalizePhaseKey(value?: string | null) {
   if (!value) return "";
   return value.toLowerCase().replace(/\s+/g, "");
@@ -115,18 +188,28 @@ export default async function DashboardPage() {
 
   if (!data.user) redirect("/login");
 
-  const [{ data: profile }, { data: onboarding }] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select("full_name, german_level")
-      .eq("id", data.user.id)
-      .single(),
-    supabase
-      .from("v_onboarding_progress")
-      .select("completed, total, is_complete")
-      .eq("user_id", data.user.id)
-      .maybeSingle(),
-  ]);
+  const weekStartDate = getWeekStart();
+  const weekStartIso = weekStartDate.toISOString().slice(0, 10);
+
+  const [{ data: profile }, { data: onboarding }, { data: weeklyCheckin }] =
+    await Promise.all([
+      supabase
+        .from("profiles")
+        .select("full_name, german_level")
+        .eq("id", data.user.id)
+        .single(),
+      supabase
+        .from("v_onboarding_progress")
+        .select("completed, total, is_complete")
+        .eq("user_id", data.user.id)
+        .maybeSingle(),
+      supabase
+        .from("weekly_checkins")
+        .select("mood, hours, wins, blockers, submitted_at")
+        .eq("user_id", data.user.id)
+        .eq("week_start", weekStartIso)
+        .maybeSingle<WeeklyCheckinRow>(),
+    ]);
 
   if (onboarding?.is_complete) {
     const { data: existing } = await supabase
@@ -194,6 +277,11 @@ export default async function DashboardPage() {
   const onboardingPercent = onboardingTotal
     ? Math.round((onboardingCompleted / onboardingTotal) * 100)
     : 0;
+  const weekLabel = getWeekLabel(weekStartDate);
+  const weeklyMoodLabel = weeklyCheckin?.mood
+    ? moodOptions.find((option) => option.value === weeklyCheckin.mood)?.label ??
+      weeklyCheckin.mood
+    : "—";
 
   return (
     <div className="space-y-6">
@@ -253,41 +341,120 @@ export default async function DashboardPage() {
 
         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-            Weekly snapshot
+            Weekly check-in · Week of {weekLabel}
           </p>
-          <h3 className="mt-1 text-lg font-semibold text-slate-900">
-            Hi {profile?.full_name?.split(" ")[0] ?? "there"}, your momentum
-            looks strong.
-          </h3>
-          <div className="mt-6 grid gap-3">
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
-              <div>
-                <p className="text-xs text-slate-500">Speaking practice</p>
-                <p className="text-sm font-semibold text-slate-900">
-                  18 mins this week
+          {weeklyCheckin ? (
+            <div className="mt-4 space-y-3">
+              <h3 className="text-lg font-semibold text-slate-900">
+                Submitted — thank you!
+              </h3>
+              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
+                <p className="font-semibold text-slate-900">
+                  Mood: {weeklyMoodLabel}
+                </p>
+                <p className="text-slate-600">
+                  Focus hours: {weeklyCheckin.hours ?? "—"}
                 </p>
               </div>
-              <span className="text-xs font-semibold text-emerald-600">
-                +6 mins vs last week
-              </span>
+              {(weeklyCheckin.wins || weeklyCheckin.blockers) && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
+                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                      Wins
+                    </p>
+                    <p className="mt-1 text-slate-700">
+                      {weeklyCheckin.wins || "No highlights shared."}
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm">
+                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                      Blockers
+                    </p>
+                    <p className="mt-1 text-slate-700">
+                      {weeklyCheckin.blockers || "No blockers noted."}
+                    </p>
+                  </div>
+                </div>
+              )}
+              <p className="text-xs text-slate-500">
+                Want to update it? Submit again and we’ll refresh your signals.
+              </p>
+              <form action={submitWeeklyCheckinAction} className="space-y-3">
+                <input type="hidden" name="overwrite" value="1" />
+                <button
+                  type="submit"
+                  className="w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:border-slate-400"
+                >
+                  Update check-in
+                </button>
+              </form>
             </div>
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
-              <div>
-                <p className="text-xs text-slate-500">AI coach check-ins</p>
-                <p className="text-sm font-semibold text-slate-900">4 sessions</p>
+          ) : (
+            <form action={submitWeeklyCheckinAction} className="mt-4 space-y-4">
+              <p className="text-sm text-slate-600">
+                Take 30 seconds to reflect. This helps mentors and employers see
+                your rhythm.
+              </p>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-900">
+                  How do you feel this week?
+                </label>
+                <select
+                  name="mood"
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  required
+                >
+                  <option value="">Select mood…</option>
+                  {moodOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <span className="text-xs text-slate-500">Goal: 5 / week</span>
-            </div>
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
-              <div>
-                <p className="text-xs text-slate-500">Reliability signals</p>
-                <p className="text-sm font-semibold text-slate-900">
-                  On time · 100%
-                </p>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-900">
+                  Focus hours (approx.)
+                </label>
+                <input
+                  name="hours"
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  placeholder="e.g., 4.5"
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                />
               </div>
-              <span className="text-xs text-emerald-600">Looks great</span>
-            </div>
-          </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-900">
+                  Wins
+                </label>
+                <textarea
+                  name="wins"
+                  rows={2}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  placeholder="What felt good?"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-900">
+                  Blockers
+                </label>
+                <textarea
+                  name="blockers"
+                  rows={2}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300"
+                  placeholder="What felt heavy or confusing?"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+              >
+                Submit check-in
+              </button>
+            </form>
+          )}
         </article>
       </section>
 
