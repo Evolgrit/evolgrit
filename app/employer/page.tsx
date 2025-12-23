@@ -8,14 +8,14 @@ export default function EmployerHome() {
         Welcome to the Evolgrit employer hub
       </h1>
       <p className="mt-2 text-sm text-slate-600">
-        Manage your international talent pilots, view readiness signals and coordinate onboarding.
+        Manage your international talent batches, view readiness signals and coordinate onboarding.
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-            Pilots
+            Batches
           </p>
-          <p className="mt-1 text-sm text-slate-700">No pilots active yet.</p>
+          <p className="mt-1 text-sm text-slate-700">No batches active yet.</p>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">

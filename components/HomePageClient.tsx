@@ -50,9 +50,9 @@ Das senkt Ihr Risiko im Onboarding und erhöht die Chance, dass neue Mitarbeiten
   },
   {
     id: "pilots",
-    label: "Pilot batches",
+    label: "Batches",
     icon: "🧪",
-    title: "Start with focused pilot batches.",
+    title: "Start with focused batches.",
     description:
       "Align roles, locations and timelines – and learn together in small steps.",
     modalTitle: "Gemeinsam mit Pilotkohorten starten.",

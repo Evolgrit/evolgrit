@@ -9,7 +9,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 const navItems = [
   { label: "Overview", href: "/employer" },
   { label: "Matches", href: "/employer/matches" },
-  { label: "Pilots", href: "/employer/pilots" },
+  { label: "Batches", href: "/employer/pilots" },
   { label: "Company profile", href: "/employer/profile" },
   { label: "Settings", href: "/employer/settings" },
 ];
@@ -44,7 +44,7 @@ export default function EmployerShell({
 
   async function handleLogout() {
     await supabase.auth.signOut();
-    router.push("/login?role=employer");
+    router.push("/login");
   }
 
   return (

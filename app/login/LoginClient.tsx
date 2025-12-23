@@ -563,63 +563,22 @@ export default function LoginClient() {
                 )}
               </>
             ) : (
-              <form onSubmit={handleSignup} className="mt-6 space-y-3 md:space-y-4">
-                <TextInput
-                  label="Email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={signupEmail}
-                  onChange={setSignupEmail}
-                  placeholder="you@email.com"
-                />
-                <PasswordField
-                  label="Password"
-                  required
-                  autoComplete="new-password"
-                  value={signupPassword}
-                  onChange={setSignupPassword}
-                  placeholder="Create a password"
-                  minLength={12}
-                  showCopy
-                />
-                <PasswordChecklist rules={passwordRules} />
-                <ActionButton
-                  text="Create account"
-                  loadingText="Creating…"
-                  type="submit"
-                  loading={signupStatus === "loading"}
-                  disabled={!passwordRules.allValid}
-                />
-                {signupMessage && (
-                  <Banner
-                    kind={signupStatus === "success" ? "success" : "error"}
-                    message={signupMessage}
-                  />
-                )}
-                {!isEmployer && (
-                  <div className="space-y-2.5">
-                    <div className="py-2 text-center text-xs uppercase tracking-[0.2em] text-slate-400">
-                      or
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleProviderLogin("google")}
-                      className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
-                    >
-                      Continue with Google
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleProviderLogin("apple")}
-                      className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
-                    >
-                      Continue with Apple
-                    </button>
-                    {oauthMessage && <Banner kind={oauthStatus} message={oauthMessage} />}
-                  </div>
-                )}
-              </form>
+              <LearnerSignup
+                signupEmail={signupEmail}
+                setSignupEmail={setSignupEmail}
+                signupPassword={signupPassword}
+                setSignupPassword={setSignupPassword}
+                passwordRules={passwordRules}
+                signupStatus={signupStatus}
+                signupMessage={signupMessage}
+                onSignup={handleSignup}
+                handleProviderLogin={handleProviderLogin}
+                oauthMessage={oauthMessage}
+                oauthStatus={oauthStatus}
+                onGoToEmployer={() => {
+                  window.location.href = "/login?role=employer";
+                }}
+              />
             )}
           </>
         )}
@@ -750,5 +709,151 @@ function PasswordChecklist({ rules }: { rules: PasswordRules }) {
         </p>
       ))}
     </div>
+  );
+}
+
+function LearnerSignup({
+  signupEmail,
+  setSignupEmail,
+  signupPassword,
+  setSignupPassword,
+  passwordRules,
+  signupStatus,
+  signupMessage,
+  onSignup,
+  handleProviderLogin,
+  oauthMessage,
+  oauthStatus,
+  onGoToEmployer,
+}: {
+  signupEmail: string;
+  setSignupEmail: (value: string) => void;
+  signupPassword: string;
+  setSignupPassword: (value: string) => void;
+  passwordRules: PasswordRules;
+  signupStatus: Status;
+  signupMessage: string | null;
+  onSignup: (e: React.FormEvent) => Promise<void>;
+  handleProviderLogin: (provider: "google" | "apple") => Promise<void>;
+  oauthMessage: string | null;
+  oauthStatus: "success" | "error" | "warning";
+  onGoToEmployer: () => void;
+}) {
+  const [role, setRole] = useState<"learner" | "employer">("learner");
+
+  if (role === "employer") {
+    return (
+      <div className="mt-6 space-y-4 rounded-3xl border border-slate-200 bg-white px-4 py-6 shadow-sm">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+            I’m joining as
+          </p>
+          <div className="flex items-center gap-2 text-sm font-medium text-slate-900">
+            <button
+              type="button"
+              onClick={() => setRole("learner")}
+              className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600 hover:text-slate-900"
+            >
+              Learner
+            </button>
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 rounded-full border border-slate-900 px-3 py-1 text-xs font-semibold text-slate-900"
+            >
+              Employer <span className="text-[11px] text-slate-500">🔒 Invite-only</span>
+            </button>
+          </div>
+        </div>
+        <p className="text-sm text-slate-600">
+          Employer access is invite-only. Request access and we’ll reach out.
+        </p>
+        <button
+          type="button"
+          onClick={onGoToEmployer}
+          className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+        >
+          Request employer access
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSignup} className="mt-6 space-y-3 md:space-y-4">
+      <div className="space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+          I’m joining as
+        </p>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => setRole("learner")}
+            className="inline-flex flex-1 items-center justify-center rounded-2xl border border-slate-200 bg-slate-900/5 px-4 py-2 text-xs font-semibold text-slate-900"
+          >
+            Learner
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole("employer")}
+            className="inline-flex flex-1 items-center justify-center gap-1 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600"
+          >
+            Employer <span className="text-[10px] text-slate-400">🔒 Invite-only</span>
+          </button>
+        </div>
+      </div>
+      <TextInput
+        label="Email"
+        type="email"
+        required
+        autoComplete="email"
+        value={signupEmail}
+        onChange={setSignupEmail}
+        placeholder="you@email.com"
+      />
+      <PasswordField
+        label="Password"
+        required
+        autoComplete="new-password"
+        value={signupPassword}
+        onChange={setSignupPassword}
+        placeholder="Create a password"
+        minLength={12}
+        showCopy
+      />
+      <PasswordChecklist rules={passwordRules} />
+      <ActionButton
+        text="Create account"
+        loadingText="Creating…"
+        type="submit"
+        loading={signupStatus === "loading"}
+        disabled={!passwordRules.allValid}
+      />
+      {signupMessage && (
+        <Banner
+          kind={signupStatus === "success" ? "success" : "error"}
+          message={signupMessage}
+        />
+      )}
+      <div className="space-y-2.5">
+        <div className="py-2 text-center text-xs uppercase tracking-[0.2em] text-slate-400">
+          or
+        </div>
+        <button
+          type="button"
+          onClick={() => handleProviderLogin("google")}
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+        >
+          Continue with Google
+        </button>
+        <button
+          type="button"
+          onClick={() => handleProviderLogin("apple")}
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+        >
+          Continue with Apple
+        </button>
+        {oauthMessage && <Banner kind={oauthStatus} message={oauthMessage} />}
+      </div>
+    </form>
   );
 }
