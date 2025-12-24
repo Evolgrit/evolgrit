@@ -45,7 +45,46 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({ candidates: data ?? [] }, { status: 200 });
+    const candidateRows = data ?? [];
+    const learnerIds = candidateRows
+      .map((row) => row?.learner_id)
+      .filter((id): id is string => Boolean(id));
+
+    let actionsByLearner = new Map<string, Record<string, string | null>>();
+    if (learnerIds.length > 0) {
+      const { data: actionsData, error: actionsError } = await supabaseAdmin
+        .from("employer_candidate_actions")
+        .select("learner_id, action, created_at")
+        .eq("employer_id", auth.user.id)
+        .in("learner_id", learnerIds);
+
+      if (actionsError) {
+        console.error("employer candidates actions error", actionsError);
+      } else {
+        actionsByLearner = new Map(
+          learnerIds.map((id) => [id, {} as Record<string, string | null>])
+        );
+        actionsData?.forEach((actionRow) => {
+          const mapEntry = actionsByLearner.get(actionRow.learner_id) ?? {};
+          mapEntry[actionRow.action] = actionRow.created_at;
+          actionsByLearner.set(actionRow.learner_id, mapEntry);
+        });
+      }
+    }
+
+    const enriched = candidateRows.map((row) => {
+      const actionInfo = row.learner_id
+        ? actionsByLearner.get(row.learner_id) ?? {}
+        : {};
+      return {
+        ...row,
+        saved_at: actionInfo["saved"] ?? null,
+        interested_at: actionInfo["interested"] ?? null,
+        intro_requested_at: actionInfo["intro_requested"] ?? null,
+      };
+    });
+
+    return NextResponse.json({ candidates: enriched }, { status: 200 });
   } catch (error) {
     console.error("employer candidates unexpected error", error);
     return NextResponse.json(

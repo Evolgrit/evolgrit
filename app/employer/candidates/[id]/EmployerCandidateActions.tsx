@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 type ActionType = "saved" | "interested" | "intro_requested";
 
@@ -34,16 +34,14 @@ export default function EmployerCandidateActions({
   learnerId: string;
   initialActions: ExistingAction[];
 }) {
-  const initialSet = useMemo(
-    () => new Set(initialActions.map((a) => a.action)),
-    [initialActions]
+  const [performed, setPerformed] = useState(() =>
+    new Map(initialActions.map((action) => [action.action, action.created_at]))
   );
-  const [performed, setPerformed] = useState(initialSet);
   const [status, setStatus] = useState<string | null>(null);
   const [loadingAction, setLoadingAction] = useState<ActionType | null>(null);
 
   async function handleAction(action: ActionType) {
-    if (performed.has(action)) return;
+    if (performed.get(action)) return;
     setLoadingAction(action);
     setStatus(null);
     try {
@@ -56,7 +54,11 @@ export default function EmployerCandidateActions({
         const body = await res.json().catch(() => ({ error: "Unable to save" }));
         throw new Error(body.error || "Unable to save action");
       }
-      setPerformed((prev) => new Set(prev).add(action));
+      setPerformed((prev) => {
+        const next = new Map(prev);
+        next.set(action, new Date().toISOString());
+        return next;
+      });
       setStatus(`${actionMeta[action].label} saved.`);
     } catch (error) {
       const message =
@@ -85,23 +87,25 @@ export default function EmployerCandidateActions({
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {(Object.keys(actionMeta) as ActionType[]).map((action) => {
           const meta = actionMeta[action];
-          const done = performed.has(action);
+          const doneAt = performed.get(action);
           return (
             <button
               key={action}
               type="button"
-              disabled={done || loadingAction === action}
+              disabled={Boolean(doneAt) || loadingAction === action}
               onClick={() => handleAction(action)}
               className={`rounded-2xl border border-slate-200 px-4 py-3 text-left shadow-sm transition ${
-                done
+                doneAt
                   ? "bg-emerald-50 text-emerald-700"
                   : "bg-white text-slate-900 hover:-translate-y-0.5"
-              }`}
+                }`}
             >
               <p className="text-sm font-semibold">
-                {done ? `✓ ${meta.label}` : meta.label}
+                {doneAt ? `✓ ${meta.label}` : meta.label}
               </p>
-              <p className="text-xs text-slate-500">{meta.helper}</p>
+              <p className="text-xs text-slate-500">
+                {doneAt ? `Saved ${new Date(doneAt).toLocaleDateString()}` : meta.helper}
+              </p>
             </button>
           );
         })}
@@ -112,4 +116,3 @@ export default function EmployerCandidateActions({
     </article>
   );
 }
-

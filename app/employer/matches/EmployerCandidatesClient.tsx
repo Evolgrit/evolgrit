@@ -13,10 +13,16 @@ type CandidateRow = {
   modules_total: number | null;
   last_checkin_week: string | null;
   documents_count: number | null;
+  saved_at?: string | null;
+  interested_at?: string | null;
+  intro_requested_at?: string | null;
 };
 
 const readinessPresets = [30, 50, 70];
+const actionFilters = ["all", "saved", "interested", "intro_requested"] as const;
 const germanLevels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+
+type ActionFilter = (typeof actionFilters)[number];
 
 export default function EmployerCandidatesClient() {
   const [candidates, setCandidates] = useState<CandidateRow[]>([]);
@@ -24,6 +30,7 @@ export default function EmployerCandidatesClient() {
   const [error, setError] = useState<string | null>(null);
   const [minReadiness, setMinReadiness] = useState<number | null>(null);
   const [germanFilter, setGermanFilter] = useState<string>("");
+  const [actionFilter, setActionFilter] = useState<ActionFilter>("all");
 
   useEffect(() => {
     async function load() {
@@ -53,9 +60,12 @@ export default function EmployerCandidatesClient() {
       if (minReadiness !== null && score < minReadiness) return false;
       if (germanFilter && (candidate.german_level ?? "").toUpperCase() !== germanFilter)
         return false;
+      if (actionFilter === "saved" && !candidate.saved_at) return false;
+      if (actionFilter === "interested" && !candidate.interested_at) return false;
+      if (actionFilter === "intro_requested" && !candidate.intro_requested_at) return false;
       return true;
     });
-  }, [candidates, minReadiness, germanFilter]);
+  }, [candidates, minReadiness, germanFilter, actionFilter]);
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
@@ -66,10 +76,10 @@ export default function EmployerCandidatesClient() {
           Readiness signals to coordinate onboarding.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <fieldset className="rounded-2xl border border-slate-200 px-3 py-2">
-            <legend className="text-xs text-slate-500">Min readiness</legend>
-            <div className="mt-2 flex gap-2">
+      <div className="mt-6 flex flex-wrap gap-3">
+        <fieldset className="rounded-2xl border border-slate-200 px-3 py-2">
+          <legend className="text-xs text-slate-500">Min readiness</legend>
+          <div className="mt-2 flex gap-2">
             {readinessPresets.map((preset) => (
               <button
                 key={preset}
@@ -102,6 +112,26 @@ export default function EmployerCandidatesClient() {
             ))}
           </select>
         </label>
+
+        <fieldset className="rounded-2xl border border-slate-200 px-3 py-2">
+          <legend className="text-xs text-slate-500">Actions</legend>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {actionFilters.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActionFilter(filter)}
+                className={`rounded-full px-3 py-1 text-sm capitalize ${
+                  actionFilter === filter
+                    ? "bg-slate-900 text-white"
+                    : "bg-slate-100 text-slate-600"
+                }`}
+              >
+                {filter === "all" ? "All" : filter.replace("_", " ")}
+              </button>
+            ))}
+          </div>
+        </fieldset>
       </div>
 
         {loading && <p className="mt-6 text-sm text-slate-500">Loading candidates…</p>}
@@ -124,15 +154,32 @@ export default function EmployerCandidatesClient() {
                 href={`/employer/candidates/${candidate.learner_id}`}
                 className="flex h-full flex-col rounded-3xl border border-slate-200 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-lg font-semibold text-slate-900">
-                      {candidate.full_name || "Candidate"}
-                    </h2>
-                    <p className="text-sm text-slate-500">
-                      German level: {candidate.german_level || "—"}
-                    </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-900">
+                    {candidate.full_name || "Candidate"}
+                  </h2>
+                  <p className="text-sm text-slate-500">
+                    German level: {candidate.german_level || "—"}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                    {candidate.saved_at && (
+                      <span className="rounded-full bg-slate-900/5 px-2 py-1 text-slate-700">
+                        Saved
+                      </span>
+                    )}
+                    {candidate.interested_at && (
+                      <span className="rounded-full bg-amber-100 px-2 py-1 text-amber-700">
+                        Interested
+                      </span>
+                    )}
+                    {candidate.intro_requested_at && (
+                      <span className="rounded-full bg-emerald-100 px-2 py-1 text-emerald-700">
+                        Intro requested
+                      </span>
+                    )}
                   </div>
+                </div>
                   <div className="text-right">
                     <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Readiness</p>
                     <p className="text-xl font-semibold text-slate-900">

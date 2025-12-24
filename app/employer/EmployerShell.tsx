@@ -9,7 +9,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 const navItems = [
   { label: "Overview", href: "/employer" },
   { label: "Candidates", href: "/employer/matches" },
-  { label: "Batches", href: "/employer/pilots" },
+  { label: "Batches", href: "/employer/batches" },
   { label: "Company profile", href: "/employer/profile" },
   { label: "Settings", href: "/employer/settings" },
 ];
