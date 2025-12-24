@@ -88,9 +88,13 @@ function formatDate(value: string | null | undefined) {
 export default async function EmployerCandidateDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const data = await loadCandidate(params.id);
+  const { id } = await params;
+  if (!id) {
+    notFound();
+  }
+  const data = await loadCandidate(id);
   const candidate = data.candidate;
   const checkins = (data.checkins ?? []) as Array<{
     week_start: string;

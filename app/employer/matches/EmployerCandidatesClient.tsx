@@ -115,7 +115,9 @@ export default function EmployerCandidatesClient() {
       )}
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {filtered.map((candidate) => (
+        {filtered.map((candidate) => {
+          if (!candidate.learner_id) return null;
+          return (
           <Link
             key={candidate.learner_id}
             href={`/employer/candidates/${candidate.learner_id}`}
@@ -179,7 +181,8 @@ export default function EmployerCandidatesClient() {
               </div>
             </dl>
           </Link>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
