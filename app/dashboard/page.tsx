@@ -5,6 +5,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import WeeklyCheckinCard, {
   type WeekCheckin,
 } from "./WeeklyCheckinCard";
+import { computePhase } from "@/lib/phase/computePhase";
+import { phaseMeta } from "@/lib/phase/phaseMeta";
 
 type WeeklyCheckinRow = {
   week_start: string | null;
@@ -231,6 +233,15 @@ export default async function DashboardPage() {
     ? Math.round((onboardingCompleted / onboardingTotal) * 100)
     : 0;
 
+  const phaseInfo = phaseMeta[
+    computePhase({
+      onboardingPercent,
+      modulesCompletedPercent: modulesTotal
+        ? Math.round((modulesCompleted / modulesTotal) * 100)
+        : 0,
+    })
+  ];
+
   return (
     <div className="space-y-6">
       <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -261,13 +272,13 @@ export default async function DashboardPage() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Current phase
+                {phaseInfo.label}
               </p>
               <h2 className="text-2xl font-semibold text-slate-900">
-                Phase 1 · Arrival & foundations
+                {phaseInfo.title}
               </h2>
               <p className="mt-1 text-sm text-slate-600">
-                Everyday German, orientation and the first mentor touchpoints.
+                {phaseInfo.description}
               </p>
             </div>
             <div className="text-right">
