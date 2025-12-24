@@ -130,7 +130,7 @@ export default async function EmployerCandidateDetailPage({
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 space-y-6">
       <Link
         href="/employer/matches"
         className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900"
@@ -148,8 +148,8 @@ export default async function EmployerCandidateDetailPage({
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <div className="space-y-6">
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="space-y-6 lg:col-span-8">
           <div className="grid gap-4 md:grid-cols-3">
             <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Readiness</p>
@@ -259,28 +259,30 @@ export default async function EmployerCandidateDetailPage({
           </article>
         </div>
 
-        <div className="space-y-6">
-          <EmployerCandidateActions learnerId={id} initialActions={actions} />
+        <div className="space-y-6 lg:col-span-4">
+          <div className="sticky top-24 space-y-6">
+            <EmployerCandidateActions learnerId={id} initialActions={actions} />
 
-          <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-              Recent actions
-            </p>
-            <div className="mt-3 space-y-2">
-              {actionHistory.length === 0 && (
-                <p className="text-sm text-slate-500">No actions yet.</p>
-              )}
-              {actionHistory.map((action) => (
-                <div
-                  key={`${action.label}-${action.created_at}`}
-                  className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
-                >
-                  <p className="text-sm font-medium text-slate-900">{action.label}</p>
-                  <p className="text-xs text-slate-500">{formatDate(action.created_at)}</p>
-                </div>
-              ))}
-            </div>
-          </article>
+            <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                Recent actions
+              </p>
+              <div className="mt-3 space-y-2">
+                {actionHistory.length === 0 && (
+                  <p className="text-sm text-slate-500">No actions yet.</p>
+                )}
+                {actionHistory.map((action) => (
+                  <div
+                    key={`${action.label}-${action.created_at}`}
+                    className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
+                  >
+                    <p className="text-sm font-medium text-slate-900">{action.label}</p>
+                    <p className="text-xs text-slate-500">{formatDate(action.created_at)}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </div>
