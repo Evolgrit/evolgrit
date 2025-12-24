@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
+import { enforceRateLimit } from "@/lib/ratelimit";
 
 // Requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, optional ADMIN_EMAIL, RESEND_API_KEY.
 const supabaseAdmin = createClient(
@@ -15,6 +16,12 @@ const adminEmail = process.env.ADMIN_EMAIL || "info@evolgrit.com";
 
 export async function POST(request: Request) {
   try {
+    const limited = await enforceRateLimit(request, {
+      routeKey: "employer-access",
+      limit: 3,
+      windowSeconds: 3600,
+    });
+    if (limited) return limited;
     const body = await request.json();
 
     const company_name = String(body.company_name ?? "").trim();

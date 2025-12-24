@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { enforceRateLimit } from "@/lib/ratelimit";
 
 function normalizeRoles(s: string) {
   const x = s.toLowerCase();
@@ -19,6 +20,12 @@ function isPriorityEmployer(norm: string) {
 
 export async function POST(req: Request) {
   try {
+    const limited = await enforceRateLimit(req, {
+      routeKey: "employer-leads",
+      limit: 5,
+      windowSeconds: 3600,
+    });
+    if (limited) return limited;
     const body = await req.json();
 
     const company = String(body.company ?? "").trim();

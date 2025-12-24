@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { enforceRateLimit } from "@/lib/ratelimit";
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL;
@@ -58,6 +59,12 @@ function isPriorityLearner(level: string | null, timeframe: string | null) {
 
 export async function POST(req: Request) {
   try {
+    const limited = await enforceRateLimit(req, {
+      routeKey: "waitlist",
+      limit: 5,
+      windowSeconds: 3600,
+    });
+    if (limited) return limited;
     const supabase = getSupabase();
     const resend = getResend();
     const body = await req.json();
