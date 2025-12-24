@@ -32,10 +32,12 @@ async function loadCandidate(id: string) {
     .maybeSingle();
 
   if (candidateError) {
-    throw new Error("Unable to load candidate");
+    console.error("candidate query failed", { id, candidateError });
+    notFound();
   }
 
   if (!candidate) {
+    console.warn("candidate not found", { id });
     notFound();
   }
 
