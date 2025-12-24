@@ -1,33 +1,77 @@
 import Link from "next/link";
-import { cookies, headers } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseAdmin = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 async function loadCandidate(id: string) {
-  const cookieStore = await cookies();
-  const headerStore = await headers();
-  const protocol = headerStore.get("x-forwarded-proto") || "http";
-  const host = headerStore.get("x-forwarded-host") || headerStore.get("host");
-  const baseUrl = host ? `${protocol}://${host}` : "http://localhost:3000";
-
-  const cookieHeader = cookieStore
-    .getAll()
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join("; ");
-
-  const res = await fetch(`${baseUrl}/api/employer/candidates/${id}`, {
-    headers: cookieHeader ? { Cookie: cookieHeader } : undefined,
-    cache: "no-store",
-  });
-
-  if (res.status === 404) {
-    notFound();
+  const supabase = await createSupabaseServerClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) {
+    redirect("/login?role=employer");
   }
 
-  if (!res.ok) {
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", auth.user.id)
+    .single();
+
+  if (profileError || !profile || (profile.role !== "employer" && profile.role !== "admin")) {
+    redirect("/employer");
+  }
+
+  const { data: candidate, error: candidateError } = await supabaseAdmin
+    .from("employer_readiness_view")
+    .select("*")
+    .eq("learner_id", id)
+    .maybeSingle();
+
+  if (candidateError) {
     throw new Error("Unable to load candidate");
   }
 
-  return res.json();
+  if (!candidate) {
+    notFound();
+  }
+
+  const [checkinsRes, completedRes, modulesTotalRes, eventsRes] = await Promise.all([
+    supabaseAdmin
+      .from("weekly_checkins")
+      .select("week_start, mood, hours, wins, blockers, created_at")
+      .eq("user_id", id)
+      .order("week_start", { ascending: false })
+      .limit(6),
+    supabaseAdmin
+      .from("module_progress")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", id)
+      .eq("status", "completed"),
+    supabaseAdmin
+      .from("modules")
+      .select("id", { count: "exact", head: true })
+      .eq("is_active", true),
+    supabaseAdmin
+      .from("readiness_events")
+      .select("id, event_type, event_value, created_at")
+      .eq("profile_id", id)
+      .order("created_at", { ascending: false })
+      .limit(10),
+  ]);
+
+  return {
+    candidate,
+    checkins: checkinsRes.data ?? [],
+    modules: {
+      completed: completedRes.count ?? 0,
+      total: modulesTotalRes.count ?? 0,
+    },
+    readinessEvents: eventsRes.data ?? [],
+  };
 }
 
 function formatDate(value: string | null | undefined) {
