@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -8,11 +8,12 @@ const supabaseAdmin = createClient(
 );
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const learnerId = params.id;
+    const { id } = await context.params;
+    const learnerId = id;
     if (!learnerId) {
       return NextResponse.json({ error: "Missing id" }, { status: 400 });
     }

@@ -3,8 +3,8 @@ import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 
 async function loadCandidate(id: string) {
-  const cookieStore = cookies();
-  const headerStore = headers();
+  const cookieStore = await cookies();
+  const headerStore = await headers();
   const protocol = headerStore.get("x-forwarded-proto") || "http";
   const host = headerStore.get("x-forwarded-host") || headerStore.get("host");
   const baseUrl = host ? `${protocol}://${host}` : "http://localhost:3000";
@@ -161,7 +161,7 @@ export default async function EmployerCandidateDetailPage({
           )}
           {checkins.map((checkin) => (
             <div
-              key={`${checkin.week_start}-${checkin.created_at}`}
+              key={checkin.week_start}
               className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
             >
               <div className="flex flex-wrap justify-between text-sm">
