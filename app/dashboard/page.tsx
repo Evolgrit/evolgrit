@@ -43,6 +43,16 @@ function getWeekLabel(date: Date) {
   }).format(date);
 }
 
+function formatDate(value?: string | null) {
+  if (!value) return "—";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return "—";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+  }).format(parsed);
+}
+
 async function submitWeeklyCheckinAction(formData: FormData) {
   "use server";
   const supabase = await createSupabaseServerClient();
@@ -233,17 +243,54 @@ export default async function DashboardPage() {
     ? Math.round((onboardingCompleted / onboardingTotal) * 100)
     : 0;
 
-  const phaseInfo = phaseMeta[
-    computePhase({
-      onboardingPercent,
-      modulesCompletedPercent: modulesTotal
-        ? Math.round((modulesCompleted / modulesTotal) * 100)
-        : 0,
-    })
-  ];
+  const modulesPercent = modulesTotal
+    ? Math.round((modulesCompleted / modulesTotal) * 100)
+    : 0;
+  const phaseKey = computePhase({
+    onboardingPercent,
+    modulesCompletedPercent: modulesPercent,
+  });
+  const phaseInfo = phaseMeta[phaseKey];
+  const journeyProgress = Math.max(
+    0,
+    Math.min(100, Math.round((onboardingPercent + modulesPercent) / 2))
+  );
+
+  const nextActions: Record<keyof typeof phaseMeta, {
+    label: string;
+    href: string;
+    helper: string;
+  }> = {
+    orientation: {
+      label: "Continue onboarding",
+      href: "/dashboard/onboarding",
+      helper: "Finish your basics so we can place you in the right batch.",
+    },
+    language_life: {
+      label: "Complete this week’s modules",
+      href: "/dashboard/modules",
+      helper: "Short tasks keep language and everyday life moving.",
+    },
+    job_readiness: {
+      label: "Upload key documents",
+      href: "/dashboard/documents",
+      helper: "Contracts and IDs unlock the next phase.",
+    },
+    matching: {
+      label: "Review opportunities",
+      href: "/dashboard/jobs",
+      helper: "See which employers fit your profile right now.",
+    },
+  };
+  const currentAction = nextActions[phaseKey];
+  const currentWeekCheckin = weeklyTimeline.find((week) => week.isCurrent)?.checkin;
+  const weeklyStatusLabel = currentWeekCheckin ? "Submitted" : "Not submitted";
+  const weeklyStatusHelper = currentWeekCheckin
+    ? `Saved ${formatDate(currentWeekCheckin.updated_at ?? currentWeekCheckin.created_at ?? currentWeekIso)}`
+    : "Share mood & blockers so mentors can support you.";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1200px]">
       <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -267,15 +314,15 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <section className="grid gap-6 lg:grid-cols-[1.35fr,0.9fr]">
+      <section className="space-y-4">
         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                {phaseInfo.label}
+                Current phase
               </p>
               <h2 className="text-2xl font-semibold text-slate-900">
-                {phaseInfo.title}
+                {phaseInfo.label} · {phaseInfo.title}
               </h2>
               <p className="mt-1 text-sm text-slate-600">
                 {phaseInfo.description}
@@ -283,8 +330,8 @@ export default async function DashboardPage() {
             </div>
             <div className="text-right">
               <p className="text-xs text-slate-500">Journey progress</p>
-              <p className="text-4xl font-semibold text-slate-900">60%</p>
-              <p className="text-xs text-slate-400">Week 3 · 8-week phase</p>
+              <p className="text-4xl font-semibold text-slate-900">{journeyProgress}%</p>
+              <p className="text-xs text-slate-400">Week 3 · calm pace</p>
             </div>
           </div>
 
@@ -296,14 +343,7 @@ export default async function DashboardPage() {
               <p className="mt-2 text-lg font-semibold text-slate-900">
                 {profile?.german_level ?? "Not set"}
               </p>
-              <p className="text-xs text-slate-500">Goal: B1 for childcare</p>
-            </div>
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Next mentor call
-              </p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">Thu · 18:00</p>
-              <p className="text-xs text-slate-500">Lina · cultural readiness</p>
+              <p className="text-xs text-slate-500">Update in onboarding any time.</p>
             </div>
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -314,10 +354,34 @@ export default async function DashboardPage() {
               </p>
               <p className="text-xs text-slate-500">{modulesSummaryHelper}</p>
             </div>
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                Weekly check-in
+              </p>
+              <p className="mt-2 text-lg font-semibold text-slate-900">
+                {weeklyStatusLabel}
+              </p>
+              <p className="text-xs text-slate-500">{weeklyStatusHelper}</p>
+            </div>
           </div>
         </article>
+      </section>
 
+      <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
         <WeeklyCheckinCard weeks={weeklyTimeline} action={submitWeeklyCheckinAction} />
+        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+            Next best action
+          </p>
+          <h3 className="text-xl font-semibold text-slate-900">Keep moving calmly</h3>
+          <p className="mt-1 text-sm text-slate-600">{currentAction.helper}</p>
+          <Link
+            href={currentAction.href}
+            className="mt-4 inline-flex rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+          >
+            {currentAction.label} →
+          </Link>
+        </article>
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
