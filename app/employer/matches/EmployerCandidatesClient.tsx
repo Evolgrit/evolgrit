@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 type CandidateRow = {
-  id: string;
+  learner_id: string;
   full_name: string | null;
   german_level: string | null;
   target_roles: string[] | null;
@@ -115,9 +116,10 @@ export default function EmployerCandidatesClient() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {filtered.map((candidate) => (
-          <article
-            key={candidate.id}
-            className="rounded-3xl border border-slate-200 p-5 shadow-sm"
+          <Link
+            key={candidate.learner_id}
+            href={`/employer/candidates/${candidate.learner_id}`}
+            className="rounded-3xl border border-slate-200 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -129,9 +131,7 @@ export default function EmployerCandidatesClient() {
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Readiness
-                </p>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Readiness</p>
                 <p className="text-xl font-semibold text-slate-900">
                   {candidate.readiness_score ?? 0}%
                 </p>
@@ -178,7 +178,7 @@ export default function EmployerCandidatesClient() {
                 <dd>{candidate.documents_count ?? 0}</dd>
               </div>
             </dl>
-          </article>
+          </Link>
         ))}
       </div>
     </div>

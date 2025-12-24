@@ -19,7 +19,7 @@ export default function EmployerHome() {
         </div>
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-            Matches
+            Candidates
           </p>
           <p className="mt-1 text-sm text-slate-700">We’ll notify you once learners are ready.</p>
         </div>
