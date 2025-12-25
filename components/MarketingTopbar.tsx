@@ -22,12 +22,6 @@ export default function MarketingTopbar({
   const [open, setOpen] = useState(false);
   const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
-  const scrollToTop = () => {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   const closeMenu = () => setOpen(false);
 
   const handleLogoutClick = async () => {
@@ -41,12 +35,7 @@ export default function MarketingTopbar({
     <header className="sticky top-0 z-[120] border-b border-slate-200/50 bg-white/80 backdrop-blur">
       <div className={`${container} flex flex-col py-4`}>
         <div className="flex items-center justify-between gap-4">
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="flex items-center gap-2"
-            aria-label="Scroll to top"
-          >
+          <Link href="/" className="flex items-center gap-2" aria-label="Go to homepage">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-sm font-semibold text-slate-50 shadow-lg shadow-slate-900/30">
               E
             </div>
@@ -56,7 +45,7 @@ export default function MarketingTopbar({
               </div>
               <div className="text-[11px] text-slate-500">Language · Jobs · AI</div>
             </div>
-          </button>
+          </Link>
 
           <div className="hidden items-center gap-4 text-sm sm:flex">
             <div className="flex items-center gap-2 pl-3 text-xs text-slate-400">

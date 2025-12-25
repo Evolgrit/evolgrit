@@ -28,12 +28,12 @@ export function Reveal({
   children,
   className,
   delayMs = 0,
-  durationMs = 260,
+  durationMs = 360,
   distance = 12,
   once = true,
   threshold = 0.08,
   staggerChildren = false,
-  staggerMs = 120,
+  staggerMs = 180,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
