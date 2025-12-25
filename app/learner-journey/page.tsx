@@ -5,6 +5,8 @@ import { BigKpiCard } from "@/components/ui/BigKpiCard";
 import { ui } from "@/lib/ui/tokens";
 import DemoMentorChatTrigger from "@/components/learner-journey/DemoMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
+import { Reveal } from "@/components/ui/Reveal";
+import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – From German Learning to Job Placement",
@@ -115,8 +117,9 @@ export default function LearnerJourneyPage() {
   return (
     <>
       <MarketingTopbar />
-      <main className="relative z-0 min-h-screen bg-slate-50 pt-6">
-        <div className={`${marketingContainer} py-8`}>
+      <MarketingPageShell>
+        <main className="relative z-0 min-h-screen bg-slate-50 pt-6">
+          <div className={`${marketingContainer} py-8`}>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
             <aside className="hidden lg:block lg:col-span-3">
               <div className="sticky top-24 flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -163,7 +166,8 @@ export default function LearnerJourneyPage() {
             </aside>
 
             <div className="space-y-4 lg:col-span-6">
-              <section id="demo-overview" className="space-y-4">
+              <Reveal durationMs={220} distance={8}>
+                <section id="demo-overview" className="space-y-4">
                 <header className={`${ui.card} ${ui.cardPadding}`}>
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
@@ -225,9 +229,11 @@ export default function LearnerJourneyPage() {
                     />
                   </div>
                 </article>
-              </section>
+                </section>
+              </Reveal>
 
-              <section id="demo-journey" className={`${ui.card} ${ui.cardPadding} space-y-3`}>
+              <Reveal durationMs={220} distance={8}>
+                <section id="demo-journey" className={`${ui.card} ${ui.cardPadding} space-y-3`}>
                 <p className={ui.text.meta}>Three calm phases</p>
                 <p className="text-sm text-slate-600">
                   Evolgrit batches move from arrival to job-ready with clear guardrails:
@@ -237,9 +243,11 @@ export default function LearnerJourneyPage() {
                   <li>Phase 2 · Language & life – transport, housing, cultural cues.</li>
                   <li>Phase 3 · Job-ready & matching – employer signals & next steps.</li>
                 </ul>
-              </section>
+                </section>
+              </Reveal>
 
-              <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
+              <Reveal durationMs={220} distance={8}>
+                <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
                 <article id="demo-mentor" className={`${ui.card} ${ui.cardPadding}`}>
                   <div className="flex items-center justify-between">
                     <div>
@@ -287,32 +295,41 @@ export default function LearnerJourneyPage() {
                   </div>
                   <p className="mt-3 text-sm text-blue-600">Upload key documents →</p>
                 </article>
-              </section>
+                </section>
+              </Reveal>
 
-              <section id="demo-modules" className="space-y-4">
+              <Reveal durationMs={220} distance={8}>
+                <section id="demo-modules" className="space-y-4">
                 <div>
                   <p className={ui.text.meta}>Modules preview</p>
                   <p className={ui.text.body}>
                     Lightweight blocks, reusable each batch.
                   </p>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {modulesPreview.map((module) => (
-                    <article key={module.title} className={`${ui.card} ${ui.compactCardPadding}`}>
-                      <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-400">
-                        <span>{module.type}</span>
-                        <span>{module.minutes} min</span>
-                      </div>
-                      <h4 className="mt-3 text-lg font-semibold text-slate-900">
-                        {module.title}
-                      </h4>
-                      <p className="mt-2 text-sm text-slate-500">{module.status}</p>
-                    </article>
-                  ))}
-                </div>
-              </section>
+                  <Reveal
+                    durationMs={220}
+                    distance={6}
+                    staggerChildren
+                    className="grid gap-4 md:grid-cols-2"
+                  >
+                    {modulesPreview.map((module) => (
+                      <article key={module.title} className={`${ui.card} ${ui.compactCardPadding}`}>
+                        <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-400">
+                          <span>{module.type}</span>
+                          <span>{module.minutes} min</span>
+                        </div>
+                        <h4 className="mt-3 text-lg font-semibold text-slate-900">
+                          {module.title}
+                        </h4>
+                        <p className="mt-2 text-sm text-slate-500">{module.status}</p>
+                      </article>
+                    ))}
+                  </Reveal>
+                </section>
+              </Reveal>
 
-              <section id="demo-jobs">
+              <Reveal durationMs={220} distance={8}>
+                <section id="demo-jobs">
                 <article className={`${ui.card} ${ui.cardPadding}`}>
                   <p className={ui.text.meta}>Jobs & opportunities</p>
                   <h3 className="text-xl font-semibold text-slate-900">
@@ -323,9 +340,11 @@ export default function LearnerJourneyPage() {
                     so employers can invite you calmly when the match is right.
                   </p>
                 </article>
-              </section>
+                </section>
+              </Reveal>
 
-              <section id="demo-profile">
+              <Reveal durationMs={220} distance={8}>
+                <section id="demo-profile">
                 <article className={`${ui.card} ${ui.cardPadding}`}>
                   <p className={ui.text.meta}>Profile snapshot</p>
                   <h3 className="text-xl font-semibold text-slate-900">
@@ -336,7 +355,8 @@ export default function LearnerJourneyPage() {
                     tailored batches, modules and employers.
                   </p>
                 </article>
-              </section>
+                </section>
+              </Reveal>
             </div>
 
             <aside className="hidden lg:block lg:col-span-3">
@@ -360,6 +380,7 @@ export default function LearnerJourneyPage() {
           messages={mentorMessagesDemo}
         />
       </main>
+      </MarketingPageShell>
     </>
   );
 }

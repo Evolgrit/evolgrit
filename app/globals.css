@@ -45,3 +45,24 @@ body {
 .demo-chat-fade-up {
   animation: demo-chat-fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+@keyframes marketing-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-marketing-fade {
+  animation: marketing-fade 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marketing-fade {
+    animation: none;
+  }
+}

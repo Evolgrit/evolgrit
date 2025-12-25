@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MarketingTopbar from "@/components/MarketingTopbar";
+import { Reveal } from "@/components/ui/Reveal";
+import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – Calm three-phase journey",
@@ -57,9 +59,11 @@ export default function HowItWorksPage() {
   return (
     <>
       <MarketingTopbar />
-      <main className="min-h-screen bg-slate-50 pb-16 text-slate-900">
-        <section className={`${container} pt-16`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <MarketingPageShell>
+        <main className="min-h-screen bg-slate-50 pb-16 text-slate-900">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} pt-16`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
               How it works
             </p>
@@ -83,49 +87,65 @@ export default function HowItWorksPage() {
                 Join the waitlist
               </Link>
             </div>
-          </div>
-        </section>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-10`}>
-          <div className="grid gap-4 md:grid-cols-3">
-            {journeyCards.map((card) => (
-              <article
-                key={card.label}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-10`}>
+              <Reveal
+                durationMs={220}
+                distance={6}
+                staggerChildren
+                className="grid gap-4 md:grid-cols-3"
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  {card.label}
-                </p>
-                <h2 className="mt-2 text-xl font-semibold text-slate-900">{card.title}</h2>
-                <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+                {journeyCards.map((card) => (
+                  <article
+                    key={card.label}
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                      {card.label}
+                    </p>
+                    <h2 className="mt-2 text-xl font-semibold text-slate-900">{card.title}</h2>
+                    <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
+                  </article>
+                ))}
+              </Reveal>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Progress & readiness</p>
             <h3 className="mt-2 text-2xl font-semibold text-slate-900">
               Signals that show when someone is ready — not just hopeful.
             </h3>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {signalCards.map((signal) => (
-                <div
-                  key={signal.title}
-                  className="rounded-2xl border border-slate-100 bg-slate-50/60 p-5"
+                <Reveal
+                  durationMs={220}
+                  distance={6}
+                  staggerChildren
+                  className="mt-6 grid gap-4 md:grid-cols-2"
                 >
-                  <p className="text-sm font-semibold text-slate-900">{signal.title}</p>
-                  <p className="mt-2 text-sm text-slate-600">{signal.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                  {signalCards.map((signal) => (
+                    <div
+                      key={signal.title}
+                      className="rounded-2xl border border-slate-100 bg-slate-50/60 p-5"
+                    >
+                      <p className="text-sm font-semibold text-slate-900">{signal.title}</p>
+                      <p className="mt-2 text-sm text-slate-600">{signal.body}</p>
+                    </div>
+                  ))}
+                </Reveal>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="grid gap-6 lg:grid-cols-2">
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="grid gap-6 lg:grid-cols-2">
+                <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Weekly rhythm</p>
               <h4 className="mt-2 text-xl font-semibold text-slate-900">Every week stays predictable.</h4>
               <div className="mt-4 space-y-3 text-sm text-slate-600">
@@ -143,7 +163,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
             </article>
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Before you start</p>
               <h4 className="mt-2 text-xl font-semibold text-slate-900">Phase 0 sets the tone.</h4>
               <ul className="mt-4 space-y-2 text-sm text-slate-600">
@@ -155,11 +175,13 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
             </article>
-          </div>
-        </section>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Ready?</p>
             <h3 className="mt-2 text-2xl font-semibold text-slate-900">
               Start the journey the right way.
@@ -181,9 +203,11 @@ export default function HowItWorksPage() {
                 Explore the demo →
               </Link>
             </div>
-          </div>
-        </section>
-      </main>
+              </div>
+            </section>
+          </Reveal>
+        </main>
+      </MarketingPageShell>
     </>
   );
 }

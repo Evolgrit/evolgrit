@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MarketingTopbar from "@/components/MarketingTopbar";
+import { Reveal } from "@/components/ui/Reveal";
+import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 
 export const metadata: Metadata = {
   title: "For Employers – Evolgrit batches & readiness signals",
@@ -54,9 +56,11 @@ export default function ForEmployersPage() {
   return (
     <>
       <MarketingTopbar />
-      <main className="min-h-screen bg-slate-50 pb-16 text-slate-900">
-        <section className={`${container} pt-16`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <MarketingPageShell>
+        <main className="min-h-screen bg-slate-50 pb-16 text-slate-900">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} pt-16`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
               For employers
             </p>
@@ -80,78 +84,106 @@ export default function ForEmployersPage() {
                 See readiness demo
               </Link>
             </div>
-          </div>
-        </section>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-10`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-10`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Why Evolgrit</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-900">
               The old approach wastes time for learners and teams.
             </h2>
-            <ul className="mt-4 space-y-2 text-sm text-slate-600">
-              {challengePoints.map((point) => (
-                <li key={point} className="flex gap-2">
-                  <span className="text-slate-400">•</span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+                <ul className="mt-4 space-y-2 text-sm text-slate-600">
+                  {challengePoints.map((point) => (
+                    <li key={point} className="flex gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-10`}>
-          <div className="grid gap-4 md:grid-cols-2">
-            {employerValueCards.map((card) => (
-              <article
-                key={card.title}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-10`}>
+              <Reveal
+                durationMs={220}
+                distance={6}
+                staggerChildren
+                className="grid gap-4 md:grid-cols-2"
               >
-                <h3 className="text-lg font-semibold text-slate-900">{card.title}</h3>
-                <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+                {employerValueCards.map((card) => (
+                  <article
+                    key={card.title}
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <h3 className="text-lg font-semibold text-slate-900">{card.title}</h3>
+                    <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
+                  </article>
+                ))}
+              </Reveal>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Invite-only access</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-900">How access works</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {accessSteps.map((step, index) => (
-                <div
-                  key={step.title}
-                  className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5"
+                <Reveal
+                  durationMs={220}
+                  distance={6}
+                  staggerChildren
+                  className="mt-6 grid gap-4 md:grid-cols-3"
                 >
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                    Step {index + 1}
-                  </p>
-                  <h4 className="mt-1 text-lg font-semibold text-slate-900">{step.title}</h4>
-                  <p className="mt-2 text-sm text-slate-600">{step.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                  {accessSteps.map((step, index) => (
+                    <div
+                      key={step.title}
+                      className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5"
+                    >
+                      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                        Step {index + 1}
+                      </p>
+                      <h4 className="mt-1 text-lg font-semibold text-slate-900">{step.title}</h4>
+                      <p className="mt-2 text-sm text-slate-600">{step.body}</p>
+                    </div>
+                  ))}
+                </Reveal>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Batches</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-900">Predictable groups, calmer onboarding.</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {batchHighlights.map((batch) => (
-                <div key={batch.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5">
-                  <h4 className="text-base font-semibold text-slate-900">{batch.title}</h4>
-                  <p className="mt-2 text-sm text-slate-600">{batch.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                <Reveal
+                  durationMs={220}
+                  distance={6}
+                  staggerChildren
+                  className="mt-6 grid gap-4 md:grid-cols-3"
+                >
+                  {batchHighlights.map((batch) => (
+                    <div
+                      key={batch.title}
+                      className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5"
+                    >
+                      <h4 className="text-base font-semibold text-slate-900">{batch.title}</h4>
+                      <p className="mt-2 text-sm text-slate-600">{batch.body}</p>
+                    </div>
+                  ))}
+                </Reveal>
+              </div>
+            </section>
+          </Reveal>
 
-        <section className={`${container} mt-12`}>
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+          <Reveal durationMs={220} distance={8}>
+            <section className={`${container} mt-12`}>
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Partner with Evolgrit</p>
             <h3 className="mt-2 text-2xl font-semibold text-slate-900">
               Ready for calmer international hiring?
@@ -173,9 +205,11 @@ export default function ForEmployersPage() {
                 See readiness demo →
               </Link>
             </div>
-          </div>
-        </section>
-      </main>
+              </div>
+            </section>
+          </Reveal>
+        </main>
+      </MarketingPageShell>
     </>
   );
 }
