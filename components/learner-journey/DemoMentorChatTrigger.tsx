@@ -1,5 +1,7 @@
 "use client";
 
+// Demo-only web chat trigger: keep read-only preview for marketing.
+// Full chat/call functionality lives in the in-app experiences (/dashboard, /employer).
 import { useState } from "react";
 import MentorChatSheet from "@/components/dashboard/MentorChatSheet";
 import { MessageCircle } from "@/components/icons/LucideIcons";

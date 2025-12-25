@@ -1,5 +1,7 @@
 "use client";
 
+// Marketing shell is demo-only for web; production flows live in app routes.
+// Keeps smooth transitions and scroll reset for marketing pages.
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "@/lib/ui/motion";

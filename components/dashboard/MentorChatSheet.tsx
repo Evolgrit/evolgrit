@@ -1,5 +1,7 @@
 "use client";
 
+// Demo-safe chat sheet for marketing pages: keep interactions read-only and error-free.
+// Production chat/call handling belongs in app routes (/dashboard, /employer).
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
