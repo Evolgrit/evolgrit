@@ -7,6 +7,7 @@ import DemoMentorChatTrigger from "@/components/learner-journey/DemoMentorChatTr
 import type { MentorMessage } from "@/lib/types/mentor";
 import { Reveal } from "@/components/ui/Reveal";
 import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
+import { DocumentIcon } from "@/components/icons/LucideIcons";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – From German Learning to Job Placement",
@@ -275,25 +276,42 @@ export default function LearnerJourneyPage() {
                   </div>
                 </article>
 
-                <article id="demo-docs" className={`${ui.card} ${ui.cardPadding}`}>
-                  <p className={ui.text.meta}>Documents readiness</p>
-                  <h3 className="mt-2 text-xl font-semibold text-slate-900">
-                    {documentsPreview.ready} / {documentsPreview.total} ready
-                  </h3>
-                  <p className={ui.text.body}>
-                    IDs, contracts and health insurance proofs stay in one place.
-                  </p>
-                  <div className="mt-4 h-2 rounded-full bg-slate-100">
-                    <div
-                      className="h-full rounded-full bg-slate-900"
-                      style={{
-                        width: `${Math.round(
-                          (documentsPreview.ready / documentsPreview.total) * 100
-                        )}%`,
-                      }}
-                    />
+                <article id="demo-docs" className="relative">
+                  <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50">
+                      <DocumentIcon className="h-5 w-5 text-indigo-600" />
+                    </div>
+
+                    <p className="text-xs uppercase tracking-wide text-slate-500">
+                      Documents readiness
+                    </p>
+
+                    <div className="mt-2 flex items-baseline gap-1">
+                      <span className="text-3xl font-semibold text-slate-900">
+                        {documentsPreview.ready}
+                      </span>
+                      <span className="text-lg text-slate-400">/{documentsPreview.total}</span>
+                      <span className="ml-2 text-sm text-slate-500">ready</span>
+                    </div>
+
+                    <div className="mt-4 h-2 w-full rounded-full bg-slate-100">
+                      <div
+                        className="h-2 rounded-full bg-slate-900 transition-all"
+                        style={{
+                          width: `${Math.round(
+                            (documentsPreview.ready / documentsPreview.total) * 100
+                          )}%`,
+                        }}
+                      />
+                    </div>
+
+                    <a
+                      href="/dashboard/documents"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline"
+                    >
+                      Upload key documents <span aria-hidden>→</span>
+                    </a>
                   </div>
-                  <p className="mt-3 text-sm text-blue-600">Upload key documents →</p>
                 </article>
                 </section>
               </Reveal>
