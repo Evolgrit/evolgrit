@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type MarketingTopbarProps = {
   loggedIn?: boolean;
@@ -20,6 +21,7 @@ export default function MarketingTopbar({
   onLogout,
 }: MarketingTopbarProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
   const closeMenu = () => setOpen(false);
@@ -29,6 +31,14 @@ export default function MarketingTopbar({
       await onLogout();
       setOpen(false);
     }
+  };
+
+  const isActiveLink = (href: string) => {
+    if (href.startsWith("#")) {
+      return pathname === "/";
+    }
+    const targetPath = href.split("#")[0];
+    return targetPath === pathname;
   };
 
   return (
@@ -55,7 +65,11 @@ export default function MarketingTopbar({
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-slate-500 transition hover:text-slate-900"
+                className={
+                  isActiveLink(item.href)
+                    ? "rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-slate-900 font-medium"
+                    : "text-slate-500 transition hover:text-slate-900"
+                }
               >
                 {item.label}
               </Link>
@@ -111,7 +125,11 @@ export default function MarketingTopbar({
                 key={item.label}
                 href={item.href}
                 onClick={closeMenu}
-                className="block rounded-md px-2 py-1 hover:bg-slate-50"
+                className={
+                  isActiveLink(item.href)
+                    ? "inline-flex items-center rounded-full border border-slate-300 bg-slate-50 px-3 py-1 font-medium text-slate-900"
+                    : "block rounded-md px-2 py-1 hover:bg-slate-50"
+                }
               >
                 {item.label}
               </Link>
