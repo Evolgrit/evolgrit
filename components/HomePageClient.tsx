@@ -841,6 +841,12 @@ className="flex items-center gap-2 cursor-pointer"
               <a href="#product" className="text-slate-500 hover:text-slate-900">
                 Product
               </a>
+              <a
+                href="/learner-journey"
+                className="text-slate-500 hover:text-slate-900"
+              >
+                Learner journey (Demo)
+              </a>
               <a href="#journey" className="text-slate-500 hover:text-slate-900">
                 How it works
               </a>
@@ -894,6 +900,13 @@ className="flex items-center gap-2 cursor-pointer"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Product
+              </a>
+              <a
+                href="/learner-journey"
+                className="block text-slate-700 hover:text-slate-900"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Learner journey (Demo)
               </a>
               <a
                 href="#journey"
