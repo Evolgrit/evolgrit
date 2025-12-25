@@ -3,6 +3,18 @@ import Link from "next/link";
 import MarketingTopbar from "@/components/MarketingTopbar";
 import { Reveal } from "@/components/ui/Reveal";
 import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
+import { WhyNowSection } from "@/components/marketing/sections/WhyNowSection";
+import { WhoSection } from "@/components/marketing/sections/WhoSection";
+import { JourneyOverviewSection } from "@/components/marketing/sections/JourneyOverviewSection";
+import { LearnerHowItWorksSection } from "@/components/marketing/sections/LearnerHowItWorksSection";
+import { ProgramTimelineSection } from "@/components/marketing/sections/ProgramTimelineSection";
+import { ReadinessScoreSection } from "@/components/marketing/sections/ReadinessScoreSection";
+import { GetToKnowSection } from "@/components/marketing/sections/GetToKnowSection";
+import { PathwaysSection } from "@/components/marketing/sections/PathwaysSection";
+import { ExampleJourneysSection } from "@/components/marketing/sections/ExampleJourneysSection";
+import { BrandMeaningSection } from "@/components/marketing/sections/BrandMeaningSection";
+import { FinalCtaSection } from "@/components/marketing/sections/FinalCtaSection";
+import { LearnerStorySection } from "@/components/marketing/sections/LearnerStorySection";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – Calm three-phase journey",
@@ -11,49 +23,6 @@ export const metadata: Metadata = {
 };
 
 const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
-
-const journeyCards = [
-  {
-    label: "Phase 0",
-    title: "Orientation & expectations",
-    copy: "Clear onboarding, paperwork prep and a realistic view of the effort — before a learner commits.",
-  },
-  {
-    label: "Phase 1–2",
-    title: "Language & everyday life",
-    copy: "Real German for transport, housing, public services and community so daily life feels steady.",
-  },
-  {
-    label: "Phase 3",
-    title: "Job readiness & matching",
-    copy: "Employer signals, simulations, mentor feedback and calm introductions into work or education paths.",
-  },
-];
-
-const signalCards = [
-  {
-    title: "Weekly check-in",
-    body: "Mood, focus hours and blockers turn into simple signals that mentors and employers read at a glance.",
-  },
-  {
-    title: "Modules & momentum",
-    body: "Micro-modules and tasks keep batches moving together, with progress ready for review.",
-  },
-  {
-    title: "Documents readiness",
-    body: "IDs, contracts, health insurance and residence proofs are collected early with reminders.",
-  },
-  {
-    title: "Mentor touchpoints",
-    body: "Weekly mentor guidance plus AI support ensures learners get corrections the moment they need them.",
-  },
-];
-
-const trustPoints = [
-  "No shortcuts — Evolgrit is for learners ready to build a real life in Germany.",
-  "Structured weeks reduce burnout and make progress visible.",
-  "A calm batch path replaces ad-hoc courses and scattered paperwork.",
-];
 
 export default function HowItWorksPage() {
   return (
@@ -91,109 +60,47 @@ export default function HowItWorksPage() {
             </section>
           </Reveal>
 
+          <Reveal delayMs={240} durationMs={360} distance={12}>
+            <LearnerStorySection />
+          </Reveal>
+
           <Reveal delayMs={260} durationMs={360} distance={12}>
-            <section className={`${container} mt-12 space-y-10`}>
-              <div className="text-center">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                  Value pillars
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-                  The journey, signals and rhythm stay linked.
-                </h2>
-                <p className="mt-1 text-sm text-slate-600">
-                  Evolgrit combines phase clarity, measurable readiness and a predictable cadence.
-                </p>
-              </div>
+            <WhyNowSection />
+          </Reveal>
 
-              <Reveal
-                durationMs={220}
-                distance={6}
-                staggerChildren
-                className="grid gap-4 md:grid-cols-3"
-              >
-                {journeyCards.map((card) => (
-                  <article
-                    key={card.label}
-                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                  >
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                      {card.label}
-                    </p>
-                    <h2 className="mt-2 text-xl font-semibold text-slate-900">{card.title}</h2>
-                    <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
-                  </article>
-                ))}
-              </Reveal>
+          <Reveal delayMs={280} durationMs={360} distance={12}>
+            <WhoSection />
+          </Reveal>
 
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                  Progress & readiness signals
-                </p>
-                <h3 className="mt-2 text-2xl font-semibold text-slate-900">
-                  Signals that show when someone is ready — not just hopeful.
-                </h3>
-                <Reveal
-                  durationMs={220}
-                  distance={6}
-                  staggerChildren
-                  className="mt-6 grid gap-4 md:grid-cols-2"
-                >
-                  {signalCards.map((signal) => (
-                    <div
-                      key={signal.title}
-                      className="rounded-2xl border border-slate-100 bg-slate-50/60 p-5"
-                    >
-                      <p className="text-sm font-semibold text-slate-900">{signal.title}</p>
-                      <p className="mt-2 text-sm text-slate-600">{signal.body}</p>
-                    </div>
-                  ))}
-                </Reveal>
-              </div>
+          <Reveal delayMs={300} durationMs={360} distance={12}>
+            <JourneyOverviewSection />
+          </Reveal>
 
-              <div className="grid gap-6 lg:grid-cols-2">
-                <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                    Weekly rhythm
-                  </p>
-                  <h4 className="mt-2 text-xl font-semibold text-slate-900">
-                    Every week stays predictable.
-                  </h4>
-                  <div className="mt-4 space-y-3 text-sm text-slate-600">
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4">
-                      <p className="font-medium text-slate-900">Tasks & micro-modules</p>
-                      <p>Language + integration blocks with AI support.</p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4">
-                      <p className="font-medium text-slate-900">Weekly check-in</p>
-                      <p>Mood, focus hours and blockers keep mentors informed.</p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4">
-                      <p className="font-medium text-slate-900">Mentor touchpoint</p>
-                      <p>Live feedback or voice notes align expectations calmly.</p>
-                    </div>
-                  </div>
-                </article>
-                <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                    Before you start
-                  </p>
-                  <h4 className="mt-2 text-xl font-semibold text-slate-900">
-                    Phase 0 sets the tone.
-                  </h4>
-                  <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                    {trustPoints.map((point) => (
-                      <li key={point} className="flex gap-2">
-                        <span className="text-slate-400">•</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </div>
-            </section>
+          <Reveal delayMs={320} durationMs={360} distance={12}>
+            <LearnerHowItWorksSection />
+          </Reveal>
+
+          <Reveal delayMs={340} durationMs={360} distance={12}>
+            <ProgramTimelineSection />
+          </Reveal>
+
+          <Reveal delayMs={360} durationMs={360} distance={12}>
+            <ReadinessScoreSection />
           </Reveal>
 
           <Reveal delayMs={380} durationMs={360} distance={12}>
+            <GetToKnowSection />
+          </Reveal>
+
+          <Reveal delayMs={400} durationMs={360} distance={12}>
+            <PathwaysSection />
+          </Reveal>
+
+          <Reveal delayMs={420} durationMs={360} distance={12}>
+            <ExampleJourneysSection />
+          </Reveal>
+
+          <Reveal delayMs={440} durationMs={360} distance={12}>
             <section className={`${container} mt-12`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
                 <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
@@ -253,32 +160,12 @@ export default function HowItWorksPage() {
             </section>
           </Reveal>
 
-          <Reveal delayMs={420} durationMs={360} distance={12}>
-            <section className={`${container} mt-12`}>
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Ready?</p>
-            <h3 className="mt-2 text-2xl font-semibold text-slate-900">
-              Start the journey the right way.
-            </h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Calm batches, guided expectations and real readiness signals.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="/waitlist"
-                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-              >
-                Join learner waitlist
-              </Link>
-              <Link
-                href="/learner-journey"
-                className="text-sm font-medium text-blue-600 hover:text-blue-700"
-              >
-                Explore the demo →
-              </Link>
-            </div>
-              </div>
-            </section>
+          <Reveal delayMs={460} durationMs={360} distance={12}>
+            <BrandMeaningSection />
+          </Reveal>
+
+          <Reveal delayMs={480} durationMs={360} distance={12}>
+            <FinalCtaSection />
           </Reveal>
         </main>
       </MarketingPageShell>
