@@ -3,6 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 
+type MarketingTopbarProps = {
+  loggedIn?: boolean;
+  onLogout?: () => void | Promise<void>;
+};
+
 const navLinks = [
   { label: "Product", href: "#product" },
   { label: "Learner journey (Demo)", href: "/learner-journey" },
@@ -10,7 +15,10 @@ const navLinks = [
   { label: "For employers", href: "#for-employers" },
 ];
 
-export default function MarketingTopbar() {
+export default function MarketingTopbar({
+  loggedIn = false,
+  onLogout,
+}: MarketingTopbarProps) {
   const [open, setOpen] = useState(false);
   const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
@@ -22,8 +30,15 @@ export default function MarketingTopbar() {
 
   const closeMenu = () => setOpen(false);
 
+  const handleLogoutClick = async () => {
+    if (onLogout) {
+      await onLogout();
+      setOpen(false);
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/50 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-[120] border-b border-slate-200/50 bg-white/80 backdrop-blur">
       <div className={`${container} flex flex-col py-4`}>
         <div className="flex items-center justify-between gap-4">
           <button
@@ -56,12 +71,22 @@ export default function MarketingTopbar() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/login"
-              className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm text-slate-700 shadow-sm hover:bg-white"
-            >
-              Log in
-            </Link>
+            {loggedIn ? (
+              <button
+                type="button"
+                onClick={handleLogoutClick}
+                className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm text-slate-700 shadow-sm hover:bg-white"
+              >
+                Log out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm text-slate-700 shadow-sm hover:bg-white"
+              >
+                Log in
+              </Link>
+            )}
             <Link
               href="/waitlist"
               className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
@@ -103,13 +128,23 @@ export default function MarketingTopbar() {
               </Link>
             ))}
             <div className="flex gap-2 pt-2">
-              <Link
-                href="/login"
-                onClick={closeMenu}
-                className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-center text-xs text-slate-700 shadow-sm"
-              >
-                Log in
-              </Link>
+              {loggedIn ? (
+                <button
+                  type="button"
+                  onClick={handleLogoutClick}
+                  className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-center text-xs text-slate-700 shadow-sm"
+                >
+                  Log out
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={closeMenu}
+                  className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-center text-xs text-slate-700 shadow-sm"
+                >
+                  Log in
+                </Link>
+              )}
               <Link
                 href="/waitlist"
                 onClick={closeMenu}

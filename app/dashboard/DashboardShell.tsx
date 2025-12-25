@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import MarketingTopbar from "@/components/MarketingTopbar";
 
 const navItems = [
   { label: "Overview", href: "/dashboard" },
@@ -52,7 +53,8 @@ export default function DashboardShell({
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <div className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 py-4 backdrop-blur lg:hidden">
+      <MarketingTopbar loggedIn onLogout={handleLogout} />
+      <div className="sticky top-[72px] z-30 border-b border-slate-200 bg-slate-50/95 px-4 py-4 backdrop-blur lg:hidden">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
@@ -84,7 +86,7 @@ export default function DashboardShell({
         </nav>
       </div>
 
-      <div className="mx-auto flex min-h-screen max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto mt-4 flex min-h-screen max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <aside className="hidden w-64 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:flex">
           <div>
             <div>

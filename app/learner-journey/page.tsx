@@ -115,7 +115,7 @@ export default function LearnerJourneyPage() {
   return (
     <>
       <MarketingTopbar />
-      <div className="min-h-screen bg-slate-50">
+      <main className="relative z-0 min-h-screen bg-slate-50 pt-6">
         <div className={`${marketingContainer} py-8`}>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
             <aside className="hidden lg:block lg:col-span-3">
@@ -359,7 +359,7 @@ export default function LearnerJourneyPage() {
           mentorInitial="L"
           messages={mentorMessagesDemo}
         />
-      </div>
+      </main>
     </>
   );
 }
