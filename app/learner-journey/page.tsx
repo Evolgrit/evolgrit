@@ -166,7 +166,7 @@ export default function LearnerJourneyPage() {
             </aside>
 
             <div className="space-y-4 lg:col-span-6">
-              <Reveal durationMs={220} distance={8}>
+              <Reveal delayMs={120} durationMs={260} distance={10}>
                 <section id="demo-overview" className="space-y-4">
                 <header className={`${ui.card} ${ui.cardPadding}`}>
                   <div className="flex flex-wrap items-center justify-between gap-4">
@@ -232,7 +232,7 @@ export default function LearnerJourneyPage() {
                 </section>
               </Reveal>
 
-              <Reveal durationMs={220} distance={8}>
+              <Reveal delayMs={200} durationMs={260} distance={10}>
                 <section id="demo-journey" className={`${ui.card} ${ui.cardPadding} space-y-3`}>
                 <p className={ui.text.meta}>Three calm phases</p>
                 <p className="text-sm text-slate-600">
@@ -246,7 +246,7 @@ export default function LearnerJourneyPage() {
                 </section>
               </Reveal>
 
-              <Reveal durationMs={220} distance={8}>
+              <Reveal delayMs={260} durationMs={260} distance={10}>
                 <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
                 <article id="demo-mentor" className={`${ui.card} ${ui.cardPadding}`}>
                   <div className="flex items-center justify-between">
@@ -298,7 +298,7 @@ export default function LearnerJourneyPage() {
                 </section>
               </Reveal>
 
-              <Reveal durationMs={220} distance={8}>
+              <Reveal delayMs={320} durationMs={260} distance={10}>
                 <section id="demo-modules" className="space-y-4">
                 <div>
                   <p className={ui.text.meta}>Modules preview</p>
@@ -328,7 +328,7 @@ export default function LearnerJourneyPage() {
                 </section>
               </Reveal>
 
-              <Reveal durationMs={220} distance={8}>
+              <Reveal delayMs={360} durationMs={260} distance={10}>
                 <section id="demo-jobs">
                 <article className={`${ui.card} ${ui.cardPadding}`}>
                   <p className={ui.text.meta}>Jobs & opportunities</p>

@@ -28,10 +28,10 @@ export function Reveal({
   children,
   className,
   delayMs = 0,
-  durationMs = 700,
-  distance = 10,
+  durationMs = 260,
+  distance = 12,
   once = true,
-  threshold = 0.15,
+  threshold = 0.08,
   staggerChildren = false,
   staggerMs = 120,
 }: RevealProps) {
@@ -80,7 +80,7 @@ export function Reveal({
   const baseStyle: CSSProperties = prefersReducedMotion
     ? { transition: "opacity 150ms linear" }
     : {
-        transition: `opacity ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1), filter ${durationMs}ms cubic-bezier(0.16, 1, 0.3, 1)`,
+        transition: `opacity ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1), filter ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1)`,
         transitionDelay,
         transform: isVisible ? "translateY(0px)" : `translateY(${distance}px)`,
         filter: isVisible ? "blur(0px)" : "blur(6px)",

@@ -58,7 +58,7 @@ export default function ForEmployersPage() {
       <MarketingTopbar />
       <MarketingPageShell>
         <main className="min-h-screen bg-slate-50 pb-16 text-slate-900">
-          <Reveal durationMs={220} distance={8}>
+          <Reveal delayMs={120} durationMs={260} distance={10}>
             <section className={`${container} pt-16`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
@@ -88,7 +88,7 @@ export default function ForEmployersPage() {
             </section>
           </Reveal>
 
-          <Reveal durationMs={220} distance={8}>
+          <Reveal delayMs={200} durationMs={260} distance={10}>
             <section className={`${container} mt-10`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Why Evolgrit</p>
@@ -107,7 +107,7 @@ export default function ForEmployersPage() {
             </section>
           </Reveal>
 
-          <Reveal durationMs={220} distance={8}>
+          <Reveal delayMs={260} durationMs={260} distance={10}>
             <section className={`${container} mt-10`}>
               <Reveal
                 durationMs={220}
@@ -128,7 +128,7 @@ export default function ForEmployersPage() {
             </section>
           </Reveal>
 
-          <Reveal durationMs={220} distance={8}>
+          <Reveal delayMs={320} durationMs={260} distance={10}>
             <section className={`${container} mt-12`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Invite-only access</p>
@@ -156,7 +156,7 @@ export default function ForEmployersPage() {
             </section>
           </Reveal>
 
-          <Reveal durationMs={220} distance={8}>
+          <Reveal delayMs={360} durationMs={260} distance={10}>
             <section className={`${container} mt-12`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Batches</p>
