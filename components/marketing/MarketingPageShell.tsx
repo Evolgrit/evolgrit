@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { motion } from "@/lib/ui/motion";
 
 export function MarketingPageShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +19,15 @@ export function MarketingPageShell({ children }: { children: ReactNode }) {
   }, [pathname, renderPath]);
 
   return (
-    <div key={renderPath} className="animate-marketing-fade">
+    <div
+      key={renderPath}
+      style={{
+        animationDuration: `${motion.page.fadeMs}ms`,
+        animationTimingFunction: motion.easing.smooth,
+        animationFillMode: "both",
+        animationName: "marketing-fade",
+      }}
+    >
       {children}
     </div>
   );

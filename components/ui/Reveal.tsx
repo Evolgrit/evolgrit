@@ -11,6 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { motion } from "@/lib/ui/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -27,13 +28,13 @@ type RevealProps = {
 export function Reveal({
   children,
   className,
-  delayMs = 0,
-  durationMs = 360,
-  distance = 12,
+  delayMs = motion.reveal.baseDelayMs,
+  durationMs = motion.reveal.durationMs,
+  distance = motion.reveal.translateY,
   once = true,
   threshold = 0.08,
   staggerChildren = false,
-  staggerMs = 180,
+  staggerMs = motion.reveal.staggerMs,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -80,7 +81,7 @@ export function Reveal({
   const baseStyle: CSSProperties = prefersReducedMotion
     ? { transition: "opacity 150ms linear" }
     : {
-        transition: `opacity ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1), filter ${durationMs}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+        transition: `opacity ${durationMs}ms ${motion.easing.smooth}, transform ${durationMs}ms ${motion.easing.smooth}, filter ${durationMs}ms ${motion.easing.smooth}`,
         transitionDelay,
         transform: isVisible ? "translateY(0px)" : `translateY(${distance}px)`,
         filter: isVisible ? "blur(0px)" : "blur(6px)",
