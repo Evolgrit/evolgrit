@@ -72,14 +72,14 @@ export function BigKpiCard({
   return (
     <article
       className={cx(
-        "relative overflow-hidden rounded-3xl p-6 min-h-[190px] shadow-sm",
+        "relative rounded-3xl p-6 min-h-[190px] shadow-sm w-full",
         style.bg
       )}
     >
       {watermark && (
         <span
           className={cx(
-            "pointer-events-none absolute -right-4 top-4 text-[120px] font-semibold leading-none opacity-10",
+            "pointer-events-none select-none absolute -right-4 top-4 text-[120px] font-semibold leading-none opacity-10",
             style.value
           )}
           aria-hidden="true"
@@ -93,7 +93,12 @@ export function BigKpiCard({
           {sublabel && <p className="text-xs text-slate-500">{sublabel}</p>}
         </div>
         <div className="flex items-baseline gap-1">
-          <span className={cx("text-4xl font-semibold", style.value)}>
+          <span
+            className={cx(
+              "break-words whitespace-normal text-3xl sm:text-4xl lg:text-[42px] font-semibold leading-none",
+              style.value
+            )}
+          >
             {mainValue}
           </span>
           {fraction && (
