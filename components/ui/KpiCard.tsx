@@ -49,6 +49,7 @@ export type KpiCardProps = {
   progress?: number;
   ctaLabel?: string;
   ctaHref?: string;
+  className?: string;
 };
 
 export function KpiCard({
@@ -61,6 +62,7 @@ export function KpiCard({
   progress,
   ctaLabel,
   ctaHref,
+  className,
 }: KpiCardProps) {
   const colors = toneMap[tone];
   const clampedProgress =
@@ -69,7 +71,9 @@ export function KpiCard({
       : undefined;
 
   return (
-    <div className="relative w-full min-w-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div
+      className={`relative w-full min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm ${className ?? ""}`}
+    >
       {icon && (
         <div
           className={`absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full ${colors.iconBg}`}
@@ -81,7 +85,7 @@ export function KpiCard({
       <p className="text-xs uppercase tracking-wide text-slate-500">{label}</p>
 
       <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-3xl font-semibold text-slate-900">{valueMain}</span>
+        <span className="text-4xl font-semibold text-slate-900">{valueMain}</span>
         {valueSub && <span className="text-lg text-slate-400">{valueSub}</span>}
         {statusText && <span className="ml-2 text-sm text-slate-500">{statusText}</span>}
       </div>

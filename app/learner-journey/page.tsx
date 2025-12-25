@@ -232,6 +232,7 @@ export default function LearnerJourneyPage() {
                       icon={<Smile className="h-5 w-5" />}
                       ctaLabel="See check-in"
                       ctaHref="#demo-mentor"
+                      className="gap-2"
                     />
                     <KpiCard
                       label="Modules completed"

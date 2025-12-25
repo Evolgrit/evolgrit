@@ -463,6 +463,7 @@ export default async function DashboardPage() {
                   icon={<Paperclip className="h-5 w-5" />}
                   ctaLabel="Go to modules"
                   ctaHref="/dashboard/modules"
+                  className="gap-2"
                 />
                 <KpiCard
                   label="Weekly check-in"
@@ -474,6 +475,7 @@ export default async function DashboardPage() {
                   icon={<Smile className="h-5 w-5" />}
                   ctaLabel="Go to check-in"
                   ctaHref="#weekly-checkin"
+                  className="gap-2"
                 />
               </div>
             </article>
