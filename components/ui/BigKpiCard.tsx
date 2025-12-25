@@ -72,7 +72,7 @@ export function BigKpiCard({
   return (
     <article
       className={cx(
-        "relative rounded-3xl p-6 min-h-[190px] shadow-sm w-full",
+        "relative overflow-hidden rounded-3xl p-6 min-h-[190px] shadow-sm w-full",
         style.bg
       )}
     >
@@ -95,7 +95,7 @@ export function BigKpiCard({
         <div className="flex items-baseline gap-1">
           <span
             className={cx(
-              "break-words whitespace-normal text-3xl sm:text-4xl lg:text-[42px] font-semibold leading-none",
+              "max-w-full truncate whitespace-nowrap text-4xl lg:text-[40px] xl:text-[36px] font-semibold leading-none",
               style.value
             )}
           >
