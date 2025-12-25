@@ -99,6 +99,31 @@ export default function DashboardShell({
               </p>
             </div>
 
+            <Link
+              href="/dashboard/profile"
+              className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm transition hover:border-slate-300 hover:shadow"
+            >
+              {profileAvatar ? (
+                <Image
+                  src={profileAvatar}
+                  alt={profileName}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
+              ) : (
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
+                  {initials || "DW"}
+                </div>
+              )}
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-slate-900">
+                  {profileName || "Daniel West"}
+                </p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500">Profile</p>
+              </div>
+            </Link>
+
             <nav className="mt-8 space-y-1">
               {navWithState.map((item) => (
                 <Link
@@ -147,27 +172,7 @@ export default function DashboardShell({
         </aside>
 
         <main className="flex-1">
-          <div className="rounded-3xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                  Batch Alpha · Week 3
-                </p>
-                <h2 className="mt-1 text-xl font-semibold text-slate-900">
-                  Dashboard overview
-                </h2>
-              </div>
-
-              <ProfileMenuButton
-                profileName={profileName}
-                profileAvatar={profileAvatar}
-                initials={initials}
-                onLogout={handleLogout}
-              />
-            </div>
-          </div>
-
-          <div className="mt-6">{children}</div>
+          <div className="mt-0">{children}</div>
         </main>
       </div>
     </div>

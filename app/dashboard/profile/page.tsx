@@ -47,6 +47,9 @@ export default async function ProfilePage() {
               <p className="mt-1 text-sm text-slate-600">
                 Keep your details up to date for the next batch.
               </p>
+              <p className="mt-1 text-sm text-slate-500">
+                Keep your journey calm and consistent.
+              </p>
             </div>
             <a href="/dashboard" className="text-sm text-slate-500 hover:text-slate-900">
               Back to dashboard →
