@@ -49,6 +49,7 @@ type BigKpiCardProps = {
   watermark?: string;
   chips?: string[];
   footer?: string;
+  className?: string;
 };
 
 const cx = (...classes: (string | false | undefined)[]) =>
@@ -62,6 +63,7 @@ export function BigKpiCard({
   watermark,
   chips,
   footer,
+  className,
 }: BigKpiCardProps) {
   const style = toneStyles[tone];
 
@@ -73,7 +75,8 @@ export function BigKpiCard({
     <article
       className={cx(
         "relative overflow-hidden rounded-3xl p-6 min-h-[190px] shadow-sm w-full",
-        style.bg
+        style.bg,
+        className
       )}
     >
       {watermark && (

@@ -69,12 +69,12 @@ export default function WeeklyCheckinCard({
   }
 
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
         Weekly check-in · {selectedWeek?.label}
       </p>
 
-      <div className="mt-3 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2">
+      <div className="mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2">
         {weeks.map((week) => {
           const hasEntry = Boolean(week.checkin);
           const isSelected = week.weekStart === selectedWeekStart;
@@ -116,7 +116,7 @@ export default function WeeklyCheckinCard({
       )}
 
       {showForm ? (
-        <form action={action} className="mt-5 space-y-4">
+        <form action={action} className="mt-4 space-y-4">
           <input type="hidden" name="weekStart" value={selectedWeekStart} />
           <p className="text-sm text-slate-600">
             Takes 30 seconds. Mentors use this to understand your energy.
@@ -187,7 +187,7 @@ export default function WeeklyCheckinCard({
           </div>
         </form>
       ) : (
-        <div className="mt-5 space-y-4">
+        <div className="mt-4 space-y-4">
           {selectedCheckin ? (
             <>
               <div className="grid gap-3 sm:grid-cols-2">

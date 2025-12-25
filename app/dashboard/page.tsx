@@ -24,28 +24,28 @@ const phaseAccent: Record<Phase, {
     cardBorder: "border-l-4 border-amber-300",
     pillBg: "bg-amber-100",
     pillText: "text-amber-700",
-    kpiBorder: "border-amber-200",
+    kpiBorder: "border-l-4 border-amber-300",
     bar: "bg-amber-400",
   },
   language_life: {
     cardBorder: "border-l-4 border-blue-300",
     pillBg: "bg-blue-100",
     pillText: "text-blue-700",
-    kpiBorder: "border-blue-200",
+    kpiBorder: "border-l-4 border-blue-300",
     bar: "bg-blue-400",
   },
   job_readiness: {
     cardBorder: "border-l-4 border-violet-300",
     pillBg: "bg-violet-100",
     pillText: "text-violet-700",
-    kpiBorder: "border-violet-200",
+    kpiBorder: "border-l-4 border-violet-300",
     bar: "bg-violet-400",
   },
   matching: {
     cardBorder: "border-l-4 border-emerald-300",
     pillBg: "bg-emerald-100",
     pillText: "text-emerald-700",
-    kpiBorder: "border-emerald-200",
+    kpiBorder: "border-l-4 border-emerald-300",
     bar: "bg-emerald-400",
   },
 };
@@ -396,10 +396,10 @@ export default async function DashboardPage() {
   const mentorConfigured = Boolean(mentorId && mentorThreadId);
 
   return (
-    <div className={`${ui.container} space-y-6`}>
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+    <div className={`${ui.container} space-y-4`}>
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-4">
-          <header className={`${ui.card} ${ui.cardPadding}`}>
+          <header className={`${ui.card} ${ui.compactCardPadding}`}>
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -426,7 +426,7 @@ export default async function DashboardPage() {
 
           <section className="space-y-4">
             <article
-              className={`${ui.card} ${ui.cardPadding} ${phaseColors.cardBorder}`}
+              className={`${ui.card} ${ui.compactCardPadding} ${phaseColors.cardBorder}`}
             >
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
@@ -451,7 +451,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <BigKpiCard
                   label="Level studied"
                   value={germanLevelDisplay}
@@ -459,6 +459,7 @@ export default async function DashboardPage() {
                   watermark={germanLevelDisplay}
                   chips={germanChips}
                   footer="Update in onboarding any time."
+                  className={phaseColors.kpiBorder}
                 />
                 <BigKpiCard
                   label="Modules completed"
@@ -467,6 +468,7 @@ export default async function DashboardPage() {
                   tone="blue"
                   watermark="Modules"
                   footer={modulesSummaryHelper}
+                  className={phaseColors.kpiBorder}
                 />
                 <BigKpiCard
                   label="Weekly check-in"
@@ -474,18 +476,12 @@ export default async function DashboardPage() {
                   tone={currentWeekCheckin ? "green" : "amber"}
                   watermark={currentWeekCheckin ? "✓" : "!"}
                   footer={weeklyStatusHelper}
+                  className={phaseColors.kpiBorder}
                 />
               </div>
             </article>
-          </section>
 
-          <section className="grid gap-4 lg:grid-cols-[2fr,1fr]">
-            <WeeklyCheckinCard
-              weeks={weeklyTimeline}
-              action={submitWeeklyCheckinAction}
-              summaryFirst
-            />
-            <article className={`${ui.card} ${ui.cardPadding}`}>
+            <article className={`${ui.card} ${ui.compactCardPadding}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 Next best action
               </p>
@@ -502,7 +498,15 @@ export default async function DashboardPage() {
             </article>
           </section>
 
-          <section className={`${ui.card} ${ui.cardPadding}`}>
+          <section className="grid gap-4">
+            <WeeklyCheckinCard
+              weeks={weeklyTimeline}
+              action={submitWeeklyCheckinAction}
+              summaryFirst
+            />
+          </section>
+
+          <section className={`${ui.card} ${ui.compactCardPadding}`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
