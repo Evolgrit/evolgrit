@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 import { DocumentIcon, Paperclip, Smile } from "@/components/icons/LucideIcons";
 import { KpiCard } from "@/components/ui/KpiCard";
+import { NextActionCard } from "@/components/ui/NextActionCard";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – From German Learning to Job Placement",
@@ -245,6 +246,16 @@ export default function LearnerJourneyPage() {
                 </section>
               </Reveal>
 
+              <Reveal delayMs={240} durationMs={360} distance={12}>
+                <NextActionCard
+                  meta="Next action"
+                  title="Open demo"
+                  description="Walk through the Evolgrit learner journey in demo mode."
+                  primaryLabel="Open demo →"
+                  primaryHref="#demo-overview"
+                />
+              </Reveal>
+
               <Reveal delayMs={260} durationMs={360} distance={12}>
                 <section id="demo-journey" className={`${ui.card} ${ui.cardPadding} space-y-3`}>
                 <p className={ui.text.meta}>Three calm phases</p>
@@ -312,7 +323,7 @@ export default function LearnerJourneyPage() {
                     Lightweight blocks, reusable each batch.
                   </p>
                 </div>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <KpiCard
                     label="Homework completed"
                     valueMain={homeworkPreview.completed}

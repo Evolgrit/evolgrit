@@ -11,6 +11,7 @@ import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
 import { ui } from "@/lib/ui/tokens";
 import { BigKpiCard } from "@/components/ui/BigKpiCard";
 import { KpiCard } from "@/components/ui/KpiCard";
+import { NextActionCard } from "@/components/ui/NextActionCard";
 import MobileMentorChatTrigger from "@/components/dashboard/MobileMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
 import { Paperclip } from "@/components/icons/LucideIcons";
@@ -294,34 +295,46 @@ export default async function DashboardPage() {
     Math.min(100, Math.round((onboardingPercent + modulesPercent) / 2))
   );
 
-  const nextActions: Record<keyof typeof phaseMeta, {
-    label: string;
-    href: string;
-    helper: string;
-  }> = {
-    orientation: {
-      label: "Continue onboarding",
-      href: "/dashboard/onboarding",
-      helper: "Finish your basics so we can place you in the right batch.",
-    },
-    language_life: {
-      label: "Complete this week’s modules",
-      href: "/dashboard/modules",
-      helper: "Short tasks keep language and everyday life moving.",
-    },
-    job_readiness: {
-      label: "Upload key documents",
-      href: "/dashboard/documents",
-      helper: "Contracts and IDs unlock the next phase.",
-    },
-    matching: {
-      label: "Review opportunities",
-      href: "/dashboard/jobs",
-      helper: "See which employers fit your profile right now.",
-    },
-  };
-  const currentAction = nextActions[phaseKey];
+  const docsReady = onboardingDone;
+  const modulesProgress =
+    modulesTotal > 0 ? modulesCompleted / modulesTotal : 0;
+  const modulesReady = modulesProgress >= 1;
   const currentWeekCheckin = weeklyTimeline.find((week) => week.isCurrent)?.checkin;
+  const nextAction =
+    !onboardingDone
+      ? {
+          meta: "Next action",
+          title: "Continue onboarding",
+          description: "Finish your basics so we can place you in the right batch.",
+          href: "/dashboard/onboarding",
+        }
+      : !docsReady
+      ? {
+          meta: "Next action",
+          title: "Upload key documents",
+          description: "Contracts and IDs unlock the next phase.",
+          href: "/dashboard/documents",
+        }
+      : !currentWeekCheckin
+      ? {
+          meta: "Next action",
+          title: "Submit weekly check-in",
+          description: "Share mood & blockers so mentors can support you.",
+          href: "#weekly-checkin",
+        }
+      : !modulesReady
+      ? {
+          meta: "Next action",
+          title: "Start this week’s modules",
+          description: "Short tasks keep language and everyday life moving.",
+          href: "/dashboard/modules",
+        }
+      : {
+          meta: "Next action",
+          title: "Open learning modules",
+          description: "Keep momentum with new tasks and mentor feedback.",
+          href: "/dashboard/modules",
+        };
   const weeklyStatusLabel = currentWeekCheckin ? "Submitted" : "Not submitted";
   const weeklyStatusHelper = currentWeekCheckin
     ? `Saved ${formatDate(currentWeekCheckin.updated_at ?? currentWeekCheckin.created_at ?? currentWeekIso)}`
@@ -331,8 +344,6 @@ export default async function DashboardPage() {
     germanLevelDisplay && germanLevelDisplay !== "Not set"
       ? ["A1", "A2", "B1", germanLevelDisplay]
       : ["A1", "A2", "B1", "B2"];
-  const modulesProgress =
-    modulesTotal > 0 ? modulesCompleted / modulesTotal : 0;
   const mentorId = process.env.DEFAULT_MENTOR_ID ?? null;
   const mentorName = process.env.DEFAULT_MENTOR_NAME ?? "Lina";
   const mentorRole = process.env.DEFAULT_MENTOR_ROLE ?? "Cultural readiness mentor";
@@ -478,24 +489,16 @@ export default async function DashboardPage() {
               </div>
             </article>
 
-            <article className={`${ui.card} ${ui.compactCardPadding}`}>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Next best action
-              </p>
-              <h3 className="text-xl font-semibold text-slate-900">
-                Keep moving calmly
-              </h3>
-              <p className="mt-1 text-sm text-slate-600">{currentAction.helper}</p>
-              <Link
-                href={currentAction.href}
-                className="mt-4 inline-flex rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-              >
-                {currentAction.label} →
-              </Link>
-            </article>
+            <NextActionCard
+              meta={nextAction.meta}
+              title={nextAction.title}
+              description={nextAction.description}
+              primaryLabel={nextAction.title.replace(/→?$/, "→")}
+              primaryHref={nextAction.href}
+            />
           </section>
 
-          <section className="grid gap-4">
+          <section className="grid gap-4" id="weekly-checkin">
             <WeeklyCheckinCard
               weeks={weeklyTimeline}
               action={submitWeeklyCheckinAction}
