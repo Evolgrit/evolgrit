@@ -1849,6 +1849,24 @@ className="flex items-center gap-2 cursor-pointer"
       </p>
     </div>
 
+    <div className="mb-8 rounded-3xl bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5 sm:p-6 shadow-lg shadow-blue-500/30 flex flex-col gap-3">
+      <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">
+        Demo
+      </p>
+      <h3 className="text-xl font-semibold">
+        See the learner journey
+      </h3>
+      <p className="text-sm text-white/80">
+        A calm three-phase path from arrival to job-ready — with clear next steps.
+      </p>
+      <Link
+        href="/learner-journey"
+        className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur hover:bg-white/20 transition"
+      >
+        Open demo →
+      </Link>
+    </div>
+
     <div className="grid gap-5 md:grid-cols-3">
       {evolgritPhases.map((phase) => (
         <article
