@@ -3,6 +3,7 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import MarketingTopbar from "./MarketingTopbar";
 import { Reveal } from "@/components/ui/Reveal";
 
 type EmployerCard = {
@@ -510,7 +511,6 @@ const learnersGetHighlights = [
   },
 ] as const;
 export default function HomePageClient() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openEmployerCardId, setOpenEmployerCardId] = useState<string | null>(
     null
   );
@@ -805,144 +805,7 @@ const journeyCards = [
     <div 
     id="top"
     className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900">
-      {/* HEADER / NAVBAR */}
-      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/50">
-        <div className="max-w-6xl mx-auto px-5 py-4">
-          <nav className="flex items-center justify-between gap-4">
-            {/* Logo + Title */}
-<button
-  type="button"
-  onClick={() =>
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }
-className="flex items-center gap-2 cursor-pointer"
->
-  <div className="w-8 h-8 rounded-xl bg-slate-900 shadow-lg shadow-slate-900/40 flex items-center justify-center text-slate-100 text-sm font-semibold">
-    E
-  </div>
-  <div>
-    <div className="text-sm font-semibold tracking-[0.18em] uppercase">
-      Evolgrit
-    </div>
-    <div className="text-[11px] text-slate-500">
-      Language · Jobs · AI
-    </div>
-  </div>
-</button>
-            {/* Desktop Menu */}
-            <div className="hidden sm:flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-2 pl-3 ml-1 border-l border-slate-200 text-xs text-slate-400">
-                EN
-              </div>
-
-              <a href="#product" className="text-slate-500 hover:text-slate-900">
-                Product
-              </a>
-              <a
-                href="/learner-journey"
-                className="text-slate-500 hover:text-slate-900"
-              >
-                Learner journey (Demo)
-              </a>
-              <a href="#journey" className="text-slate-500 hover:text-slate-900">
-                How it works
-              </a>
-              <a href="#for-employers" className="text-slate-500 hover:text-slate-900">
-                For employers
-              </a>
-
-  <a
-    href="/login"
-    className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm hover:bg-white shadow-sm"
-  >
-    Log in
-  </a>
-                  <a
-                    href="/waitlist"
-                    className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700"
-                  >
-                    Join learner waitlist
-                  </a>
-            </div>
-
-            {/* Mobile hamburger */}
-            <button
-              className="sm:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700 shadow-sm hover:bg-white"
-              onClick={() => setIsMenuOpen((open) => !open)}
-              aria-label="Open navigation menu"
-            >
-              <span className="flex flex-col gap-[3px]">
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-                <span className="h-[2px] w-4 bg-slate-700 rounded-full" />
-              </span>
-            </button>
-          </nav>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="sm:hidden mt-4 mb-2 space-y-3 text-sm border border-slate-200 rounded-2xl bg-white/90 p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                  Language
-                </span>
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  EN
-                </div>
-              </div>
-
-              <a
-                href="#product"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Product
-              </a>
-              <a
-                href="/learner-journey"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Learner journey (Demo)
-              </a>
-              <a
-                href="#journey"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                How it works
-              </a>
-              <a
-                href="#for-employers"
-                className="block text-slate-700 hover:text-slate-900"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                For employers
-              </a>
-
-<div className="pt-2 flex gap-2">
-  <a
-    href="/login"
-    className="flex-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs hover:bg-white shadow-sm flex items-center justify-center text-slate-700"
-    onClick={() => setIsMenuOpen(false)}
-  >
-    Log in
-  </a>
-  <a
-    href="/waitlist"
-    className="flex-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-blue-500/40 hover:bg-blue-700 flex items-center justify-center"
-    onClick={() => setIsMenuOpen(false)}
-  >
-    Join learner waitlist
-  </a>
-</div>
-            </div>
-          )}
-        </div>
-      </header>
+      <MarketingTopbar />
 
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-5 pt-10 pb-24">
