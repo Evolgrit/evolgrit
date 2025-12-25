@@ -184,8 +184,27 @@ export default function MentorChatSheet({
           </section>
 
           <section className="space-y-2 px-5 py-4">
-            <form onSubmit={handleSend} className="space-y-2">
-              <div className="flex items-center gap-2">
+            <form onSubmit={handleSend} className="space-y-3">
+              <input
+                type="text"
+                name="message"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                placeholder={
+                  canSend
+                    ? "Write message..."
+                    : "Chat available inside Evolgrit"
+                }
+                disabled={!canSend}
+                className="w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    event.currentTarget.form?.requestSubmit();
+                  }
+                }}
+              />
+              <div className="flex items-center justify-between border-t border-slate-100 pt-2">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -203,43 +222,17 @@ export default function MentorChatSheet({
                   >
                     <Paperclip className="h-4 w-4" />
                   </button>
-                  <input
-                    type="text"
-                    name="message"
-                    value={input}
-                    onChange={(event) => setInput(event.target.value)}
-                  placeholder={
-                    canSend
-                      ? "Write message..."
-                      : demo
-                        ? "Chat available inside Evolgrit"
-                        : "Mentor chat unlocks when assigned."
-                  }
-                    disabled={!canSend}
-                    className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" && !event.shiftKey) {
-                        event.preventDefault();
-                        event.currentTarget.form?.requestSubmit();
-                      }
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={sending || !input.trim() || !canSend}
-                    className="rounded-full bg-slate-900 p-2 text-white transition hover:bg-slate-800 disabled:opacity-40"
-                  >
-                    <ArrowUp className="h-4 w-4" />
-                  </button>
                 </div>
-                {!canSend && (
-                  <p className="text-xs text-slate-500">
-                    Chat available inside Evolgrit.
-                  </p>
-                )}
-                {error && <p className="text-xs text-rose-600">{error}</p>}
-                {info && <p className="text-xs text-emerald-600">{info}</p>}
+                <button
+                  type="submit"
+                  disabled={sending || !input.trim() || !canSend}
+                  className="rounded-full bg-slate-900 p-2 text-white transition hover:bg-slate-800 disabled:opacity-40"
+                >
+                  <ArrowUp className="h-4 w-4" />
+                </button>
               </div>
+              {error && <p className="text-xs text-rose-600">{error}</p>}
+              {info && <p className="text-xs text-emerald-600">{info}</p>}
             </form>
             <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
               <div className="inline-flex items-center gap-2">

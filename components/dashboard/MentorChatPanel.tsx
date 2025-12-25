@@ -141,44 +141,41 @@ export default function MentorChatPanel({
       </section>
 
       <div className="border-t border-slate-200 px-5 py-4">
-        <form
-          onSubmit={handleSend}
-          className="flex flex-col gap-2 text-sm text-slate-500"
-        >
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
-              aria-label="Add emoji"
-              disabled={!canSend}
-            >
-              <Smile className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
-              aria-label="Attach file"
-              disabled={!canSend}
-            >
-              <Paperclip className="h-4 w-4" />
-            </button>
-            <input
-              type="text"
-              name="message"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  event.currentTarget.form?.requestSubmit();
-                }
-              }}
-              placeholder={
-                canSend ? "Write message..." : "Mentor chat unlocks when assigned."
+        <form onSubmit={handleSend} className="flex flex-col gap-3 text-sm text-slate-500">
+          <input
+            type="text"
+            name="message"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                event.currentTarget.form?.requestSubmit();
               }
-              disabled={!canSend}
-              className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
-            />
+            }}
+            placeholder={canSend ? "Write message..." : "Chat available inside Evolgrit"}
+            disabled={!canSend}
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
+          />
+          <div className="flex items-center justify-between border-t border-slate-100 pt-2">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
+                aria-label="Add emoji"
+                disabled={!canSend}
+              >
+                <Smile className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
+                aria-label="Attach file"
+                disabled={!canSend}
+              >
+                <Paperclip className="h-4 w-4" />
+              </button>
+            </div>
             <button
               type="submit"
               disabled={composerDisabled || !input.trim()}
@@ -187,11 +184,6 @@ export default function MentorChatPanel({
               <ArrowUp className="h-4 w-4" />
             </button>
           </div>
-          {!canSend && (
-            <p className="text-xs text-slate-500">
-              Chat becomes active once your mentor is assigned.
-            </p>
-          )}
           {error && <p className="text-xs text-rose-600">{error}</p>}
           {info && <p className="text-xs text-emerald-600">{info}</p>}
         </form>
