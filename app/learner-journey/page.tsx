@@ -7,7 +7,8 @@ import DemoMentorChatTrigger from "@/components/learner-journey/DemoMentorChatTr
 import type { MentorMessage } from "@/lib/types/mentor";
 import { Reveal } from "@/components/ui/Reveal";
 import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
-import { DocumentIcon } from "@/components/icons/LucideIcons";
+import { DocumentIcon, Paperclip, Smile } from "@/components/icons/LucideIcons";
+import { KpiCard } from "@/components/ui/KpiCard";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – From German Learning to Job Placement",
@@ -76,6 +77,15 @@ const documentsPreview = {
   ready: 2,
   total: 4,
 };
+const modulesSummary = {
+  completed: 2,
+  total: 3,
+};
+const homeworkPreview = {
+  completed: 5,
+  total: 8,
+};
+const readinessScoreDemo = 0.62;
 
 const weeklyCheckin = {
   mood: "Calm",
@@ -87,8 +97,6 @@ const weeklyCheckin = {
 const weeklyStatusLabelDemo = "Submitted";
 const weeklyStatusHelperDemo = "Saved Mar 11 (demo).";
 const germanChipsDemo = ["A1", "A2", "B1", "B2"];
-const modulesValueDemo = "2/3";
-
 const mentorMessagesDemoRaw = [
   { id: 1, author: "mentor", text: "Hi Lina, ready for our calm check-in?" },
   { id: 2, author: "you", text: "Yes, I finished the transport module." },
@@ -215,18 +223,22 @@ export default function LearnerJourneyPage() {
                       footer="Refreshed weekly via mentor."
                     />
                     <BigKpiCard
-                      label="Modules completed"
-                      value={modulesValueDemo}
-                      tone="blue"
-                      watermark="Modules"
-                      footer="Keep momentum tonight."
-                    />
-                    <BigKpiCard
                       label="Weekly check-in"
                       value={weeklyStatusLabelDemo}
                       tone="green"
                       watermark="✓"
                       footer={weeklyStatusHelperDemo}
+                    />
+                    <KpiCard
+                      label="Modules completed"
+                      valueMain={modulesSummary.completed}
+                      valueSub={`/${modulesSummary.total}`}
+                      statusText="this week"
+                      tone="blue"
+                      progress={modulesSummary.completed / modulesSummary.total}
+                      icon={<Paperclip className="h-5 w-5" />}
+                      ctaLabel="Open modules"
+                      ctaHref="#demo-modules"
                     />
                   </div>
                 </article>
@@ -277,41 +289,17 @@ export default function LearnerJourneyPage() {
                 </article>
 
                 <article id="demo-docs" className="relative">
-                  <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50">
-                      <DocumentIcon className="h-5 w-5 text-indigo-600" />
-                    </div>
-
-                    <p className="text-xs uppercase tracking-wide text-slate-500">
-                      Documents readiness
-                    </p>
-
-                    <div className="mt-2 flex items-baseline gap-1">
-                      <span className="text-3xl font-semibold text-slate-900">
-                        {documentsPreview.ready}
-                      </span>
-                      <span className="text-lg text-slate-400">/{documentsPreview.total}</span>
-                      <span className="ml-2 text-sm text-slate-500">ready</span>
-                    </div>
-
-                    <div className="mt-4 h-2 w-full rounded-full bg-slate-100">
-                      <div
-                        className="h-2 rounded-full bg-slate-900 transition-all"
-                        style={{
-                          width: `${Math.round(
-                            (documentsPreview.ready / documentsPreview.total) * 100
-                          )}%`,
-                        }}
-                      />
-                    </div>
-
-                    <a
-                      href="/dashboard/documents"
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline"
-                    >
-                      Upload key documents <span aria-hidden>→</span>
-                    </a>
-                  </div>
+                  <KpiCard
+                    label="Documents readiness"
+                    valueMain={documentsPreview.ready}
+                    valueSub={`/${documentsPreview.total}`}
+                    statusText="ready"
+                    tone="blue"
+                    progress={documentsPreview.ready / documentsPreview.total}
+                    icon={<DocumentIcon className="h-5 w-5" />}
+                    ctaLabel="Upload key documents"
+                    ctaHref="/dashboard/documents"
+                  />
                 </article>
                 </section>
               </Reveal>
@@ -323,6 +311,30 @@ export default function LearnerJourneyPage() {
                   <p className={ui.text.body}>
                     Lightweight blocks, reusable each batch.
                   </p>
+                </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+                  <KpiCard
+                    label="Homework completed"
+                    valueMain={homeworkPreview.completed}
+                    valueSub={`/${homeworkPreview.total}`}
+                    statusText="submitted"
+                    tone="green"
+                    progress={homeworkPreview.completed / homeworkPreview.total}
+                    icon={<DocumentIcon className="h-5 w-5" />}
+                    ctaLabel="Review homework"
+                    ctaHref="/dashboard"
+                  />
+                  <KpiCard
+                    label="Readiness score"
+                    valueMain={Math.round(readinessScoreDemo * 100)}
+                    valueSub="%"
+                    statusText="calm pace"
+                    tone="violet"
+                    progress={readinessScoreDemo}
+                    icon={<Smile className="h-5 w-5" />}
+                    ctaLabel="View signals"
+                    ctaHref="/for-employers#tina-story"
+                  />
                 </div>
                   <Reveal
                     durationMs={220}

@@ -10,8 +10,10 @@ import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
 import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
 import { ui } from "@/lib/ui/tokens";
 import { BigKpiCard } from "@/components/ui/BigKpiCard";
+import { KpiCard } from "@/components/ui/KpiCard";
 import MobileMentorChatTrigger from "@/components/dashboard/MobileMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
+import { Paperclip } from "@/components/icons/LucideIcons";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -267,11 +269,6 @@ export default async function DashboardPage() {
   const modulesCompleted = phaseOneProgress.filter(
     (row) => row.status === "completed"
   ).length;
-  const modulesSummaryHelper =
-    modulesTotal > 0 && modulesCompleted >= modulesTotal
-      ? "All priority modules done"
-      : "Keep momentum tonight";
-
   const onboardingTotal = onboarding?.total ?? 8;
   const onboardingCompleted = Math.min(
     onboarding?.completed ?? 0,
@@ -334,10 +331,8 @@ export default async function DashboardPage() {
     germanLevelDisplay && germanLevelDisplay !== "Not set"
       ? ["A1", "A2", "B1", germanLevelDisplay]
       : ["A1", "A2", "B1", "B2"];
-  const modulesValue =
-    modulesTotal > 0
-      ? `${modulesCompleted}/${modulesTotal}`
-      : `${modulesCompleted}/0`;
+  const modulesProgress =
+    modulesTotal > 0 ? modulesCompleted / modulesTotal : 0;
   const mentorId = process.env.DEFAULT_MENTOR_ID ?? null;
   const mentorName = process.env.DEFAULT_MENTOR_NAME ?? "Lina";
   const mentorRole = process.env.DEFAULT_MENTOR_ROLE ?? "Cultural readiness mentor";
@@ -461,14 +456,16 @@ export default async function DashboardPage() {
                   footer="Update in onboarding any time."
                   className={phaseColors.kpiBorder}
                 />
-                <BigKpiCard
+                <KpiCard
                   label="Modules completed"
-                  value={modulesValue}
-                  sublabel="This batch"
+                  valueMain={modulesCompleted}
+                  valueSub={`/${modulesTotal}`}
+                  statusText="this batch"
                   tone="blue"
-                  watermark="Modules"
-                  footer={modulesSummaryHelper}
-                  className={phaseColors.kpiBorder}
+                  progress={modulesProgress}
+                  icon={<Paperclip className="h-5 w-5" />}
+                  ctaLabel="Go to modules"
+                  ctaHref="/dashboard/modules"
                 />
                 <BigKpiCard
                   label="Weekly check-in"
