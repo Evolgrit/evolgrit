@@ -9,7 +9,7 @@ type EmployerTestimonialSectionProps = {
 
 export function EmployerTestimonialSection({ id = "tina-story" }: EmployerTestimonialSectionProps) {
   return (
-    <section id={id} className="mx-auto mt-12 w-full max-w-5xl px-5 sm:px-6 lg:px-8">
+    <section id={id} className="mx-auto mt-12 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
       <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
         <div className="relative aspect-[16/9] sm:aspect-[21/9]">
           <Image

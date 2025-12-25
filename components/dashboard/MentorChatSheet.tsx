@@ -109,7 +109,7 @@ export default function MentorChatSheet({
       />
       <div className="fixed inset-x-0 bottom-0 z-50 xl:hidden">
         <div className="mx-auto w-full max-w-lg rounded-t-3xl border border-slate-200 bg-white shadow-2xl">
-          <header className="flex items-center gap-3 px-5 py-4">
+          <header className="flex items-center gap-3 px-4 py-4 sm:px-5">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-lg font-semibold text-white">
               {mentorAvatar}
             </div>
@@ -132,7 +132,7 @@ export default function MentorChatSheet({
           </header>
           <div className="border-t border-slate-200" />
 
-          <section className="space-y-4 border-b border-slate-200 px-5 py-4">
+          <section className="space-y-4 border-b border-slate-200 px-4 py-4 sm:px-5">
             <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
               Video chat
             </p>
@@ -150,7 +150,7 @@ export default function MentorChatSheet({
             </div>
           </section>
 
-          <section className="space-y-3 border-b border-slate-200 px-5 py-4">
+          <section className="space-y-3 border-b border-slate-200 px-4 py-4 sm:px-5">
             <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
               Text chat
             </p>
@@ -178,7 +178,7 @@ export default function MentorChatSheet({
             </div>
           </section>
 
-          <section className="space-y-2 px-5 py-4">
+          <section className="space-y-2 px-4 py-4 pb-6 sm:px-5">
             <form onSubmit={handleSend} className="space-y-3">
               {demo && (
                 <p className="text-sm text-slate-500">
