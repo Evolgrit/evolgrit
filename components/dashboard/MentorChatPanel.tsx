@@ -102,21 +102,17 @@ export default function MentorChatPanel({
         <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
           Video chat
         </p>
-        <div className="rounded-2xl border border-blue-100 bg-blue-50/80 p-4">
-          <div className="flex min-h-[140px] items-center justify-center rounded-2xl border border-white/60 bg-white/60 text-sm text-slate-500">
-            Video available when your mentor is live.
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/90 p-4">
+          <div className="flex h-32 items-center justify-center rounded-2xl bg-blue-100/70">
+            <button
+              type="button"
+              disabled
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
+            >
+              <Phone className="h-4 w-4 text-emerald-500" />
+              Start a call
+            </button>
           </div>
-          <p className="mt-3 text-xs text-blue-900/70">
-            Calm 1:1 calls keep onboarding relaxed.
-          </p>
-          <button
-            type="button"
-            disabled
-            className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-600"
-          >
-            <Phone className="h-4 w-4" />
-            Start a call
-          </button>
         </div>
       </section>
 
