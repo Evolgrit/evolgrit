@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ui } from "@/lib/ui/tokens";
 
 export const metadata: Metadata = {
   title: "How Evolgrit Works – From German Learning to Job Placement",
@@ -73,10 +74,10 @@ const mentorMessages = [
 
 export default function LearnerJourneyPage() {
   return (
-    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8">
+    <div className={`${ui.container} py-8`}>
       <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-6">
-          <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <header className={`${ui.card} ${ui.cardPadding}`}>
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -100,7 +101,7 @@ export default function LearnerJourneyPage() {
           </header>
 
           <section className="space-y-4">
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <article className={`${ui.card} ${ui.cardPadding}`}>
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -147,7 +148,7 @@ export default function LearnerJourneyPage() {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <article className={`${ui.card} ${ui.cardPadding}`}>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -176,7 +177,7 @@ export default function LearnerJourneyPage() {
               </div>
             </article>
 
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <article className={`${ui.card} ${ui.cardPadding}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 Documents readiness
               </p>
@@ -215,7 +216,7 @@ export default function LearnerJourneyPage() {
               {modulesPreview.map((module) => (
                 <article
                   key={module.title}
-                  className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
+                  className={`${ui.card} ${ui.compactCardPadding}`}
                 >
                   <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-400">
                     <span>{module.type}</span>
@@ -233,7 +234,7 @@ export default function LearnerJourneyPage() {
 
         <aside className="hidden xl:block">
           <div className="sticky top-24 space-y-4">
-            <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <article className={`${ui.card} ${ui.compactCardPadding}`}>
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-full bg-slate-900 text-white flex items-center justify-center text-lg font-semibold">
                   L
@@ -252,7 +253,7 @@ export default function LearnerJourneyPage() {
               </p>
             </article>
 
-            <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
+            <article className={`space-y-3 ${ui.card} ${ui.compactCardPadding}`}>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                   Video chat
@@ -270,7 +271,7 @@ export default function LearnerJourneyPage() {
               </button>
             </article>
 
-            <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+            <article className={`space-y-4 ${ui.card} ${ui.compactCardPadding}`}>
               <div className="flex items-center justify-between">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                   Text chat

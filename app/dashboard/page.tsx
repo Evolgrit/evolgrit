@@ -8,6 +8,7 @@ import WeeklyCheckinCard, {
 import { computePhase } from "@/lib/phase/computePhase";
 import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
 import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
+import { ui } from "@/lib/ui/tokens";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -393,10 +394,10 @@ export default async function DashboardPage() {
   const mentorConfigured = Boolean(mentorId && mentorThreadId);
 
   return (
-    <div className="mx-auto max-w-[1200px] space-y-6 px-4 sm:px-6 lg:px-8">
+    <div className={`${ui.container} space-y-6`}>
       <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-4">
-          <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <header className={`${ui.card} ${ui.cardPadding}`}>
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -423,7 +424,7 @@ export default async function DashboardPage() {
 
           <section className="space-y-4">
             <article
-              className={`rounded-3xl border border-slate-200 bg-white p-6 shadow-sm ${phaseColors.cardBorder}`}
+              className={`${ui.card} ${ui.cardPadding} ${phaseColors.cardBorder}`}
             >
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
@@ -492,7 +493,7 @@ export default async function DashboardPage() {
               action={submitWeeklyCheckinAction}
               summaryFirst
             />
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <article className={`${ui.card} ${ui.cardPadding}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 Next best action
               </p>
@@ -509,7 +510,7 @@ export default async function DashboardPage() {
             </article>
           </section>
 
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className={`${ui.card} ${ui.cardPadding}`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
