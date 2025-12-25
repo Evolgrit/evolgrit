@@ -1804,6 +1804,14 @@ const journeyCards = [
         ))}
       </div>
     </div>
+    <div className="mt-8 text-center">
+      <Link
+        href="/how-it-works"
+        className="text-sm font-medium text-blue-600 hover:text-blue-700"
+      >
+        Explore how it works →
+      </Link>
+    </div>
   </div>
 </section>
 </Reveal>
@@ -1980,6 +1988,14 @@ const journeyCards = [
               className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-50 shadow-md shadow-slate-900/40 hover:bg-slate-800"
             >
               Talk to us about hiring
+            </Link>
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/for-employers"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+            >
+              Learn more for employers →
             </Link>
           </div>
         </div>

@@ -11,8 +11,8 @@ type MarketingTopbarProps = {
 const navLinks = [
   { label: "Product", href: "#product" },
   { label: "Learner journey (Demo)", href: "/learner-journey" },
-  { label: "How it works", href: "#journey" },
-  { label: "For employers", href: "#for-employers" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "For employers", href: "/for-employers" },
 ];
 
 export default function MarketingTopbar({
