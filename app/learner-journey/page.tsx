@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import MarketingTopbar from "@/components/MarketingTopbar";
+import { BigKpiCard } from "@/components/ui/BigKpiCard";
 import { ui } from "@/lib/ui/tokens";
 
 export const metadata: Metadata = {
@@ -77,6 +78,10 @@ const weeklyCheckin = {
   blockers: "Need clarity on bus shift vocabulary.",
   savedAt: "Mar 11",
 };
+const weeklyStatusLabelDemo = "Submitted";
+const weeklyStatusHelperDemo = "Saved Mar 11 (demo).";
+const germanChipsDemo = ["A1", "A2", "B1", "B2"];
+const modulesValueDemo = "2/3";
 
 const mentorMessages = [
   { id: 1, author: "mentor", text: "Hi Lina, ready for our calm check-in?" },
@@ -178,24 +183,29 @@ export default function LearnerJourneyPage() {
                       <p className="text-xs text-slate-400">Week 3 · calm pace</p>
                     </div>
                   </div>
-                  <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                      <p className={ui.text.meta}>German level</p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">
-                        A2 → B1 path
-                      </p>
-                      <p className="text-xs text-slate-500">Refreshed weekly via mentor.</p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                      <p className={ui.text.meta}>Modules this week</p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">2 / 3</p>
-                      <p className="text-xs text-slate-500">Keep momentum tonight.</p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                      <p className={ui.text.meta}>Weekly check-in</p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">Submitted</p>
-                      <p className="text-xs text-slate-500">Saved Mar 11.</p>
-                    </div>
+                  <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <BigKpiCard
+                      label="Level studied"
+                      value="B2"
+                      tone="neutral"
+                      watermark="B2"
+                      chips={germanChipsDemo}
+                      footer="Refreshed weekly via mentor."
+                    />
+                    <BigKpiCard
+                      label="Modules completed"
+                      value={modulesValueDemo}
+                      tone="blue"
+                      watermark="Modules"
+                      footer="Keep momentum tonight."
+                    />
+                    <BigKpiCard
+                      label="Weekly check-in"
+                      value={weeklyStatusLabelDemo}
+                      tone="green"
+                      watermark="✓"
+                      footer={weeklyStatusHelperDemo}
+                    />
                   </div>
                 </article>
               </section>

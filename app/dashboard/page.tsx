@@ -9,6 +9,7 @@ import { computePhase } from "@/lib/phase/computePhase";
 import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
 import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
 import { ui } from "@/lib/ui/tokens";
+import { BigKpiCard } from "@/components/ui/BigKpiCard";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -271,8 +272,6 @@ export default async function DashboardPage() {
   const modulesCompleted = phaseOneProgress.filter(
     (row) => row.status === "completed"
   ).length;
-  const modulesSummaryLabel =
-    modulesTotal > 0 ? `${modulesCompleted} / ${modulesTotal}` : "—";
   const modulesSummaryHelper =
     modulesTotal > 0 && modulesCompleted >= modulesTotal
       ? "All priority modules done"
@@ -335,7 +334,15 @@ export default async function DashboardPage() {
   const weeklyStatusHelper = currentWeekCheckin
     ? `Saved ${formatDate(currentWeekCheckin.updated_at ?? currentWeekCheckin.created_at ?? currentWeekIso)}`
     : "Share mood & blockers so mentors can support you.";
-
+  const germanLevelDisplay = profile?.german_level ?? "Not set";
+  const germanChips =
+    germanLevelDisplay && germanLevelDisplay !== "Not set"
+      ? ["A1", "A2", "B1", germanLevelDisplay]
+      : ["A1", "A2", "B1", "B2"];
+  const modulesValue =
+    modulesTotal > 0
+      ? `${modulesCompleted}/${modulesTotal}`
+      : `${modulesCompleted}/0`;
   const mentorId = process.env.DEFAULT_MENTOR_ID ?? null;
   const mentorName = process.env.DEFAULT_MENTOR_NAME ?? "Lina";
   const mentorRole = process.env.DEFAULT_MENTOR_ROLE ?? "Cultural readiness mentor";
@@ -449,40 +456,30 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <div
-                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
-                >
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                    German level
-                  </p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">
-                    {profile?.german_level ?? "Not set"}
-                  </p>
-                  <p className="text-xs text-slate-500">Update in onboarding any time.</p>
-                </div>
-                <div
-                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
-                >
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                    Modules this week
-                  </p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">
-                    {modulesSummaryLabel}
-                  </p>
-                  <p className="text-xs text-slate-500">{modulesSummaryHelper}</p>
-                </div>
-                <div
-                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
-                >
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                    Weekly check-in
-                  </p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">
-                    {weeklyStatusLabel}
-                  </p>
-                  <p className="text-xs text-slate-500">{weeklyStatusHelper}</p>
-                </div>
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <BigKpiCard
+                  label="Level studied"
+                  value={germanLevelDisplay}
+                  tone="neutral"
+                  watermark={germanLevelDisplay}
+                  chips={germanChips}
+                  footer="Update in onboarding any time."
+                />
+                <BigKpiCard
+                  label="Modules completed"
+                  value={modulesValue}
+                  sublabel="This batch"
+                  tone="blue"
+                  watermark="Modules"
+                  footer={modulesSummaryHelper}
+                />
+                <BigKpiCard
+                  label="Weekly check-in"
+                  value={weeklyStatusLabel}
+                  tone={currentWeekCheckin ? "green" : "amber"}
+                  watermark={currentWeekCheckin ? "✓" : "!"}
+                  footer={weeklyStatusHelper}
+                />
               </div>
             </article>
           </section>
