@@ -12,6 +12,7 @@ const navLinks = [
 
 export default function MarketingTopbar() {
   const [open, setOpen] = useState(false);
+  const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
   const scrollToTop = () => {
     if (typeof window !== "undefined") {
@@ -23,7 +24,7 @@ export default function MarketingTopbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/50 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-col px-5 py-4">
+      <div className={`${container} flex flex-col py-4`}>
         <div className="flex items-center justify-between gap-4">
           <button
             type="button"

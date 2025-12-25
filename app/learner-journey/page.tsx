@@ -108,12 +108,15 @@ const mentorMessagesDemo: MentorMessage[] = mentorMessagesDemoRaw.map(
   }),
 );
 
+const marketingContainer =
+  "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
+
 export default function LearnerJourneyPage() {
   return (
     <>
       <MarketingTopbar />
       <div className="min-h-screen bg-slate-50">
-        <div className={`${ui.container} py-8`}>
+        <div className={`${marketingContainer} py-8`}>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
             <aside className="hidden lg:block lg:col-span-3">
               <div className="sticky top-24 flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

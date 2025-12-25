@@ -6,6 +6,9 @@ import Link from "next/link";
 import MarketingTopbar from "./MarketingTopbar";
 import { Reveal } from "@/components/ui/Reveal";
 
+const marketingContainer =
+  "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
+
 type EmployerCard = {
   id: string;
   label: string;
@@ -808,12 +811,12 @@ const journeyCards = [
       <MarketingTopbar />
 
       {/* MAIN CONTENT */}
-      <main className="max-w-6xl mx-auto px-5 pt-10 pb-24">
+      <main className={`${marketingContainer} pt-10 pb-24`}>
 
 {/* HERO – MAIN MISSION + COHORT STATS */}
 <Reveal>
 <section className="border-b border-slate-100 bg-gradient-to-b from-slate-50/80 to-white">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] items-start">
+        <div className={`${marketingContainer} py-16 lg:py-24 grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] items-start`}>
     {/* Left: Mission & CTAs */}
     <div className="space-y-6">
       <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-500">
@@ -862,7 +865,7 @@ const journeyCards = [
     </div>
 
     {/* Right: Batch overview card */}
-    <aside className="w-full max-w-md lg:ml-auto">
+    <aside className="w-full max-w-lg lg:ml-auto">
       <div className="rounded-3xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur-sm p-5 sm:p-6 space-y-5">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -911,7 +914,7 @@ const journeyCards = [
       {/* LEARNER STORY – TINA */}
       <section
         aria-labelledby="tina-story-heading"
-        className="max-w-6xl mx-auto mt-6 px-5"
+        className={`${marketingContainer} mt-6`}
       >
         <div
           className="
@@ -1013,7 +1016,7 @@ const journeyCards = [
   id="who"
   className="bg-slate-50 py-16 sm:py-20"
 >
-  <div className="max-w-6xl mx-auto px-5">
+  <div className={marketingContainer}>
     {/* Eyebrow */}
     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
       Who Evolgrit is built for
@@ -1098,7 +1101,7 @@ const journeyCards = [
 
 {/* WHY EVOLGRIT IS NEEDED NOW */}
 <section className="bg-white py-12 sm:py-14">
-  <div className="max-w-6xl mx-auto px-5">
+  <div className={marketingContainer}>
     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
       Why now
     </p>
@@ -1129,7 +1132,7 @@ const journeyCards = [
 {/* PATHWAYS – Apple-style cards */}
 <Reveal>
 <section id="pathways" className="mt-24">
-  <div className="max-w-6xl mx-auto px-5">
+  <div className={marketingContainer}>
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h2 className="text-3xl sm:text-[32px] font-semibold text-slate-900">
@@ -1345,7 +1348,7 @@ const journeyCards = [
 
 <section
   aria-labelledby="example-journeys-heading"
-  className="max-w-6xl mx-auto px-4 lg:px-6 py-16"
+  className={`${marketingContainer} py-16`}
 >
   <div className="mb-8 text-center">
     <h2
@@ -1483,7 +1486,7 @@ const journeyCards = [
   aria-labelledby="get-to-know-title"
   className="bg-slate-50 py-16 sm:py-20"
 >
-  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+  <div className={marketingContainer}>
     <div className="flex items-baseline justify-between gap-4">
       <div>
         <h2
@@ -1698,7 +1701,7 @@ const journeyCards = [
 
 <Reveal>
 <section id="journey" className="bg-white py-16 sm:py-20 scroll-mt-24">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+  <div className={marketingContainer}>
     <div className="text-center space-y-3 mb-10">
       <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
         Evolgrit journey
@@ -1850,7 +1853,7 @@ const journeyCards = [
 )}
 
 <section className="py-16 sm:py-20">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+  <div className={marketingContainer}>
     <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-4">
       What learners get with Evolgrit
     </h3>
@@ -1892,7 +1895,7 @@ const journeyCards = [
         id="for-employers"
         className="bg-slate-50 py-16 sm:py-20"
       >
-        <div className="max-w-6xl mx-auto px-4 lg:px-6">
+        <div className={marketingContainer}>
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <div>
@@ -2081,7 +2084,7 @@ const journeyCards = [
         </div>
       </section>
 {/* BRAND HERO – WHAT IS EVOLGRIT */}
-<section className="max-w-6xl mx-auto mt-16 px-5 mb-14 sm:mb-20">
+<section className={`${marketingContainer} mt-16 mb-14 sm:mb-20`}>
   <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900 text-slate-50 shadow-xl px-8 py-8 sm:px-12 sm:py-10 text-center">
     <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
       What is Evolgrit?
@@ -2101,7 +2104,7 @@ const journeyCards = [
   </div>
 </section>
       {/* FINAL CTA BAR */}
-      <section className="max-w-6xl mx-auto mt-16 px-5">
+      <section className={`${marketingContainer} mt-16`}>
         <div className="rounded-2xl bg-slate-900 text-slate-50 px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-1">
