@@ -368,6 +368,7 @@ export default function LearnerJourneyPage() {
                   isConfigured={false}
                   threadId={null}
                   initialMessages={mentorMessagesDemo}
+                  demo
                 />
               </div>
             </aside>

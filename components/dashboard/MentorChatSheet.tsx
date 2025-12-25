@@ -39,7 +39,6 @@ export default function MentorChatSheet({
 }: MentorChatSheetProps) {
   const [messages, setMessages] = useState<MentorMessage[]>(initialMessages);
   const [input, setInput] = useState("");
-  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -73,7 +72,6 @@ export default function MentorChatSheet({
     event.preventDefault();
     if (!canSend || !threadId || !input.trim()) return;
 
-    setSending(true);
     setError(null);
     setInfo(null);
 
@@ -97,7 +95,6 @@ export default function MentorChatSheet({
       console.error("mentor message send error", err);
       setError(err instanceof Error ? err.message : "Message failed");
     } finally {
-      setSending(false);
       setTimeout(() => setInfo(null), 2000);
     }
   }
@@ -183,13 +180,20 @@ export default function MentorChatSheet({
 
           <section className="space-y-2 px-5 py-4">
             <form onSubmit={handleSend} className="space-y-3">
+              {demo && (
+                <p className="text-sm text-slate-500">
+                  Chat is available inside the Evolgrit app.
+                </p>
+              )}
               <input
                 type="text"
                 name="message"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder={
-                  canSend
+                  demo
+                    ? "Chat available inside Evolgrit"
+                    : canSend
                     ? "Write message..."
                     : "Chat available inside Evolgrit"
                 }
@@ -231,7 +235,7 @@ export default function MentorChatSheet({
                 </div>
                 <button
                   type="submit"
-                  disabled={sending || (!input.trim() && canSend === false)}
+                  disabled={!canSend || !input.trim()}
                   className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800 disabled:opacity-40"
                 >
                   {input.trim() ? (
@@ -241,8 +245,8 @@ export default function MentorChatSheet({
                   )}
                 </button>
               </div>
-              {error && <p className="text-xs text-rose-600">{error}</p>}
-              {info && <p className="text-xs text-emerald-600">{info}</p>}
+              {!demo && error && <p className="text-xs text-rose-600">{error}</p>}
+              {!demo && info && <p className="text-xs text-emerald-600">{info}</p>}
             </form>
             <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
               <div className="inline-flex items-center gap-2">

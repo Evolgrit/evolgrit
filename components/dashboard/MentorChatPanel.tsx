@@ -20,6 +20,7 @@ type Props = {
   isConfigured: boolean;
   threadId: string | null;
   initialMessages: MentorMessage[];
+  demo?: boolean;
 };
 
 export default function MentorChatPanel({
@@ -29,6 +30,7 @@ export default function MentorChatPanel({
   isConfigured,
   threadId,
   initialMessages,
+  demo = false,
 }: Props) {
   const [messages, setMessages] = useState<MentorMessage[]>(initialMessages);
   const [input, setInput] = useState("");
@@ -38,7 +40,7 @@ export default function MentorChatPanel({
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const mentorAvatar = useMemo(() => mentorInitial.toUpperCase(), [mentorInitial]);
 
-  const canSend = isConfigured && Boolean(threadId);
+  const canSend = !demo && isConfigured && Boolean(threadId);
   const composerDisabled = !canSend || sending;
 
   useEffect(() => {
@@ -106,14 +108,14 @@ export default function MentorChatPanel({
         </p>
         <div className="rounded-2xl border border-blue-100 bg-blue-50/90 p-4">
           <div className="flex h-32 items-center justify-center rounded-2xl bg-blue-100/70">
-            <button
-              type="button"
-              disabled
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
-            >
-              <Phone className="h-4 w-4 text-emerald-500" />
-              Start a call
-            </button>
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
+                >
+                  <Phone className="h-4 w-4 text-emerald-500" />
+                  Start a call
+                </button>
           </div>
         </div>
       </section>
@@ -140,6 +142,11 @@ export default function MentorChatPanel({
 
       <div className="border-t border-slate-200 px-5 py-4">
         <form onSubmit={handleSend} className="space-y-3">
+          {demo && (
+            <p className="text-sm text-slate-500">
+              Chat is available inside the Evolgrit app.
+            </p>
+          )}
           <input
             type="text"
             name="message"
@@ -151,7 +158,13 @@ export default function MentorChatPanel({
                 event.currentTarget.form?.requestSubmit();
               }
             }}
-            placeholder={canSend ? "Write message..." : "Chat available inside Evolgrit"}
+            placeholder={
+              demo
+                ? "Chat available inside Evolgrit"
+                : canSend
+                ? "Write message..."
+                : "Chat available inside Evolgrit"
+            }
             disabled={!canSend}
             className="w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
           />
@@ -194,8 +207,8 @@ export default function MentorChatPanel({
               )}
             </button>
           </div>
-          {error && <p className="text-xs text-rose-600">{error}</p>}
-          {info && <p className="text-xs text-emerald-600">{info}</p>}
+          {!demo && error && <p className="text-xs text-rose-600">{error}</p>}
+          {!demo && info && <p className="text-xs text-emerald-600">{info}</p>}
         </form>
         <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
           <div className="inline-flex items-center gap-2">
