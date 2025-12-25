@@ -10,6 +10,8 @@ import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
 import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
 import { ui } from "@/lib/ui/tokens";
 import { BigKpiCard } from "@/components/ui/BigKpiCard";
+import MobileMentorChatTrigger from "@/components/dashboard/MobileMentorChatTrigger";
+import type { MentorMessage } from "@/lib/types/mentor";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -65,13 +67,6 @@ type CheckinSummary = {
   blockers: string | null;
   created_at: string | null;
   updated_at: string | null;
-};
-
-type MentorMessage = {
-  id: string;
-  sender_type: "learner" | "mentor";
-  content: string;
-  created_at: string;
 };
 
 function getWeekStart(date = new Date()) {
@@ -563,6 +558,14 @@ export default async function DashboardPage() {
           </div>
         </aside>
       </div>
+      <MobileMentorChatTrigger
+        mentorName={mentorName}
+        mentorRole={mentorRole}
+        mentorInitial={mentorInitial}
+        initialMessages={mentorMessages}
+        isConfigured={mentorConfigured}
+        threadId={mentorThreadId}
+      />
     </div>
   );
 }

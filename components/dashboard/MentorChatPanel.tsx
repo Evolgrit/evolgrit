@@ -1,13 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-type MentorMessage = {
-  id: string;
-  sender_type: "learner" | "mentor";
-  content: string;
-  created_at: string;
-};
+import {
+  ArrowUp,
+  HelpCircle,
+  MoreHorizontal,
+  Paperclip,
+  Phone,
+  Smile,
+} from "@/components/icons/LucideIcons";
+import type { MentorMessage } from "@/lib/types/mentor";
 
 type Props = {
   mentorName: string;
@@ -34,6 +36,7 @@ export default function MentorChatPanel({
   const mentorAvatar = useMemo(() => mentorInitial.toUpperCase(), [mentorInitial]);
 
   const canSend = isConfigured && Boolean(threadId);
+  const composerDisabled = !canSend || sending;
 
   async function handleSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,9 +72,9 @@ export default function MentorChatPanel({
   }
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="flex items-center gap-3 p-5">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white text-lg font-semibold">
+    <div className="flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-lg font-semibold text-white">
           {mentorAvatar}
         </div>
         <div>
@@ -84,108 +87,122 @@ export default function MentorChatPanel({
         </span>
         <button
           type="button"
-          className="rounded-full border border-slate-200 bg-white p-2 text-xs text-slate-500 hover:bg-slate-50"
+          className="rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-50"
           aria-label="Mentor options"
         >
-          ···
+          <MoreHorizontal className="h-4 w-4" />
         </button>
-      </div>
+      </header>
       <div className="border-t border-slate-200" />
 
-      <div className="space-y-3 border-b border-slate-200 p-5">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-            Video chat
-          </p>
-          <p className="text-sm text-slate-600">Scheduled inside Evolgrit.</p>
-        </div>
-        <div className="rounded-2xl bg-blue-50 p-4 text-center text-sm text-slate-600">
-          Video calls are available during mentor sessions.
-        </div>
-        <button
-          type="button"
-          disabled
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-500"
-        >
-          📞 Start a call (coming soon)
-        </button>
-      </div>
-
-      <div className="flex flex-col border-b border-slate-200 p-5">
-        <div className="mb-3 flex items-center justify-between">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-            Text chat
-          </p>
-          <span className="text-xs text-slate-500">Mentor replies within a day</span>
-        </div>
-        {messages.length ? (
-          <div className="flex max-h-64 flex-col gap-3 overflow-hidden">
-            <div className="flex flex-col gap-3 overflow-y-auto pr-1 text-sm">
-              {messages.map((message) => (
-                <MessageBubble
-                  key={message.id}
-                  message={message}
-                  mentorInitial={mentorAvatar}
-                />
-              ))}
-            </div>
+      <section className="space-y-4 border-b border-slate-200 px-5 py-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              Video chat
+            </p>
+            <p className="text-sm text-slate-600">Weekly mentor sessions.</p>
           </div>
-        ) : (
-          <p className="text-sm text-slate-500">
-            Send your mentor a quick update to stay aligned.
-          </p>
-        )}
-      </div>
-
-      <div className="space-y-3 p-5">
-        {isConfigured ? (
-          <form onSubmit={handleSend} className="space-y-2">
-            <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
-              <button
-                type="button"
-                className="rounded-full p-2 text-slate-500 hover:text-slate-700"
-                aria-label="Add emoji"
-              >
-                🙂
-              </button>
-              <button
-                type="button"
-                className="rounded-full p-2 text-slate-500 hover:text-slate-700"
-                aria-label="Attach file"
-              >
-                📎
-              </button>
-              <input
-                type="text"
-                name="message"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                placeholder="Write message..."
-                className="flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
-              />
-              <button
-                type="submit"
-                disabled={sending || !input.trim()}
-                className="rounded-full bg-slate-900 p-2 text-white disabled:opacity-50"
-              >
-                ↑
-              </button>
-            </div>
-            {error && <p className="text-xs text-rose-600">{error}</p>}
-            {info && <p className="text-xs text-emerald-600">{info}</p>}
-          </form>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500">
-            Mentor chat unlocks once your mentor is assigned.
-          </div>
-        )}
-        <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
-          <span>Help center</span>
           <button
             type="button"
-            className="rounded-full border border-slate-200 px-2 py-1 text-slate-600 hover:bg-slate-50"
+            disabled
+            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white opacity-70"
           >
-            ?
+            <Phone className="h-4 w-4" />
+            Start a call
+          </button>
+        </div>
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/80 p-4">
+          <div className="flex min-h-[140px] items-center justify-center rounded-2xl border border-white/60 bg-white/60 text-sm text-slate-500">
+            Video available when your mentor is live.
+          </div>
+          <p className="mt-3 text-xs text-blue-900/70">
+            Calm 1:1 calls keep onboarding relaxed.
+          </p>
+        </div>
+      </section>
+
+      <section className="space-y-3 border-b border-slate-200 px-5 py-4">
+        <div className="flex items-center justify-between">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Text chat</p>
+          <span className="text-xs text-slate-500">Mentor replies within a day</span>
+        </div>
+        <div className="max-h-64 space-y-3 overflow-y-auto pr-1">
+          {messages.length ? (
+            messages.map((message) => (
+              <MentorMessageBubble
+                key={message.id}
+                message={message}
+                mentorInitial={mentorAvatar}
+              />
+            ))
+          ) : (
+            <p className="text-sm text-slate-500">
+              Send your mentor a quick update to stay aligned.
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section className="space-y-2 px-5 py-4">
+        <form onSubmit={handleSend} className="space-y-2">
+          <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2">
+            <button
+              type="button"
+              className="rounded-full p-2 text-slate-500 hover:text-slate-900"
+              aria-label="Add emoji"
+              disabled={!canSend}
+            >
+              <Smile className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              className="rounded-full p-2 text-slate-500 hover:text-slate-900"
+              aria-label="Attach file"
+              disabled={!canSend}
+            >
+              <Paperclip className="h-4 w-4" />
+            </button>
+            <input
+              type="text"
+              name="message"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder={
+                canSend ? "Write message..." : "Mentor chat unlocks when assigned."
+              }
+              disabled={!canSend}
+              className="flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:text-slate-400"
+            />
+            <button
+              type="submit"
+              disabled={composerDisabled || !input.trim()}
+              className="rounded-full bg-slate-900 p-2 text-white transition hover:bg-slate-800 disabled:opacity-40"
+            >
+              <ArrowUp className="h-4 w-4" />
+            </button>
+          </div>
+          {!canSend && (
+            <p className="text-xs text-slate-500">
+              Chat becomes active once your mentor is assigned.
+            </p>
+          )}
+          {error && <p className="text-xs text-rose-600">{error}</p>}
+          {info && <p className="text-xs text-emerald-600">{info}</p>}
+        </form>
+      </section>
+
+      <div className="border-t border-slate-200 px-5 py-4 text-xs text-slate-500">
+        <div className="flex items-center justify-between">
+          <div className="inline-flex items-center gap-2">
+            <HelpCircle className="h-4 w-4" />
+            Help center
+          </div>
+          <button
+            type="button"
+            className="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900"
+          >
+            Open
           </button>
         </div>
       </div>
@@ -193,7 +210,7 @@ export default function MentorChatPanel({
   );
 }
 
-function MessageBubble({
+export function MentorMessageBubble({
   message,
   mentorInitial,
 }: {
@@ -202,27 +219,23 @@ function MessageBubble({
 }) {
   const isMentor = message.sender_type === "mentor";
   return (
-    <div
-      className={`flex items-start gap-3 ${
-        isMentor ? "" : "flex-row-reverse text-right"
-      }`}
-    >
+    <div className={`flex items-start gap-3 ${isMentor ? "" : "flex-row-reverse text-right"}`}>
       <div
-        className={`flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-xs font-semibold ${
-          isMentor ? "text-slate-900" : "text-slate-900"
+        className={`flex h-10 w-10 items-center justify-center rounded-full text-xs font-semibold ${
+          isMentor ? "bg-slate-100 text-slate-900" : "bg-slate-900 text-white"
         }`}
       >
         {isMentor ? mentorInitial : "You"}
       </div>
-      <div className="flex max-w-[80%] flex-col gap-1 text-left">
+      <div className="flex max-w-[80%] flex-col gap-1">
         <div
-          className={`rounded-2xl px-3 py-2 text-sm ${
-            isMentor ? "bg-slate-100 text-slate-800" : "bg-slate-900 text-white"
+          className={`rounded-2xl px-4 py-2 text-sm shadow-sm ${
+            isMentor ? "bg-slate-50 text-slate-900" : "bg-slate-900 text-white"
           }`}
         >
           {message.content}
         </div>
-        <span className="text-[11px] text-slate-400">
+        <span className={`text-[10px] text-slate-400 ${isMentor ? "text-left" : "text-right"}`}>
           {new Date(message.created_at).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
