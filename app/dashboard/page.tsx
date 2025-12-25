@@ -328,7 +328,7 @@ export default async function DashboardPage() {
     : "Share mood & blockers so mentors can support you.";
 
   return (
-    <div className="space-y-6 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1200px]">
+    <div className="space-y-4 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1200px]">
       <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -405,7 +405,7 @@ export default async function DashboardPage() {
         </article>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
+      <section className="grid gap-4 lg:grid-cols-[2fr,1fr]">
         <WeeklyCheckinCard weeks={weeklyTimeline} action={submitWeeklyCheckinAction} />
         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
