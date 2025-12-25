@@ -13,8 +13,11 @@ type CandidateRow = {
   modules_total: number | null;
   last_checkin_week: string | null;
   documents_count: number | null;
+  saved?: boolean;
   saved_at?: string | null;
+  interested?: boolean;
   interested_at?: string | null;
+  intro_requested?: boolean;
   intro_requested_at?: string | null;
 };
 
@@ -60,9 +63,9 @@ export default function EmployerCandidatesClient() {
       if (minReadiness !== null && score < minReadiness) return false;
       if (germanFilter && (candidate.german_level ?? "").toUpperCase() !== germanFilter)
         return false;
-      if (actionFilter === "saved" && !candidate.saved_at) return false;
-      if (actionFilter === "interested" && !candidate.interested_at) return false;
-      if (actionFilter === "intro_requested" && !candidate.intro_requested_at) return false;
+      if (actionFilter === "saved" && !candidate.saved) return false;
+      if (actionFilter === "interested" && !candidate.interested) return false;
+      if (actionFilter === "intro_requested" && !candidate.intro_requested) return false;
       return true;
     });
   }, [candidates, minReadiness, germanFilter, actionFilter]);
@@ -163,17 +166,17 @@ export default function EmployerCandidatesClient() {
                     German level: {candidate.german_level || "—"}
                   </p>
                   <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                    {candidate.saved_at && (
+                    {candidate.saved && (
                       <span className="rounded-full bg-slate-900/5 px-2 py-1 text-slate-700">
                         Saved
                       </span>
                     )}
-                    {candidate.interested_at && (
+                    {candidate.interested && (
                       <span className="rounded-full bg-amber-100 px-2 py-1 text-amber-700">
                         Interested
                       </span>
                     )}
-                    {candidate.intro_requested_at && (
+                    {candidate.intro_requested && (
                       <span className="rounded-full bg-emerald-100 px-2 py-1 text-emerald-700">
                         Intro requested
                       </span>

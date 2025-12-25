@@ -76,11 +76,17 @@ export async function GET() {
       const actionInfo = row.learner_id
         ? actionsByLearner.get(row.learner_id) ?? {}
         : {};
+      const savedAt = actionInfo["saved"] ?? null;
+      const interestedAt = actionInfo["interested"] ?? null;
+      const introRequestedAt = actionInfo["intro_requested"] ?? null;
       return {
         ...row,
-        saved_at: actionInfo["saved"] ?? null,
-        interested_at: actionInfo["interested"] ?? null,
-        intro_requested_at: actionInfo["intro_requested"] ?? null,
+        saved_at: savedAt,
+        interested_at: interestedAt,
+        intro_requested_at: introRequestedAt,
+        saved: Boolean(savedAt),
+        interested: Boolean(interestedAt),
+        intro_requested: Boolean(introRequestedAt),
       };
     });
 
