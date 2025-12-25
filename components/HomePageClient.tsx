@@ -5,86 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import MarketingTopbar from "./MarketingTopbar";
 import { Reveal } from "@/components/ui/Reveal";
+import { employerCards } from "@/lib/data/employerCards";
 
 const marketingContainer =
   "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
-type EmployerCard = {
-  id: string;
-  label: string;
-  icon: string;
-  title: string;
-  description: string;
-  modalTitle: string;
-  modalBody: string;
-};
-
-const employerCards: EmployerCard[] = [
-  {
-    id: "readiness",
-    label: "Readiness at a glance",
-    icon: "📊",
-    title: "See who is really ready – not just who has a CV.",
-    description:
-      "Language level, cultural readiness and reliability signals in one simple view.",
-    modalTitle: "One profile that shows real readiness.",
-    modalBody: `Mit Evolgrit sehen Sie nicht nur einen Lebenslauf:
-
-• Sprachlevel und Selbstvertrauen – basierend auf echten Aufgaben.
-• Kulturelle Bereitschaft – Alltag, Arbeit und Teamdynamik.
-• Zuverlässigkeitssignale – Teilnahme, Aufgabenerfüllung, Engagement.
-
-So erkennen Sie auf einen Blick, welche Kandidat:innen wirklich für Ihre Rollen vorbereitet sind – nicht nur, wer ein Zertifikat besitzt.`,
-  },
-  {
-    id: "risk",
-    label: "Onboarding support",
-    icon: "🧭",
-    title: "Reduce onboarding risk for you and your team.",
-    description:
-      "Structured support before and after arrival – so people actually stay.",
-    modalTitle: "Weniger Onboarding-Risiko, mehr Stabilität.",
-    modalBody: `Evolgrit begleitet internationale Talente schon vor dem ersten Vertrag:
-
-• Vorbereitung auf Arbeitsalltag, Schichtpläne und Kommunikation im Team.
-• Klärung von Papieren, Wohnung, Versicherungen und Behördenwegen.
-• Mentoring in den ersten Wochen im Job – sprachlich und kulturell.
-
-Das senkt Ihr Risiko im Onboarding und erhöht die Chance, dass neue Mitarbeitende langfristig bleiben.`,
-  },
-  {
-    id: "pilots",
-    label: "Batches",
-    icon: "🧪",
-    title: "Start with focused batches.",
-    description:
-      "Align roles, locations and timelines – and learn together in small steps.",
-    modalTitle: "Gemeinsam mit Pilotkohorten starten.",
-    modalBody: `Wir beginnen nicht mit Hunderten Profilen, sondern mit klaren Pilotkohorten:
-
-• Ausrichtung auf Ihre Rollen (z.B. Logistik, Pflege, Busfahrer:innen).
-• Abstimmung auf Standorte, Schichten und Saisonverläufe.
-• Gemeinsame Definition von Sprache, Skills und Unterstützung.
-
-So können Sie das Modell im Kleinen testen, bevor Sie es skalieren.`,
-  },
-  {
-    id: "pipeline",
-    label: "Repeatable pipeline",
-    icon: "🔁",
-    title: "Build a repeatable international talent pipeline.",
-    description:
-      "Plug Evolgrit into your existing hiring process – not a separate universe.",
-    modalTitle: "Eine wiederholbare Pipeline für internationale Talente.",
-    modalBody: `In späteren Phasen kann Evolgrit in Ihre bestehende Talent-Pipeline integriert werden:
-
-• Gemeinsame Definition von Rollenprofilen und Anforderungen.
-• Regelmäßige Kohorten, die zu Ihren Einstellungszyklen passen.
-• Transparente Kennzahlen zu Sprache, Fortschritt und Verbleib.
-
-Damit wird internationale Einstellung kein einmaliges Projekt, sondern ein wiederholbares System.`,
-  },
-];
 // WHO EVOLGRIT IS BUILT FOR – cards
 const whoCards = [
   {
@@ -1992,10 +1917,10 @@ const journeyCards = [
           </div>
           <div className="mt-8 text-center">
             <Link
-              href="/for-employers"
+              href="/for-employers#tina-story"
               className="text-sm font-medium text-blue-600 hover:text-blue-700"
             >
-              Learn more for employers →
+              Read more for employers →
             </Link>
           </div>
         </div>
@@ -2058,53 +1983,6 @@ const journeyCards = [
     </div>
   </div>
 )}
-      {/* EMPLOYER TESTIMONIAL – Sabrina & Tina */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 pt-12 sm:pt-16">
-        <div className="rounded-3xl bg-white border border-slate-200 shadow-sm overflow-hidden">
-          {/* Bild oben */}
-          <div className="relative aspect-[16/9] sm:aspect-[21/9]">
-            <Image
-              src="/testimonial-tina.jpg"
-              alt="Tina arbeitet mit Kindern in einem Kindergarten"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 832px, 100vw"
-            />
-          </div>
-
-          {/* Text darunter */}
-          <div className="p-6 sm:p-8">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400 mb-2">
-              Arbeitgebergeschichte · Kinderbetreuung
-            </p>
-
-            <p className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">
-              „Nach drei Wochen fühlt es sich an, als wäre sie schon seit Jahren im Team.“
-            </p>
-
-            <p className="text-sm text-slate-600 mb-4">
-              „Unsere neue Kollegin Tina kam über Evolgrit zu uns. Ihr Deutsch ist sicher,
-              sie kennt die typischen Situationen im Kindergarten – vom Elterngespräch bis
-              zur Übergabe am Morgen – und bewegt sich kulturell so, als hätte sie schon
-              lange in Deutschland gelebt. Dabei ist sie erst seit drei Wochen in unserer
-              Einrichtung.“
-            </p>
-
-            <div className="flex items-center gap-3 text-xs text-slate-500">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold">
-                S
-              </div>
-              <div>
-                <p className="font-semibold text-slate-700">Sabrina M.</p>
-                <p>Kindergartenleiterin · Berlin</p>
-              </div>
-              <span className="ml-auto inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-2 py-[2px] text-[11px]">
-                Über Evolgrit angestellt
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
 {/* BRAND HERO – WHAT IS EVOLGRIT */}
 <section className={`${marketingContainer} mt-16 mb-14 sm:mb-20`}>
   <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900 text-slate-50 shadow-xl px-8 py-8 sm:px-12 sm:py-10 text-center">
