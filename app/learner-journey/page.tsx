@@ -95,9 +95,9 @@ export default function LearnerJourneyPage() {
       <MarketingTopbar />
       <div className="min-h-screen bg-slate-50">
         <div className={`${ui.container} py-8`}>
-          <div className="grid gap-6 lg:grid-cols-[240px,minmax(0,1fr)] xl:grid-cols-[240px,minmax(0,1fr),320px]">
-            <aside className="hidden w-60 flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:flex">
-              <div>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+            <aside className="hidden lg:block lg:col-span-3">
+              <div className="sticky top-24 flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                     Evolgrit
@@ -106,41 +106,41 @@ export default function LearnerJourneyPage() {
                   <p className="mt-1 text-sm text-slate-500">
                     AI-powered batches for life & work in Germany.
                   </p>
+                  <nav className="mt-8 space-y-1">
+                    {demoNavItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        className="group relative flex items-center justify-between rounded-2xl px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-900/5 hover:text-slate-900"
+                      >
+                        <span className="relative z-10 flex-1">
+                          {item.label}
+                          {item.badge && (
+                            <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                              {item.badge}
+                            </span>
+                          )}
+                        </span>
+                        <span
+                          className="absolute left-1 top-1/2 h-6 w-1 -translate-y-1/2 rounded-full bg-slate-900 opacity-0 group-hover:opacity-50"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    ))}
+                  </nav>
                 </div>
-                <nav className="mt-8 space-y-1">
-                  {demoNavItems.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className="group relative flex items-center justify-between rounded-2xl px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-900/5 hover:text-slate-900"
-                    >
-                      <span className="relative z-10 flex-1">
-                        {item.label}
-                        {item.badge && (
-                          <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-700">
-                            {item.badge}
-                          </span>
-                        )}
-                      </span>
-                      <span
-                        className="absolute left-1 top-1/2 h-6 w-1 -translate-y-1/2 rounded-full bg-slate-900 opacity-0 group-hover:opacity-50"
-                        aria-hidden="true"
-                      />
-                    </a>
-                  ))}
-                </nav>
-              </div>
-              <div className="rounded-2xl border border-slate-100 bg-slate-900/90 p-4 text-slate-50">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-200">
-                  Private beta 2026
-                </p>
-                <p className="mt-1 text-sm text-slate-100">
-                  Weekly mentor calls · AI coach · cultural readiness.
-                </p>
+                <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-900/90 p-4 text-slate-50">
+                  <p className="text-xs uppercase tracking-[0.22em] text-slate-200">
+                    Private beta 2026
+                  </p>
+                  <p className="mt-1 text-sm text-slate-100">
+                    Weekly mentor calls · AI coach · cultural readiness.
+                  </p>
+                </div>
               </div>
             </aside>
 
-            <div className="space-y-6">
+            <div className="space-y-4 lg:col-span-6">
               <section id="demo-overview" className="space-y-4">
                 <header className={`${ui.card} ${ui.cardPadding}`}>
                   <div className="flex flex-wrap items-center justify-between gap-4">
@@ -312,7 +312,7 @@ export default function LearnerJourneyPage() {
               </section>
             </div>
 
-            <aside className="hidden xl:block">
+            <aside className="hidden lg:block lg:col-span-3">
               <div className="sticky top-24 space-y-4">
                 <article className={`${ui.card} ${ui.compactCardPadding}`}>
                   <div className="flex items-center gap-3">
