@@ -6,7 +6,44 @@ import WeeklyCheckinCard, {
   type WeekCheckin,
 } from "./WeeklyCheckinCard";
 import { computePhase } from "@/lib/phase/computePhase";
-import { phaseMeta } from "@/lib/phase/phaseMeta";
+import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
+
+const phaseAccent: Record<Phase, {
+  cardBorder: string;
+  pillBg: string;
+  pillText: string;
+  kpiBorder: string;
+  bar: string;
+}> = {
+  orientation: {
+    cardBorder: "border-l-4 border-amber-300",
+    pillBg: "bg-amber-100",
+    pillText: "text-amber-700",
+    kpiBorder: "border-amber-200",
+    bar: "bg-amber-400",
+  },
+  language_life: {
+    cardBorder: "border-l-4 border-blue-300",
+    pillBg: "bg-blue-100",
+    pillText: "text-blue-700",
+    kpiBorder: "border-blue-200",
+    bar: "bg-blue-400",
+  },
+  job_readiness: {
+    cardBorder: "border-l-4 border-violet-300",
+    pillBg: "bg-violet-100",
+    pillText: "text-violet-700",
+    kpiBorder: "border-violet-200",
+    bar: "bg-violet-400",
+  },
+  matching: {
+    cardBorder: "border-l-4 border-emerald-300",
+    pillBg: "bg-emerald-100",
+    pillText: "text-emerald-700",
+    kpiBorder: "border-emerald-200",
+    bar: "bg-emerald-400",
+  },
+};
 
 type WeeklyCheckinRow = {
   week_start: string | null;
@@ -251,6 +288,7 @@ export default async function DashboardPage() {
     modulesCompletedPercent: modulesPercent,
   });
   const phaseInfo = phaseMeta[phaseKey];
+  const phaseColors = phaseAccent[phaseKey];
   const journeyProgress = Math.max(
     0,
     Math.min(100, Math.round((onboardingPercent + modulesPercent) / 2))
@@ -315,12 +353,12 @@ export default async function DashboardPage() {
       </header>
 
       <section className="space-y-4">
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <article className={`rounded-3xl border border-slate-200 bg-white p-6 shadow-sm ${phaseColors.cardBorder}`}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${phaseColors.pillBg} ${phaseColors.pillText}`}>
                 Current phase
-              </p>
+              </span>
               <h2 className="text-2xl font-semibold text-slate-900">
                 {phaseInfo.label} · {phaseInfo.title}
               </h2>
@@ -336,7 +374,7 @@ export default async function DashboardPage() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 German level
               </p>
@@ -345,7 +383,7 @@ export default async function DashboardPage() {
               </p>
               <p className="text-xs text-slate-500">Update in onboarding any time.</p>
             </div>
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 Modules this week
               </p>
@@ -354,7 +392,7 @@ export default async function DashboardPage() {
               </p>
               <p className="text-xs text-slate-500">{modulesSummaryHelper}</p>
             </div>
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
               <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
                 Weekly check-in
               </p>
@@ -419,7 +457,7 @@ export default async function DashboardPage() {
           </div>
           <div className="mt-2 h-2 rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-slate-900 transition-all"
+              className={`h-full rounded-full transition-all ${phaseColors.bar}`}
               style={{ width: `${onboardingPercent}%` }}
             />
           </div>
