@@ -3,11 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
+  Camera,
   HelpCircle,
   Paperclip,
   Phone,
   Smile,
   XIcon,
+  Mic,
 } from "@/components/icons/LucideIcons";
 import type { MentorMessage } from "@/lib/types/mentor";
 import { MentorMessageBubble } from "./MentorChatPanel";
@@ -200,7 +202,7 @@ export default function MentorChatSheet({
                   }
                 }}
               />
-              <div className="flex items-center justify-between border-t border-slate-100 pt-2">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -218,13 +220,25 @@ export default function MentorChatSheet({
                   >
                     <Paperclip className="h-4 w-4" />
                   </button>
+                  <button
+                    type="button"
+                    className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
+                    aria-label="Open camera"
+                    disabled={!canSend}
+                  >
+                    <Camera className="h-4 w-4" />
+                  </button>
                 </div>
                 <button
                   type="submit"
-                  disabled={sending || !input.trim() || !canSend}
-                  className="rounded-full bg-slate-900 p-2 text-white transition hover:bg-slate-800 disabled:opacity-40"
+                  disabled={sending || (!input.trim() && canSend === false)}
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800 disabled:opacity-40"
                 >
-                  <ArrowUp className="h-4 w-4" />
+                  {input.trim() ? (
+                    <ArrowUp className="h-4 w-4" />
+                  ) : (
+                    <Mic className="h-4 w-4" />
+                  )}
                 </button>
               </div>
               {error && <p className="text-xs text-rose-600">{error}</p>}

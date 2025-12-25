@@ -87,3 +87,24 @@ export function XIcon(props: IconProps) {
     </SvgIcon>
   );
 }
+
+export function Mic(props: IconProps) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M12 19v3m-4 0h8" />
+      <rect width="8" height="13" x="8" y="3" rx="4" />
+    </SvgIcon>
+  );
+}
+
+export function Camera(props: IconProps) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M11 6h7" />
+      <path d="M5 22v-7" />
+      <path d="M5 15 9 9" />
+      <path d="M9 9v9" />
+      <path d="M17 6 13 2 9 6" />
+    </SvgIcon>
+  );
+}
