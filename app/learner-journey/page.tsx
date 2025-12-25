@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import MarketingTopbar from "@/components/MarketingTopbar";
 import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
-import { BigKpiCard } from "@/components/ui/BigKpiCard";
 import { ui } from "@/lib/ui/tokens";
 import DemoMentorChatTrigger from "@/components/learner-journey/DemoMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
@@ -9,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 import { DocumentIcon, Paperclip, Smile } from "@/components/icons/LucideIcons";
 import { KpiCard } from "@/components/ui/KpiCard";
+import { BigKpiCard } from "@/components/ui/BigKpiCard";
 import { NextActionCard } from "@/components/ui/NextActionCard";
 
 export const metadata: Metadata = {
@@ -96,7 +96,6 @@ const weeklyCheckin = {
   savedAt: "Mar 11",
 };
 const weeklyStatusLabelDemo = "Submitted";
-const weeklyStatusHelperDemo = "Saved Mar 11 (demo).";
 const germanChipsDemo = ["A1", "A2", "B1", "B2"];
 const mentorMessagesDemoRaw = [
   { id: 1, author: "mentor", text: "Hi Lina, ready for our calm check-in?" },
@@ -223,12 +222,16 @@ export default function LearnerJourneyPage() {
                       chips={germanChipsDemo}
                       footer="Refreshed weekly via mentor."
                     />
-                    <BigKpiCard
+                    <KpiCard
                       label="Weekly check-in"
-                      value={weeklyStatusLabelDemo}
-                      tone="green"
-                      watermark="✓"
-                      footer={weeklyStatusHelperDemo}
+                      valueMain={weeklyStatusLabelDemo === "Submitted" ? 1 : 0}
+                      valueSub="/1"
+                      statusText={weeklyStatusLabelDemo.toLowerCase()}
+                      tone={weeklyStatusLabelDemo === "Submitted" ? "green" : "amber"}
+                      progress={weeklyStatusLabelDemo === "Submitted" ? 1 : 0}
+                      icon={<Smile className="h-5 w-5" />}
+                      ctaLabel="See check-in"
+                      ctaHref="#demo-mentor"
                     />
                     <KpiCard
                       label="Modules completed"

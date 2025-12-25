@@ -14,7 +14,7 @@ import { KpiCard } from "@/components/ui/KpiCard";
 import { NextActionCard } from "@/components/ui/NextActionCard";
 import MobileMentorChatTrigger from "@/components/dashboard/MobileMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
-import { Paperclip } from "@/components/icons/LucideIcons";
+import { Paperclip, Smile } from "@/components/icons/LucideIcons";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -86,16 +86,6 @@ function getWeekLabel(date: Date) {
     month: "short",
     day: "numeric",
   }).format(date);
-}
-
-function formatDate(value?: string | null) {
-  if (!value) return "—";
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return "—";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-  }).format(parsed);
 }
 
 async function submitWeeklyCheckinAction(formData: FormData) {
@@ -335,10 +325,6 @@ export default async function DashboardPage() {
           description: "Keep momentum with new tasks and mentor feedback.",
           href: "/dashboard/modules",
         };
-  const weeklyStatusLabel = currentWeekCheckin ? "Submitted" : "Not submitted";
-  const weeklyStatusHelper = currentWeekCheckin
-    ? `Saved ${formatDate(currentWeekCheckin.updated_at ?? currentWeekCheckin.created_at ?? currentWeekIso)}`
-    : "Share mood & blockers so mentors can support you.";
   const germanLevelDisplay = profile?.german_level ?? "Not set";
   const germanChips =
     germanLevelDisplay && germanLevelDisplay !== "Not set"
@@ -478,13 +464,16 @@ export default async function DashboardPage() {
                   ctaLabel="Go to modules"
                   ctaHref="/dashboard/modules"
                 />
-                <BigKpiCard
+                <KpiCard
                   label="Weekly check-in"
-                  value={weeklyStatusLabel}
+                  valueMain={currentWeekCheckin ? 1 : 0}
+                  valueSub="/1"
+                  statusText={currentWeekCheckin ? "submitted" : "not submitted"}
                   tone={currentWeekCheckin ? "green" : "amber"}
-                  watermark={currentWeekCheckin ? "✓" : "!"}
-                  footer={weeklyStatusHelper}
-                  className={phaseColors.kpiBorder}
+                  progress={currentWeekCheckin ? 1 : 0}
+                  icon={<Smile className="h-5 w-5" />}
+                  ctaLabel="Go to check-in"
+                  ctaHref="#weekly-checkin"
                 />
               </div>
             </article>

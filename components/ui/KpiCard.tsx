@@ -69,7 +69,7 @@ export function KpiCard({
       : undefined;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="relative w-full min-w-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       {icon && (
         <div
           className={`absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full ${colors.iconBg}`}
