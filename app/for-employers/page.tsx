@@ -14,31 +14,6 @@ export const metadata: Metadata = {
 
 const container = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
-const challengePoints = [
-  "Language-only courses do not guarantee work readiness.",
-  "Paperwork, housing and expectations slow down onboarding.",
-  "Managers lack calm signals to know when a candidate is truly ready.",
-];
-
-const employerValueCards = [
-  {
-    title: "Readiness signals",
-    copy: "Score composed of language, everyday life confidence and reliability. Updated every week.",
-  },
-  {
-    title: "Candidate detail view",
-    copy: "Documents, modules, mentor notes and weekly check-ins in one card — easy to scan.",
-  },
-  {
-    title: "Documents readiness",
-    copy: "IDs, contracts, insurance proofs are requested early so onboarding does not stall.",
-  },
-  {
-    title: "Private actions",
-    copy: "Save, mark interested or request an intro. Evolgrit only loops you in when a match is aligned.",
-  },
-];
-
 const accessSteps = [
   { title: "Request access", body: "Share your hiring focus, locations and timeline." },
   { title: "Review & alignment", body: "We calibrate readiness expectations and batches with you." },
@@ -91,18 +66,18 @@ export default function ForEmployersPage() {
           </Reveal>
 
           <Reveal delayMs={260} durationMs={360} distance={12}>
-            <section className={`${container} mt-10`}>
+            <section className={`${container} mt-10 space-y-10`}>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                    For employers
+                    Value pillars
                   </p>
                   <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">
                     Calm signals before you hire.
                   </h2>
                   <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl">
-                    Evolgrit gives you access to international candidates who practice
-                    language, everyday life and job scenarios in one batch.
+                    Evolgrit gives you access to international candidates who practice language,
+                    everyday life and job scenarios in one batch.
                   </p>
                 </div>
                 <Link
@@ -112,7 +87,7 @@ export default function ForEmployersPage() {
                   Talk to us about hiring
                 </Link>
               </div>
-              <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {employerCards.map((card) => (
                   <article
                     key={`${card.id}-preview`}
@@ -133,46 +108,59 @@ export default function ForEmployersPage() {
                   </article>
                 ))}
               </div>
-            </section>
-          </Reveal>
-
-          <Reveal delayMs={260} durationMs={360} distance={12}>
-            <section className={`${container} mt-10`}>
-              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Why Evolgrit</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-              The old approach wastes time for learners and teams.
-            </h2>
-                <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                  {challengePoints.map((point) => (
-                    <li key={point} className="flex gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          </Reveal>
-
-          <Reveal delayMs={320} durationMs={360} distance={12}>
-            <section className={`${container} mt-10`}>
-              <Reveal
-                durationMs={220}
-                distance={6}
-                staggerChildren
-                className="grid gap-4 md:grid-cols-2"
-              >
-                {employerValueCards.map((card) => (
-                  <article
-                    key={card.title}
-                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+              <div className="grid gap-6 lg:grid-cols-2">
+                <article className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                    How access works
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold text-slate-900">
+                    Invite-only access in three calm steps.
+                  </h3>
+                  <Reveal
+                    durationMs={220}
+                    distance={6}
+                    staggerChildren
+                    className="mt-5 grid gap-4 sm:grid-cols-3"
                   >
-                    <h3 className="text-lg font-semibold text-slate-900">{card.title}</h3>
-                    <p className="mt-2 text-sm text-slate-600">{card.copy}</p>
-                  </article>
-                ))}
-              </Reveal>
+                    {accessSteps.map((step, index) => (
+                      <div
+                        key={step.title}
+                        className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4"
+                      >
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                          Step {index + 1}
+                        </p>
+                        <h4 className="mt-1 text-base font-semibold text-slate-900">
+                          {step.title}
+                        </h4>
+                        <p className="mt-2 text-sm text-slate-600">{step.body}</p>
+                      </div>
+                    ))}
+                  </Reveal>
+                </article>
+                <article className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Batches</p>
+                  <h3 className="mt-2 text-xl font-semibold text-slate-900">
+                    Predictable groups, calmer onboarding.
+                  </h3>
+                  <Reveal
+                    durationMs={220}
+                    distance={6}
+                    staggerChildren
+                    className="mt-5 grid gap-3"
+                  >
+                    {batchHighlights.map((batch) => (
+                      <div
+                        key={batch.title}
+                        className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4"
+                      >
+                        <h4 className="text-sm font-semibold text-slate-900">{batch.title}</h4>
+                        <p className="mt-1 text-sm text-slate-600">{batch.body}</p>
+                      </div>
+                    ))}
+                  </Reveal>
+                </article>
+              </div>
             </section>
           </Reveal>
 
@@ -218,59 +206,6 @@ export default function ForEmployersPage() {
                     </span>
                   </div>
                 </div>
-              </div>
-            </section>
-          </Reveal>
-
-          <Reveal delayMs={380} durationMs={360} distance={12}>
-            <section className={`${container} mt-12`}>
-              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Invite-only access</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-900">How access works</h2>
-                <Reveal
-                  durationMs={220}
-                  distance={6}
-                  staggerChildren
-                  className="mt-6 grid gap-4 md:grid-cols-3"
-                >
-                  {accessSteps.map((step, index) => (
-                    <div
-                      key={step.title}
-                      className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5"
-                    >
-                      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        Step {index + 1}
-                      </p>
-                      <h4 className="mt-1 text-lg font-semibold text-slate-900">{step.title}</h4>
-                      <p className="mt-2 text-sm text-slate-600">{step.body}</p>
-                    </div>
-                  ))}
-                </Reveal>
-              </div>
-            </section>
-          </Reveal>
-
-          <Reveal delayMs={420} durationMs={360} distance={12}>
-            <section className={`${container} mt-12`}>
-              <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Batches</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-900">Predictable groups, calmer onboarding.</h2>
-                <Reveal
-                  durationMs={220}
-                  distance={6}
-                  staggerChildren
-                  className="mt-6 grid gap-4 md:grid-cols-3"
-                >
-                  {batchHighlights.map((batch) => (
-                    <div
-                      key={batch.title}
-                      className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5"
-                    >
-                      <h4 className="text-base font-semibold text-slate-900">{batch.title}</h4>
-                      <p className="mt-2 text-sm text-slate-600">{batch.body}</p>
-                    </div>
-                  ))}
-                </Reveal>
               </div>
             </section>
           </Reveal>
