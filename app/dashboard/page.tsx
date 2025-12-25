@@ -7,6 +7,7 @@ import WeeklyCheckinCard, {
 } from "./WeeklyCheckinCard";
 import { computePhase } from "@/lib/phase/computePhase";
 import { phaseMeta, type Phase } from "@/lib/phase/phaseMeta";
+import MentorChatPanel from "@/components/dashboard/MentorChatPanel";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -62,6 +63,13 @@ type CheckinSummary = {
   blockers: string | null;
   created_at: string | null;
   updated_at: string | null;
+};
+
+type MentorMessage = {
+  id: string;
+  sender_type: "learner" | "mentor";
+  content: string;
+  created_at: string;
 };
 
 function getWeekStart(date = new Date()) {
@@ -327,142 +335,236 @@ export default async function DashboardPage() {
     ? `Saved ${formatDate(currentWeekCheckin.updated_at ?? currentWeekCheckin.created_at ?? currentWeekIso)}`
     : "Share mood & blockers so mentors can support you.";
 
+  const mentorId = process.env.DEFAULT_MENTOR_ID ?? null;
+  const mentorName = process.env.DEFAULT_MENTOR_NAME ?? "Lina";
+  const mentorRole = process.env.DEFAULT_MENTOR_ROLE ?? "Cultural readiness mentor";
+  const mentorInitial =
+    mentorName.trim().charAt(0).toUpperCase() || mentorRole.trim().charAt(0) || "M";
+  let mentorThreadId: string | null = null;
+  let mentorMessages: MentorMessage[] = [];
+
+  if (mentorId) {
+    const { data: existingThread, error: existingThreadError } = await supabase
+      .from("mentor_threads")
+      .select("id")
+      .eq("learner_id", data.user.id)
+      .eq("mentor_id", mentorId)
+      .maybeSingle();
+
+    if (existingThreadError) {
+      console.error("mentor thread fetch error", existingThreadError);
+    }
+
+    if (existingThread?.id) {
+      mentorThreadId = existingThread.id;
+    } else {
+      const { data: insertedThread, error: insertThreadError } = await supabase
+        .from("mentor_threads")
+        .insert({
+          learner_id: data.user.id,
+          mentor_id: mentorId,
+        })
+        .select("id")
+        .single();
+
+      if (insertThreadError) {
+        console.error("mentor thread insert error", insertThreadError);
+      } else {
+        mentorThreadId = insertedThread?.id ?? null;
+      }
+    }
+
+    if (mentorThreadId) {
+      const { data: mentorMessageRows, error: mentorMessageError } = await supabase
+        .from("mentor_messages")
+        .select("id, sender_type, content, created_at")
+        .eq("thread_id", mentorThreadId)
+        .order("created_at", { ascending: true })
+        .limit(30);
+
+      if (mentorMessageError) {
+        console.error("mentor messages fetch error", mentorMessageError);
+      } else if (mentorMessageRows) {
+        mentorMessages = mentorMessageRows as MentorMessage[];
+      }
+    }
+  }
+
+  const mentorConfigured = Boolean(mentorId && mentorThreadId);
+
   return (
-    <div className="space-y-4 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1200px]">
-      <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-              Batch Alpha · Week 3
-            </p>
-            <h1 className="text-2xl font-semibold text-slate-900">
-              Dashboard overview
-            </h1>
-            <p className="text-sm text-slate-600">
-              Keep your journey calm and consistent.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Learner</p>
-            <p className="font-semibold text-slate-900">
-              {profile?.full_name ?? "Learner"}
-            </p>
-            <p className="text-[11px] text-slate-500">AI + mentor guidance</p>
-          </div>
-        </div>
-      </header>
+    <div className="mx-auto max-w-[1200px] space-y-6 px-4 sm:px-6 lg:px-8">
+      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="space-y-4">
+          <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Batch Alpha · Week 3
+                </p>
+                <h1 className="text-2xl font-semibold text-slate-900">
+                  Dashboard overview
+                </h1>
+                <p className="text-sm text-slate-600">
+                  Keep your journey calm and consistent.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                  Learner
+                </p>
+                <p className="font-semibold text-slate-900">
+                  {profile?.full_name ?? "Learner"}
+                </p>
+                <p className="text-[11px] text-slate-500">AI + mentor guidance</p>
+              </div>
+            </div>
+          </header>
 
-      <section className="space-y-4">
-        <article className={`rounded-3xl border border-slate-200 bg-white p-6 shadow-sm ${phaseColors.cardBorder}`}>
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${phaseColors.pillBg} ${phaseColors.pillText}`}>
-                Current phase
-              </span>
-              <h2 className="text-2xl font-semibold text-slate-900">
-                {phaseInfo.label} · {phaseInfo.title}
-              </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                {phaseInfo.description}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-slate-500">Journey progress</p>
-              <p className="text-4xl font-semibold text-slate-900">{journeyProgress}%</p>
-              <p className="text-xs text-slate-400">Week 3 · calm pace</p>
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                German level
-              </p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">
-                {profile?.german_level ?? "Not set"}
-              </p>
-              <p className="text-xs text-slate-500">Update in onboarding any time.</p>
-            </div>
-            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Modules this week
-              </p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">
-                {modulesSummaryLabel}
-              </p>
-              <p className="text-xs text-slate-500">{modulesSummaryHelper}</p>
-            </div>
-            <div className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Weekly check-in
-              </p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">
-                {weeklyStatusLabel}
-              </p>
-              <p className="text-xs text-slate-500">{weeklyStatusHelper}</p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section className="grid gap-4 lg:grid-cols-[2fr,1fr]">
-        <WeeklyCheckinCard weeks={weeklyTimeline} action={submitWeeklyCheckinAction} />
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-            Next best action
-          </p>
-          <h3 className="text-xl font-semibold text-slate-900">Keep moving calmly</h3>
-          <p className="mt-1 text-sm text-slate-600">{currentAction.helper}</p>
-          <Link
-            href={currentAction.href}
-            className="mt-4 inline-flex rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-          >
-            {currentAction.label} →
-          </Link>
-        </article>
-      </section>
-
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-              Onboarding status
-            </p>
-            <h3 className="text-xl font-semibold text-slate-900">
-              {onboardingCompleted} / {onboardingTotal} details complete
-            </h3>
-            <p className="text-sm text-slate-600">
-              {onboardingDone
-                ? "You’re ready for matching."
-                : "Finish onboarding to unlock tailored roles."}
-            </p>
-          </div>
-          {onboardingDone ? (
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-              Complete
-            </span>
-          ) : (
-            <Link
-              href="/dashboard/onboarding"
-              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+          <section className="space-y-4">
+            <article
+              className={`rounded-3xl border border-slate-200 bg-white p-6 shadow-sm ${phaseColors.cardBorder}`}
             >
-              Continue onboarding →
-            </Link>
-          )}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <span
+                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${phaseColors.pillBg} ${phaseColors.pillText}`}
+                  >
+                    Current phase
+                  </span>
+                  <h2 className="text-2xl font-semibold text-slate-900">
+                    {phaseInfo.label} · {phaseInfo.title}
+                  </h2>
+                  <p className="mt-1 text-sm text-slate-600">
+                    {phaseInfo.description}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-slate-500">Journey progress</p>
+                  <p className="text-4xl font-semibold text-slate-900">
+                    {journeyProgress}%
+                  </p>
+                  <p className="text-xs text-slate-400">Week 3 · calm pace</p>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                <div
+                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
+                >
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    German level
+                  </p>
+                  <p className="mt-2 text-lg font-semibold text-slate-900">
+                    {profile?.german_level ?? "Not set"}
+                  </p>
+                  <p className="text-xs text-slate-500">Update in onboarding any time.</p>
+                </div>
+                <div
+                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
+                >
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    Modules this week
+                  </p>
+                  <p className="mt-2 text-lg font-semibold text-slate-900">
+                    {modulesSummaryLabel}
+                  </p>
+                  <p className="text-xs text-slate-500">{modulesSummaryHelper}</p>
+                </div>
+                <div
+                  className={`rounded-2xl border border-slate-100 bg-slate-50 p-4 border-l-4 border-slate-200 ${phaseColors.kpiBorder}`}
+                >
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                    Weekly check-in
+                  </p>
+                  <p className="mt-2 text-lg font-semibold text-slate-900">
+                    {weeklyStatusLabel}
+                  </p>
+                  <p className="text-xs text-slate-500">{weeklyStatusHelper}</p>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section className="grid gap-4 lg:grid-cols-[2fr,1fr]">
+            <WeeklyCheckinCard
+              weeks={weeklyTimeline}
+              action={submitWeeklyCheckinAction}
+              summaryFirst
+            />
+            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                Next best action
+              </p>
+              <h3 className="text-xl font-semibold text-slate-900">
+                Keep moving calmly
+              </h3>
+              <p className="mt-1 text-sm text-slate-600">{currentAction.helper}</p>
+              <Link
+                href={currentAction.href}
+                className="mt-4 inline-flex rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+              >
+                {currentAction.label} →
+              </Link>
+            </article>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Onboarding status
+                </p>
+                <h3 className="text-xl font-semibold text-slate-900">
+                  {onboardingCompleted} / {onboardingTotal} details complete
+                </h3>
+                <p className="text-sm text-slate-600">
+                  {onboardingDone
+                    ? "You’re ready for matching."
+                    : "Finish onboarding to unlock tailored roles."}
+                </p>
+              </div>
+              {onboardingDone ? (
+                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                  Complete
+                </span>
+              ) : (
+                <Link
+                  href="/dashboard/onboarding"
+                  className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:border-slate-300"
+                >
+                  Continue onboarding →
+                </Link>
+              )}
+            </div>
+            <div className="mt-4">
+              <div className="flex items-center justify-between text-xs text-slate-500">
+                <span>Progress</span>
+                <span>{onboardingPercent}%</span>
+              </div>
+              <div className="mt-2 h-2 rounded-full bg-slate-100">
+                <div
+                  className={`h-full rounded-full transition-all ${phaseColors.bar}`}
+                  style={{ width: `${onboardingPercent}%` }}
+                />
+              </div>
+            </div>
+          </section>
         </div>
-        <div className="mt-4">
-          <div className="flex items-center justify-between text-xs text-slate-500">
-            <span>Progress</span>
-            <span>{onboardingPercent}%</span>
-          </div>
-          <div className="mt-2 h-2 rounded-full bg-slate-100">
-            <div
-              className={`h-full rounded-full transition-all ${phaseColors.bar}`}
-              style={{ width: `${onboardingPercent}%` }}
+
+        <aside className="hidden xl:block">
+          <div className="sticky top-24">
+            <MentorChatPanel
+              mentorName={mentorName}
+              mentorRole={mentorRole}
+              mentorInitial={mentorInitial}
+              isConfigured={mentorConfigured}
+              threadId={mentorThreadId}
+              initialMessages={mentorMessages}
             />
           </div>
-        </div>
-      </section>
+        </aside>
+      </div>
     </div>
   );
 }

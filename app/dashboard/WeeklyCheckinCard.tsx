@@ -26,9 +26,11 @@ export type WeekCheckin = {
 export default function WeeklyCheckinCard({
   weeks,
   action,
+  summaryFirst = false,
 }: {
   weeks: WeekCheckin[];
   action: (formData: FormData) => Promise<void>;
+  summaryFirst?: boolean;
 }) {
   const currentWeek = useMemo(() => weeks.find((w) => w.isCurrent), [weeks]);
   const [selectedWeekStart, setSelectedWeekStart] = useState(
@@ -42,7 +44,9 @@ export default function WeeklyCheckinCard({
     (week) => week.weekStart === selectedWeekStart
   );
   const selectedCheckin = selectedWeek?.checkin;
-  const showForm = selectedWeek?.isCurrent && (editingCurrent || !selectedCheckin);
+  const showForm =
+    selectedWeek?.isCurrent &&
+    (editingCurrent || !selectedCheckin || !summaryFirst);
 
   function handleSelectWeek(weekStart: string, isCurrent: boolean) {
     setSelectedWeekStart(weekStart);
