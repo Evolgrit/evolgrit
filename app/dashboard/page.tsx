@@ -14,7 +14,7 @@ import { KpiCard } from "@/components/ui/KpiCard";
 import { NextActionCard } from "@/components/ui/NextActionCard";
 import MobileMentorChatTrigger from "@/components/dashboard/MobileMentorChatTrigger";
 import type { MentorMessage } from "@/lib/types/mentor";
-import { Paperclip, Smile } from "@/components/icons/LucideIcons";
+import { DocumentIcon, Paperclip, Smile } from "@/components/icons/LucideIcons";
 
 const phaseAccent: Record<Phase, {
   cardBorder: string;
@@ -285,11 +285,15 @@ export default async function DashboardPage() {
     Math.min(100, Math.round((onboardingPercent + modulesPercent) / 2))
   );
 
-  const docsReady = onboardingDone;
   const modulesProgress =
     modulesTotal > 0 ? modulesCompleted / modulesTotal : 0;
   const modulesReady = modulesProgress >= 1;
   const currentWeekCheckin = weeklyTimeline.find((week) => week.isCurrent)?.checkin;
+  const documentsReadyCount = 2;
+  const documentsTotalCount = 4;
+  const documentsProgress =
+    documentsTotalCount > 0 ? documentsReadyCount / documentsTotalCount : 0;
+  const docsReady = documentsProgress >= 1;
   const nextAction =
     !onboardingDone
       ? {
@@ -475,6 +479,18 @@ export default async function DashboardPage() {
                   icon={<Smile className="h-5 w-5" />}
                   ctaLabel="Go to check-in"
                   ctaHref="#weekly-checkin"
+                  className="gap-2"
+                />
+                <KpiCard
+                  label="Documents readiness"
+                  valueMain={documentsReadyCount}
+                  valueSub={`/${documentsTotalCount}`}
+                  statusText="ready"
+                  tone="blue"
+                  progress={documentsProgress}
+                  icon={<DocumentIcon className="h-5 w-5" />}
+                  ctaLabel="Upload key documents"
+                  ctaHref="/dashboard/documents"
                   className="gap-2"
                 />
               </div>

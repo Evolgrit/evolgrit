@@ -314,6 +314,7 @@ export default function LearnerJourneyPage() {
                     icon={<DocumentIcon className="h-5 w-5" />}
                     ctaLabel="Upload key documents"
                     ctaHref="/dashboard/documents"
+                    className="gap-2"
                   />
                 </article>
                 </section>
