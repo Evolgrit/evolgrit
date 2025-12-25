@@ -44,6 +44,10 @@ export default function MentorChatPanel({
   const composerDisabled = !canSend || sending;
 
   useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+  }, []);
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
@@ -81,7 +85,7 @@ export default function MentorChatPanel({
   }
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="flex flex-col overflow-visible rounded-3xl border border-slate-200 bg-white shadow-sm">
       <header className="flex items-center gap-3 px-5 py-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-lg font-semibold text-white">
           {mentorAvatar}

@@ -38,6 +38,10 @@ export default function DashboardShell({
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createSupabaseBrowserClient();
+  useEffect(() => {
+    if (!pathname || !pathname.startsWith("/dashboard")) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
   const navWithState = useMemo(
     () =>
       navItems.map((item) => ({
