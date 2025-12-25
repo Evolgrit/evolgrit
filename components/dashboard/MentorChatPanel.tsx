@@ -77,10 +77,8 @@ export default function MentorChatPanel({
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-lg font-semibold text-white">
           {mentorAvatar}
         </div>
-        <div>
-          <p className="text-sm font-semibold text-slate-900">{mentorName}</p>
-          <p className="text-xs text-slate-500">{mentorRole}</p>
-        </div>
+        <p className="text-sm font-semibold text-slate-900">{mentorName}</p>
+        <span className="sr-only">{mentorRole}</span>
         <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
           Online
@@ -96,22 +94,9 @@ export default function MentorChatPanel({
       <div className="border-t border-slate-200" />
 
       <section className="space-y-4 border-b border-slate-200 px-5 py-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-              Video chat
-            </p>
-            <p className="text-sm text-slate-600">Weekly mentor sessions.</p>
-          </div>
-          <button
-            type="button"
-            disabled
-            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white opacity-70"
-          >
-            <Phone className="h-4 w-4" />
-            Start a call
-          </button>
-        </div>
+        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+          Video chat
+        </p>
         <div className="rounded-2xl border border-blue-100 bg-blue-50/80 p-4">
           <div className="flex min-h-[140px] items-center justify-center rounded-2xl border border-white/60 bg-white/60 text-sm text-slate-500">
             Video available when your mentor is live.
@@ -119,14 +104,19 @@ export default function MentorChatPanel({
           <p className="mt-3 text-xs text-blue-900/70">
             Calm 1:1 calls keep onboarding relaxed.
           </p>
+          <button
+            type="button"
+            disabled
+            className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-600"
+          >
+            <Phone className="h-4 w-4" />
+            Start a call
+          </button>
         </div>
       </section>
 
       <section className="space-y-3 border-b border-slate-200 px-5 py-4">
-        <div className="flex items-center justify-between">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Text chat</p>
-          <span className="text-xs text-slate-500">Mentor replies within a day</span>
-        </div>
+        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Text chat</p>
         <div className="max-h-64 space-y-3 overflow-y-auto pr-1">
           {messages.length ? (
             messages.map((message) => (
