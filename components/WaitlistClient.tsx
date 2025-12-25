@@ -16,6 +16,8 @@ type FormState = {
 
 
 
+const marketingContainer = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
+
 const initialState: FormState = {
   full_name: "",
   email: "",
@@ -97,9 +99,9 @@ export default function WaitlistClient() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 px-4 py-12 sm:px-5 sm:py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-xl mx-auto">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 py-12 sm:py-16">
+      <div className={marketingContainer}>
+        <div className="mx-auto max-w-xl">
           <div className="mb-6 text-center">
             <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
               Learner waitlist

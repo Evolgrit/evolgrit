@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const marketingContainer = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
+
 export default function EmployersClient() {
   const [company, setCompany] = useState("");
   const [roleTypes, setRoleTypes] = useState("");
@@ -39,9 +41,9 @@ export default function EmployersClient() {
     setSubmitting(false);
   }
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 px-5 py-16 sm:py-20">
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-3xl mx-auto text-center">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 text-slate-900 py-16 sm:py-20">
+      <div className={marketingContainer}>
+        <div className="mx-auto max-w-3xl text-center">
           <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
             For employers
           </p>

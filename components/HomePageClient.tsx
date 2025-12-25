@@ -907,6 +907,30 @@ const journeyCards = [
         </div>
       </div>
     </aside>
+ </div>
+</section>
+
+<section className="py-10">
+  <div className={`${marketingContainer}`}>
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+          Demo
+        </span>
+        <h3 className="mt-2 text-xl font-semibold text-slate-900">
+          See the learner journey
+        </h3>
+        <p className="text-sm text-slate-600">
+          A calm three-phase path from arrival to job-ready — with clear next steps.
+        </p>
+      </div>
+      <Link
+        href="/learner-journey"
+        className="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+      >
+        Open demo →
+      </Link>
+    </div>
   </div>
 </section>
 </Reveal>
@@ -1713,24 +1737,6 @@ const journeyCards = [
         From arrival to job-ready, Evolgrit keeps learners moving step by step without
         burning out.
       </p>
-    </div>
-
-    <div className="mb-8 rounded-3xl bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5 sm:p-6 shadow-lg shadow-blue-500/30 flex flex-col gap-3">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">
-        Demo
-      </p>
-      <h3 className="text-xl font-semibold">
-        See the learner journey
-      </h3>
-      <p className="text-sm text-white/80">
-        A calm three-phase path from arrival to job-ready — with clear next steps.
-      </p>
-      <Link
-        href="/learner-journey"
-        className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur hover:bg-white/20 transition"
-      >
-        Open demo →
-      </Link>
     </div>
 
     <div className="grid gap-5 md:grid-cols-3">
