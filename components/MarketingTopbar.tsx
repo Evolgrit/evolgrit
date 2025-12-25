@@ -10,7 +10,6 @@ type MarketingTopbarProps = {
 };
 
 const navLinks = [
-  { label: "Product", href: "#product" },
   { label: "Learner journey (Demo)", href: "/learner-journey" },
   { label: "How it works", href: "/how-it-works" },
   { label: "For employers", href: "/for-employers" },
@@ -34,9 +33,6 @@ export default function MarketingTopbar({
   };
 
   const isActiveLink = (href: string) => {
-    if (href.startsWith("#")) {
-      return pathname === "/";
-    }
     const targetPath = href.split("#")[0];
     return targetPath === pathname;
   };
