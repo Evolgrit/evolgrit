@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
   HelpCircle,
@@ -40,6 +40,7 @@ export default function MentorChatSheet({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const mentorAvatar = useMemo(() => mentorInitial.toUpperCase(), [mentorInitial]);
   const canSend = !demo && isConfigured && Boolean(threadId);
 
@@ -57,6 +58,12 @@ export default function MentorChatSheet({
       setMessages(initialMessages);
     }
   }, [demo, initialMessages, open]);
+
+  useEffect(() => {
+    if (open) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, open]);
 
   if (!open) return null;
 
@@ -109,7 +116,7 @@ export default function MentorChatSheet({
             </div>
             <div>
               <p className="text-sm font-semibold text-slate-900">{mentorName}</p>
-              <p className="text-xs text-slate-500">{mentorRole}</p>
+              <span className="sr-only">{mentorRole}</span>
             </div>
             <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -127,22 +134,9 @@ export default function MentorChatSheet({
           <div className="border-t border-slate-200" />
 
           <section className="space-y-4 border-b border-slate-200 px-5 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                  Video chat
-                </p>
-                <p className="text-sm text-slate-600">Weekly mentor sessions.</p>
-              </div>
-              <button
-                type="button"
-                disabled
-                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white opacity-70"
-              >
-                <Phone className="h-4 w-4" />
-                Start a call
-              </button>
-            </div>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              Video chat
+            </p>
             <div className="rounded-2xl border border-blue-100 bg-blue-50/80 p-4">
               <div className="flex min-h-[120px] items-center justify-center rounded-2xl border border-white/60 bg-white/60 text-sm text-slate-500">
                 Video available when your mentor is live.
@@ -150,16 +144,21 @@ export default function MentorChatSheet({
               <p className="mt-3 text-xs text-blue-900/70">
                 Calm 1:1 calls keep onboarding relaxed.
               </p>
+              <button
+                type="button"
+                disabled
+                className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-600"
+              >
+                <Phone className="h-4 w-4" />
+                Start a call
+              </button>
             </div>
           </section>
 
           <section className="space-y-3 border-b border-slate-200 px-5 py-4">
-            <div className="flex items-center justify-between">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                Text chat
-              </p>
-              <span className="text-xs text-slate-500">Mentor replies within a day</span>
-            </div>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
+              Text chat
+            </p>
             <div className="max-h-[45vh] space-y-3 overflow-y-auto pr-1">
               {messages.length ? (
                 messages.map((message, index) => (
@@ -180,20 +179,17 @@ export default function MentorChatSheet({
                   Send your mentor a quick update to stay aligned.
                 </p>
               )}
+              <div ref={messagesEndRef} />
             </div>
           </section>
 
           <section className="space-y-2 px-5 py-4">
-            {demo ? (
-              <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500">
-                Chat becomes available once you’re inside Evolgrit.
-              </div>
-            ) : (
-              <form onSubmit={handleSend} className="space-y-2">
-                <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2">
+            <form onSubmit={handleSend} className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    className="rounded-full p-2 text-slate-500 hover:text-slate-900 disabled:opacity-40"
+                    className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
                     aria-label="Add emoji"
                     disabled={!canSend}
                   >
@@ -201,7 +197,7 @@ export default function MentorChatSheet({
                   </button>
                   <button
                     type="button"
-                    className="rounded-full p-2 text-slate-500 hover:text-slate-900 disabled:opacity-40"
+                    className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
                     aria-label="Attach file"
                     disabled={!canSend}
                   >
@@ -212,11 +208,21 @@ export default function MentorChatSheet({
                     name="message"
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
-                    placeholder={
-                      canSend ? "Write message..." : "Mentor chat unlocks when assigned."
-                    }
+                  placeholder={
+                    canSend
+                      ? "Write message..."
+                      : demo
+                        ? "Chat available inside Evolgrit"
+                        : "Mentor chat unlocks when assigned."
+                  }
                     disabled={!canSend}
-                    className="flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:text-slate-400"
+                    className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" && !event.shiftKey) {
+                        event.preventDefault();
+                        event.currentTarget.form?.requestSubmit();
+                      }
+                    }}
                   />
                   <button
                     type="submit"
@@ -226,14 +232,16 @@ export default function MentorChatSheet({
                     <ArrowUp className="h-4 w-4" />
                   </button>
                 </div>
+                {!canSend && (
+                  <p className="text-xs text-slate-500">
+                    Chat available inside Evolgrit.
+                  </p>
+                )}
                 {error && <p className="text-xs text-rose-600">{error}</p>}
                 {info && <p className="text-xs text-emerald-600">{info}</p>}
-              </form>
-            )}
-          </section>
-
-          <div className="border-t border-slate-200 px-5 py-4 text-xs text-slate-500">
-            <div className="flex items-center justify-between">
+              </div>
+            </form>
+            <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
               <div className="inline-flex items-center gap-2">
                 <HelpCircle className="h-4 w-4" />
                 Help center
@@ -245,7 +253,7 @@ export default function MentorChatSheet({
                 Open
               </button>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </>

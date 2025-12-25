@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
   HelpCircle,
@@ -33,10 +33,15 @@ export default function MentorChatPanel({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const mentorAvatar = useMemo(() => mentorInitial.toUpperCase(), [mentorInitial]);
 
   const canSend = isConfigured && Boolean(threadId);
   const composerDisabled = !canSend || sending;
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   async function handleSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -131,15 +136,19 @@ export default function MentorChatPanel({
               Send your mentor a quick update to stay aligned.
             </p>
           )}
+          <div ref={messagesEndRef} />
         </div>
       </section>
 
-      <section className="space-y-2 px-5 py-4">
-        <form onSubmit={handleSend} className="space-y-2">
-          <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2">
+      <div className="border-t border-slate-200 px-5 py-4">
+        <form
+          onSubmit={handleSend}
+          className="flex flex-col gap-2 text-sm text-slate-500"
+        >
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              className="rounded-full p-2 text-slate-500 hover:text-slate-900"
+              className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
               aria-label="Add emoji"
               disabled={!canSend}
             >
@@ -147,7 +156,7 @@ export default function MentorChatPanel({
             </button>
             <button
               type="button"
-              className="rounded-full p-2 text-slate-500 hover:text-slate-900"
+              className="rounded-full border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 disabled:opacity-40"
               aria-label="Attach file"
               disabled={!canSend}
             >
@@ -158,11 +167,17 @@ export default function MentorChatPanel({
               name="message"
               value={input}
               onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault();
+                  event.currentTarget.form?.requestSubmit();
+                }
+              }}
               placeholder={
                 canSend ? "Write message..." : "Mentor chat unlocks when assigned."
               }
               disabled={!canSend}
-              className="flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:text-slate-400"
+              className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 disabled:opacity-60"
             />
             <button
               type="submit"
@@ -180,10 +195,7 @@ export default function MentorChatPanel({
           {error && <p className="text-xs text-rose-600">{error}</p>}
           {info && <p className="text-xs text-emerald-600">{info}</p>}
         </form>
-      </section>
-
-      <div className="border-t border-slate-200 px-5 py-4 text-xs text-slate-500">
-        <div className="flex items-center justify-between">
+        <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-3 text-xs text-slate-500">
           <div className="inline-flex items-center gap-2">
             <HelpCircle className="h-4 w-4" />
             Help center
