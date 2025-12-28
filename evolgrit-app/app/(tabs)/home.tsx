@@ -27,7 +27,6 @@ import { Stack, Text } from "tamagui";
 
 type ERS = { L: number; A: number; S: number; C: number };
 
-const clamp0to100 = (n: number) => Math.max(0, Math.min(100, n));
 const ersMin = (e: ERS) => Math.min(e.L, e.A, e.S, e.C);
 
 const MAX_HEADER = 120;
@@ -107,7 +106,7 @@ export default function HomeHub() {
   const score = useMemo(() => ersMin(ers), [ers]);
   const limiter = useMemo(() => {
     const min = score;
-    const entries: Array<[keyof ERS, number]> = [
+    const entries: [keyof ERS, number][] = [
       ["L", ers.L],
       ["A", ers.A],
       ["S", ers.S],

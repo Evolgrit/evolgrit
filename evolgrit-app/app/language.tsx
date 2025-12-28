@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack, Text } from "tamagui";
 import { useRouter } from "expo-router";
+
 import { loadLangPrefs, saveLangPrefs, type LangPrefs } from "../lib/languagePrefs";
+import { GlassCard } from "../components/system/GlassCard";
+import { PrimaryButton } from "../components/system/PrimaryButton";
+import { PillButton } from "../components/system/PillButton";
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -31,42 +36,30 @@ export default function LanguageSelect() {
   }
 
   return (
-    <View style={{ flex: 1, padding: 16, paddingTop: 24, backgroundColor: "#F6F7FB" }}>
-      <Text style={{ fontSize: 24, fontWeight: "900", color: "#111827" }}>Choose your language</Text>
-      <Text style={{ marginTop: 6, color: "#6B7280" }}>You will learn German (Deutsch).</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
+      <Stack flex={1} padding={16} gap={12}>
+        <Stack gap={4}>
+          <Text fontSize={24} fontWeight="900" color="$text">
+            Choose your language
+          </Text>
+          <Text color="$muted">You will learn German (Deutsch).</Text>
+        </Stack>
 
-      <View style={{ marginTop: 16, gap: 10 }}>
-        {LANGS.map((l) => (
-          <Pressable
-            key={l.code}
-            onPress={() => setNativeLang(l.code)}
-            style={{
-              paddingVertical: 14,
-              paddingHorizontal: 14,
-              borderRadius: 14,
-              borderWidth: 1,
-              borderColor: nativeLang === l.code ? "#111827" : "#E5E7EB",
-              backgroundColor: "#fff",
-            }}
-          >
-            <Text style={{ fontWeight: "800", color: "#111827" }}>{l.label}</Text>
-            <Text style={{ color: "#6B7280" }}>{l.code} → de</Text>
-          </Pressable>
-        ))}
-      </View>
+        <GlassCard>
+          <Stack gap={10}>
+            {LANGS.map((l) => (
+              <PillButton
+                key={l.code}
+                label={`${l.label} (${l.code})`}
+                borderColor={nativeLang === l.code ? "$primary" : "$border"}
+                onPress={() => setNativeLang(l.code)}
+              />
+            ))}
+          </Stack>
+        </GlassCard>
 
-      <Pressable
-        onPress={onContinue}
-        style={{
-          marginTop: 16,
-          backgroundColor: "#111827",
-          paddingVertical: 14,
-          borderRadius: 16,
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ color: "#fff", fontWeight: "900" }}>Continue</Text>
-      </Pressable>
-    </View>
+        <PrimaryButton label="Continue" onPress={onContinue} />
+      </Stack>
+    </SafeAreaView>
   );
 }

@@ -7,7 +7,6 @@ import { Stack, Text } from "tamagui";
 import { loadPhaseState, type PhaseState } from "../../lib/phaseStateStore";
 import { getDevMode } from "../../lib/devModeStore";
 import { getLessonsByLevel } from "../../lessons/catalog";
-import type { LessonLevel } from "../../lessons/schema";
 import { GlassCard } from "../../components/system/GlassCard";
 import { PrimaryButton } from "../../components/system/PrimaryButton";
 import { PillButton } from "../../components/system/PillButton";
@@ -29,27 +28,10 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   );
 }
 
-function Pill({ label, active }: { label: string; active?: boolean }) {
-  return (
-    <Stack
-      paddingVertical={8}
-      paddingHorizontal={12}
-      borderRadius={999}
-      borderWidth={1}
-      borderColor={active ? "$text" : "$border"}
-      backgroundColor="$card"
-    >
-      <Text fontWeight="800" color="$text">
-        {label}
-      </Text>
-    </Stack>
-  );
-}
-
 export default function LearnTab() {
   const [phaseState, setPhaseState] = useState<PhaseState | null>(null);
   const [devMode, setDevMode] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState<LessonLevel>("A1");
+  const [selectedLevel, setSelectedLevel] = useState<"A1" | "A2">("A1");
   const router = useRouter();
 
   useEffect(() => {
@@ -92,7 +74,7 @@ export default function LearnTab() {
       <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
         <Card title="Journey">
           <Stack flexDirection="row" gap={10} flexWrap="wrap">
-            {(["A1", "A2"] as LessonLevel[]).map((lvl) => (
+            {(["A1", "A2"] as ("A1" | "A2")[]).map((lvl) => (
               <PillButton
                 key={lvl}
                 label={lvl}

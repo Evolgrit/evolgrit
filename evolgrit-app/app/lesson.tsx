@@ -1,23 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { AudioModule, RecordingPresets, setAudioModeAsync, useAudioRecorder, useAudioRecorderState } from "expo-audio";
+import { Stack, Text } from "tamagui";
+import { Ionicons } from "@expo/vector-icons";
 
 import { getLessonById, LESSON_CATALOG } from "../lessons/catalog";
 import { appendEvent } from "../lib/eventsStore";
-import { applyERSDelta } from "../lib/readinessService";
-import { completeNextActionAndRecompute, setLearnNextAction } from "../lib/nextActionService";
 import { RecordingIndicator } from "../components/RecordingIndicator";
 import { GlassCard } from "../components/system/GlassCard";
-import { Ionicons } from "@expo/vector-icons";
-import { Stack, Text } from "tamagui";
 import { PillButton } from "../components/system/PillButton";
-import { PrimaryButton } from "../components/system/PrimaryButton";
-import { SecondaryButton } from "../components/system/SecondaryButton";
 
 const C = {
-  bg: "#F6F7FB",
+  bg: "#F7F8FA",
   text: "#111827",
   sub: "#6B7280",
   dark: "#111827",
@@ -25,11 +21,7 @@ const C = {
 };
 
 function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <GlassCard marginBottom={12}>
-      {children}
-    </GlassCard>
-  );
+  return <GlassCard marginBottom={12}>{children}</GlassCard>;
 }
 
 export default function LessonScreen() {
@@ -43,10 +35,8 @@ export default function LessonScreen() {
   const [i, setI] = useState(0);
   const step = steps[i];
 
-  // Minimal simulation state
   const [lastWasOk, setLastWasOk] = useState(true);
   const [transcript, setTranscript] = useState("");
-  const [recordingUri, setRecordingUri] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [choiceStatus, setChoiceStatus] = useState<"correct" | "wrong" | null>(null);
   const [showHintBanner, setShowHintBanner] = useState(true);
@@ -61,7 +51,7 @@ export default function LessonScreen() {
     setI(nextIndex);
   }
 
-  async function startRec() {
+  async function startRec(stepName: string) {
     const perm = await AudioModule.requestRecordingPermissionsAsync();
     if (!perm.granted) return;
 
@@ -70,26 +60,22 @@ export default function LessonScreen() {
       playsInSilentMode: true,
     });
 
+    await appendEvent("task_started", { task: stepName, lessonId: lesson.id });
     await recorder.prepareToRecordAsync();
     await recorder.record();
   }
 
-  async function stopRec() {
+  async function stopRec(stepName: string) {
     try {
       await recorder.stop();
-      setRecordingUri(recorder.uri ?? null);
     } catch {
-      // ignore stop errors
+      // ignore
     }
-  }
 
-  async function done() {
-    // System consequences (silent):
-    await appendEvent("task_completed", { task: lesson?.id ?? "lesson_unknown", lessonId: lesson?.id ?? "unknown" });
-    await applyERSDelta({ L: 1, A: 1 });
-    await setLearnNextAction(); // sets a learn-flavored next action
-    await completeNextActionAndRecompute(); // recompute system next step
-    router.replace("/(tabs)/home");
+    await appendEvent("task_completed", { task: stepName, lessonId: lesson.id, ok: true });
+    setTranscript(stepName === "speak_guided" ? (step as any)?.sentence ?? "" : (step as any)?.prompt ?? "");
+    setLastWasOk(true);
+    next();
   }
 
   useEffect(() => {
@@ -108,7 +94,6 @@ export default function LessonScreen() {
     );
   }
 
-  // ------- RENDER -------
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: C.bg }}>
       <Stack paddingHorizontal={16} paddingTop={12} paddingBottom={12} flexDirection="row" alignItems="center" justifyContent="space-between">
@@ -128,7 +113,7 @@ export default function LessonScreen() {
         </Pressable>
       </Stack>
 
-      <Stack padding={16} gap={12}>
+      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
         {step.type === "context" && (
           <>
             <Card>
@@ -136,7 +121,7 @@ export default function LessonScreen() {
                 {step.text}
               </Text>
             </Card>
-            <PillButton onPress={next}>Continue</PillButton>
+            <PillButton label="Continue" onPress={next} />
           </>
         )}
 
@@ -151,15 +136,10 @@ export default function LessonScreen() {
 
             <Pressable
               onPressIn={async () => {
-                await appendEvent("task_started", { task: "speak_free", lessonId: lesson.id });
-                await startRec();
+                await startRec("speak_free");
               }}
               onPressOut={async () => {
-                await stopRec();
-                setLastWasOk(true);
-                setTranscript(step.prompt);
-                await appendEvent("task_completed", { task: "speak_free", ok: true, lessonId: lesson.id });
-                next();
+                await stopRec("speak_free");
               }}
               style={{
                 backgroundColor: C.dark,
@@ -168,9 +148,7 @@ export default function LessonScreen() {
                 alignItems: "center",
               }}
             >
-              <Text color="#fff" fontWeight="900">
-                Hold to speak
-              </Text>
+              <Text style={{ color: "#fff", fontWeight: "900" }}>Hold to speak</Text>
             </Pressable>
           </>
         )}
@@ -187,12 +165,12 @@ export default function LessonScreen() {
 
               {transcript ? (
                 <Text marginTop={10} color={C.sub}>
-                  "{transcript}"
+                  &quot;{transcript}&quot;
                 </Text>
               ) : null}
             </Card>
 
-            <PillButton onPress={next}>Continue</PillButton>
+            <PillButton label="Continue" onPress={next} />
           </>
         )}
 
@@ -208,7 +186,7 @@ export default function LessonScreen() {
                 </Text>
               </Stack>
             </Card>
-            <PillButton onPress={next}>Continue</PillButton>
+            <PillButton label="Continue" onPress={next} />
           </>
         )}
 
@@ -223,14 +201,10 @@ export default function LessonScreen() {
 
             <Pressable
               onPressIn={async () => {
-                await appendEvent("task_started", { task: "speak_guided", lessonId: lesson.id });
-                await startRec();
+                await startRec("speak_guided");
               }}
               onPressOut={async () => {
-                await stopRec();
-                setTranscript(step.sentence);
-                await appendEvent("task_completed", { task: "speak_guided", ok: true, lessonId: lesson.id });
-                next();
+                await stopRec("speak_guided");
               }}
               style={{
                 backgroundColor: C.dark,
@@ -239,21 +213,8 @@ export default function LessonScreen() {
                 alignItems: "center",
               }}
             >
-              <Text color="#fff" fontWeight="900">
-                Hold to speak
-              </Text>
+              <Text style={{ color: "#fff", fontWeight: "900" }}>Hold to speak</Text>
             </Pressable>
-          </>
-        )}
-
-        {step.type === "done" && (
-          <>
-            <Card>
-              <Text fontSize={20} fontWeight="900" color={C.text}>
-                {step.identity}
-              </Text>
-            </Card>
-            <PrimaryButton onPress={done}>Done</PrimaryButton>
           </>
         )}
 
@@ -298,14 +259,10 @@ export default function LessonScreen() {
             <RecordingIndicator isRecording={isRecording} />
             <Pressable
               onPressIn={async () => {
-                await appendEvent("task_started", { task: "speak_repeat", lessonId: lesson.id });
-                await startRec();
+                await startRec("speak_repeat");
               }}
               onPressOut={async () => {
-                await stopRec();
-                setTranscript(step.target);
-                await appendEvent("task_completed", { task: "speak_repeat", ok: true, lessonId: lesson.id });
-                next();
+                await stopRec("speak_repeat");
               }}
               style={{
                 backgroundColor: C.dark,
@@ -314,9 +271,7 @@ export default function LessonScreen() {
                 alignItems: "center",
               }}
             >
-              <Text color="#fff" fontWeight="900">
-                {isRecording ? "Recording…" : "Hold to speak"}
-              </Text>
+              <Text style={{ color: "#fff", fontWeight: "900" }}>{isRecording ? "Recording…" : "Hold to speak"}</Text>
             </Pressable>
           </>
         )}
@@ -343,11 +298,11 @@ export default function LessonScreen() {
                       if (correct) {
                         setTimeout(() => next(), 500);
                       }
-                  }}
-                  style={{
-                    flex: 1,
-                    borderRadius: 14,
-                    paddingVertical: 10,
+                    }}
+                    style={{
+                      flex: 1,
+                      borderRadius: 14,
+                      paddingVertical: 10,
                       borderWidth: 1,
                       borderColor: isCorrect
                         ? "#10B981"
@@ -389,28 +344,28 @@ export default function LessonScreen() {
         )}
 
         {step.type === "hint_banner" && showHintBanner ? (
-            <Pressable
-              onPress={() => {
-                setShowHintBanner(false);
-                next();
-              }}
-              style={{
-                backgroundColor: "rgba(255,181,143,0.18)",
-                borderRadius: 12,
-                padding: 12,
-                borderWidth: 1,
-                borderColor: "rgba(255,181,143,0.35)",
-              }}
-            >
-              <Text fontWeight="800" color={C.text}>
-                Tip
-              </Text>
-              <Text color={C.sub} marginTop={4}>
-                {step.text}
-              </Text>
-            </Pressable>
-          ) : null}
-      </Stack>
+          <Pressable
+            onPress={() => {
+              setShowHintBanner(false);
+              next();
+            }}
+            style={{
+              backgroundColor: "rgba(255,181,143,0.18)",
+              borderRadius: 12,
+              padding: 12,
+              borderWidth: 1,
+              borderColor: "rgba(255,181,143,0.35)",
+            }}
+          >
+            <Text fontWeight="800" color={C.text}>
+              Tip
+            </Text>
+            <Text color={C.sub} marginTop={4}>
+              {step.text}
+            </Text>
+          </Pressable>
+        ) : null}
+      </ScrollView>
     </SafeAreaView>
   );
 }

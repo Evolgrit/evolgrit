@@ -5,12 +5,14 @@ import { Ionicons } from "@expo/vector-icons";
 export function ListRow({
   title,
   subtitle,
+  value,
   icon,
   onPress,
   ...props
 }: {
   title: string;
   subtitle?: string;
+  value?: string;
   icon?: React.ReactNode;
   onPress?: () => void;
 } & StackProps) {
@@ -50,6 +52,11 @@ export function ListRow({
           </Text>
         ) : null}
       </Stack>
+      {value ? (
+        <Text color="$muted" marginRight={6} fontSize={13}>
+          {value}
+        </Text>
+      ) : null}
       <Ionicons name="chevron-forward" size={18} color="rgba(17,24,39,0.30)" />
     </Stack>
   );

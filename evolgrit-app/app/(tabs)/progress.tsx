@@ -20,15 +20,6 @@ import { Stack, Text } from "tamagui";
 import { PrimaryButton } from "../../components/system/PrimaryButton";
 import { SecondaryButton } from "../../components/system/SecondaryButton";
 
-const C = {
-  bg: "#F6F7FB",
-  card: "#ffffff",
-  border: "#E5E7EB",
-  text: "#111827",
-  sub: "#6B7280",
-  dark: "#111827",
-};
-
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <GlassCard marginBottom={12}>

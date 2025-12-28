@@ -1,10 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { Stack, Text } from "tamagui";
+
 import { loadLangPrefs } from "../lib/languagePrefs";
 import { applyERSDelta } from "../lib/readinessService";
 import { completeNextActionAndRecompute } from "../lib/nextActionService";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { GlassCard } from "../components/system/GlassCard";
+import { PrimaryButton } from "../components/system/PrimaryButton";
 
 type Feedback = {
   hint1: string;
@@ -12,45 +16,27 @@ type Feedback = {
   identity: string;
 };
 
-const CARD = {
-  bg: "#ffffff",
-  border: "#E5E7EB",
-  text: "#111827",
-  sub: "#6B7280",
-  dark: "#111827",
-  soft: "#F6F7FB",
-};
-
 function helperLine(nativeLang: string) {
   const map: Record<string, string> = {
-    en: "Helper: Use this sentence to ask politely in a shop.",
-    pl: "Wskazówka: Użyj tego zdania, aby grzecznie zapytać w sklepie.",
-    ar: "مساعدة: استخدم هذه الجملة لتسأل بأدب في المتجر.",
-    tr: "İpucu: Mağazada kibarca sormak için bu cümleyi kullan.",
-    ro: "Ajutor: Folosește această propoziție ca să întrebi politicos în magazin.",
-    uk: "Підказка: Використай це речення, щоб ввічливо запитати в магазині.",
-    ru: "Подсказка: Используй это предложение, чтобы вежливо спросить в магазине.",
+    en: "Use this sentence to ask politely in a shop.",
+    pl: "Użyj tego zdania, aby grzecznie zapytać w sklepie.",
+    ar: "استخدم هذه الجملة لتسأل بأدب في المتجر.",
+    tr: "Mağazada kibarca sormak için bu cümleyi kullan.",
+    ro: "Folosește această propoziție ca să întrebi politicos în magazin.",
+    uk: "Використай це речення, щоб ввічливо запитати в магазині.",
+    ru: "Используй это предложение, чтобы вежливо спросить в магазине.",
   };
   return map[nativeLang] ?? map.en;
 }
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <View
-      style={{
-        backgroundColor: CARD.bg,
-        borderRadius: 16,
-        padding: 16,
-        borderWidth: 1,
-        borderColor: CARD.border,
-        marginBottom: 12,
-      }}
-    >
-      <Text style={{ fontSize: 12, fontWeight: "800", color: CARD.sub, marginBottom: 10 }}>
+    <GlassCard marginBottom={12}>
+      <Text fontSize={12} fontWeight="800" color="$muted" marginBottom={10}>
         {title.toUpperCase()}
       </Text>
       {children}
-    </View>
+    </GlassCard>
   );
 }
 
@@ -97,26 +83,32 @@ export default function SpeakTaskA1() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: CARD.soft }}>
-      <View style={{ paddingHorizontal: 16, paddingBottom: 10 }}>
-        <Text style={{ fontSize: 22, fontWeight: "900", color: CARD.text }}>Speaking</Text>
-        <Text style={{ marginTop: 4, color: CARD.sub }}>One task. One improvement. One next step.</Text>
-      </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
+      <Stack paddingHorizontal={16} paddingBottom={10}>
+        <Text fontSize={22} fontWeight="900" color="$text">
+          Speaking
+        </Text>
+        <Text marginTop={4} color="$muted">
+          One task. One improvement. One next step.
+        </Text>
+      </Stack>
 
       <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
         <Card title="Context">
-          <Text style={{ fontSize: 18, fontWeight: "800", color: CARD.text, marginBottom: 6 }}>
+          <Text fontSize={18} fontWeight="800" color="$text" marginBottom={6}>
             {context.oneLiner}
           </Text>
-          <Text style={{ color: CARD.sub }}>{context.situation}</Text>
+          <Text color="$muted">{context.situation}</Text>
         </Card>
 
         <Card title="Your line">
-          <Text style={{ fontSize: 18, fontWeight: "800", color: CARD.text }}>{context.prompt}</Text>
-          <Text style={{ marginTop: 10, color: CARD.sub }}>
+          <Text fontSize={18} fontWeight="800" color="$text">
+            {context.prompt}
+          </Text>
+          <Text marginTop={10} color="$muted">
             {helperLine(nativeLang)}
           </Text>
-          <Text style={{ color: CARD.sub, marginTop: 6 }}>
+          <Text color="$muted" marginTop={6}>
             {{
               en: "Sag den Satz laut und deutlich.",
               pl: "Powiedz to zdanie głośno i wyraźnie.",
@@ -130,66 +122,37 @@ export default function SpeakTaskA1() {
         </Card>
 
         {stage === "ready" && (
-          <Pressable
-            onPress={() => setStage("speaking")}
-            style={{
-              backgroundColor: CARD.dark,
-              paddingVertical: 14,
-              borderRadius: 16,
-              alignItems: "center",
-              marginBottom: 12,
-            }}
-          >
-            <Text style={{ color: "#fff", fontWeight: "900" }}>Hold to speak</Text>
-          </Pressable>
+          <PrimaryButton label="Hold to speak" onPress={() => setStage("speaking")} />
         )}
 
         {stage === "speaking" && (
-          <Pressable
-            onPressOut={() => setStage("feedback")}
-            style={{
-              backgroundColor: "#ffffff",
-              borderWidth: 1,
-              borderColor: CARD.border,
-              paddingVertical: 14,
-              borderRadius: 16,
-              alignItems: "center",
-              marginBottom: 12,
-            }}
-          >
-            <Text style={{ color: CARD.text, fontWeight: "900" }}>Release to get feedback</Text>
-          </Pressable>
+          <PrimaryButton label="Release to get feedback" onPressOut={() => setStage("feedback")} />
         )}
 
         {stage === "feedback" && (
           <>
             <Card title="Feedback">
-              <Text style={{ color: CARD.text, fontWeight: "800", marginBottom: 6 }}>{feedback.hint1}</Text>
-              {feedback.hint2 ? <Text style={{ color: CARD.text, fontWeight: "800" }}>{feedback.hint2}</Text> : null}
+              <Text color="$text" fontWeight="800" marginBottom={6}>
+                {feedback.hint1}
+              </Text>
+              {feedback.hint2 ? (
+                <Text color="$text" fontWeight="800">
+                  {feedback.hint2}
+                </Text>
+              ) : null}
             </Card>
 
             <Card title="You gained">
-              <Text style={{ color: CARD.text, fontWeight: "900" }}>{feedback.identity}</Text>
+              <Text color="$text" fontWeight="900">
+                {feedback.identity}
+              </Text>
             </Card>
 
-            <Pressable
-              onPress={onComplete}
-              disabled={saving}
-              style={{
-                backgroundColor: CARD.dark,
-                paddingVertical: 14,
-                borderRadius: 16,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "#fff", fontWeight: "900" }}>
-                {saving ? "Saving…" : "Done → Next Action"}
-              </Text>
-            </Pressable>
+            <PrimaryButton label={saving ? "Saving…" : "Done → Next Action"} disabled={saving} onPress={onComplete} />
           </>
         )}
 
-        <Text style={{ marginTop: 12, color: "#9CA3AF", fontSize: 12 }}>
+        <Text marginTop={12} color="$muted" fontSize={12}>
           This screen simulates speaking. Next step: microphone + ASR + internal scoring.
         </Text>
       </ScrollView>

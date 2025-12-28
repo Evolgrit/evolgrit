@@ -1,19 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Stack, Text } from "tamagui";
 
-import { AppButton } from "../components/AppButton";
+import { PillButton } from "../components/system/PillButton";
+import { GlassCard } from "../components/system/GlassCard";
 import { loadMoods, saveMood, type Mood, dayKey } from "../lib/moodStore";
-
-const C = {
-  bg: "#F6F7FB",
-  card: "#FFFFFF",
-  border: "#E5E7EB",
-  text: "#111827",
-  sub: "#6B7280",
-};
 
 const MOOD_COLOR: Record<Mood, string> = {
   calm: "#2ECC71",
@@ -52,16 +45,7 @@ function startOfMonthGrid(d: Date) {
   return addDays(first, -diff);
 }
 
-function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <View style={{ backgroundColor: C.card, borderRadius: 14, padding: 16, borderWidth: 1, borderColor: C.border, marginBottom: 12 }}>
-      {children}
-    </View>
-  );
-}
-
 export default function ProfileMood() {
-  const router = useRouter();
   const [moods, setMoods] = useState<Record<string, Mood>>({});
   const [anchor, setAnchor] = useState<Date>(new Date());
   const [selected, setSelected] = useState<Date>(new Date());
@@ -84,40 +68,46 @@ export default function ProfileMood() {
   const selectedMood = moods[dayKey(selected)] ?? null;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: C.bg }}>
-      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingVertical: 12, gap: 12 }}>
-        <Pressable onPress={() => router.back()} style={{ padding: 6 }}>
-          <Ionicons name="chevron-back" size={22} color={C.text} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
+      <Stack flexDirection="row" alignItems="center" paddingHorizontal={16} paddingVertical={12} gap={12}>
+        <Pressable onPress={() => window.history.back()} style={{ padding: 6 }}>
+          <Ionicons name="chevron-back" size={22} color="#111827" />
         </Pressable>
-        <View>
-          <Text style={{ fontSize: 18, fontWeight: "900", color: C.text }}>Mood & check-ins</Text>
-          <Text style={{ color: C.sub, marginTop: 2 }}>Log one mood per day</Text>
-        </View>
-      </View>
+        <Stack>
+          <Text fontSize={18} fontWeight="900" color="$text">
+            Mood & check-ins
+          </Text>
+          <Text color="$muted" marginTop={2}>
+            Log one mood per day
+          </Text>
+        </Stack>
+      </Stack>
 
       <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 24 }}>
-        <Card>
-          <View style={{ flexDirection: "row", gap: 10, marginBottom: 12 }}>
-            <View style={{ flex: 1 }}>
-              <AppButton label="Week" variant={viewMode === "week" ? "primary" : "secondary"} onPress={() => setViewMode("week")} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <AppButton label="Month" variant={viewMode === "month" ? "primary" : "secondary"} onPress={() => setViewMode("month")} />
-            </View>
-          </View>
+        <GlassCard>
+          <Stack flexDirection="row" gap={10} marginBottom={12}>
+            <Stack flex={1}>
+              <PillButton label="Week" onPress={() => setViewMode("week")} />
+            </Stack>
+            <Stack flex={1}>
+              <PillButton label="Month" onPress={() => setViewMode("month")} />
+            </Stack>
+          </Stack>
 
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+          <Stack flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom={12}>
             <Pressable onPress={() => setAnchor(addDays(anchor, viewMode === "week" ? -7 : -30))} style={{ padding: 6 }}>
-              <Ionicons name="chevron-back" size={18} color={C.text} />
+              <Ionicons name="chevron-back" size={18} color="#111827" />
             </Pressable>
-            <Text style={{ fontWeight: "800", color: C.text }}>{monthLabel(anchor)}</Text>
+            <Text fontWeight="800" color="$text">
+              {monthLabel(anchor)}
+            </Text>
             <Pressable onPress={() => setAnchor(addDays(anchor, viewMode === "week" ? +7 : +30))} style={{ padding: 6 }}>
-              <Ionicons name="chevron-forward" size={18} color={C.text} />
+              <Ionicons name="chevron-forward" size={18} color="#111827" />
             </Pressable>
-          </View>
+          </Stack>
 
           {viewMode === "week" ? (
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Stack flexDirection="row" justifyContent="space-between">
               {weekDays.map((d) => {
                 const key = dayKey(d);
                 const mood = moods[key];
@@ -132,28 +122,32 @@ export default function ProfileMood() {
                       paddingVertical: 10,
                       alignItems: "center",
                       borderWidth: 1,
-                      borderColor: isSel ? C.text : C.border,
+                      borderColor: isSel ? "#111827" : "rgba(17,24,39,0.08)",
                       backgroundColor: "#fff",
                     }}
                   >
-                    <Text style={{ fontSize: 11, color: C.sub, fontWeight: "800" }}>{d.toLocaleString(undefined, { weekday: "short" })}</Text>
-                    <Text style={{ marginTop: 4, fontSize: 16, fontWeight: "900", color: C.text }}>{d.getDate()}</Text>
-                    <View style={{ marginTop: 6, height: 8 }}>
-                      {mood ? <View style={{ width: 8, height: 8, borderRadius: 99, backgroundColor: MOOD_COLOR[mood] }} /> : null}
-                    </View>
+                    <Text fontSize={11} color="$muted" fontWeight="800">
+                      {d.toLocaleString(undefined, { weekday: "short" })}
+                    </Text>
+                    <Text marginTop={4} fontSize={16} fontWeight="900" color="$text">
+                      {d.getDate()}
+                    </Text>
+                    <Stack marginTop={6} height={8}>
+                      {mood ? <Stack width={8} height={8} borderRadius={99} backgroundColor={MOOD_COLOR[mood]} /> : null}
+                    </Stack>
                   </Pressable>
                 );
               })}
-            </View>
+            </Stack>
           ) : (
-            <View style={{ gap: 8 }}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Stack gap={8}>
+              <Stack flexDirection="row" justifyContent="space-between">
                 {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((w) => (
-                  <Text key={w} style={{ width: 44, textAlign: "center", fontSize: 11, color: C.sub, fontWeight: "800" }}>
+                  <Text key={w} width={44} textAlign="center" fontSize={11} color="$muted" fontWeight="800">
                     {w}
                   </Text>
                 ))}
-              </View>
+              </Stack>
 
               {(() => {
                 const start = startOfMonthGrid(anchor);
@@ -162,7 +156,7 @@ export default function ProfileMood() {
                 const rows = Array.from({ length: 6 }, (_, r) => cells.slice(r * 7, r * 7 + 7));
 
                 return rows.map((row, idx) => (
-                  <View key={idx} style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                  <Stack key={idx} flexDirection="row" justifyContent="space-between">
                     {row.map((d) => {
                       const key = dayKey(d);
                       const mood = moods[key];
@@ -178,43 +172,47 @@ export default function ProfileMood() {
                             paddingVertical: 10,
                             alignItems: "center",
                             borderWidth: 1,
-                            borderColor: isSel ? C.text : "transparent",
+                            borderColor: isSel ? "#111827" : "transparent",
                             backgroundColor: inMonth ? "#fff" : "#F3F4F6",
                             opacity: inMonth ? 1 : 0.55,
                           }}
                         >
-                          <Text style={{ fontSize: 14, fontWeight: "900", color: C.text }}>{d.getDate()}</Text>
-                          <View style={{ marginTop: 6, height: 8 }}>
-                            {mood ? <View style={{ width: 8, height: 8, borderRadius: 99, backgroundColor: MOOD_COLOR[mood] }} /> : null}
-                          </View>
+                          <Text fontSize={14} fontWeight="900" color="$text">
+                            {d.getDate()}
+                          </Text>
+                          <Stack marginTop={6} height={8}>
+                            {mood ? <Stack width={8} height={8} borderRadius={99} backgroundColor={MOOD_COLOR[mood]} /> : null}
+                          </Stack>
                         </Pressable>
                       );
                     })}
-                  </View>
+                  </Stack>
                 ));
               })()}
-            </View>
+            </Stack>
           )}
 
-          <View style={{ marginTop: 14, padding: 12, borderRadius: 12, backgroundColor: "#fff", borderWidth: 1, borderColor: C.border }}>
-            <Text style={{ color: C.text, fontWeight: "900" }}>
+          <GlassCard marginTop={14}>
+            <Text color="$text" fontWeight="900">
               Selected: {selected.toLocaleDateString()} {selectedMood ? `· ${selectedMood}` : ""}
             </Text>
-            <Text style={{ marginTop: 6, color: C.sub }}>Tap a mood to log it for this day.</Text>
+            <Text marginTop={6} color="$muted">
+              Tap a mood to log it for this day.
+            </Text>
 
-            <View style={{ flexDirection: "row", gap: 10, marginTop: 12 }}>
-              <View style={{ flex: 1 }}>
-                <AppButton label="Calm" variant="secondary" onPress={() => setMoodForSelected("calm")} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <AppButton label="Stressed" variant="secondary" onPress={() => setMoodForSelected("stressed")} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <AppButton label="No time" variant="secondary" onPress={() => setMoodForSelected("no_time")} />
-              </View>
-            </View>
-          </View>
-        </Card>
+            <Stack flexDirection="row" gap={10} marginTop={12}>
+              <Stack flex={1}>
+                <PillButton label="Calm" onPress={() => setMoodForSelected("calm")} />
+              </Stack>
+              <Stack flex={1}>
+                <PillButton label="Stressed" onPress={() => setMoodForSelected("stressed")} />
+              </Stack>
+              <Stack flex={1}>
+                <PillButton label="No time" onPress={() => setMoodForSelected("no_time")} />
+              </Stack>
+            </Stack>
+          </GlassCard>
+        </GlassCard>
       </ScrollView>
     </SafeAreaView>
   );
