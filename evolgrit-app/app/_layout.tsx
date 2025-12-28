@@ -1,24 +1,19 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Stack } from "expo-router";
+import { TamaguiProvider } from "tamagui";
+import config from "../tamagui.config";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <TamaguiProvider config={config}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="speak-v2" options={{ title: "Speaking" }} />
+        <Stack.Screen name="speak-task" options={{ title: "Speaking" }} />
+        <Stack.Screen name="language" options={{ title: "Language" }} />
+        <Stack.Screen name="lesson" options={{ title: "Lesson" }} />
+        <Stack.Screen name="mentor" options={{ headerShown: false }} />
+        <Stack.Screen name="profile" options={{ title: "Profile" }} />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </TamaguiProvider>
   );
 }
