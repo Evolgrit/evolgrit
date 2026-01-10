@@ -1,0 +1,40 @@
+{
+  "id": "a1_w2_cloze_dialog_01",
+  "level": "A1",
+  "week": 2,
+  "title": "Stadtführung buchen",
+  "prompt": "Im Internet suchen Christine und Miguel nach einer Stadtführung …",
+  "tip": "Tipp: ‚admission fee‘ = Eintrittspreis",
+  "turns": [
+    {
+      "speaker": "christine",
+      "align": "left",
+      "text": "Miguel, diese Tour ist perfekt! Der {{gap:0}} ist so günstig!",
+      "translation": "Miguel, dieser Stadtrundgang ist perfekt! Der Eintrittspreis ist so günstig!"
+    },
+    {
+      "speaker": "miguel",
+      "align": "right",
+      "text": "Wow! Ja! Werden wir {{gap:1}} sehen?",
+      "translation": "Wow! Ja! Werden wir Denkmäler sehen?"
+    },
+    {
+      "speaker": "christine",
+      "align": "left",
+      "text": "Ja, davon gibt es viele. Wir werden auch historische Stätten sehen!",
+      "translation": "Ja, davon gibt es viele. Wir werden auch historische Stätten sehen!"
+    }
+  ],
+  "gaps": [
+    {
+      "id": 0,
+      "answer": "admission fee",
+      "options": ["audio guide", "admission fee"]
+    },
+    {
+      "id": 1,
+      "answer": "monuments",
+      "options": ["historical sites", "monuments"]
+    }
+  ]
+}

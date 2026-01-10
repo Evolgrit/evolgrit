@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { View, Text, Pressable, Animated, StyleSheet } from "react-native";
-import { BlurView } from "expo-blur";
 import * as Haptics from "expo-haptics";
 
 export function GlassPillButton({
@@ -57,9 +56,7 @@ export function GlassPillButton({
           },
         ]}
       >
-        <BlurView intensity={22} tint="light" style={StyleSheet.absoluteFill} />
         <View style={styles.overlay} />
-        <View style={styles.border} />
 
         <View style={styles.content}>
           {leftIcon ? <View style={{ marginRight: 8 }}>{leftIcon}</View> : null}
@@ -76,7 +73,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 999,
     justifyContent: "center",
-    overflow: "hidden",
     shadowColor: "#000",
     shadowOpacity: 0.08,
     shadowRadius: 12,
@@ -84,10 +80,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(255,255,255,0.62)",
-  },
-  border: {
-    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#ffffff",
     borderRadius: 999,
     borderWidth: 1,
     borderColor: "rgba(17,24,39,0.08)",

@@ -50,15 +50,25 @@ export default function Profile() {
     return "Stability";
   }, [limiter]);
 
+  function flagFor(lang: string) {
+    const map: Record<string, string> = {
+      en: "🇬🇧",
+      tr: "🇹🇷",
+      pl: "🇵🇱",
+      ar: "🇸🇦",
+      ro: "🇷🇴",
+      uk: "🇺🇦",
+      ru: "🇷🇺",
+      de: "🇩🇪",
+    };
+    return map[lang] ?? "🏳️";
+  }
+
   async function pickAvatar() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) return;
-    const mediaTypes =
-      (ImagePicker as any).MediaType?.Images
-        ? [(ImagePicker as any).MediaType.Images]
-        : (ImagePicker as any).MediaTypeOptions.Images;
     const res = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes,
+      mediaTypes: ["images"],
       quality: 0.9,
     });
     if (!res.canceled && res.assets?.[0]?.uri) {
@@ -112,11 +122,18 @@ export default function Profile() {
         </GlassCard>
 
         <GlassCard padding={0} marginBottom={12}>
+          <ListRow
+            icon={<Ionicons name="settings-outline" size={18} color="#111827" />}
+            title="Einstellungen"
+            subtitle="Allgemein, Erinnerungen, Tonaufnahmen"
+            onPress={() => router.push("/settings")}
+          />
           <ListRow icon={<Ionicons name="image-outline" size={18} color="#111827" />} title="Change photo" onPress={pickAvatar} />
           <ListRow
             icon={<Ionicons name="language-outline" size={18} color="#111827" />}
             title="Language"
             subtitle={`${nativeLang} → ${targetLang}`}
+            value={`${flagFor(nativeLang)} → ${flagFor("de")}`}
           />
           <ListRow
             icon={<Ionicons name="analytics-outline" size={18} color="#111827" />}

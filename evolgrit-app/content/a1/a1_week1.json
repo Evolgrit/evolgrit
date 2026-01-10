@@ -1,0 +1,270 @@
+{
+  "level": "A1",
+  "week": 1,
+  "theme": "Ankommen",
+  "story": {
+    "de": "Du bist neu in Deutschland. Heute ist dein erster Tag. Kleine Schritte reichen.",
+    "en": "You are new in Germany. Today is your first day. Small steps are enough."
+  },
+  "tasks": [
+    {
+      "id": "a1_w1_t1_name",
+      "slug": "a1-w1-name",
+      "week": 1,
+      "order": 1,
+      "duration_min": 3,
+      "title": "Sich vorstellen: Name",
+      "situation": {
+        "title": "Erstes Treffen",
+        "de": "Du triffst jemanden zum ersten Mal.",
+        "en": "You meet someone for the first time."
+      },
+      "observe": {
+        "kind": "dialogue",
+        "lines": [
+          {
+            "id": "l1",
+            "speaker": "mentor",
+            "de": "Hallo! Ich heiße Anna.",
+            "en": "Hello! My name is Anna.",
+            "pronunciation": "HAL-lo | ich HAI-ße AN-na",
+            "tts": { "rate": "normal" }
+          },
+          {
+            "id": "l2",
+            "speaker": "mentor",
+            "de": "Und du?",
+            "en": "And you?",
+            "pronunciation": "unt DU",
+            "tts": { "rate": "normal" }
+          }
+        ]
+      },
+      "do": {
+        "type": "speak_fill_gap",
+        "prompt_de": "Sag deinen Namen.",
+        "prompt_en": "Say your name.",
+        "speak_target": "Hallo, ich heiße ___.",
+        "gap": {
+          "id": "g1",
+          "de_template": "Hallo, ich heiße ___.",
+          "en": "Hello, my name is ___.",
+          "correct": "Daniel",
+          "placeholder": "Name"
+        }
+      },
+      "hint": {
+        "id": "h1",
+        "title": "Mini-Tipp",
+        "body": "„Ich heiße …“ = „My name is …“. Sag es ruhig und deutlich.",
+        "optional": true
+      },
+      "success": {
+        "title": "Erledigt",
+        "de": "Du kannst dich mit deinem Namen vorstellen.",
+        "en": "You can introduce yourself with your name."
+      }
+    },
+    {
+      "id": "a1_w1_t2_origin",
+      "slug": "a1-w1-origin",
+      "week": 1,
+      "order": 2,
+      "duration_min": 3,
+      "title": "Sich vorstellen: Herkunft",
+      "situation": {
+        "title": "Smalltalk",
+        "de": "Jemand fragt dich: Woher kommst du?",
+        "en": "Someone asks: Where are you from?"
+      },
+      "observe": {
+        "kind": "single_line",
+        "lines": [
+          {
+            "id": "l1",
+            "speaker": "mentor",
+            "de": "Ich komme aus Spanien.",
+            "en": "I come from Spain.",
+            "pronunciation": "ich KOM-me aus SPA-ni-en",
+            "tts": { "rate": "normal" }
+          }
+        ]
+      },
+      "do": {
+        "type": "speak_repeat",
+        "prompt_de": "Sag den Satz mit deinem Land.",
+        "prompt_en": "Say the sentence with your country.",
+        "speak_target": "Ich komme aus ___.",
+        "gap": {
+          "id": "g1",
+          "de_template": "Ich komme aus ___.",
+          "en": "I come from ___.",
+          "correct": "England",
+          "placeholder": "Land"
+        }
+      },
+      "hint": {
+        "id": "h1",
+        "title": "Mini-Tipp",
+        "body": "„aus“ = „from“. Fokus auf „komme“.",
+        "optional": true
+      },
+      "success": {
+        "title": "Erledigt",
+        "de": "Du kannst sagen, woher du kommst.",
+        "en": "You can say where you are from."
+      }
+    },
+    {
+      "id": "a1_w1_t3_greeting",
+      "slug": "a1-w1-greeting",
+      "week": 1,
+      "order": 3,
+      "duration_min": 2,
+      "title": "Begrüßen",
+      "situation": {
+        "title": "Tagsüber",
+        "de": "Du begrüßt jemanden am Morgen.",
+        "en": "You greet someone in the morning."
+      },
+      "observe": {
+        "kind": "dialogue",
+        "lines": [
+          {
+            "id": "l1",
+            "speaker": "mentor",
+            "de": "Guten Morgen!",
+            "en": "Good morning!",
+            "pronunciation": "GU-ten MOR-gen",
+            "tts": { "rate": "normal" }
+          },
+          {
+            "id": "l2",
+            "speaker": "learner",
+            "de": "Guten Morgen!",
+            "en": "Good morning!",
+            "pronunciation": "GU-ten MOR-gen",
+            "tts": { "rate": "slow" }
+          }
+        ]
+      },
+      "do": {
+        "type": "choice_select",
+        "prompt_de": "Welche Begrüßung passt am Morgen?",
+        "prompt_en": "Which greeting fits in the morning?",
+        "choices": [
+          { "id": "c1", "label": "Guten Morgen", "correct": true },
+          { "id": "c2", "label": "Gute Nacht", "correct": false }
+        ]
+      },
+      "hint": {
+        "id": "h1",
+        "title": "Mini-Tipp",
+        "body": "„Guten Morgen“ nutzt du morgens. „Gute Nacht“ beim Schlafengehen.",
+        "optional": true
+      },
+      "success": {
+        "title": "Erledigt",
+        "de": "Du weißt, wie man am Morgen begrüßt.",
+        "en": "You know how to greet in the morning."
+      }
+    },
+    {
+      "id": "a1_w1_t4_thanks",
+      "slug": "a1-w1-thanks",
+      "week": 1,
+      "order": 4,
+      "duration_min": 2,
+      "title": "Bitte & Danke",
+      "situation": {
+        "title": "Höflichkeit",
+        "de": "Du willst freundlich sein.",
+        "en": "You want to be polite."
+      },
+      "observe": {
+        "kind": "dialogue",
+        "lines": [
+          {
+            "id": "l1",
+            "speaker": "mentor",
+            "de": "Danke!",
+            "en": "Thanks!",
+            "pronunciation": "DAN-ke",
+            "tts": { "rate": "normal" }
+          },
+          {
+            "id": "l2",
+            "speaker": "mentor",
+            "de": "Bitte.",
+            "en": "You're welcome / Please.",
+            "pronunciation": "BIT-te",
+            "tts": { "rate": "normal" }
+          }
+        ]
+      },
+      "do": {
+        "type": "speak_repeat",
+        "prompt_de": "Sag: „Danke“ und danach „Bitte“.",
+        "prompt_en": "Say: “Danke” and then “Bitte”.",
+        "speak_target": "Danke. Bitte."
+      },
+      "hint": {
+        "id": "h1",
+        "title": "Mini-Tipp",
+        "body": "Kurzer, klarer Ton. Das wirkt sofort sympathisch.",
+        "optional": true
+      },
+      "success": {
+        "title": "Erledigt",
+        "de": "Du kannst dich bedanken und antworten.",
+        "en": "You can say thanks and respond."
+      }
+    },
+    {
+      "id": "a1_w1_t5_numbers",
+      "slug": "a1-w1-numbers",
+      "week": 1,
+      "order": 5,
+      "duration_min": 3,
+      "title": "Zahlen 1–20 (Mini)",
+      "situation": {
+        "title": "Erster Einkauf",
+        "de": "Du brauchst eine kleine Zahl.",
+        "en": "You need a small number."
+      },
+      "observe": {
+        "kind": "single_line",
+        "lines": [
+          {
+            "id": "l1",
+            "speaker": "mentor",
+            "de": "Ich nehme zwei.",
+            "en": "I’ll take two.",
+            "pronunciation": "ich NEE-me TSVAI",
+            "tts": { "rate": "normal" }
+          }
+        ]
+      },
+      "do": {
+        "type": "choice_select",
+        "prompt_de": "Welche Zahl ist „zwei“?",
+        "prompt_en": "Which number is “zwei”?",
+        "choices": [
+          { "id": "c1", "label": "2", "correct": true },
+          { "id": "c2", "label": "12", "correct": false }
+        ]
+      },
+      "hint": {
+        "id": "h1",
+        "title": "Mini-Tipp",
+        "body": "Sprich Zahlen langsam. Erst klar, dann schneller.",
+        "optional": true
+      },
+      "success": {
+        "title": "Erledigt",
+        "de": "Du erkennst die Zahl „zwei“.",
+        "en": "You can recognize the number “two”."
+      }
+    }
+  ]
+}

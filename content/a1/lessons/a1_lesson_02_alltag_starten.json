@@ -1,0 +1,64 @@
+{
+  "id": "a1_lesson_02_alltag_starten",
+  "title": "Alltag starten",
+  "level": "A1",
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "audioText": "Wie viel kostet das?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wie viel kostet das?",
+          "imageKey": "a1_market_asking_price_correct_01",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "label": "Danke",
+          "imageKey": "a1_market_greeting_distract_01",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "audioText": "Ich brauche zwei Kilo.",
+      "targetText": "Ich brauche ____ Kilo.",
+      "choices": [
+        { "id": "a", "label": "zwei", "correct": true },
+        { "id": "b", "label": "bitte", "correct": false }
+      ],
+      "answer": "zwei"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "targetText": "Entschuldigung, wo finde ich Reis?",
+      "audioText": "Entschuldigung, wo finde ich Reis?"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "targetText": "Ich brauche zwei Kilo.",
+      "audioText": "Ich brauche zwei Kilo."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wofür nutzt du das?",
+      "audioText": "Einkaufen",
+      "choices": [
+        { "id": "a", "label": "Einkaufen", "correct": true },
+        { "id": "b", "label": "Schlafen", "correct": false }
+      ],
+      "answer": "Einkaufen"
+    },
+    {
+      "type": "summary",
+      "title": "Super",
+      "body": "Du kannst im Laden fragen."
+    }
+  ]
+}

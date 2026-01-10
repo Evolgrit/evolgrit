@@ -1,17 +1,17 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Stack, Text } from "tamagui";
 
 import { GlassCard } from "../../components/system/GlassCard";
 import { PrimaryButton } from "../../components/system/PrimaryButton";
+import { ScreenShell } from "../../components/system/ScreenShell";
 
 export default function SpeakTab() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F6F7FB" }}>
-      <Stack flex={1} paddingHorizontal={16} paddingTop={24} gap={12}>
+    <ScreenShell title="Speak">
+      <Stack flex={1} gap={12}>
         <Stack gap={4}>
           <Text fontSize={22} fontWeight="900" color="$text">
             Speak
@@ -29,6 +29,6 @@ export default function SpeakTab() {
           <PrimaryButton label="Start speaking drill" onPress={() => router.push("/speak-task")} />
         </GlassCard>
       </Stack>
-    </SafeAreaView>
+    </ScreenShell>
   );
 }

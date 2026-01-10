@@ -1,27 +1,28 @@
 import React from "react";
 import { Button, type ButtonProps } from "tamagui";
+import { pillProps } from "./recipes";
 
 export function SecondaryButton({
   label,
   children,
+  backgroundColor,
+  borderColor,
+  textColor,
   ...props
-}: ButtonProps & { label?: string }) {
+}: ButtonProps & { label?: string; textColor?: string }) {
   const content = label ?? children;
 
   return (
     <Button
+      {...pillProps}
       {...props}
-      backgroundColor="$card"
-      color="$text"
-      borderRadius={12}
+      backgroundColor={backgroundColor ?? "$card"}
+      borderColor={borderColor ?? pillProps.borderColor}
+      color={textColor ?? "$text"}
       minHeight={48}
-      paddingVertical={12}
-      fontWeight="900"
-      borderWidth={1}
-      borderColor="$border"
       pressStyle={{ scale: 0.98, opacity: 0.92 }}
     >
-      <Button.Text color="$text" fontWeight="800" fontSize={15}>
+      <Button.Text color={textColor ?? "$text"} fontWeight="800" fontSize={15}>
         {typeof content === "string" ? content : " "}
       </Button.Text>
       {typeof content !== "string" ? content : null}

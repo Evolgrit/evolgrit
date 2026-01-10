@@ -1,118 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import { Stack, Text } from "tamagui";
+import { YStack } from "tamagui";
 
-import { loadPhaseState, type PhaseState } from "../../lib/phaseStateStore";
-import { getDevMode } from "../../lib/devModeStore";
-import { getLessonsByLevel } from "../../lessons/catalog";
-import { GlassCard } from "../../components/system/GlassCard";
-import { PrimaryButton } from "../../components/system/PrimaryButton";
-import { PillButton } from "../../components/system/PillButton";
+import { ScreenShell } from "../../components/system/ScreenShell";
+import { SectionHeader } from "../../components/system/SectionHeader";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { LearnTrackCard } from "../../components/system/LearnTrackCard";
 
-const C = {
-  bg: "#F7F8FA",
-  text: "#111827",
-  sub: "#6B7280",
+const TRACK_IMAGES = {
+  language: require("../../assets/learn/tracks/language.jpg"),
+  life: require("../../assets/learn/tracks/life.jpg"),
+  job: require("../../assets/learn/tracks/job.jpg"),
 };
 
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <GlassCard marginBottom={12}>
-      <Text fontSize={12} fontWeight="800" color={C.sub} marginBottom={10}>
-        {title.toUpperCase()}
-      </Text>
-      {children}
-    </GlassCard>
-  );
-}
-
 export default function LearnTab() {
-  const [phaseState, setPhaseState] = useState<PhaseState | null>(null);
-  const [devMode, setDevMode] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState<"A1" | "A2">("A1");
   const router = useRouter();
-
-  useEffect(() => {
-    (async () => {
-      setPhaseState(await loadPhaseState());
-      setDevMode(await getDevMode());
-    })();
-  }, []);
-
-  if (!phaseState) {
-    return (
-      <Stack flex={1} backgroundColor={C.bg} alignItems="center" justifyContent="center">
-        <Text color={C.sub}>Loading…</Text>
-      </Stack>
-    );
-  }
-
-  const { phase, week } = phaseState;
-  const lessons = getLessonsByLevel(selectedLevel);
+  const insets = useSafeAreaInsets();
+  const TAB_BAR_HEIGHT = 80;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: C.bg }}>
-      <Stack paddingHorizontal={16} paddingTop={22} paddingBottom={10}>
-        <Text fontSize={22} fontWeight="900" color={C.text}>
-          Learn
-        </Text>
-        <Text marginTop={4} color={C.sub}>
-          Structured path. No browsing. Unlocks by progress.
-        </Text>
-        {devMode ? (
-          <PillButton
-            marginTop={8}
-            alignSelf="flex-start"
-            label="Open Tour Lesson"
-            onPress={() => router.push({ pathname: "/lesson", params: { lessonId: "a1_tour_tickets_photos" } })}
+    <ScreenShell title="Learn">
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: insets.bottom + TAB_BAR_HEIGHT + 16,
+        }}
+      >
+        <SectionHeader
+          label="Learn"
+          title="Learn"
+          subtext="Guided paths for Sprache, Leben & Job."
+          marginBottom="$4"
+        />
+
+        <YStack gap="$3" padding="$4">
+          <LearnTrackCard
+            image={TRACK_IMAGES.language}
+            title="Sprache"
+            subtitle="A1–B2 · klarer Lernpfad"
+            onPress={() => router.push("/learn/language")}
           />
-        ) : null}
-      </Stack>
 
-      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
-        <Card title="Journey">
-          <Stack flexDirection="row" gap={10} flexWrap="wrap">
-            {(["A1", "A2"] as ("A1" | "A2")[]).map((lvl) => (
-              <PillButton
-                key={lvl}
-                label={lvl}
-                disabled={!devMode && lvl !== "A1"}
-                backgroundColor={selectedLevel === lvl ? "$card" : "$card"}
-                onPress={() => setSelectedLevel(lvl)}
-              />
-            ))}
-          </Stack>
-          <Text marginTop={10} color={C.sub}>
-            Current:{" "}
-            <Text fontWeight="900" color={C.text}>
-              {phase}
-            </Text>{" "}
-            · Week{" "}
-            <Text fontWeight="900" color={C.text}>
-              {week}
-            </Text>
-          </Text>
-        </Card>
+          <LearnTrackCard
+            image={TRACK_IMAGES.life}
+            title="Leben in Deutschland"
+            subtitle="Kultur · Do & Don’t · Alltag"
+            onPress={() => router.push("/learn/life")}
+          />
 
-        <Card title="Lessons">
-          {lessons.map((lesson) => (
-            <GlassCard key={lesson.id} marginBottom={10}>
-              <Text fontWeight="900" color={C.text}>
-                {lesson.title}
-              </Text>
-              <Text marginTop={4} color={C.sub}>
-                {lesson.capability}
-              </Text>
-
-              <Stack marginTop={10}>
-                <PrimaryButton onPress={() => router.push(`/lesson?lessonId=${lesson.id}`)} label="Start" />
-              </Stack>
-            </GlassCard>
-          ))}
-        </Card>
+          <LearnTrackCard
+            image={TRACK_IMAGES.job}
+            title="Job & Zukunft"
+            subtitle="Bewerbung · Telefonate · Arbeit"
+            onPress={() => router.push("/learn/job")}
+          />
+        </YStack>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenShell>
   );
 }

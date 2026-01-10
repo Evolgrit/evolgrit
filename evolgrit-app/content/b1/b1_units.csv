@@ -1,0 +1,71 @@
+week,level,title,slug,type,context,target_text,mentor_tip
+1,B1,Smalltalk & Meinung äußern,b1_smalltalk_opinion,learn,Du sprichst kurz mit jemandem und sagst deine Meinung.,Ich denke, dass es eine gute Idee ist.,Sag deine Meinung ruhig und begründe sie kurz.
+1,B1,Termin vereinbaren oder verschieben,b1_appointment_change,learn,Du musst einen Termin ändern.,Könnten wir den Termin auf morgen verschieben?,Nutze Konjunktiv II für Höflichkeit.
+1,B1,Beschwerde höflich äußern,b1_complaint_polite,learn,Ein Produkt oder Service ist nicht in Ordnung.,Leider gibt es ein Problem mit dem Produkt.,Beginne mit 'Leider' statt direkt zu kritisieren.
+1,B1,Speak: Problem im Geschäft erklären,b1_speak_shop_problem,speak,Du erklärst im Geschäft ein Problem.,Entschuldigung, dieses Produkt funktioniert nicht.,Sprich langsam und klar.
+1,B1,Speak: Termin telefonisch verschieben,b1_speak_call_change,speak,Du rufst an, um einen Termin zu ändern.,Ich rufe an, weil ich den Termin verschieben muss.,Sag zuerst den Grund, dann den Wunsch.
+2,B1,Aufgaben bei der Arbeit klären,b1_work_tasks,learn,Du sprichst mit Kolleg*innen über Aufgaben.,Könnten Sie mir bitte erklären, was ich machen soll?,Nachfragen ist besser als Fehler machen.
+2,B1,Feedback geben und annehmen,b1_feedback,learn,Du gibst konstruktives Feedback.,Ich finde, das war gut, aber wir könnten es verbessern.,Erst positiv, dann Verbesserung.
+2,B1,Kurze E-Mail schreiben,b1_email_short,learn,Du schreibst eine kurze berufliche E-Mail.,Vielen Dank für Ihre Nachricht.,Halte Sätze kurz und klar.
+2,B1,Speak: Aufgabe nicht verstanden,b1_speak_task_unclear,speak,Du hast eine Aufgabe nicht verstanden.,Entschuldigung, ich habe eine Frage zu der Aufgabe.,Sei ehrlich, wenn etwas unklar ist.
+2,B1,Speak: Deadline besprechen,b1_speak_deadline,speak,Du sprichst über eine Frist.,Ich schaffe es bis morgen, aber nicht heute.,Sag klar, was realistisch ist.
+3,B1,Wohnung besichtigen,b1_flat_viewing,learn,Du besichtigst eine Wohnung.,Die Wohnung gefällt mir, aber ich habe ein paar Fragen.,Stell konkrete Fragen zu Kosten und Lage.
+3,B1,Reparatur melden,b1_report_repair,learn,Du meldest einen Defekt in der Wohnung.,Der Wasserhahn tropft seit gestern Abend.,Beschreibe kurz das Problem und den Zeitpunkt.
+3,B1,Nebenkosten verstehen,b1_utilities,learn,Du fragst nach Nebenkosten.,Welche Nebenkosten sind in der Miete enthalten?,Frage klar nach, was inklusive ist.
+3,B1,Speak: Heizung funktioniert nicht,b1_speak_heating,speak,Du meldest eine kaputte Heizung.,Entschuldigung, die Heizung wird nicht warm.,Nenne das Problem und seit wann.
+3,B1,Speak: Mietvertrag klären,b1_speak_lease,speak,Du stellst Fragen zum Mietvertrag.,Ich hätte noch Fragen zum Mietvertrag.,Sprich höflich und klar.
+3,B1,Wohnungssuche: Anfrage & Besichtigung,b1_w3_l1_apartment_viewing_request,learn,Du fragst höflich nach einer Besichtigung und stellst 1–2 Fragen.,Ich interessiere mich für die Wohnung. Ist eine Besichtigung möglich?,Kurz + höflich + konkrete Frage.
+3,B1,Nachbarn: Problem ruhig ansprechen,b1_w3_l2_neighbor_problem,learn,Du sprichst Lärm/Ordnung freundlich an und machst einen Vorschlag.,Könnten wir kurz darüber sprechen? Ich muss früh schlafen.,Ich-Botschaft + Vorschlag statt Vorwurf.
+3,B1,Vertrag: Kündigungsfrist & Nebenkosten,b1_w3_l3_contract_notice_period,learn,Du fragst nach Kündigungsfrist und Nebenkosten.,Wie lange ist die Kündigungsfrist, und was ist in den Nebenkosten enthalten?,Zwei klare Fragen, langsam.
+3,B1,Speak: Nachbar wegen Lärm,b1_w3_s1_neighbor_noise_request,speak,Du bittest freundlich um Ruhe und machst einen Vorschlag.,Könnten Sie bitte etwas leiser sein? Ich muss früh schlafen.,Ruhig bleiben. Bitte + Grund + Vorschlag.
+3,B1,Speak: Vermieter – Heizung kaputt,b1_w3_s2_landlord_heating_issue,speak,Du erklärst das Problem und fragst nach einem Termin.,Die Heizung funktioniert nicht. Können Sie bitte jemanden schicken?,Problem → Bitte → Zeitpunkt.
+4,B1,Arzttermin vereinbaren,b1_doctor_appointment,learn,Du brauchst einen Arzttermin.,Ich hätte gerne einen Termin nächste Woche.,Nenne Grund und Zeitwunsch.
+4,B1,Symptome beschreiben,b1_symptoms,learn,Du beschreibst, wie es dir geht.,Ich habe seit zwei Tagen starke Kopfschmerzen.,Dauer + Stärke nennen.
+4,B1,Rezept abholen,b1_pickup_prescription,learn,Du holst ein Rezept ab.,Ich möchte mein Rezept abholen.,Sag klar, was du brauchst.
+4,B1,Speak: Notfall anrufen,b1_speak_emergency,speak,Du rufst im Notfall an.,Es ist ein Notfall, ich brauche einen Krankenwagen.,Sprich knapp und ruhig.
+4,B1,Speak: Krankmeldung erklären,b1_speak_sick_note,speak,Du meldest dich krank.,Ich bin krank und brauche eine Krankmeldung.,Nenne Dauer und Arztbesuch.
+4,B1,Beim Arzt: Symptome strukturiert erklären,b1_w4_l1_symptoms_structure,learn,Seit wann? Wie stark? Wo? Was hilft?,Seit drei Tagen habe ich starke Kopfschmerzen.,Seit wann → Symptom → Intensität.
+4,B1,Arzttermin: telefonisch fragen,b1_w4_l2_doctor_appointment_call,learn,Du fragst nach einem Termin und sagst kurz den Grund.,Ich hätte gern einen Termin. Es ist dringend.,Kurz erklären, ob es dringend ist.
+4,B1,Apotheke: Dosierung & Alternative,b1_w4_l3_pharmacy_dosage_alt,learn,Du fragst, wie oft du etwas nehmen sollst.,Wie oft soll ich das nehmen? Gibt es eine Alternative?,Zwei kurze Fragen reichen.
+4,B1,Speak: Arzt – Symptome erklären,b1_w4_s1_doctor_symptoms,speak,Du erklärst Symptome ruhig und klar.,Seit drei Tagen habe ich starke Kopfschmerzen und mir ist schwindelig.,Seit wann + was + wie stark.
+4,B1,Speak: Apotheke – Fragen stellen,b1_w4_s2_pharmacy_questions,speak,Du fragst nach Dosierung und Alternative.,Wie oft soll ich das nehmen? Gibt es eine Alternative?,Sprich langsam. Kurze Fragen.
+5,B1,Anmeldung im Bürgeramt,b1_city_registration,learn,Du meldest dich in der Stadt an.,Ich möchte mich anmelden und brauche einen Termin.,Sag klar, welches Anliegen du hast.
+5,B1,Formular ausfüllen,b1_fill_form,learn,Du füllst ein Formular aus.,Welche Unterlagen brauche ich für das Formular?,Frage nach fehlenden Unterlagen.
+5,B1,Ausweis beantragen,b1_request_id,learn,Du beantragst einen Ausweis.,Ich möchte einen neuen Ausweis beantragen.,Nenne Grund und Unterlagen.
+5,B1,Speak: Termin im Bürgeramt,b1_speak_city_appointment,speak,Du vereinbarst einen Termin im Amt.,Ich brauche einen Termin zur Anmeldung.,Formuliere höflich.
+5,B1,Speak: Unterlagen nachreichen,b1_speak_submit_docs,speak,Du reichst fehlende Unterlagen nach.,Ich möchte die fehlenden Unterlagen nachreichen.,Sag kurz, was fehlt.
+5,B1,Behörde: Unterlagen & Termin,b1_w5_l1_amt_documents,learn,Du fragst nach Unterlagen und Termin.,Welche Unterlagen brauche ich für die Anmeldung?,Direkt nach Unterlagen fragen.
+5,B1,Unterlagen fehlen – ruhig reagieren,b1_w5_l2_missing_document,learn,Du sagst, was du hast und was fehlt.,Ich habe den Pass dabei, aber die Meldebescheinigung fehlt.,Habe / fehlt klar trennen.
+5,B1,Frist & Nachweise verstehen,b1_w5_l3_deadline_proof,learn,Du fragst nach Frist und Nachweis.,Bis wann muss ich das einreichen?,Kurze, klare Frage.
+5,B1,Speak: Bürgeramt – Dokument fehlt,b1_w5_s1_amt_missing_docs,speak,Du erklärst das Problem und fragst nach der Lösung.,Die Meldebescheinigung fehlt. Was kann ich jetzt machen?,Situation → Problem → Frage.
+5,B1,Speak: Telefonat mit Sachbearbeiter,b1_w5_s2_amt_phone,speak,Du erklärst dein Anliegen kurz und klar.,Ich habe eine Frage zu meinem Antrag. Können Sie mir helfen?,Kurzer Einstieg + klare Frage.
+6,B1,Konto eröffnen,b1_open_account,learn,Du eröffnest ein Bankkonto.,Ich möchte ein Girokonto eröffnen.,Sag, welche Art Konto du brauchst.
+6,B1,Budget planen,b1_budget,learn,Du planst dein Monatsbudget.,Ich muss meine Ausgaben besser planen.,Nenne Kategorien und Grenzen.
+6,B1,Versicherung auswählen,b1_choose_insurance,learn,Du wählst eine Versicherung.,Welche Versicherung passt zu meiner Situation?,Vergleiche Leistung und Preis.
+6,B1,Speak: Banktermin vereinbaren,b1_speak_bank,speak,Du machst einen Termin in der Bank.,Ich brauche einen Termin zur Kontoeröffnung.,Sag, was du brauchst.
+6,B1,Speak: Rückzahlung klären,b1_speak_refund,speak,Du klärst eine Rückzahlung.,Ich warte auf eine Rückzahlung von 50 Euro.,Nenne Betrag und Grund.
+6,B1,Rechnung/Mahnung: reagieren,b1_w6_l1_invoice_warning,learn,Du reagierst ruhig und sagst einen Plan.,Ich habe Ihre Mahnung erhalten. Ich kläre das heute.,Ruhig bleiben. Kurzer Plan.
+6,B1,Bank: Karte wird abgelehnt,b1_w6_l2_bank_card_declined,learn,Du erklärst ein Problem und bittest um Prüfung.,Meine Karte wird abgelehnt. Können Sie das bitte prüfen?,Was passiert + seit wann + bitte prüfen.
+6,B1,Kundenservice: Störung melden,b1_w6_l3_customer_service_outage,learn,Du meldest eine Störung und fragst nach Dauer.,Mein Internet funktioniert seit gestern nicht.,Seit wann + was genau passiert.
+6,B1,Speak: Störung melden (Internet),b1_w6_s1_internet_outage_call,speak,Du meldest die Störung und fragst nach Lösung.,Mein Internet funktioniert seit gestern nicht. Können Sie mir helfen?,Seit wann + was + Frage.
+6,B1,Speak: Bank – Karte abgelehnt,b1_w6_s2_bank_card_issue,speak,Du erklärst das Problem und fragst nach Lösung.,Meine Karte wird abgelehnt. Können Sie das prüfen?,Kurz erklären. Dann bitten.
+7,B1,Kursanmeldung,b1_course_signup,learn,Du meldest dich für einen Kurs an.,Ich möchte mich für den Kurs anmelden.,Nenne Kurs und Zeitpunkt.
+7,B1,Lebenslauf verschicken,b1_send_cv,learn,Du schickst deinen Lebenslauf.,Anbei finden Sie meinen Lebenslauf.,Halte die Mail kurz.
+7,B1,Meeting vorbereiten,b1_prepare_meeting,learn,Du bereitest ein Meeting vor.,Wir sollten die Agenda vorher teilen.,Agenda hilft allen.
+7,B1,Speak: Bewerbungsgespräch kurz,b1_speak_interview,speak,Du führst ein kurzes Interview.,Ich habe zwei Jahre Erfahrung in Logistik.,Nenne Erfahrung und Stärke.
+7,B1,Speak: Aufgabe priorisieren,b1_speak_prioritize,speak,Du priorisierst Aufgaben.,Ich erledige zuerst die dringenden Tickets.,Sag, was du zuerst machst.
+7,B1,Kurs/Weiterbildung: Fragen stellen,b1_w7_l1_training_questions,learn,Du fragst nach Voraussetzungen und Ablauf.,Gibt es Voraussetzungen für den Kurs?,Kurze Frage, klar.
+7,B1,Selbstvorstellung in 20 Sekunden,b1_w7_l2_self_intro_20s,learn,Name → Erfahrung → Ziel.,Ich heiße ___. Ich habe Erfahrung in ___. Ich suche eine Stelle als ___.,Drei Sätze reichen.
+7,B1,Lebenslauf: starke Verben,b1_w7_l3_cv_strong_verbs,learn,Du nutzt Verben, die professionell klingen.,Ich habe Projekte organisiert und Prozesse verbessert.,Nutze klare Verben: organisiert, koordiniert, verbessert.
+7,B1,Speak: Kurzvorstellung (Interview),b1_w7_s1_interview_intro,speak,Du stellst dich ruhig vor.,Ich heiße ___. Ich habe Erfahrung in ___. Ich möchte als ___ arbeiten.,Langsam. Kurz. Klar.
+7,B1,Speak: Rückruf & Termin,b1_w7_s2_callback_schedule,speak,Du vereinbarst einen Rückruf.,Können wir morgen kurz telefonieren?,Zeitvorschlag + Rückfrage.
+8,B1,Prüfungstermin klären,b1_exam_date,learn,Du klärst den Termin einer Prüfung.,Wann findet die Prüfung statt?,Frage nach Ort und Zeit.
+8,B1,Lernplan erstellen,b1_study_plan,learn,Du erstellst einen Lernplan.,Ich lerne jeden Tag eine Stunde.,Setze realistische Einheiten.
+8,B1,Feedback einholen,b1_get_feedback,learn,Du holst Feedback ein.,Haben Sie Feedback zu meiner Präsentation?,Bitte konkret nach Feedback fragen.
+8,B1,Speak: Nervosität ansprechen,b1_speak_nervous,speak,Du bist vor der Prüfung nervös.,Ich bin nervös, haben Sie einen Tipp?,Sprich offen über Nervosität.
+8,B1,Speak: Erfolge erzählen,b1_speak_success,speak,Du berichtest über deinen Fortschritt.,Ich habe alle Übungen der Woche geschafft.,Betone, was gut lief.
+8,B1,B1 Schreiben: kurze E-Mail,b1_w8_l1_email_exam,learn,Grund → Bitte → Schluss.,Guten Tag, ich kann heute leider nicht kommen. Können wir einen neuen Termin vereinbaren?,Kurz, höflich, klar.
+8,B1,B1 Sprechen: Vorstellung + Thema,b1_w8_l2_speaking_part1,learn,3–4 Sätze frei sprechen.,Ich stelle mich kurz vor und spreche über ein Alltagsthema.,Ruhig sprechen. 3 Sätze reichen.
+8,B1,B1 Sprechen: Meinung + Gründe,b1_w8_l3_speaking_part2,learn,Meinung → 2 Gründe.,Ich finde __ gut, weil __. Außerdem __.,Zwei Gründe reichen.
+8,B1,Speak: Prüfungssimulation 1,b1_w8_s1_exam_sim_1,speak,Vorstellung + Alltagsthema.,Ich heiße ___. Heute spreche ich über ___.,Langsam. Klar. Kurz.
+8,B1,Speak: Prüfungssimulation 2,b1_w8_s2_exam_sim_2,speak,Meinung + Gründe.,Ich finde __ gut, weil __. Außerdem __.,Zwei Gründe reichen.

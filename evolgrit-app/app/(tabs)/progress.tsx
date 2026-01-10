@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ReadinessRing } from "../../components/ReadinessRing";
 import { loadPhaseState } from "../../lib/phaseStateStore";
 import {
@@ -19,6 +18,7 @@ import { GlassCard } from "../../components/system/GlassCard";
 import { Stack, Text } from "tamagui";
 import { PrimaryButton } from "../../components/system/PrimaryButton";
 import { SecondaryButton } from "../../components/system/SecondaryButton";
+import { ScreenShell } from "../../components/system/ScreenShell";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -66,9 +66,11 @@ export default function ProgressTab() {
 
   if (!currentERS) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#F6F7FB", alignItems: "center", justifyContent: "center" }}>
-        <Text color="$muted">Loading…</Text>
-      </SafeAreaView>
+      <ScreenShell title="Progress">
+        <Stack flex={1} alignItems="center" justifyContent="center">
+          <Text color="$muted">Loading…</Text>
+        </Stack>
+      </ScreenShell>
     );
   }
 
@@ -102,17 +104,11 @@ export default function ProgressTab() {
   const last7 = items.slice(0, 7).map((s) => ersMin(s.ers));
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F6F7FB" }}>
-      <Stack paddingHorizontal={16} paddingTop={10} paddingBottom={10}>
-        <Text fontSize={22} fontWeight="900" color="$text">
-          Progress
-        </Text>
-        <Text marginTop={4} color="$muted">
+    <ScreenShell title="Progress">
+      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+        <Text marginBottom={10} color="$muted">
           Proof only. Read-only. No comparisons.
         </Text>
-      </Stack>
-
-      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
         {/* 1) Readiness Ring */}
         <Stack alignItems="center" marginBottom={12}>
           <ReadinessRing value={score} size={210} strokeWidth={14} />
@@ -172,6 +168,6 @@ export default function ProgressTab() {
           Snapshots are local. Later: server snapshots + auto-save on weekly review.
         </Text>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenShell>
   );
 }

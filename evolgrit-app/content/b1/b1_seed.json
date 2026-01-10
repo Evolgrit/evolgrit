@@ -1,0 +1,482 @@
+[
+  {
+    "week": 1,
+    "level": "B1",
+    "lessons": [
+      {"title": "Smalltalk & Meinung äußern", "slug": "b1_smalltalk_opinion", "type": "learn", "context": "Du sprichst kurz mit jemandem und sagst deine Meinung.", "target_text": "Ich denke, dass es eine gute Idee ist.", "mentor_tip": "Sag deine Meinung ruhig und begründe sie kurz."},
+      {"title": "Termin vereinbaren oder verschieben", "slug": "b1_appointment_change", "type": "learn", "context": "Du musst einen Termin ändern.", "target_text": "Könnten wir den Termin auf morgen verschieben?", "mentor_tip": "Nutze Konjunktiv II für Höflichkeit."},
+      {"title": "Beschwerde höflich äußern", "slug": "b1_complaint_polite", "type": "learn", "context": "Ein Produkt oder Service ist nicht in Ordnung.", "target_text": "Leider gibt es ein Problem mit dem Produkt.", "mentor_tip": "Beginne mit 'Leider' statt direkt zu kritisieren."},
+      {"title": "Speak: Problem im Geschäft erklären", "slug": "b1_speak_shop_problem", "type": "speak", "context": "Du erklärst im Geschäft ein Problem.", "target_text": "Entschuldigung, dieses Produkt funktioniert nicht.", "mentor_tip": "Sprich langsam und klar.", "dialog": [
+        {"speaker": "you", "text": "Entschuldigung, dieses Produkt funktioniert nicht richtig."},
+        {"speaker": "mentor", "text": "Was genau funktioniert nicht?"},
+        {"speaker": "you", "text": "Ich habe es gestern gekauft."},
+        {"speaker": "mentor", "text": "Haben Sie die Quittung dabei?"},
+        {"speaker": "you", "text": "Ja, hier ist er."},
+        {"speaker": "mentor", "text": "Was möchten Sie?"},
+        {"speaker": "you", "text": "Ich hätte gern mein Geld zurück."},
+        {"speaker": "mentor", "text": "Oder ein neues Produkt?"},
+        {"speaker": "you", "text": "Ein neues Produkt wäre gut."},
+        {"speaker": "mentor", "text": "Kein Problem, ich tausche es um."}
+      ], "pronunciation_guides": [
+        {"word": "Entschuldigung", "guide": "ent·SCHUL·di·gung", "note": "Betone SCHUL klar."},
+        {"word": "Produkt", "guide": "PRO·dukt"},
+        {"word": "funktioniert", "guide": "funk·tio·NIERT"},
+        {"word": "gekauft", "guide": "ge·KAUFT"},
+        {"word": "Kassenzettel", "guide": "KAS·sen·ZET·tel"},
+        {"word": "zurück", "guide": "zu·RÜCK"},
+        {"word": "Hilfe", "guide": "HIL·fe"}
+      ]},
+      {"title": "Speak: Termin telefonisch verschieben", "slug": "b1_speak_call_change", "type": "speak", "context": "Du rufst an, um einen Termin zu ändern.", "target_text": "Ich rufe an, weil ich den Termin verschieben muss.", "mentor_tip": "Sag zuerst den Grund, dann den Wunsch.", "dialog": [
+        {"speaker": "you", "text": "Guten Tag, hier ist Anna Müller."},
+        {"speaker": "mentor", "text": "Guten Tag, wie kann ich helfen?"},
+        {"speaker": "you", "text": "Ich muss meinen Termin morgen verschieben."},
+        {"speaker": "mentor", "text": "Kein Problem. Wann passt es Ihnen?"},
+        {"speaker": "you", "text": "Passt Ihnen Donnerstag um 10 Uhr?"},
+        {"speaker": "mentor", "text": "Ja, das ist frei."},
+        {"speaker": "you", "text": "Prima, dann nehme ich den Termin."},
+        {"speaker": "mentor", "text": "Ich habe es eingetragen."},
+        {"speaker": "you", "text": "Vielen Dank für Ihre Hilfe."},
+        {"speaker": "mentor", "text": "Gern geschehen, bis Donnerstag."}
+      ], "pronunciation_guides": [
+        {"word": "verschieben", "guide": "ver·SCHIE·ben", "note": "Betone SCHIE."}
+      ]}
+    ]
+  },
+  {
+    "week": 2,
+    "level": "B1",
+    "lessons": [
+      {"title": "Aufgaben bei der Arbeit klären", "slug": "b1_work_tasks", "type": "learn", "context": "Du sprichst mit Kolleg*innen über Aufgaben.", "target_text": "Könnten Sie mir bitte erklären, was ich machen soll?", "mentor_tip": "Nachfragen ist besser als Fehler machen."},
+      {"title": "Feedback geben und annehmen", "slug": "b1_feedback", "type": "learn", "context": "Du gibst konstruktives Feedback.", "target_text": "Ich finde, das war gut, aber wir könnten es verbessern.", "mentor_tip": "Erst positiv, dann Verbesserung."},
+      {"title": "Kurze E-Mail schreiben", "slug": "b1_email_short", "type": "learn", "context": "Du schreibst eine kurze berufliche E-Mail.", "target_text": "Vielen Dank für Ihre Nachricht.", "mentor_tip": "Halte Sätze kurz und klar."},
+      {"title": "Speak: Aufgabe nicht verstanden", "slug": "b1_speak_task_unclear", "type": "speak", "context": "Du hast eine Aufgabe nicht verstanden.", "target_text": "Entschuldigung, ich habe eine Frage zu der Aufgabe.", "mentor_tip": "Sei ehrlich, wenn etwas unklar ist.", "dialog": [
+        {"speaker": "you", "text": "Entschuldigung, ich habe eine Frage zu der Aufgabe."},
+        {"speaker": "mentor", "text": "Ja, was ist unklar?"},
+        {"speaker": "you", "text": "Soll ich zuerst den Bericht oder die Tabelle fertigstellen?"},
+        {"speaker": "mentor", "text": "Bitte zuerst den Bericht."},
+        {"speaker": "you", "text": "Okay, bis wann?"},
+        {"speaker": "mentor", "text": "Bis morgen Mittag."},
+        {"speaker": "you", "text": "Alles klar, ich mache das."},
+        {"speaker": "mentor", "text": "Danke für die Rückfrage."},
+        {"speaker": "you", "text": "Gern, ich möchte sicher sein."},
+        {"speaker": "mentor", "text": "Genau so ist es gut."}
+      ], "pronunciation_guides": [
+        {"word": "Entschuldigung", "guide": "ent·SCHUL·di·gung", "note": "Betone SCHUL."}
+      ]},
+      {"title": "Speak: Deadline besprechen", "slug": "b1_speak_deadline", "type": "speak", "context": "Du sprichst über eine Frist.", "target_text": "Ich schaffe es bis morgen, aber nicht heute.", "mentor_tip": "Sag klar, was realistisch ist.", "dialog": [
+        {"speaker": "you", "text": "Ich schaffe es bis morgen, aber nicht heute."},
+        {"speaker": "mentor", "text": "Okay, was brauchst du dafür?"},
+        {"speaker": "you", "text": "Etwas Zeit und die Daten von Lisa."},
+        {"speaker": "mentor", "text": "Die Daten bekommst du heute Mittag."},
+        {"speaker": "you", "text": "Super, dann ist morgen realistisch."},
+        {"speaker": "mentor", "text": "Gut, danke für die Einschätzung."},
+        {"speaker": "you", "text": "Kein Problem."},
+        {"speaker": "mentor", "text": "Sag Bescheid, falls du Hilfe brauchst."},
+        {"speaker": "you", "text": "Mache ich."},
+        {"speaker": "mentor", "text": "Alles klar."}
+      ], "pronunciation_guides": []}
+    ]
+  },
+  {
+    "week": 3,
+    "level": "B1",
+    "lessons": [
+      {"title": "Wohnung besichtigen", "slug": "b1_flat_viewing", "type": "learn", "context": "Du besichtigst eine Wohnung.", "target_text": "Die Wohnung gefällt mir, aber ich habe ein paar Fragen.", "mentor_tip": "Stell konkrete Fragen zu Kosten und Lage."},
+      {"title": "Reparatur melden", "slug": "b1_report_repair", "type": "learn", "context": "Du meldest einen Defekt in der Wohnung.", "target_text": "Der Wasserhahn tropft seit gestern Abend.", "mentor_tip": "Beschreibe kurz das Problem und den Zeitpunkt."},
+      {"title": "Nebenkosten verstehen", "slug": "b1_utilities", "type": "learn", "context": "Du fragst nach Nebenkosten.", "target_text": "Welche Nebenkosten sind in der Miete enthalten?", "mentor_tip": "Frage klar nach, was inklusive ist."},
+      {"title": "Speak: Heizung funktioniert nicht", "slug": "b1_speak_heating", "type": "speak", "context": "Du meldest eine kaputte Heizung.", "target_text": "Entschuldigung, die Heizung wird nicht warm.", "mentor_tip": "Nenne das Problem und seit wann.", "dialog": [
+        {"speaker": "you", "text": "Entschuldigung, die Heizung wird nicht warm."},
+        {"speaker": "mentor", "text": "Seit wann haben Sie das Problem?"},
+        {"speaker": "you", "text": "Seit gestern Abend."},
+        {"speaker": "mentor", "text": "Haben Sie den Thermostat geprüft?"},
+        {"speaker": "you", "text": "Ja, er steht auf fünf."},
+        {"speaker": "mentor", "text": "Ich schicke heute noch jemanden vorbei."},
+        {"speaker": "you", "text": "Vielen Dank."},
+        {"speaker": "mentor", "text": "Bleiben Sie bitte zuhause, falls der Techniker Fragen hat."},
+        {"speaker": "you", "text": "Das mache ich."},
+        {"speaker": "mentor", "text": "Auf Wiederhören."}
+      ], "pronunciation_guides": [
+        {"word": "Entschuldigung", "guide": "ent·SCHUL·di·gung"},
+        {"word": "Heizung", "guide": "HEI·zung"}
+      ]},
+      {"title": "Speak: Mietvertrag klären", "slug": "b1_speak_lease", "type": "speak", "context": "Du stellst Fragen zum Mietvertrag.", "target_text": "Ich hätte noch Fragen zum Mietvertrag.", "mentor_tip": "Sprich höflich und klar.", "dialog": [
+        {"speaker": "you", "text": "Ich hätte noch Fragen zum Mietvertrag."},
+        {"speaker": "mentor", "text": "Ja, gerne."},
+        {"speaker": "you", "text": "Wie lange beträgt die Kündigungsfrist?"},
+        {"speaker": "mentor", "text": "Drei Monate zum Monatsende."},
+        {"speaker": "you", "text": "Sind Haustiere erlaubt?"},
+        {"speaker": "mentor", "text": "Kleine Haustiere ja, Hunde nach Absprache."},
+        {"speaker": "you", "text": "Danke, das hilft mir."},
+        {"speaker": "mentor", "text": "Haben Sie noch weitere Fragen?"},
+        {"speaker": "you", "text": "Nein, das war alles."},
+        {"speaker": "mentor", "text": "Gut, dann können wir unterschreiben."}
+      ], "pronunciation_guides": [
+        {"word": "Kündigungsfrist", "guide": "KÜN·di·gungs·frist"}
+      ]},
+      {"title": "Wohnungssuche: Anfrage & Besichtigung", "slug": "b1_w3_l1_apartment_viewing_request", "type": "learn", "context": "Du fragst höflich nach einer Besichtigung und stellst 1–2 Fragen.", "target_text": "Ich interessiere mich für die Wohnung. Ist eine Besichtigung möglich?", "mentor_tip": "Kurz + höflich + konkrete Frage."},
+      {"title": "Nachbarn: Problem ruhig ansprechen", "slug": "b1_w3_l2_neighbor_problem", "type": "learn", "context": "Du sprichst Lärm/Ordnung freundlich an und machst einen Vorschlag.", "target_text": "Könnten wir kurz darüber sprechen? Ich muss früh schlafen.", "mentor_tip": "Ich-Botschaft + Vorschlag statt Vorwurf."},
+      {"title": "Vertrag: Kündigungsfrist & Nebenkosten", "slug": "b1_w3_l3_contract_notice_period", "type": "learn", "context": "Du fragst nach Kündigungsfrist und Nebenkosten.", "target_text": "Wie lange ist die Kündigungsfrist, und was ist in den Nebenkosten enthalten?", "mentor_tip": "Zwei klare Fragen, langsam."},
+      {"title": "Speak: Nachbar wegen Lärm", "slug": "b1_w3_s1_neighbor_noise_request", "type": "speak", "context": "Du bittest freundlich um Ruhe und machst einen Vorschlag.", "target_text": "Könnten Sie bitte etwas leiser sein? Ich muss früh schlafen.", "mentor_tip": "Ruhig bleiben. Bitte + Grund + Vorschlag.", "dialog": [
+        {"role": "mentor", "text": "Hallo, was ist los?"},
+        {"role": "user", "text": "Entschuldigung, es ist gerade sehr laut."},
+        {"role": "mentor", "text": "Oh, stört es Sie sehr?"},
+        {"role": "user", "text": "Ja, ich muss morgen früh arbeiten."},
+        {"role": "mentor", "text": "Wir haben Besuch, tut mir leid."},
+        {"role": "user", "text": "Könnten Sie bitte etwas leiser sein?"},
+        {"role": "mentor", "text": "Ja, natürlich. Wir passen auf."},
+        {"role": "user", "text": "Danke Ihnen."},
+        {"role": "mentor", "text": "Kein Problem."},
+        {"role": "user", "text": "Schönen Abend noch."}
+      ], "pronunciation_guides": [
+        {"word": "Entschuldigung", "guide": "ent·SCHUL·di·gung", "note": "Betone SCHUL."},
+        {"word": "natürlich", "guide": "na·TÜR·lich", "note": "Betone TÜR."}
+      ]},
+      {"title": "Speak: Vermieter – Heizung kaputt", "slug": "b1_w3_s2_landlord_heating_issue", "type": "speak", "context": "Du erklärst das Problem und fragst nach einem Termin.", "target_text": "Die Heizung funktioniert nicht. Können Sie bitte jemanden schicken?", "mentor_tip": "Problem → Bitte → Zeitpunkt.", "dialog": [
+        {"role": "mentor", "text": "Guten Tag. Worum geht es?"},
+        {"role": "user", "text": "Die Heizung funktioniert seit heute nicht."},
+        {"role": "mentor", "text": "Passiert das in allen Zimmern?"},
+        {"role": "user", "text": "Ja, überall ist es kalt."},
+        {"role": "mentor", "text": "Was möchten Sie, dass wir machen?"},
+        {"role": "user", "text": "Können Sie bitte jemanden schicken?"},
+        {"role": "mentor", "text": "Wann wären Sie zu Hause?"},
+        {"role": "user", "text": "Morgen Vormittag wäre gut."},
+        {"role": "mentor", "text": "Okay, ich gebe es weiter."},
+        {"role": "user", "text": "Vielen Dank im Voraus."}
+      ], "pronunciation_guides": [
+        {"word": "Vermieter", "guide": "ver·MIE·ter", "note": "Betone MIE."},
+        {"word": "Vormittag", "guide": "VOR·mit·tag", "note": "Betone VOR."}
+      ]}
+    ]
+  },
+  {
+    "week": 4,
+    "level": "B1",
+    "lessons": [
+      {"title": "Arzttermin vereinbaren", "slug": "b1_doctor_appointment", "type": "learn", "context": "Du brauchst einen Arzttermin.", "target_text": "Ich hätte gerne einen Termin nächste Woche.", "mentor_tip": "Nenne Grund und Zeitwunsch."},
+      {"title": "Symptome beschreiben", "slug": "b1_symptoms", "type": "learn", "context": "Du beschreibst, wie es dir geht.", "target_text": "Ich habe seit zwei Tagen starke Kopfschmerzen.", "mentor_tip": "Dauer + Stärke nennen."},
+      {"title": "Rezept abholen", "slug": "b1_pickup_prescription", "type": "learn", "context": "Du holst ein Rezept ab.", "target_text": "Ich möchte mein Rezept abholen.", "mentor_tip": "Sag klar, was du brauchst."},
+      {"title": "Speak: Notfall anrufen", "slug": "b1_speak_emergency", "type": "speak", "context": "Du rufst im Notfall an.", "target_text": "Es ist ein Notfall, ich brauche einen Krankenwagen.", "mentor_tip": "Sprich knapp und ruhig.", "dialog": [
+        {"speaker": "you", "text": "Es ist ein Notfall, ich brauche einen Krankenwagen."},
+        {"speaker": "mentor", "text": "Wo befinden Sie sich?"},
+        {"speaker": "you", "text": "In der Hauptstraße 12, dritte Etage."},
+        {"speaker": "mentor", "text": "Was ist passiert?"},
+        {"speaker": "you", "text": "Jemand ist gestürzt und bewusstlos."},
+        {"speaker": "mentor", "text": "Wir schicken sofort Hilfe."},
+        {"speaker": "you", "text": "Danke, ich bleibe am Telefon."},
+        {"speaker": "mentor", "text": "Bitte bleiben Sie ruhig."},
+        {"speaker": "you", "text": "Verstanden."},
+        {"speaker": "mentor", "text": "Der Rettungsdienst ist unterwegs."}
+      ], "pronunciation_guides": [
+        {"word": "Krankenwagen", "guide": "KRAN·ken·wa·gen"}
+      ]},
+      {"title": "Speak: Krankmeldung erklären", "slug": "b1_speak_sick_note", "type": "speak", "context": "Du meldest dich krank.", "target_text": "Ich bin krank und brauche eine Krankmeldung.", "mentor_tip": "Nenne Dauer und Arztbesuch.", "dialog": [
+        {"speaker": "you", "text": "Ich bin krank und brauche eine Krankmeldung."},
+        {"speaker": "mentor", "text": "Seit wann sind Sie krank?"},
+        {"speaker": "you", "text": "Seit gestern."},
+        {"speaker": "mentor", "text": "Haben Sie einen Arzttermin?"},
+        {"speaker": "you", "text": "Ja, heute um 14 Uhr."},
+        {"speaker": "mentor", "text": "Schicken Sie die Bescheinigung bitte per E-Mail."},
+        {"speaker": "you", "text": "Mache ich."},
+        {"speaker": "mentor", "text": "Gute Besserung."},
+        {"speaker": "you", "text": "Danke."},
+        {"speaker": "mentor", "text": "Auf Wiederhören."}
+      ], "pronunciation_guides": [
+        {"word": "Krankmeldung", "guide": "KRANK·mel·dung"}
+      ]},
+      {"title": "Beim Arzt: Symptome strukturiert erklären", "slug": "b1_w4_l1_symptoms_structure", "type": "learn", "context": "Seit wann? Wie stark? Wo? Was hilft?", "target_text": "Seit drei Tagen habe ich starke Kopfschmerzen.", "mentor_tip": "Seit wann → Symptom → Intensität."},
+      {"title": "Arzttermin: telefonisch fragen", "slug": "b1_w4_l2_doctor_appointment_call", "type": "learn", "context": "Du fragst nach einem Termin und sagst kurz den Grund.", "target_text": "Ich hätte gern einen Termin. Es ist dringend.", "mentor_tip": "Kurz erklären, ob es dringend ist."},
+      {"title": "Apotheke: Dosierung & Alternative", "slug": "b1_w4_l3_pharmacy_dosage_alt", "type": "learn", "context": "Du fragst, wie oft du etwas nehmen sollst.", "target_text": "Wie oft soll ich das nehmen? Gibt es eine Alternative?", "mentor_tip": "Zwei kurze Fragen reichen."},
+      {"title": "Speak: Arzt – Symptome erklären", "slug": "b1_w4_s1_doctor_symptoms", "type": "speak", "context": "Du erklärst Symptome ruhig und klar.", "target_text": "Seit drei Tagen habe ich starke Kopfschmerzen und mir ist schwindelig.", "mentor_tip": "Seit wann + was + wie stark.", "dialog": [
+        {"role": "mentor", "text": "Was führt Sie heute zu mir?"},
+        {"role": "user", "text": "Seit drei Tagen habe ich starke Kopfschmerzen."},
+        {"role": "mentor", "text": "Haben Sie noch andere Beschwerden?"},
+        {"role": "user", "text": "Ja, mir ist manchmal schwindelig."},
+        {"role": "mentor", "text": "Wie stark sind die Schmerzen?"},
+        {"role": "user", "text": "Ziemlich stark, besonders am Abend."},
+        {"role": "mentor", "text": "Hatten Sie Fieber?"},
+        {"role": "user", "text": "Nein, kein Fieber."},
+        {"role": "mentor", "text": "Nehmen Sie Medikamente?"},
+        {"role": "user", "text": "Nur gelegentlich Ibuprofen."}
+      ], "pronunciation_guides": [
+        {"word": "schwindelig", "guide": "SCHWIN·de·lig", "note": "Betone SCHWIN."},
+        {"word": "gelegentlich", "guide": "ge·LE·gen·tlich", "note": "Betone LE."}
+      ]},
+      {"title": "Speak: Apotheke – Fragen stellen", "slug": "b1_w4_s2_pharmacy_questions", "type": "speak", "context": "Du fragst nach Dosierung und Alternative.", "target_text": "Wie oft soll ich das nehmen? Gibt es eine Alternative?", "mentor_tip": "Sprich langsam. Kurze Fragen.", "dialog": [
+        {"role": "mentor", "text": "Wie kann ich helfen?"},
+        {"role": "user", "text": "Ich brauche etwas gegen Halsschmerzen."},
+        {"role": "mentor", "text": "Haben Sie Allergien?"},
+        {"role": "user", "text": "Nein, keine Allergien."},
+        {"role": "mentor", "text": "Dann empfehle ich diese Tabletten."},
+        {"role": "user", "text": "Wie oft soll ich das nehmen?"},
+        {"role": "mentor", "text": "Dreimal am Tag."},
+        {"role": "user", "text": "Gibt es eine Alternative ohne Tabletten?"},
+        {"role": "mentor", "text": "Ja, ein Spray."},
+        {"role": "user", "text": "Okay, danke."}
+      ], "pronunciation_guides": [
+        {"word": "Alternative", "guide": "al·ter·na·TI·ve", "note": "Betone TI."}
+      ]}
+    ]
+  },
+  {
+    "week": 5,
+    "level": "B1",
+    "lessons": [
+      {"title": "Anmeldung im Bürgeramt", "slug": "b1_city_registration", "type": "learn", "context": "Du meldest dich in der Stadt an.", "target_text": "Ich möchte mich anmelden und brauche einen Termin.", "mentor_tip": "Sag klar, welches Anliegen du hast."},
+      {"title": "Formular ausfüllen", "slug": "b1_fill_form", "type": "learn", "context": "Du füllst ein Formular aus.", "target_text": "Welche Unterlagen brauche ich für das Formular?", "mentor_tip": "Frage nach fehlenden Unterlagen."},
+      {"title": "Ausweis beantragen", "slug": "b1_request_id", "type": "learn", "context": "Du beantragst einen Ausweis.", "target_text": "Ich möchte einen neuen Ausweis beantragen.", "mentor_tip": "Nenne Grund und Unterlagen."},
+      {"title": "Speak: Termin im Bürgeramt", "slug": "b1_speak_city_appointment", "type": "speak", "context": "Du vereinbarst einen Termin im Amt.", "target_text": "Ich brauche einen Termin zur Anmeldung.", "mentor_tip": "Formuliere höflich.", "dialog": [
+        {"speaker": "you", "text": "Ich brauche einen Termin zur Anmeldung."},
+        {"speaker": "mentor", "text": "Wann möchten Sie kommen?"},
+        {"speaker": "you", "text": "Nächste Woche, wenn möglich."},
+        {"speaker": "mentor", "text": "Dienstag um 10 Uhr wäre frei."},
+        {"speaker": "you", "text": "Das passt, danke."},
+        {"speaker": "mentor", "text": "Bringen Sie bitte Ihren Pass mit."},
+        {"speaker": "you", "text": "Mache ich."},
+        {"speaker": "mentor", "text": "Der Termin ist eingetragen."},
+        {"speaker": "you", "text": "Vielen Dank."},
+        {"speaker": "mentor", "text": "Gern geschehen."}
+      ], "pronunciation_guides": [
+        {"word": "Anmeldung", "guide": "AN·mel·dung"}
+      ]},
+      {"title": "Speak: Unterlagen nachreichen", "slug": "b1_speak_submit_docs", "type": "speak", "context": "Du reichst fehlende Unterlagen nach.", "target_text": "Ich möchte die fehlenden Unterlagen nachreichen.", "mentor_tip": "Sag kurz, was fehlt.", "dialog": [
+        {"speaker": "you", "text": "Ich möchte die fehlenden Unterlagen nachreichen."},
+        {"speaker": "mentor", "text": "Welche Unterlagen sind das?"},
+        {"speaker": "you", "text": "Die Meldebescheinigung und das Foto."},
+        {"speaker": "mentor", "text": "Gut, ich nehme sie an."},
+        {"speaker": "you", "text": "Brauche ich noch etwas?"},
+        {"speaker": "mentor", "text": "Nein, das reicht."},
+        {"speaker": "you", "text": "Danke für die Info."},
+        {"speaker": "mentor", "text": "Gern."},
+        {"speaker": "you", "text": "Auf Wiedersehen."},
+        {"speaker": "mentor", "text": "Auf Wiedersehen."}
+      ], "pronunciation_guides": [
+        {"word": "Unterlagen", "guide": "UN·ter·la·gen"}
+      ]},
+      {"title": "Behörde: Unterlagen & Termin", "slug": "b1_w5_l1_amt_documents", "type": "learn", "context": "Du fragst nach Unterlagen und Termin.", "target_text": "Welche Unterlagen brauche ich für die Anmeldung?", "mentor_tip": "Direkt nach Unterlagen fragen."},
+      {"title": "Unterlagen fehlen – ruhig reagieren", "slug": "b1_w5_l2_missing_document", "type": "learn", "context": "Du sagst, was du hast und was fehlt.", "target_text": "Ich habe den Pass dabei, aber die Meldebescheinigung fehlt.", "mentor_tip": "Habe / fehlt klar trennen."},
+      {"title": "Frist & Nachweise verstehen", "slug": "b1_w5_l3_deadline_proof", "type": "learn", "context": "Du fragst nach Frist und Nachweis.", "target_text": "Bis wann muss ich das einreichen?", "mentor_tip": "Kurze, klare Frage."},
+      {"title": "Speak: Bürgeramt – Dokument fehlt", "slug": "b1_w5_s1_amt_missing_docs", "type": "speak", "context": "Du erklärst das Problem und fragst nach der Lösung.", "target_text": "Die Meldebescheinigung fehlt. Was kann ich jetzt machen?", "mentor_tip": "Situation → Problem → Frage.", "dialog": [
+        {"role": "mentor", "text": "Guten Tag. Was brauchen Sie?"},
+        {"role": "user", "text": "Ich möchte mich anmelden."},
+        {"role": "mentor", "text": "Haben Sie alle Unterlagen dabei?"},
+        {"role": "user", "text": "Ich habe den Pass, aber die Meldebescheinigung fehlt."},
+        {"role": "mentor", "text": "Können Sie sie nachreichen?"},
+        {"role": "user", "text": "Ja. Bis wann muss ich das einreichen?"},
+        {"role": "mentor", "text": "Innerhalb von zwei Wochen."},
+        {"role": "user", "text": "Kann ich trotzdem heute den Antrag starten?"},
+        {"role": "mentor", "text": "Ja, wir können beginnen."},
+        {"role": "user", "text": "Danke."}
+      ], "pronunciation_guides": [
+        {"word": "Meldebescheinigung", "guide": "MEL·de·be·SCHEI·ni·gung", "note": "Betone SCHEI."},
+        {"word": "einreichen", "guide": "EIN·rei·chen", "note": "Betone EIN."}
+      ]},
+      {"title": "Speak: Telefonat mit Sachbearbeiter", "slug": "b1_w5_s2_amt_phone", "type": "speak", "context": "Du erklärst dein Anliegen kurz und klar.", "target_text": "Ich habe eine Frage zu meinem Antrag. Können Sie mir helfen?", "mentor_tip": "Kurzer Einstieg + klare Frage.", "dialog": [
+        {"role": "mentor", "text": "Bürgeramt, guten Tag."},
+        {"role": "user", "text": "Guten Tag. Ich habe eine Frage zu meinem Antrag."},
+        {"role": "mentor", "text": "Worum geht es genau?"},
+        {"role": "user", "text": "Mir fehlt ein Dokument. Ich bin unsicher, was ich nachreichen muss."},
+        {"role": "mentor", "text": "Welche Unterlagen haben Sie schon?"},
+        {"role": "user", "text": "Pass und Mietvertrag. Die Meldebescheinigung fehlt."},
+        {"role": "mentor", "text": "Dann reichen Sie die Meldebescheinigung nach."},
+        {"role": "user", "text": "Bis wann ist die Frist?"},
+        {"role": "mentor", "text": "In zwei Wochen."},
+        {"role": "user", "text": "Alles klar. Vielen Dank."}
+      ], "pronunciation_guides": [
+        {"word": "Sachbearbeiter", "guide": "SACH·be·AR·bei·ter", "note": "Betone AR."}
+      ]}
+    ]
+  },
+  {
+    "week": 6,
+    "level": "B1",
+    "lessons": [
+      {"title": "Konto eröffnen", "slug": "b1_open_account", "type": "learn", "context": "Du eröffnest ein Bankkonto.", "target_text": "Ich möchte ein Girokonto eröffnen.", "mentor_tip": "Sag, welche Art Konto du brauchst."},
+      {"title": "Budget planen", "slug": "b1_budget", "type": "learn", "context": "Du planst dein Monatsbudget.", "target_text": "Ich muss meine Ausgaben besser planen.", "mentor_tip": "Nenne Kategorien und Grenzen."},
+      {"title": "Versicherung auswählen", "slug": "b1_choose_insurance", "type": "learn", "context": "Du wählst eine Versicherung.", "target_text": "Welche Versicherung passt zu meiner Situation?", "mentor_tip": "Vergleiche Leistung und Preis."},
+      {"title": "Speak: Banktermin vereinbaren", "slug": "b1_speak_bank", "type": "speak", "context": "Du machst einen Termin in der Bank.", "target_text": "Ich brauche einen Termin zur Kontoeröffnung.", "mentor_tip": "Sag, was du brauchst.", "dialog": [
+        {"speaker": "you", "text": "Ich brauche einen Termin zur Kontoeröffnung."},
+        {"speaker": "mentor", "text": "Wann passt es Ihnen?"},
+        {"speaker": "you", "text": "Freitag Vormittag."},
+        {"speaker": "mentor", "text": "Um 10 Uhr ist frei."},
+        {"speaker": "you", "text": "Das nehme ich."},
+        {"speaker": "mentor", "text": "Bringen Sie Ihren Ausweis mit."},
+        {"speaker": "you", "text": "Mache ich."},
+        {"speaker": "mentor", "text": "Der Termin ist bestätigt."},
+        {"speaker": "you", "text": "Danke."},
+        {"speaker": "mentor", "text": "Gern."}
+      ], "pronunciation_guides": []},
+      {"title": "Speak: Rückzahlung klären", "slug": "b1_speak_refund", "type": "speak", "context": "Du klärst eine Rückzahlung.", "target_text": "Ich warte auf eine Rückzahlung von 50 Euro.", "mentor_tip": "Nenne Betrag und Grund.", "dialog": [
+        {"speaker": "you", "text": "Ich warte auf eine Rückzahlung von 50 Euro."},
+        {"speaker": "mentor", "text": "Worum geht es genau?"},
+        {"speaker": "you", "text": "Ein Artikel war defekt."},
+        {"speaker": "mentor", "text": "Wann haben Sie reklamiert?"},
+        {"speaker": "you", "text": "Vor einer Woche."},
+        {"speaker": "mentor", "text": "Ich prüfe das gleich."},
+        {"speaker": "you", "text": "Danke."},
+        {"speaker": "mentor", "text": "Die Überweisung geht heute raus."},
+        {"speaker": "you", "text": "Super, danke."},
+        {"speaker": "mentor", "text": "Gern geschehen."}
+      ], "pronunciation_guides": [
+        {"word": "Rückzahlung", "guide": "RÜCK·zah·lung"}
+      ]},
+      {"title": "Rechnung/Mahnung: reagieren", "slug": "b1_w6_l1_invoice_warning", "type": "learn", "context": "Du reagierst ruhig und sagst einen Plan.", "target_text": "Ich habe Ihre Mahnung erhalten. Ich kläre das heute.", "mentor_tip": "Ruhig bleiben. Kurzer Plan."},
+      {"title": "Bank: Karte wird abgelehnt", "slug": "b1_w6_l2_bank_card_declined", "type": "learn", "context": "Du erklärst ein Problem und bittest um Prüfung.", "target_text": "Meine Karte wird abgelehnt. Können Sie das bitte prüfen?", "mentor_tip": "Was passiert + seit wann + bitte prüfen."},
+      {"title": "Kundenservice: Störung melden", "slug": "b1_w6_l3_customer_service_outage", "type": "learn", "context": "Du meldest eine Störung und fragst nach Dauer.", "target_text": "Mein Internet funktioniert seit gestern nicht.", "mentor_tip": "Seit wann + was genau passiert."},
+      {"title": "Speak: Störung melden (Internet)", "slug": "b1_w6_s1_internet_outage_call", "type": "speak", "context": "Du meldest die Störung und fragst nach Lösung.", "target_text": "Mein Internet funktioniert seit gestern nicht. Können Sie mir helfen?", "mentor_tip": "Seit wann + was + Frage.", "dialog": [
+        {"role": "mentor", "text": "Kundenservice, guten Tag."},
+        {"role": "user", "text": "Guten Tag. Mein Internet funktioniert seit gestern nicht."},
+        {"role": "mentor", "text": "Leuchtet der Router?"},
+        {"role": "user", "text": "Ja, aber ich habe keine Verbindung."},
+        {"role": "mentor", "text": "Haben Sie den Router neu gestartet?"},
+        {"role": "user", "text": "Ja, ohne Erfolg."},
+        {"role": "mentor", "text": "Ich prüfe die Leitung."},
+        {"role": "user", "text": "Danke. Wie lange dauert das?"},
+        {"role": "mentor", "text": "Etwa zwei Stunden."},
+        {"role": "user", "text": "Okay, vielen Dank."}
+      ], "pronunciation_guides": [
+        {"word": "Verbindung", "guide": "ver·BIN·dung", "note": "Betone BIN."}
+      ]},
+      {"title": "Speak: Bank – Karte abgelehnt", "slug": "b1_w6_s2_bank_card_issue", "type": "speak", "context": "Du erklärst das Problem und fragst nach Lösung.", "target_text": "Meine Karte wird abgelehnt. Können Sie das prüfen?", "mentor_tip": "Kurz erklären. Dann bitten.", "dialog": [
+        {"role": "mentor", "text": "Guten Tag. Wie kann ich helfen?"},
+        {"role": "user", "text": "Meine Karte wird abgelehnt."},
+        {"role": "mentor", "text": "Seit wann passiert das?"},
+        {"role": "user", "text": "Seit heute Nachmittag."},
+        {"role": "mentor", "text": "Haben Sie die PIN richtig eingegeben?"},
+        {"role": "user", "text": "Ja, ich denke schon."},
+        {"role": "mentor", "text": "Wir prüfen das Konto."},
+        {"role": "user", "text": "Können Sie bitte auch prüfen, ob die Karte gesperrt ist?"},
+        {"role": "mentor", "text": "Ja, einen Moment."},
+        {"role": "user", "text": "Danke."}
+      ], "pronunciation_guides": [
+        {"word": "abgelehnt", "guide": "AB·ge·lehnt", "note": "Betone AB."},
+        {"word": "gesperrt", "guide": "ge·SPERRT", "note": "Betone SPERRT."}
+      ]}
+    ]
+  },
+  {
+    "week": 7,
+    "level": "B1",
+    "lessons": [
+      {"title": "Kursanmeldung", "slug": "b1_course_signup", "type": "learn", "context": "Du meldest dich für einen Kurs an.", "target_text": "Ich möchte mich für den Kurs anmelden.", "mentor_tip": "Nenne Kurs und Zeitpunkt."},
+      {"title": "Lebenslauf verschicken", "slug": "b1_send_cv", "type": "learn", "context": "Du schickst deinen Lebenslauf.", "target_text": "Anbei finden Sie meinen Lebenslauf.", "mentor_tip": "Halte die Mail kurz."},
+      {"title": "Meeting vorbereiten", "slug": "b1_prepare_meeting", "type": "learn", "context": "Du bereitest ein Meeting vor.", "target_text": "Wir sollten die Agenda vorher teilen.", "mentor_tip": "Agenda hilft allen."},
+      {"title": "Speak: Bewerbungsgespräch kurz", "slug": "b1_speak_interview", "type": "speak", "context": "Du führst ein kurzes Interview.", "target_text": "Ich habe zwei Jahre Erfahrung in Logistik.", "mentor_tip": "Nenne Erfahrung und Stärke.", "dialog": [
+        {"speaker": "mentor", "text": "Stellen Sie sich bitte kurz vor."},
+        {"speaker": "you", "text": "Ich bin Daniel und habe zwei Jahre Erfahrung in Logistik."},
+        {"speaker": "mentor", "text": "Was sind Ihre Stärken?"},
+        {"speaker": "you", "text": "Ich arbeite strukturiert und zuverlässig."},
+        {"speaker": "mentor", "text": "Warum möchten Sie bei uns arbeiten?"},
+        {"speaker": "you", "text": "Weil mir das Team und die Aufgaben gefallen."},
+        {"speaker": "mentor", "text": "Haben Sie Fragen?"},
+        {"speaker": "you", "text": "Wie läuft die Einarbeitung ab?"},
+        {"speaker": "mentor", "text": "Wir planen zwei Wochen Training."},
+        {"speaker": "you", "text": "Danke für die Infos."}
+      ], "pronunciation_guides": [
+        {"word": "Erfahrung", "guide": "Er·FAH·rung"}
+      ]},
+      {"title": "Speak: Aufgabe priorisieren", "slug": "b1_speak_prioritize", "type": "speak", "context": "Du priorisierst Aufgaben.", "target_text": "Ich erledige zuerst die dringenden Tickets.", "mentor_tip": "Sag, was du zuerst machst.", "dialog": [
+        {"speaker": "mentor", "text": "Woran arbeiten Sie heute?"},
+        {"speaker": "you", "text": "Ich erledige zuerst die dringenden Tickets."},
+        {"speaker": "mentor", "text": "Wie viele sind es?"},
+        {"speaker": "you", "text": "Drei Stück."},
+        {"speaker": "mentor", "text": "Wann sind sie fertig?"},
+        {"speaker": "you", "text": "Bis 15 Uhr."},
+        {"speaker": "mentor", "text": "Gut, danke."},
+        {"speaker": "you", "text": "Gerne."},
+        {"speaker": "mentor", "text": "Sag Bescheid, falls du Hilfe brauchst."},
+        {"speaker": "you", "text": "Mache ich."}
+      ], "pronunciation_guides": []},
+      {"title": "Kurs/Weiterbildung: Fragen stellen", "slug": "b1_w7_l1_training_questions", "type": "learn", "context": "Du fragst nach Voraussetzungen und Ablauf.", "target_text": "Gibt es Voraussetzungen für den Kurs?", "mentor_tip": "Kurze Frage, klar."},
+      {"title": "Selbstvorstellung in 20 Sekunden", "slug": "b1_w7_l2_self_intro_20s", "type": "learn", "context": "Name → Erfahrung → Ziel.", "target_text": "Ich heiße ___. Ich habe Erfahrung in ___. Ich suche eine Stelle als ___.", "mentor_tip": "Drei Sätze reichen."},
+      {"title": "Lebenslauf: starke Verben", "slug": "b1_w7_l3_cv_strong_verbs", "type": "learn", "context": "Du nutzt Verben, die professionell klingen.", "target_text": "Ich habe Projekte organisiert und Prozesse verbessert.", "mentor_tip": "Nutze klare Verben: organisiert, koordiniert, verbessert."},
+      {"title": "Speak: Kurzvorstellung (Interview)", "slug": "b1_w7_s1_interview_intro", "type": "speak", "context": "Du stellst dich ruhig vor.", "target_text": "Ich heiße ___. Ich habe Erfahrung in ___. Ich möchte als ___ arbeiten.", "mentor_tip": "Langsam. Kurz. Klar.", "dialog": [
+        {"role": "mentor", "text": "Erzählen Sie kurz etwas über sich."},
+        {"role": "user", "text": "Ich heiße ___. Ich habe Erfahrung im Verkauf."},
+        {"role": "mentor", "text": "Warum möchten Sie hier arbeiten?"},
+        {"role": "user", "text": "Ich möchte mich weiterentwickeln und im Team arbeiten."},
+        {"role": "mentor", "text": "Was sind Ihre Stärken?"},
+        {"role": "user", "text": "Ich bin zuverlässig und lerne schnell."},
+        {"role": "mentor", "text": "Welche Stelle suchen Sie?"},
+        {"role": "user", "text": "Eine Stelle im Vertrieb."},
+        {"role": "mentor", "text": "Danke."},
+        {"role": "user", "text": "Gern."}
+      ], "pronunciation_guides": [
+        {"word": "zuverlässig", "guide": "zu·VER·läs·sig", "note": "Betone VER."}
+      ]},
+      {"title": "Speak: Rückruf & Termin", "slug": "b1_w7_s2_callback_schedule", "type": "speak", "context": "Du vereinbarst einen Rückruf.", "target_text": "Können wir morgen kurz telefonieren?", "mentor_tip": "Zeitvorschlag + Rückfrage.", "dialog": [
+        {"role": "mentor", "text": "Guten Tag, Sie hatten angerufen."},
+        {"role": "user", "text": "Ja, danke für den Rückruf."},
+        {"role": "mentor", "text": "Worum geht es?"},
+        {"role": "user", "text": "Um den nächsten Schritt im Bewerbungsprozess."},
+        {"role": "mentor", "text": "Wann haben Sie Zeit?"},
+        {"role": "user", "text": "Morgen Vormittag oder Nachmittag."},
+        {"role": "mentor", "text": "Morgen 14 Uhr passt."},
+        {"role": "user", "text": "Ja, 14 Uhr ist gut."},
+        {"role": "mentor", "text": "Bis morgen."},
+        {"role": "user", "text": "Bis morgen, danke."}
+      ], "pronunciation_guides": [
+        {"word": "Bewerbungsprozess", "guide": "be·WER·bungs·pro·ZESS", "note": "Betone WER und ZESS."}
+      ]}
+    ]
+  },
+  {
+    "week": 8,
+    "level": "B1",
+    "lessons": [
+      {"title": "Prüfungstermin klären", "slug": "b1_exam_date", "type": "learn", "context": "Du klärst den Termin einer Prüfung.", "target_text": "Wann findet die Prüfung statt?", "mentor_tip": "Frage nach Ort und Zeit."},
+      {"title": "Lernplan erstellen", "slug": "b1_study_plan", "type": "learn", "context": "Du erstellst einen Lernplan.", "target_text": "Ich lerne jeden Tag eine Stunde.", "mentor_tip": "Setze realistische Einheiten."},
+      {"title": "Feedback einholen", "slug": "b1_get_feedback", "type": "learn", "context": "Du holst Feedback ein.", "target_text": "Haben Sie Feedback zu meiner Präsentation?", "mentor_tip": "Bitte konkret nach Feedback fragen."},
+      {"title": "Speak: Nervosität ansprechen", "slug": "b1_speak_nervous", "type": "speak", "context": "Du bist vor der Prüfung nervös.", "target_text": "Ich bin nervös, haben Sie einen Tipp?", "mentor_tip": "Sprich offen über Nervosität.", "dialog": [
+        {"speaker": "you", "text": "Ich bin nervös, haben Sie einen Tipp?"},
+        {"speaker": "mentor", "text": "Atmen Sie tief ein und planen Sie Pausen."},
+        {"speaker": "you", "text": "Okay, ich probiere es."},
+        {"speaker": "mentor", "text": "Lesen Sie die Aufgaben zuerst ruhig durch."},
+        {"speaker": "you", "text": "Guter Hinweis."},
+        {"speaker": "mentor", "text": "Sie schaffen das."},
+        {"speaker": "you", "text": "Danke."},
+        {"speaker": "mentor", "text": "Gern."},
+        {"speaker": "you", "text": "Ich fühle mich besser."},
+        {"speaker": "mentor", "text": "Super."}
+      ], "pronunciation_guides": []},
+      {"title": "Speak: Erfolge erzählen", "slug": "b1_speak_success", "type": "speak", "context": "Du berichtest über deinen Fortschritt.", "target_text": "Ich habe alle Übungen der Woche geschafft.", "mentor_tip": "Betone, was gut lief.", "dialog": [
+        {"speaker": "mentor", "text": "Wie lief die Woche?"},
+        {"speaker": "you", "text": "Ich habe alle Übungen der Woche geschafft."},
+        {"speaker": "mentor", "text": "Was hat dir geholfen?"},
+        {"speaker": "you", "text": "Der Plan mit täglichen Einheiten."},
+        {"speaker": "mentor", "text": "Was war schwierig?"},
+        {"speaker": "you", "text": "Die Hörübung, aber ich habe sie wiederholt."},
+        {"speaker": "mentor", "text": "Gut, so lernst du am meisten."},
+        {"speaker": "you", "text": "Danke für die Begleitung."},
+        {"speaker": "mentor", "text": "Weiter so."},
+        {"speaker": "you", "text": "Mache ich."}
+      ], "pronunciation_guides": []},
+      {"title": "B1 Schreiben: kurze E-Mail", "slug": "b1_w8_l1_email_exam", "type": "learn", "context": "Grund → Bitte → Schluss.", "target_text": "Guten Tag, ich kann heute leider nicht kommen. Können wir einen neuen Termin vereinbaren?", "mentor_tip": "Kurz, höflich, klar."},
+      {"title": "B1 Sprechen: Vorstellung + Thema", "slug": "b1_w8_l2_speaking_part1", "type": "learn", "context": "3–4 Sätze frei sprechen.", "target_text": "Ich stelle mich kurz vor und spreche über ein Alltagsthema.", "mentor_tip": "Ruhig sprechen. 3 Sätze reichen."},
+      {"title": "B1 Sprechen: Meinung + Gründe", "slug": "b1_w8_l3_speaking_part2", "type": "learn", "context": "Meinung → 2 Gründe.", "target_text": "Ich finde __ gut, weil __. Außerdem __.", "mentor_tip": "Zwei Gründe reichen."},
+      {"title": "Speak: Prüfungssimulation 1", "slug": "b1_w8_s1_exam_sim_1", "type": "speak", "context": "Vorstellung + Alltagsthema.", "target_text": "Ich heiße ___. Heute spreche ich über ___.", "mentor_tip": "Langsam. Klar. Kurz.", "dialog": [
+        {"role": "mentor", "text": "Stellen Sie sich bitte kurz vor."},
+        {"role": "user", "text": "Ich heiße ___. Ich komme aus ___."},
+        {"role": "mentor", "text": "Was machen Sie in Deutschland?"},
+        {"role": "user", "text": "Ich lerne Deutsch und suche Arbeit."},
+        {"role": "mentor", "text": "Worüber sprechen Sie heute?"},
+        {"role": "user", "text": "Heute spreche ich über Einkaufen."},
+        {"role": "mentor", "text": "Warum ist das Thema wichtig?"},
+        {"role": "user", "text": "Weil ich jeden Tag einkaufe und besser sprechen will."},
+        {"role": "mentor", "text": "Danke."},
+        {"role": "user", "text": "Danke."}
+      ], "pronunciation_guides": []},
+      {"title": "Speak: Prüfungssimulation 2", "slug": "b1_w8_s2_exam_sim_2", "type": "speak", "context": "Meinung + Gründe.", "target_text": "Ich finde __ gut, weil __. Außerdem __.", "mentor_tip": "Zwei Gründe reichen.", "dialog": [
+        {"role": "mentor", "text": "Was ist Ihre Meinung zu Sport?"},
+        {"role": "user", "text": "Ich finde Sport wichtig, weil er gesund ist."},
+        {"role": "mentor", "text": "Haben Sie noch einen Grund?"},
+        {"role": "user", "text": "Außerdem reduziert Sport Stress."},
+        {"role": "mentor", "text": "Machen Sie selbst Sport?"},
+        {"role": "user", "text": "Ja, ich gehe zweimal pro Woche ins Fitnessstudio."},
+        {"role": "mentor", "text": "Sehr gut."},
+        {"role": "user", "text": "Danke."},
+        {"role": "mentor", "text": "Das war’s."},
+        {"role": "user", "text": "Okay."}
+      ], "pronunciation_guides": []}
+    ]
+  }
+]

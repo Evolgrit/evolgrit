@@ -1,0 +1,98 @@
+{
+  "id": "a1_w1_name",
+  "title": "Sich vorstellen: Name",
+  "level": "A1",
+  "week": 1,
+  "steps": [
+    {
+      "type": "image_audio_choice",
+      "prompt": "Errate die Bedeutung",
+      "tts": { "text": "Hallo", "rate": "normal" },
+      "options": [
+        {
+          "id": "opt1",
+          "label": "Guten Abend",
+          "imageKey": "greet_gutenabend_distract",
+          "audioText": "Guten Abend"
+        },
+        {
+          "id": "opt2",
+          "label": "Hallo",
+          "imageKey": "greet_hallo_correct",
+          "audioText": "Hallo"
+        }
+      ],
+      "answerId": "opt2"
+    },
+    {
+      "type": "cloze_audio_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "tts": { "text": "Guten Tag, Frau Bianchi.", "rate": "normal" },
+      "imageKey": "greet_formal",
+      "sentence": { "before": "", "after": ", Frau Bianchi." },
+      "translation": "Guten Tag, Frau Bianchi.",
+      "choices": [
+        { "id": "c1", "label": "Danke" },
+        { "id": "c2", "label": "Guten Tag" }
+      ],
+      "answerId": "c2"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Hallo",
+      "choices": [
+        { "id": "a", "label": "Hallo", "imageKey": "hello" },
+        { "id": "b", "label": "Ja", "imageKey": "yes" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "____, ich heiße Anna.",
+      "choices": [
+        { "id": "a", "label": "Hallo" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Bilde den Satz",
+      "text": "Ich heiße ____.",
+      "choices": [
+        { "id": "a", "label": "Anna" },
+        { "id": "b", "label": "Danke" },
+        { "id": "c", "label": "Ja" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hallo, ich heiße Anna.",
+      "cta": "Weiter"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Welches Wort fehlt?",
+      "text": "Ich ____ Anna.",
+      "choices": [
+        { "id": "a", "label": "heiße" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "Hallo, ich heiße Anna.",
+      "choices": [
+        { "id": "a", "label": "Hallo, ich heiße Ben." },
+        { "id": "b", "label": "Gute Nacht." }
+      ],
+      "answer": "a"
+    }
+  ]
+}

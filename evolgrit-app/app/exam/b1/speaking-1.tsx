@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from "react";
+import { Text, YStack, XStack } from "tamagui";
+import { useRouter } from "expo-router";
+
+import { ScreenShell } from "../../../components/system/ScreenShell";
+import { GlassCard } from "../../../components/system/GlassCard";
+import { PrimaryButton } from "../../../components/system/PrimaryButton";
+import { setSpeaking1Done } from "../../../lib/examB1Store";
+
+const PROMPT = "Stellen Sie sich kurz vor und nennen Sie ein Thema.";
+const EXAMPLE = "Ich heiße ___. Ich komme aus ___. Heute spreche ich über ___.";
+
+function formatTimer(seconds: number) {
+  const m = Math.floor(seconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = (seconds % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+export default function Speaking1() {
+  const router = useRouter();
+  const [remaining, setRemaining] = useState(180);
+  const [running, setRunning] = useState(false);
+
+  useEffect(() => {
+    if (!running) return;
+    const id = setInterval(() => {
+      setRemaining((r) => {
+        if (r <= 1) {
+          setRunning(false);
+          return 0;
+        }
+        return r - 1;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [running]);
+
+  return (
+    <ScreenShell title="Sprechen Teil 1">
+      <YStack gap="$3">
+        <GlassCard>
+          <Text fontSize={18} fontWeight="900" color="#111827">
+            Sprechen Teil 1
+          </Text>
+          <Text marginTop={6} color="#6B7280">
+            {PROMPT}
+          </Text>
+          <GlassCard marginTop="$3">
+            <Text fontWeight="800" color="#111827">
+              Beispiel
+            </Text>
+            <Text marginTop={6} color="#6B7280">
+              {EXAMPLE}
+            </Text>
+          </GlassCard>
+
+          <XStack marginTop="$3" alignItems="center" justifyContent="space-between">
+            <Text fontWeight="800" color="#111827">
+              Timer
+            </Text>
+            <Text fontWeight="900" fontSize={18} color="#111827">
+              {formatTimer(remaining)}
+            </Text>
+          </XStack>
+
+          <YStack gap="$2" marginTop="$3">
+            <PrimaryButton
+              label={running ? "Läuft…" : "Start"}
+              onPress={() => {
+                setRemaining(180);
+                setRunning(true);
+              }}
+            />
+            <PrimaryButton
+              label="Fertig"
+              onPress={async () => {
+                await setSpeaking1Done(true);
+                router.replace("/exam/b1/speaking-2");
+              }}
+            />
+          </YStack>
+        </GlassCard>
+      </YStack>
+    </ScreenShell>
+  );
+}

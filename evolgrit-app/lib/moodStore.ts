@@ -1,31 +1,40 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Mood = "calm" | "stressed" | "no_time";
+export type MoodMap = Record<string, Mood>; // key: YYYY-MM-DD
 
-const KEY = "evolgrit.moodsByDay";
+const KEY = "evolgrit.moods.v1";
 
-type Store = Record<string, Mood>; // yyyy-mm-dd -> mood
-
-export function dayKey(d: Date) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
+function pad(n: number) {
+  return String(n).padStart(2, "0");
 }
 
-export async function loadMoods(): Promise<Store> {
+export function todayKey(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+export async function getAllMoods(): Promise<MoodMap> {
   const raw = await AsyncStorage.getItem(KEY);
-  return raw ? JSON.parse(raw) : {};
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw) as MoodMap;
+  } catch {
+    return {};
+  }
 }
 
-export async function saveMood(date: Date, mood: Mood) {
-  const all = await loadMoods();
-  all[dayKey(date)] = mood;
-  await AsyncStorage.setItem(KEY, JSON.stringify(all));
-  return all;
+export async function getMoodForDate(dateISO: string): Promise<Mood | null> {
+  const map = await getAllMoods();
+  return map[dateISO] ?? null;
 }
 
-export async function getMood(date: Date): Promise<Mood | null> {
-  const all = await loadMoods();
-  return all[dayKey(date)] ?? null;
+export async function setMoodForDate(dateISO: string, mood: Mood): Promise<void> {
+  const map = await getAllMoods();
+  map[dateISO] = mood;
+  await AsyncStorage.setItem(KEY, JSON.stringify(map));
+}
+
+export async function setMoodToday(mood: Mood): Promise<void> {
+  await setMoodForDate(todayKey(), mood);
 }

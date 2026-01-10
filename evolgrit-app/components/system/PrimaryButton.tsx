@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, type ButtonProps } from "tamagui";
+import { pillProps } from "./recipes";
 
 export function PrimaryButton({
   label,
@@ -11,9 +12,9 @@ export function PrimaryButton({
   return (
     <Button
       {...props}
+      {...pillProps}
       backgroundColor="$primary"
-      borderRadius={12}
-      height={48}
+      minHeight={48}
       pressStyle={{ scale: 0.98, opacity: 0.92 }}
     >
       <Button.Text color="$textOnDark" fontWeight="800" fontSize={15}>

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Pressable } from "react-native";
 import Svg, { Circle } from "react-native-svg";
+import Animated, { useSharedValue, useAnimatedProps, withTiming, Easing } from "react-native-reanimated";
 
 const COLORS = {
   green: "#2ECC71",
@@ -30,8 +31,24 @@ export function ReadinessRing({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const progress = Math.min(100, Math.max(0, Math.round(value)));
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const animatedProgress = useSharedValue(0);
+
+  useEffect(() => {
+    animatedProgress.value = withTiming(progress, {
+      duration: 520,
+      easing: Easing.out(Easing.cubic),
+    });
+  }, [progress, animatedProgress]);
+
+  const animatedProps = useAnimatedProps(() => {
+    const strokeDashoffset = circumference - (animatedProgress.value / 100) * circumference;
+    return {
+      strokeDashoffset,
+    };
+  });
+
   const color = zoneColor(progress);
+  const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
   return (
     <Pressable onPress={onPress}>
@@ -45,7 +62,7 @@ export function ReadinessRing({
             r={radius}
             strokeWidth={strokeWidth}
           />
-          <Circle
+          <AnimatedCircle
             stroke={color}
             fill="none"
             cx={size / 2}
@@ -53,10 +70,10 @@ export function ReadinessRing({
             r={radius}
             strokeWidth={strokeWidth}
             strokeDasharray={`${circumference} ${circumference}`}
-            strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
             rotation="-90"
             origin={`${size / 2}, ${size / 2}`}
+            animatedProps={animatedProps as any}
           />
         </Svg>
 

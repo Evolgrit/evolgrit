@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, Text } from "tamagui";
 import { useRouter } from "expo-router";
 
 import { loadLangPrefs, saveLangPrefs, type LangPrefs } from "../lib/languagePrefs";
-import { GlassCard } from "../components/system/GlassCard";
 import { PrimaryButton } from "../components/system/PrimaryButton";
 import { PillButton } from "../components/system/PillButton";
+import { ScreenShell } from "../components/system/ScreenShell";
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -36,8 +35,8 @@ export default function LanguageSelect() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
-      <Stack flex={1} padding={16} gap={12}>
+    <ScreenShell title="Sprache wählen" showBack>
+      <Stack flex={1} gap={12} paddingBottom={24}>
         <Stack gap={4}>
           <Text fontSize={24} fontWeight="900" color="$text">
             Choose your language
@@ -45,21 +44,20 @@ export default function LanguageSelect() {
           <Text color="$muted">You will learn German (Deutsch).</Text>
         </Stack>
 
-        <GlassCard>
-          <Stack gap={10}>
-            {LANGS.map((l) => (
-              <PillButton
-                key={l.code}
-                label={`${l.label} (${l.code})`}
-                borderColor={nativeLang === l.code ? "$primary" : "$border"}
-                onPress={() => setNativeLang(l.code)}
-              />
-            ))}
-          </Stack>
-        </GlassCard>
+        <Stack backgroundColor="$surface" borderRadius={18} borderWidth={1} borderColor="$border" padding="$3" gap={10}>
+          {LANGS.map((l) => (
+            <PillButton
+              key={l.code}
+              label={`${l.label} (${l.code})`}
+              borderColor={nativeLang === l.code ? "$primary" : "$border"}
+              backgroundColor={nativeLang === l.code ? "$surface2" : "$surface"}
+              onPress={() => setNativeLang(l.code)}
+            />
+          ))}
+        </Stack>
 
         <PrimaryButton label="Continue" onPress={onContinue} />
       </Stack>
-    </SafeAreaView>
+    </ScreenShell>
   );
 }

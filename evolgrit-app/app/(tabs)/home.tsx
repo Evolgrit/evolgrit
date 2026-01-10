@@ -1,42 +1,30 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Pressable, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolation,
-} from "react-native-reanimated";
-import { BlurView } from "expo-blur";
 import type { NextAction, NextActionSource } from "../../lib/nextActionService";
 import { getNextAction, completeNextActionAndRecompute } from "../../lib/nextActionService";
 import { useRouter } from "expo-router";
 import { loadLangPrefs } from "../../lib/languagePrefs";
-import { resetApp } from "../../lib/resetApp";
 import { ReadinessRing } from "../../components/ReadinessRing";
 import { loadCurrentERS } from "../../lib/readinessService";
-import { appendEventAt, appendEvent } from "../../lib/eventsStore";
-import { saveMood } from "../../lib/moodStore";
+import { appendEvent } from "../../lib/eventsStore";
+import { setMoodForDate, todayKey, getMoodForDate, type Mood } from "../../lib/moodStore";
 import { GlassCard } from "../../components/system/GlassCard";
-import { PrimaryButton } from "../../components/system/PrimaryButton";
-import { SecondaryButton } from "../../components/system/SecondaryButton";
 import { PillButton } from "../../components/system/PillButton";
-import { Stack, Text } from "tamagui";
+import { ScreenShell } from "../../components/system/ScreenShell";
+import { Stack, Text, YStack, useThemeName, ScrollView, Button, XStack } from "tamagui";
+import { getAvatarUri } from "../../lib/avatarStore";
+import { NextActionCard } from "../../components/home/NextActionCard";
+import { Feather } from "@expo/vector-icons";
+import { Image } from "react-native";
+import { openMentorChat } from "../../lib/navigation/openMentorChat";
 
 type ERS = { L: number; A: number; S: number; C: number };
 
 const ersMin = (e: ERS) => Math.min(e.L, e.A, e.S, e.C);
 
-const MAX_HEADER = 120;
-const MIN_HEADER = 68;
-const HEADER_RANGE = MAX_HEADER - MIN_HEADER;
-
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <GlassCard marginBottom={12}>
-      <Text fontSize={14} fontWeight="700" color="#111827" marginBottom={10}>
+      <Text fontSize={14} fontWeight="700" color="$text" marginBottom={10}>
         {title}
       </Text>
       {children}
@@ -50,10 +38,12 @@ export default function HomeHub() {
   const [nextAction, setNextAction] = useState<NextAction | null>(null);
   const [nextActionSource, setNextActionSource] = useState<NextActionSource | null>(null);
   const [showAdjustedHint, setShowAdjustedHint] = useState(false);
+  const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const hintTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
-
-  const scrollY = useSharedValue(0);
+  const [avatarUri, setAvatarUri] = React.useState<string | null>(null);
+  const theme = useThemeName();
+  const TAB_BAR_HEIGHT = 80;
 
   useEffect(() => {
     (async () => {
@@ -67,6 +57,8 @@ export default function HomeHub() {
       const current = await loadCurrentERS();
       setErs(current);
       setCurrentERS(current);
+      const storedMood = await getMoodForDate(todayKey());
+      setSelectedMood(storedMood);
     })();
   }, []);
 
@@ -79,32 +71,19 @@ export default function HomeHub() {
     })();
   }, []);
 
-  const onScroll = useAnimatedScrollHandler({
-    onScroll: (e) => {
-      scrollY.value = e.contentOffset.y;
-    },
-  });
-
-  const headerStyle = useAnimatedStyle(() => {
-    const h = interpolate(scrollY.value, [0, HEADER_RANGE], [MAX_HEADER, MIN_HEADER], Extrapolation.CLAMP);
-    return { height: h };
-  });
-
-  const blurStyle = useAnimatedStyle(() => {
-    const opacity = interpolate(scrollY.value, [0, 10, 40], [0, 0.4, 1], Extrapolation.CLAMP);
-    return { opacity };
-  });
-
-  const titleStyle = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [0, HEADER_RANGE], [1, 0.84], Extrapolation.CLAMP);
-    const ty = interpolate(scrollY.value, [0, HEADER_RANGE], [0, -6], Extrapolation.CLAMP);
-    return {
-      transform: [{ scale }, { translateY: ty }],
+  React.useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const uri = await getAvatarUri();
+      if (mounted) setAvatarUri(uri);
+    })();
+    return () => {
+      mounted = false;
     };
-  });
+  }, []);
 
   const score = useMemo(() => ersMin(ers), [ers]);
-  const limiter = useMemo(() => {
+  const limiter = useMemo<"L" | "A" | "S" | "C">(() => {
     const min = score;
     const entries: [keyof ERS, number][] = [
       ["L", ers.L],
@@ -118,32 +97,17 @@ export default function HomeHub() {
   const whatToImprove = useMemo(() => {
     switch (limiter) {
       case "L":
-        return "Language is limiting. Do 1 speaking + 1 listening micro-check today.";
+        return "Heute zählt ein klarer Satz.";
       case "A":
-        return "Application is limiting. Do 1 real-life simulation (shop / transport / work).";
+        return "Heute üben wir Anwendung im Alltag.";
       case "S":
-        return "Stability is limiting. Reduce plan: fewer minutes, higher consistency.";
+        return "Heute stabilisieren wir zuerst.";
       case "C":
-        return "Consistency is limiting. Make it smaller: 3 minutes daily for 7 days.";
+        return "Heute reichen 3 Minuten.";
       default:
-        return "Do one small step now.";
+        return "Ein ruhiger Schritt reicht.";
     }
   }, [limiter]);
-
-  async function onCompleteNextAction() {
-    const updated = await completeNextActionAndRecompute();
-    setNextAction(updated.action);
-    setNextActionSource(updated.source);
-  }
-
-  async function onSimulateRisk() {
-    const ts = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString();
-    await appendEventAt("next_action_completed", ts, { source: "dev_sim" });
-    await completeNextActionAndRecompute();
-    const stored = await getNextAction();
-    setNextAction(stored.action);
-    setNextActionSource(stored.source);
-  }
 
   useEffect(() => {
     return () => {
@@ -153,7 +117,8 @@ export default function HomeHub() {
 
   async function onCheckin(mood: "calm" | "stressed" | "no_time") {
     await appendEvent("checkin_submitted", { mood });
-    await saveMood(new Date(), mood);
+    await setMoodForDate(todayKey(), mood);
+    setSelectedMood(mood);
     await completeNextActionAndRecompute();
     const stored = await getNextAction();
     setNextAction(stored.action);
@@ -165,43 +130,53 @@ export default function HomeHub() {
 
   if (!nextAction || !currentERS)
     return (
-      <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#F7F8FA" }}>
-        <Text color="#6B7280">Loading next action...</Text>
-      </SafeAreaView>
+      <ScreenShell title="Home">
+        <YStack flex={1} alignItems="center" justifyContent="center">
+          <Text color="$muted">Loading…</Text>
+        </YStack>
+      </ScreenShell>
     );
 
+  const avatarButton = (
+    <Button
+      unstyled
+      onPress={() => router.push("/profile")}
+      width={36}
+      height={36}
+      borderRadius={18}
+      overflow="hidden"
+      backgroundColor="rgba(17,24,39,0.08)"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {avatarUri ? <Image source={{ uri: avatarUri }} style={{ width: "100%", height: "100%" }} /> : null}
+    </Button>
+  );
+
+  const chatButton = (
+    <Button
+      unstyled
+      onPress={() => openMentorChat(router)}
+      padding={6}
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Feather name="message-square" size={22} color={theme === "dark" ? "#fff" : "#111827"} />
+    </Button>
+  );
+
+  const isSelected = (mood: Mood) => selectedMood === mood;
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
-      <Stack flex={1}>
-        <Animated.ScrollView
-          onScroll={onScroll}
-          scrollEventThrottle={16}
-          contentContainerStyle={{ paddingTop: MAX_HEADER + 12, paddingBottom: 140, paddingHorizontal: 16 }}
-        >
-          <Stack backgroundColor="#111827" borderRadius={18} padding={16} marginBottom={12} gap={6}>
-            <Text color="#E5E7EB" fontSize={12} fontWeight="700">
-              {nextAction.title.toUpperCase()}
-            </Text>
-            <Text color="#fff" fontSize={18} fontWeight="800">
-              {nextAction.cta}
-            </Text>
-            <Text color="#D1D5DB" marginBottom={4}>
-              {nextAction.subtitle}
-            </Text>
-
-            <PrimaryButton onPress={() => router.push("/speak-v2")} label={`Start now · ${nextAction.etaMin} min`} />
-            {nextActionSource === "risk" || showAdjustedHint ? (
-              <Text color="#9CA3AF" fontSize={12} marginTop={6}>
-                Adjusted for today.
-              </Text>
-            ) : null}
-
-            <Pressable onPress={onCompleteNextAction}>
-              <Text color="#9CA3AF" fontSize={12} marginTop={6}>
-                Tap to simulate “completed”.
-              </Text>
-            </Pressable>
-          </Stack>
+    <ScreenShell title="Home" leftContent={avatarButton} rightActions={chatButton}>
+      <ScrollView contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 32 }}>
+        <YStack gap="$4">
+          <NextActionCard
+            action={nextAction}
+            source={nextActionSource}
+            onStart={() => router.push("/speak-v2")}
+            showAdjusted={showAdjustedHint}
+          />
 
           <Card title="Readiness Score (ERS)">
             <Stack alignItems="center" marginBottom={8}>
@@ -212,124 +187,42 @@ export default function HomeHub() {
                 onPress={() => router.push("/(tabs)/progress")}
               />
             </Stack>
-            <Text marginTop={6} color="#6B7280" textAlign="center">
-              Limiter:{" "}
-              <Text fontWeight="800" color="#111827">
-                {limiter}
-              </Text>{" "}
-              · {whatToImprove}
+            <Text marginTop={6} color="$muted" textAlign="center">
+              {whatToImprove}
             </Text>
           </Card>
 
-          <GlassCard>
-            <Text color="#111827" fontWeight="700" marginBottom={10}>
-              Mentor
-            </Text>
-            <Text color="#6B7280" marginBottom={12}>
-              Ask a question (text or voice later). Mentor reply becomes your next action.
+          <Card title="Wie fühlst du dich heute?">
+            <Text color="$muted" marginBottom={12}>
+              Eine kleine Stimmung reicht.
             </Text>
 
-            <PrimaryButton onPress={() => router.push("/mentor")} label="Ask Mentor" />
-
-            <PillButton
-              onPress={async () => {
-                await resetApp();
-                router.replace("/language");
-              }}
-              marginTop={10}
-            >
-              Reset
-            </PillButton>
-
-            <SecondaryButton label="Simulate Risk (6d)" marginTop={8} onPress={onSimulateRisk} />
-
-            <Text color="#9CA3AF" fontSize={12} marginTop={10}>
-              Tap to simulate mentor impact.
-            </Text>
-          </GlassCard>
-
-          <Card title="Quick check-in (optional)">
-            <Text color="#6B7280" marginBottom={12}>
-              How is today? This creates signals for Risk & Plan Adjustments.
-            </Text>
-
-            <Stack flexDirection="row" gap={10}>
-              <Stack flex={1}>
-                <PillButton onPress={() => onCheckin("calm")}>Calm</PillButton>
-              </Stack>
-              <Stack flex={1}>
-                <PillButton onPress={() => onCheckin("stressed")}>Stressed</PillButton>
-              </Stack>
-              <Stack flex={1}>
-                <PillButton onPress={() => onCheckin("no_time")}>No time</PillButton>
-              </Stack>
-            </Stack>
+            <XStack gap="$2">
+              <PillButton
+                flex={1}
+                backgroundColor={isSelected("calm") ? "$border" : "$card"}
+                onPress={() => onCheckin("calm")}
+              >
+                Calm
+              </PillButton>
+              <PillButton
+                flex={1}
+                backgroundColor={isSelected("stressed") ? "$border" : "$card"}
+                onPress={() => onCheckin("stressed")}
+              >
+                Stressed
+              </PillButton>
+              <PillButton
+                flex={1}
+                backgroundColor={isSelected("no_time") ? "$border" : "$card"}
+                onPress={() => onCheckin("no_time")}
+              >
+                No time
+              </PillButton>
+            </XStack>
           </Card>
-        </Animated.ScrollView>
-
-        <Animated.View style={[styles.header, headerStyle]}>
-          <Animated.View style={[StyleSheet.absoluteFill, blurStyle]}>
-            <BlurView intensity={24} tint="light" style={StyleSheet.absoluteFill} />
-            <Stack style={{ ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(255,255,255,0.70)" }} />
-          </Animated.View>
-
-          <Stack style={styles.headerRowPinned}>
-            <Stack flex={1} />
-            <Pressable onPress={() => router.push("/mentor")} style={styles.iconBtn}>
-              <Ionicons name="chatbubble-ellipses-outline" size={18} color="#111827" />
-            </Pressable>
-            <Pressable onPress={() => router.push("/profile")} style={styles.iconBtn}>
-              <Ionicons name="person-circle-outline" size={20} color="#111827" />
-            </Pressable>
-          </Stack>
-
-          <Animated.View style={[styles.titleWrap, titleStyle]}>
-            <Text fontSize={30} fontWeight="800" color="#111827">
-              Home
-            </Text>
-            <Text marginTop={4} fontSize={13} color="#6B7280">
-              One next action. Visible proof. Calm progress.
-            </Text>
-          </Animated.View>
-        </Animated.View>
-      </Stack>
-    </SafeAreaView>
+        </YStack>
+      </ScrollView>
+    </ScreenShell>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    justifyContent: "flex-end",
-    shadowColor: "#000",
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 6 },
-  },
-  headerRowPinned: {
-    position: "absolute",
-    top: 12,
-    left: 16,
-    right: 16,
-    height: 44,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  iconBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 999,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,0.55)",
-    borderWidth: 1,
-    borderColor: "rgba(17,24,39,0.04)",
-  },
-  titleWrap: { paddingBottom: 10 },
-});

@@ -1,0 +1,1021 @@
+{
+  "level": "A1",
+  "language": "de",
+  "version": "a1_v1_seed",
+  "defaults": {
+    "durationMin": 3,
+    "mode": [
+      "normal",
+      "slow"
+    ],
+    "ui": {
+      "maxTextLines": 2,
+      "noGrammarScreen": true
+    }
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "theme": "Ankommen",
+      "goal": "Sicherheit: Ich kann mich vorstellen und einfache Begrüßungen.",
+      "grammar_hint": "Bei „ich“ endet das Verb oft auf „-e“ (ich heiße, ich komme).",
+      "tasks": [
+        {
+          "id": "a1_w1_t1_intro_name",
+          "situation": "Sich vorstellen: Name",
+          "listenText": {
+            "normal": "Hallo! Ich heiße Lina. Und du?",
+            "slow": "Hal-lo! Ich hei-ße Li-na. Und du?"
+          },
+          "recognize": [
+            "Hallo",
+            "ich",
+            "heiße",
+            "Und du"
+          ],
+          "speak": {
+            "prompt": "Sag: „Hallo, ich heiße ___.“",
+            "target": "Hallo, ich heiße ___."
+          },
+          "mentorTip": "Langsam starten. Name deutlich sprechen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w1_t2_intro_country",
+          "situation": "Sich vorstellen: Herkunft",
+          "listenText": {
+            "normal": "Ich komme aus Polen. Ich wohne jetzt hier.",
+            "slow": "Ich kom-me aus Po-len. Ich woh-ne jetzt hier."
+          },
+          "recognize": [
+            "Ich komme aus",
+            "Ich wohne",
+            "jetzt"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich komme aus ___.“",
+            "target": "Ich komme aus ___."
+          },
+          "mentorTip": "„aus“ kurz, Land klar.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w1_t3_greeting_goodbye",
+          "situation": "Begrüßen & verabschieden",
+          "listenText": {
+            "normal": "Guten Morgen! Schön dich zu sehen. Tschüss!",
+            "slow": "Gu-ten Mor-gen! Schön dich zu se-hen. Tschüss!"
+          },
+          "recognize": [
+            "Guten Morgen",
+            "Schön",
+            "Tschüss"
+          ],
+          "speak": {
+            "prompt": "Sag: „Guten Morgen!“ und danach: „Tschüss!“",
+            "target": "Guten Morgen! Tschüss!"
+          },
+          "mentorTip": "Lächeln hören – das macht es freundlicher.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w1_t4_polite_words",
+          "situation": "Bitte & Danke",
+          "listenText": {
+            "normal": "Danke! — Bitte. Kein Problem.",
+            "slow": "Dan-ke! — Bit-te. Kein Pro-blem."
+          },
+          "recognize": [
+            "Danke",
+            "Bitte",
+            "Kein Problem"
+          ],
+          "speak": {
+            "prompt": "Sag: „Danke.“ → „Bitte.“",
+            "target": "Danke. Bitte."
+          },
+          "mentorTip": "Kurze Pausen zwischen den Wörtern.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w1_t5_numbers_0_20",
+          "situation": "Zahlen 0–20 (Mini)",
+          "listenText": {
+            "normal": "eins, zwei, drei … zehn … zwanzig",
+            "slow": "eins, zwei, drei … zehn … zwan-zig"
+          },
+          "recognize": [
+            "1",
+            "2",
+            "3",
+            "10",
+            "20"
+          ],
+          "speak": {
+            "prompt": "Sag laut: 1–5 und dann 10 und 20.",
+            "target": "eins, zwei, drei, vier, fünf, zehn, zwanzig"
+          },
+          "mentorTip": "Bei „zwanzig“ das „-zig“ weich.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_introduce_name",
+          "situation": "Vorstellen: Name",
+          "listenText": {
+            "normal": "Hallo, ich heiße Anna. Freut mich.",
+            "slow": "Hal-lo, ich hei-ße An-na. Freut mich."
+          },
+          "recognize": [
+            "ich heiße",
+            "Freut mich"
+          ],
+          "speak": {
+            "prompt": "Sag: „Hallo, ich heiße ___. Freut mich.“",
+            "target": "Hallo, ich heiße ___. Freut mich."
+          },
+          "english_hint": "Hi, my name is ___. Nice to meet you.",
+          "mentorTip": "Kurz und freundlich: „Freut mich“ nicht zu schnell.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_where_from",
+          "situation": "Herkunft sagen",
+          "listenText": {
+            "normal": "Ich komme aus England. Und du?",
+            "slow": "Ich kom-me aus Eng-land. Und du?"
+          },
+          "recognize": [
+            "Ich komme aus",
+            "Und du"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich komme aus ___. Und du?“",
+            "target": "Ich komme aus ___. Und du?"
+          },
+          "english_hint": "I'm from ___. And you?",
+          "mentorTip": "„aus“ kurz, „Und du?“ mit Frageintonation.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "theme": "Alltag starten",
+      "goal": "Kontrolle: Einkaufen, Mengen, Preise, Uhrzeit.",
+      "grammar_hint": "Zahlen stehen vor dem Nomen: „zwei Äpfel“.",
+      "tasks": [
+        {
+          "id": "a1_w2_t1_shop_need",
+          "situation": "Einkaufen: Ich brauche …",
+          "listenText": {
+            "normal": "Ich brauche Brot, bitte.",
+            "slow": "Ich brau-che Brot, bit-te."
+          },
+          "recognize": [
+            "Ich brauche",
+            "bitte",
+            "Brot"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich brauche ___.“",
+            "target": "Ich brauche ___."
+          },
+          "mentorTip": "„brau-che“ klar trennen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w2_t2_shop_quantity",
+          "situation": "Einkaufen: Menge",
+          "listenText": {
+            "normal": "Zwei Äpfel, bitte.",
+            "slow": "Zwei Äp-fel, bit-te."
+          },
+          "recognize": [
+            "Zwei",
+            "Äpfel",
+            "bitte"
+          ],
+          "speak": {
+            "prompt": "Sag: „Zwei ___, bitte.“",
+            "target": "Zwei ___, bitte."
+          },
+          "mentorTip": "Zahl zuerst – dann Produkt.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w2_t3_price_question",
+          "situation": "Preis fragen",
+          "listenText": {
+            "normal": "Was kostet das?",
+            "slow": "Was kos-tet das?"
+          },
+          "recognize": [
+            "Was kostet",
+            "das"
+          ],
+          "speak": {
+            "prompt": "Sag: „Was kostet das?“",
+            "target": "Was kostet das?"
+          },
+          "mentorTip": "Frage am Ende leicht hoch.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w2_t4_time_basic",
+          "situation": "Uhrzeit",
+          "listenText": {
+            "normal": "Es ist drei Uhr.",
+            "slow": "Es ist drei Uhr."
+          },
+          "recognize": [
+            "Es ist",
+            "Uhr"
+          ],
+          "speak": {
+            "prompt": "Sag: „Es ist ___ Uhr.“",
+            "target": "Es ist ___ Uhr."
+          },
+          "mentorTip": "„Uhr“ kurz und rund.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w2_t5_simple_preference",
+          "situation": "Einfach: mag / nicht mag",
+          "listenText": {
+            "normal": "Ich mag Kaffee. Ich mag keinen Tee.",
+            "slow": "Ich mag Kaf-fee. Ich mag kei-nen Tee."
+          },
+          "recognize": [
+            "Ich mag",
+            "keinen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich mag ___.“",
+            "target": "Ich mag ___."
+          },
+          "mentorTip": "„mag“ kurz, nicht „maak“.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_supermarket_rice",
+          "situation": "Im Supermarkt: Reis finden",
+          "listenText": {
+            "normal": "Entschuldigung, wo finde ich Reis? Ich brauche zwei Kilo.",
+            "slow": "Ent-schul-di-gung, wo fin-de ich Reis? Ich brau-che zwei Ki-lo."
+          },
+          "recognize": [
+            "Entschuldigung",
+            "Reis",
+            "zwei Kilo"
+          ],
+          "speak": {
+            "prompt": "Sag: „Entschuldigung, wo finde ich Reis? Ich brauche zwei Kilo.“",
+            "target": "Entschuldigung, wo finde ich Reis? Ich brauche zwei Kilo."
+          },
+          "english_hint": "Excuse me, where can I find rice? I need two kilos.",
+          "mentorTip": "Sag „Entschuldigung“ deutlich. Mach eine kurze Pause vor „Ich brauche…“.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_bakery_order",
+          "situation": "In der Bäckerei",
+          "listenText": {
+            "normal": "Guten Tag! Ich hätte gern zwei Brötchen, bitte.",
+            "slow": "Gu-ten Tag! Ich hät-te gern zwei Bröt-chen, bit-te."
+          },
+          "recognize": [
+            "Guten Tag",
+            "Brötchen",
+            "bitte"
+          ],
+          "speak": {
+            "prompt": "Sag: „Guten Tag! Ich hätte gern zwei Brötchen, bitte.“",
+            "target": "Guten Tag! Ich hätte gern zwei Brötchen, bitte."
+          },
+          "english_hint": "Hello! I'd like two rolls, please.",
+          "mentorTip": "„Guten Tag“ ruhig, „bitte“ am Ende nicht verschlucken.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_cafe_drink",
+          "situation": "Im Café",
+          "listenText": {
+            "normal": "Ich hätte gern einen Kaffee mit Milch, bitte.",
+            "slow": "Ich hät-te gern ei-nen Kaf-fee mit Milch, bit-te."
+          },
+          "recognize": [
+            "Kaffee",
+            "Milch",
+            "bitte"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich hätte gern einen Kaffee mit Milch, bitte.“",
+            "target": "Ich hätte gern einen Kaffee mit Milch, bitte."
+          },
+          "english_hint": "I'd like a coffee with milk, please.",
+          "mentorTip": "Übe die Artikel: „einen Kaffee“.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_ask_price",
+          "situation": "Preis fragen",
+          "listenText": {
+            "normal": "Wie viel kostet das?",
+            "slow": "Wie viel kos-tet das?"
+          },
+          "recognize": [
+            "Wie viel",
+            "kostet"
+          ],
+          "speak": {
+            "prompt": "Sag: „Wie viel kostet das?“",
+            "target": "Wie viel kostet das?"
+          },
+          "english_hint": "How much is this?",
+          "mentorTip": "„kostet“ klar aussprechen: KOS-tet.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "theme": "Menschen & Orte",
+      "goal": "Zugehörigkeit: Stadt, Wege, Treffen.",
+      "grammar_hint": "Fragen starten oft mit Verb/Fragewort: „Wo ist…?“",
+      "tasks": [
+        {
+          "id": "a1_w3_t1_where_toilet",
+          "situation": "Ort finden",
+          "listenText": {
+            "normal": "Entschuldigung, wo ist die Toilette?",
+            "slow": "Ent-schul-di-gung, wo ist die Toi-let-te?"
+          },
+          "recognize": [
+            "Entschuldigung",
+            "wo ist",
+            "die Toilette"
+          ],
+          "speak": {
+            "prompt": "Sag: „Entschuldigung, wo ist __?“",
+            "target": "Entschuldigung, wo ist __?"
+          },
+          "mentorTip": "„Ent-schul-di-gung“ in Silben.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w3_t2_direction",
+          "situation": "Richtung",
+          "listenText": {
+            "normal": "Geradeaus und dann links.",
+            "slow": "Ge-ra-de-aus und dann links."
+          },
+          "recognize": [
+            "geradeaus",
+            "dann",
+            "links"
+          ],
+          "speak": {
+            "prompt": "Sag: „Geradeaus und dann __.“",
+            "target": "Geradeaus und dann __."
+          },
+          "mentorTip": "„geradeaus“ ruhig, nicht hetzen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w3_t3_meeting_time",
+          "situation": "Treffen vereinbaren",
+          "listenText": {
+            "normal": "Treffen wir uns um fünf Uhr?",
+            "slow": "Tref-fen wir uns um fünf Uhr?"
+          },
+          "recognize": [
+            "Treffen wir uns",
+            "um",
+            "Uhr"
+          ],
+          "speak": {
+            "prompt": "Sag: „Treffen wir uns um ___ Uhr?“",
+            "target": "Treffen wir uns um ___ Uhr?"
+          },
+          "mentorTip": "„wir“ weich, nicht „veer“.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w3_t4_yes_no",
+          "situation": "Ja / Nein / vielleicht",
+          "listenText": {
+            "normal": "Ja, gern. Nein, sorry. Vielleicht später.",
+            "slow": "Ja, gern. Nein, sor-ry. Viel-leicht spä-ter."
+          },
+          "recognize": [
+            "Ja",
+            "Nein",
+            "Vielleicht"
+          ],
+          "speak": {
+            "prompt": "Sag drei Antworten: Ja / Nein / Vielleicht.",
+            "target": "Ja. Nein. Vielleicht."
+          },
+          "mentorTip": "Kurz & klar — kein langes Denken.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w3_t5_thank_you_help",
+          "situation": "Hilfe bekommen",
+          "listenText": {
+            "normal": "Danke für die Hilfe!",
+            "slow": "Dan-ke für die Hil-fe!"
+          },
+          "recognize": [
+            "Danke",
+            "für",
+            "Hilfe"
+          ],
+          "speak": {
+            "prompt": "Sag: „Danke für die Hilfe!“",
+            "target": "Danke für die Hilfe!"
+          },
+          "mentorTip": "„Hilfe“ mit kurzem i.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_directions_station",
+          "situation": "Nach dem Weg fragen",
+          "listenText": {
+            "normal": "Entschuldigung, wo ist der Bahnhof?",
+            "slow": "Ent-schul-di-gung, wo ist der Bahn-hof?"
+          },
+          "recognize": [
+            "Entschuldigung",
+            "Bahnhof"
+          ],
+          "speak": {
+            "prompt": "Sag: „Entschuldigung, wo ist der Bahnhof?“",
+            "target": "Entschuldigung, wo ist der Bahnhof?"
+          },
+          "english_hint": "Excuse me, where is the train station?",
+          "mentorTip": "Betone „Bahnhof“: BAHN-hof.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "theme": "Termine & Regeln",
+      "goal": "Kompetenz: pünktlich, entschuldigen, absagen.",
+      "grammar_hint": "Zeit am Satzanfang ist normal: „Heute…“, „Morgen…“",
+      "tasks": [
+        {
+          "id": "a1_w4_t1_on_time",
+          "situation": "Pünktlichkeit",
+          "listenText": {
+            "normal": "Ich komme um neun Uhr.",
+            "slow": "Ich kom-me um neun Uhr."
+          },
+          "recognize": [
+            "Ich komme",
+            "um",
+            "neun Uhr"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich komme um ___ Uhr.“",
+            "target": "Ich komme um ___ Uhr."
+          },
+          "mentorTip": "Uhrzeit deutlich.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w4_t2_late_notice",
+          "situation": "Zu spät: ankündigen",
+          "listenText": {
+            "normal": "Ich komme zehn Minuten später.",
+            "slow": "Ich kom-me zehn Mi-nu-ten spä-ter."
+          },
+          "recognize": [
+            "zehn Minuten",
+            "später"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich komme ___ Minuten später.“",
+            "target": "Ich komme ___ Minuten später."
+          },
+          "mentorTip": "„spä-ter“ langes ä.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w4_t3_sorry",
+          "situation": "Entschuldigen",
+          "listenText": {
+            "normal": "Entschuldigung, ich bin zu spät.",
+            "slow": "Ent-schul-di-gung, ich bin zu spät."
+          },
+          "recognize": [
+            "Entschuldigung",
+            "zu spät"
+          ],
+          "speak": {
+            "prompt": "Sag: „Entschuldigung, ich bin zu spät.“",
+            "target": "Entschuldigung, ich bin zu spät."
+          },
+          "mentorTip": "Erst Entschuldigung, dann Grund.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w4_t4_cancel",
+          "situation": "Absagen",
+          "listenText": {
+            "normal": "Ich kann heute nicht. Morgen vielleicht.",
+            "slow": "Ich kann heu-te nicht. Mor-gen viel-leicht."
+          },
+          "recognize": [
+            "Ich kann nicht",
+            "heute",
+            "morgen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich kann heute nicht.“",
+            "target": "Ich kann heute nicht."
+          },
+          "mentorTip": "Freundlich bleiben: Ton ruhig.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w4_t5_reschedule",
+          "situation": "Neuen Termin",
+          "listenText": {
+            "normal": "Können wir den Termin verschieben?",
+            "slow": "Kön-nen wir den Ter-min ver-schie-ben?"
+          },
+          "recognize": [
+            "Können wir",
+            "Termin",
+            "verschieben"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können wir den Termin verschieben?“",
+            "target": "Können wir den Termin verschieben?"
+          },
+          "mentorTip": "„können“ mit kurzem ö.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_appointment_time",
+          "situation": "Uhrzeit / Termin",
+          "listenText": {
+            "normal": "Wie spät ist es?",
+            "slow": "Wie spät ist es?"
+          },
+          "recognize": [
+            "Wie spät",
+            "ist es"
+          ],
+          "speak": {
+            "prompt": "Sag: „Wie spät ist es?“",
+            "target": "Wie spät ist es?"
+          },
+          "english_hint": "What time is it?",
+          "mentorTip": "„spät“ = langes ä: spääät.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "theme": "Wohnen",
+      "goal": "Stabilität: Wohnung, Nachbarn, einfache Probleme.",
+      "grammar_hint": "mein/meine = gehört zu mir: „meine Wohnung“",
+      "tasks": [
+        {
+          "id": "a1_w5_t1_my_flat",
+          "situation": "Meine Wohnung",
+          "listenText": {
+            "normal": "Das ist meine Wohnung.",
+            "slow": "Das ist mei-ne Woh-nung."
+          },
+          "recognize": [
+            "Das ist",
+            "meine",
+            "Wohnung"
+          ],
+          "speak": {
+            "prompt": "Sag: „Das ist meine ___.“",
+            "target": "Das ist meine ___."
+          },
+          "mentorTip": "„meine“ weich sprechen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w5_t2_neighbors",
+          "situation": "Nachbarn begrüßen",
+          "listenText": {
+            "normal": "Hallo, ich bin dein neuer Nachbar.",
+            "slow": "Hal-lo, ich bin dein neu-er Nach-bar."
+          },
+          "recognize": [
+            "neuer",
+            "Nachbar"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich bin dein neuer Nachbar.“",
+            "target": "Ich bin dein neuer Nachbar."
+          },
+          "mentorTip": "Nach-bar klar trennen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w5_t3_noise",
+          "situation": "Lärm",
+          "listenText": {
+            "normal": "Es ist zu laut. Bitte leiser.",
+            "slow": "Es ist zu laut. Bit-te lei-ser."
+          },
+          "recognize": [
+            "zu laut",
+            "Bitte",
+            "leiser"
+          ],
+          "speak": {
+            "prompt": "Sag: „Bitte leiser.“",
+            "target": "Bitte leiser."
+          },
+          "mentorTip": "Kurz + freundlich, nicht aggressiv.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w5_t4_broken",
+          "situation": "Etwas ist kaputt",
+          "listenText": {
+            "normal": "Die Lampe ist kaputt.",
+            "slow": "Die Lam-pe ist ka-putt."
+          },
+          "recognize": [
+            "ist kaputt",
+            "Lampe"
+          ],
+          "speak": {
+            "prompt": "Sag: „___ ist kaputt.“",
+            "target": "___ ist kaputt."
+          },
+          "mentorTip": "„kaputt“ klar am Ende.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w5_t5_landlord_help",
+          "situation": "Hilfe vom Vermieter",
+          "listenText": {
+            "normal": "Können Sie bitte helfen?",
+            "slow": "Kön-nen Sie bit-te hel-fen?"
+          },
+          "recognize": [
+            "Können Sie",
+            "bitte",
+            "helfen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie bitte helfen?“",
+            "target": "Können Sie bitte helfen?"
+          },
+          "mentorTip": "Sie-Form = höflich.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "theme": "Arbeit kennenlernen",
+      "goal": "Hoffnung: Aufgaben, einfache Anweisungen, Kollegen.",
+      "grammar_hint": "Verb oft auf Platz 2: „Heute arbeite ich…“",
+      "tasks": [
+        {
+          "id": "a1_w6_t1_job_title",
+          "situation": "Beruf sagen",
+          "listenText": {
+            "normal": "Ich arbeite als Fahrer.",
+            "slow": "Ich ar-bei-te als Fah-rer."
+          },
+          "recognize": [
+            "Ich arbeite",
+            "als"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich arbeite als ___.“",
+            "target": "Ich arbeite als ___."
+          },
+          "mentorTip": "„arbeite“ in 2 Teilen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w6_t2_simple_task",
+          "situation": "Aufgabe verstehen",
+          "listenText": {
+            "normal": "Bitte hier unterschreiben.",
+            "slow": "Bit-te hier un-ter-schrei-ben."
+          },
+          "recognize": [
+            "Bitte",
+            "hier",
+            "unterschreiben"
+          ],
+          "speak": {
+            "prompt": "Sag: „Okay, ich unterschreibe.“",
+            "target": "Okay, ich unterschreibe."
+          },
+          "mentorTip": "„unter-schrei-ben“ deutlich.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w6_t3_question_help",
+          "situation": "Nachfragen",
+          "listenText": {
+            "normal": "Entschuldigung, können Sie das wiederholen?",
+            "slow": "Ent-schul-di-gung, kön-nen Sie das wie-der-ho-len?"
+          },
+          "recognize": [
+            "wiederholen",
+            "können Sie"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie das wiederholen?“",
+            "target": "Können Sie das wiederholen?"
+          },
+          "mentorTip": "Ruhig fragen, das ist normal.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w6_t4_time_shift",
+          "situation": "Schicht / Zeit",
+          "listenText": {
+            "normal": "Ich arbeite heute von acht bis vier.",
+            "slow": "Ich ar-bei-te heu-te von acht bis vier."
+          },
+          "recognize": [
+            "von",
+            "bis",
+            "heute"
+          ],
+          "speak": {
+            "prompt": "Sag: „Heute arbeite ich von __ bis __.“",
+            "target": "Heute arbeite ich von __ bis __."
+          },
+          "mentorTip": "Zahlen klar.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w6_t5_thanks_colleague",
+          "situation": "Kollegen: Danke",
+          "listenText": {
+            "normal": "Danke, das hilft mir.",
+            "slow": "Dan-ke, das hilft mir."
+          },
+          "recognize": [
+            "hilft",
+            "mir"
+          ],
+          "speak": {
+            "prompt": "Sag: „Danke, das hilft mir.“",
+            "target": "Danke, das hilft mir."
+          },
+          "mentorTip": "Kurz, ehrlich.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "theme": "Kommunikation im Alltag",
+      "goal": "Selbstvertrauen: bitten, ablehnen, kleine Meinung.",
+      "grammar_hint": "„Bitte“ macht Sätze freundlich: „Bitte helfen.“",
+      "tasks": [
+        {
+          "id": "a1_w7_t1_request",
+          "situation": "Bitte um Hilfe",
+          "listenText": {
+            "normal": "Können Sie mir bitte helfen?",
+            "slow": "Kön-nen Sie mir bit-te hel-fen?"
+          },
+          "recognize": [
+            "mir",
+            "bitte",
+            "helfen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie mir bitte helfen?“",
+            "target": "Können Sie mir bitte helfen?"
+          },
+          "mentorTip": "„mir“ kurz.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w7_t2_simple_opinion",
+          "situation": "Meinung leicht",
+          "listenText": {
+            "normal": "Ich finde das gut.",
+            "slow": "Ich fin-de das gut."
+          },
+          "recognize": [
+            "Ich finde",
+            "gut"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich finde das gut.“",
+            "target": "Ich finde das gut."
+          },
+          "mentorTip": "„finde“ nicht verschlucken.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w7_t3_not_possible",
+          "situation": "Ablehnen",
+          "listenText": {
+            "normal": "Sorry, das geht nicht.",
+            "slow": "Sor-ry, das geht nicht."
+          },
+          "recognize": [
+            "geht nicht"
+          ],
+          "speak": {
+            "prompt": "Sag: „Das geht nicht.“",
+            "target": "Das geht nicht."
+          },
+          "mentorTip": "Ton ruhig halten.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w7_t4_need_time",
+          "situation": "Zeit brauchen",
+          "listenText": {
+            "normal": "Einen Moment, bitte.",
+            "slow": "Ei-nen Mo-ment, bit-te."
+          },
+          "recognize": [
+            "Moment",
+            "bitte"
+          ],
+          "speak": {
+            "prompt": "Sag: „Einen Moment, bitte.“",
+            "target": "Einen Moment, bitte."
+          },
+          "mentorTip": "Sehr nützlich im Alltag.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w7_t5_small_talk",
+          "situation": "Mini-Smalltalk",
+          "listenText": {
+            "normal": "Wie geht’s? — Gut, danke.",
+            "slow": "Wie geht’s? — Gut, dan-ke."
+          },
+          "recognize": [
+            "Wie geht’s",
+            "Gut",
+            "danke"
+          ],
+          "speak": {
+            "prompt": "Sag: „Wie geht’s?“ → „Gut, danke.“",
+            "target": "Wie geht’s? Gut, danke."
+          },
+          "mentorTip": "Kurz antworten reicht.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_need_help",
+          "situation": "Hilfe brauchen",
+          "listenText": {
+            "normal": "Können Sie mir bitte helfen?",
+            "slow": "Kön-nen Sie mir bit-te hel-fen?"
+          },
+          "recognize": [
+            "Können Sie",
+            "bitte",
+            "helfen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie mir bitte helfen?“",
+            "target": "Können Sie mir bitte helfen?"
+          },
+          "english_hint": "Can you help me, please?",
+          "mentorTip": "„Können Sie…“ höflich, nicht wie „könn’se“ verschlucken.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_speak_repeat_slowly",
+          "situation": "Wiederholen",
+          "listenText": {
+            "normal": "Können Sie das bitte wiederholen? Langsam, bitte.",
+            "slow": "Kön-nen Sie das bit-te wie-der-ho-len? Lang-sam, bit-te."
+          },
+          "recognize": [
+            "bitte",
+            "wiederholen"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie das bitte wiederholen? Langsam, bitte.“",
+            "target": "Können Sie das bitte wiederholen? Langsam, bitte."
+          },
+          "english_hint": "Could you repeat that? Slowly, please.",
+          "mentorTip": "Zweite „bitte“ extra weich.",
+          "durationMin": 3
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "theme": "Festigung",
+      "goal": "Stolz: Wiederholen & Mini-Simulationen.",
+      "grammar_hint": "Du kannst mehr als du denkst — bleib ruhig.",
+      "tasks": [
+        {
+          "id": "a1_w8_t1_sim_shop",
+          "situation": "Simulation: Einkauf",
+          "listenText": {
+            "normal": "Ich brauche zwei Äpfel. Was kostet das?",
+            "slow": "Ich brau-che zwei Äp-fel. Was kos-tet das?"
+          },
+          "recognize": [
+            "Ich brauche",
+            "zwei",
+            "Was kostet"
+          ],
+          "speak": {
+            "prompt": "Sag beides: „Ich brauche…“ und „Was kostet…?“",
+            "target": "Ich brauche ___. Was kostet das?"
+          },
+          "mentorTip": "Zwei Sätze = Mini-Erfolg.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w8_t2_sim_directions",
+          "situation": "Simulation: Weg",
+          "listenText": {
+            "normal": "Entschuldigung, wo ist der Bahnhof?",
+            "slow": "Ent-schul-di-gung, wo ist der Bahn-hof?"
+          },
+          "recognize": [
+            "Bahnhof",
+            "wo ist"
+          ],
+          "speak": {
+            "prompt": "Sag: „Entschuldigung, wo ist __?“",
+            "target": "Entschuldigung, wo ist __?"
+          },
+          "mentorTip": "Einmal tief atmen – dann sprechen.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w8_t3_sim_appointment",
+          "situation": "Simulation: Termin",
+          "listenText": {
+            "normal": "Ich komme zehn Minuten später. Entschuldigung.",
+            "slow": "Ich kom-me zehn Mi-nu-ten spä-ter. Ent-schul-di-gung."
+          },
+          "recognize": [
+            "später",
+            "Entschuldigung"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich komme ___ Minuten später.“",
+            "target": "Ich komme ___ Minuten später."
+          },
+          "mentorTip": "Kurz ankündigen ist stark.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w8_t4_sim_work",
+          "situation": "Simulation: Arbeit",
+          "listenText": {
+            "normal": "Können Sie das wiederholen? Danke.",
+            "slow": "Kön-nen Sie das wie-der-ho-len? Dan-ke."
+          },
+          "recognize": [
+            "wiederholen",
+            "Danke"
+          ],
+          "speak": {
+            "prompt": "Sag: „Können Sie das wiederholen?“",
+            "target": "Können Sie das wiederholen?"
+          },
+          "mentorTip": "Fragen ist professionell.",
+          "durationMin": 3
+        },
+        {
+          "id": "a1_w8_t5_finish_pride",
+          "situation": "Abschluss: Ich kann das",
+          "listenText": {
+            "normal": "Ich kann das. Schritt für Schritt.",
+            "slow": "Ich kann das. Schritt für Schritt."
+          },
+          "recognize": [
+            "Ich kann das",
+            "Schritt für Schritt"
+          ],
+          "speak": {
+            "prompt": "Sag: „Ich kann das.“",
+            "target": "Ich kann das."
+          },
+          "mentorTip": "Kurz feiern – dann weiter.",
+          "durationMin": 3
+        }
+      ]
+    }
+  ]
+}

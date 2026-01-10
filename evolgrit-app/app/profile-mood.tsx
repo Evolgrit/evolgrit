@@ -6,7 +6,8 @@ import { Stack, Text } from "tamagui";
 
 import { PillButton } from "../components/system/PillButton";
 import { GlassCard } from "../components/system/GlassCard";
-import { loadMoods, saveMood, type Mood, dayKey } from "../lib/moodStore";
+import { getAllMoods, setMoodForDate, type Mood } from "../lib/moodStore";
+import { useFocusEffect } from "expo-router";
 
 const MOOD_COLOR: Record<Mood, string> = {
   calm: "#2ECC71",
@@ -53,19 +54,34 @@ export default function ProfileMood() {
 
   useEffect(() => {
     (async () => {
-      setMoods(await loadMoods());
+      setMoods(await getAllMoods());
     })();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        setMoods(await getAllMoods());
+      })();
+    }, [])
+  );
 
   const weekStart = useMemo(() => startOfWeek(anchor), [anchor]);
   const weekDays = useMemo(() => Array.from({ length: 7 }, (_, i) => addDays(weekStart, i)), [weekStart]);
 
   async function setMoodForSelected(mood: Mood) {
-    const next = await saveMood(selected, mood);
+    const selKey = `${selected.getFullYear()}-${String(selected.getMonth() + 1).padStart(2, "0")}-${String(
+      selected.getDate()
+    ).padStart(2, "0")}`;
+    await setMoodForDate(selKey, mood);
+    const next = await getAllMoods();
     setMoods(next);
   }
 
-  const selectedMood = moods[dayKey(selected)] ?? null;
+  const selectedKey = `${selected.getFullYear()}-${String(selected.getMonth() + 1).padStart(2, "0")}-${String(
+    selected.getDate()
+  ).padStart(2, "0")}`;
+  const selectedMood = moods[selectedKey] ?? null;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
@@ -109,7 +125,9 @@ export default function ProfileMood() {
           {viewMode === "week" ? (
             <Stack flexDirection="row" justifyContent="space-between">
               {weekDays.map((d) => {
-                const key = dayKey(d);
+                const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+                  d.getDate()
+                ).padStart(2, "0")}`;
                 const mood = moods[key];
                 const isSel = sameDay(d, selected);
                 return (
@@ -158,7 +176,9 @@ export default function ProfileMood() {
                 return rows.map((row, idx) => (
                   <Stack key={idx} flexDirection="row" justifyContent="space-between">
                     {row.map((d) => {
-                      const key = dayKey(d);
+                      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+                        d.getDate()
+                      ).padStart(2, "0")}`;
                       const mood = moods[key];
                       const isSel = sameDay(d, selected);
                       const inMonth = d.getMonth() === anchor.getMonth();

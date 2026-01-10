@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, type ButtonProps } from "tamagui";
+import { pillProps } from "./recipes";
 
 export function PillButton({
   label,
@@ -11,19 +12,30 @@ export function PillButton({
   return (
     <Button
       {...props}
+      {...pillProps}
       backgroundColor="$card"
       color="$text"
-      borderRadius={999}
-      minHeight={42}
-      paddingHorizontal={14}
+      alignItems="center"
+      justifyContent="center"
+      minHeight={44}
+      paddingHorizontal={16}
       paddingVertical={10}
-      fontWeight="800"
-      borderWidth={1}
-      borderColor="$border"
+      borderRadius="$6"
+      flexShrink={0}
+      alignSelf="flex-start"
+      width="auto"
       pressStyle={{ scale: 0.97, opacity: 0.92 }}
-      shadowColor="transparent"
     >
-      <Button.Text color="$text" fontWeight="800" fontSize={14}>
+      <Button.Text
+        color="$text"
+        fontWeight="800"
+        fontSize={15}
+        lineHeight={20}
+        textAlign="center"
+        flexShrink={0}
+        allowFontScaling={false}
+        includeFontPadding={false}
+      >
         {typeof content === "string" ? content : " "}
       </Button.Text>
       {typeof content !== "string" ? content : null}

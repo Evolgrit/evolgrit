@@ -39,7 +39,10 @@ export function TopBar({ title }: { title: string }) {
       <Text style={{ fontSize: 18, fontWeight: "900", color: "#111827" }}>{title}</Text>
 
       {/* Chat icon right */}
-      <Pressable onPress={() => router.push("/mentor")} style={{ width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center" }}>
+      <Pressable
+        onPress={() => router.push("/chat/mentor-default")}
+        style={{ width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center" }}
+      >
         <Ionicons name="chatbubble-ellipses-outline" size={22} color="#111827" />
       </Pressable>
     </View>

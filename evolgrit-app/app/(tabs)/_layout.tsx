@@ -1,24 +1,20 @@
 import React from "react";
-import { View } from "react-native";
 import { Tabs } from "expo-router";
-import { FloatingTabBar } from "../../components/FloatingTabBar";
+import { AirbnbTabBar } from "../../components/navigation/AirbnbTabBar";
 
 export default function TabLayout() {
   return (
-    <View style={{ flex: 1 }}>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: { display: "none" },
-        }}
-      >
-        <Tabs.Screen name="home" />
-        <Tabs.Screen name="learn" />
-        <Tabs.Screen name="speak" />
-        <Tabs.Screen name="progress" />
-      </Tabs>
-
-      <FloatingTabBar />
-    </View>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBar={(props) => <AirbnbTabBar {...(props as any)} />}
+    >
+      {/* Only these 4 tabs */}
+      <Tabs.Screen name="home" options={{ title: "Home" }} />
+      <Tabs.Screen name="learn" options={{ title: "Learn" }} />
+      <Tabs.Screen name="speak" options={{ title: "Speak" }} />
+      <Tabs.Screen name="progress" options={{ title: "Progress" }} />
+    </Tabs>
   );
 }

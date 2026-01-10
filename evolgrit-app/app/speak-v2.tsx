@@ -1,20 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useMemo, useState } from "react";
+import { Alert, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { Stack, Text } from "tamagui";
 
-import { loadLangPrefs } from "../lib/languagePrefs";
 import { applyERSDelta } from "../lib/readinessService";
 import { completeNextActionAndRecompute } from "../lib/nextActionService";
 import { appendEvent } from "../lib/eventsStore";
 import { GlassCard } from "../components/system/GlassCard";
 import { PrimaryButton } from "../components/system/PrimaryButton";
 import { PillButton } from "../components/system/PillButton";
-
-const TOKENS = {
-  bg: "#F7F8FA",
-};
+import { ScreenShell } from "../components/system/ScreenShell";
+import { PronunciationGuide } from "../components/speaking/PronunciationGuide";
+import { matchGuidesForSentence } from "../lib/pronunciation";
+import type { PronunciationGuideItem } from "../components/speaking/PronunciationGuide";
+import { AudioHelpRow } from "@/components/speaking/AudioHelpRow";
+import { getTtsBase64 } from "@/lib/tts/azureTtsClient";
+import { playBase64Tts } from "@/lib/tts/ttsPlayer";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -29,42 +30,29 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 
 export default function SpeakV2() {
   const router = useRouter();
-  const [nativeLang, setNativeLang] = useState("en");
   const [stage, setStage] = useState<"prompt" | "speaking" | "result">("prompt");
   const [showTip, setShowTip] = useState(false);
+  const [loadingRate, setLoadingRate] = useState<"normal" | "slow" | null>(null);
+  const TTS_DEBUG = __DEV__ && false;
 
   const prompt = useMemo(
     () => ({
       context: "Im Supermarkt",
       sentence: "Entschuldigung, wo finde ich Reis? Ich brauche zwei Kilo.",
-      tip: "Tipp: Sag ‚Entschuldigung‘ klar und langsam. Betone ‚zwei Kilo‘ deutlich.",
+      englishHint: "Excuse me, where can I find rice? I need two kilos.",
+      tip: "Tipp: Sag „Entschuldigung“ klar und langsam. Betone „zwei Kilo“ deutlich.",
       expected: "Du fragst höflich nach einem Produkt und einer Menge.",
+      pronunciation_guides: undefined as undefined | PronunciationGuideItem[],
     }),
     []
   );
 
   const [transcript, setTranscript] = useState<string>("");
   const [reply, setReply] = useState<string>("");
-
-  useEffect(() => {
-    (async () => {
-      const prefs = await loadLangPrefs();
-      if (prefs?.nativeLang) setNativeLang(prefs.nativeLang);
-    })();
-  }, []);
-
-  const translateLabel = useMemo(() => {
-    const map: Record<string, string> = {
-      en: "Translate",
-      pl: "Tłumacz",
-      ar: "ترجمة",
-      tr: "Çevir",
-      ro: "Tradu",
-      uk: "Переклад",
-      ru: "Перевод",
-    };
-    return map[nativeLang] ?? "Translate";
-  }, [nativeLang]);
+  const pronunciationGuides = useMemo(
+    () => matchGuidesForSentence(prompt.sentence, prompt.pronunciation_guides as any),
+    [prompt.sentence, prompt.pronunciation_guides]
+  );
 
   async function onDone() {
     await appendEvent("task_completed", { task: "speak_v2" });
@@ -73,18 +61,35 @@ export default function SpeakV2() {
     router.replace("/(tabs)/home");
   }
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: TOKENS.bg }}>
-      <Stack paddingHorizontal={16} paddingTop={10} paddingBottom={10}>
-        <Text fontSize={22} fontWeight="900" color="$text">
-          Speaking
-        </Text>
-        <Text marginTop={4} color="$muted">
-          One task. One improvement. One next step.
-        </Text>
-      </Stack>
+  async function handlePlay(rate: "normal" | "slow") {
+    try {
+      setLoadingRate(rate);
+      const cleanText = prompt.sentence
+        .replace(/^\s*(Say:|Sag:)\s*/i, "")
+        .replace(/^['\"„‚]+/, "")
+        .replace(/['\"”’]+$/, "")
+        .trim();
+      if (TTS_DEBUG) console.log("[tts] request", { rate, textPreview: cleanText.slice(0, 40) });
+      const res = await getTtsBase64({ text: cleanText, rate });
+      if (TTS_DEBUG) console.log("[tts] response ok", { base64Len: res.base64.length });
+      const uri = await playBase64Tts({
+        base64: res.base64,
+        mime: res.mime,
+        text: cleanText,
+        rate,
+      });
+      if (TTS_DEBUG) console.log("[tts] resolvedUri", uri);
+    } catch (err) {
+      console.error("[tts] play error", err);
+      Alert.alert("Audio konnte nicht geladen werden");
+    } finally {
+      setLoadingRate(null);
+    }
+  }
 
-      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
+  return (
+    <ScreenShell title="Speaking" showBack>
+      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
         <Card title="Context">
           <Text fontSize={18} fontWeight="900" color="$text">
             {prompt.context}
@@ -98,11 +103,22 @@ export default function SpeakV2() {
           <Text fontSize={20} fontWeight="900" color="$text">
             {prompt.sentence}
           </Text>
+          {prompt.englishHint ? (
+            <Text marginTop={6} color="$muted" fontSize={13}>
+              {prompt.englishHint}
+            </Text>
+          ) : null}
+          <AudioHelpRow
+            loading={!!loadingRate}
+            normalDisabled={!!loadingRate}
+            slowDisabled={!!loadingRate}
+            onPressNormal={() => handlePlay("normal")}
+            onPressSlow={() => handlePlay("slow")}
+          />
+          <PronunciationGuide items={pronunciationGuides} />
 
           <Stack flexDirection="row" gap={10} marginTop={12}>
             <PillButton label={showTip ? "Hide tip" : "Tip"} onPress={() => setShowTip((s) => !s)} />
-            <PillButton label="Audio" onPress={() => {}} />
-            <PillButton label={translateLabel} onPress={() => {}} />
           </Stack>
 
           {showTip ? (
@@ -159,6 +175,6 @@ export default function SpeakV2() {
           ASR + real audio playback comes next. UI/flow is ready.
         </Text>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenShell>
   );
 }
