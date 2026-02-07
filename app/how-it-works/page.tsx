@@ -6,9 +6,6 @@ import { MarketingPageShell } from "@/components/marketing/MarketingPageShell";
 import { WhyNowSection } from "@/components/marketing/sections/WhyNowSection";
 import { WhoSection } from "@/components/marketing/sections/WhoSection";
 import { JourneyOverviewSection } from "@/components/marketing/sections/JourneyOverviewSection";
-import { LearnerHowItWorksSection } from "@/components/marketing/sections/LearnerHowItWorksSection";
-import { ProgramTimelineSection } from "@/components/marketing/sections/ProgramTimelineSection";
-import { ReadinessScoreSection } from "@/components/marketing/sections/ReadinessScoreSection";
 import { GetToKnowSection } from "@/components/marketing/sections/GetToKnowSection";
 import { PathwaysSection } from "@/components/marketing/sections/PathwaysSection";
 import { ExampleJourneysSection } from "@/components/marketing/sections/ExampleJourneysSection";
@@ -77,30 +74,18 @@ export default function HowItWorksPage() {
           </Reveal>
 
           <Reveal delayMs={320} durationMs={360} distance={12}>
-            <LearnerHowItWorksSection />
-          </Reveal>
-
-          <Reveal delayMs={340} durationMs={360} distance={12}>
-            <ProgramTimelineSection />
-          </Reveal>
-
-          <Reveal delayMs={360} durationMs={360} distance={12}>
-            <ReadinessScoreSection />
-          </Reveal>
-
-          <Reveal delayMs={380} durationMs={360} distance={12}>
             <GetToKnowSection />
           </Reveal>
 
-          <Reveal delayMs={400} durationMs={360} distance={12}>
+          <Reveal delayMs={340} durationMs={360} distance={12}>
             <PathwaysSection />
           </Reveal>
 
-          <Reveal delayMs={420} durationMs={360} distance={12}>
+          <Reveal delayMs={360} durationMs={360} distance={12}>
             <ExampleJourneysSection />
           </Reveal>
 
-          <Reveal delayMs={440} durationMs={360} distance={12}>
+          <Reveal delayMs={380} durationMs={360} distance={12}>
             <section className={`${container} mt-12`}>
               <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
                 <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
