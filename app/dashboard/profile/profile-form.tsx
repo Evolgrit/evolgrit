@@ -5,6 +5,13 @@ import Image from "next/image";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
+declare const window:
+  | {
+      addEventListener: (type: string, listener: (event: { key?: string }) => void) => void;
+      removeEventListener: (type: string, listener: (event: { key?: string }) => void) => void;
+    }
+  | undefined;
+
 type Profile = {
   full_name?: string | null;
   birthday?: string | null;
@@ -980,7 +987,8 @@ function EntryModal({
   fields: EntryModalField[];
 }) {
   useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
+    if (typeof window === "undefined") return;
+    function onKeyDown(e: { key?: string }) {
       if (e.key === "Escape") onClose();
     }
     window.addEventListener("keydown", onKeyDown);

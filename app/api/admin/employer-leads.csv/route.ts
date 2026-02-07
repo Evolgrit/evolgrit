@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 function unauthorized() {
@@ -8,7 +8,7 @@ function unauthorized() {
   });
 }
 
-function requireBasicAuth(req: Request) {
+function requireBasicAuth(req: NextRequest) {
   const auth = req.headers.get("authorization");
   const user = process.env.ADMIN_USER || "";
   const pass = process.env.ADMIN_PASS || "";
@@ -25,8 +25,11 @@ function toCSV(rows: Record<string, unknown>[]) {
   return lines.join("\n");
 }
 
-export async function GET(req: Request) {
-  if (!requireBasicAuth(req)) return unauthorized();
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
+  if (!requireBasicAuth(request)) return unauthorized();
 
   const supabase = createClient(
     process.env.SUPABASE_URL!,

@@ -4,6 +4,31 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
+declare const window:
+  | {
+      setTimeout: (handler: () => void, timeout?: number) => number;
+      setInterval: (handler: () => void, timeout?: number) => number;
+      clearInterval: (id?: number) => void;
+      addEventListener: (type: string, listener: (event: { key?: string }) => void) => void;
+      removeEventListener: (type: string, listener: (event: { key?: string }) => void) => void;
+      open: (url?: string, target?: string, features?: string) => void;
+    }
+  | undefined;
+declare const document:
+  | {
+      createElement: (tag: string) => {
+        type?: string;
+        accept?: string;
+        onchange?: (event: Event) => void;
+        click: () => void;
+      };
+      body: {
+        appendChild: (el: unknown) => void;
+        removeChild: (el: unknown) => void;
+      };
+    }
+  | undefined;
+
 const categories = [
   {
     id: "personal",
@@ -68,6 +93,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
   const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
   const [uploadTasks, setUploadTasks] = useState<UploadTask[]>([]);
   const uploadIntervals = useRef<Record<string, number>>({});
+  const hasWindow = typeof window !== "undefined";
   const [previewDoc, setPreviewDoc] = useState<{ url: string; record: DocumentRecord } | null>(
     null
   );
@@ -84,14 +110,15 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
     const intervalMap = uploadIntervals.current;
     return () => {
       Object.values(intervalMap).forEach((intervalId) => {
-        if (intervalId) window.clearInterval(intervalId);
+        if (intervalId && hasWindow) window.clearInterval(intervalId);
       });
     };
-  }, []);
+  }, [hasWindow]);
 
   function showMessage(type: "success" | "error", text: string) {
     setMessageType(type);
     setMessage(text);
+    if (!hasWindow) return;
     window.setTimeout(() => {
       setMessage(null);
       setMessageType(null);
@@ -104,6 +131,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
       ...prev,
       { id: taskId, category: categoryId, fileName, progress: 5, status: "uploading" },
     ]);
+    if (!hasWindow) return taskId;
     uploadIntervals.current[taskId] = window.setInterval(() => {
       setUploadTasks((prev) =>
         prev.map((task) =>
@@ -117,7 +145,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
   }
 
   function finishUploadTask(taskId: string, status: UploadTask["status"], message?: string) {
-    if (uploadIntervals.current[taskId]) {
+    if (uploadIntervals.current[taskId] && hasWindow) {
       window.clearInterval(uploadIntervals.current[taskId]);
       delete uploadIntervals.current[taskId];
     }
@@ -133,7 +161,7 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
           : task
       )
     );
-    if (status !== "error") {
+    if (status !== "error" && hasWindow) {
       window.setTimeout(() => {
         setUploadTasks((prev) => prev.filter((task) => task.id !== taskId));
       }, 1000);
@@ -282,14 +310,15 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
   }
 
   useEffect(() => {
-    function onKey(event: KeyboardEvent) {
+    if (!hasWindow) return;
+    function onKey(event: { key?: string }) {
       if (event.key === "Escape") {
         setPreviewDoc(null);
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [hasWindow]);
 
   async function handleView(doc: DocumentRecord) {
     const { data, error } = await supabase.storage
@@ -301,17 +330,19 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
     }
     if (doc.mime_type?.startsWith("image/") || doc.mime_type === "application/pdf") {
       setPreviewDoc({ url: data.signedUrl, record: doc });
-    } else {
+    } else if (hasWindow) {
       window.open(data.signedUrl, "_blank", "noopener,noreferrer");
     }
   }
 
   function openFilePicker(callback: (file?: File) => void) {
+    if (typeof document === "undefined") return;
     const input = document.createElement("input");
     input.type = "file";
     input.accept = allowedMimeTypes.join(",");
     input.onchange = (event) => {
-      const file = (event.target as HTMLInputElement).files?.[0];
+      const target = event.target as { files?: { 0?: File } | null };
+      const file = target?.files?.[0];
       callback(file);
     };
     input.click();
@@ -467,11 +498,13 @@ export default function DocumentsClient({ initialDocuments }: { initialDocuments
                               handleDelete(doc);
                             } else {
                               setPendingDeleteId(doc.id);
-                              window.setTimeout(() => {
-                                setPendingDeleteId((current) =>
-                                  current === doc.id ? null : current
-                                );
-                              }, 5000);
+                              if (hasWindow) {
+                                window.setTimeout(() => {
+                                  setPendingDeleteId((current) =>
+                                    current === doc.id ? null : current
+                                  );
+                                }, 5000);
+                              }
                             }
                           }}
                           className={`rounded-full border px-3 py-1 ${

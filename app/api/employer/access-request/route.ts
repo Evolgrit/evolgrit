@@ -1,28 +1,33 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
 import { enforceRateLimit } from "@/lib/ratelimit";
 
 // Requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, optional ADMIN_EMAIL, RESEND_API_KEY.
-const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend =
   resendApiKey && resendApiKey.length > 0 ? new Resend(resendApiKey) : null;
 const adminEmail = process.env.ADMIN_EMAIL || "info@evolgrit.com";
 
-export async function POST(request: Request) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   try {
-    const limited = await enforceRateLimit(request, {
+    const limited = await enforceRateLimit(request as unknown as Request, {
       routeKey: "employer-access",
       limit: 3,
       windowSeconds: 3600,
     });
     if (limited) return limited;
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, any>;
 
     const company_name = String(body.company_name ?? "").trim();
     const contact_name = String(body.contact_name ?? "").trim();
@@ -37,6 +42,7 @@ export async function POST(request: Request) {
       );
     }
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { error } = await supabaseAdmin.from("access_requests").upsert(
       {
         email,

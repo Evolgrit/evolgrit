@@ -1,23 +1,29 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 // Requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.
-const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 type EmployerState = "none" | "pending" | "approved";
 
-export async function POST(request: Request) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   try {
-    const { email } = await request.json();
+    const { email } = (await request.json()) as { email?: unknown };
     if (!email || typeof email !== "string") {
       return NextResponse.json({ state: "none" satisfies EmployerState });
     }
 
     const normalized = email.trim().toLowerCase();
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from("access_requests")
       .select("status")

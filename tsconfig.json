@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "ES2020",
     "lib": [
-      "es2020"
+      "es2020",
+      "dom",
+      "dom.iterable"
     ],
     "jsx": "react-jsx",
     "module": "esnext",
@@ -35,6 +37,8 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "evolgrit-app/**",
+    "supabase/functions/**"
   ]
 }

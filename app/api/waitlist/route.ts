@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { enforceRateLimit } from "@/lib/ratelimit";
@@ -57,9 +57,12 @@ function isPriorityLearner(level: string | null, timeframe: string | null) {
   return false;
 }
 
-export async function POST(req: Request) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   try {
-    const limited = await enforceRateLimit(req, {
+    const limited = await enforceRateLimit(request as unknown as Request, {
       routeKey: "waitlist",
       limit: 5,
       windowSeconds: 3600,
@@ -67,7 +70,7 @@ export async function POST(req: Request) {
     if (limited) return limited;
     const supabase = getSupabase();
     const resend = getResend();
-    const body = await req.json();
+    const body = (await request.json()) as Record<string, any>;
 
     const full_name = String(body.full_name ?? "").trim();
     const email = String(body.email ?? "").trim().toLowerCase();

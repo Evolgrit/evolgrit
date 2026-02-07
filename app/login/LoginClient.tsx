@@ -6,6 +6,12 @@ import { useEffect, useMemo, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import PasswordField from "@/components/ui/PasswordField";
 
+declare const window:
+  | {
+      location: { origin: string; href: string; hash?: string };
+    }
+  | undefined;
+
 type Status = "idle" | "loading" | "success" | "error";
 type InviteState = "unknown" | "none" | "pending" | "approved";
 
@@ -210,6 +216,7 @@ export default function LoginClient() {
 
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault();
+    if (typeof window === "undefined") return;
     if (isEmployer) {
       const state = await checkEmployerState(magicEmail);
       if (state !== "approved") {
@@ -576,6 +583,7 @@ export default function LoginClient() {
                 oauthMessage={oauthMessage}
                 oauthStatus={oauthStatus}
                 onGoToEmployer={() => {
+                  if (typeof window === "undefined") return;
                   window.location.href = "/login?role=employer";
                 }}
               />

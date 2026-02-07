@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+declare const window: { alert?: (message?: string) => void } | undefined;
+
 export function ContactedToggle({
   id,
   initial,
@@ -24,7 +26,9 @@ export function ContactedToggle({
 
     if (!res.ok) {
       setValue(!next);
-      alert("Update failed. Please try again.");
+      if (typeof window !== "undefined" && typeof window.alert === "function") {
+        window.alert("Update failed. Please try again.");
+      }
     }
 
     setBusy(false);
@@ -36,7 +40,10 @@ export function ContactedToggle({
         type="checkbox"
         checked={value}
         disabled={busy}
-        onChange={(e) => toggle(e.target.checked)}
+        onChange={(e) => {
+          const target = e.target as { checked?: boolean };
+          toggle(Boolean(target?.checked));
+        }}
       />
       <span className="text-xs text-slate-500">
         {value ? "Contacted" : "Open"}

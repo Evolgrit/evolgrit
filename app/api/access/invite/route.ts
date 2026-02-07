@@ -1,16 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
 
-const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
-export async function POST(req: Request) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   try {
     const actorId = await getAdminActorId();
-    const { email } = await req.json();
+    const { email } = (await request.json()) as { email?: unknown };
     if (!email || typeof email !== "string") {
       return NextResponse.json(
         { error: "Email required" },
@@ -19,6 +24,7 @@ export async function POST(req: Request) {
     }
 
     const normalized = email.trim().toLowerCase();
+    const supabaseAdmin = getSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from("access_requests")
       .select("status")

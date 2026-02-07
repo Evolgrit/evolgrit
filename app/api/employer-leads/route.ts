@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { enforceRateLimit } from "@/lib/ratelimit";
@@ -18,15 +18,18 @@ function isPriorityEmployer(norm: string) {
   return norm.includes("care") || norm.includes("childcare");
 }
 
-export async function POST(req: Request) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   try {
-    const limited = await enforceRateLimit(req, {
+    const limited = await enforceRateLimit(request as unknown as Request, {
       routeKey: "employer-leads",
       limit: 5,
       windowSeconds: 3600,
     });
     if (limited) return limited;
-    const body = await req.json();
+  const body = (await request.json()) as Record<string, any>;
 
     const company = String(body.company ?? "").trim();
     const role_types = String(body.role_types ?? "").trim();

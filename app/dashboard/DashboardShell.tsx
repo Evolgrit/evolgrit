@@ -40,6 +40,7 @@ export default function DashboardShell({
   const supabase = createSupabaseBrowserClient();
   useEffect(() => {
     if (!pathname || !pathname.startsWith("/dashboard")) return;
+    if (typeof window === "undefined") return;
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname]);
   const navWithState = useMemo(
@@ -200,6 +201,7 @@ function ProfileMenuButton({
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     function handleClick(event: MouseEvent) {
       if (
         menuRef.current &&

@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -11,10 +14,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { threadId, content } = await request.json().catch(() => ({
+  const { threadId, content } = (await request.json().catch(() => ({
     threadId: null,
     content: null,
-  }));
+  }))) as { threadId?: unknown; content?: unknown };
 
   if (!threadId || typeof content !== "string" || !content.trim()) {
     return NextResponse.json({ error: "Message content missing" }, { status: 400 });

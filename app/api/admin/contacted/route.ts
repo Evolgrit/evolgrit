@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getAdminActorId, logAdminAudit } from "@/lib/admin-audit";
 
@@ -9,7 +9,7 @@ function unauthorized() {
   });
 }
 
-function requireBasicAuth(req: Request) {
+function requireBasicAuth(req: NextRequest) {
   const auth = req.headers.get("authorization");
   const user = process.env.ADMIN_USER || "";
   const pass = process.env.ADMIN_PASS || "";
@@ -20,14 +20,21 @@ function requireBasicAuth(req: Request) {
   return u === user && p === pass;
 }
 
-export async function POST(req: Request) {
-  if (!requireBasicAuth(req)) return unauthorized();
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
+  if (!requireBasicAuth(request)) return unauthorized();
 
-  const { id, contacted } = await req.json();
+  const { id, contacted } = (await request.json()) as {
+    id?: unknown;
+    contacted?: unknown;
+  };
 
   if (!id || typeof contacted !== "boolean") {
     return NextResponse.json({ ok: false, error: "Invalid payload" }, { status: 400 });
   }
+  const safeId = id as string;
 
   const supabase = createClient(
     process.env.SUPABASE_URL!,
@@ -42,7 +49,7 @@ export async function POST(req: Request) {
   const { error } = await supabase
     .from("waitlist_signups")
     .update(update)
-    .eq("id", id);
+    .eq("id", safeId);
 
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
@@ -52,7 +59,7 @@ export async function POST(req: Request) {
   await logAdminAudit({
     actorId,
     action: "waitlist_contacted_toggle",
-    target: id,
+    target: safeId,
     meta: { contacted },
   });
 

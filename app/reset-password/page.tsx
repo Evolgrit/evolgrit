@@ -5,6 +5,12 @@ import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import PasswordField from "@/components/ui/PasswordField";
 
+declare const window:
+  | {
+      location: { hash?: string };
+    }
+  | undefined;
+
 export default function ResetPasswordPage() {
   const supabase = createSupabaseBrowserClient();
   const router = useRouter();

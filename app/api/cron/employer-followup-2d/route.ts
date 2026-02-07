@@ -1,15 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 
-function requireCronAuth(req: Request) {
+function requireCronAuth(req: NextRequest) {
   const auth = req.headers.get("authorization") || "";
   const secret = process.env.CRON_SECRET || "";
   return Boolean(secret) && auth === `Bearer ${secret}`;
 }
 
-export async function GET(req: Request) {
-  if (!requireCronAuth(req)) {
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
+  if (!requireCronAuth(request)) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 

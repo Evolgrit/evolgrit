@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 function unauthorized() {
@@ -42,8 +42,11 @@ function toCSV(rows: Record<string, unknown>[]) {
   return lines.join("\n");
 }
 
-export async function GET(req: Request) {
-  const auth = req.headers.get("authorization");
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{}> }
+) {
+  const auth = request.headers.get("authorization");
 
   const user = process.env.ADMIN_USER || "";
   const pass = process.env.ADMIN_PASS || "";
