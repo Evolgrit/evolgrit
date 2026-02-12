@@ -1,0 +1,31 @@
+{
+  "id": "a2_u01",
+  "title": "Smalltalk & Vorlieben",
+  "subtitle": "persönliche Gespräche führen",
+  "items": [
+    {
+      "id": "a2_u01_l01",
+      "title": "Lektion 1 · Smalltalk & Vorlieben",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u01_l02",
+      "title": "Lektion 2 · persönliche Gespräche führen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u01_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u01_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

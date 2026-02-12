@@ -1,0 +1,31 @@
+{
+  "id": "a1_u15",
+  "title": "Smalltalk",
+  "subtitle": "Wetter & kurze Gespräche",
+  "items": [
+    {
+      "id": "a1_u15_l01",
+      "title": "Smalltalk",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u15_l02",
+      "title": "Wetter & kurze Gespräche",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u15_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u15_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

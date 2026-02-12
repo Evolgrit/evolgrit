@@ -1,0 +1,19 @@
+{
+  "id": "a2_u4",
+  "title": "Unit 4 · Zuhause",
+  "subtitle": "Wohnen und Wiederholen",
+  "items": [
+    {
+      "id": "a2_l07_wohnung_probleme",
+      "title": "Lektion 7 · Wohnung: Probleme",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_l08_review",
+      "title": "Lektion 8 · Wiederholung",
+      "kind": "lesson",
+      "durationMin": 3
+    }
+  ]
+}

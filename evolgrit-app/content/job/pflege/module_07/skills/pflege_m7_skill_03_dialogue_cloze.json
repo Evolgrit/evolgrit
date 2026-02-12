@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m7_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M7 · Mini-Dialog",
+  "subtitle": "Meldung kurz und klar",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Was ist passiert?",
+      "choices": [
+        { "id": "a", "label": "Der Patient ist gestuerzt. Ich melde es sofort." },
+        { "id": "b", "label": "Ich weiss es nicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich ____ es sofort.",
+      "choices": [
+        { "id": "a", "label": "melde" },
+        { "id": "b", "label": "warte" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wen informieren Sie zuerst?",
+      "choices": [
+        { "id": "a", "label": "Die Dienstleitung." },
+        { "id": "b", "label": "Die Kantine." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich informiere die ____.",
+      "choices": [
+        { "id": "a", "label": "Dienstleitung" },
+        { "id": "b", "label": "Kueche" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was ist der naechste Schritt?",
+      "choices": [
+        { "id": "a", "label": "Dokumentation im Bericht." },
+        { "id": "b", "label": "Nichts tun." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich dokumentiere die Meldung im Bericht."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Sie koennen Meldungen strukturiert geben."
+    }
+  ]
+}

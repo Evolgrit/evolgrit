@@ -1,0 +1,66 @@
+{
+  "id": "a1_l1_04_bitte_danke",
+  "title": "Bitte & Danke",
+  "level": "A1",
+  "week": 1,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die passende Reaktion",
+      "text": "Du bekommst Hilfe.",
+      "choices": [
+        { "id": "a", "label": "Danke" },
+        { "id": "b", "label": "Bitte" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "____ schön.",
+      "choices": [
+        { "id": "a", "label": "Danke" },
+        { "id": "b", "label": "Hallo" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Entschuldigung."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt?",
+      "text": "Mentor: Hier ist dein Kaffee.",
+      "choices": [
+        { "id": "a", "label": "Danke!" },
+        { "id": "b", "label": "Guten Morgen!" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wie antwortest du auf \"Danke\"?",
+      "choices": [
+        { "id": "a", "label": "Bitte." },
+        { "id": "b", "label": "Tschüss." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Bitte."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst dich bedanken.",
+        "Du kannst höflich reagieren."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

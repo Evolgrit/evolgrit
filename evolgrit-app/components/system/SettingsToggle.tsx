@@ -30,9 +30,6 @@ export function SettingsToggle({ value, onValueChange, disabled }: Props) {
         height={28}
         borderRadius={999}
         backgroundColor="#fff"
-        shadowColor="rgba(0,0,0,0.18)"
-        shadowRadius={6}
-        shadowOffset={{ width: 0, height: 2 }}
       />
     </Switch>
   )

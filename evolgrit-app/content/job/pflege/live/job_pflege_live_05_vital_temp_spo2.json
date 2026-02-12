@@ -1,0 +1,42 @@
+{
+  "id": "job_pflege_live_05_vital_temp_spo2",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Temperatur & SpO₂",
+  "subtitle": "Kurz messen, klar sagen",
+  "durationMin": 5,
+  "tasks": [
+    "Temperatur nennen",
+    "SpO₂ nennen",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Wie ist die Temperatur?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag die Temperatur (z.B. 36,8).",
+      "suggestions": ["36,8", "38,2", "39,0"]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Und wie ist die Sauerstoffsättigung?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag die SpO₂ in Prozent.",
+      "suggestions": ["96", "93", "98"]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Danke. Ich notiere die Werte."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_03_neighbors",
+  "title": "Nachbarn & Ruhe",
+  "subtitle": "Zusammenleben ohne Stress",
+  "durationMin": 12,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Ruhezeiten sind wichtig (oft 22–7 Uhr). Lärm kann schnell Konflikte machen – auch ohne böse Absicht."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Frag kurz: „Ist es okay, wenn ich heute bohre?“" },
+        { "kind": "do", "text": "Leise sein am Abend, besonders im Mehrfamilienhaus." },
+        { "kind": "dont", "text": "Laut telefonieren oder Musik nach 22 Uhr." },
+        { "kind": "dont", "text": "Spontan vorbeikommen ohne Nachricht." }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Du willst abends Besuch. Was ist am besten?",
+      "options": [
+        "Ich bekomme Besuch. Ist es okay, wenn wir bis 22 Uhr leise sind?",
+        "Wir machen Party. Du musst dich dran gewöhnen."
+      ],
+      "correctIndex": 0,
+      "explain": "Ankündigen + Rücksicht beruhigt."
+    },
+    {
+      "type": "examples",
+      "title": "Sätze für Nachbarn",
+      "items": [
+        "Entschuldigung für den Lärm.",
+        "Ich bin neu hier. Danke für deine Geduld.",
+        "Sag mir bitte Bescheid, wenn es zu laut ist."
+      ]
+    }
+  ]
+}

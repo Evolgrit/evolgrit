@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m5_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M5 · Mini-Dialog",
+  "subtitle": "Vitalwerte abfragen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wie ist der Blutdruck?",
+      "choices": [
+        { "id": "a", "label": "120 zu 80." },
+        { "id": "b", "label": "Zimmer 12." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Der Blutdruck ist ____ zu 80.",
+      "choices": [
+        { "id": "a", "label": "120" },
+        { "id": "b", "label": "12" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wie ist die Temperatur?",
+      "choices": [
+        { "id": "a", "label": "38,2 Grad." },
+        { "id": "b", "label": "Ich wohne in Berlin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Die Temperatur ist ____. ",
+      "choices": [
+        { "id": "a", "label": "38,2" },
+        { "id": "b", "label": "3,8" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was fragst du als nächstes?",
+      "choices": [
+        { "id": "a", "label": "Wie ist die Sauerstoffsättigung?" },
+        { "id": "b", "label": "Wie heißt du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wie ist die Sauerstoffsättigung?"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Du kannst Vitalwerte ruhig abfragen."
+    }
+  ]
+}

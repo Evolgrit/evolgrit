@@ -1,0 +1,51 @@
+{
+  "id": "a2_u02_l03_weg_fragen_a2",
+  "level": "A2",
+  "unitId": "a2_u02",
+  "title": "Weg fragen (A2)",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Wie komme ich zur Post?"
+        },
+        {
+          "id": "b",
+          "label": "Wie koche ich zur Post?"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Können Sie mir den Weg zeigen?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ist das weit ___ hier?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "von"
+        },
+        {
+          "id": "b",
+          "label": "bei"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst höflich nach dem Weg fragen."
+    }
+  ]
+}

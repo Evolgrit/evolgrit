@@ -6,6 +6,7 @@ import { Text } from "tamagui";
 import { loadLangPrefs } from "../lib/languagePrefs";
 import { applyERSDelta } from "../lib/readinessService";
 import { completeNextActionAndRecompute } from "../lib/nextActionService";
+import { logNextActionCompleted } from "../lib/nextActionStore";
 import { GlassCard } from "../components/system/GlassCard";
 import { PrimaryButton } from "../components/system/PrimaryButton";
 import { ScreenShell } from "../components/system/ScreenShell";
@@ -85,6 +86,7 @@ export default function SpeakTaskA1() {
     setSaving(true);
     try {
       await applyERSDelta({ L: 2, A: 3 });
+      await logNextActionCompleted("speak_drill", 3);
       await completeNextActionAndRecompute(); // writes a fresh next action to storage
       router.replace("/(tabs)/home"); // back to Home
     } finally {
@@ -100,6 +102,14 @@ export default function SpeakTaskA1() {
         .replace(/^['"„‚]+/, "")
         .replace(/['"”’]+$/, "")
         .trim();
+      if (!cleanText) {
+        console.warn("[tts] missing text - skipping speak");
+        return;
+      }
+      if (cleanText.toLowerCase().includes("daniel")) {
+        console.warn("[tts] blocked debug phrase");
+        return;
+      }
       if (TTS_DEBUG) console.log("[tts] request", { rate, textPreview: cleanText.slice(0, 40) });
       const res = await getTtsBase64({ text: cleanText, rate });
       if (TTS_DEBUG) console.log("[tts] response ok", { base64Len: res.base64.length });

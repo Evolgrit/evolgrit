@@ -1,0 +1,37 @@
+{
+  "id": "job_pflege_live_06_alarmzeichen_hilfe",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Alarmzeichen",
+  "subtitle": "Wenn es kritisch wird: schnell & klar",
+  "durationMin": 5,
+  "tasks": [
+    "Sag: Ich hole sofort Hilfe.",
+    "Sag: Patient in Zimmer X hat Problem Y.",
+    "Sag: Bitte kommen Sie sofort."
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Der Patient wird plötzlich sehr blass und schwach. Sag: Du holst sofort Hilfe." },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Kurz und klar.",
+      "suggestions": ["Ich hole sofort Hilfe!", "Ich rufe sofort Hilfe!", "Ich brauche sofort Unterstützung!"]
+    },
+    { "id": "c2", "role": "coach", "text": "Gib die Info: Zimmer und Problem." },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag: Zimmer + Symptom.",
+      "suggestions": ["Zimmer 102, der Patient ist sehr schwach.", "Zimmer 14, der Patient ist sehr blass.", "Zimmer 8, der Patient hat starke Schmerzen."]
+    },
+    { "id": "c3", "role": "coach", "text": "Sag: Bitte kommen Sie sofort." },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Sag 1 Satz.",
+      "suggestions": ["Bitte kommen Sie sofort!", "Kommen Sie bitte sofort!", "Bitte schnell, jetzt!"]
+    },
+    { "id": "c4", "role": "coach", "text": "Sehr gut. In kritischen Momenten: kurz, klar, laut genug." }
+  ]
+}

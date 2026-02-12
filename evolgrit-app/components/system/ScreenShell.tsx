@@ -22,7 +22,7 @@ export function ScreenShell({
   leftContent,
   rightActions,
   children,
-  backgroundColor = "#F7F8FA",
+  backgroundColor = "$bgApp",
   header,
   scroll = false,
 }: Props) {
@@ -48,7 +48,13 @@ export function ScreenShell({
         />
       )}
 
-      <YStack flex={1} paddingHorizontal={16} paddingTop={scroll ? 0 : 0} marginTop={scroll ? 0 : 0}>
+      <YStack
+        flex={1}
+        paddingHorizontal={16}
+        paddingTop={scroll ? 0 : 0}
+        marginTop={scroll ? 0 : 0}
+        backgroundColor="$bgApp"
+      >
         {scroll ? (
           <YStack flex={1} paddingTop={headerHeight - insets.top - 8}>
             {children}

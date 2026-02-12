@@ -1,0 +1,31 @@
+{
+  "id": "a1_u04",
+  "title": "Zahlen & Preise",
+  "subtitle": "0–100, Mengen, Euro",
+  "items": [
+    {
+      "id": "a1_u04_l01",
+      "title": "Zahlen & Preise",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u04_l02",
+      "title": "0–100",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u04_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u04_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

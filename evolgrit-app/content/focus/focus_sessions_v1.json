@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "locale": "de-DE",
+    "category": "focus",
+    "version": "v1"
+  },
+  "voices": {
+    "katja": { "label": "Katja", "azureVoice": "de-DE-KatjaNeural", "tone": "neutral" },
+    "amala": { "label": "Amala", "azureVoice": "de-DE-AmalaNeural", "tone": "warm" }
+  },
+  "levels": [
+    { "id": "L1", "label": "Ankommen", "colorKey": "green" },
+    { "id": "L2", "label": "Körper", "colorKey": "blue" },
+    { "id": "L3", "label": "Gedanken", "colorKey": "purple" },
+    { "id": "L4", "label": "Stress", "colorKey": "orange" },
+    { "id": "L5", "label": "Fokus", "colorKey": "yellow" }
+  ],
+  "sessions": [
+    {
+      "id": "focus_pre_01_arrive",
+      "levelId": "L1",
+      "mode": "pre_learning",
+      "title": "Ankommen",
+      "durationSec": 180,
+      "script": [
+        "Willkommen.",
+        "Nimm dir einen Moment Zeit.",
+        "Setz dich bequem hin oder bleib so, wie du bist.",
+        "Atme ruhig ein … und langsam aus.",
+        "Du musst nichts leisten.",
+        "Du bist jetzt hier.",
+        "Lass den Tag für einen Moment los."
+      ]
+    },
+    {
+      "id": "focus_pre_02_calm_breath",
+      "levelId": "L1",
+      "mode": "pre_learning",
+      "title": "Ruhiger Atem",
+      "durationSec": 240,
+      "script": [
+        "Spüre deinen Atem.",
+        "Einatmen …",
+        "Ausatmen.",
+        "Wenn Gedanken kommen, ist das okay.",
+        "Bring deine Aufmerksamkeit sanft zurück zum Atem.",
+        "Jeder Atemzug bringt etwas mehr Ruhe."
+      ]
+    },
+    {
+      "id": "focus_post_03_body_scan",
+      "levelId": "L2",
+      "mode": "post_learning",
+      "title": "Körperscan",
+      "durationSec": 300,
+      "script": [
+        "Richte deine Aufmerksamkeit auf deinen Körper.",
+        "Spüre deine Schultern.",
+        "Lass sie ein wenig sinken.",
+        "Spüre deinen Rücken.",
+        "Deinen Nacken.",
+        "Du darfst jetzt loslassen."
+      ]
+    },
+    {
+      "id": "focus_post_04_release_tension",
+      "levelId": "L2",
+      "mode": "post_learning",
+      "title": "Spannung lösen",
+      "durationSec": 240,
+      "script": [
+        "Atme tief ein.",
+        "Mit dem Ausatmen lässt du Spannung gehen.",
+        "Stell dir vor, wie dein Körper schwerer wird.",
+        "Sicher.",
+        "Getragen.",
+        "Ruhig."
+      ]
+    },
+    {
+      "id": "focus_pre_05_thoughts_clouds",
+      "levelId": "L3",
+      "mode": "pre_learning",
+      "title": "Gedanken beobachten",
+      "durationSec": 240,
+      "script": [
+        "Gedanken kommen und gehen.",
+        "Du musst ihnen nicht folgen.",
+        "Stell dir vor, sie ziehen wie Wolken vorbei.",
+        "Du bleibst ruhig darunter."
+      ]
+    },
+    {
+      "id": "focus_post_06_inner_silence",
+      "levelId": "L3",
+      "mode": "post_learning",
+      "title": "Innere Stille",
+      "durationSec": 240,
+      "script": [
+        "Zwischen zwei Gedanken ist ein Moment Stille.",
+        "Bleib kurz dort.",
+        "Nichts tun.",
+        "Nichts ändern.",
+        "Nur sein."
+      ]
+    },
+    {
+      "id": "focus_pre_07_safe_now",
+      "levelId": "L4",
+      "mode": "pre_learning",
+      "title": "Sicherheit spüren",
+      "durationSec": 240,
+      "script": [
+        "Erinnere dich:",
+        "In diesem Moment bist du sicher.",
+        "Dein Körper darf entspannen.",
+        "Du musst nichts entscheiden.",
+        "Nur atmen."
+      ]
+    },
+    {
+      "id": "focus_post_08_let_stress_go",
+      "levelId": "L4",
+      "mode": "post_learning",
+      "title": "Stress loslassen",
+      "durationSec": 300,
+      "script": [
+        "Wenn Stress da ist, kämpfe nicht dagegen.",
+        "Nimm ihn wahr.",
+        "Atme hinein.",
+        "Und mit dem Ausatmen: ein kleines Stück loslassen."
+      ]
+    },
+    {
+      "id": "focus_pre_09_clarity",
+      "levelId": "L5",
+      "mode": "pre_learning",
+      "title": "Neue Klarheit",
+      "durationSec": 240,
+      "script": [
+        "Dein Atem wird ruhiger.",
+        "Dein Kopf wird klarer.",
+        "Vielleicht spürst du mehr Raum.",
+        "Das ist dein innerer Fokus."
+      ]
+    },
+    {
+      "id": "focus_sleep_10_strengthened",
+      "levelId": "L5",
+      "mode": "sleep",
+      "title": "Gestärkt zurück",
+      "durationSec": 360,
+      "script": [
+        "Nimm dieses Gefühl mit in deinen Tag.",
+        "Du darfst Schritt für Schritt gehen.",
+        "Ruhig.",
+        "Klar.",
+        "Wenn du bereit bist, öffne langsam die Augen."
+      ]
+    }
+  ]
+}

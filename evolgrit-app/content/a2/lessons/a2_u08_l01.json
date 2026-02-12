@@ -1,0 +1,51 @@
+{
+  "id": "a2_u08_l01",
+  "level": "A2",
+  "unitId": "a2_u08",
+  "title": "Lektion 1 · Routinen & Gefühle",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ich bin heute müde."
+        },
+        {
+          "id": "b",
+          "label": "Ich bin heute Küche."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich stehe um sieben auf."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Am Abend ___ ich müde.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "bin"
+        },
+        {
+          "id": "b",
+          "label": "bist"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Routinen erklären."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "job_pflege_live_02_schmerzen",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Schmerzen abfragen",
+  "subtitle": "Ort, Stärke, seit wann",
+  "durationMin": 4,
+  "tasks": [
+    "Frag nach Schmerzort.",
+    "Frag nach Stärke (0–10).",
+    "Frag seit wann."
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Zeigen Sie bitte: Wo genau tut es weh?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag den Schmerzort (z. B. Bauch / Kopf / Rücken).",
+      "suggestions": [
+        "Hier im Bauch, rechts.",
+        "Im Kopf, vorne.",
+        "Im unteren Rücken."
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Auf einer Skala von 0 bis 10: Wie stark sind die Schmerzen?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag eine Zahl (0–10) + optional „sehr stark / mittel“.",
+      "suggestions": [
+        "Acht von zehn, sehr stark.",
+        "Fünf von zehn.",
+        "Sieben von zehn."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Seit wann haben Sie diese Schmerzen?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Sag seit wann (heute / seit gestern / seit 2 Tagen).",
+      "suggestions": [
+        "Seit heute Morgen.",
+        "Seit gestern Abend.",
+        "Seit zwei Tagen."
+      ]
+    },
+    {
+      "id": "c4",
+      "role": "coach",
+      "text": "Danke. Ich notiere das kurz."
+    }
+  ]
+}

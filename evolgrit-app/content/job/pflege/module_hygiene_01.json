@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_hygiene_01",
+  "title": "Pflege · Hygiene & Sicherheit",
+  "subtitle": "Hände, Handschuhe, Sturzprävention",
+  "durationMin": 12,
+  "outcomes": [
+    "Hygiene-Schritte kurz und klar nennen",
+    "Sicherheitsregeln am Bett erklären",
+    "Patienten sicher anleiten"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_07_hygiene_haende",
+    "job_pflege_live_08_sicherheit_sturz",
+    "job_pflege_live_09_lagerung_klingel"
+  ]
+}

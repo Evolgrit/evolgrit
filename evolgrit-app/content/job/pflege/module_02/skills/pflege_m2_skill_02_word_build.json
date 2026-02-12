@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m2_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M2 · Satzbau",
+  "subtitle": "Schmerzen ruhig beschreiben",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Wo genau tut es ____?",
+      "choices": [
+        { "id": "a", "label": "weh" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Auf einer Skala von ____ bis zehn.",
+      "choices": [
+        { "id": "a", "label": "null" },
+        { "id": "b", "label": "hundert" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Seit ____ haben Sie die Schmerzen?",
+      "choices": [
+        { "id": "a", "label": "wann" },
+        { "id": "b", "label": "wo" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Der Schmerz ist ____.",
+      "choices": [
+        { "id": "a", "label": "stark" },
+        { "id": "b", "label": "leer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Ich ____ den Arzt.",
+      "choices": [
+        { "id": "a", "label": "informiere" },
+        { "id": "b", "label": "vergesse" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst die wichtigsten Schmerz-Sätze bauen."
+    }
+  ]
+}

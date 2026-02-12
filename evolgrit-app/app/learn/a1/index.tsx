@@ -1,111 +1,162 @@
-import React from "react";
-import { ScrollView, Pressable } from "react-native";
-import { Stack, Text, XStack, YStack } from "tamagui";
+import React, { useEffect, useMemo, useState } from "react";
+import { ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { YStack } from "tamagui";
 import { ScreenShell } from "../../../components/system/ScreenShell";
-import { NavBackButton } from "../../../components/system/NavBackButton";
-import { loadA1Week } from "../../../lib/content/loadA1";
-import { HeroImage } from "../../../components/system/HeroImage";
-import { SoftButton } from "../../../components/system/SoftButton";
+import { LevelHeader } from "../../../components/learn/LevelHeader";
+import { UnitAccordion } from "../../../components/learn/UnitAccordion";
+import { LessonRow } from "../../../components/learn/LessonRow";
+import { getProgressState } from "../../../lib/progressStore";
+import type { LessonStatus } from "../../../components/learn/StatusIcon";
+
+const DEV_UNLOCK_ALL = typeof __DEV__ !== "undefined" ? __DEV__ : false;
+const A1_INDEX = require("../../../content/a1/a1_index.json");
+const UNIT_DATA: Record<string, any> = {
+  a1_u01: require("../../../content/a1/units/a1_u01.json"),
+  a1_u02: require("../../../content/a1/units/a1_u02.json"),
+  a1_u03: require("../../../content/a1/units/a1_u03.json"),
+  a1_u04: require("../../../content/a1/units/a1_u04.json"),
+  a1_u05: require("../../../content/a1/units/a1_u05.json"),
+  a1_u06: require("../../../content/a1/units/a1_u06.json"),
+  a1_u07: require("../../../content/a1/units/a1_u07.json"),
+  a1_u08: require("../../../content/a1/units/a1_u08.json"),
+  a1_u09: require("../../../content/a1/units/a1_u09.json"),
+  a1_u10: require("../../../content/a1/units/a1_u10.json"),
+  a1_u11: require("../../../content/a1/units/a1_u11.json"),
+  a1_u12: require("../../../content/a1/units/a1_u12.json"),
+  a1_u13: require("../../../content/a1/units/a1_u13.json"),
+  a1_u14: require("../../../content/a1/units/a1_u14.json"),
+  a1_u15: require("../../../content/a1/units/a1_u15.json"),
+  a1_u16: require("../../../content/a1/units/a1_u16.json"),
+  a1_u17: require("../../../content/a1/units/a1_u17.json"),
+  a1_u18: require("../../../content/a1/units/a1_u18.json"),
+  a1_u19: require("../../../content/a1/units/a1_u19.json"),
+  a1_u20: require("../../../content/a1/units/a1_u20.json"),
+};
 
 const TAB_BAR_HEIGHT = 80;
-const A1_HERO = require("../../../assets/learn/levels/a1-hero.jpg");
 
-export default function A1WeeksScreen() {
+type ItemStatus = {
+  id: string;
+  status: LessonStatus;
+};
+
+function labelForKind(kind: string) {
+  switch (kind) {
+    case "mini":
+      return "Mini";
+    case "quiz":
+      return "Quiz";
+    case "abschluss":
+      return "Abschluss";
+    case "speaking":
+      return "Speaking";
+    default:
+      return "Lesson";
+  }
+}
+
+export default function A1UnitsScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const weeks = [
-    loadA1Week(1),
-    { week: 2, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 3, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 4, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 5, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 6, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 7, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-    { week: 8, theme: "Demnächst", story: { de: "Kommt bald." }, tasks: [] },
-  ];
-  const contentPadBottom = insets.bottom + TAB_BAR_HEIGHT + 16;
+  const [completedMap, setCompletedMap] = useState<Record<string, boolean>>({});
+  const [openUnitId, setOpenUnitId] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const state = await getProgressState();
+      if (!active) return;
+      setCompletedMap(state.completedLessons.A1 ?? {});
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const units = useMemo(() => {
+    const list = (A1_INDEX?.units ?? []) as { id: string }[];
+    return list.map((u) => UNIT_DATA[u.id]).filter(Boolean);
+  }, []);
+
+  const unitStatuses = useMemo(() => {
+    const result: Record<string, ItemStatus[]> = {};
+    units.forEach((unit) => {
+      const statuses: ItemStatus[] = [];
+      let firstAvailableFound = false;
+      unit.items.forEach((item: any) => {
+        const done = Boolean(completedMap[item.id]);
+        if (done) {
+          statuses.push({ id: item.id, status: "done" });
+          return;
+        }
+        if (DEV_UNLOCK_ALL) {
+          statuses.push({ id: item.id, status: "available" });
+          return;
+        }
+        if (!firstAvailableFound) {
+          firstAvailableFound = true;
+          const isRecommended = item.minutes <= 3 || item.kind === "speaking";
+          statuses.push({ id: item.id, status: isRecommended ? "recommended" : "available" });
+          return;
+        }
+        statuses.push({ id: item.id, status: "locked" });
+      });
+      result[unit.id] = statuses;
+    });
+    return result;
+  }, [completedMap, units]);
+
+  useEffect(() => {
+    if (openUnitId) return;
+    for (const unit of units) {
+      const unitStatus = unitStatuses[unit.id] ?? [];
+      const hasAvailable = unitStatus.some((s) => s.status === "available" || s.status === "recommended");
+      if (hasAvailable) {
+        setOpenUnitId(unit.id);
+        break;
+      }
+    }
+  }, [openUnitId, unitStatuses]);
 
   return (
-    <ScreenShell header={<></>} backgroundColor="$background">
-      <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: 16,
-          paddingBottom: contentPadBottom,
-          paddingTop: insets.top + 8,
-        }}
-      >
-        {/* Topbar */}
-        <XStack alignItems="center" justifyContent="space-between" marginBottom="$3">
-          <NavBackButton fallbackRoute="/(tabs)/learn" />
-          <Text fontWeight="800" color="$text" fontSize="$6">
-            A1
-          </Text>
-          <Stack width={40} />{/* placeholder for right icon slot */}
-        </XStack>
-
-        {/* Hero */}
-        <HeroImage source={A1_HERO} />
-
-        {/* Title */}
-        <YStack gap="$1" marginTop="$3">
-          <Text fontSize="$8" fontWeight="900" color="$text">
-            A1 Ankommen
-          </Text>
-          <Text color="$muted">8 Lektionen · 3-Minuten Aufgaben</Text>
-        </YStack>
-
-        {/* Bonus Card */}
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push("/lesson-runner/a1_w1_name")}
-          style={{ width: "100%" }}
-        >
-          <XStack
-            marginTop="$4"
-            height={76}
-            borderRadius="$6"
-            backgroundColor="rgba(0,0,0,0.035)"
-            paddingHorizontal="$3.5"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <YStack>
-              <Text fontWeight="800" color="$text">
-                Bonus · Mini-Lektion
-              </Text>
-              <Text color="$muted">Kurz und ruhig.</Text>
-            </YStack>
-            <SoftButton label="Start" />
-          </XStack>
-        </Pressable>
-
-        {/* Lessons list */}
-        <YStack marginTop="$4" gap="$3">
-          {weeks.map((w: any) => (
-            <YStack key={w.week} paddingHorizontal="$3" paddingVertical="$3" borderRadius="$6" backgroundColor="rgba(0,0,0,0.02)" gap="$2">
-              <XStack alignItems="center" gap="$3">
-                <YStack flex={1} gap="$1" minWidth={0}>
-                  <Text fontWeight="900" color="$text" numberOfLines={1}>
-                    Lektion {w.week} · {w.theme}
-                  </Text>
-                  <Text color="$muted" numberOfLines={2}>
-                    {w.story?.de ?? "In Vorbereitung."}
-                  </Text>
-                </YStack>
-
-                <SoftButton
-                  label={w.tasks?.length ? "Start" : "Bald"}
-                  tone="strong"
-                  disabled={!w.tasks?.length}
-                  onPress={() =>
-                    router.push({ pathname: "/learn/a1/week/[week]", params: { week: String(w.week) } })
-                  }
-                />
-              </XStack>
-            </YStack>
-          ))}
+    <ScreenShell title="A1" backgroundColor="$bgApp">
+      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + TAB_BAR_HEIGHT + 16 }}>
+        <LevelHeader
+          title={A1_INDEX?.title ?? "A1 – Ankommen"}
+          subtitle={A1_INDEX?.subtitle ?? "80 Lektionen · 3-Minuten Aufgaben"}
+          onBack={() => router.back()}
+        />
+        <YStack gap="$3" padding="$4">
+          {units.map((unit) => {
+            const unitStatus = unitStatuses[unit.id] ?? [];
+            return (
+              <UnitAccordion
+                key={unit.id}
+                title={unit.title}
+                subtitle={unit.subtitle}
+                open={openUnitId === unit.id}
+                onToggle={() => {
+                  setOpenUnitId((prev) => (prev === unit.id ? null : unit.id));
+                }}
+              >
+                {unit.items.map((item: any) => {
+                  const itemStatus = unitStatus.find((s) => s.id === item.id)?.status ?? "available";
+                  return (
+                    <LessonRow
+                      key={item.id}
+                      title={item.title}
+                      minutes={item.durationMin ?? item.minutes}
+                      kindLabel={labelForKind(item.kind)}
+                      status={itemStatus}
+                      onPress={() => router.push(`/lesson-runner/${item.id}`)}
+                    />
+                  );
+                })}
+              </UnitAccordion>
+            );
+          })}
         </YStack>
       </ScrollView>
     </ScreenShell>

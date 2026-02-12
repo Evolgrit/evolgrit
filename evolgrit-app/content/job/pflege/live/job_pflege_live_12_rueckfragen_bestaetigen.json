@@ -1,0 +1,50 @@
+{
+  "id": "job_pflege_live_12_rueckfragen_bestaetigen",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Rückfragen & Bestätigung",
+  "subtitle": "Missverständnisse vermeiden",
+  "durationMin": 5,
+  "tasks": [
+    "Rückfrage stellen",
+    "Kurz wiederholen",
+    "Bestätigen lassen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Du hast etwas nicht verstanden. Stell eine ruhige Rückfrage."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "1 Satz Rückfrage.",
+      "suggestions": [
+        "Können Sie das bitte noch einmal erklären?",
+        "Meinen Sie Zimmer 102 oder 103?",
+        "Soll ich den Blutdruck jetzt oder später messen?"
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Sehr gut. Wiederhole kurz, was du verstanden hast."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "1 Satz Wiederholung.",
+      "suggestions": [
+        "Okay, ich messe später noch einmal den Blutdruck.",
+        "Verstanden: Ich informiere den Arzt, wenn es schlimmer wird.",
+        "Also: Patient beobachten und Werte kontrollieren."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Perfekt. Das verhindert Fehler."
+    }
+  ]
+}

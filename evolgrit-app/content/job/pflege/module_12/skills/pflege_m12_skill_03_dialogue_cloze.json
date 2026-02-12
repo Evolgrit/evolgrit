@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m12_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M12 · Mini-Dialog",
+  "subtitle": "Kurz und klar",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wie gehen Sie vor?",
+      "choices": [
+        { "id": "a", "label": "Ich setze Prioritaeten und arbeite Schritt fuer Schritt." },
+        { "id": "b", "label": "Ich mache alles gleichzeitig." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich setze ____.",
+      "choices": [
+        { "id": "a", "label": "Prioritaeten" },
+        { "id": "b", "label": "Pausen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Was sagen Sie zum Stress?",
+      "choices": [
+        { "id": "a", "label": "Ich bleibe ruhig und strukturiere die Aufgaben." },
+        { "id": "b", "label": "Ich gebe auf." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich strukturiere die ____.",
+      "choices": [
+        { "id": "a", "label": "Aufgaben" },
+        { "id": "b", "label": "Feier" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was ist sinnvoll?",
+      "choices": [
+        { "id": "a", "label": "Ich plane eine kurze Pause ein." },
+        { "id": "b", "label": "Ich arbeite ohne Pause." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich plane die Pause ein und arbeite Schritt fuer Schritt."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Sie koennen Selbstorganisation kurz erklaeren."
+    }
+  ]
+}

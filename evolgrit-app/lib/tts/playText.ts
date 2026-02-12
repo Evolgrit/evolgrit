@@ -7,7 +7,11 @@ export async function playTtsText(text: string, rate: "normal" | "slow" = "norma
     const clean = sanitizeText(text);
 
     if (!clean) {
-      console.warn("[tts] missing text");
+      console.warn("[tts] missing text - skipping speak");
+      return;
+    }
+    if (clean.toLowerCase().includes("daniel")) {
+      console.warn("[tts] blocked debug phrase");
       return;
     }
 

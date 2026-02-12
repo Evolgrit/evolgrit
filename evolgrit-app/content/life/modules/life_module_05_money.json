@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_05_money",
+  "title": "Geld, Einkaufen & Verträge",
+  "subtitle": "Sicher bezahlen, Abos verstehen",
+  "durationMin": 12,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Rechnungen, Abos und Verträge sind verbindlich. Probleme entstehen oft durch Kündigungsfristen oder unklare Bestätigungen."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Frag nach der Kündigungsfrist, bevor du unterschreibst." },
+        { "kind": "do", "text": "Bewahre Rechnungen/Bestätigungen auf." },
+        { "kind": "dont", "text": "Unterschreiben, ohne zu verstehen." },
+        { "kind": "dont", "text": "„Ich zahle später“ ohne Plan." }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Du willst ein Abo kündigen. Was ist sinnvoll?",
+      "options": [
+        "Ich schaue die Frist nach und kündige schriftlich (E-Mail reicht oft).",
+        "Ich warte. Vielleicht stoppt es automatisch."
+      ],
+      "correctIndex": 0,
+      "explain": "Fristen + schriftlich = sicher."
+    },
+    {
+      "type": "examples",
+      "title": "Sätze für Alltag",
+      "items": [
+        "Kann ich mit Karte zahlen?",
+        "Ich möchte das bitte kündigen.",
+        "Können Sie mir das schriftlich bestätigen?"
+      ]
+    }
+  ]
+}

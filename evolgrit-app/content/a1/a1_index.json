@@ -1,0 +1,127 @@
+{
+  "level": "A1",
+  "title": "A1 – Ankommen",
+  "subtitle": "80 Lektionen · 3-Minuten Aufgaben",
+  "units": [
+    {
+      "id": "a1_u01",
+      "title": "Begrüßen & Verabschieden",
+      "subtitle": "Hallo sagen, Tschüss sagen",
+      "count": 4
+    },
+    {
+      "id": "a1_u02",
+      "title": "Ich bin …",
+      "subtitle": "Name, Herkunft, Wohnort",
+      "count": 4
+    },
+    {
+      "id": "a1_u03",
+      "title": "Andere vorstellen",
+      "subtitle": "Das ist … / Wer ist das?",
+      "count": 4
+    },
+    {
+      "id": "a1_u04",
+      "title": "Zahlen & Preise",
+      "subtitle": "0–100, Mengen, Euro",
+      "count": 4
+    },
+    {
+      "id": "a1_u05",
+      "title": "Zeit & Termine",
+      "subtitle": "Uhrzeit, Tage, Monate",
+      "count": 4
+    },
+    {
+      "id": "a1_u06",
+      "title": "Familie",
+      "subtitle": "Personen und Beziehungen",
+      "count": 4
+    },
+    {
+      "id": "a1_u07",
+      "title": "Essen & Trinken",
+      "subtitle": "Wörter + einfache Sätze",
+      "count": 4
+    },
+    {
+      "id": "a1_u08",
+      "title": "Restaurant",
+      "subtitle": "Bestellen & bezahlen",
+      "count": 4
+    },
+    {
+      "id": "a1_u09",
+      "title": "Café & Bäckerei",
+      "subtitle": "Kurz bestellen",
+      "count": 4
+    },
+    {
+      "id": "a1_u10",
+      "title": "Einkaufen",
+      "subtitle": "Supermarkt & Markt",
+      "count": 4
+    },
+    {
+      "id": "a1_u11",
+      "title": "Weg fragen",
+      "subtitle": "Links, rechts, geradeaus",
+      "count": 4
+    },
+    {
+      "id": "a1_u12",
+      "title": "Unterwegs",
+      "subtitle": "Bus, Bahn, Tickets",
+      "count": 4
+    },
+    {
+      "id": "a1_u13",
+      "title": "Wohnen",
+      "subtitle": "Zimmer, Möbel, Dinge",
+      "count": 4
+    },
+    {
+      "id": "a1_u14",
+      "title": "Arbeit (Basics)",
+      "subtitle": "Berufe & Aufgaben",
+      "count": 4
+    },
+    {
+      "id": "a1_u15",
+      "title": "Smalltalk",
+      "subtitle": "Wetter & kurze Gespräche",
+      "count": 4
+    },
+    {
+      "id": "a1_u16",
+      "title": "Freizeit",
+      "subtitle": "Pläne machen",
+      "count": 4
+    },
+    {
+      "id": "a1_u17",
+      "title": "Sport & Hobbys",
+      "subtitle": "Was du gerne machst",
+      "count": 4
+    },
+    {
+      "id": "a1_u18",
+      "title": "Post & DHL",
+      "subtitle": "Abholen, senden, Formulare",
+      "count": 4
+    },
+    {
+      "id": "a1_u19",
+      "title": "Behörden (leicht)",
+      "subtitle": "Termin, Dokumente, Fragen",
+      "count": 4
+    },
+    {
+      "id": "a1_u20",
+      "title": "Gestern / Heute",
+      "subtitle": "Mini-Vergangenheit (leicht)",
+      "count": 4
+    }
+  ]
+}

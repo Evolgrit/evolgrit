@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_11_exam_preparation",
+  "title": "Modul 11 · Prüfung – kurz & strukturiert",
+  "subtitle": "Typische Fragen sicher beantworten",
+  "durationMin": 12,
+  "outcomes": [
+    "Antworten strukturiert geben",
+    "Fachlich korrekt und knapp bleiben",
+    "Rueckfragen sicher beantworten"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_11_pruefung"
+  ]
+}

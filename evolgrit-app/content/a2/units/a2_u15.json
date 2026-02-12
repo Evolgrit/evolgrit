@@ -1,0 +1,31 @@
+{
+  "id": "a2_u15",
+  "title": "Zukunft & Pläne",
+  "subtitle": "Pläne äußern",
+  "items": [
+    {
+      "id": "a2_u15_l01",
+      "title": "Lektion 1 · Zukunft & Pläne",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u15_l02",
+      "title": "Lektion 2 · Pläne äußern",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u15_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u15_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

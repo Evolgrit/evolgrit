@@ -1,0 +1,31 @@
+{
+  "id": "a2_u02",
+  "title": "Hobbys & Freizeit",
+  "subtitle": "Interessen beschreiben",
+  "items": [
+    {
+      "id": "a2_u02_l01",
+      "title": "Lektion 1 · Hobbys & Freizeit",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u02_l02",
+      "title": "Lektion 2 · Interessen beschreiben",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u02_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u02_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

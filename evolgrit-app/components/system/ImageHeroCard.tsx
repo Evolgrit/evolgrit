@@ -17,10 +17,6 @@ export function ImageHeroCard({ title, subtitle, onPress, pill }: Props) {
         borderRadius={18}
         padding="$4"
         gap="$3"
-        shadowColor="rgba(0,0,0,0.08)"
-        shadowOpacity={1}
-        shadowRadius={14}
-        shadowOffset={{ width: 0, height: 8 }}
       >
         {pill ? (
           <Stack

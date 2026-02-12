@@ -1,0 +1,42 @@
+{
+  "id": "b1_03_polite_complaint",
+  "title": "Beschwerde höflich äußern",
+  "level": "B1",
+  "week": 3,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich habe ein Problem mit dem Produkt." },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Es ist leider ____.",
+      "choices": [
+        { "id": "a", "label": "kaputt" },
+        { "id": "b", "label": "nett" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Können Sie mir helfen?",
+      "choices": [
+        { "id": "a", "label": "Ja, ich schaue nach." },
+        { "id": "b", "label": "Guten Morgen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst höflich ein Problem ansprechen."
+    }
+  ]
+}

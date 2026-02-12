@@ -53,10 +53,6 @@ export function AppButton({
     backgroundColor: "rgba(255,255,255,0.75)",
     borderWidth: 1,
     borderColor: "rgba(17,24,39,0.08)",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 6 },
   };
 
   const textBase: TextStyle = { fontWeight: "900" };

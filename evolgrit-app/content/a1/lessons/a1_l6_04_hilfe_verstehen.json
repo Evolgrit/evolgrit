@@ -1,0 +1,60 @@
+{
+  "id": "a1_l6_04_hilfe_verstehen",
+  "title": "Hilfe & Verstehen",
+  "level": "A1",
+  "week": 6,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Können Sie bitte helfen?" },
+        { "id": "b", "label": "Das ist teuer." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich verstehe nicht."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich ____ nicht.",
+      "choices": [
+        { "id": "a", "label": "verstehe" },
+        { "id": "b", "label": "trinke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Können Sie das wiederholen?" },
+        { "id": "b", "label": "Guten Tag, Frau Bianchi." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Verstehst du?",
+      "choices": [
+        { "id": "a", "label": "Nein, bitte wiederholen." },
+        { "id": "b", "label": "Danke." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst um Hilfe bitten.",
+        "Du kannst sagen, was du nicht verstehst."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

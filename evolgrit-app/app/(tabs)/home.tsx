@@ -1,49 +1,44 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import type { NextAction, NextActionSource } from "../../lib/nextActionService";
-import { getNextAction, completeNextActionAndRecompute } from "../../lib/nextActionService";
-import { useRouter } from "expo-router";
-import { loadLangPrefs } from "../../lib/languagePrefs";
-import { ReadinessRing } from "../../components/ReadinessRing";
-import { loadCurrentERS } from "../../lib/readinessService";
-import { appendEvent } from "../../lib/eventsStore";
-import { setMoodForDate, todayKey, getMoodForDate, type Mood } from "../../lib/moodStore";
-import { GlassCard } from "../../components/system/GlassCard";
-import { PillButton } from "../../components/system/PillButton";
-import { ScreenShell } from "../../components/system/ScreenShell";
-import { Stack, Text, YStack, useThemeName, ScrollView, Button, XStack } from "tamagui";
-import { getAvatarUri } from "../../lib/avatarStore";
-import { NextActionCard } from "../../components/home/NextActionCard";
+import React, { useEffect, useRef, useState } from "react";
+import { Image, Pressable } from "react-native";
+import { useFocusEffect, useRouter } from "expo-router";
+import { Button, ScrollView, Stack, Text, XStack, YStack, useTheme } from "tamagui";
 import { Feather } from "@expo/vector-icons";
-import { Image } from "react-native";
+
+import { ScreenShell } from "../../components/system/ScreenShell";
+import { GlassCard } from "../../components/system/GlassCard";
+import { getAvatarUri } from "../../lib/avatarStore";
+import { loadLangPrefs } from "../../lib/languagePrefs";
 import { openMentorChat } from "../../lib/navigation/openMentorChat";
+import { buildHomeCards, type HomeCard } from "../../lib/homeCards";
+import { logNextActionShown } from "../../lib/nextActionStore";
+import { getLatestResumeInfo, type ResumeInfo } from "../../lib/progress/lessonProgress";
+import { getEvents, track } from "../../lib/tracking";
 
-type ERS = { L: number; A: number; S: number; C: number };
+const TAB_BAR_HEIGHT = 80;
 
-const ersMin = (e: ERS) => Math.min(e.L, e.A, e.S, e.C);
+type DomainKey = "language" | "job" | "life" | "focus";
 
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <GlassCard marginBottom={12}>
-      <Text fontSize={14} fontWeight="700" color="$text" marginBottom={10}>
-        {title}
-      </Text>
-      {children}
-    </GlassCard>
-  );
-}
+type DomainStat = {
+  minutes: number;
+  sessions: number;
+};
+
+type DomainStats = Record<DomainKey, DomainStat>;
 
 export default function HomeHub() {
-  const [ers, setErs] = useState<ERS>({ L: 32, A: 18, S: 55, C: 40 });
-  const [currentERS, setCurrentERS] = useState<ERS | null>(null);
-  const [nextAction, setNextAction] = useState<NextAction | null>(null);
-  const [nextActionSource, setNextActionSource] = useState<NextActionSource | null>(null);
-  const [showAdjustedHint, setShowAdjustedHint] = useState(false);
-  const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
-  const hintTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
-  const [avatarUri, setAvatarUri] = React.useState<string | null>(null);
-  const theme = useThemeName();
-  const TAB_BAR_HEIGHT = 80;
+  const theme = useTheme();
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
+  const [cards, setCards] = useState<HomeCard[]>([]);
+  const [todayMinutes, setTodayMinutes] = useState(0);
+  const [resumeInfo, setResumeInfo] = useState<ResumeInfo>(null);
+  const [domainStats, setDomainStats] = useState<DomainStats>({
+    language: { minutes: 0, sessions: 0 },
+    job: { minutes: 0, sessions: 0 },
+    life: { minutes: 0, sessions: 0 },
+    focus: { minutes: 0, sessions: 0 },
+  });
+  const loggedRef = useRef<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -53,25 +48,6 @@ export default function HomeHub() {
   }, [router]);
 
   useEffect(() => {
-    (async () => {
-      const current = await loadCurrentERS();
-      setErs(current);
-      setCurrentERS(current);
-      const storedMood = await getMoodForDate(todayKey());
-      setSelectedMood(storedMood);
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const stored = await getNextAction();
-      setNextAction(stored.action);
-      setNextActionSource(stored.source);
-      await appendEvent("next_action_shown", { source: stored.source });
-    })();
-  }, []);
-
-  React.useEffect(() => {
     let mounted = true;
     (async () => {
       const uri = await getAvatarUri();
@@ -82,60 +58,51 @@ export default function HomeHub() {
     };
   }, []);
 
-  const score = useMemo(() => ersMin(ers), [ers]);
-  const limiter = useMemo<"L" | "A" | "S" | "C">(() => {
-    const min = score;
-    const entries: [keyof ERS, number][] = [
-      ["L", ers.L],
-      ["A", ers.A],
-      ["S", ers.S],
-      ["C", ers.C],
-    ];
-    return entries.find(([, v]) => v === min)?.[0] ?? "A";
-  }, [ers, score]);
-
-  const whatToImprove = useMemo(() => {
-    switch (limiter) {
-      case "L":
-        return "Heute zählt ein klarer Satz.";
-      case "A":
-        return "Heute üben wir Anwendung im Alltag.";
-      case "S":
-        return "Heute stabilisieren wir zuerst.";
-      case "C":
-        return "Heute reichen 3 Minuten.";
-      default:
-        return "Ein ruhiger Schritt reicht.";
-    }
-  }, [limiter]);
-
-  useEffect(() => {
-    return () => {
-      if (hintTimer.current) clearTimeout(hintTimer.current);
-    };
-  }, []);
-
-  async function onCheckin(mood: "calm" | "stressed" | "no_time") {
-    await appendEvent("checkin_submitted", { mood });
-    await setMoodForDate(todayKey(), mood);
-    setSelectedMood(mood);
-    await completeNextActionAndRecompute();
-    const stored = await getNextAction();
-    setNextAction(stored.action);
-    setNextActionSource(stored.source);
-    if (hintTimer.current) clearTimeout(hintTimer.current);
-    setShowAdjustedHint(true);
-    hintTimer.current = setTimeout(() => setShowAdjustedHint(false), 3000);
-  }
-
-  if (!nextAction || !currentERS)
-    return (
-      <ScreenShell title="Home">
-        <YStack flex={1} alignItems="center" justifyContent="center">
-          <Text color="$muted">Loading…</Text>
-        </YStack>
-      </ScreenShell>
-    );
+  useFocusEffect(
+    React.useCallback(() => {
+      let active = true;
+      (async () => {
+        const { cards: nextCards, todayMinutes: minutes } = await buildHomeCards();
+        if (!active) return;
+        setCards(nextCards);
+        setTodayMinutes(minutes);
+        const resume = await getLatestResumeInfo();
+        if (!active) return;
+        setResumeInfo(resume);
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        const events = await getEvents(startOfDay.getTime());
+        if (!active) return;
+        const nextStats: DomainStats = {
+          language: { minutes: 0, sessions: 0 },
+          job: { minutes: 0, sessions: 0 },
+          life: { minutes: 0, sessions: 0 },
+          focus: { minutes: 0, sessions: 0 },
+        };
+        events.forEach((event) => {
+          const key = event.category as DomainKey;
+          if (!nextStats[key]) return;
+          const mins = event.durationSec ? Math.round(event.durationSec / 60) : 0;
+          if (mins) {
+            nextStats[key].minutes += mins;
+            nextStats[key].sessions += 1;
+          }
+          if (event.action.endsWith("_complete")) {
+            nextStats[key].sessions += 1;
+          }
+        });
+        setDomainStats(nextStats);
+        const first = nextCards[0];
+        if (first?.kind === "next_action" && loggedRef.current !== first.route) {
+          loggedRef.current = first.route;
+          await logNextActionShown(first.actionType);
+        }
+      })();
+      return () => {
+        active = false;
+      };
+    }, [])
+  );
 
   const avatarButton = (
     <Button
@@ -145,7 +112,7 @@ export default function HomeHub() {
       height={36}
       borderRadius={18}
       overflow="hidden"
-      backgroundColor="rgba(17,24,39,0.08)"
+      backgroundColor="$cardSubtle"
       alignItems="center"
       justifyContent="center"
     >
@@ -154,75 +121,175 @@ export default function HomeHub() {
   );
 
   const chatButton = (
-    <Button
-      unstyled
-      onPress={() => openMentorChat(router)}
-      padding={6}
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Feather name="message-square" size={22} color={theme === "dark" ? "#fff" : "#111827"} />
+    <Button unstyled onPress={() => openMentorChat(router)} padding={6} alignItems="center" justifyContent="center">
+      <Feather name="message-square" size={22} color={theme.text?.val ?? theme.color?.val ?? "black"} />
     </Button>
   );
 
-  const isSelected = (mood: Mood) => selectedMood === mood;
+  const renderCard = (card: HomeCard) => {
+    const isNext = card.kind === "next_action";
+    const cardVariant = isNext ? "job" : "default";
+    return (
+      <Pressable
+        key={card.kind}
+        accessibilityRole="button"
+        onPress={() => router.push(card.route)}
+      >
+        <GlassCard position="relative" variant={cardVariant}>
+          <XStack alignItems="center" justifyContent="space-between" marginBottom={6}>
+            <Text fontSize={12} fontWeight="700" color="$textSecondary">
+              {card.kind === "next_action" ? "NEXT ACTION" : card.kind === "resume" ? "WEITERLERNEN" : card.kind === "job" ? "JOB" : "FOCUS"}
+            </Text>
+            {isNext ? (
+              <Text fontSize={12} fontWeight="700" color="$textSecondary">
+                3 Min
+              </Text>
+            ) : null}
+          </XStack>
+          <Text fontSize={18} fontWeight="800" color="$text">
+            {card.title}
+          </Text>
+          <Text color="$textSecondary" marginTop={4}>
+            {card.subtitle}
+          </Text>
+          {card.kind === "next_action" && todayMinutes > 0 ? (
+            <Text color="$textSecondary" marginTop={8} fontSize={12}>
+              Heute fokussiert: {todayMinutes} Min
+            </Text>
+          ) : null}
+        </GlassCard>
+      </Pressable>
+    );
+  };
+
+  const resumeTitle = resumeInfo?.title ?? resumeInfo?.lessonId ?? "";
+  const resumeStepLine =
+    resumeInfo && resumeInfo.totalSteps
+      ? `Schritt ${resumeInfo.stepIndex + 1} von ${resumeInfo.totalSteps}`
+      : resumeInfo
+      ? `Schritt ${resumeInfo.stepIndex + 1}`
+      : "";
+  const resumeVariant =
+    resumeInfo?.level?.startsWith("JOB") || resumeInfo?.lessonId?.startsWith("pflege_") || resumeInfo?.lessonId?.startsWith("job_")
+      ? "job"
+      : "language";
 
   return (
     <ScreenShell title="Home" leftContent={avatarButton} rightActions={chatButton}>
-      <ScrollView contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 32 }}>
-        <YStack gap="$4">
-          <NextActionCard
-            action={nextAction}
-            source={nextActionSource}
-            onStart={() => router.push("/speak-v2")}
-            showAdjusted={showAdjustedHint}
-          />
+      <ScrollView contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 24 }}>
+        <YStack gap="$3" padding="$4" paddingTop="$2">
+          {cards.filter((c) => c.kind === "next_action").map(renderCard)}
 
-          <Card title="Readiness Score (ERS)">
-            <Stack alignItems="center" marginBottom={8}>
-              <ReadinessRing
-                value={ersMin(currentERS)}
-                size={190}
-                strokeWidth={14}
-                onPress={() => router.push("/(tabs)/progress")}
+          {resumeInfo ? (
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => {
+                if (!resumeInfo.lessonId) return;
+                track({
+                  ts: Date.now(),
+                  category: "language",
+                  action: "lesson_minutes",
+                  durationSec: 0,
+                  id: resumeInfo.lessonId,
+                }).catch(() => {});
+                router.push(`/lesson-runner/${resumeInfo.lessonId}?resume=1`);
+              }}
+            >
+              <GlassCard position="relative" variant={resumeVariant}>
+                <Text fontSize={12} fontWeight="700" color="$textSecondary" marginBottom={6}>
+                  WEITERLERNEN
+                </Text>
+                <Text fontSize={18} fontWeight="800" color="$text">
+                  {resumeTitle}
+                </Text>
+                <Text color="$textSecondary" marginTop={4}>
+                  {resumeStepLine}
+                </Text>
+              </GlassCard>
+            </Pressable>
+          ) : null}
+
+          <YStack gap="$2" marginTop="$2">
+            <Text fontSize={16} fontWeight="800" color="$text">
+              Bereiche
+            </Text>
+            <XStack flexWrap="wrap" gap="$3">
+              <DomainTile
+                title="Sprache"
+                subtitle={domainStats.language.sessions > 0 ? `${domainStats.language.sessions} Sessions` : "Heute starten"}
+                value={domainStats.language.minutes > 0 ? `${domainStats.language.minutes} Min` : "—"}
+                bg="language"
+                onPress={() => router.push("/learn/language")}
               />
-            </Stack>
-            <Text marginTop={6} color="$muted" textAlign="center">
-              {whatToImprove}
-            </Text>
-          </Card>
-
-          <Card title="Wie fühlst du dich heute?">
-            <Text color="$muted" marginBottom={12}>
-              Eine kleine Stimmung reicht.
-            </Text>
-
-            <XStack gap="$2">
-              <PillButton
-                flex={1}
-                backgroundColor={isSelected("calm") ? "$border" : "$card"}
-                onPress={() => onCheckin("calm")}
-              >
-                Calm
-              </PillButton>
-              <PillButton
-                flex={1}
-                backgroundColor={isSelected("stressed") ? "$border" : "$card"}
-                onPress={() => onCheckin("stressed")}
-              >
-                Stressed
-              </PillButton>
-              <PillButton
-                flex={1}
-                backgroundColor={isSelected("no_time") ? "$border" : "$card"}
-                onPress={() => onCheckin("no_time")}
-              >
-                No time
-              </PillButton>
+              <DomainTile
+                title="Job & Zukunft"
+                subtitle={domainStats.job.sessions > 0 ? `${domainStats.job.sessions} Sessions` : "Heute starten"}
+                value={domainStats.job.minutes > 0 ? `${domainStats.job.minutes} Min` : "—"}
+                bg="job"
+                onPress={() => router.push("/learn/job")}
+              />
+              <DomainTile
+                title="Leben"
+                subtitle={domainStats.life.sessions > 0 ? `${domainStats.life.sessions} Sessions` : "Heute starten"}
+                value={domainStats.life.minutes > 0 ? `${domainStats.life.minutes} Min` : "—"}
+                bg="life"
+                onPress={() => router.push("/learn/life")}
+              />
+              <DomainTile
+                title="Focus"
+                subtitle={domainStats.focus.sessions > 0 ? `${domainStats.focus.sessions} Sessions` : "Heute starten"}
+                value={domainStats.focus.minutes > 0 ? `${domainStats.focus.minutes} Min` : "—"}
+                bg="focus"
+                onPress={() => router.push("/focus")}
+              />
             </XStack>
-          </Card>
+          </YStack>
         </YStack>
       </ScrollView>
     </ScreenShell>
+  );
+}
+
+function DomainTile({
+  title,
+  subtitle,
+  value,
+  bg,
+  onPress,
+}: {
+  title: string;
+  subtitle: string;
+  value: string;
+  bg: "language" | "life" | "job" | "focus";
+  onPress: () => void;
+}) {
+  const theme = useTheme();
+  const iconColor = theme.text?.val ?? theme.color?.val ?? "#111111";
+  return (
+    <Pressable accessibilityRole="button" onPress={onPress} style={{ width: "48%" }}>
+      <GlassCard variant={bg}>
+        <XStack alignItems="center" justifyContent="space-between">
+          <Text fontSize={12} fontWeight="700" color="$textSecondary">
+            {title}
+          </Text>
+          <Stack
+            width={28}
+            height={28}
+            borderRadius={14}
+            backgroundColor="$card"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Feather name="arrow-up-right" size={14} color={iconColor} />
+          </Stack>
+        </XStack>
+        <Text fontSize={24} fontWeight="800" color="$text" marginTop="$2">
+          {value}
+        </Text>
+        <Text color="$textSecondary" marginTop="$1" fontSize={12}>
+          {subtitle}
+        </Text>
+      </GlassCard>
+    </Pressable>
   );
 }

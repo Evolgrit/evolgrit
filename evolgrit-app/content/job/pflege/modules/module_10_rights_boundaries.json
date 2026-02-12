@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_10_rights_boundaries",
+  "title": "Modul 10 · Rechte & Grenzen",
+  "subtitle": "Aufgaben klaeren, Nein sagen, Hilfe holen",
+  "durationMin": 12,
+  "outcomes": [
+    "Aufgaben klar abgrenzen",
+    "Ruecksprache korrekt einholen",
+    "Grenzen ruhig kommunizieren"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_10_grenzen"
+  ]
+}

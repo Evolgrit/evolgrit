@@ -1,0 +1,61 @@
+{
+  "id": "a1_l2_02_preise_mengen",
+  "title": "Preise & Mengen",
+  "level": "A1",
+  "week": 2,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Wie viel kostet das?" },
+        { "id": "b", "label": "Wie heißt du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wie viel kostet das?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Das kostet ____ Euro.",
+      "choices": [
+        { "id": "a", "label": "zwei" },
+        { "id": "b", "label": "Anna" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Baue das Wort",
+      "text": "2",
+      "choices": [
+        { "id": "a", "label": "zwei" },
+        { "id": "b", "label": "zehn" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "Kunde: Wie viel kostet das?",
+      "choices": [
+        { "id": "a", "label": "Zwei Euro." },
+        { "id": "b", "label": "Ich heiße Nina." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst nach dem Preis fragen.",
+        "Du kannst Mengen nennen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

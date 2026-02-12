@@ -1,0 +1,35 @@
+{
+  "id": "a2_u08_m01",
+  "level": "A2",
+  "unitId": "a2_u08",
+  "title": "Mini · Kurz",
+  "durationMin": 2,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich stehe um sieben auf."
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ich bin heute müde."
+        },
+        {
+          "id": "b",
+          "label": "Ich bin heute Küche."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Mini geschafft",
+      "text": "Du kannst Routinen erklären."
+    }
+  ]
+}

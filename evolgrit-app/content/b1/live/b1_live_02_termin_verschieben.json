@@ -1,0 +1,110 @@
+{
+  "id": "b1_live_02_termin_verschieben",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Termin verschieben",
+  "subtitle": "Ruhig nachfragen, neuen Termin finden",
+  "durationMin": 4,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "tasks": [
+    "Sag, dass du den Termin verschieben musst.",
+    "Schlage zwei neue Zeiten vor.",
+    "Bestätige freundlich den neuen Termin."
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Hi, hier ist die Praxis. Du hast einen Termin morgen. Was ist los?",
+      "goalHint": "Sag, dass du den Termin verschieben musst.",
+      "tipSuggestions": [
+        "Ich muss den Termin verschieben.",
+        "Können wir den Termin bitte verschieben?",
+        "Ich brauche einen neuen Termin."
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Okay. Wann passt es dir?",
+      "goalHint": "Nenne zwei neue Zeiten.",
+      "tipSuggestions": [
+        "Am Donnerstag um 10 Uhr oder am Freitag um 14 Uhr.",
+        "Donnerstag um 10 Uhr oder Freitag um 14 Uhr passt.",
+        "Ich kann Donnerstag 10 Uhr oder Freitag 14 Uhr."
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Freitag 14 Uhr geht. Passt das?",
+      "goalHint": "Bestätige freundlich.",
+      "tipSuggestions": [
+        "Ja, das passt. Vielen Dank.",
+        "Ja, perfekt, danke.",
+        "Ja, das passt."
+      ]
+    }
+  ],
+  "turns": [
+    {
+      "role": "coach",
+      "coachText": "Hi, hier ist die Praxis. Du hast einen Termin morgen. Was ist los?",
+      "expectedUser": "Ich muss den Termin verschieben.",
+      "hints": [
+        "Ich muss den Termin verschieben.",
+        "Können wir den Termin bitte verschieben?",
+        "Ich brauche einen neuen Termin."
+      ],
+      "tip": "Kurz und ruhig sagen."
+    },
+    {
+      "role": "user",
+      "instruction": "Sag, dass du den Termin verschieben musst.",
+      "exampleAnswers": [
+        "Ich muss den Termin verschieben.",
+        "Können wir den Termin bitte verschieben?",
+        "Ich brauche einen neuen Termin."
+      ]
+    },
+    {
+      "role": "coach",
+      "coachText": "Okay. Wann passt es dir?",
+      "expectedUser": "Am Donnerstag um 10 Uhr oder am Freitag um 14 Uhr.",
+      "hints": [
+        "Am Donnerstag um 10 Uhr oder am Freitag um 14 Uhr.",
+        "Donnerstag um 10 Uhr oder Freitag um 14 Uhr passt.",
+        "Ich kann Donnerstag 10 Uhr oder Freitag 14 Uhr."
+      ],
+      "tip": "Zwei Optionen helfen bei der Planung."
+    },
+    {
+      "role": "user",
+      "instruction": "Schlage zwei neue Zeiten vor.",
+      "exampleAnswers": [
+        "Am Donnerstag um 10 Uhr oder am Freitag um 14 Uhr.",
+        "Donnerstag um 10 Uhr oder Freitag um 14 Uhr passt.",
+        "Ich kann Donnerstag 10 Uhr oder Freitag 14 Uhr."
+      ]
+    },
+    {
+      "role": "coach",
+      "coachText": "Freitag 14 Uhr geht. Passt das?",
+      "expectedUser": "Ja, das passt. Vielen Dank.",
+      "hints": [
+        "Ja, das passt. Vielen Dank.",
+        "Ja, perfekt, danke.",
+        "Ja, das passt."
+      ],
+      "tip": "Bestätigen + bedanken."
+    }
+  ],
+  "endSummary": {
+    "title": "Gute Arbeit",
+    "bullets": [
+      "Du hast den Termin freundlich verschoben.",
+      "Du hast klare Zeiten vorgeschlagen.",
+      "Du hast den neuen Termin bestätigt."
+    ]
+  }
+}

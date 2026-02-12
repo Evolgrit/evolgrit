@@ -1,0 +1,66 @@
+{
+  "id": "pflege_m8_skill_01_vocab",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M8 · Vokabeln",
+  "subtitle": "Beobachtung & Begruendung",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "beobachten",
+      "choices": [
+        { "id": "a", "label": "beobachten", "imageKey": "PLACEHOLDER_IMAGE" },
+        { "id": "b", "label": "vergessen", "imageKey": "PLACEHOLDER_IMAGE" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Symptom",
+      "choices": [
+        { "id": "a", "label": "Symptom", "imageKey": "PLACEHOLDER_IMAGE" },
+        { "id": "b", "label": "Termin", "imageKey": "PLACEHOLDER_IMAGE" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "begruenden",
+      "choices": [
+        { "id": "a", "label": "begruenden", "imageKey": "PLACEHOLDER_IMAGE" },
+        { "id": "b", "label": "vermeiden", "imageKey": "PLACEHOLDER_IMAGE" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Ich beobachte den Zustand.",
+      "text": "Ich ____ den Zustand.",
+      "choices": [
+        { "id": "a", "label": "beobachte" },
+        { "id": "b", "label": "vergesse" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Ich begruende die Massnahme.",
+      "text": "Ich begruende die ____.",
+      "choices": [
+        { "id": "a", "label": "Massnahme" },
+        { "id": "b", "label": "Pause" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut!",
+      "text": "Sie kennen die Kernwoerter fuer Beobachtung."
+    }
+  ]
+}

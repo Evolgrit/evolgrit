@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_04",
+  "title": "Pflege · Modul 4",
+  "subtitle": "Übergabe & Dokumentation (klar, kurz, vollständig)",
+  "durationMin": 18,
+  "outcomes": [
+    "Übergabe strukturiert geben (Name, Zimmer, Problem, Maßnahme, Plan)",
+    "Kurz dokumentieren (1–2 Sätze, ohne unnötige Details)",
+    "Missverständnisse vermeiden (Rückfragen, Bestätigung)"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_10_uebergabe_struktur",
+    "job_pflege_live_11_kurz_dokumentieren",
+    "job_pflege_live_12_rueckfragen_bestaetigen"
+  ]
+}

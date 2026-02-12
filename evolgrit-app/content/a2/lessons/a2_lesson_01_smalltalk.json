@@ -1,0 +1,43 @@
+{
+  "id": "a2_l01_smalltalk",
+  "title": "Smalltalk: Basics",
+  "level": "A2",
+  "week": 1,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Wie geht’s?",
+      "ttsText": "Wie geht’s?",
+      "choices": [
+        { "id": "a", "label": "Alles gut.", "imageKey": "a2_smalltalk_wiegehts_correct_01" },
+        { "id": "b", "label": "Danke.", "imageKey": "a2_smalltalk_danke_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Mir geht es ____.",
+      "choices": [
+        { "id": "a", "label": "gut" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wie geht es dir?",
+      "choices": [
+        { "id": "a", "label": "Gut, danke. Und dir?" },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wie geht es dir?"
+    }
+  ]
+}

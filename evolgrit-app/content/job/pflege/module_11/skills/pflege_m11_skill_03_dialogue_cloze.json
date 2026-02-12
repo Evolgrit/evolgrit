@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m11_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M11 · Mini-Dialog",
+  "subtitle": "Pruefungsfrage ueben",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Welche Massnahme ergreifen Sie?",
+      "choices": [
+        { "id": "a", "label": "Ich messe die Werte und dokumentiere sie." },
+        { "id": "b", "label": "Ich mache nichts." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich ____ die Werte.",
+      "choices": [
+        { "id": "a", "label": "messe" },
+        { "id": "b", "label": "vergesse" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wie begruenden Sie das?",
+      "choices": [
+        { "id": "a", "label": "Die Atmung ist flach, daher kontrolliere ich die Werte." },
+        { "id": "b", "label": "Weil es so ist." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich ____ die Werte, weil die Atmung flach ist.",
+      "choices": [
+        { "id": "a", "label": "kontrolliere" },
+        { "id": "b", "label": "vergesse" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was sagen Sie zum Schluss?",
+      "choices": [
+        { "id": "a", "label": "Ich dokumentiere die Beobachtung." },
+        { "id": "b", "label": "Ich gehe nach Hause." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich dokumentiere die Beobachtung und informiere den Arzt."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Sie koennen Pruefungsfragen knapp beantworten."
+    }
+  ]
+}

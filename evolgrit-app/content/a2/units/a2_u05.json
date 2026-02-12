@@ -1,0 +1,31 @@
+{
+  "id": "a2_u05",
+  "title": "Im Restaurant",
+  "subtitle": "Bestellen & Rückfragen",
+  "items": [
+    {
+      "id": "a2_u05_l01",
+      "title": "Lektion 1 · Im Restaurant",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u05_l02",
+      "title": "Lektion 2 · Bestellen & Rückfragen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u05_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u05_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

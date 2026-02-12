@@ -31,13 +31,8 @@ export function GlassSurface({
       height={height}
       paddingHorizontal={padH}
       paddingVertical={padV}
-      backgroundColor="#fff"
-      borderWidth={1}
-      borderColor="rgba(0,0,0,0.06)"
-      shadowColor="rgba(0,0,0,0.06)"
-      shadowOpacity={1}
-      shadowRadius={8}
-      shadowOffset={{ width: 0, height: 4 }}
+      backgroundColor="$bgSurface"
+      borderWidth={0}
       {...(style as any)}
     >
       {children}

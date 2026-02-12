@@ -1,0 +1,60 @@
+{
+  "id": "a1_l4_04_termin_verschieben",
+  "title": "Termin verschieben",
+  "level": "A1",
+  "week": 4,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Können wir den Termin verschieben?" },
+        { "id": "b", "label": "Wo ist der Bahnhof?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Können wir den Termin verschieben?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Geht es ____?",
+      "choices": [
+        { "id": "a", "label": "morgen" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Geht es morgen?",
+      "choices": [
+        { "id": "a", "label": "Ja, morgen ist gut." },
+        { "id": "b", "label": "Wie viel kostet das?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Um drei Uhr." },
+        { "id": "b", "label": "Ich heiße Maria." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst einen Termin verschieben.",
+        "Du kannst eine Uhrzeit nennen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

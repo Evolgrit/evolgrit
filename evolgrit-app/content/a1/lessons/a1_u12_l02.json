@@ -1,0 +1,51 @@
+{
+  "id": "a1_u12_l02",
+  "level": "A1",
+  "unitId": "a1_u12",
+  "title": "Bus",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ein Ticket nach Köln, bitte."
+        },
+        {
+          "id": "b",
+          "label": "Ein Ticket nach Löffel, bitte."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wann fährt der Zug?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Der Bus fährt um ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "acht"
+        },
+        {
+          "id": "b",
+          "label": "zwei"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Tickets und Zeiten nennen."
+    }
+  ]
+}

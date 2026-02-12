@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m8_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M8 · Satzbau",
+  "subtitle": "Beobachten und begruenden",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich beobachte die Atmung.",
+      "tokens": ["Ich", "beobachte", "die", "Atmung", "."],
+      "answer": ["Ich", "beobachte", "die", "Atmung", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Die Haut ist blass.",
+      "tokens": ["Die", "Haut", "ist", "blass", "."],
+      "answer": ["Die", "Haut", "ist", "blass", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich informiere den Arzt.",
+      "tokens": ["Ich", "informiere", "den", "Arzt", "."],
+      "answer": ["Ich", "informiere", "den", "Arzt", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich begruende die Massnahme.",
+      "tokens": ["Ich", "begruende", "die", "Massnahme", "."],
+      "answer": ["Ich", "begruende", "die", "Massnahme", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich dokumentiere die Beobachtung.",
+      "tokens": ["Ich", "dokumentiere", "die", "Beobachtung", "."],
+      "answer": ["Ich", "dokumentiere", "die", "Beobachtung", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen Beobachtungen klar formulieren."
+    }
+  ]
+}

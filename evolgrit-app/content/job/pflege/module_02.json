@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_02",
+  "title": "Pflege · Modul 2",
+  "subtitle": "Schmerzen & Maßnahmen (ruhig und klar)",
+  "durationMin": 14,
+  "outcomes": [
+    "Schmerz genau beschreiben lassen (Ort, Stärke, Dauer)",
+    "Maßnahmen ruhig ankündigen (kühlen, Lagerung, Arzt informieren)",
+    "Alarmzeichen erkennen und Hilfe holen"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_04_schmerz_verlauf",
+    "job_pflege_live_05_massnahmen_ankuendigen",
+    "job_pflege_live_06_alarmzeichen_hilfe"
+  ]
+}

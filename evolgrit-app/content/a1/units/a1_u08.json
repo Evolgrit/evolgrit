@@ -1,0 +1,31 @@
+{
+  "id": "a1_u08",
+  "title": "Restaurant",
+  "subtitle": "Bestellen & bezahlen",
+  "items": [
+    {
+      "id": "a1_u08_l01",
+      "title": "Restaurant",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u08_l02",
+      "title": "Bestellen & bezahlen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u08_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u08_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

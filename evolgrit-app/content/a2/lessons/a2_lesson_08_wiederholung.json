@@ -1,0 +1,40 @@
+{
+  "id": "a2_l08_review",
+  "title": "Wiederholung",
+  "level": "A2",
+  "week": 8,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Wie geht es dir?" },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Können Sie mir helfen?" },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Was kostet das?" },
+        { "id": "b", "label": "Gute Nacht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich kann das."
+    }
+  ]
+}

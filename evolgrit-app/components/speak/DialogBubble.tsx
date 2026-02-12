@@ -27,10 +27,6 @@ export function DialogBubble({ role, text, guides, active, completed }: Props) {
       padding={14}
       borderWidth={1}
       borderColor={border}
-      shadowColor={active ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.05)"}
-      shadowOpacity={1}
-      shadowRadius={active ? 14 : 10}
-      shadowOffset={{ width: 0, height: active ? 6 : 4 }}
       opacity={completed ? 0.92 : 1}
       gap="$2"
     >

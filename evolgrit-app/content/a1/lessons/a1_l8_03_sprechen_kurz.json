@@ -1,0 +1,36 @@
+{
+  "id": "a1_l8_03_sprechen_kurz",
+  "title": "Sprechen: Kurz",
+  "level": "A1",
+  "week": 8,
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hallo, ich heiße Anna."
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Können Sie mir helfen?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die passende Antwort",
+      "choices": [
+        { "id": "a", "label": "Bitte langsam." },
+        { "id": "b", "label": "Bitte teuer." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst kurze Sätze sprechen.",
+        "Du kannst um langsames Sprechen bitten."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

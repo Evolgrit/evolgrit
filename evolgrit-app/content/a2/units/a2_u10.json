@@ -1,0 +1,31 @@
+{
+  "id": "a2_u10",
+  "title": "Gesundheit & Beschwerden",
+  "subtitle": "Symptome beschreiben",
+  "items": [
+    {
+      "id": "a2_u10_l01",
+      "title": "Lektion 1 · Gesundheit & Beschwerden",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u10_l02",
+      "title": "Lektion 2 · Symptome beschreiben",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u10_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u10_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

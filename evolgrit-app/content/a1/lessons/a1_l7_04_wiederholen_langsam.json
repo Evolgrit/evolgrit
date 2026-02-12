@@ -1,0 +1,60 @@
+{
+  "id": "a1_l7_04_wiederholen_langsam",
+  "title": "Wiederholen & Langsam",
+  "level": "A1",
+  "week": 7,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Bitte langsamer." },
+        { "id": "b", "label": "Bitte teurer." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Bitte langsamer."
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Können Sie das wiederholen?" },
+        { "id": "b", "label": "Können Sie das verkaufen?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich verstehe ____.",
+      "choices": [
+        { "id": "a", "label": "nicht" },
+        { "id": "b", "label": "ja" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Alles klar?",
+      "choices": [
+        { "id": "a", "label": "Nein. Bitte wiederholen." },
+        { "id": "b", "label": "Ja, danke." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst um Wiederholung bitten.",
+        "Du kannst um langsames Sprechen bitten."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

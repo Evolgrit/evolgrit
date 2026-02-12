@@ -1,0 +1,31 @@
+{
+  "id": "a1_u06",
+  "title": "Familie",
+  "subtitle": "Personen und Beziehungen",
+  "items": [
+    {
+      "id": "a1_u06_l01",
+      "title": "Familie",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u06_l02",
+      "title": "Personen und Beziehungen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u06_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u06_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

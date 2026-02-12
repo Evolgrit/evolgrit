@@ -1,0 +1,192 @@
+{
+  "id": "b2_01_opinion",
+  "level": "B2",
+  "title": "Lesson 1 · Meinung äußern",
+  "subtitle": "klar, respektvoll, strukturiert",
+  "steps": [
+    {
+      "id": "s1",
+      "type": "choice",
+      "title": "Warm-up",
+      "prompt": "Welche Formulierung klingt am sachlichsten?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Das ist kompletter Quatsch."
+        },
+        {
+          "id": "b",
+          "label": "Ich sehe das anders, weil …"
+        },
+        {
+          "id": "c",
+          "label": "Du hast keine Ahnung."
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "s2",
+      "type": "dialogue_choice",
+      "title": "Zustimmen + ergänzen",
+      "scenario": "Team-Meeting",
+      "turns": [
+        {
+          "speaker": "Mentor",
+          "text": "Sollen wir die Deadline um eine Woche verschieben?"
+        },
+        {
+          "speaker": "Mentor",
+          "text": "Sag erst, ob du zustimmst – und begründe kurz."
+        }
+      ],
+      "question": "Wähle die beste Antwort:",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ja, ist mir egal.",
+          "feedback": "Zu locker und ohne Begründung."
+        },
+        {
+          "id": "b",
+          "label": "Ich stimme zu, weil wir dann die Qualität sichern können.",
+          "feedback": "Sehr gut: Zustimmung + klarer Grund."
+        },
+        {
+          "id": "c",
+          "label": "Nein. Punkt.",
+          "feedback": "Zu hart, ohne Erklärung."
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "s3",
+      "type": "cloze_choice",
+      "title": "Begründung bauen",
+      "prompt": "Ergänze das fehlende Wort:",
+      "sentence": "Ich stimme zu, ___ wir dann mehr Zeit für die Prüfung haben.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "weil"
+        },
+        {
+          "id": "b",
+          "label": "trotzdem"
+        }
+      ],
+      "answer": "a",
+      "text": "Ich stimme zu, ___ wir dann mehr Zeit für die Prüfung haben."
+    },
+    {
+      "id": "s4",
+      "type": "word_build",
+      "title": "Struktur-Satz",
+      "prompt": "Baue einen guten B2-Satz.",
+      "target": "Meiner Meinung nach ist das sinnvoll, weil es langfristig Zeit spart.",
+      "tokens": [
+        "Meiner",
+        "Meinung",
+        "nach",
+        "ist",
+        "das",
+        "sinnvoll,",
+        "weil",
+        "es",
+        "langfristig",
+        "Zeit",
+        "spart."
+      ],
+      "text": "Meiner Meinung nach ist das ____ , weil es langfristig Zeit spart.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "sinnvoll"
+        },
+        {
+          "id": "b",
+          "label": "sinnlos"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "s5",
+      "type": "dialogue_choice",
+      "title": "Widersprechen (respektvoll)",
+      "scenario": "Team-Meeting",
+      "turns": [
+        {
+          "speaker": "Mentor",
+          "text": "Ich finde, wir brauchen keine Tests. Das kostet nur Zeit."
+        },
+        {
+          "speaker": "Mentor",
+          "text": "Wähle eine respektvolle Gegenposition."
+        }
+      ],
+      "question": "Wähle die beste Antwort:",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Das stimmt nicht.",
+          "feedback": "Zu kurz – ohne Begründung."
+        },
+        {
+          "id": "b",
+          "label": "Ich verstehe den Punkt, aber ohne Tests riskieren wir Fehler in der Produktion.",
+          "feedback": "Sehr gut: Verständnis + Gegenargument."
+        },
+        {
+          "id": "c",
+          "label": "Dann mach du das eben.",
+          "feedback": "Unprofessionell."
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "s6",
+      "type": "listen_repeat",
+      "title": "Sprich nach",
+      "prompt": "Sprich den Satz ruhig und klar.",
+      "targetText": "Ich verstehe den Punkt, aber ohne Tests riskieren wir Fehler in der Produktion.",
+      "locale": "de-DE",
+      "hint": "Tipp: Betone „aber“ und sprich „Produktion“ deutlich."
+    },
+    {
+      "id": "s7",
+      "type": "cloze_choice",
+      "title": "Höflich abschließen",
+      "prompt": "Wähle das passende Ende:",
+      "sentence": "Lass uns das kurz prüfen, ___ wir entscheiden.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "bevor"
+        },
+        {
+          "id": "b",
+          "label": "obwohl"
+        }
+      ],
+      "answer": "a",
+      "text": "Lass uns das kurz prüfen, ___ wir entscheiden."
+    },
+    {
+      "id": "s8",
+      "type": "summary",
+      "title": "Kurz-Fazit",
+      "bullets": [
+        "B2 heißt: ruhig bleiben, klar begründen, respektvoll widersprechen.",
+        "Stark ist: „Ich verstehe den Punkt, aber …“ + ein konkreter Grund.",
+        "Nutze Struktur: Meinung → Grund → Beispiel → Abschluss."
+      ],
+      "cta": {
+        "primaryLabel": "Weiter",
+        "secondaryLabel": "Nochmal üben"
+      }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "a1_l2_03_fragen_wo_ist",
+  "title": "Fragen: Wo ist …",
+  "level": "A1",
+  "week": 2,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Wo ist …?" },
+        { "id": "b", "label": "Wie geht’s?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Wo ist der ____?",
+      "choices": [
+        { "id": "a", "label": "Reis" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wo ist der Reis?"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "Kunde: Wo ist der Reis?",
+      "choices": [
+        { "id": "a", "label": "Dort drüben." },
+        { "id": "b", "label": "Gern geschehen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst nach einem Produkt fragen.",
+        "Du verstehst eine Wegangabe."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

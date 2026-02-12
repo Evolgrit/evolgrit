@@ -1,0 +1,81 @@
+{
+  "id": "job_pflege_live_10_uebergabe_struktur",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Übergabe strukturiert",
+  "subtitle": "Name · Zimmer · Problem · Maßnahme · Plan",
+  "durationMin": 6,
+  "tasks": [
+    "Sag Name + Zimmer",
+    "Sag Problem in 1 Satz",
+    "Sag Maßnahme",
+    "Sag Plan (was als Nächstes)"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Übergabe im Team. Fang an mit Name und Zimmer."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag: Patient + Zimmer.",
+      "suggestions": [
+        "Patient Müller, Zimmer 102.",
+        "Frau Novak, Zimmer 14.",
+        "Herr Petrenko, Zimmer 8."
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Sehr gut. Problem in einem Satz."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "1 Satz (z.B. Schmerzen/Fieber).",
+      "suggestions": [
+        "Starke Bauchschmerzen seit gestern Abend.",
+        "Fieber und Husten seit zwei Tagen.",
+        "Schwindel seit heute Morgen."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Welche Maßnahme hast du gemacht?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": [
+        "Wir haben die Werte gemessen.",
+        "Ich habe den Arzt informiert.",
+        "Ich habe dem Patienten Wasser gebracht."
+      ]
+    },
+    {
+      "id": "c4",
+      "role": "coach",
+      "text": "Und was ist der Plan für die nächste Schicht?"
+    },
+    {
+      "id": "u4",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": [
+        "Bitte weiter beobachten und bei Schmerzen melden.",
+        "Bitte Blutdruck später noch einmal messen.",
+        "Bitte den Arzt informieren, falls es schlimmer wird."
+      ]
+    },
+    {
+      "id": "c5",
+      "role": "coach",
+      "text": "Sehr gut. Das war klar und vollständig."
+    }
+  ]
+}

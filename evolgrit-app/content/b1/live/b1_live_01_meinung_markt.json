@@ -1,0 +1,198 @@
+{
+  "id": "b1_live_01_meinung_markt",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Meinung äußern: Auf dem Markt",
+  "subtitle": "Sicher sagen, was du willst – ruhig & klar",
+  "durationMin": 6,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "setting": {
+    "scene": "Wochenmarkt",
+    "context": "Du willst einkaufen, nach Preis fragen und deine Meinung sagen (zu teuer / passt / Alternative)."
+  },
+  "tasks": [
+    "Sag, was du suchst (Produkt + Menge).",
+    "Frag nach dem Preis und bitte um Wiederholung, wenn nötig.",
+    "Sag deine Meinung (zu teuer / fair / ich nehme es) und schließe freundlich ab."
+  ],
+  "difficultyNotes": {
+    "focus": [
+      "Höflich bitten (bitte, könnten Sie …)",
+      "Nachfragen/klären (Wie bitte? Können Sie das wiederholen?)",
+      "Meinung sachlich formulieren (Ich finde…, Mir scheint…, Für mich ist…) "
+    ],
+    "tone": "freundlich, ruhig, ohne Stress"
+  },
+  "tipSuggestionsGlobal": [
+    "Entschuldigung, könnten Sie mir kurz helfen?",
+    "Wie viel kostet das?",
+    "Könnten Sie das bitte wiederholen?",
+    "Das ist mir etwas zu teuer.",
+    "Haben Sie eine günstigere Alternative?",
+    "Ich nehme das, bitte."
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Wir sind auf dem Wochenmarkt. Sag mir kurz: Was suchst du heute?",
+      "goalHint": "Sag ein Produkt + Menge (z.B. Brot, Äpfel, Käse).",
+      "tipSuggestions": [
+        "Ich suche ein Brot.",
+        "Ich hätte gern zwei Äpfel, bitte.",
+        "Ich suche etwas Käse, ungefähr 200 Gramm."
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Gut. Sag es noch höflicher – mit „hätte gern“ oder „könnte ich bitte…“.",
+      "goalHint": "Höflich formulieren.",
+      "tipSuggestions": [
+        "Ich hätte gern ein Brot, bitte.",
+        "Könnte ich bitte zwei Äpfel bekommen?",
+        "Ich hätte gern ungefähr 200 Gramm Käse."
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Super. Frag jetzt nach dem Preis.",
+      "goalHint": "Preisfrage stellen.",
+      "tipSuggestions": [
+        "Was kostet das?",
+        "Wie viel kostet das Brot?",
+        "Was kostet 200 Gramm Käse?"
+      ]
+    },
+    {
+      "id": "t04",
+      "text": "Ich sage dir einen Preis: „Drei Euro fünfzig.“ Bitte frag nach, weil du es nicht ganz verstanden hast.",
+      "goalHint": "Nachfragen / Wiederholung.",
+      "tipSuggestions": [
+        "Wie bitte? Können Sie das wiederholen?",
+        "Entschuldigung, ich habe es nicht verstanden. Wie viel war das?",
+        "Könnten Sie den Preis bitte noch einmal sagen?"
+      ]
+    },
+    {
+      "id": "t05",
+      "text": "Jetzt sag: Du findest den Preis etwas hoch, aber bleib freundlich.",
+      "goalHint": "Meinung (zu teuer) höflich ausdrücken.",
+      "tipSuggestions": [
+        "Das ist mir etwas zu teuer.",
+        "Ich finde den Preis ein bisschen hoch.",
+        "Für mich ist das gerade etwas teuer."
+      ]
+    },
+    {
+      "id": "t06",
+      "text": "Sehr gut. Frag nach einer günstigeren Alternative.",
+      "goalHint": "Alternative erfragen.",
+      "tipSuggestions": [
+        "Haben Sie etwas Günstigeres?",
+        "Gibt es eine günstigere Alternative?",
+        "Haben Sie vielleicht ein kleineres Stück, das weniger kostet?"
+      ]
+    },
+    {
+      "id": "t07",
+      "text": "Ich biete dir eine Alternative an. Sag, dass das besser passt und du es nehmen möchtest.",
+      "goalHint": "Zustimmen + Entscheidung.",
+      "tipSuggestions": [
+        "Ja, das passt besser. Ich nehme das, bitte.",
+        "Okay, das klingt gut. Dann nehme ich das.",
+        "Danke, das ist besser. Ich würde das nehmen."
+      ]
+    },
+    {
+      "id": "t08",
+      "text": "Sag jetzt noch kurz die Menge oder Variante, damit es klar ist.",
+      "goalHint": "Menge/Variante wiederholen.",
+      "tipSuggestions": [
+        "Dann nehme ich 200 Gramm, bitte.",
+        "Ich nehme davon zwei Stück.",
+        "Ich nehme eine kleine Portion, bitte."
+      ]
+    },
+    {
+      "id": "t09",
+      "text": "Perfekt. Frag, ob du mit Karte zahlen kannst.",
+      "goalHint": "Zahlungsmethode erfragen.",
+      "tipSuggestions": [
+        "Kann ich mit Karte zahlen?",
+        "Nehmen Sie Kartenzahlung?",
+        "Kann ich auch kontaktlos bezahlen?"
+      ]
+    },
+    {
+      "id": "t10",
+      "text": "Ich sage: „Nur bar.“ Sag ruhig: Das ist okay, und frag nach dem nächsten Geldautomaten.",
+      "goalHint": "Ruhig reagieren + nach Weg fragen.",
+      "tipSuggestions": [
+        "Okay, kein Problem. Wo ist der nächste Geldautomat?",
+        "Alles klar. Wissen Sie, wo ich Geld abheben kann?",
+        "Gut, danke. Wo finde ich einen Geldautomaten in der Nähe?"
+      ]
+    },
+    {
+      "id": "t11",
+      "text": "Sag jetzt einen kurzen Abschlusssatz: Danke und schönen Tag wünschen.",
+      "goalHint": "Freundlich abschließen.",
+      "tipSuggestions": [
+        "Danke! Einen schönen Tag noch.",
+        "Vielen Dank. Schönen Tag!",
+        "Danke schön, auf Wiedersehen."
+      ]
+    },
+    {
+      "id": "t12",
+      "text": "Mini-Reflexion: Sag in einem Satz, warum du den Preis zuerst zu hoch fandest (ruhig, ohne Drama).",
+      "goalHint": "Begründung geben (B1).",
+      "tipSuggestions": [
+        "Ich fand es etwas teuer, weil ich nur ein kleines Budget habe.",
+        "Für mich war es hoch, weil ich heute sparen möchte.",
+        "Ich dachte, es ist teuer, weil ich weniger brauche."
+      ]
+    },
+    {
+      "id": "t13",
+      "text": "Sehr gut. Sag jetzt einen Alternativsatz mit „Mir scheint…“ oder „Ich habe den Eindruck…“.",
+      "goalHint": "B1-Formulierung (Eindruck/Meinung).",
+      "tipSuggestions": [
+        "Mir scheint der Preis etwas hoch.",
+        "Ich habe den Eindruck, das ist eher teuer.",
+        "Für mich wirkt der Preis ziemlich hoch."
+      ]
+    },
+    {
+      "id": "t14",
+      "text": "Letzter Übungssatz: Bitte um Wiederholung – aber diesmal kurz und klar.",
+      "goalHint": "Kurze Reparaturfrage.",
+      "tipSuggestions": [
+        "Wie bitte?",
+        "Noch einmal, bitte.",
+        "Können Sie das wiederholen?"
+      ]
+    },
+    {
+      "id": "t15",
+      "text": "Super gemacht. Sag zum Schluss: „Ich komme später wieder“ – freundlich.",
+      "goalHint": "Abschluss + Plan.",
+      "tipSuggestions": [
+        "Danke, ich komme später wieder.",
+        "Vielen Dank, ich komme später noch einmal vorbei.",
+        "Danke! Ich schaue später nochmal vorbei."
+      ]
+    }
+  ],
+  "endSummary": {
+    "title": "Gute Arbeit",
+    "bullets": [
+      "Du hast höflich bestellt und nach dem Preis gefragt.",
+      "Du hast ruhig nachgefragt, als du etwas nicht verstanden hast.",
+      "Du hast deine Meinung sachlich geäußert und eine Alternative erfragt."
+    ],
+    "nextSuggestion": "Wenn du willst, wiederholen wir das gleiche Szenario mit einem anderen Produkt."
+  }
+}

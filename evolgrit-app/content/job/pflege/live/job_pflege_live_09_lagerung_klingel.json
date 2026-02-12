@@ -1,0 +1,31 @@
+{
+  "id": "job_pflege_live_09_lagerung_klingel",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Lagerung & Klingel",
+  "subtitle": "Bett sicher einstellen",
+  "durationMin": 4,
+  "tasks": [
+    "Sicherheitscheck am Bett",
+    "Klingel erreichbar prüfen",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Was prüfen Sie am Bett, damit es sicher ist?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Nennen Sie ein Sicherheitsdetail.",
+      "suggestions": ["Klingel erreichbar.", "Bremse drin."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Sehr gut. Sicherheit geprüft."
+    }
+  ]
+}

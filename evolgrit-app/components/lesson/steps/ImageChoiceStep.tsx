@@ -3,7 +3,7 @@ import { LayoutChangeEvent, Pressable } from "react-native";
 import { YStack, Text, XStack, Image } from "tamagui";
 import { lessonType } from "@/design/typography";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
-import { LESSON_IMAGES } from "../../../assets/lesson-images";
+import { getLessonImage } from "../../../assets/lesson-images";
 
 type Option = { id: string; label: string; imageKey?: string | null; correct?: boolean };
 
@@ -55,16 +55,6 @@ export function ImageChoiceStep({
     };
   }, [containerW, gap]);
 
-  const getImageSource = (key?: string | null) => {
-    if (!key) return null;
-    const source = LESSON_IMAGES[key];
-    if (!source) {
-      console.warn(`[lesson] Missing image for key=${key}`);
-      return null;
-    }
-    return source;
-  };
-
   return (
     <YStack gap={outerGapY} flex={1} alignItems="center" paddingHorizontal={sidePad} backgroundColor="transparent">
       <Text {...lessonType.prompt} color="$text" textAlign="center">
@@ -77,7 +67,7 @@ export function ImageChoiceStep({
           const isCorrect = !!opt.correct;
           const bg = isSelected && reveal ? (isCorrect ? successBg : dangerBg) : "$background";
           const border = isSelected && reveal ? (isCorrect ? successBorder : dangerBorder) : "transparent";
-          const source = getImageSource(opt.imageKey);
+          const source = getLessonImage(opt.imageKey);
 
           return (
             <Animated.View key={opt.id} style={shakeStyle}>
@@ -97,15 +87,7 @@ export function ImageChoiceStep({
                   overflow="hidden"
                 >
                   <YStack height={imageH} backgroundColor="$color2">
-                    {source ? (
-                      <Image source={source} width="100%" height="100%" resizeMode="cover" />
-                    ) : (
-                      <YStack flex={1} alignItems="center" justifyContent="center" backgroundColor="$color3">
-                        <Text color="$muted" fontSize={lessonType.muted.fontSize} lineHeight={lessonType.muted.lineHeight} fontWeight={lessonType.muted.fontWeight}>
-                          Bild fehlt
-                        </Text>
-                      </YStack>
-                    )}
+                    <Image source={source} width="100%" height="100%" resizeMode="cover" />
                   </YStack>
                     <YStack
                       minHeight={52}

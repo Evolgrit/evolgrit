@@ -1,0 +1,74 @@
+{
+  "meta": { "name": "evolgrit_light_v1", "mode": "light", "grid": 8 },
+  "colors": {
+    "bg": "#FFFFFF",
+    "bgApp": "#FFFFFF",
+    "bgSurface": "#FFFFFF",
+    "bgSurfaceMuted": "#F6F7F8",
+    "bgInput": "#EEF0F3",
+    "card": "#FFFFFF",
+    "cardSubtle": "#F6F7F8",
+    "text": "#111111",
+    "textSecondary": "#6B7280",
+    "textHint": "#9CA3AF",
+    "disabled": "#D1D5DB",
+    "danger": "#EB5757",
+    "success": "#22C55E",
+    "successSoft": "#EAF8F0",
+    "info": "#3B82F6",
+    "infoSoft": "#EAF3FF",
+    "gray2": "#FFFFFF",
+    "gray6": "#9CA3AF",
+    "a1": "#4A90E2",
+    "a2": "#4CAF50",
+    "b1": "#F5C542",
+    "b2": "#F2994A",
+    "job": "#8E44AD",
+    "focus": "#2D9CDB",
+    "bubbleCoach": "#FFFFFF",
+    "bubbleUser": "#FFFFFF",
+
+    "surfaceLanguage": "#DFF3EE",
+    "surfaceLife": "#E9DDF7",
+    "surfaceJob": "#F7E8B8",
+    "surfaceFocus": "#EAF6FB",
+    "ringIdle": "#D1D5DB",
+    "ringCoach": "#2D9CDB",
+    "ringRec": "#4CAF50",
+    "ringError": "#EB5757"
+  },
+  "gradients": {
+    "a1Soft": ["#EAF3FF", "#FFFFFF"],
+    "a2Soft": ["#ECF8F1", "#FFFFFF"],
+    "b1Soft": ["#FFF7DF", "#FFFFFF"],
+    "b2Soft": ["#FFF1E6", "#FFFFFF"],
+    "jobSoft": ["#F4ECF7", "#FFFFFF"],
+    "focusSoft": ["#EAF6FB", "#FFFFFF"]
+  },
+  "radii": {
+    "sm": 12,
+    "md": 18,
+    "lg": 26,
+    "xl": 32
+  },
+  "space": {
+    "1": 8,
+    "2": 16,
+    "3": 24,
+    "4": 32
+  },
+  "sizes": {
+    "buttonH": 48,
+    "iconBtn": 44,
+    "tabBarH": 72
+  },
+  "shadow": {
+    "soft": {
+      "shadowColor": "#000000",
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+      "shadowOffset": { "width": 0, "height": 0 },
+      "elevation": 0
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "a1_u03_l02",
+  "level": "A1",
+  "unitId": "a1_u03",
+  "title": "Das ist … / Wer ist das?",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Das ist Anna."
+        },
+        {
+          "id": "b",
+          "label": "Das ist kalt."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wer ist das?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Das ist mein ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Freund"
+        },
+        {
+          "id": "b",
+          "label": "Buch"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst andere vorstellen."
+    }
+  ]
+}

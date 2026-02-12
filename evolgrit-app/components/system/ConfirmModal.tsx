@@ -40,13 +40,19 @@ export function ConfirmModal({
           enterStyle={{ scale: 0.96, opacity: 0 }}
           exitStyle={{ scale: 0.96, opacity: 0 }}
           backgroundColor="$background"
-          borderRadius="$6"
+          borderRadius={20}
           padding="$4"
           gap="$3"
           width="90%"
           maxWidth={420}
           alignSelf="center"
           bordered={false}
+          elevate={0}
+          elevation={0}
+          shadowColor="transparent"
+          shadowOpacity={0}
+          shadowRadius={0}
+          shadowOffset={{ width: 0, height: 0 }}
         >
           <YStack gap="$3">
             <XStack justifyContent="space-between" alignItems="flex-start" gap="$2">

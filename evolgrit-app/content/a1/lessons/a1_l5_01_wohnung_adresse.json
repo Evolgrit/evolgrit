@@ -1,0 +1,60 @@
+{
+  "id": "a1_l5_01_wohnung_adresse",
+  "title": "Wohnung & Adresse",
+  "level": "A1",
+  "week": 5,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Wo wohnst du?" },
+        { "id": "b", "label": "Wie viel kostet das?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich wohne in Berlin."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich wohne in ____.",
+      "choices": [
+        { "id": "a", "label": "Berlin" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Meine Adresse ist …" },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wo wohnst du?",
+      "choices": [
+        { "id": "a", "label": "Ich wohne in Berlin." },
+        { "id": "b", "label": "Ich brauche Brot." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst sagen, wo du wohnst.",
+        "Du kannst nach der Adresse fragen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

@@ -152,10 +152,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   shadowWrap: {
-    shadowColor: "#111827",
-    shadowOpacity: 0.08,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 8 },
   },
   bar: {
     height: 68,
@@ -163,10 +159,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: BORDER,
-    shadowColor: "#111827",
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 6 },
   },
   capsule: {
     position: "absolute",

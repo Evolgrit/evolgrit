@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m12_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M12 · Satzbau",
+  "subtitle": "Prioritaeten benennen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich setze klare Prioritaeten.",
+      "tokens": ["Ich", "setze", "klare", "Prioritaeten", "."],
+      "answer": ["Ich", "setze", "klare", "Prioritaeten", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich plane die Pause ein.",
+      "tokens": ["Ich", "plane", "die", "Pause", "ein", "."],
+      "answer": ["Ich", "plane", "die", "Pause", "ein", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Der Dienstplan ist klar.",
+      "tokens": ["Der", "Dienstplan", "ist", "klar", "."],
+      "answer": ["Der", "Dienstplan", "ist", "klar", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich arbeite die Aufgaben der Reihe nach.",
+      "tokens": ["Ich", "arbeite", "die", "Aufgaben", "der", "Reihe", "nach", "."],
+      "answer": ["Ich", "arbeite", "die", "Aufgaben", "der", "Reihe", "nach", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich bespreche den Ablauf.",
+      "tokens": ["Ich", "bespreche", "den", "Ablauf", "."],
+      "answer": ["Ich", "bespreche", "den", "Ablauf", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen Prioritaeten klar formulieren."
+    }
+  ]
+}

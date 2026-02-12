@@ -1,0 +1,51 @@
+{
+  "id": "a1_u06_q01",
+  "level": "A1",
+  "unitId": "a1_u06",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Das ist meine Schwester."
+        },
+        {
+          "id": "b",
+          "label": "Das ist mein Teller."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich habe einen Bruder."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Das ist mein ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Vater"
+        },
+        {
+          "id": "b",
+          "label": "Auto"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst über Familie sprechen."
+    }
+  ]
+}

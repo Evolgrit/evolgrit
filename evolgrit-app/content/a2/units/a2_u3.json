@@ -1,0 +1,19 @@
+{
+  "id": "a2_u3",
+  "title": "Unit 3 · Alltag",
+  "subtitle": "Termine und Arbeit",
+  "items": [
+    {
+      "id": "a2_l05_termine",
+      "title": "Lektion 5 · Termine",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_l06_arbeit_alltag",
+      "title": "Lektion 6 · Arbeit & Alltag",
+      "kind": "lesson",
+      "durationMin": 3
+    }
+  ]
+}

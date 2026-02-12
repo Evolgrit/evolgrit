@@ -1,0 +1,32 @@
+{
+  "id": "a2_l07_wohnung_probleme",
+  "title": "Wohnung: Probleme",
+  "level": "A2",
+  "week": 7,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Es ist kaputt." },
+        { "id": "b", "label": "Es ist teuer." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Der Wasserhahn ist ____.",
+      "choices": [
+        { "id": "a", "label": "kaputt" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Können Sie bitte helfen?"
+    }
+  ]
+}

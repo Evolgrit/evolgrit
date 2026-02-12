@@ -1,0 +1,55 @@
+{
+  "id": "a1_l1_03_begruessen",
+  "title": "Begrüßen",
+  "level": "A1",
+  "week": 1,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Welche Begrüßung passt am Morgen?",
+      "choices": [
+        { "id": "a", "label": "Guten Morgen", "imageKey": "a1_greeting_gutenmorgen_correct_01" },
+        { "id": "b", "label": "Guten Abend", "imageKey": "a1_greeting_gutenabend_correct_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Guten ____!",
+      "choices": [
+        { "id": "a", "label": "Tag" },
+        { "id": "b", "label": "Nacht" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Guten Tag!"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was sagst du abends?",
+      "choices": [
+        { "id": "a", "label": "Guten Abend" },
+        { "id": "b", "label": "Guten Morgen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Tschüss!"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kennst Begrüßungen für verschiedene Zeiten.",
+        "Du kannst dich verabschieden."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

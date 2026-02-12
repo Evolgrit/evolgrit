@@ -1,0 +1,23 @@
+{
+  "id": "a1_review_04",
+  "title": "Mini-Dialog + Speak-Repeat",
+  "level": "A1",
+  "week": 0,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wie heißt du?",
+      "choices": [
+        { "id": "a", "label": "Ich heiße Anna." },
+        { "id": "b", "label": "Ich komme aus Berlin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich heiße Anna."
+    }
+  ]
+}

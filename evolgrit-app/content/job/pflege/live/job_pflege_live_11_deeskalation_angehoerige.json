@@ -1,0 +1,53 @@
+{
+  "id": "job_pflege_live_11_deeskalation_angehoerige",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Deeskalation (Angehörige)",
+  "subtitle": "Ruhe bewahren und erklären",
+  "durationMin": 5,
+  "tasks": [
+    "Empathisch reagieren",
+    "Beruhigen",
+    "Nächsten Schritt nennen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Sagen Sie einen empathischen Satz."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Ein Satz reicht.",
+      "suggestions": ["Ich verstehe, dass Sie sich sorgen."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Wie beruhigen Sie die Situation?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz und ruhig.",
+      "suggestions": ["Wir kümmern uns jetzt darum."]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Was passiert als nächstes?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Kurz erklären.",
+      "suggestions": ["Ich messe jetzt die Werte und hole dann den Arzt."]
+    },
+    {
+      "id": "c4",
+      "role": "coach",
+      "text": "Sehr gut. Klar und ruhig erklärt."
+    }
+  ]
+}

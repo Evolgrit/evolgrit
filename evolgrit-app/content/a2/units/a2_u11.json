@@ -1,0 +1,31 @@
+{
+  "id": "a2_u11",
+  "title": "Vergangene Erlebnisse",
+  "subtitle": "Perfekt anwenden",
+  "items": [
+    {
+      "id": "a2_u11_l01",
+      "title": "Lektion 1 · Vergangene Erlebnisse",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u11_l02",
+      "title": "Lektion 2 · Perfekt anwenden",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u11_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u11_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

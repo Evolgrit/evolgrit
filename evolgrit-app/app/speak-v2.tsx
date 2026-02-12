@@ -69,6 +69,14 @@ export default function SpeakV2() {
         .replace(/^['\"„‚]+/, "")
         .replace(/['\"”’]+$/, "")
         .trim();
+      if (!cleanText) {
+        console.warn("[tts] missing text - skipping speak");
+        return;
+      }
+      if (cleanText.toLowerCase().includes("daniel")) {
+        console.warn("[tts] blocked debug phrase");
+        return;
+      }
       if (TTS_DEBUG) console.log("[tts] request", { rate, textPreview: cleanText.slice(0, 40) });
       const res = await getTtsBase64({ text: cleanText, rate });
       if (TTS_DEBUG) console.log("[tts] response ok", { base64Len: res.base64.length });

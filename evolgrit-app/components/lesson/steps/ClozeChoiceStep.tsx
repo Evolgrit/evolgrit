@@ -27,6 +27,16 @@ export function ClozeChoiceStep({
   const shakeStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shake.value }],
   }));
+  const rawText =
+    typeof text === "string"
+      ? text
+      : typeof prompt === "string"
+      ? prompt
+      : "";
+
+  if (!rawText) {
+    console.warn("[lesson-runner] cloze_choice missing text", { prompt, text });
+  }
 
   const triggerShake = () => {
     shake.value = 0;
@@ -38,13 +48,27 @@ export function ClozeChoiceStep({
     );
   };
 
+  if (!rawText) {
+    return (
+      <YStack gap="$3">
+        <Text fontSize="$6" fontWeight="600">
+          Schritt-Fehler im Inhalt
+        </Text>
+        <Text opacity={0.7}>
+          Diese Cloze-Aufgabe hat keinen Text. Bitte JSON prüfen.
+        </Text>
+        <SoftButton label="Weiter" onPress={() => onSelect("__skip__", true)} />
+      </YStack>
+    );
+  }
+
   return (
     <YStack gap="$3">
       <Text {...lessonType.section} color="$text">
         {prompt}
       </Text>
       <Text color="$muted" {...lessonType.muted} flexShrink={1} numberOfLines={3} ellipsizeMode="tail">
-        {text}
+        {rawText}
       </Text>
       <YStack gap="$2">
         {options.map((opt) => {

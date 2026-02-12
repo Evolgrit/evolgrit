@@ -1,0 +1,35 @@
+{
+  "id": "a2_u06_m01",
+  "level": "A2",
+  "unitId": "a2_u06",
+  "title": "Mini · Kurz",
+  "durationMin": 2,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wo ist die Post?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Apotheke ist neben dem Bahnhof."
+        },
+        {
+          "id": "b",
+          "label": "Die Apotheke ist neben dem Montag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Mini geschafft",
+      "text": "Du kannst Orte beschreiben."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "a1_l8_01_wiederholung",
+  "title": "Wiederholung",
+  "level": "A1",
+  "week": 8,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle das richtige Wort",
+      "choices": [
+        { "id": "a", "label": "Hallo" },
+        { "id": "b", "label": "Tschüss" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das richtige Wort",
+      "choices": [
+        { "id": "a", "label": "Danke" },
+        { "id": "b", "label": "Bitte langsam" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das passende Wort",
+      "choices": [
+        { "id": "a", "label": "Ja" },
+        { "id": "b", "label": "Nein" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich heiße ____.",
+      "choices": [
+        { "id": "a", "label": "Anna" },
+        { "id": "b", "label": "gehen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst wichtige Wörter wiederholen.",
+        "Du erkennst einfache Sätze."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

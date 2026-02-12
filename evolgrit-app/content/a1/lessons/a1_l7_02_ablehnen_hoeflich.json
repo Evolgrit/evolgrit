@@ -1,0 +1,60 @@
+{
+  "id": "a1_l7_02_ablehnen_hoeflich",
+  "title": "Höflich ablehnen",
+  "level": "A1",
+  "week": 7,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort passt?",
+      "choices": [
+        { "id": "a", "label": "Nein, danke." },
+        { "id": "b", "label": "Ja, bitte." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Nein, danke."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich kann ____.",
+      "choices": [
+        { "id": "a", "label": "nicht" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Später vielleicht." },
+        { "id": "b", "label": "Gestern vielleicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Kommst du mit?",
+      "choices": [
+        { "id": "a", "label": "Nein, danke. Später vielleicht." },
+        { "id": "b", "label": "Ja, sofort." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst höflich ablehnen.",
+        "Du kannst eine Alternative nennen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

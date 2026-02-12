@@ -1,0 +1,48 @@
+{
+  "level": "B1",
+  "mode": "live_dialogue",
+  "items": [
+    {
+      "id": "b1_live_01_meinung_markt",
+      "title": "Meinung äußern: Auf dem Markt",
+      "subtitle": "Sicher sagen, was du willst – ruhig & klar",
+      "durationMin": 6,
+      "coachName": "Lena"
+    },
+    {
+      "id": "b1_live_02_termin_verschieben",
+      "title": "Termin verschieben",
+      "subtitle": "Ruhig nachfragen, neuen Termin finden",
+      "durationMin": 4,
+      "coachName": "Lena"
+    },
+    {
+      "id": "b1_live_03_beschwerde_loesung",
+      "title": "Höflich reklamieren",
+      "subtitle": "Problem erklären, Lösung erbitten",
+      "durationMin": 4,
+      "coachName": "Lena"
+    },
+    {
+      "id": "pflege_live_01_handover",
+      "title": "Pflege: Übergabe",
+      "subtitle": "Kurz und klar übergeben",
+      "durationMin": 5,
+      "coachName": "Lena"
+    },
+    {
+      "id": "pflege_live_02_pain",
+      "title": "Pflege: Schmerzen abfragen",
+      "subtitle": "Ruhig nachfragen und dokumentieren",
+      "durationMin": 5,
+      "coachName": "Lena"
+    },
+    {
+      "id": "pflege_live_03_call_doctor",
+      "title": "Pflege: Arzt informieren",
+      "subtitle": "Kurz schildern und um Rückmeldung bitten",
+      "durationMin": 5,
+      "coachName": "Lena"
+    }
+  ]
+}

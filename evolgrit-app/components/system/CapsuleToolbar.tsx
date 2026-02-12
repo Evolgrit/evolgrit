@@ -35,10 +35,6 @@ export function CapsuleToolbar({
       alignItems="center"
       paddingHorizontal={px}
       gap={gap}
-      shadowColor="rgba(0,0,0,0.06)"
-      shadowOpacity={1}
-      shadowRadius={8}
-      shadowOffset={{ width: 0, height: 4 }}
       {...(style as any)}
     >
       {actions.map((a) => (

@@ -1,0 +1,27 @@
+{
+  "id": "b1_06_exam_sim_2",
+  "title": "Prüfungssimulation: Teil 2",
+  "level": "B1",
+  "week": 6,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich stimme dir zu." },
+        { "id": "b", "label": "Ich kaufe Deutsch." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich habe einen Vorschlag."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst kurz reagieren."
+    }
+  ]
+}

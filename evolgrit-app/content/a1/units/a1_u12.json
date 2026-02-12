@@ -1,0 +1,31 @@
+{
+  "id": "a1_u12",
+  "title": "Unterwegs",
+  "subtitle": "Bus, Bahn, Tickets",
+  "items": [
+    {
+      "id": "a1_u12_l01",
+      "title": "Unterwegs",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u12_l02",
+      "title": "Bus",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u12_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u12_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

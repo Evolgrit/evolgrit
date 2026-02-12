@@ -1,0 +1,32 @@
+{
+  "id": "a2_l06_arbeit_alltag",
+  "title": "Arbeit & Alltag",
+  "level": "A2",
+  "week": 6,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Bitte warten." },
+        { "id": "b", "label": "Bitte kommen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Bitte ____ Sie.",
+      "choices": [
+        { "id": "a", "label": "unterschreiben" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Bitte füllen Sie das Formular aus."
+    }
+  ]
+}

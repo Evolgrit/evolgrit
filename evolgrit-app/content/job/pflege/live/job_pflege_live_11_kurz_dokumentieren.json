@@ -1,0 +1,50 @@
+{
+  "id": "job_pflege_live_11_kurz_dokumentieren",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Kurz dokumentieren",
+  "subtitle": "1–2 Sätze, sachlich",
+  "durationMin": 5,
+  "tasks": [
+    "Dokumentiere kurz das Problem",
+    "Dokumentiere Maßnahme",
+    "Dokumentiere Ergebnis"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Schreib/sprech eine kurze Doku: Problem + Maßnahme. Fang an."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "1–2 Sätze, sachlich.",
+      "suggestions": [
+        "Patient klagt über Bauchschmerzen. Werte gemessen und Arzt informiert.",
+        "Patient hat Fieber. Wasser gegeben und Arzt informiert.",
+        "Patient ist schwindelig. Blutdruck gemessen und Patient gelagert."
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Sehr gut. Jetzt ergänze kurz das Ergebnis."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "1 Satz Ergebnis.",
+      "suggestions": [
+        "Schmerzen unverändert, Patient wird weiter beobachtet.",
+        "Zustand stabil, Kontrolle später wiederholen.",
+        "Patient fühlt sich etwas besser."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Perfekt. Kurz, klar, sachlich."
+    }
+  ]
+}

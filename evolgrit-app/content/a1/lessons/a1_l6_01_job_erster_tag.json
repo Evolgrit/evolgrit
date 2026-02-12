@@ -1,0 +1,60 @@
+{
+  "id": "a1_l6_01_job_erster_tag",
+  "title": "Erster Arbeitstag",
+  "level": "A1",
+  "week": 6,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Guten Morgen, ich bin neu hier." },
+        { "id": "b", "label": "Wo ist der Markt?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Guten Morgen, ich heiße Anna."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich bin ____ hier.",
+      "choices": [
+        { "id": "a", "label": "neu" },
+        { "id": "b", "label": "kalt" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Freut mich." },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wie heißt du?",
+      "choices": [
+        { "id": "a", "label": "Ich heiße Anna." },
+        { "id": "b", "label": "Ich brauche Brot." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst dich vorstellen.",
+        "Du kannst höflich begrüßen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

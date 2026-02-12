@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m10_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M10 · Satzbau",
+  "subtitle": "Grenzen klar sagen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Das gehoert nicht zu meiner Aufgabe.",
+      "tokens": ["Das", "gehoert", "nicht", "zu", "meiner", "Aufgabe", "."],
+      "answer": ["Das", "gehoert", "nicht", "zu", "meiner", "Aufgabe", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich brauche Ruecksprache.",
+      "tokens": ["Ich", "brauche", "Ruecksprache", "."],
+      "answer": ["Ich", "brauche", "Ruecksprache", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich hole die Dienstleitung.",
+      "tokens": ["Ich", "hole", "die", "Dienstleitung", "."],
+      "answer": ["Ich", "hole", "die", "Dienstleitung", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Bitte warten Sie kurz.",
+      "tokens": ["Bitte", "warten", "Sie", "kurz", "."],
+      "answer": ["Bitte", "warten", "Sie", "kurz", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich klaere das mit dem Arzt.",
+      "tokens": ["Ich", "klaere", "das", "mit", "dem", "Arzt", "."],
+      "answer": ["Ich", "klaere", "das", "mit", "dem", "Arzt", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen Grenzen klar formulieren."
+    }
+  ]
+}

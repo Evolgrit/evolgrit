@@ -61,10 +61,6 @@ export function GlassSlider({ value, onChange, disabled }: Props) {
               left: Math.max(0, knobX - 9),
               borderWidth: 1,
               borderColor: "rgba(0,0,0,0.08)",
-              shadowColor: "rgba(0,0,0,0.18)",
-              shadowOpacity: 1,
-              shadowRadius: 8,
-              shadowOffset: { width: 0, height: 4 },
             }}
           />
         </View>

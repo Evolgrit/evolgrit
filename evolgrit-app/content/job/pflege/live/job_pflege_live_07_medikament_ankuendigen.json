@@ -1,0 +1,37 @@
+{
+  "id": "job_pflege_live_07_medikament_ankuendigen",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Medikament ankündigen",
+  "subtitle": "ruhig erklären · einfache Sätze",
+  "durationMin": 5,
+  "tasks": [
+    "Sag: Ich bringe ein Medikament.",
+    "Sag: Bitte mit Wasser.",
+    "Sag: Danach kurz warten."
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Sag ruhig: Du bringst jetzt ein Medikament." },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": ["Ich bringe Ihnen jetzt ein Medikament.", "Sie bekommen jetzt ein Medikament.", "Ich gebe Ihnen jetzt Ihre Tablette."]
+    },
+    { "id": "c2", "role": "coach", "text": "Sehr gut. Sag: Bitte mit Wasser." },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz und freundlich.",
+      "suggestions": ["Bitte mit Wasser.", "Nehmen Sie es bitte mit Wasser.", "Trinken Sie bitte einen Schluck Wasser."]
+    },
+    { "id": "c3", "role": "coach", "text": "Sag: Danach warten wir kurz." },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": ["Danach warten wir kurz.", "Wir warten kurz, okay?", "Ich komme gleich wieder."]
+    },
+    { "id": "c4", "role": "coach", "text": "Perfekt. Ruhig, klar, freundlich – so fühlt sich der Patient sicher." }
+  ]
+}

@@ -10,10 +10,11 @@ export default function TabLayout() {
       }}
       tabBar={(props) => <AirbnbTabBar {...(props as any)} />}
     >
-      {/* Only these 4 tabs */}
+      {/* Tabs */}
       <Tabs.Screen name="home" options={{ title: "Home" }} />
       <Tabs.Screen name="learn" options={{ title: "Learn" }} />
       <Tabs.Screen name="speak" options={{ title: "Speak" }} />
+      <Tabs.Screen name="focus" options={{ title: "Focus" }} />
       <Tabs.Screen name="progress" options={{ title: "Progress" }} />
     </Tabs>
   );

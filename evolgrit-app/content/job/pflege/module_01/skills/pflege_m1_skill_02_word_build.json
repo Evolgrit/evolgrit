@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m1_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M1 · Satzbau",
+  "subtitle": "Sätze ruhig & klar bauen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Wie ____ Sie?",
+      "choices": [
+        { "id": "a", "label": "heißen" },
+        { "id": "b", "label": "wohnen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "In welchem ____ sind Sie?",
+      "choices": [
+        { "id": "a", "label": "Zimmer" },
+        { "id": "b", "label": "Garten" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Wo genau tut es ____?",
+      "choices": [
+        { "id": "a", "label": "weh" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Seit wann ____ Sie die Schmerzen?",
+      "choices": [
+        { "id": "a", "label": "haben" },
+        { "id": "b", "label": "sind" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Auf einer Skala von null bis ____. ",
+      "choices": [
+        { "id": "a", "label": "zehn" },
+        { "id": "b", "label": "hundert" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst die wichtigsten Pflege-Sätze korrekt bauen."
+    }
+  ]
+}

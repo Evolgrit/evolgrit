@@ -3,7 +3,7 @@ import { Pressable } from "react-native";
 import { Image, Stack, Text, YStack } from "tamagui";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { LESSON_IMAGES } from "../../../assets/lesson-images";
+import { getLessonImage } from "../../../assets/lesson-images";
 import { playTtsText } from "../../../lib/tts/playText";
 import { stopTts } from "../../../lib/tts/ttsPlayer";
 import { SoftButton } from "../../system/SoftButton";
@@ -59,10 +59,7 @@ export function ClozeAudioChoiceStep({
     }
   };
 
-  const source = imageKey ? LESSON_IMAGES[imageKey] : null;
-  if (imageKey && !source) {
-    console.warn(`[lesson] Missing image key ${imageKey}`);
-  }
+  const source = getLessonImage(imageKey);
 
   return (
     <YStack gap="$3" backgroundColor="$background">
@@ -91,26 +88,13 @@ export function ClozeAudioChoiceStep({
         </Pressable>
       ) : null}
 
-      {source ? (
-        <Stack
-          height={180}
-          borderRadius={18}
-          overflow="hidden"
-        >
-          <Image source={source} width="100%" height="100%" resizeMode="cover" />
-        </Stack>
-      ) : imageKey ? (
-        <Stack
-          height={180}
-          borderRadius={18}
-          overflow="hidden"
-          alignItems="center"
-          justifyContent="center"
-          backgroundColor="$color3"
-        >
-          <Text color="$muted">Bild fehlt</Text>
-        </Stack>
-      ) : null}
+      <Stack
+        height={180}
+        borderRadius={18}
+        overflow="hidden"
+      >
+        <Image source={source} width="100%" height="100%" resizeMode="cover" />
+      </Stack>
 
       <YStack gap="$2" padding="$3" backgroundColor="$background" borderRadius="$5">
         <Text color="$text" fontSize={18} fontWeight="800" textAlign="center">

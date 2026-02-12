@@ -1,0 +1,31 @@
+{
+  "id": "a1_u03",
+  "title": "Andere vorstellen",
+  "subtitle": "Das ist … / Wer ist das?",
+  "items": [
+    {
+      "id": "a1_u03_l01",
+      "title": "Andere vorstellen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u03_l02",
+      "title": "Das ist … / Wer ist das?",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u03_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u03_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

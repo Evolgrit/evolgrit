@@ -1,0 +1,31 @@
+{
+  "id": "a2_u07",
+  "title": "Personen & Neuigkeiten",
+  "subtitle": "Informationen teilen",
+  "items": [
+    {
+      "id": "a2_u07_l01",
+      "title": "Lektion 1 · Personen & Neuigkeiten",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u07_l02",
+      "title": "Lektion 2 · Informationen teilen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u07_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u07_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

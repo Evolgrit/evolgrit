@@ -1,0 +1,51 @@
+{
+  "id": "a1_l3_03_weg_beschreiben",
+  "title": "Weg beschreiben",
+  "level": "A1",
+  "week": 3,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort passt?",
+      "choices": [
+        { "id": "a", "label": "Geradeaus." },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Baue das Wort",
+      "text": "links",
+      "choices": [
+        { "id": "a", "label": "links" },
+        { "id": "b", "label": "rechts" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Geradeaus und dann links."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wie komme ich zum Markt?",
+      "choices": [
+        { "id": "a", "label": "Geradeaus und dann links." },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst eine Richtung nennen.",
+        "Du kannst einen Weg beschreiben."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "a1_u19",
+  "title": "Behörden (leicht)",
+  "subtitle": "Termin, Dokumente, Fragen",
+  "items": [
+    {
+      "id": "a1_u19_l01",
+      "title": "Behörden (leicht)",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u19_l02",
+      "title": "Termin",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u19_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u19_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

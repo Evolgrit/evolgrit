@@ -1,0 +1,56 @@
+{
+  "id": "pflege_m3_skill_01_vocab",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M3 · Vokabeln",
+  "subtitle": "Medikamente & Zeiten",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Tablette",
+      "choices": [
+        { "id": "a", "label": "Tablette", "imageKey": "job_pflege_med_tablet_correct_01" },
+        { "id": "b", "label": "Tasse", "imageKey": "job_pflege_med_cup_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "morgens",
+      "choices": [
+        { "id": "a", "label": "morgens", "imageKey": "job_pflege_time_morning_correct_01" },
+        { "id": "b", "label": "abends", "imageKey": "job_pflege_time_evening_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Bitte nehmen Sie die Tablette mit Wasser.",
+      "text": "Bitte nehmen Sie die ____ mit Wasser.",
+      "choices": [
+        { "id": "a", "label": "Tablette" },
+        { "id": "b", "label": "Klingel" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Gibt es Allergien?",
+      "text": "Gibt es ____?",
+      "choices": [
+        { "id": "a", "label": "Allergien" },
+        { "id": "b", "label": "Zimmer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut!",
+      "text": "Du kennst die wichtigsten Wörter für Medikamente & Zeiten."
+    }
+  ]
+}

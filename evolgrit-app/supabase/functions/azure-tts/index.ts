@@ -16,7 +16,7 @@ type Body = {
   rate?: "normal" | "slow";
 };
 
-function json(status: number, body: unknown) {
+function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -33,64 +33,124 @@ function escapeXml(s: string) {
 }
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
-  if (req.method !== "POST") return json(405, { error: "Use POST" });
-
-  let body: Body;
+  let text = "";
+  let stage = "init";
+  let azureRegion = "";
+  let azureVoice = "";
   try {
-    body = await req.json();
-  } catch {
-    return json(400, { error: "Invalid JSON" });
+    if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+    if (req.method !== "POST") return json({ error: "Use POST" }, 405);
+
+    let body: Body;
+    try {
+      body = await req.json();
+    } catch {
+      return json({ error: "Invalid JSON" }, 400);
+    }
+
+    text = (body.text ?? "").trim();
+    if (!text) return json({ error: "Missing text" }, 400);
+    if (text.length > 800) return json({ error: "Text too long (max 800 chars)" }, 400);
+
+    const locale = (body.locale ?? "de-DE").trim();
+    const rate = body.rate ?? "normal";
+    azureVoice = (Deno.env.get("AZURE_SPEECH_VOICE")?.trim() || "de-DE-KatjaNeural");
+    const azureKey = Deno.env.get("AZURE_SPEECH_KEY")?.trim() ?? "";
+    azureRegion = Deno.env.get("AZURE_SPEECH_REGION")?.trim().toLowerCase() ?? "";
+
+    if (!azureKey || !azureRegion) {
+      return json(
+        {
+          error: "env_missing",
+          missing: { AZURE_SPEECH_KEY: !azureKey, AZURE_SPEECH_REGION: !azureRegion },
+        },
+        500
+      );
+    }
+
+    if (!/^[a-z0-9]+$/.test(azureRegion) || azureRegion.length > 32) {
+      return json({ error: "env_invalid_region", azureRegion }, 500);
+    }
+
+    const endpoint = `https://${azureRegion}.tts.speech.microsoft.com/cognitiveservices/v1`;
+    const ssmlRate = rate === "slow" ? "0.8" : "1.0";
+    const ssml =
+      `<speak version="1.0" xml:lang="${locale}">` +
+      `<voice name="${azureVoice}">` +
+      `<prosody rate="${ssmlRate}">${escapeXml(text)}</prosody>` +
+      `</voice></speak>`;
+
+    stage = "azure_request";
+    console.log(
+      "[azure-tts] endpoint",
+      endpoint,
+      "regionLen",
+      azureRegion.length,
+      "keyLen",
+      azureKey.length,
+      "voice",
+      azureVoice
+    );
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/ssml+xml",
+        "X-Microsoft-OutputFormat": "audio-16khz-32kbitrate-mono-mp3",
+        "Ocp-Apim-Subscription-Key": azureKey,
+        "User-Agent": "evolgrit-tts",
+      },
+      body: ssml,
+    });
+
+    if (!res.ok) {
+      stage = "azure_response";
+      const errText = await res.text().catch(() => "");
+      console.error("[azure-tts] fail", {
+        stage,
+        status: res.status,
+        region: azureRegion,
+        voice: azureVoice,
+        textLen: text.length,
+      });
+      return new Response(
+        JSON.stringify({
+          error: "azure-tts failed",
+          stage,
+          status: res.status,
+          details: errText.slice(0, 300),
+        }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    stage = "success";
+    const audioBytes = new Uint8Array(await res.arrayBuffer());
+    const b64 = btoa(String.fromCharCode(...audioBytes));
+
+    return json({
+      ok: true,
+      mime: "audio/mpeg",
+      base64: b64,
+      voice: azureVoice,
+      locale,
+      rate,
+    });
+  } catch (e) {
+    stage = "catch";
+    console.error("[azure-tts] fail", {
+      stage,
+      status: 500,
+      region: azureRegion,
+      voice: azureVoice,
+      textLen: text?.length ?? 0,
+    });
+    return new Response(
+      JSON.stringify({
+        error: "azure-tts failed",
+        stage,
+        message: String(e?.message ?? e),
+      }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
-
-  const text = (body.text ?? "").trim();
-  if (!text) return json(400, { error: "Missing text" });
-  if (text.length > 800) return json(400, { error: "Text too long (max 800 chars)" });
-
-  const locale = (body.locale ?? "de-DE").trim();
-  const rate = body.rate ?? "normal";
-  const voice =
-    (body.voice ?? Deno.env.get("AZURE_SPEECH_VOICE") ?? "de-DE-KatjaNeural").trim();
-
-  const azureKey = Deno.env.get("AZURE_SPEECH_KEY") ?? "";
-  const azureRegion = (Deno.env.get("AZURE_SPEECH_REGION") ?? "").trim();
-
-  if (!azureKey) return json(500, { error: "Missing AZURE_SPEECH_KEY" });
-  if (!azureRegion) return json(500, { error: "Missing AZURE_SPEECH_REGION" });
-
-  const ttsUrl = `https://${azureRegion}.tts.speech.microsoft.com/cognitiveservices/v1`;
-  const ssmlRate = rate === "slow" ? "0.8" : "1.0";
-  const ssml =
-    `<speak version="1.0" xml:lang="${locale}">` +
-    `<voice name="${voice}">` +
-    `<prosody rate="${ssmlRate}">${escapeXml(text)}</prosody>` +
-    `</voice></speak>`;
-
-  const res = await fetch(ttsUrl, {
-    method: "POST",
-    headers: {
-      "Ocp-Apim-Subscription-Key": azureKey,
-      "Content-Type": "application/ssml+xml",
-      "X-Microsoft-OutputFormat": "audio-16khz-32kbitrate-mono-mp3",
-      "User-Agent": "evolgrit-supabase-tts",
-    },
-    body: ssml,
-  });
-
-  if (!res.ok) {
-    const errText = await res.text().catch(() => "");
-    return json(502, { error: `Azure TTS failed: ${res.status} ${errText}` });
-  }
-
-  const audioBytes = new Uint8Array(await res.arrayBuffer());
-  const b64 = btoa(String.fromCharCode(...audioBytes));
-
-  return json(200, {
-    ok: true,
-    mime: "audio/mpeg",
-    base64: b64,
-    voice,
-    locale,
-    rate,
-  });
 });

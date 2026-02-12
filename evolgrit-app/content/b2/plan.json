@@ -1,0 +1,49 @@
+{
+  "level": "B2",
+  "title": "B2 – Sicher kommunizieren",
+  "subtitle": "3 Lektionen · klar und ruhig",
+  "units": [
+    {
+      "id": "b2_u1",
+      "title": "Unit 1 · Meinung",
+      "subtitle": "Sachlich argumentieren",
+      "items": [
+        {
+          "id": "b2_01_opinion",
+          "title": "Lesson 1 · Meinung aeussern",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b2_01_opinion" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "b2_u2",
+      "title": "Unit 2 · Struktur",
+      "subtitle": "Gespraech lenken",
+      "items": [
+        {
+          "id": "b2_02_structure",
+          "title": "Lesson 2 · Gespraech strukturieren",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b2_02_structure" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "b2_u3",
+      "title": "Unit 3 · Konflikt",
+      "subtitle": "Sachlich ansprechen",
+      "items": [
+        {
+          "id": "b2_03_conflict",
+          "title": "Lesson 3 · Konflikt sachlich ansprechen",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b2_03_conflict" },
+          "status": "available"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "a2_u13",
+  "title": "Beruf & Karriere",
+  "subtitle": "Arbeit erklären",
+  "items": [
+    {
+      "id": "a2_u13_l01",
+      "title": "Lektion 1 · Beruf & Karriere",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u13_l02",
+      "title": "Lektion 2 · Arbeit erklären",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u13_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u13_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

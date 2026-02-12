@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m3_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M3 · Mini-Dialog",
+  "subtitle": "Medikamente erklären",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Bitte nehmen Sie die Tablette.",
+      "choices": [
+        { "id": "a", "label": "Okay, mit Wasser." },
+        { "id": "b", "label": "Ich gehe nach Hause." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Bitte mit ____. ",
+      "choices": [
+        { "id": "a", "label": "Wasser" },
+        { "id": "b", "label": "Bett" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Gibt es Allergien?",
+      "choices": [
+        { "id": "a", "label": "Nein, keine Allergien." },
+        { "id": "b", "label": "Zimmer 12." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Keine ____.",
+      "choices": [
+        { "id": "a", "label": "Allergien" },
+        { "id": "b", "label": "Zimmer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was sagst du als nächstes?",
+      "choices": [
+        { "id": "a", "label": "Nehmen Sie es bitte morgens." },
+        { "id": "b", "label": "Wo ist der Garten?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Nehmen Sie es bitte morgens."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Du kannst Medikamente freundlich erklären."
+    }
+  ]
+}

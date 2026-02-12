@@ -1,0 +1,60 @@
+{
+  "id": "a1_l6_02_aufgaben_einfach",
+  "title": "Einfache Aufgaben",
+  "level": "A1",
+  "week": 6,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Bitte hier putzen." },
+        { "id": "b", "label": "Bitte hier schlafen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Bitte hier putzen."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Bitte ____.",
+      "choices": [
+        { "id": "a", "label": "kommen" },
+        { "id": "b", "label": "wohnen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort passt?",
+      "choices": [
+        { "id": "a", "label": "Ich mache das." },
+        { "id": "b", "label": "Ich weiß nicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Kannst du das machen?",
+      "choices": [
+        { "id": "a", "label": "Ja, ich mache das." },
+        { "id": "b", "label": "Nein, danke." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du verstehst einfache Aufgaben.",
+        "Du kannst zustimmen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

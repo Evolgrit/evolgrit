@@ -1,0 +1,97 @@
+{
+  "level": "A2",
+  "title": "A2 – Selbstständig im Alltag & Beruf",
+  "subtitle": "15 Einheiten · 3-Minuten Aufgaben",
+  "units": [
+    {
+      "id": "a2_u01",
+      "title": "Smalltalk & Vorlieben",
+      "subtitle": "persönliche Gespräche führen",
+      "count": 4
+    },
+    {
+      "id": "a2_u02",
+      "title": "Hobbys & Freizeit",
+      "subtitle": "Interessen beschreiben",
+      "count": 4
+    },
+    {
+      "id": "a2_u03",
+      "title": "Vergleichen & Beschreiben",
+      "subtitle": "größer, besser, anders",
+      "count": 4
+    },
+    {
+      "id": "a2_u04",
+      "title": "Im Geschäft & Café",
+      "subtitle": "nachfragen & reagieren",
+      "count": 4
+    },
+    {
+      "id": "a2_u05",
+      "title": "Im Restaurant",
+      "subtitle": "Bestellen & Rückfragen",
+      "count": 4
+    },
+    {
+      "id": "a2_u06",
+      "title": "Orte & Orientierung",
+      "subtitle": "wo sich etwas befindet",
+      "count": 4
+    },
+    {
+      "id": "a2_u07",
+      "title": "Personen & Neuigkeiten",
+      "subtitle": "Informationen teilen",
+      "count": 4
+    },
+    {
+      "id": "a2_u08",
+      "title": "Routinen & Gefühle",
+      "subtitle": "Alltag erklären",
+      "count": 4
+    },
+    {
+      "id": "a2_u09",
+      "title": "Anweisungen geben",
+      "subtitle": "Schritte erklären",
+      "count": 4
+    },
+    {
+      "id": "a2_u10",
+      "title": "Gesundheit & Beschwerden",
+      "subtitle": "Symptome beschreiben",
+      "count": 4
+    },
+    {
+      "id": "a2_u11",
+      "title": "Vergangene Erlebnisse",
+      "subtitle": "Perfekt anwenden",
+      "count": 4
+    },
+    {
+      "id": "a2_u12",
+      "title": "Ereignisse schildern",
+      "subtitle": "zusammenhängend erzählen",
+      "count": 4
+    },
+    {
+      "id": "a2_u13",
+      "title": "Beruf & Karriere",
+      "subtitle": "Arbeit erklären",
+      "count": 4
+    },
+    {
+      "id": "a2_u14",
+      "title": "Reise & Nachrichten",
+      "subtitle": "Informationen verstehen",
+      "count": 4
+    },
+    {
+      "id": "a2_u15",
+      "title": "Zukunft & Pläne",
+      "subtitle": "Pläne äußern",
+      "count": 4
+    }
+  ]
+}

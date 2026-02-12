@@ -1,0 +1,31 @@
+{
+  "id": "a1_u11",
+  "title": "Weg fragen",
+  "subtitle": "Links, rechts, geradeaus",
+  "items": [
+    {
+      "id": "a1_u11_l01",
+      "title": "Weg fragen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u11_l02",
+      "title": "Links",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u11_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u11_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

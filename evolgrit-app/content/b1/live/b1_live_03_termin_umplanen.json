@@ -1,0 +1,78 @@
+{
+  "level": "B1",
+  "mode": "live_dialogue",
+  "id": "b1_live_03_termin_umplanen",
+  "title": "Termin umplanen: Höflich & klar",
+  "subtitle": "Nachfragen, bestätigen, nächsten Vorschlag machen",
+  "durationMin": 4,
+  "coach": {
+    "id": "coach_anna",
+    "name": "Anna",
+    "tone": "ruhig"
+  },
+  "scenario": {
+    "location": "Telefon / E-Mail",
+    "context": "Du musst einen Termin verschieben und einen neuen vorschlagen."
+  },
+  "rules": {
+    "targetLanguage": "de",
+    "sourceLanguageHidden": true,
+    "maxTurns": 6
+  },
+  "steps": [
+    {
+      "id": "m1",
+      "role": "mentor",
+      "type": "prompt",
+      "text": "Du willst den Termin verschieben. Starte höflich."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "z.B.: \"Guten Tag, ich würde gern …\"",
+      "targetExamples": [
+        "Guten Tag, ich würde gern unseren Termin verschieben.",
+        "Hallo, ich muss unseren Termin leider verschieben."
+      ]
+    },
+    {
+      "id": "m2",
+      "role": "mentor",
+      "type": "coach",
+      "text": "Gut. Sag kurz warum – nur ein Satz."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "Kurz & neutral.",
+      "targetExamples": [
+        "Ich habe kurzfristig einen anderen Termin.",
+        "Ich bin an dem Tag krank."
+      ]
+    },
+    {
+      "id": "m3",
+      "role": "mentor",
+      "type": "coach",
+      "text": "Jetzt mach einen konkreten Vorschlag mit Datum oder Zeit."
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "z.B.: \"Geht es am … um …?\"",
+      "targetExamples": [
+        "Geht es am Donnerstag um 15 Uhr?",
+        "Hätten Sie morgen Vormittag Zeit?"
+      ]
+    },
+    {
+      "id": "m4",
+      "role": "mentor",
+      "type": "wrap",
+      "text": "Perfekt. Das klingt höflich und professionell."
+    }
+  ]
+}

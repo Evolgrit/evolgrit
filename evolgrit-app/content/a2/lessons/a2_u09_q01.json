@@ -1,0 +1,92 @@
+{
+  "id": "a2_u09_q01",
+  "level": "A2",
+  "unitId": "a2_u09",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Öffnen Sie die App."
+        },
+        {
+          "id": "b",
+          "label": "Öffnen Sie den Hunger."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gehen"
+        },
+        {
+          "id": "b",
+          "label": "gehe"
+        }
+      ],
+      "answer": "a",
+      "text": "Dann ___ Sie weiter."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Öffnen Sie die App."
+        },
+        {
+          "id": "b",
+          "label": "Öffnen Sie den Hunger."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gehen"
+        },
+        {
+          "id": "b",
+          "label": "gehe"
+        }
+      ],
+      "answer": "a",
+      "text": "Dann ___ Sie weiter."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Öffnen Sie die App."
+        },
+        {
+          "id": "b",
+          "label": "Öffnen Sie den Hunger."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Quiz fertig",
+      "text": "Gut gemacht!"
+    }
+  ]
+}

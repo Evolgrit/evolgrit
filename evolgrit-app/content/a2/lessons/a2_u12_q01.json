@@ -1,0 +1,92 @@
+{
+  "id": "a2_u12_q01",
+  "level": "A2",
+  "unitId": "a2_u12",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Zuerst bin ich nach Hause gegangen."
+        },
+        {
+          "id": "b",
+          "label": "Zuerst bin ich nach Haus gegangen gestern."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "bin"
+        },
+        {
+          "id": "b",
+          "label": "habe"
+        }
+      ],
+      "answer": "a",
+      "text": "Später ___ ich eingeschlafen."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Zuerst bin ich nach Hause gegangen."
+        },
+        {
+          "id": "b",
+          "label": "Zuerst bin ich nach Haus gegangen gestern."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "bin"
+        },
+        {
+          "id": "b",
+          "label": "habe"
+        }
+      ],
+      "answer": "a",
+      "text": "Später ___ ich eingeschlafen."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Zuerst bin ich nach Hause gegangen."
+        },
+        {
+          "id": "b",
+          "label": "Zuerst bin ich nach Haus gegangen gestern."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Quiz fertig",
+      "text": "Gut gemacht!"
+    }
+  ]
+}

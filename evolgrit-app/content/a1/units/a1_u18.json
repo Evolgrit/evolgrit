@@ -1,0 +1,31 @@
+{
+  "id": "a1_u18",
+  "title": "Post & DHL",
+  "subtitle": "Abholen, senden, Formulare",
+  "items": [
+    {
+      "id": "a1_u18_l01",
+      "title": "Post & DHL",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u18_l02",
+      "title": "Abholen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u18_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u18_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

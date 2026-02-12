@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_02_directness",
+  "title": "Direkt, aber nicht unfreundlich",
+  "subtitle": "So klingt Kommunikation in Deutschland",
+  "durationMin": 10,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Viele Menschen sprechen kurz und direkt. Das ist oft nicht unhöflich – es soll klar sein."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Frag klar: „Kannst du mir kurz helfen?“" },
+        { "kind": "do", "text": "Sag ehrlich: „Heute passt es mir nicht.“" },
+        { "kind": "dont", "text": "Zu lange erklären, ohne zur Antwort zu kommen." },
+        { "kind": "dont", "text": "Ironie nutzen, wenn du unsicher bist." }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Du willst etwas ablehnen. Was klingt ruhig & respektvoll?",
+      "options": [
+        "Heute klappt es leider nicht. Vielleicht morgen?",
+        "Nein. Lass mich in Ruhe."
+      ],
+      "correctIndex": 0,
+      "explain": "Kurz + Alternative wirkt höflich."
+    },
+    {
+      "type": "examples",
+      "title": "Hilfreiche Formulierungen",
+      "items": [
+        "Kannst du mir das bitte wiederholen?",
+        "Ich habe es nicht ganz verstanden.",
+        "So passt es für mich. Danke!"
+      ]
+    }
+  ]
+}

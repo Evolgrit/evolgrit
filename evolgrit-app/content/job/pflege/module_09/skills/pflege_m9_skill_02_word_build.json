@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m9_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M9 · Satzbau",
+  "subtitle": "Ruhig und professionell",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich bleibe ruhig und hoere zu.",
+      "tokens": ["Ich", "bleibe", "ruhig", "und", "hoere", "zu", "."],
+      "answer": ["Ich", "bleibe", "ruhig", "und", "hoere", "zu", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich stelle eine Rueckfrage.",
+      "tokens": ["Ich", "stelle", "eine", "Rueckfrage", "."],
+      "answer": ["Ich", "stelle", "eine", "Rueckfrage", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Bitte sprechen Sie langsam.",
+      "tokens": ["Bitte", "sprechen", "Sie", "langsam", "."],
+      "answer": ["Bitte", "sprechen", "Sie", "langsam", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich erklaere den naechsten Schritt.",
+      "tokens": ["Ich", "erklaere", "den", "naechsten", "Schritt", "."],
+      "answer": ["Ich", "erklaere", "den", "naechsten", "Schritt", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich dokumentiere das Gespraech.",
+      "tokens": ["Ich", "dokumentiere", "das", "Gespraech", "."],
+      "answer": ["Ich", "dokumentiere", "das", "Gespraech", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen ruhig und klar sprechen."
+    }
+  ]
+}

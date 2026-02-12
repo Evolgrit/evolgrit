@@ -1,0 +1,51 @@
+{
+  "id": "a2_u12_l01",
+  "level": "A2",
+  "unitId": "a2_u12",
+  "title": "Lektion 1 · Ereignisse schildern",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Zuerst bin ich nach Hause gegangen."
+        },
+        {
+          "id": "b",
+          "label": "Zuerst bin ich nach Haus gegangen gestern."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Danach habe ich gegessen."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Später ___ ich eingeschlafen.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "bin"
+        },
+        {
+          "id": "b",
+          "label": "habe"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Ereignisse erzählen."
+    }
+  ]
+}

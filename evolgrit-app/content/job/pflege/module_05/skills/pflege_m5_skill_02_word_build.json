@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m5_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M5 · Satzbau",
+  "subtitle": "Vitalwerte korrekt sagen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Der Blutdruck ist ____ zu 80.",
+      "choices": [
+        { "id": "a", "label": "120" },
+        { "id": "b", "label": "12" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Der Puls ist ____. ",
+      "choices": [
+        { "id": "a", "label": "72" },
+        { "id": "b", "label": "7" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Die Temperatur ist ____. ",
+      "choices": [
+        { "id": "a", "label": "36,8" },
+        { "id": "b", "label": "3,6" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "SpO₂ ist ____ Prozent.",
+      "choices": [
+        { "id": "a", "label": "96" },
+        { "id": "b", "label": "9" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Die Werte sind ____.",
+      "choices": [
+        { "id": "a", "label": "stabil" },
+        { "id": "b", "label": "später" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst Vitalwerte klar sagen."
+    }
+  ]
+}

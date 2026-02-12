@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_05",
+  "title": "Pflege · Modul 5",
+  "subtitle": "Vitalwerte (Blutdruck, Puls, Temperatur, SpO₂)",
+  "durationMin": 14,
+  "outcomes": [
+    "Blutdruck, Puls, Temperatur und SpO₂ sicher abfragen",
+    "Auffällige Werte erkennen und benennen",
+    "Kurz dokumentieren und weitergeben"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_04_vital_bp_puls",
+    "job_pflege_live_05_vital_temp_spo2",
+    "job_pflege_live_06_vital_auffaellig"
+  ]
+}

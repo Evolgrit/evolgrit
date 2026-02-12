@@ -1,0 +1,78 @@
+{
+  "level": "B1",
+  "mode": "live_dialogue",
+  "id": "b1_live_02_problem_job",
+  "title": "Problem im Job: Ruhig erklären",
+  "subtitle": "Sachlich bleiben, Lösung vorschlagen",
+  "durationMin": 5,
+  "coach": {
+    "id": "coach_anna",
+    "name": "Anna",
+    "tone": "ruhig"
+  },
+  "scenario": {
+    "location": "Arbeitsplatz",
+    "context": "Du erklärst ein Problem und schlägst eine Lösung vor."
+  },
+  "rules": {
+    "targetLanguage": "de",
+    "sourceLanguageHidden": true,
+    "maxTurns": 6
+  },
+  "steps": [
+    {
+      "id": "m1",
+      "role": "mentor",
+      "type": "prompt",
+      "text": "Okay. Erklär mir kurz: Was ist das Problem?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "z.B.: \"Ich habe ein Problem mit ...\"",
+      "targetExamples": [
+        "Ich habe ein Problem mit der Lieferung.",
+        "Ich komme heute nicht rechtzeitig, weil …"
+      ]
+    },
+    {
+      "id": "m2",
+      "role": "mentor",
+      "type": "coach",
+      "text": "Gut. Sag es noch etwas genauer – aber ruhig. Was ist passiert?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "2–3 Sätze. Fakten, keine Emotion.",
+      "targetExamples": [
+        "Die Lieferung ist nicht angekommen, und wir können nicht weiterarbeiten.",
+        "Ich habe die Datei nicht erhalten, deshalb kann ich es nicht prüfen."
+      ]
+    },
+    {
+      "id": "m3",
+      "role": "mentor",
+      "type": "coach",
+      "text": "Sehr gut. Jetzt mach einen Lösungsvorschlag: Was können wir tun?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "type": "free_speak",
+      "hint": "z.B.: \"Wir könnten …\" / \"Ich schlage vor …\"",
+      "targetExamples": [
+        "Ich schlage vor, wir rufen den Lieferanten an und fragen nach.",
+        "Wir könnten eine Ersatzlösung nutzen und morgen nachliefern."
+      ]
+    },
+    {
+      "id": "m4",
+      "role": "mentor",
+      "type": "wrap",
+      "text": "Stark. Du klingst ruhig und klar. Wenn du willst, sag es noch einmal in einem Satz."
+    }
+  ]
+}

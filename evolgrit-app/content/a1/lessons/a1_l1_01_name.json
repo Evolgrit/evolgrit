@@ -1,0 +1,76 @@
+{
+  "id": "a1_l1_01_name",
+  "title": "Sich vorstellen: Name",
+  "level": "A1",
+  "week": 1,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Wähle die passende Begrüßung.",
+      "ttsText": "Hallo",
+      "choices": [
+        { "id": "a", "label": "Hallo", "imageKey": "a1_greeting_hallo_correct_02" },
+        { "id": "b", "label": "Guten Abend", "imageKey": "a1_greeting_gutenabend_correct_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "____, ich heiße Anna.",
+      "choices": [
+        { "id": "a", "label": "Hallo" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hallo, ich heiße Anna."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wie heißt du?",
+      "choices": [
+        { "id": "a", "label": "Ich heiße ..." },
+        { "id": "b", "label": "Ich komme aus ..." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich heiße ____.",
+      "choices": [
+        { "id": "a", "label": "Anna" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich heiße Maria."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was sagst du?",
+      "text": "Mentor: Hallo, ich heiße Anna.",
+      "choices": [
+        { "id": "a", "label": "Hallo, ich heiße Ben." },
+        { "id": "b", "label": "Ich komme aus Berlin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst dich vorstellen.",
+        "Du kannst nach dem Namen fragen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

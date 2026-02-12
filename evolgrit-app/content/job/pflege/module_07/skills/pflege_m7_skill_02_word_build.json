@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m7_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M7 · Satzbau",
+  "subtitle": "Melden und dokumentieren",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich melde den Vorfall sofort.",
+      "tokens": ["Ich", "melde", "den", "Vorfall", "sofort", "."],
+      "answer": ["Ich", "melde", "den", "Vorfall", "sofort", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Bitte informieren Sie die Dienstleitung.",
+      "tokens": ["Bitte", "informieren", "Sie", "die", "Dienstleitung", "."],
+      "answer": ["Bitte", "informieren", "Sie", "die", "Dienstleitung", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich dokumentiere die Beobachtung.",
+      "tokens": ["Ich", "dokumentiere", "die", "Beobachtung", "."],
+      "answer": ["Ich", "dokumentiere", "die", "Beobachtung", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Der Arzt ist informiert.",
+      "tokens": ["Der", "Arzt", "ist", "informiert", "."],
+      "answer": ["Der", "Arzt", "ist", "informiert", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich gebe die Information weiter.",
+      "tokens": ["Ich", "gebe", "die", "Information", "weiter", "."],
+      "answer": ["Ich", "gebe", "die", "Information", "weiter", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen Meldungen klar formulieren."
+    }
+  ]
+}

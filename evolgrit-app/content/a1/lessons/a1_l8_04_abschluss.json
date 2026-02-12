@@ -1,0 +1,31 @@
+{
+  "id": "a1_l8_04_abschluss",
+  "title": "Abschluss",
+  "level": "A1",
+  "week": 8,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich verstehe Deutsch." },
+        { "id": "b", "label": "Ich kaufe Deutsch." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich lerne weiter." },
+        { "id": "b", "label": "Ich gehe nicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Super! Du hast A1 begonnen. Du kannst jetzt einfache Gespräche führen."
+    }
+  ]
+}

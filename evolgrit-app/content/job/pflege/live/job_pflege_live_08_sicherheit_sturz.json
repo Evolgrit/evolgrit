@@ -1,0 +1,31 @@
+{
+  "id": "job_pflege_live_08_sicherheit_sturz",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Sturzprävention",
+  "subtitle": "Sicher aufstehen lassen",
+  "durationMin": 4,
+  "tasks": [
+    "Sicheres Aufstehen anleiten",
+    "Hilfe anbieten",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Was sagen Sie, damit der Patient sicher aufsteht?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sagen Sie einen kurzen Sicherheitssatz.",
+      "suggestions": ["Bitte warten, ich helfe Ihnen.", "Nicht alleine aufstehen."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Sehr gut. Das verhindert Stürze."
+    }
+  ]
+}

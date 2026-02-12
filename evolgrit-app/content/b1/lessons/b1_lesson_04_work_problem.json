@@ -1,0 +1,37 @@
+{
+  "id": "b1_04_work_problem",
+  "title": "Im Job: Problem erklären",
+  "level": "B1",
+  "week": 4,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Es gibt ein Problem mit der Lieferung." },
+        { "id": "b", "label": "Ich wohne in Berlin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Die Datei ist ____ angekommen.",
+      "choices": [
+        { "id": "a", "label": "nicht" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wir brauchen eine kurze Lösung."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst ein Problem im Job erklären."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "pflege_live_03_call_doctor",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Pflege: Arzt informieren",
+  "subtitle": "Kurz schildern und um Rückmeldung bitten",
+  "durationMin": 5,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "setting": {
+    "scene": "Telefon / Stationszimmer",
+    "context": "Du informierst die Ärztin über einen Befund."
+  },
+  "tasks": [
+    "Kurze Lage schildern.",
+    "Relevante Werte nennen.",
+    "Um Rückmeldung bitten."
+  ],
+  "difficultyNotes": {
+    "focus": [
+      "klarer Aufbau",
+      "kurze Sätze",
+      "höflich fragen"
+    ],
+    "tone": "professionell, ruhig"
+  },
+  "tipSuggestionsGlobal": [
+    "Es geht um Patient Herrn ...",
+    "Der Blutdruck ist ...",
+    "Wie sollen wir weiter vorgehen?"
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Starte den Anruf: um wen geht es?",
+      "goalHint": "Patient nennen.",
+      "tipSuggestions": [
+        "Es geht um Herrn Müller in Zimmer 12.",
+        "Ich rufe wegen Frau Kaya an.",
+        "Es geht um Patient Herrn Schmidt."
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Nenne kurz den Grund.",
+      "goalHint": "Symptom/Befund.",
+      "tipSuggestions": [
+        "Der Blutdruck ist heute sehr hoch.",
+        "Er klagt über starke Schmerzen.",
+        "Die Temperatur ist gestiegen."
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Gib einen Wert oder eine Beobachtung.",
+      "goalHint": "Zahl + Einheit.",
+      "tipSuggestions": [
+        "Blutdruck 180 zu 100.",
+        "Temperatur 38,8 Grad.",
+        "Puls 110."
+      ]
+    },
+    {
+      "id": "t04",
+      "text": "Bitte um Rückmeldung.",
+      "goalHint": "Höflich fragen.",
+      "tipSuggestions": [
+        "Wie sollen wir weiter vorgehen?",
+        "Können Sie kurz vorbeikommen?",
+        "Sollen wir etwas geben?"
+      ]
+    }
+  ],
+  "endSummary": {
+    "title": "Sehr gut",
+    "bullets": [
+      "Du hast strukturiert berichtet.",
+      "Du hast Werte klar genannt.",
+      "Du hast höflich nach dem nächsten Schritt gefragt."
+    ],
+    "nextSuggestion": "Als Nächstes wiederholen wir die Übergabe."
+  }
+}

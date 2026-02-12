@@ -1,0 +1,35 @@
+{
+  "id": "a2_u05_m01",
+  "level": "A2",
+  "unitId": "a2_u05",
+  "title": "Mini · Kurz",
+  "durationMin": 2,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Könnte ich die Rechnung bekommen?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Suppe ist zu kalt."
+        },
+        {
+          "id": "b",
+          "label": "Die Suppe ist zu Uhr."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Mini geschafft",
+      "text": "Du kannst im Restaurant bestellen."
+    }
+  ]
+}

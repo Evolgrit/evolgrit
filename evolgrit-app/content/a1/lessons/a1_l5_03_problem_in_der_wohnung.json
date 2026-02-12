@@ -1,0 +1,60 @@
+{
+  "id": "a1_l5_03_problem_in_der_wohnung",
+  "title": "Problem in der Wohnung",
+  "level": "A1",
+  "week": 5,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Die Heizung ist kaputt." },
+        { "id": "b", "label": "Ich bin müde." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Die Heizung ist kaputt."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Das Wasser ist ____.",
+      "choices": [
+        { "id": "a", "label": "kalt" },
+        { "id": "b", "label": "nett" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Können Sie bitte helfen?" },
+        { "id": "b", "label": "Wo ist der Markt?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Was ist los?",
+      "choices": [
+        { "id": "a", "label": "Die Heizung ist kaputt." },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst ein Problem melden.",
+        "Du kannst um Hilfe bitten."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

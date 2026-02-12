@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_kommunikation_01",
+  "title": "Pflege · Kommunikation",
+  "subtitle": "Empathie, Grenzen, nächste Schritte",
+  "durationMin": 15,
+  "outcomes": [
+    "Empathisch und ruhig reagieren",
+    "Grenzen respektvoll setzen",
+    "Nächste Schritte klar erklären"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_10_deeskalation_patient",
+    "job_pflege_live_11_deeskalation_angehoerige",
+    "job_pflege_live_12_erklaeren_wartezeit"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "level": "A2",
+  "title": "A2 – Unterwegs",
+  "subtitle": "8 Lektionen · 3-Minuten Aufgaben",
+  "units": [
+    {
+      "id": "a2_u1",
+      "title": "Unit 1 · Smalltalk",
+      "subtitle": "Fragen, antworten, reagieren",
+      "items": [
+        {
+          "id": "a2_l01_smalltalk",
+          "title": "Lektion 1 · Wie geht’s?",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l01_smalltalk" },
+          "status": "available"
+        },
+        {
+          "id": "a2_l02_zeiten_tagesablauf",
+          "title": "Lektion 2 · Zeiten & Tagesablauf",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l02_zeiten_tagesablauf" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "a2_u2",
+      "title": "Unit 2 · Wege",
+      "subtitle": "Richtung und Orientierung",
+      "items": [
+        {
+          "id": "a2_l03_weg_und_richtung",
+          "title": "Lektion 3 · Weg & Richtung",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l03_weg_und_richtung" },
+          "status": "available"
+        },
+        {
+          "id": "a2_l04_einkaufen_a2",
+          "title": "Lektion 4 · Einkaufen",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l04_einkaufen_a2" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "a2_u3",
+      "title": "Unit 3 · Alltag",
+      "subtitle": "Termine und Arbeit",
+      "items": [
+        {
+          "id": "a2_l05_termine",
+          "title": "Lektion 5 · Termine",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l05_termine" },
+          "status": "available"
+        },
+        {
+          "id": "a2_l06_arbeit_alltag",
+          "title": "Lektion 6 · Arbeit & Alltag",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l06_arbeit_alltag" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "a2_u4",
+      "title": "Unit 4 · Zuhause",
+      "subtitle": "Wohnen und Wiederholen",
+      "items": [
+        {
+          "id": "a2_l07_wohnung_probleme",
+          "title": "Lektion 7 · Wohnung: Probleme",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l07_wohnung_probleme" },
+          "status": "available"
+        },
+        {
+          "id": "a2_l08_review",
+          "title": "Lektion 8 · Wiederholung",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "a2_l08_review" },
+          "status": "available"
+        }
+      ]
+    }
+  ]
+}

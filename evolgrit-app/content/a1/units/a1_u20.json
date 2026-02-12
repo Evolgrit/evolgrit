@@ -1,0 +1,31 @@
+{
+  "id": "a1_u20",
+  "title": "Gestern / Heute",
+  "subtitle": "Mini-Vergangenheit (leicht)",
+  "items": [
+    {
+      "id": "a1_u20_l01",
+      "title": "Gestern / Heute",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u20_l02",
+      "title": "Mini-Vergangenheit (leicht)",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u20_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u20_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

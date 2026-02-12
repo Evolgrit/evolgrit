@@ -1,0 +1,37 @@
+{
+  "id": "job_pflege_live_05_massnahmen_ankuendigen",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Maßnahmen ankündigen",
+  "subtitle": "Beruhigen · erklären · nächste Schritte",
+  "durationMin": 4,
+  "tasks": [
+    "Beruhige: Ich kümmere mich.",
+    "Ankündigen: Ich hole Hilfe / Arzt.",
+    "Einfach erklären: Was passiert als Nächstes?"
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Der Patient hat starke Schmerzen. Sag ruhig: Du kümmerst dich." },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag 1 Satz.",
+      "suggestions": ["Ich kümmere mich darum.", "Ich bin gleich wieder da.", "Ich helfe Ihnen jetzt."]
+    },
+    { "id": "c2", "role": "coach", "text": "Sehr gut. Sag: Du informierst den Arzt." },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag 1 Satz.",
+      "suggestions": ["Ich informiere den Arzt.", "Ich rufe den Arzt sofort.", "Ich hole sofort Hilfe."]
+    },
+    { "id": "c3", "role": "coach", "text": "Sag noch: Was passiert als Nächstes?" },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Kurz und klar.",
+      "suggestions": ["Wir messen kurz die Werte.", "Ich messe kurz den Blutdruck.", "Ich bringe Ihnen gleich etwas Wasser."]
+    },
+    { "id": "c4", "role": "coach", "text": "Sehr gut. Ruhig bleiben und klar sprechen – das hilft." }
+  ]
+}

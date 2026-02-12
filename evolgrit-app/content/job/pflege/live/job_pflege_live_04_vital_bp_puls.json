@@ -1,0 +1,42 @@
+{
+  "id": "job_pflege_live_04_vital_bp_puls",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Blutdruck & Puls",
+  "subtitle": "Werte kurz und sicher abfragen",
+  "durationMin": 5,
+  "tasks": [
+    "Blutdruck nennen lassen",
+    "Puls nennen lassen",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Wir prüfen kurz die Vitalwerte. Wie ist der Blutdruck?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag den Blutdruck (z.B. 120 zu 80).",
+      "suggestions": ["120 zu 80", "140 zu 90", "110 zu 70"]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Danke. Wie ist der Puls?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag den Puls (nur Zahl).",
+      "suggestions": ["72", "95", "110"]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Sehr gut. Ich notiere die Werte."
+    }
+  ]
+}

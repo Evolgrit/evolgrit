@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m6_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M6 · Satzbau",
+  "subtitle": "Sicher anleiten",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte ____ desinfizieren.",
+      "choices": [
+        { "id": "a", "label": "Hände" },
+        { "id": "b", "label": "Fenster" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte ____ anziehen.",
+      "choices": [
+        { "id": "a", "label": "Handschuhe" },
+        { "id": "b", "label": "Schuhe" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte ____ nicht alleine aufstehen.",
+      "choices": [
+        { "id": "a", "label": "noch" },
+        { "id": "b", "label": "nie" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Die ____ ist erreichbar.",
+      "choices": [
+        { "id": "a", "label": "Klingel" },
+        { "id": "b", "label": "Küche" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Die ____ ist drin.",
+      "choices": [
+        { "id": "a", "label": "Bremse" },
+        { "id": "b", "label": "Brot" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst sichere Anweisungen geben."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_03",
+  "title": "Pflege · Modul 3",
+  "subtitle": "Medikamente & Zeiten (sicher kommunizieren)",
+  "durationMin": 16,
+  "outcomes": [
+    "Zeiten korrekt nennen (morgens, mittags, abends, nachts)",
+    "Medikamente ankündigen (ohne Fachjargon)",
+    "Rückfragen sicher beantworten (vor/nach dem Essen, Wasser, Allergie)"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_07_medikament_ankuendigen",
+    "job_pflege_live_08_zeitplan_erklaeren",
+    "job_pflege_live_09_rueckfragen_allergie"
+  ]
+}

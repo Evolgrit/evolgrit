@@ -1,0 +1,55 @@
+{
+  "id": "pflege_m6_skill_01_vocab",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M6 · Vokabeln",
+  "subtitle": "Hygiene & Sicherheit",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Hände desinfizieren",
+      "choices": [
+        { "id": "a", "label": "Hände desinfizieren", "imageKey": "job_pflege_hygiene_hands_correct_01" },
+        { "id": "b", "label": "Hände waschen", "imageKey": "job_pflege_hygiene_wash_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Handschuhe",
+      "choices": [
+        { "id": "a", "label": "Handschuhe", "imageKey": "job_pflege_hygiene_gloves_correct_01" },
+        { "id": "b", "label": "Socken", "imageKey": "job_pflege_hygiene_socks_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Klingel",
+      "choices": [
+        { "id": "a", "label": "Klingel", "imageKey": "job_pflege_safety_bell_correct_01" },
+        { "id": "b", "label": "Brot", "imageKey": "job_pflege_bread_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Bitte warten, ich helfe Ihnen.",
+      "text": "Bitte warten, ich ____ Ihnen.",
+      "choices": [
+        { "id": "a", "label": "helfe" },
+        { "id": "b", "label": "schlafe" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut!",
+      "text": "Du kennst wichtige Wörter für Hygiene & Sicherheit."
+    }
+  ]
+}
