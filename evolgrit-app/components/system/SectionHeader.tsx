@@ -12,15 +12,15 @@ export function SectionHeader({ label, title, subtext, marginBottom = "$3" }: Pr
   return (
     <Stack gap="$1" marginBottom={marginBottom}>
       {label ? (
-        <Text fontSize={12} fontWeight="800" color="$muted">
+        <Text fontFamily="$body" fontSize="$meta" fontWeight="700" color="$muted">
           {label.toUpperCase()}
         </Text>
       ) : null}
-      <Text fontSize={18} fontWeight="900" color="$text">
+      <Text fontFamily="$heading" fontSize="$screenTitle" lineHeight="$screenTitle" fontWeight="700" color="$text">
         {title}
       </Text>
       {subtext ? (
-        <Text fontSize={13} color="$muted">
+        <Text fontFamily="$body" fontSize="$meta" color="$muted">
           {subtext}
         </Text>
       ) : null}

@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.evolgrit-app"
+      "bundleIdentifier": "com.anonymous.evolgrit-app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -44,11 +47,19 @@
           }
         }
       ],
-      "expo-audio"
+      "expo-audio",
+      "expo-localization",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c2c482c8-de0c-4a73-80cd-6a31197aab46"
+      }
     }
   }
 }

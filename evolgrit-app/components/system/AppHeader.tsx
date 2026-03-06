@@ -21,7 +21,13 @@ export function AppHeader({ title, left, right }: Props) {
 
         <Stack flex={1} alignItems="center" justifyContent="center">
           {title ? (
-            <Text fontSize={18} fontWeight="900" color="$text">
+            <Text
+              fontFamily="$heading"
+              fontSize="$screenTitle"
+              lineHeight="$screenTitle"
+              fontWeight="700"
+              color="$text"
+            >
               {title}
             </Text>
           ) : null}

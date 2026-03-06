@@ -19,6 +19,8 @@ import {
 import { duckForTts, startAmbient, stopAmbient } from "../../../lib/ambientPlayer";
 import { playCoachTts, stopCoachTts } from "../../../lib/tts/liveCoachTts";
 import { track } from "../../../lib/tracking";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 const focusData = require("../../../content/focus/focus_sessions_v1.json");
 
@@ -47,6 +49,8 @@ export default function FocusSessionScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ id?: string }>();
   const insets = useSafeAreaInsets();
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
   const [voiceId, setVoiceId] = useState<FocusVoiceId>("katja");
   const [ambientEnabled, setAmbientEnabledState] = useState(false);
   const [ambientId, setAmbientIdState] = useState<AmbientId>("ocean");
@@ -109,7 +113,7 @@ export default function FocusSessionScreen() {
     setIsPlaying(true);
     try {
       duckForTts(true);
-      await playCoachTts(sessionText, { voice, rate: "normal" });
+      await playCoachTts(sessionText, { voice, rate: "normal", locale: targetLocale });
     } catch {
       // ignore
     } finally {

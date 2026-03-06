@@ -3,6 +3,7 @@ import { YStack, Text } from "tamagui";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 import { SoftButton } from "../../system/SoftButton";
 import { lessonType } from "@/design/typography";
+import { useI18n } from "../../../lib/i18n";
 
 type Option = { id: string; label: string; correct?: boolean };
 
@@ -21,6 +22,7 @@ export function ClozeChoiceStep({
   reveal?: boolean;
   onSelect: (id: string, correct: boolean) => void;
 }) {
+  const { t } = useI18n();
   const dangerBg = "rgba(231,76,60,0.12)";
   const successBg = "rgba(46,204,113,0.12)";
   const shake = useSharedValue(0);
@@ -57,7 +59,7 @@ export function ClozeChoiceStep({
         <Text opacity={0.7}>
           Diese Cloze-Aufgabe hat keinen Text. Bitte JSON prüfen.
         </Text>
-        <SoftButton label="Weiter" onPress={() => onSelect("__skip__", true)} />
+        <SoftButton label={t("common.next")} onPress={() => onSelect("__skip__", true)} />
       </YStack>
     );
   }

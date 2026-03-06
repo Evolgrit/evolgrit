@@ -9,276 +9,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import { ChevronDown, ChevronRight, Lock } from "lucide-react-native";
 import { DEV_UNLOCK_ALL } from "../../../lib/config/devFlags";
-
-type JobModule = {
-  title: string;
-  subtitle?: string;
-  durationMin?: number;
-  route?: string;
-  locked?: boolean;
-};
-
-type JobUnit = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  modules: JobModule[];
-};
-
-type JobGroup = {
-  id: string;
-  title: string;
-  subtitle: string;
-  bg: string;
-  units: JobUnit[];
-};
-
-const JOBS: JobGroup[] = [
-  {
-    id: "pflege",
-    title: "Pflege",
-    subtitle: "Patienten · Übergabe · Alltag",
-    bg: "$surfaceJob",
-    units: [
-      {
-        id: "pflege_u1",
-        title: "Unit 1 · Start im Dienst",
-        subtitle: "Aufnahme und Schmerzen",
-        modules: [
-          { title: "Modul 1", subtitle: "Aufnahme & Übergabe", durationMin: 12, route: "/learn/job/pflege/01" },
-          { title: "Modul 2", subtitle: "Schmerzen & Maßnahmen", durationMin: 14, route: "/learn/job/pflege/02" },
-        ],
-      },
-      {
-        id: "pflege_u2",
-        title: "Unit 2 · Beobachten & Dokumentieren",
-        subtitle: "Medikamente und Dokumentation",
-        modules: [
-          { title: "Modul 3", subtitle: "Medikamente & Zeiten", durationMin: 16, route: "/learn/job/pflege/03" },
-          { title: "Modul 4", subtitle: "Übergabe & Dokumentation", durationMin: 18, route: "/learn/job/pflege/04" },
-        ],
-      },
-      {
-        id: "pflege_u3",
-        title: "Unit 3 · Routine & Sicherheit",
-        subtitle: "Vitalwerte und Hygiene",
-        modules: [
-          { title: "Modul 5", subtitle: "Vitalwerte", durationMin: 12, route: "/learn/job/pflege/05" },
-          { title: "Modul 6", subtitle: "Hygiene & Sicherheit", durationMin: 12, route: "/learn/job/pflege/06" },
-        ],
-      },
-      {
-        id: "pflege_u4",
-        title: "Unit 4 · Verantwortung",
-        subtitle: "Melden und Beobachten",
-        modules: [
-          { title: "Modul 7", subtitle: "Verantwortung & Meldewege", durationMin: 12, route: "/learn/job/pflege/07" },
-          { title: "Modul 8", subtitle: "Beobachten & Begründen", durationMin: 14, route: "/learn/job/pflege/08" },
-        ],
-      },
-      {
-        id: "pflege_u5",
-        title: "Unit 5 · Kommunikation",
-        subtitle: "Gespräche und Grenzen",
-        modules: [
-          { title: "Modul 9", subtitle: "Schwierige Gespräche", durationMin: 14, route: "/learn/job/pflege/09" },
-          { title: "Modul 10", subtitle: "Rechte & Grenzen", durationMin: 12, route: "/learn/job/pflege/10" },
-        ],
-      },
-      {
-        id: "pflege_u6",
-        title: "Unit 6 · Prüfung & Organisation",
-        subtitle: "Prüfung und Selbstorganisation",
-        modules: [
-          { title: "Modul 11", subtitle: "Prüfung – kurz & strukturiert", durationMin: 12, route: "/learn/job/pflege/11" },
-          { title: "Modul 12", subtitle: "Selbstorganisation & Stress", durationMin: 12, route: "/learn/job/pflege/12" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "handwerk",
-    title: "Handwerk",
-    subtitle: "Werkstatt · Baustelle · Team",
-    bg: "$surfaceLanguage",
-    units: [
-      {
-        id: "handwerk_u1",
-        title: "Unit 1 · Einstieg",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "handwerk_u2",
-        title: "Unit 2 · Teamarbeit",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "handwerk_u3",
-        title: "Unit 3 · Alltag",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-  {
-    id: "gastro",
-    title: "Gastro",
-    subtitle: "Service · Küche · Bestellungen",
-    bg: "$surfaceLife",
-    units: [
-      {
-        id: "gastro_u1",
-        title: "Unit 1 · Service",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "gastro_u2",
-        title: "Unit 2 · Küche",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "gastro_u3",
-        title: "Unit 3 · Ablauf",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-  {
-    id: "logistik",
-    title: "Logistik",
-    subtitle: "Lieferung · Routen · Übergaben",
-    bg: "$surfaceFocus",
-    units: [
-      {
-        id: "logistik_u1",
-        title: "Unit 1 · Übergabe",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "logistik_u2",
-        title: "Unit 2 · Route",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "logistik_u3",
-        title: "Unit 3 · Alltag",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-  {
-    id: "reinigung",
-    title: "Reinigung",
-    subtitle: "Räume · Aufgaben · Rückmeldung",
-    bg: "$surfaceLife",
-    units: [
-      {
-        id: "reinigung_u1",
-        title: "Unit 1 · Einstieg",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "reinigung_u2",
-        title: "Unit 2 · Ordnung",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "reinigung_u3",
-        title: "Unit 3 · Abschluss",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-  {
-    id: "lager",
-    title: "Lager",
-    subtitle: "Waren · Ordnung · Rückfragen",
-    bg: "$surfaceLanguage",
-    units: [
-      {
-        id: "lager_u1",
-        title: "Unit 1 · Einstieg",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "lager_u2",
-        title: "Unit 2 · Ordnung",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "lager_u3",
-        title: "Unit 3 · Rückfragen",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-  {
-    id: "kueche",
-    title: "Küche",
-    subtitle: "Vorbereitung · Abläufe · Hygiene",
-    bg: "$surfaceFocus",
-    units: [
-      {
-        id: "kueche_u1",
-        title: "Unit 1 · Einstieg",
-        subtitle: "Kommt bald",
-        modules: [
-          { title: "Modul 1", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-          { title: "Modul 2", subtitle: "Bald verfügbar", durationMin: 10, locked: true },
-        ],
-      },
-      {
-        id: "kueche_u2",
-        title: "Unit 2 · Hygiene",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 3", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-      {
-        id: "kueche_u3",
-        title: "Unit 3 · Abschluss",
-        subtitle: "Kommt bald",
-        modules: [{ title: "Modul 4", subtitle: "Bald verfügbar", durationMin: 10, locked: true }],
-      },
-    ],
-  },
-];
+import { JOBS, type JobGroup } from "../../../lib/data/jobs";
+import { useI18n } from "../../../lib/i18n";
 
 export default function JobSelectScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [openJobId, setOpenJobId] = useState<string | null>(null);
   const [openUnitId, setOpenUnitId] = useState<string | null>(null);
+  const { t } = useI18n();
   const theme = useTheme();
   const iconColor = theme.textSecondary?.val ?? theme.text?.val ?? "black";
+  const jobsToShow: JobGroup[] = JOBS;
 
   const toggleJob = useCallback(
     (jobId: string) => {
@@ -307,11 +49,11 @@ export default function JobSelectScreen() {
   }, []);
 
   return (
-    <ScreenShell title="Job & Zukunft" showBack>
+    <ScreenShell title={t("job.title")} showBack>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
         <YStack padding="$4" gap="$4">
           <YStack gap="$3">
-            {JOBS.map((job) => {
+            {jobsToShow.map((job) => {
               const open = openJobId === job.id;
               return (
                 <YStack key={job.id} backgroundColor="$bgSurface" borderRadius="$6">
@@ -409,7 +151,7 @@ export default function JobSelectScreen() {
                                         <XStack alignItems="center" gap="$2">
                                           {mod.durationMin ? (
                                             <Text color="$textSecondary" fontSize={12}>
-                                              ~{mod.durationMin} Min
+                                              {t("common.minutes_short_approx", { count: mod.durationMin })}
                                             </Text>
                                           ) : null}
                                           {isLocked ? <Lock size={16} color={iconColor} /> : null}

@@ -1,12 +1,14 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Pressable, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { Text, XStack, YStack } from "tamagui";
 import { ScreenShell } from "../../../components/system/ScreenShell";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { DEV_SHOW_ALL_JOBS } from "../../../lib/flags";
-import { useSelectedJobTrack } from "../../../lib/jobStore";
+import { useSelectedJobTrackOptional } from "../../../lib/jobStore";
 import { setLastJobFocus } from "../../../lib/nextActionStore";
+import { getDevMode } from "../../../lib/devModeStore";
+import { JOBS } from "../../../lib/data/jobs";
+import { useI18n } from "../../../lib/i18n";
 
 type ModuleItem = {
   id: string;
@@ -17,49 +19,48 @@ type ModuleItem = {
   liveId?: string;
 };
 
-const TRACKS = [
-  { id: "pflege", title: "Pflege", subtitle: "Patienten · Übergabe · Alltag" },
-  { id: "handwerk", title: "Handwerk", subtitle: "Werkstatt · Baustelle · Team" },
-  { id: "gastro", title: "Gastro", subtitle: "Service · Küche · Bestellungen" },
-  { id: "logistik", title: "Logistik", subtitle: "Lieferung · Routen · Übergaben" },
-  { id: "reinigung", title: "Reinigung", subtitle: "Räume · Aufgaben · Rückmeldung" },
-  { id: "lager", title: "Lager", subtitle: "Waren · Ordnung · Rückfragen" },
-  { id: "kueche", title: "Küche", subtitle: "Vorbereitung · Abläufe · Hygiene" },
-];
+const TRACKS = JOBS.map((job) => ({ id: job.id, title: job.title, subtitle: job.subtitle }));
 
 const pflegeContent = require("../../../content/job/pflege/index.json");
 
 export default function JobTrackScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const selectedTrack = useSelectedJobTrack();
+  const selectedTrack = useSelectedJobTrackOptional();
+  const [devMode, setDevModeState] = useState(false);
+  const { t } = useI18n();
 
   const pflegeModules: ModuleItem[] = Array.isArray(pflegeContent?.modules)
     ? pflegeContent.modules
     : [];
 
   const tracksToShow = useMemo(() => {
-    if (DEV_SHOW_ALL_JOBS) return TRACKS;
+    if (devMode) return TRACKS;
+    if (!selectedTrack) return TRACKS;
     return TRACKS.filter((track) => track.id === selectedTrack);
-  }, [selectedTrack]);
+  }, [devMode, selectedTrack]);
+
+  useEffect(() => {
+    getDevMode().then((enabled) => setDevModeState(enabled));
+  }, []);
 
   return (
-    <ScreenShell title="Dein Beruf" showBack>
+    <ScreenShell title={t("job.track_title")} showBack>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
         <YStack padding="$4" gap="$4">
           <XStack alignItems="center" justifyContent="space-between">
             <YStack>
               <Text fontSize={20} fontWeight="900" color="$text">
-                Dein Beruf
+                {t("job.track_title")}
               </Text>
-              <Text color="$muted">Dein Lernpfad für den Arbeitsalltag.</Text>
+              <Text color="$muted">{t("job.track_subtitle")}</Text>
             </YStack>
             <Pressable
               accessibilityRole="button"
               onPress={() => router.push("/learn/job")}
             >
               <Text color="$muted" fontWeight="700">
-                Beruf wechseln
+                {t("job.change_track")}
               </Text>
             </Pressable>
           </XStack>
@@ -105,13 +106,13 @@ export default function JobTrackScreen() {
                             {mod.title}
                           </Text>
                           <Text color="$muted">{mod.subtitle}</Text>
-                          <Text color="$muted">~{mod.durationMin} Min</Text>
+                          <Text color="$muted">{t("common.minutes_short_approx", { count: mod.durationMin })}</Text>
                         </YStack>
                       </Pressable>
                     ))}
                   </YStack>
                 ) : (
-                  <Text color="$muted">Kommt bald.</Text>
+                  <Text color="$muted">{t("job.coming_soon")}</Text>
                 )}
               </YStack>
             );

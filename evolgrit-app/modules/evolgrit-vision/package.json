@@ -1,0 +1,9 @@
+{
+  "name": "evolgrit-vision",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "expo": {
+    "name": "EvolgritVision",
+    "platforms": ["ios"]
+  }
+}

@@ -9,6 +9,7 @@ import { UnitAccordion } from "../../../components/learn/UnitAccordion";
 import { LessonRow } from "../../../components/learn/LessonRow";
 import { getProgressState } from "../../../lib/progressStore";
 import type { LessonStatus } from "../../../components/learn/StatusIcon";
+import { useI18n } from "../../../lib/i18n";
 
 const DEV_UNLOCK_ALL = typeof __DEV__ !== "undefined" ? __DEV__ : false;
 const A1_INDEX = require("../../../content/a1/a1_index.json");
@@ -45,21 +46,22 @@ type ItemStatus = {
 function labelForKind(kind: string) {
   switch (kind) {
     case "mini":
-      return "Mini";
+      return "mini";
     case "quiz":
-      return "Quiz";
+      return "quiz";
     case "abschluss":
-      return "Abschluss";
+      return "lesson";
     case "speaking":
-      return "Speaking";
+      return "lesson";
     default:
-      return "Lesson";
+      return "lesson";
   }
 }
 
 export default function A1UnitsScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>({});
   const [openUnitId, setOpenUnitId] = useState<string | null>(null);
 
@@ -127,6 +129,13 @@ export default function A1UnitsScreen() {
           title={A1_INDEX?.title ?? "A1 – Ankommen"}
           subtitle={A1_INDEX?.subtitle ?? "80 Lektionen · 3-Minuten Aufgaben"}
           onBack={() => router.back()}
+          titleFontSize="$6"
+          titleLineHeight="$6"
+          titleFontWeight="$8"
+          subtitleFontSize="$3"
+          subtitleLineHeight="$3"
+          subtitleFontWeight="$5"
+          subtitleOpacity={0.65}
         />
         <YStack gap="$3" padding="$4">
           {units.map((unit) => {
@@ -136,6 +145,15 @@ export default function A1UnitsScreen() {
                 key={unit.id}
                 title={unit.title}
                 subtitle={unit.subtitle}
+                titleFontSize="$5"
+                titleLineHeight="$5"
+                titleFontWeight="$8"
+                subtitleFontSize="$3"
+                subtitleLineHeight="$3"
+                subtitleFontWeight="$6"
+                subtitleOpacity={0.65}
+                headerPaddingVertical="$4"
+                headerPaddingHorizontal="$4"
                 open={openUnitId === unit.id}
                 onToggle={() => {
                   setOpenUnitId((prev) => (prev === unit.id ? null : unit.id));
@@ -148,7 +166,7 @@ export default function A1UnitsScreen() {
                       key={item.id}
                       title={item.title}
                       minutes={item.durationMin ?? item.minutes}
-                      kindLabel={labelForKind(item.kind)}
+                      kindLabel={t(`common.${labelForKind(item.kind)}`)}
                       status={itemStatus}
                       onPress={() => router.push(`/lesson-runner/${item.id}`)}
                     />

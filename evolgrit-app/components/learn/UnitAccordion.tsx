@@ -10,9 +10,33 @@ type Props = {
   open: boolean;
   onToggle: () => void;
   children: React.ReactNode;
+  titleFontSize?: number | string;
+  titleFontWeight?: string;
+  titleLineHeight?: number;
+  subtitleFontSize?: number | string;
+  subtitleFontWeight?: string;
+  subtitleLineHeight?: number;
+  subtitleOpacity?: number;
+  headerPaddingVertical?: number | string;
+  headerPaddingHorizontal?: number | string;
 };
 
-export function UnitAccordion({ title, subtitle, open, onToggle, children }: Props) {
+export function UnitAccordion({
+  title,
+  subtitle,
+  open,
+  onToggle,
+  children,
+  titleFontSize = "$5",
+  titleFontWeight = "800",
+  titleLineHeight,
+  subtitleFontSize = "$3",
+  subtitleFontWeight,
+  subtitleLineHeight,
+  subtitleOpacity,
+  headerPaddingVertical = "$4",
+  headerPaddingHorizontal = "$4",
+}: Props) {
   const theme = useTheme();
   const iconColor = theme.textSecondary?.val ?? theme.text?.val ?? "black";
   const handleToggle = useCallback(() => {
@@ -35,12 +59,23 @@ export function UnitAccordion({ title, subtitle, open, onToggle, children }: Pro
           transform: [{ scale: pressed ? 0.98 : 1 }],
         })}
       >
-        <XStack padding="$4" alignItems="center" justifyContent="space-between">
+        <XStack
+          paddingVertical={headerPaddingVertical}
+          paddingHorizontal={headerPaddingHorizontal}
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <YStack flex={1} gap="$1">
-            <Text fontSize="$5" fontWeight="800" color="$text">
+            <Text fontSize={titleFontSize} fontWeight={titleFontWeight} lineHeight={titleLineHeight} color="$text">
               {title}
             </Text>
-            <Text fontSize="$3" color="$textSecondary">
+            <Text
+              fontSize={subtitleFontSize}
+              fontWeight={subtitleFontWeight}
+              lineHeight={subtitleLineHeight}
+              opacity={subtitleOpacity}
+              color="$textSecondary"
+            >
               {subtitle}
             </Text>
           </YStack>

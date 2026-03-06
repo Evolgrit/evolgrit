@@ -120,14 +120,16 @@ export async function getTtsAudio({
   text,
   voice,
   rate = "normal",
+  locale = "de-DE",
 }: {
   text: string;
   voice: string;
   rate?: Rate;
+  locale?: string;
 }) {
   await ensureCacheVersion();
   const dir = await ensureDir();
-  const key = sha1(`v${CACHE_VERSION}|de-DE|${voice}|${rate}|${text}`);
+  const key = sha1(`v${CACHE_VERSION}|${locale}|${voice}|${rate}|${text}`);
   const uri = `${dir}${key}.mp3`;
   const info = await FileSystem.getInfoAsync(uri);
   const size = "size" in info && info.exists ? (info as any).size ?? 0 : 0;
@@ -138,7 +140,7 @@ export async function getTtsAudio({
   }
 
   const { data, error } = await supabase.functions.invoke("azure-tts", {
-    body: { text, rate, voice, locale: "de-DE" },
+    body: { text, rate, voice, locale },
   });
 
   if (error) {
@@ -180,7 +182,7 @@ export async function stopCoachTts() {
 
 export async function playCoachTts(
   text: string,
-  opts: { voice: string; rate?: Rate }
+  opts: { voice: string; rate?: Rate; locale?: string }
 ) {
   if (!text || !text.trim()) {
     console.warn("[tts] missing text - skipping speak");
@@ -190,7 +192,7 @@ export async function playCoachTts(
     console.warn("[tts] blocked debug phrase");
     return;
   }
-  const uri = await getTtsAudio({ text, voice: opts.voice, rate: opts.rate ?? "normal" });
+  const uri = await getTtsAudio({ text, voice: opts.voice, rate: opts.rate ?? "normal", locale: opts.locale });
 
   await stopCurrent();
 

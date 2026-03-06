@@ -10,6 +10,7 @@ import { LessonRow } from "../../../components/learn/LessonRow";
 import { loadLevelPlan } from "../../../lib/content/loadLevelPlan";
 import { getProgressState } from "../../../lib/progressStore";
 import { applyDevUnlock, type ItemStatus } from "../../../lib/progress/availability";
+import { useI18n } from "../../../lib/i18n";
 
 const TAB_BAR_HEIGHT = 80;
 
@@ -26,6 +27,7 @@ type PlanUnit = {
   title: string;
   subtitle: string;
   items: PlanItem[];
+  lessons?: PlanItem[];
 };
 
 type Plan = {
@@ -49,6 +51,7 @@ export default function LevelPlanScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const level = (params.level ?? "A2") as "A2" | "B1" | "B2";
+  const { t } = useI18n();
   const plan = useMemo(() => loadLevelPlan(level) as Plan, [level]);
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>({});
   const [openUnitId, setOpenUnitId] = useState<string | null>(null);
@@ -71,7 +74,8 @@ export default function LevelPlanScreen() {
     plan.units.forEach((unit) => {
       const statuses: { id: string; status: ItemStatus }[] = [];
       let firstAvailableFound = false;
-      unit.items.forEach((item) => {
+      const items = Array.isArray(unit.lessons) ? unit.lessons : Array.isArray(unit.items) ? unit.items : [];
+      items.forEach((item) => {
         const done = Boolean(completedMap[item.id]);
         if (done) {
           statuses.push({ id: item.id, status: applyDevUnlock("done") });
@@ -105,10 +109,15 @@ export default function LevelPlanScreen() {
   return (
     <ScreenShell title={plan.title} backgroundColor="$bgApp">
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + TAB_BAR_HEIGHT + 16 }}>
-        <LevelHeader title={plan.title} subtitle={plan.subtitle} onBack={() => router.back()} />
+        <LevelHeader
+          title={plan.title || t("learn.level_title_fallback")}
+          subtitle={plan.subtitle}
+          onBack={() => router.back()}
+        />
         <YStack gap="$3" padding="$4">
           {plan.units.map((unit) => {
             const unitStatus = unitStatuses[unit.id] ?? [];
+            const items = Array.isArray(unit.lessons) ? unit.lessons : Array.isArray(unit.items) ? unit.items : [];
             return (
               <UnitAccordion
                 key={unit.id}
@@ -119,7 +128,7 @@ export default function LevelPlanScreen() {
                   setOpenUnitId((prev) => (prev === unit.id ? null : unit.id));
                 }}
               >
-                {unit.items.map((item) => {
+                {items.map((item) => {
                   const status = unitStatus.find((s) => s.id === item.id)?.status ?? applyDevUnlock("available");
                   const meta = parseMeta(item.meta);
                   return (
@@ -130,6 +139,10 @@ export default function LevelPlanScreen() {
                       kindLabel={meta.kindLabel}
                       status={status as any}
                       onPress={() => {
+                        if (!item.route) {
+                          Alert.alert(t("common.coming_soon"), t("common.coming_soon_body"));
+                          return;
+                        }
                         if (item.route.type === "lesson_runner" && item.route.lessonId) {
                           router.push(`/lesson-runner/${item.route.lessonId}`);
                           return;
@@ -139,7 +152,7 @@ export default function LevelPlanScreen() {
                           return;
                         }
                         if (item.route.type === "stub") {
-                          Alert.alert("Kommt bald", "Dieses Modul ist noch nicht verfuegbar.");
+                          Alert.alert(t("common.coming_soon"), t("common.coming_soon_body"));
                           router.push("/learn/coming-soon");
                         }
                       }}

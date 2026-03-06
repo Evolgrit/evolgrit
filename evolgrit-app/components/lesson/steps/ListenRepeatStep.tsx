@@ -18,6 +18,9 @@ import { playCorrect, playWrong } from "../../../lib/feedback";
 import { AudioMeter } from "../AudioMeter";
 import { SoftButton } from "../../system/SoftButton";
 import { lessonType } from "@/design/typography";
+import { useI18n } from "../../../lib/i18n";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 const HIGHLIGHT_BG = "rgba(46,204,113,0.18)";
 const PASS_SCORE = 0.9;
@@ -56,11 +59,14 @@ export function ListenRepeatStep({
   prompt,
   text,
   onSolved,
+  onCorrectChange,
 }: {
   prompt: string;
   text: string;
   onSolved?: (ok: boolean) => void;
+  onCorrectChange?: (ok: boolean) => void;
 }) {
+  const { t } = useI18n();
   const recorder = useAudioRecorder(WAV_REC_OPTIONS);
   const recState = useAudioRecorderState(recorder);
   const recSnapshot = useRef(recState);
@@ -83,6 +89,9 @@ export function ListenRepeatStep({
   const pulse = useSharedValue(0);
   const [attemptCount, setAttemptCount] = useState(0);
   const [hasMicPermission, setHasMicPermission] = useState(true);
+  const [asrHint, setAsrHint] = useState<string | null>(null);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   useEffect(() => {
     recSnapshot.current = recState;
@@ -141,10 +150,12 @@ export function ListenRepeatStep({
       setRecordedUri(null);
     }
     onSolved?.(false);
+    onCorrectChange?.(false);
     setTranscript(null);
     setScore(null);
     setTokenStatuses([]);
     setAttemptCount(0);
+    setAsrHint(null);
     setIsRequesting(true);
     try {
       const perm = await requestRecordingPermissionsAsync();
@@ -193,12 +204,20 @@ export function ListenRepeatStep({
       }
 
       if (!uri || (durMs && durMs < 800)) {
-        Alert.alert("Zu kurz", "Bitte noch einmal aufnehmen.");
+        setAsrHint("Ich habe dich nicht gut gehört. Sprich bitte etwas länger.");
         setRecordedUri(null);
         setRecPhase("idle");
         return;
       }
       const wavUri = await ensureWavCopy(uri);
+      const info = await FileSystem.getInfoAsync(wavUri);
+      const size = typeof (info as any)?.size === "number" ? (info as any).size : 0;
+      if (durMs < 900 || size < 60 * 1024) {
+        setAsrHint("Ich habe dich nicht gut gehört. Sprich bitte etwas länger.");
+        setRecordedUri(null);
+        setRecPhase("idle");
+        return;
+      }
       setRecordedUri(wavUri);
       setRecPhase("processing");
       await player.stop();
@@ -211,10 +230,14 @@ export function ListenRepeatStep({
           setScore,
           setTokenStatuses,
           setAsrLoading,
+          setAsrHint,
         },
+        durMs,
         attemptCount,
         setAttemptCount,
-        onSolved
+        targetLocale,
+        onSolved,
+        onCorrectChange
       );
       setRecPhase("recorded");
     } catch (err) {
@@ -257,13 +280,14 @@ export function ListenRepeatStep({
 
   const ensureTtsPath = async () => {
     const clean = sanitizeText(text);
-    const res = await getTtsBase64({ text: clean, rate: "normal" });
+    const localeKey = targetLocale || "de-DE";
+    const res = await getTtsBase64({ text: clean, rate: "normal", locale: localeKey });
     const dir = `${FileSystem.cacheDirectory}tts/`;
     const info = await FileSystem.getInfoAsync(dir);
     if (!info.exists) {
       await FileSystem.makeDirectoryAsync(dir, { intermediates: true });
     }
-    const hash = hashCanonical(`de-DE|default|normal|${clean}`);
+    const hash = hashCanonical(`${localeKey}|default|normal|${clean}`);
     const path = `${dir}tts_${hash}_normal.mp3`;
     const existing = await FileSystem.getInfoAsync(path);
     if (!existing.exists) {
@@ -446,6 +470,12 @@ export function ListenRepeatStep({
           </Text>
         ) : null}
 
+        {asrHint ? (
+          <Text {...lessonType.muted} color="$muted">
+            {asrHint}
+          </Text>
+        ) : null}
+
         {transcript ? (
           <YStack gap="$2">
             <Text {...lessonType.muted} color="$muted">
@@ -453,7 +483,7 @@ export function ListenRepeatStep({
             </Text>
             <Text {...lessonType.body}>{transcript}</Text>
             {score !== null ? (
-              <Text {...lessonType.body} color={score >= PASS_SCORE ? "$text" : "$red10"}>
+              <Text {...lessonType.body} color="$muted">
                 Score: {score.toFixed(2)}
               </Text>
             ) : null}
@@ -495,7 +525,7 @@ export function ListenRepeatStep({
 
         <XStack justifyContent="flex-end">
           <SoftButton
-            label="Nochmal"
+            label={t("common.tryAgain")}
             onPress={() => {
               setTranscript(null);
               setScore(null);
@@ -504,6 +534,8 @@ export function ListenRepeatStep({
               setAttemptCount(0);
               setRecPhase("idle");
               onSolved?.(false);
+              onCorrectChange?.(false);
+              setAsrHint(null);
             }}
           />
         </XStack>
@@ -585,16 +617,34 @@ async function runAsr(
     setScore: (s: number | null) => void;
     setTokenStatuses: (t: { token: string; status: AsrTokenStatus }[]) => void;
     setAsrLoading: (b: boolean) => void;
+    setAsrHint: (msg: string | null) => void;
   },
+  durationMs: number,
   attemptCount: number,
   setAttemptCount: React.Dispatch<React.SetStateAction<number>>,
-  onSolved?: (ok: boolean) => void
+  targetLocale: string,
+  onSolved?: (ok: boolean) => void,
+  onCorrectChange?: (ok: boolean) => void
 ) {
-  const { setTranscript, setScore, setTokenStatuses, setAsrLoading } = setters;
+  const { setTranscript, setScore, setTokenStatuses, setAsrLoading, setAsrHint } = setters;
   setAsrLoading(true);
   try {
-    const res = await evaluateRecording({ fileUri: uri, targetText: target, locale: "de-DE" });
+    const res = await evaluateRecording({ fileUri: uri, targetText: target, locale: targetLocale });
     const score = typeof res.score === "number" ? res.score : 0;
+    const transcript = (res.transcript ?? "").trim();
+    if ((transcript.length === 0 || score === 0) && durationMs < 1200) {
+      setTranscript(null);
+      setScore(null);
+      setTokenStatuses([]);
+      setAsrHint("Ich habe dich nicht verstanden. Versuch’s nochmal.");
+      const nextAttempt = attemptCount + 1;
+      setAttemptCount(nextAttempt);
+      onSolved?.(false);
+      onCorrectChange?.(false);
+      console.log("[asr] attempt", { attemptCount: nextAttempt, score, canContinue: false });
+      return;
+    }
+    setAsrHint(null);
     setTranscript(res.transcript);
     setScore(score);
     setTokenStatuses(res.tokens ?? []);
@@ -604,6 +654,7 @@ async function runAsr(
     const canContinue = ok || nextAttempt >= MAX_ATTEMPTS;
     console.log("[asr] attempt", { attemptCount: nextAttempt, score, canContinue });
     onSolved?.(canContinue);
+    onCorrectChange?.(ok);
     if (ok) {
       await playCorrect();
     } else {
@@ -615,7 +666,9 @@ async function runAsr(
     setTranscript(null);
     setScore(null);
     setTokenStatuses([]);
+    setAsrHint("Ich habe dich nicht verstanden. Versuch’s nochmal.");
     onSolved?.(false);
+    onCorrectChange?.(false);
   } finally {
     setAsrLoading(false);
   }

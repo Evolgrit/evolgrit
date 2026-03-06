@@ -1,4 +1,4 @@
-import { createTamagui } from "@tamagui/core";
+import { createFont, createTamagui } from "@tamagui/core";
 import { config as baseConfig } from "@tamagui/config";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const evolgritTokens = require("./design/tokens.evolgrit.json");
@@ -33,11 +33,50 @@ const themes = {
   },
 };
 
+const interFont = createFont({
+  family: "Inter_400Regular",
+  size: baseConfig.fonts.body.size,
+  lineHeight: baseConfig.fonts.body.lineHeight,
+  weight: {
+    4: "400",
+    5: "500",
+    6: "600",
+    7: "700",
+    8: "800",
+    9: "900",
+  },
+  letterSpacing: baseConfig.fonts.body.letterSpacing,
+});
+
+const frauncesFont = createFont({
+  family: "Fraunces_600SemiBold",
+  size: baseConfig.fonts.heading.size,
+  lineHeight: baseConfig.fonts.heading.lineHeight,
+  weight: {
+    4: "400",
+    6: "600",
+    7: "700",
+  },
+  letterSpacing: baseConfig.fonts.heading.letterSpacing,
+});
+
 const config = createTamagui({
   ...baseConfig,
+  fonts: {
+    ...baseConfig.fonts,
+    body: interFont,
+    heading: frauncesFont,
+  },
   themes,
   tokens: {
     ...baseConfig.tokens,
+    size: {
+      ...baseConfig.tokens.size,
+      screenTitle: 30,
+      sectionTitle: 19,
+      body: 16,
+      meta: 13,
+    },
     color: {
       ...baseConfig.tokens.color,
       bg: colors.bg,

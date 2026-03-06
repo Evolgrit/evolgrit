@@ -25,6 +25,9 @@ import { routeCoachReply, type LiveModuleType, type ConvoState } from "../../../
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { logNextActionCompleted } from "../../../lib/nextActionStore";
 import { track } from "../../../lib/tracking";
+import { useI18n } from "../../../lib/i18n";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 import {
   RotateCcw,
   Volume2,
@@ -83,6 +86,9 @@ export default function LiveSpeakScreen() {
   const id = params.id ?? "";
   const data = useMemo(() => (id ? loadLiveDialogue(id) : null), [id]);
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const [recState, setRecState] = useState<RecState>("idle");
   const [messages, setMessages] = useState<ChatMsg[]>([]);
@@ -289,7 +295,7 @@ export default function LiveSpeakScreen() {
       setPhase("COACH_TALK");
       setIsCoachSpeaking(true);
       try {
-        await playCoachTts(text, { voice, rate });
+        await playCoachTts(text, { voice, rate, locale: targetLocale });
       } catch (err: any) {
         console.warn("[live-tts] failed", err?.message ?? err);
       } finally {
@@ -323,7 +329,7 @@ export default function LiveSpeakScreen() {
   const ensureAudioModeAndPermission = useCallback(async () => {
     const perm = await requestRecordingPermissionsAsync();
     if (!perm.granted) {
-      Alert.alert("Mikrofon", "Bitte Mikrofon erlauben.");
+      Alert.alert(t("speak.mic_title"), t("speak.mic_permission"));
       throw new Error("mic-permission");
     }
     await setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
@@ -361,8 +367,8 @@ export default function LiveSpeakScreen() {
 
   useEffect(() => {
     if (!showTranslation) return;
-    setTranslationText(lastCoachText ? `Übersetzung: ${lastCoachText}` : "");
-  }, [showTranslation, lastCoachText]);
+    setTranslationText(lastCoachText ? t("speak.translation_prefix", { text: lastCoachText }) : "");
+  }, [showTranslation, lastCoachText, t]);
 
   const animatePressIn = () => {
     Animated.spring(pressAnim, { toValue: 1.05, useNativeDriver: true }).start();
@@ -525,7 +531,7 @@ export default function LiveSpeakScreen() {
       const result = await evaluateRecording({
         fileUri: uri,
         targetText: null,
-        locale: "de-DE",
+        locale: targetLocale,
       });
       const transcript = (result?.transcript ?? "").trim();
 
@@ -583,13 +589,13 @@ export default function LiveSpeakScreen() {
             <NavBackButton />
             <YStack width={40} />
           </XStack>
-          <Text fontSize={16}>Nicht gefunden: {id}</Text>
+          <Text fontSize={16}>{t("speak.not_found", { id })}</Text>
         </YStack>
       </YStack>
     );
   }
 
-  const userLine = draftText || "Sprich jetzt.";
+  const userLine = draftText || t("speak.speak_now");
   const lastCoachId = [...messages].reverse().find((msg) => msg.role === "coach")?.id;
 
   return (
@@ -612,14 +618,14 @@ export default function LiveSpeakScreen() {
                 </Text>
               </YStack>
               <Pressable accessibilityRole="button" onPress={() => setShowTasks(true)}>
-                <YStack
-                  paddingHorizontal="$2.5"
-                  paddingVertical="$1.5"
-                  borderRadius="$10"
-                  backgroundColor="$gray2"
-                >
-                  <Text fontSize={14}>Aufgaben</Text>
-                </YStack>
+                  <YStack
+                    paddingHorizontal="$2.5"
+                    paddingVertical="$1.5"
+                    borderRadius="$10"
+                    backgroundColor="$gray2"
+                  >
+                  <Text fontSize={14}>{t("speak.tasks")}</Text>
+                  </YStack>
               </Pressable>
             </XStack>
 
@@ -729,7 +735,7 @@ export default function LiveSpeakScreen() {
               onPress={() => {
                 const next = !showTranslation;
                 setShowTranslation(next);
-                setTranslationText(next ? `Übersetzung: ${lastCoachText}` : "");
+                setTranslationText(next ? t("speak.translation_prefix", { text: lastCoachText }) : "");
               }}
             />
             <IconOnlyButton
@@ -782,19 +788,19 @@ export default function LiveSpeakScreen() {
             </Animated.View>
           </YStack>
           <Text fontSize={12} color="$muted" marginTop="$2">
-            Gedrückt halten
+            {t("speak.hold_to_talk")}
           </Text>
           {recState === "processing" ? (
             <XStack alignItems="center" gap="$2" marginTop="$2">
               <ActivityIndicator />
               <Text fontSize={12} color="$muted">
-                Transkribiere …
+                {t("speak.transcribing")}
               </Text>
             </XStack>
           ) : null}
           {showRetryHint ? (
             <Text fontSize={12} color="$muted" marginTop="$1">
-              Tipp: halte 2 Sekunden & sprich klar.
+              {t("speak.tip_hold")}
             </Text>
           ) : null}
         </YStack>
@@ -812,7 +818,7 @@ export default function LiveSpeakScreen() {
             <Pressable onPress={() => {}} style={{ width: "100%" }}>
               <YStack backgroundColor="$background" borderRadius="$6" padding="$4" gap="$3">
                 <XStack justifyContent="space-between" alignItems="center">
-                  <Text fontSize={18} fontWeight="700">Aufgaben</Text>
+                  <Text fontSize={18} fontWeight="700">{t("speak.tasks")}</Text>
                   <Pressable onPress={() => setShowTasks(false)}>
                     <Text fontSize={16}>✕</Text>
                   </Pressable>
@@ -826,7 +832,7 @@ export default function LiveSpeakScreen() {
                       </XStack>
                     ))
                   ) : (
-                    <Text color="$muted">Keine Aufgaben verfügbar.</Text>
+                    <Text color="$muted">{t("speak.no_tasks")}</Text>
                   )}
                 </YStack>
               </YStack>
@@ -847,7 +853,7 @@ export default function LiveSpeakScreen() {
             <Pressable onPress={() => {}} style={{ width: "100%" }}>
               <YStack backgroundColor="$background" borderRadius="$6" padding="$4" gap="$3" paddingBottom={micAreaHeight}>
                 <XStack justifyContent="space-between" alignItems="center">
-                  <Text fontSize={18} fontWeight="700">Vorschläge</Text>
+                  <Text fontSize={18} fontWeight="700">{t("speak.suggestions")}</Text>
                   <Pressable onPress={() => setShowTips(false)}>
                     <Text fontSize={16}>✕</Text>
                   </Pressable>
@@ -869,8 +875,8 @@ export default function LiveSpeakScreen() {
                       </Pressable>
                     ))
                   ) : (
-                    <Text color="$muted">Keine Vorschläge verfügbar.</Text>
-                  )}
+                    <Text color="$muted">{t("speak.no_suggestions")}</Text>
+                )}
                 </YStack>
               </YStack>
             </Pressable>

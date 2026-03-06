@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { getLessonImage } from "../../../assets/lesson-images";
 import { playTtsText } from "../../../lib/tts/playText";
 import { stopTts } from "../../../lib/tts/ttsPlayer";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 type Option = {
   id: string;
@@ -52,12 +54,14 @@ export function ImageAudioChoiceStep({
 
   const [audioBusy, setAudioBusy] = useState(false);
   const [containerW, setContainerW] = useState(0);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const playAudio = async (text?: string) => {
     if (!text) return;
     try {
       setAudioBusy(true);
-      await playTtsText(text, "normal");
+      await playTtsText(text, "normal", targetLocale);
     } finally {
       setAudioBusy(false);
     }

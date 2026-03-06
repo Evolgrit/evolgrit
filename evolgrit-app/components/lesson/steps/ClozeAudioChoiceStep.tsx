@@ -7,6 +7,8 @@ import { getLessonImage } from "../../../assets/lesson-images";
 import { playTtsText } from "../../../lib/tts/playText";
 import { stopTts } from "../../../lib/tts/ttsPlayer";
 import { SoftButton } from "../../system/SoftButton";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 type Choice = { id: string; label: string; correct?: boolean };
 
@@ -35,6 +37,8 @@ export function ClozeAudioChoiceStep({
   const successBg = "rgba(52,199,89,0.10)";
   const shake = useSharedValue(0);
   const [audioBusy, setAudioBusy] = useState(false);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const shakeStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shake.value }],
@@ -53,7 +57,7 @@ export function ClozeAudioChoiceStep({
     if (!ttsText) return;
     try {
       setAudioBusy(true);
-      await playTtsText(ttsText, "normal");
+      await playTtsText(ttsText, "normal", targetLocale);
     } finally {
       setAudioBusy(false);
     }

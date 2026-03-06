@@ -11,12 +11,14 @@ import { SettingsRow } from "../components/system/SettingsRow";
 import { SettingsSearchBar } from "../components/system/SettingsSearchBar";
 import { getDevMode, setDevMode } from "../lib/devModeStore";
 import { unlockAllWeeksForCurrentPhase } from "../lib/phaseStateStore";
+import { useI18n } from "../lib/i18n";
 
 export default function SettingsScreen() {
   const router = useRouter();
   const [settings, setSettings] = useState<AppSettings | null>(null);
   const [devMode, setDevModeState] = useState(false);
   const [search, setSearch] = useState("");
+  const { t } = useI18n();
 
   useEffect(() => {
     (async () => {
@@ -34,73 +36,67 @@ export default function SettingsScreen() {
 
   if (!settings) {
     return (
-      <ScreenShell title="Einstellungen" showBack>
+      <ScreenShell title={t("settings.title")} showBack>
         <Stack flex={1} alignItems="center" justifyContent="center">
-          <Text color="$muted">Lädt…</Text>
+          <Text color="$muted">{t("settings.loading")}</Text>
         </Stack>
       </ScreenShell>
     );
   }
 
   return (
-    <ScreenShell title="Einstellungen" showBack>
+    <ScreenShell title={t("settings.title")} showBack>
       <Stack flex={1} gap={16} paddingBottom={20}>
         <SettingsSearchBar value={search} onChangeText={setSearch} />
 
-        <SettingsSection title="Allgemein">
+        <SettingsSection title={t("settings.general")}>
           <SettingsRow
             icon={<Ionicons name="notifications-outline" size={18} color="#111827" />}
-            title="Erinnerungen"
-            subtitle="Benachrichtigung einmal pro Tag"
+            title={t("settings.reminders")}
+            subtitle={t("settings.reminders_sub")}
             onPress={() => router.push("/reminders" as any)}
           />
           <SettingsRow
             icon={<Ionicons name="mic-outline" size={18} color="#111827" />}
-            title="Tonaufnahmen"
-            subtitle="Audioaufnahmen speichern"
+            title={t("settings.recordings")}
+            subtitle={t("settings.recordings_sub")}
             onPress={() => router.push("/audio-settings" as any)}
           />
           <SettingsRow
             icon={<Ionicons name="volume-high-outline" size={18} color="#111827" />}
-            title="Sound-Effekte"
+            title={t("settings.sound_effects")}
             right={<SettingsToggle value={settings.soundEffects} onValueChange={() => toggle("soundEffects")} />}
             onPress={() => {}}
             showChevron={false}
           />
           <SettingsRow
             icon={<Ionicons name="flame-outline" size={18} color="#111827" />}
-            title="Streak-Benachrichtigungen"
+            title={t("settings.streak_notifications")}
             right={<SettingsToggle value={settings.streakNotifications} onValueChange={() => toggle("streakNotifications")} />}
             onPress={() => {}}
             showChevron={false}
           />
           <SettingsRow
             icon={<Ionicons name="play-forward-outline" size={18} color="#111827" />}
-            title="Automatisch zur nächsten Übung"
+            title={t("settings.auto_advance")}
             right={<SettingsToggle value={settings.autoAdvance} onValueChange={() => toggle("autoAdvance")} />}
             onPress={() => {}}
             showChevron={false}
           />
         </SettingsSection>
 
-        <SettingsSection title="Konto & Sprache">
-          <SettingsRow
-            icon={<Ionicons name="language-outline" size={18} color="#111827" />}
-            title="Sprache"
-            subtitle="Lernsprache & Ausgangssprache"
-            onPress={() => router.push("/language" as any)}
-          />
+        <SettingsSection title={t("settings.account_language")}>
           <SettingsRow
             icon={<Ionicons name="rocket-outline" size={18} color="#111827" />}
-            title="Open Demo"
+            title={t("settings.open_demo")}
             onPress={() => router.push("/demo" as any)}
           />
         </SettingsSection>
 
-        <SettingsSection title="Entwicklung">
+        <SettingsSection title={t("settings.development")}>
           <SettingsRow
             icon={<Ionicons name="terminal-outline" size={18} color="#111827" />}
-            title="Developer Mode"
+            title={t("settings.dev_mode")}
             right={
               <SettingsToggle
                 value={devMode}
@@ -115,18 +111,18 @@ export default function SettingsScreen() {
           />
           <SettingsRow
             icon={<Ionicons name="key-outline" size={18} color="#111827" />}
-            title="Unlock all weeks"
-            subtitle="Phase testing"
+            title={t("settings.unlock_weeks")}
+            subtitle={t("settings.unlock_weeks_sub")}
             onPress={async () => {
               await unlockAllWeeksForCurrentPhase();
             }}
           />
         </SettingsSection>
 
-        <SettingsSection title="Über">
+        <SettingsSection title={t("settings.about")}>
           <SettingsRow
             icon={<Ionicons name="information-circle-outline" size={18} color="#111827" />}
-            title="Version"
+            title={t("settings.version")}
             subtitle="Evolgrit · Build 1"
             showChevron={false}
           />

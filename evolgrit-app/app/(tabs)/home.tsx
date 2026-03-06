@@ -13,6 +13,7 @@ import { buildHomeCards, type HomeCard } from "../../lib/homeCards";
 import { logNextActionShown } from "../../lib/nextActionStore";
 import { getLatestResumeInfo, type ResumeInfo } from "../../lib/progress/lessonProgress";
 import { getEvents, track } from "../../lib/tracking";
+import { useI18n } from "../../lib/i18n";
 
 const TAB_BAR_HEIGHT = 80;
 
@@ -28,6 +29,7 @@ type DomainStats = Record<DomainKey, DomainStat>;
 export default function HomeHub() {
   const router = useRouter();
   const theme = useTheme();
+  const { t } = useI18n();
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
   const [cards, setCards] = useState<HomeCard[]>([]);
   const [todayMinutes, setTodayMinutes] = useState(0);
@@ -138,23 +140,55 @@ export default function HomeHub() {
         <GlassCard position="relative" variant={cardVariant}>
           <XStack alignItems="center" justifyContent="space-between" marginBottom={6}>
             <Text fontSize={12} fontWeight="700" color="$textSecondary">
-              {card.kind === "next_action" ? "NEXT ACTION" : card.kind === "resume" ? "WEITERLERNEN" : card.kind === "job" ? "JOB" : "FOCUS"}
+              {card.kind === "next_action"
+                ? t("home.next_action")
+                : card.kind === "daily_training"
+                ? t("practice.daily_title")
+                : card.kind === "migration_plan"
+                ? t("journey.card_title")
+                : card.kind === "resume"
+                ? t("home.resume")
+                : card.kind === "job"
+                ? t("home.job")
+                : t("home.focus")}
             </Text>
             {isNext ? (
               <Text fontSize={12} fontWeight="700" color="$textSecondary">
-                3 Min
+                {t("home.minutes", { count: 3 })}
               </Text>
             ) : null}
           </XStack>
-          <Text fontSize={18} fontWeight="800" color="$text">
-            {card.title}
-          </Text>
-          <Text color="$textSecondary" marginTop={4}>
-            {card.subtitle}
-          </Text>
+          {card.kind === "daily_training" ? (
+            <>
+              <Text fontSize={18} fontWeight="800" color="$text">
+                {t("practice.daily_title")}
+              </Text>
+              <Text color="$textSecondary" marginTop={4}>
+                {t("practice.daily_sub")} · {t("practice.due_count", { count: card.count })}
+              </Text>
+            </>
+          ) : card.kind === "migration_plan" ? (
+            <>
+              <Text fontSize={18} fontWeight="800" color="$text">
+                {t("journey.card_title")}
+              </Text>
+              <Text color="$textSecondary" marginTop={4}>
+                {t("journey.card_sub")} · {t("journey.card_progress", { count: card.progress })} · {t("journey.card_missing", { count: card.missing })}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text fontSize={18} fontWeight="800" color="$text">
+                {card.title}
+              </Text>
+              <Text color="$textSecondary" marginTop={4}>
+                {card.subtitle}
+              </Text>
+            </>
+          )}
           {card.kind === "next_action" && todayMinutes > 0 ? (
             <Text color="$textSecondary" marginTop={8} fontSize={12}>
-              Heute fokussiert: {todayMinutes} Min
+              {t("home.today_focus", { count: todayMinutes })}
             </Text>
           ) : null}
         </GlassCard>
@@ -165,9 +199,9 @@ export default function HomeHub() {
   const resumeTitle = resumeInfo?.title ?? resumeInfo?.lessonId ?? "";
   const resumeStepLine =
     resumeInfo && resumeInfo.totalSteps
-      ? `Schritt ${resumeInfo.stepIndex + 1} von ${resumeInfo.totalSteps}`
+      ? t("home.step_of", { current: resumeInfo.stepIndex + 1, total: resumeInfo.totalSteps })
       : resumeInfo
-      ? `Schritt ${resumeInfo.stepIndex + 1}`
+      ? t("home.step", { current: resumeInfo.stepIndex + 1 })
       : "";
   const resumeVariant =
     resumeInfo?.level?.startsWith("JOB") || resumeInfo?.lessonId?.startsWith("pflege_") || resumeInfo?.lessonId?.startsWith("job_")
@@ -175,10 +209,12 @@ export default function HomeHub() {
       : "language";
 
   return (
-    <ScreenShell title="Home" leftContent={avatarButton} rightActions={chatButton}>
+    <ScreenShell title={t("app.home")} leftContent={avatarButton} rightActions={chatButton}>
       <ScrollView contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 24 }}>
         <YStack gap="$3" padding="$4" paddingTop="$2">
           {cards.filter((c) => c.kind === "next_action").map(renderCard)}
+          {cards.filter((c) => c.kind === "daily_training").map(renderCard)}
+          {cards.filter((c) => c.kind === "migration_plan").map(renderCard)}
 
           {resumeInfo ? (
             <Pressable
@@ -196,10 +232,10 @@ export default function HomeHub() {
               }}
             >
               <GlassCard position="relative" variant={resumeVariant}>
-                <Text fontSize={12} fontWeight="700" color="$textSecondary" marginBottom={6}>
-                  WEITERLERNEN
+                <Text fontFamily="$body" fontSize="$meta" fontWeight="600" color="$textSecondary" marginBottom={6}>
+                  {t("home.resume")}
                 </Text>
-                <Text fontSize={18} fontWeight="800" color="$text">
+                <Text fontFamily="$body" fontSize="$sectionTitle" fontWeight="700" color="$text">
                   {resumeTitle}
                 </Text>
                 <Text color="$textSecondary" marginTop={4}>
@@ -210,35 +246,65 @@ export default function HomeHub() {
           ) : null}
 
           <YStack gap="$2" marginTop="$2">
-            <Text fontSize={16} fontWeight="800" color="$text">
-              Bereiche
-            </Text>
+            <XStack alignItems="center" justifyContent="space-between">
+              <Text fontFamily="$body" fontSize="$sectionTitle" fontWeight="700" color="$text">
+                {t("home.sections")}
+              </Text>
+              <Button
+                unstyled
+                onPress={() => router.push("/snap")}
+                paddingHorizontal="$3"
+                paddingVertical="$2"
+                borderRadius="$4"
+                backgroundColor="$cardSubtle"
+              >
+                <Text fontFamily="$body" fontSize="$meta" fontWeight="700" color="$text">
+                  {t("snap.open")}
+                </Text>
+              </Button>
+            </XStack>
             <XStack flexWrap="wrap" gap="$3">
               <DomainTile
-                title="Sprache"
-                subtitle={domainStats.language.sessions > 0 ? `${domainStats.language.sessions} Sessions` : "Heute starten"}
-                value={domainStats.language.minutes > 0 ? `${domainStats.language.minutes} Min` : "—"}
+                title={t("home.language")}
+                subtitle={
+                  domainStats.language.sessions > 0
+                    ? t("home.sessions", { count: domainStats.language.sessions })
+                    : t("home.start_today")
+                }
+                value={domainStats.language.minutes > 0 ? t("home.minutes", { count: domainStats.language.minutes }) : "—"}
                 bg="language"
                 onPress={() => router.push("/learn/language")}
               />
               <DomainTile
-                title="Job & Zukunft"
-                subtitle={domainStats.job.sessions > 0 ? `${domainStats.job.sessions} Sessions` : "Heute starten"}
-                value={domainStats.job.minutes > 0 ? `${domainStats.job.minutes} Min` : "—"}
+                title={t("home.job_future")}
+                subtitle={
+                  domainStats.job.sessions > 0
+                    ? t("home.sessions", { count: domainStats.job.sessions })
+                    : t("home.start_today")
+                }
+                value={domainStats.job.minutes > 0 ? t("home.minutes", { count: domainStats.job.minutes }) : "—"}
                 bg="job"
                 onPress={() => router.push("/learn/job")}
               />
               <DomainTile
-                title="Leben"
-                subtitle={domainStats.life.sessions > 0 ? `${domainStats.life.sessions} Sessions` : "Heute starten"}
-                value={domainStats.life.minutes > 0 ? `${domainStats.life.minutes} Min` : "—"}
+                title={t("home.life")}
+                subtitle={
+                  domainStats.life.sessions > 0
+                    ? t("home.sessions", { count: domainStats.life.sessions })
+                    : t("home.start_today")
+                }
+                value={domainStats.life.minutes > 0 ? t("home.minutes", { count: domainStats.life.minutes }) : "—"}
                 bg="life"
                 onPress={() => router.push("/learn/life")}
               />
               <DomainTile
-                title="Focus"
-                subtitle={domainStats.focus.sessions > 0 ? `${domainStats.focus.sessions} Sessions` : "Heute starten"}
-                value={domainStats.focus.minutes > 0 ? `${domainStats.focus.minutes} Min` : "—"}
+                title={t("home.focus")}
+                subtitle={
+                  domainStats.focus.sessions > 0
+                    ? t("home.sessions", { count: domainStats.focus.sessions })
+                    : t("home.start_today")
+                }
+                value={domainStats.focus.minutes > 0 ? t("home.minutes", { count: domainStats.focus.minutes }) : "—"}
                 bg="focus"
                 onPress={() => router.push("/focus")}
               />

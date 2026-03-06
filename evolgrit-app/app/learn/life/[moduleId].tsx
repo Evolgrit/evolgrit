@@ -15,6 +15,8 @@ import {
   useAudioRecorder,
 } from "expo-audio";
 import { evaluateRecording } from "../../../lib/asrClient";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 const TAB_BAR_HEIGHT = 80;
 
@@ -187,6 +189,8 @@ export default function LifeModuleScreen() {
   const params = useLocalSearchParams<{ moduleId?: string }>();
   const moduleId = params.moduleId ?? "life_01_time";
   const insets = useSafeAreaInsets();
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
   const data = useMemo(() => loadLifeModule(moduleId), [moduleId]);
   const [stepIndex, setStepIndex] = useState(0);
   const [doDontAnswers, setDoDontAnswers] = useState<Record<number, "do" | "dont" | null>>({});
@@ -277,7 +281,7 @@ export default function LifeModuleScreen() {
   const handlePlay = useCallback(async (text: string, rate: "normal" | "slow" = "normal") => {
     if (!text) return;
     await stopCoachTts().catch(() => {});
-    await playCoachTts(text, { voice: "de-DE-KatjaNeural", rate });
+    await playCoachTts(text, { voice: "de-DE-KatjaNeural", rate, locale: targetLocale });
   }, []);
 
   const handleDoDontPick = (idx: number, choice: "do" | "dont") => {
@@ -350,7 +354,7 @@ export default function LifeModuleScreen() {
       }
       const res = await evaluateRecording({
         fileUri: uri,
-        locale: "de-DE",
+        locale: targetLocale,
         targetText: null,
       });
       const text = (res?.transcript ?? "").trim();
@@ -365,7 +369,7 @@ export default function LifeModuleScreen() {
     } catch {
       setIsRecording(false);
     }
-  }, [recorder]);
+  }, [recorder, targetLocale]);
 
   const canContinue = useMemo(() => {
     const step = currentStep as any;

@@ -1,0 +1,77 @@
+{
+  "id": "a2_u16_l02_time_place",
+  "level": "A2",
+  "unitId": "a2_u16",
+  "title": "Zeit & Ort klären",
+  "durationMin": 3,
+  "imageKey": "a2_party_timeplace_cover_01",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Du fragst nach der Uhrzeit. Was passt?",
+      "choices": [
+        { "id": "a", "label": "Um wie viel Uhr geht’s los?" },
+        { "id": "b", "label": "Wie alt bist du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Um wie viel Uhr geht’s los?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Du fragst nach dem Ort. Was passt?",
+      "choices": [
+        { "id": "a", "label": "Wo findet die Party statt?" },
+        { "id": "b", "label": "Warum ist das blau?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wo findet die Party statt?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Fülle die Lücke:",
+      "text": "Die Party ist ___ mir zu Hause.",
+      "choices": [
+        { "id": "a", "label": "bei" },
+        { "id": "b", "label": "mit" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Dein Freund kommt später. Was passt?",
+      "choices": [
+        { "id": "a", "label": "Kein Problem, bis später!" },
+        { "id": "b", "label": "Sehr geehrte Damen und Herren." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Kein Problem, bis später!"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Wähle das passende Bild für „bei mir zu Hause“.",
+      "imageKey": "a2_home_scene_01",
+      "choices": [
+        { "id": "a", "label": "Zu Hause", "imageKey": "a2_home_scene_01" },
+        { "id": "b", "label": "Bahnhof", "imageKey": "a2_home_scene_02" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Super!",
+      "text": "Du kannst jetzt nach Zeit und Ort fragen und eine einfache Antwort geben."
+    }
+  ]
+}

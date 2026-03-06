@@ -25,6 +25,23 @@ import { enqueueReviewItems } from "../../lib/progress/spaced";
 import { makeReviewItemsFromLesson } from "../../lib/progress/makeReviewItemsFromLesson";
 import { logNextActionCompleted, setLastResumeLesson } from "../../lib/nextActionStore";
 import { track } from "../../lib/tracking";
+import { useI18n } from "../../lib/i18n";
+import { useUserSettings } from "../../lib/userSettings";
+
+type LocalizedString = string | Record<string, string>;
+
+function resolveText(value: LocalizedString | null | undefined, langCode: string) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  const code = (langCode ?? "").toLowerCase();
+  const base = code.split("-")[0];
+  if (value[code]) return value[code];
+  if (value[base]) return value[base];
+  if (value.de) return value.de;
+  if (value.en) return value.en;
+  const first = Object.values(value).find((v) => typeof v === "string" && v.trim().length > 0);
+  return typeof first === "string" ? first : "";
+}
 
 type ImageChoiceStepData = {
   type: "image_choice";
@@ -296,6 +313,7 @@ const lessons: Record<string, Lesson> = {
 
   a2_u01_l01: require("../../content/a2/lessons/a2_u01_l01.json"),
   a2_u01_l02: require("../../content/a2/lessons/a2_u01_l02.json"),
+  a2_u01_l01_meeting_invite: require("../../content/a2/lessons/a2_u01_l01_meeting_invite.json"),
   a2_u01_m01: require("../../content/a2/lessons/a2_u01_m01.json"),
   a2_u01_q01: require("../../content/a2/lessons/a2_u01_q01.json"),
   a2_u02_l01: require("../../content/a2/lessons/a2_u02_l01.json"),
@@ -354,6 +372,10 @@ const lessons: Record<string, Lesson> = {
   a2_u15_l02: require("../../content/a2/lessons/a2_u15_l02.json"),
   a2_u15_m01: require("../../content/a2/lessons/a2_u15_m01.json"),
   a2_u15_q01: require("../../content/a2/lessons/a2_u15_q01.json"),
+  a2_u16_l01_party_invite: require("../../content/a2/lessons/a2_u16_l01_party_invite.json"),
+  a2_u16_l02_time_place: require("../../content/a2/lessons/a2_u16_l02_time_place.json"),
+  a2_u16_m01_party_mini: require("../../content/a2/lessons/a2_u16_m01_party_mini.json"),
+  a2_u16_q01_party_quiz: require("../../content/a2/lessons/a2_u16_q01_party_quiz.json"),
 
 };
 
@@ -363,9 +385,12 @@ export default function LessonRunnerScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
+  const { targetLanguageCode } = useUserSettings();
   const [confirmMode, setConfirmMode] = useState<ConfirmMode>("none");
   const [resumeStep, setResumeStep] = useState<number | null>(null);
   const [canAdvance, setCanAdvance] = useState(false);
+  const [listenRepeatCorrect, setListenRepeatCorrect] = useState(false);
   const lessonStartRef = useRef(Date.now());
   const trackedMinutesRef = useRef(false);
 
@@ -463,6 +488,7 @@ export default function LessonRunnerScreen() {
     setSelected(null);
     setReveal(false);
     setCanAdvance(false);
+    setListenRepeatCorrect(false);
   }, [stepIndex]);
 
   useEffect(() => {
@@ -489,15 +515,33 @@ export default function LessonRunnerScreen() {
     return (
       <YStack flex={1} backgroundColor="#FFFFFF" padding="$4" justifyContent="center">
         <Text color="$muted" {...lessonType.body}>
-          Lektion nicht gefunden.
+          {t("lesson.not_found", { id: id ? String(id) : "" })}
         </Text>
       </YStack>
     );
   }
 
   const step = lesson.steps[stepIndex];
+
+  const pickText = (value: any): string => {
+    if (typeof value === "string") return value;
+    if (value && typeof value === "object") {
+      const byCode = value[targetLanguageCode] ?? value.de ?? value.en;
+      if (typeof byCode === "string") return byCode;
+    }
+    return "";
+  };
+
+  const pickArray = (value: any): string[] => {
+    if (!Array.isArray(value)) return [];
+    return value.map((v) => pickText(v)).filter(Boolean);
+  };
   const footerHeight = 64;
-  const canGoNext = step.type === "summary" ? true : canAdvance;
+  const canGoNext =
+    step.type === "listen_repeat" ? listenRepeatCorrect : step.type === "summary" ? true : canAdvance;
+  const isSpeakingStep = step.type === "listen_repeat";
+  const nextBg = isSpeakingStep ? (listenRepeatCorrect ? "$green9" : "$gray4") : undefined;
+  const nextText = isSpeakingStep ? (listenRepeatCorrect ? "$color1" : "$gray9") : undefined;
 
   const onChoice = async (optionId: string, correct: boolean) => {
     setSelected(optionId);
@@ -627,19 +671,28 @@ export default function LessonRunnerScreen() {
         }}
       >
         <LessonStepShell
-          title={lesson.title}
-          subtitle={`Schritt ${stepIndex + 1} von ${lesson.steps.length}`}
+          title={
+            resolveText((lesson as any)?.title, targetLanguageCode) ||
+            (typeof (lesson as any)?.title === "string" ? (lesson as any).title : "")
+          }
+          subtitle={t("learn.step_of", { current: stepIndex + 1, total: lesson.steps.length })}
           progress={(stepIndex + 1) / lesson.steps.length}
           onBack={handleBack}
           onNext={advance}
-          canNext={canAdvance}
+          canNext={canGoNext}
           wrapCard={step.type !== "listen_repeat"}
         >
           {step.type === "image_audio_choice" ? (
             <ImageAudioChoiceStep
-              prompt={step.prompt}
-              ttsText={step.tts?.text}
-              options={step.options.map((opt) => ({ ...opt, correct: opt.id === step.answerId }))}
+              prompt={resolveText((step as any).prompt, targetLanguageCode)}
+              ttsText={resolveText((step as any)?.tts?.text, targetLanguageCode)}
+              options={step.options.map((opt) => ({
+                ...opt,
+                label: resolveText((opt as any).label, targetLanguageCode),
+                ttsText: resolveText((opt as any).ttsText, targetLanguageCode),
+                audioText: resolveText((opt as any).audioText, targetLanguageCode),
+                correct: opt.id === step.answerId,
+              }))}
               selectedId={selected}
               reveal={reveal}
               onSelect={onChoice}
@@ -663,15 +716,16 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ImageChoiceStep
-                  prompt={step.prompt}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
                   options={(rawChoices ?? []).map((opt: any) => ({
                     ...opt,
+                    label: resolveText(opt.label, targetLanguageCode),
                     correct: opt.id === (step as any).answer,
                   }))}
                   selectedId={selected}
@@ -699,16 +753,17 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ChoiceStep
-                  prompt={step.prompt}
-                  text={step.text}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
+                  text={resolveText((step as any).text, targetLanguageCode)}
                   options={(rawChoices ?? []).map((opt: any) => ({
                     ...opt,
+                    label: resolveText(opt.label, targetLanguageCode),
                     correct: opt.id === (step as any).answer,
                   }))}
                   selectedId={selected}
@@ -724,7 +779,7 @@ export default function LessonRunnerScreen() {
               const rawChoices = Array.isArray((step as any).choices)
                 ? (step as any).choices
                 : null;
-              const rawText = typeof (step as any).text === "string" ? (step as any).text : "";
+              const rawText = resolveText((step as any).text, targetLanguageCode);
               if (!rawChoices || !rawText) {
                 console.warn("[lesson-runner] choice step missing choices", { id, stepIndex, step });
                 return (
@@ -737,16 +792,17 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ClozeChoiceStep
-                  prompt={step.prompt}
-                  text={step.text}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
+                  text={rawText}
                   options={(rawChoices ?? []).map((opt: any) => ({
                     ...opt,
+                    label: resolveText(opt.label, targetLanguageCode),
                     correct: opt.id === (step as any).answer,
                   }))}
                   selectedId={selected}
@@ -759,8 +815,8 @@ export default function LessonRunnerScreen() {
 
           {step.type === "listen_repeat" ? (
             <ListenRepeatStep
-              prompt={step.prompt}
-              text={step.ttsText}
+              prompt={resolveText((step as any).prompt, targetLanguageCode)}
+              text={resolveText((step as any).ttsText, targetLanguageCode)}
               onSolved={(ok) => {
                 if (!ok) {
                   const level = lesson ? resolveLevel(lesson.id, lesson.level) : null;
@@ -771,6 +827,7 @@ export default function LessonRunnerScreen() {
                 }
                 setCanAdvance(ok);
               }}
+              onCorrectChange={(ok) => setListenRepeatCorrect(ok)}
             />
           ) : null}
 
@@ -791,16 +848,17 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ChoiceStep
-                  prompt={step.prompt}
-                  text={step.text}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
+                  text={resolveText((step as any).text, targetLanguageCode)}
                   options={(rawChoices ?? []).map((opt: any) => ({
                     ...opt,
+                    label: resolveText(opt.label, targetLanguageCode),
                     correct: opt.id === (step as any).answer,
                   }))}
                   selectedId={selected}
@@ -828,16 +886,17 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ChoiceStep
-                  prompt={step.prompt}
-                  text={step.text}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
+                  text={resolveText((step as any).text, targetLanguageCode)}
                   options={(rawChoices ?? []).map((opt: any) => ({
                     ...opt,
+                    label: resolveText(opt.label, targetLanguageCode),
                     correct: opt.id === (step as any).answer,
                   }))}
                   selectedId={selected}
@@ -865,19 +924,20 @@ export default function LessonRunnerScreen() {
                         Diese Aufgabe ist gerade nicht korrekt konfiguriert. Du kannst trotzdem weitergehen.
                       </Text>
                     </GlassCard>
-                    <SoftButton label="Weiter" onPress={() => advance()} />
+                    <SoftButton label={t("common.next")} onPress={() => advance()} />
                   </YStack>
                 );
               }
               return (
                 <ClozeAudioChoiceStep
-                  prompt={step.prompt}
-                  ttsText={step.tts?.text}
+                  prompt={resolveText((step as any).prompt, targetLanguageCode)}
+                  ttsText={resolveText((step as any)?.tts?.text, targetLanguageCode)}
                   imageKey={step.imageKey}
                   sentence={step.sentence}
-                  translation={step.translation}
+                  translation={resolveText((step as any).translation, targetLanguageCode)}
                   choices={(rawChoices ?? []).map((c: any) => ({
                     ...c,
+                    label: resolveText(c.label, targetLanguageCode),
                     correct: c.id === (step as any).answerId,
                   }))}
                   selectedId={selected}
@@ -891,22 +951,22 @@ export default function LessonRunnerScreen() {
           {step.type === "summary" ? (
             <YStack gap="$3" alignItems="center">
               <Text fontWeight="900" color="$text" fontSize={20} textAlign="center">
-                {step.title}
+                {resolveText((step as any).title, targetLanguageCode)}
               </Text>
               {step.text ? (
                 <Text color="$muted" textAlign="center">
-                  {step.text}
+                  {resolveText((step as any).text, targetLanguageCode)}
                 </Text>
               ) : null}
               {step.bullets ? (
                 <YStack gap="$2" width="100%">
-                  {step.bullets.map((item, idx) => (
+                  {(step.bullets as any[]).map((item, idx) => (
                     <XStack key={`${item}-${idx}`} gap="$2" alignItems="flex-start">
                       <Text color="$text" fontWeight="900">
                         •
                       </Text>
                       <Text color="$text" flex={1}>
-                        {item}
+                        {resolveText(item as any, targetLanguageCode)}
                       </Text>
                     </XStack>
                   ))}
@@ -914,7 +974,7 @@ export default function LessonRunnerScreen() {
               ) : null}
               {step.cta ? (
                 <Text color="$muted" fontSize={12}>
-                  {step.cta}
+                  {resolveText((step as any).cta, targetLanguageCode)}
                 </Text>
               ) : null}
             </YStack>
@@ -923,8 +983,10 @@ export default function LessonRunnerScreen() {
       </ScrollView>
       <YStack padding="$3" paddingBottom={insets.bottom + 12} backgroundColor="#FFFFFF">
         <SoftButton
-          label={step.type === "summary" ? "Fertig" : "Weiter"}
+          label={step.type === "summary" ? t("common.done") : t("common.next")}
           disabled={!canGoNext}
+          backgroundColor={nextBg}
+          textColor={nextText}
           onPress={advance}
         />
       </YStack>

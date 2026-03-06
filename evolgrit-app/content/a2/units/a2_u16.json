@@ -1,0 +1,11 @@
+{
+  "id": "a2_u16",
+  "title": "Feiern & Einladen",
+  "subtitle": "Party organisieren und reagieren",
+  "lessons": [
+    { "id": "a2_u16_l01_party_invite", "title": "Party einladen", "kind": "lesson", "durationMin": 3 },
+    { "id": "a2_u16_l02_time_place", "title": "Zeit & Ort klären", "kind": "lesson", "durationMin": 3 },
+    { "id": "a2_u16_m01_party_mini", "title": "Mini · Party", "kind": "mini", "durationMin": 2 },
+    { "id": "a2_u16_q01_party_quiz", "title": "Quiz · Einladen", "kind": "quiz", "durationMin": 3 }
+  ]
+}

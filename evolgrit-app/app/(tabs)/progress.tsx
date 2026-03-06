@@ -5,6 +5,7 @@ import { Stack, Text, XStack, YStack, useTheme } from "tamagui";
 import { ScreenShell } from "../../components/system/ScreenShell";
 import { getCompletedCount } from "../../lib/progressStore";
 import { getEvents, getMonthBuckets, getSummary } from "../../lib/tracking";
+import { useI18n } from "../../lib/i18n";
 
 type TodayStats = {
   words: number;
@@ -37,6 +38,7 @@ function getStatusColor(status: "not_started" | "in_progress" | "completed") {
 
 export default function ProgressTab() {
   const theme = useTheme();
+  const { t } = useI18n();
   const [data, setData] = useState<ProgressData | null>(null);
 
   useEffect(() => {
@@ -86,27 +88,27 @@ export default function ProgressTab() {
   }, [data?.lessonsTotal]);
 
   return (
-    <ScreenShell title="Progress">
+    <ScreenShell title={t("progress.title")}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <YStack padding="$4" gap="$4">
           <YStack gap="$1">
             <Text color="$text" fontSize={28} fontWeight="800">
-              Progress
+              {t("progress.title")}
             </Text>
-            <Text color="$textSecondary">Dein Weg — ruhig & konstant.</Text>
+            <Text color="$textSecondary">{t("progress.subtitle")}</Text>
           </YStack>
 
           <XStack gap="$3">
             <StatTile
-              title="Lektionen"
+              title={t("progress.lessons")}
               value={String(data?.lessonsTotal ?? 0)}
-              subtitle="Completed"
+              subtitle={t("progress.completed")}
               bg="$surfaceLanguage"
             />
             <StatTile
-              title="Zeit"
+              title={t("progress.time")}
               value={String(data?.hoursTotal ?? 0)}
-              subtitle="Hours"
+              subtitle={t("progress.hours")}
               bg="$surfaceFocus"
             />
           </XStack>
@@ -115,31 +117,31 @@ export default function ProgressTab() {
 
           <YStack gap="$2">
             <Text color="$text" fontSize={16} fontWeight="800">
-              Today’s milestones
+              {t("progress.today_milestones")}
             </Text>
             <Stack backgroundColor="$surfaceLife" borderRadius="$r20" padding="$s16">
               <XStack gap="$2" justifyContent="space-between">
-                <MiniTile label="Neue Wörter" value={String(data?.today.words ?? 0)} />
-                <MiniTile label="Übungen" value={String(data?.today.exercises ?? 0)} />
-                <MiniTile label="Focus" value={`${data?.today.focusMinutes ?? 0} Min`} />
+                <MiniTile label={t("progress.new_words")} value={String(data?.today.words ?? 0)} />
+                <MiniTile label={t("progress.exercises")} value={String(data?.today.exercises ?? 0)} />
+                <MiniTile label={t("progress.focus")} value={t("common.minutes_short", { count: data?.today.focusMinutes ?? 0 })} />
               </XStack>
             </Stack>
           </YStack>
 
           <YStack gap="$2">
             <Text color="$text" fontSize={16} fontWeight="800">
-              Progress
+              {t("progress.section_progress")}
             </Text>
 
             <YStack gap="$3">
               <ProgressRow
-                title="Sprache"
+                title={t("progress.language")}
                 values={data?.buckets.languageLessons ?? [0, 0, 0]}
                 labels={data?.buckets.labels ?? ["—", "—", "—"]}
                 fill="$surfaceLanguage"
               />
               <ProgressRow
-                title="Job"
+                title={t("progress.job")}
                 values={data?.buckets.jobCompletes ?? [0, 0, 0]}
                 labels={data?.buckets.labels ?? ["—", "—", "—"]}
                 fill="$surfaceJob"
@@ -149,9 +151,9 @@ export default function ProgressTab() {
 
           <XStack gap="$2">
             {[
-              { label: "Nicht gestartet", status: "not_started" as const },
-              { label: "Begonnen", status: "in_progress" as const },
-              { label: "Fertig", status: "completed" as const },
+              { label: t("progress.status_not_started"), status: "not_started" as const },
+              { label: t("progress.status_in_progress"), status: "in_progress" as const },
+              { label: t("progress.status_completed"), status: "completed" as const },
             ].map((chip) => (
               <Stack
                 key={chip.label}
@@ -202,10 +204,11 @@ function StatTile({
 }
 
 function RingCard({ percent }: { percent: number }) {
+  const { t } = useI18n();
   return (
     <Stack backgroundColor="$bgSurface" borderRadius="$r20" padding="$s16">
       <Text color="$textSecondary" fontSize={12} fontWeight="700">
-        Learning progress
+        {t("progress.learning_progress")}
       </Text>
       <XStack marginTop="$s12" alignItems="center" gap="$3">
         <RingProgress percent={percent} />
@@ -214,7 +217,7 @@ function RingCard({ percent }: { percent: number }) {
             {Math.round(percent * 100)}%
           </Text>
           <Text color="$textSecondary">
-            Ziel: 100 Lektionen
+            {t("progress.goal_lessons", { count: 100 })}
           </Text>
         </YStack>
       </XStack>

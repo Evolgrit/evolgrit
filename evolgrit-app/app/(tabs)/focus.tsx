@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenShell } from "../../components/system/ScreenShell";
 import { PillButton } from "../../components/system/PillButton";
 import { getFocusMinutesToday, getFocusVoice, setFocusVoice, type FocusVoiceId } from "../../lib/focusStore";
+import { useI18n } from "../../lib/i18n";
 
 const focusData = require("../../content/focus/focus_sessions_v1.json");
 
@@ -25,12 +26,6 @@ type Section = {
   title: string;
 };
 
-const sections: Section[] = [
-  { id: "pre_learning", title: "Vor dem Lernen" },
-  { id: "post_learning", title: "Nach dem Lernen" },
-  { id: "sleep", title: "Abend & Schlaf" },
-];
-
 const levelColors: Record<string, string> = {
   green: "rgba(34, 197, 94, 0.45)",
   blue: "rgba(59, 130, 246, 0.45)",
@@ -42,6 +37,7 @@ const levelColors: Record<string, string> = {
 export default function FocusTab() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
   const [voiceId, setVoiceId] = useState<FocusVoiceId>("katja");
   const [minutesToday, setMinutesToday] = useState(0);
 
@@ -79,20 +75,26 @@ export default function FocusTab() {
     await setFocusVoice(next);
   }
 
+  const sections: Section[] = [
+    { id: "pre_learning", title: t("focus.section_pre_learning") },
+    { id: "post_learning", title: t("focus.section_post_learning") },
+    { id: "sleep", title: t("focus.section_sleep") },
+  ];
+
   return (
-    <ScreenShell title="Focus">
+    <ScreenShell title={t("focus.title")}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
         <YStack padding="$4" gap="$4">
           <YStack gap="$1">
             <Text fontSize={22} fontWeight="900" color="$text">
-              Focus
+              {t("focus.title")}
             </Text>
-            <Text color="$muted">Ruhiger Kopf, besser lernen.</Text>
+            <Text color="$muted">{t("focus.subtitle")}</Text>
           </YStack>
 
           <YStack gap="$2">
             <Text fontSize={16} fontWeight="800" color="$text">
-              Heute fokussiert: {minutesToday} Min
+              {t("focus.today", { count: minutesToday })}
             </Text>
             <XStack gap="$2">
               <PillButton
@@ -139,15 +141,17 @@ export default function FocusTab() {
                               borderRadius={999}
                               backgroundColor={color}
                             />
-                            <Text fontWeight="800" color="$text">
-                              {session.title}
-                            </Text>
-                          </XStack>
-                          <Text color="$muted">{Math.round(session.durationSec / 60)} Min</Text>
-                        </YStack>
-                      </Pressable>
-                    );
-                  })}
+                          <Text fontWeight="800" color="$text">
+                            {session.title}
+                          </Text>
+                        </XStack>
+                        <Text color="$muted">
+                          {t("common.minutes_short", { count: Math.round(session.durationSec / 60) })}
+                        </Text>
+                      </YStack>
+                    </Pressable>
+                  );
+                })}
                 </YStack>
               </YStack>
             );

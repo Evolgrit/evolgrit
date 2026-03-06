@@ -9,11 +9,12 @@ import { UnitAccordion } from "../../../components/learn/UnitAccordion";
 import { LessonRow } from "../../../components/learn/LessonRow";
 import { getProgressState } from "../../../lib/progressStore";
 import type { LessonStatus } from "../../../components/learn/StatusIcon";
+import a2Plan from "../../../content/a2/a2_index.json";
+import { useI18n } from "../../../lib/i18n";
 
 const TAB_BAR_HEIGHT = 80;
 
 const DEV_UNLOCK_ALL = typeof __DEV__ !== "undefined" ? __DEV__ : false;
-const A2_INDEX = require("../../../content/a2/a2_index.json");
 const UNIT_DATA: Record<string, any> = {
   a2_u01: require("../../../content/a2/units/a2_u01.json"),
   a2_u02: require("../../../content/a2/units/a2_u02.json"),
@@ -30,6 +31,7 @@ const UNIT_DATA: Record<string, any> = {
   a2_u13: require("../../../content/a2/units/a2_u13.json"),
   a2_u14: require("../../../content/a2/units/a2_u14.json"),
   a2_u15: require("../../../content/a2/units/a2_u15.json"),
+  a2_u16: require("../../../content/a2/units/a2_u16.json"),
 };
 
 type ItemStatus = {
@@ -40,21 +42,22 @@ type ItemStatus = {
 function labelForKind(kind: string) {
   switch (kind) {
     case "mini":
-      return "Mini";
+      return "mini";
     case "quiz":
-      return "Quiz";
+      return "quiz";
     case "abschluss":
-      return "Abschluss";
+      return "lesson";
     case "speaking":
-      return "Speaking";
+      return "lesson";
     default:
-      return "Lesson";
+      return "lesson";
   }
 }
 
 export default function A2IndexScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>({});
   const [openUnitId, setOpenUnitId] = useState<string | null>(null);
 
@@ -71,7 +74,7 @@ export default function A2IndexScreen() {
   }, []);
 
   const units = useMemo(() => {
-    const list = (A2_INDEX?.units ?? []) as { id: string }[];
+    const list = (a2Plan?.units ?? []) as { id: string }[];
     return list.map((u) => UNIT_DATA[u.id]).filter(Boolean);
   }, []);
 
@@ -80,7 +83,8 @@ export default function A2IndexScreen() {
     units.forEach((unit) => {
       const statuses: ItemStatus[] = [];
       let firstAvailableFound = false;
-      unit.items.forEach((item: any) => {
+      const unitItems = Array.isArray(unit.lessons) ? unit.lessons : unit.items ?? [];
+      unitItems.forEach((item: any) => {
         const done = Boolean(completedMap[item.id]);
         if (done) {
           statuses.push({ id: item.id, status: "done" });
@@ -118,8 +122,8 @@ export default function A2IndexScreen() {
     <ScreenShell title="A2 – Unterwegs" backgroundColor="$bgApp">
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + TAB_BAR_HEIGHT + 16 }}>
         <LevelHeader
-          title={A2_INDEX?.title ?? "A2 – Unterwegs"}
-          subtitle={A2_INDEX?.subtitle ?? "8 Lektionen · 3-Minuten Aufgaben"}
+          title={a2Plan?.title ?? "A2"}
+          subtitle={a2Plan?.subtitle ?? ""}
           onBack={() => router.back()}
         />
         <YStack gap="$3" padding="$4">
@@ -135,14 +139,14 @@ export default function A2IndexScreen() {
                   setOpenUnitId((prev) => (prev === unit.id ? null : unit.id));
                 }}
               >
-                {unit.items.map((item: any) => {
+                {(Array.isArray(unit.lessons) ? unit.lessons : unit.items ?? []).map((item: any) => {
                   const itemStatus = unitStatus.find((s) => s.id === item.id)?.status ?? "available";
                   return (
                     <LessonRow
                       key={item.id}
                       title={item.title}
                       minutes={item.durationMin ?? item.minutes}
-                      kindLabel={labelForKind(item.kind)}
+                      kindLabel={t(`common.${labelForKind(item.kind)}`)}
                       status={itemStatus}
                       onPress={() => router.push(`/lesson-runner/${item.id}`)}
                     />

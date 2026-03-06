@@ -4,6 +4,8 @@ import {
   getLastJobFocus,
   type NextActionType,
 } from "./nextActionStore";
+import { getDailyQueue } from "./storage/cards";
+import { getDocuments } from "./migration/storage";
 
 export type HomeCard =
   | {
@@ -16,16 +18,23 @@ export type HomeCard =
       accent: "blue" | "indigo" | "green" | "gray";
       durationMin: number;
     }
+  | { kind: "daily_training"; count: number; route: string }
+  | { kind: "migration_plan"; progress: number; missing: number; route: string }
   | { kind: "resume"; title: string; subtitle: string; cta: string; route: string }
   | { kind: "job"; title: string; subtitle: string; cta: string; route: string }
   | { kind: "focus"; title: string; subtitle: string; cta: string; route: string };
 
 export async function buildHomeCards(): Promise<{ cards: HomeCard[]; todayMinutes: number }> {
-  const [next, stats, jobKey] = await Promise.all([
+  const [next, stats, jobKey, docs] = await Promise.all([
     deriveNextAction(),
     getUsageStats(),
     getLastJobFocus(),
+    getDocuments(),
   ]);
+  const dailyQueue = await getDailyQueue();
+  const missing = docs.filter((d) => d.status === "missing").length;
+  const uploaded = docs.filter((d) => d.status === "uploaded").length;
+  const progress = docs.length ? Math.round((uploaded / docs.length) * 100) : 0;
 
   const cards: HomeCard[] = [];
 
@@ -38,6 +47,19 @@ export async function buildHomeCards(): Promise<{ cards: HomeCard[]; todayMinute
     route: next.route,
     accent: next.accent,
     durationMin: next.durationMin,
+  });
+
+  cards.push({
+    kind: "daily_training",
+    count: dailyQueue.length,
+    route: "/practice/daily",
+  });
+
+  cards.push({
+    kind: "migration_plan",
+    progress,
+    missing,
+    route: "/journey",
   });
 
   if (jobKey && next.type !== "job_drill") {

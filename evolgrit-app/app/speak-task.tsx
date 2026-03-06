@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Alert, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { Text } from "tamagui";
 
-import { loadLangPrefs } from "../lib/languagePrefs";
 import { applyERSDelta } from "../lib/readinessService";
 import { completeNextActionAndRecompute } from "../lib/nextActionService";
 import { logNextActionCompleted } from "../lib/nextActionStore";
@@ -15,25 +14,15 @@ import { AudioHelpRow } from "@/components/speaking/AudioHelpRow";
 import { matchGuidesForSentence } from "@/lib/pronunciation";
 import { getTtsBase64 } from "@/lib/tts/azureTtsClient";
 import { playBase64Tts } from "@/lib/tts/ttsPlayer";
+import { useI18n } from "@/lib/i18n";
+import { useUserSettings } from "@/lib/userSettings";
+import { getLocaleForLanguage } from "@/lib/locale";
 
 type Feedback = {
   hint1: string;
   hint2?: string;
   identity: string;
 };
-
-function helperLine(nativeLang: string) {
-  const map: Record<string, string> = {
-    en: "Use this sentence to ask politely in a shop.",
-    pl: "Użyj tego zdania, aby grzecznie zapytać w sklepie.",
-    ar: "استخدم هذه الجملة لتسأل بأدب في المتجر.",
-    tr: "Mağazada kibarca sormak için bu cümleyi kullan.",
-    ro: "Folosește această propoziție ca să întrebi politicos în magazin.",
-    uk: "Використай це речення, щоб ввічливо запитати в магазині.",
-    ru: "Используй это предложение, чтобы вежливо спросить в магазине.",
-  };
-  return map[nativeLang] ?? map.en;
-}
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -50,16 +39,11 @@ export default function SpeakTaskA1() {
   const router = useRouter();
   const [stage, setStage] = useState<"ready" | "speaking" | "feedback">("ready");
   const [saving, setSaving] = useState(false);
-  const [nativeLang, setNativeLang] = useState<string>("en");
+  const { t } = useI18n();
+  const { targetLanguageCode } = useUserSettings();
   const [loadingRate, setLoadingRate] = useState<"normal" | "slow" | null>(null);
   const TTS_DEBUG = __DEV__ && false;
-
-  useEffect(() => {
-    (async () => {
-      const prefs = await loadLangPrefs();
-      if (prefs?.nativeLang) setNativeLang(prefs.nativeLang);
-    })();
-  }, []);
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const context = useMemo(
     () => ({
@@ -111,7 +95,7 @@ export default function SpeakTaskA1() {
         return;
       }
       if (TTS_DEBUG) console.log("[tts] request", { rate, textPreview: cleanText.slice(0, 40) });
-      const res = await getTtsBase64({ text: cleanText, rate });
+      const res = await getTtsBase64({ text: cleanText, rate, locale: targetLocale });
       if (TTS_DEBUG) console.log("[tts] response ok", { base64Len: res.base64.length });
       const uri = await playBase64Tts({
         base64: res.base64,
@@ -122,23 +106,23 @@ export default function SpeakTaskA1() {
       if (TTS_DEBUG) console.log("[tts] resolvedUri", uri);
     } catch (err) {
       console.error("[tts] play error", err);
-      Alert.alert("Audio konnte nicht geladen werden");
+      Alert.alert(t("audio.error"));
     } finally {
       setLoadingRate(null);
     }
   }
 
   return (
-    <ScreenShell title="Speaking" showBack>
+    <ScreenShell title={t("speak.title")} showBack>
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
-        <Card title="Context">
+        <Card title={t("speak.context")}>
           <Text fontSize={18} fontWeight="800" color="$text" marginBottom={6}>
             {context.oneLiner}
           </Text>
           <Text color="$muted">{context.situation}</Text>
         </Card>
 
-        <Card title="Your line">
+        <Card title={t("speak.your_line")}>
           <Text fontSize={18} fontWeight="800" color="$text">
             {context.prompt}
           </Text>
@@ -156,32 +140,24 @@ export default function SpeakTaskA1() {
           />
           <PronunciationGuide items={guides} />
           <Text marginTop={10} color="$muted">
-            {helperLine(nativeLang)}
+            {t("speak.helper_line_shop")}
           </Text>
           <Text color="$muted" marginTop={6}>
-            {{
-              en: "Sag den Satz laut und deutlich.",
-              pl: "Powiedz to zdanie głośno i wyraźnie.",
-              ar: "قل الجملة بصوت واضح وببطء.",
-              tr: "Cümleyi yüksek ve net söyle.",
-              ro: "Spune fraza clar și rar.",
-              uk: "Скажи фразу вголос і чітко.",
-              ru: "Скажи фразу громко и четко.",
-            }[nativeLang] ?? "Sag den Satz laut und deutlich."}
+            {t("speak.speak_clearly")}
           </Text>
         </Card>
 
         {stage === "ready" && (
-          <PrimaryButton label="Hold to speak" onPress={() => setStage("speaking")} />
+          <PrimaryButton label={t("speak.hold_to_speak")} onPress={() => setStage("speaking")} />
         )}
 
         {stage === "speaking" && (
-          <PrimaryButton label="Release to get feedback" onPressOut={() => setStage("feedback")} />
+          <PrimaryButton label={t("speak.release_feedback")} onPressOut={() => setStage("feedback")} />
         )}
 
         {stage === "feedback" && (
           <>
-            <Card title="Feedback">
+            <Card title={t("speak.feedback")}>
               <Text color="$text" fontWeight="800" marginBottom={6}>
                 {feedback.hint1}
               </Text>
@@ -192,18 +168,22 @@ export default function SpeakTaskA1() {
               ) : null}
             </Card>
 
-            <Card title="You gained">
+            <Card title={t("speak.you_gained")}>
               <Text color="$text" fontWeight="900">
                 {feedback.identity}
               </Text>
             </Card>
 
-            <PrimaryButton label={saving ? "Saving…" : "Done → Next Action"} disabled={saving} onPress={onComplete} />
+            <PrimaryButton
+              label={saving ? t("speak.saving") : t("speak.done_next")}
+              disabled={saving}
+              onPress={onComplete}
+            />
           </>
         )}
 
         <Text marginTop={12} color="$muted" fontSize={12}>
-          This screen simulates speaking. Next step: microphone + ASR + internal scoring.
+          {t("speak.simulation_note")}
         </Text>
       </ScrollView>
     </ScreenShell>

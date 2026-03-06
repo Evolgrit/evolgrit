@@ -16,6 +16,12 @@
       "durationMin": 3
     },
     {
+      "id": "a2_u01_l01_meeting_invite",
+      "title": "Treffen organisieren",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
       "id": "a2_u01_m01",
       "title": "Mini · Kurz",
       "kind": "mini",

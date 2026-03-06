@@ -13,6 +13,14 @@ export async function getSelectedJobTrack() {
   }
 }
 
+export async function getSelectedJobTrackOptional(): Promise<string | null> {
+  try {
+    return (await AsyncStorage.getItem(KEY)) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export async function setSelectedJobTrack(track: string) {
   try {
     await AsyncStorage.setItem(KEY, track);
@@ -27,6 +35,22 @@ export function useSelectedJobTrack() {
   useEffect(() => {
     let isMounted = true;
     getSelectedJobTrack().then((track) => {
+      if (isMounted) setSelected(track);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return selected;
+}
+
+export function useSelectedJobTrackOptional() {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    getSelectedJobTrackOptional().then((track) => {
       if (isMounted) setSelected(track);
     });
     return () => {
