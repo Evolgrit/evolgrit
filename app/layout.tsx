@@ -28,8 +28,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/icon-180.png",
-    apple: "/icon-180.png",
+    icon: [
+      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-180.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/icon-32.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 export default function RootLayout({
