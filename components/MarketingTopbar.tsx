@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 type MarketingTopbarProps = {
@@ -41,16 +42,15 @@ export default function MarketingTopbar({
     <header className="sticky top-0 z-[120] border-b border-slate-200/50 bg-white/80 backdrop-blur">
       <div className={`${container} flex flex-col py-4`}>
         <div className="flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2" aria-label="Go to homepage">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-sm font-semibold text-slate-50 shadow-lg shadow-slate-900/30">
-              E
-            </div>
-            <div className="text-left">
-              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-900">
-                Evolgrit
-              </div>
-              <div className="text-[11px] text-slate-500">Language · Jobs · AI</div>
-            </div>
+          <Link href="/" className="flex h-9 items-center" aria-label="Go to homepage">
+            <Image
+              src="/logo.svg"
+              alt="Evolgrit"
+              width={176}
+              height={36}
+              priority
+              className="h-7 w-auto sm:h-8"
+            />
           </Link>
 
           <div className="hidden items-center gap-4 text-sm sm:flex">
