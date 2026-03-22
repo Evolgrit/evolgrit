@@ -29,7 +29,7 @@ const LANGS = [
 export default function DemoScreen() {
   const router = useRouter();
   const [step, setStep] = useState<Step>(0);
-  const [prefs, setPrefs] = useState<LangPrefs>({ nativeLang: "en", targetLang: "de" });
+  const [prefs, setPrefs] = useState<LangPrefs>({ nativeLang: "en", targetLang: "de", uiLocale: "system" });
   const [ers, setErs] = useState(DEFAULT_ERS);
   const [nextAction, setNextAction] = useState<NextAction | null>(null);
 
@@ -48,7 +48,7 @@ export default function DemoScreen() {
   }, []);
 
   function updateLang(code: string) {
-    const updated = { nativeLang: code, targetLang: "de" };
+    const updated = { nativeLang: code, targetLang: "de", uiLocale: "system" };
     setPrefs(updated);
     saveLangPrefs(updated);
   }

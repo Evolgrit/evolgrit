@@ -6,7 +6,6 @@ import * as ImagePicker from "expo-image-picker";
 import { Stack, Text } from "tamagui";
 import { useRouter } from "expo-router";
 
-import { loadLangPrefs } from "../lib/languagePrefs";
 import { loadCurrentERS } from "../lib/readinessService";
 import { ersMin, limiterOf, type ERS } from "../lib/ersStore";
 import { getRiskState, type RiskState } from "../lib/riskService";
@@ -15,12 +14,15 @@ import { getDevMode, setDevMode } from "../lib/devModeStore";
 import { getAvatarUri, setAvatarUri } from "../lib/profileAvatarStore";
 import { GlassCard } from "../components/system/GlassCard";
 import { ListRow } from "../components/system/ListRow";
+import { useI18n } from "../lib/i18n";
+import { getLanguage } from "../lib/data/languages";
+import { useUserSettings } from "../lib/userSettings";
 
 export default function Profile() {
   const router = useRouter();
+  const { t } = useI18n();
 
-  const [nativeLang, setNativeLang] = useState("en");
-  const [targetLang] = useState("de");
+  const { nativeLanguageCode, targetLanguageCode } = useUserSettings();
   const [ers, setErs] = useState<ERS | null>(null);
   const [risk, setRisk] = useState<RiskState>("green");
   const [phaseText, setPhaseText] = useState<string>("A1 · Week 1");
@@ -29,8 +31,6 @@ export default function Profile() {
 
   useEffect(() => {
     (async () => {
-      const prefs = await loadLangPrefs();
-      if (prefs?.nativeLang) setNativeLang(prefs.nativeLang);
       setErs(await loadCurrentERS());
       setRisk(await getRiskState());
       const ps = await loadPhaseState();
@@ -44,25 +44,16 @@ export default function Profile() {
   const score = ers ? ersMin(ers) : 0;
   const limiter = ers ? limiterOf(ers) : "A";
   const limiterLabel = useMemo(() => {
-    if (limiter === "A") return "Application";
-    if (limiter === "C") return "Consistency";
-    if (limiter === "L") return "Language";
-    return "Stability";
-  }, [limiter]);
+    if (limiter === "A") return t("profile.limiter_application");
+    if (limiter === "C") return t("profile.limiter_consistency");
+    if (limiter === "L") return t("profile.limiter_language");
+    return t("profile.limiter_stability");
+  }, [limiter, t]);
 
-  function flagFor(lang: string) {
-    const map: Record<string, string> = {
-      en: "🇬🇧",
-      tr: "🇹🇷",
-      pl: "🇵🇱",
-      ar: "🇸🇦",
-      ro: "🇷🇴",
-      uk: "🇺🇦",
-      ru: "🇷🇺",
-      de: "🇩🇪",
-    };
-    return map[lang] ?? "🏳️";
-  }
+  const nativeLangInfo = getLanguage(nativeLanguageCode);
+  const targetLangInfo = getLanguage(targetLanguageCode);
+  const speakLabel = `${nativeLangInfo.flag} ${nativeLangInfo.nativeName} (${nativeLangInfo.englishName})`;
+  const learnLabel = `${targetLangInfo.flag} ${targetLangInfo.nativeName} (${targetLangInfo.englishName})`;
 
   async function pickAvatar() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -83,8 +74,8 @@ export default function Profile() {
         <Pressable onPress={() => router.back()} hitSlop={10} style={{ padding: 6 }}>
           <Ionicons name="chevron-back" size={22} color="#111827" />
         </Pressable>
-        <Text fontSize={16} fontWeight="900" color="$text">
-          Profile
+        <Text fontFamily="$heading" fontSize="$screenTitle" lineHeight="$screenTitle" fontWeight="700" color="$text">
+          {t("profile.title")}
         </Text>
         <Stack width={34} />
       </Stack>
@@ -114,7 +105,7 @@ export default function Profile() {
                 Daniel West
               </Text>
               <Text color="$muted" marginTop={2}>
-                {nativeLang} → {targetLang}
+                {nativeLanguageCode} → {targetLanguageCode}
               </Text>
             </Stack>
             <Ionicons name="chevron-forward" size={18} color="rgba(17,24,39,0.25)" />
@@ -124,28 +115,34 @@ export default function Profile() {
         <GlassCard padding={0} marginBottom={12}>
           <ListRow
             icon={<Ionicons name="settings-outline" size={18} color="#111827" />}
-            title="Einstellungen"
-            subtitle="Allgemein, Erinnerungen, Tonaufnahmen"
+            title={t("profile.settings")}
+            subtitle={t("profile.settings_sub")}
             onPress={() => router.push("/settings")}
           />
-          <ListRow icon={<Ionicons name="image-outline" size={18} color="#111827" />} title="Change photo" onPress={pickAvatar} />
           <ListRow
-            icon={<Ionicons name="language-outline" size={18} color="#111827" />}
-            title="Language"
-            subtitle={`${nativeLang} → ${targetLang}`}
-            value={`${flagFor(nativeLang)} → ${flagFor("de")}`}
+            icon={<Ionicons name="chatbubble-outline" size={18} color="#111827" />}
+            title={t("profile.iSpeak")}
+            subtitle={speakLabel}
+            onPress={() => router.push("/profile/language?mode=native")}
           />
           <ListRow
+            icon={<Ionicons name="book-outline" size={18} color="#111827" />}
+            title={t("profile.iLearn")}
+            subtitle={learnLabel}
+            onPress={() => router.push("/profile/language?mode=target")}
+          />
+          <ListRow icon={<Ionicons name="image-outline" size={18} color="#111827" />} title={t("profile.changePhoto")} onPress={pickAvatar} />
+          <ListRow
             icon={<Ionicons name="analytics-outline" size={18} color="#111827" />}
-            title="Readiness"
-            subtitle={`Score ${score} · Focus ${limiterLabel}`}
-            value={risk === "red" ? "Risk" : risk === "yellow" ? "Watch" : "Stable"}
+            title={t("profile.readiness")}
+            subtitle={t("profile.readiness_sub", { score, focus: limiterLabel })}
+            value={risk === "red" ? t("profile.risk") : risk === "yellow" ? t("profile.watch") : t("profile.stable")}
             onPress={() => router.push("/(tabs)/progress")}
           />
           <ListRow
             icon={<Ionicons name="calendar-outline" size={18} color="#111827" />}
-            title="Mood & check-ins"
-            subtitle="Log how you feel today"
+            title={t("profile.mood_checkins")}
+            subtitle={t("profile.mood_sub")}
             onPress={() => router.push("/profile-mood")}
           />
         </GlassCard>
@@ -153,14 +150,14 @@ export default function Profile() {
         <GlassCard padding={0} marginBottom={12}>
           <ListRow
             icon={<Ionicons name="briefcase-outline" size={18} color="#111827" />}
-            title="Phase"
+            title={t("profile.phase")}
             subtitle={phaseText}
           />
           {devMode ? (
             <ListRow
               icon={<Ionicons name="airplane-outline" size={18} color="#111827" />}
-              title="Open Demo"
-              subtitle="Investor walkthrough"
+              title={t("profile.open_demo")}
+              subtitle={t("profile.demo_sub")}
               onPress={() => router.push("/demo")}
             />
           ) : null}
@@ -169,7 +166,7 @@ export default function Profile() {
         <GlassCard padding={0} marginBottom={12}>
           <ListRow
             icon={<Ionicons name="lock-open-outline" size={18} color="#111827" />}
-            title={`Developer Mode: ${devMode ? "ON" : "OFF"}`}
+            title={t("profile.dev_mode", { state: devMode ? t("profile.on") : t("profile.off") })}
             onPress={async () => {
               const next = !devMode;
               await setDevMode(next);
@@ -179,7 +176,7 @@ export default function Profile() {
           {devMode ? (
             <ListRow
               icon={<Ionicons name="flash-outline" size={18} color="#111827" />}
-              title="Unlock all weeks"
+              title={t("settings.unlock_weeks")}
               onPress={async () => {
                 await unlockAllWeeksForCurrentPhase();
               }}

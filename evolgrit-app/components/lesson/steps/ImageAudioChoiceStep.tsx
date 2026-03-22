@@ -3,9 +3,11 @@ import { Pressable } from "react-native";
 import { Image, Stack, Text, XStack, YStack } from "tamagui";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
-import { LESSON_IMAGES } from "../../../assets/lesson-images";
+import { getLessonImage } from "../../../assets/lesson-images";
 import { playTtsText } from "../../../lib/tts/playText";
 import { stopTts } from "../../../lib/tts/ttsPlayer";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 type Option = {
   id: string;
@@ -52,25 +54,17 @@ export function ImageAudioChoiceStep({
 
   const [audioBusy, setAudioBusy] = useState(false);
   const [containerW, setContainerW] = useState(0);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const playAudio = async (text?: string) => {
     if (!text) return;
     try {
       setAudioBusy(true);
-      await playTtsText(text, "normal");
+      await playTtsText(text, "normal", targetLocale);
     } finally {
       setAudioBusy(false);
     }
-  };
-
-  const resolveImage = (key?: string | null) => {
-    if (!key) return null;
-    const src = LESSON_IMAGES[key];
-    if (!src) {
-      console.warn(`[lesson] Missing image key ${key}`);
-      return null;
-    }
-    return src;
   };
 
   const usableW = Math.max(0, containerW);
@@ -120,7 +114,7 @@ export function ImageAudioChoiceStep({
             const isCorrect = !!opt.correct;
             const bg = isSelected && reveal ? (isCorrect ? "rgba(52,199,89,0.10)" : "rgba(255,59,48,0.10)") : "$background";
             const borderColor = isSelected && reveal ? (isCorrect ? "#34C759" : "#FF3B30") : "transparent";
-            const source = resolveImage(opt.imageKey);
+            const source = getLessonImage(opt.imageKey);
             const optionAudio = opt.audioText ?? opt.ttsText ?? ttsText ?? opt.label;
 
             return (
@@ -143,15 +137,7 @@ export function ImageAudioChoiceStep({
                   borderColor={borderColor as any}
                   >
                     <Stack height={imageH} backgroundColor="$color2">
-                      {source ? (
-                        <Image source={source} width="100%" height="100%" resizeMode="cover" />
-                      ) : (
-                        <YStack flex={1} alignItems="center" justifyContent="center" backgroundColor="$color3">
-                          <Text color="$muted" fontSize={12}>
-                            Bild fehlt
-                          </Text>
-                        </YStack>
-                      )}
+                      <Image source={source} width="100%" height="100%" resizeMode="cover" />
                       <Pressable
                         accessibilityRole="button"
                         onPress={(e) => {

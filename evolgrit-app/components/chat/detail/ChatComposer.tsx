@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInput, Pressable, View, Image } from "react-native";
-import { Stack, XStack } from "tamagui";
+import { Stack, XStack, useTheme } from "tamagui";
 import { Feather, Ionicons } from "@expo/vector-icons";
 
 type Props = {
@@ -39,6 +39,9 @@ export function ChatComposer({
   const hasText = value.trim().length > 0;
   const hasAttachment = !!attachmentUri;
   const canSend = hasText || hasAttachment;
+  const theme = useTheme();
+  const textColor = theme.text?.val ?? theme.color?.val ?? "#111111";
+  const muted = theme.textSecondary?.val ?? theme.colorMuted?.val ?? "#6B7280";
 
   return (
     <View style={{ paddingHorizontal: 0, justifyContent: "center" }}>
@@ -76,19 +79,15 @@ export function ChatComposer({
           borderRadius={22}
           alignItems="center"
           paddingHorizontal={14}
-          backgroundColor="rgba(255,255,255,0.9)"
-          borderWidth={1}
-          borderColor="rgba(0,0,0,0.06)"
-          shadowColor="rgba(0,0,0,0.08)"
-          shadowRadius={10}
-          shadowOffset={{ width: 0, height: 4 }}
+          backgroundColor="$bgInput"
+          borderWidth={0}
         >
           <TextInput
             value={value}
             onChangeText={onChange}
             placeholder={placeholder}
-            placeholderTextColor="rgba(0,0,0,0.45)"
-            style={{ flex: 1, paddingVertical: 10, fontSize: 15, color: "#111827" }}
+            placeholderTextColor={muted}
+            style={{ flex: 1, paddingVertical: 10, fontSize: 15, color: textColor }}
             multiline
           />
         </XStack>

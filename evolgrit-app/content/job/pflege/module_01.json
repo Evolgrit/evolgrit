@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_01",
+  "title": "Pflege · Modul 1",
+  "subtitle": "Erste Schicht: Aufnahme & Übergabe",
+  "durationMin": 12,
+  "outcomes": [
+    "Patient begrüßen und Aufnahme starten",
+    "Schmerz kurz und klar abfragen",
+    "Übergabe: Name + Zimmer + Grund sagen"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_01_aufnahme",
+    "job_pflege_live_02_schmerzen",
+    "job_pflege_live_03_uebergabe"
+  ]
+}

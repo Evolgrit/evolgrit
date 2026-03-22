@@ -1,0 +1,31 @@
+{
+  "id": "a2_u09",
+  "title": "Anweisungen geben",
+  "subtitle": "Schritte erklären",
+  "items": [
+    {
+      "id": "a2_u09_l01",
+      "title": "Lektion 1 · Anweisungen geben",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u09_l02",
+      "title": "Lektion 2 · Schritte erklären",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u09_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u09_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

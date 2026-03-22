@@ -13,6 +13,10 @@ type Props = {
   imageSource: ImageSourcePropType;
   onPress?: () => void;
   disabled?: boolean;
+  badgeText?: string;
+  statusLabel?: string;
+  statusBg?: string;
+  statusColor?: string;
 };
 
 const STATUS_STYLES: Record<Status, { bg: string; color: string; label: string }> = {
@@ -35,14 +39,21 @@ export function LevelCard({
   imageSource,
   onPress,
   disabled,
+  badgeText,
+  statusLabel,
+  statusBg,
+  statusColor,
 }: Props) {
   const styles = STATUS_STYLES[status];
+  const label = statusLabel ?? styles.label;
+  const bg = statusBg ?? styles.bg;
+  const color = statusColor ?? styles.color;
 
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
       style={({ pressed }) => ({
-        opacity: pressed ? 0.9 : disabled ? 0.55 : 1,
+        opacity: pressed ? 0.9 : disabled ? 0.7 : 1,
       })}
     >
       <YStack gap="$2">
@@ -70,17 +81,33 @@ export function LevelCard({
             </Text>
           ) : null}
 
-          <XStack
-            alignItems="center"
-            paddingHorizontal={10}
-            paddingVertical={6}
-            borderRadius={999}
-            backgroundColor={styles.bg}
-            maxWidth={140}
-          >
-            <Text fontSize={12} fontWeight="600" color={styles.color}>
-              {styles.label}
-            </Text>
+          <XStack gap="$2" flexWrap="wrap">
+            <XStack
+              alignItems="center"
+              paddingHorizontal={10}
+              paddingVertical={6}
+              borderRadius={999}
+              backgroundColor={bg}
+              maxWidth={140}
+            >
+              <Text fontSize={12} fontWeight="600" color={color}>
+                {label}
+              </Text>
+            </XStack>
+            {badgeText ? (
+              <XStack
+                alignItems="center"
+                paddingHorizontal={10}
+                paddingVertical={6}
+                borderRadius={999}
+                backgroundColor="rgba(0,0,0,0.06)"
+                maxWidth={180}
+              >
+                <Text fontSize={12} fontWeight="600" color="$text">
+                  {badgeText}
+                </Text>
+              </XStack>
+            ) : null}
           </XStack>
         </YStack>
       </YStack>

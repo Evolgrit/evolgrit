@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m3_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M3 · Satzbau",
+  "subtitle": "Medikamente sicher erklären",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte nehmen Sie die ____.",
+      "choices": [
+        { "id": "a", "label": "Tablette" },
+        { "id": "b", "label": "Klingel" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte mit ____.",
+      "choices": [
+        { "id": "a", "label": "Wasser" },
+        { "id": "b", "label": "Bett" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Das ist für den ____.",
+      "choices": [
+        { "id": "a", "label": "Blutdruck" },
+        { "id": "b", "label": "Flur" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Nehmen Sie es ____.",
+      "choices": [
+        { "id": "a", "label": "morgens" },
+        { "id": "b", "label": "gestern" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Haben Sie ____?",
+      "choices": [
+        { "id": "a", "label": "Allergien" },
+        { "id": "b", "label": "Zimmer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst Medikamente ruhig erklären."
+    }
+  ]
+}

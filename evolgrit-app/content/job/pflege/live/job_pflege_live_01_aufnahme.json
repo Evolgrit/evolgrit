@@ -1,0 +1,65 @@
+{
+  "id": "job_pflege_live_01_aufnahme",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Aufnahme",
+  "subtitle": "Begrüßen, kurz erklären, erste Frage stellen",
+  "durationMin": 4,
+  "tasks": [
+    "Begrüße freundlich und stell dich vor.",
+    "Frag nach Name + Geburtsdatum.",
+    "Frag kurz, warum die Person da ist."
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Hallo, ich bin Lena aus der Pflege. Ich mache kurz die Aufnahme. Wie heißen Sie?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag deinen Namen (z. B. „Ich heiße …“).",
+      "suggestions": [
+        "Ich heiße Maria Novak.",
+        "Mein Name ist Oleksandr Petrenko.",
+        "Ich bin Anna. Anna Müller."
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Danke. Und wann sind Sie geboren?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag ein Geburtsdatum (Tag.Monat.Jahr).",
+      "suggestions": [
+        "Ich bin am 12.03.1991 geboren.",
+        "Am 5. Oktober 1988.",
+        "12.03.1991."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Alles klar. Was ist der Grund, warum Sie heute hier sind?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Sag kurz den Grund (1 Satz).",
+      "suggestions": [
+        "Ich habe starke Bauchschmerzen.",
+        "Mir ist seit gestern schwindelig.",
+        "Ich habe Fieber und Husten."
+      ]
+    },
+    {
+      "id": "c4",
+      "role": "coach",
+      "text": "Danke. Ich sage gleich dem Arzt Bescheid."
+    }
+  ]
+}

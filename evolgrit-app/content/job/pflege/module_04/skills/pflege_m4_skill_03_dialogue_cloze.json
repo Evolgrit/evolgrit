@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m4_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M4 · Mini-Dialog",
+  "subtitle": "Übergabe kurz & klar",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Name und Zimmer?",
+      "choices": [
+        { "id": "a", "label": "Patient Müller, Zimmer 102." },
+        { "id": "b", "label": "Ich komme aus Polen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Patient ____, Zimmer 102.",
+      "choices": [
+        { "id": "a", "label": "Müller" },
+        { "id": "b", "label": "Küche" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Was ist das Problem?",
+      "choices": [
+        { "id": "a", "label": "Starke Bauchschmerzen seit gestern." },
+        { "id": "b", "label": "Zimmer ist groß." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Starke ____ seit gestern.",
+      "choices": [
+        { "id": "a", "label": "Bauchschmerzen" },
+        { "id": "b", "label": "Fenster" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was sagst du als nächstes?",
+      "choices": [
+        { "id": "a", "label": "Ich habe den Arzt informiert." },
+        { "id": "b", "label": "Ich gehe jetzt." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich habe den Arzt informiert."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Du kannst Übergaben strukturiert sagen."
+    }
+  ]
+}

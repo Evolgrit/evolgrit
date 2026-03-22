@@ -1,0 +1,31 @@
+{
+  "id": "a2_u06",
+  "title": "Orte & Orientierung",
+  "subtitle": "wo sich etwas befindet",
+  "items": [
+    {
+      "id": "a2_u06_l01",
+      "title": "Lektion 1 · Orte & Orientierung",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u06_l02",
+      "title": "Lektion 2 · wo sich etwas befindet",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u06_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u06_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

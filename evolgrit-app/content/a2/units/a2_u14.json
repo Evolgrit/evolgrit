@@ -1,0 +1,31 @@
+{
+  "id": "a2_u14",
+  "title": "Reise & Nachrichten",
+  "subtitle": "Informationen verstehen",
+  "items": [
+    {
+      "id": "a2_u14_l01",
+      "title": "Lektion 1 · Reise & Nachrichten",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u14_l02",
+      "title": "Lektion 2 · Informationen verstehen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u14_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u14_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

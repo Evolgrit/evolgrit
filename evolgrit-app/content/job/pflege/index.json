@@ -1,0 +1,34 @@
+{
+  "track": "pflege",
+  "title": "Pflege",
+  "modules": [
+    {
+      "id": "pflege_01_first_day",
+      "title": "Erster Tag",
+      "subtitle": "Vorstellen, Aufgaben klären",
+      "durationMin": 5,
+      "lessonRunnerId": "a1_l6_01_job_erster_tag"
+    },
+    {
+      "id": "pflege_02_tasks_questions",
+      "title": "Aufgaben & Fragen",
+      "subtitle": "Ruhig nachfragen",
+      "durationMin": 6,
+      "lessonRunnerId": "a1_l6_02_aufgaben_einfach"
+    },
+    {
+      "id": "pflege_03_patient_pain",
+      "title": "Schmerzen verstehen",
+      "subtitle": "Patient:in zuhören",
+      "durationMin": 5,
+      "liveId": "pflege_live_02_pain"
+    },
+    {
+      "id": "pflege_04_handover_docs",
+      "title": "Übergabe & Doku",
+      "subtitle": "Kurz, klar, vollständig",
+      "durationMin": 5,
+      "liveId": "pflege_live_01_handover"
+    }
+  ]
+}

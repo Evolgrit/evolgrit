@@ -1,0 +1,60 @@
+{
+  "id": "a1_l4_03_regeln_verbot_erlaubt",
+  "title": "Regeln: Verboten & Erlaubt",
+  "level": "A1",
+  "week": 4,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Hier ist Rauchen verboten." },
+        { "id": "b", "label": "Ich heiße Anna." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hier ist Rauchen verboten."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Hier ist Rauchen ____.",
+      "choices": [
+        { "id": "a", "label": "verboten" },
+        { "id": "b", "label": "bitte" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Das ist erlaubt." },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Ist das erlaubt?",
+      "choices": [
+        { "id": "a", "label": "Ja, das ist erlaubt." },
+        { "id": "b", "label": "Guten Tag." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kennst einfache Regeln.",
+        "Du kannst nach Erlaubnis fragen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

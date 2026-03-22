@@ -1,0 +1,92 @@
+{
+  "id": "a2_u05_q01",
+  "level": "A2",
+  "unitId": "a2_u05",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Suppe ist zu kalt."
+        },
+        {
+          "id": "b",
+          "label": "Die Suppe ist zu Uhr."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "ein"
+        },
+        {
+          "id": "b",
+          "label": "eins"
+        }
+      ],
+      "answer": "a",
+      "text": "Ich hätte gern ___ Wasser."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Suppe ist zu kalt."
+        },
+        {
+          "id": "b",
+          "label": "Die Suppe ist zu Uhr."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "ein"
+        },
+        {
+          "id": "b",
+          "label": "eins"
+        }
+      ],
+      "answer": "a",
+      "text": "Ich hätte gern ___ Wasser."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Suppe ist zu kalt."
+        },
+        {
+          "id": "b",
+          "label": "Die Suppe ist zu Uhr."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Quiz fertig",
+      "text": "Gut gemacht!"
+    }
+  ]
+}

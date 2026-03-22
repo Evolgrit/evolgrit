@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_04_rules",
+  "title": "Regeln & Ordnung",
+  "subtitle": "Warum Regeln ernst genommen werden",
+  "durationMin": 12,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Regeln gelten oft streng: Müll, Verkehr, Hausordnung. „Ich wusste es nicht“ hilft selten – besser kurz nachfragen."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Wenn du unsicher bist: kurz fragen." },
+        { "kind": "do", "text": "Schilder beachten (auch kleine)." },
+        { "kind": "dont", "text": "Bei Rot gehen, weil „keiner schaut“." },
+        { "kind": "dont", "text": "Regeln als persönliche Kritik verstehen." }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Du bist unsicher bei Mülltrennung. Was ist am besten?",
+      "options": [
+        "Ich frage kurz nach oder schaue auf die Infos an der Tonne.",
+        "Ich werfe alles zusammen. Ist egal."
+      ],
+      "correctIndex": 0,
+      "explain": "Nachfragen ist normal – und spart Stress."
+    },
+    {
+      "type": "examples",
+      "title": "Sätze, die helfen",
+      "items": [
+        "Entschuldigung, wo gehört das hin?",
+        "Ich bin neu. Können Sie mir das kurz zeigen?",
+        "Gibt es dafür eine Regel im Haus?"
+      ]
+    }
+  ]
+}

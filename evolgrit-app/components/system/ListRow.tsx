@@ -24,7 +24,6 @@ export function ListRow({
       borderRadius={16}
       paddingHorizontal={14}
       paddingVertical={12}
-      shadowColor="transparent"
       flexDirection="row"
       alignItems="center"
       gap="$3"

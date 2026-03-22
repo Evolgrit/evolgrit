@@ -1,0 +1,37 @@
+{
+  "id": "job_pflege_live_08_zeitplan_erklaeren",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Zeiten erklären",
+  "subtitle": "morgens · mittags · abends · nachts",
+  "durationMin": 5,
+  "tasks": [
+    "Sag: morgens um …",
+    "Sag: mittags / abends",
+    "Sag: Ich erinnere Sie."
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Der Patient fragt: Wann bekomme ich das Medikament? Sag: morgens um 8 Uhr." },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag den Zeitpunkt.",
+      "suggestions": ["Morgens um acht Uhr.", "Sie bekommen es morgens um 8 Uhr.", "Um 8 Uhr morgens."]
+    },
+    { "id": "c2", "role": "coach", "text": "Sag noch: mittags und abends." },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": ["Dann mittags und abends.", "Sie bekommen es mittags und abends.", "Noch einmal mittags und einmal abends."]
+    },
+    { "id": "c3", "role": "coach", "text": "Sag: Ich erinnere Sie rechtzeitig." },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Kurz.",
+      "suggestions": ["Ich erinnere Sie rechtzeitig.", "Ich sage Ihnen vorher Bescheid.", "Ich komme rechtzeitig."]
+    },
+    { "id": "c4", "role": "coach", "text": "Sehr gut. Zeiten immer langsam und klar sagen." }
+  ]
+}

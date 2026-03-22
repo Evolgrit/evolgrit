@@ -16,17 +16,12 @@ export function LearnTrackCard({ image, title, subtitle, onPress }: Props) {
       <XStack
         borderRadius="$6"
         height={112}
-        backgroundColor="rgba(255,255,255,0.94)"
+        backgroundColor="$bgSurface"
         padding={0}
         alignItems="stretch"
         overflow="hidden"
-        shadowColor="#000"
-        shadowOpacity={0.03}
-        shadowRadius={6}
-        shadowOffset={{ width: 0, height: 2 }}
-        elevation={0}
       >
-        <YStack width={132} height="100%" overflow="hidden" backgroundColor="$color2">
+        <YStack width={132} height="100%" overflow="hidden" backgroundColor="$bgSurfaceMuted">
           <Image
             source={image}
             width="100%"

@@ -1,0 +1,31 @@
+{
+  "id": "a1_review_02",
+  "title": "Bitte & Danke + Ja/Nein",
+  "level": "A1",
+  "week": 0,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die passende Antwort",
+      "choices": [
+        { "id": "a", "label": "Danke" },
+        { "id": "b", "label": "Bitte langsam" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das richtige Wort",
+      "choices": [
+        { "id": "a", "label": "Ja" },
+        { "id": "b", "label": "Nein" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ja, danke."
+    }
+  ]
+}

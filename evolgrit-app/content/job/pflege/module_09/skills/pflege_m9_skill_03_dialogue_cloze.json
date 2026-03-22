@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m9_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M9 · Mini-Dialog",
+  "subtitle": "Ruhig reagieren",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Ich bin unzufrieden.",
+      "choices": [
+        { "id": "a", "label": "Ich hoere zu. Was ist passiert?" },
+        { "id": "b", "label": "Das ist nicht mein Problem." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Was ist ____?",
+      "choices": [
+        { "id": "a", "label": "passiert" },
+        { "id": "b", "label": "gekocht" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Ich habe Schmerzen.",
+      "choices": [
+        { "id": "a", "label": "Wo genau tut es weh?" },
+        { "id": "b", "label": "Das weiss ich nicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Wo genau tut es ____?",
+      "choices": [
+        { "id": "a", "label": "weh" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wie geht es weiter?",
+      "choices": [
+        { "id": "a", "label": "Ich informiere den Arzt." },
+        { "id": "b", "label": "Ich gehe jetzt." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich informiere den Arzt und erklaere den naechsten Schritt."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Sie reagieren ruhig und professionell."
+    }
+  ]
+}

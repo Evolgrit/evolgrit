@@ -1,0 +1,35 @@
+{
+  "id": "a2_u14_m01",
+  "level": "A2",
+  "unitId": "a2_u14",
+  "title": "Mini · Kurz",
+  "durationMin": 2,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich habe die Nachricht gelesen."
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Der Zug hat Verspätung."
+        },
+        {
+          "id": "b",
+          "label": "Der Zug hat Verstand."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Mini geschafft",
+      "text": "Du kannst Infos verstehen."
+    }
+  ]
+}

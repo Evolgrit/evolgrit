@@ -1,0 +1,51 @@
+{
+  "id": "a1_l3_04_treffen_verabreden",
+  "title": "Treffen verabreden",
+  "level": "A1",
+  "week": 3,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Treffen wir uns morgen?" },
+        { "id": "b", "label": "Wie viel kostet das?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Treffen wir uns morgen?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ja, um ____ Uhr.",
+      "choices": [
+        { "id": "a", "label": "zwei" },
+        { "id": "b", "label": "Brot" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Treffen wir uns morgen?",
+      "choices": [
+        { "id": "a", "label": "Ja, um zwei Uhr." },
+        { "id": "b", "label": "Guten Morgen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst ein Treffen vorschlagen.",
+        "Du kannst eine Uhrzeit nennen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

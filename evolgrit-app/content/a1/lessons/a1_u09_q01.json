@@ -1,0 +1,51 @@
+{
+  "id": "a1_u09_q01",
+  "level": "A1",
+  "unitId": "a1_u09",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ein Kaffee, bitte."
+        },
+        {
+          "id": "b",
+          "label": "Ein Koffer, bitte."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ein Croissant, bitte."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich nehme ___ Brötchen.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "zwei"
+        },
+        {
+          "id": "b",
+          "label": "drei"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst im Café bestellen."
+    }
+  ]
+}

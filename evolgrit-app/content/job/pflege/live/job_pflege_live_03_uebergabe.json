@@ -1,0 +1,50 @@
+{
+  "id": "job_pflege_live_03_uebergabe",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Übergabe",
+  "subtitle": "Name, Zimmer, kurzer Grund",
+  "durationMin": 4,
+  "tasks": [
+    "Sag Name + Zimmer.",
+    "Sag kurz den Grund.",
+    "Schließe freundlich ab."
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Stell dir vor: Übergabe im Team. Sag kurz: Name und Zimmer."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag: „Patient …, Zimmer …“.",
+      "suggestions": [
+        "Patient Müller, Zimmer 102.",
+        "Frau Novak, Zimmer 14.",
+        "Herr Petrenko, Zimmer 8."
+      ]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Und was ist der Grund? Ein Satz."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag kurz den Grund (z. B. Bauchschmerzen / Fieber).",
+      "suggestions": [
+        "Starke Bauchschmerzen seit gestern Abend.",
+        "Fieber und Husten seit zwei Tagen.",
+        "Schwindel seit heute Morgen."
+      ]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Sehr gut. Danke für die Übergabe."
+    }
+  ]
+}

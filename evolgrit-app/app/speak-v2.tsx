@@ -16,6 +16,9 @@ import type { PronunciationGuideItem } from "../components/speaking/Pronunciatio
 import { AudioHelpRow } from "@/components/speaking/AudioHelpRow";
 import { getTtsBase64 } from "@/lib/tts/azureTtsClient";
 import { playBase64Tts } from "@/lib/tts/ttsPlayer";
+import { useI18n } from "@/lib/i18n";
+import { useUserSettings } from "@/lib/userSettings";
+import { getLocaleForLanguage } from "@/lib/locale";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -30,6 +33,9 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 
 export default function SpeakV2() {
   const router = useRouter();
+  const { t } = useI18n();
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
   const [stage, setStage] = useState<"prompt" | "speaking" | "result">("prompt");
   const [showTip, setShowTip] = useState(false);
   const [loadingRate, setLoadingRate] = useState<"normal" | "slow" | null>(null);
@@ -69,8 +75,16 @@ export default function SpeakV2() {
         .replace(/^['\"„‚]+/, "")
         .replace(/['\"”’]+$/, "")
         .trim();
+      if (!cleanText) {
+        console.warn("[tts] missing text - skipping speak");
+        return;
+      }
+      if (cleanText.toLowerCase().includes("daniel")) {
+        console.warn("[tts] blocked debug phrase");
+        return;
+      }
       if (TTS_DEBUG) console.log("[tts] request", { rate, textPreview: cleanText.slice(0, 40) });
-      const res = await getTtsBase64({ text: cleanText, rate });
+      const res = await getTtsBase64({ text: cleanText, rate, locale: targetLocale });
       if (TTS_DEBUG) console.log("[tts] response ok", { base64Len: res.base64.length });
       const uri = await playBase64Tts({
         base64: res.base64,
@@ -81,16 +95,16 @@ export default function SpeakV2() {
       if (TTS_DEBUG) console.log("[tts] resolvedUri", uri);
     } catch (err) {
       console.error("[tts] play error", err);
-      Alert.alert("Audio konnte nicht geladen werden");
+      Alert.alert(t("audio.error"));
     } finally {
       setLoadingRate(null);
     }
   }
 
   return (
-    <ScreenShell title="Speaking" showBack>
+    <ScreenShell title={t("speak.title")} showBack>
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
-        <Card title="Context">
+        <Card title={t("speak.context")}>
           <Text fontSize={18} fontWeight="900" color="$text">
             {prompt.context}
           </Text>
@@ -99,7 +113,7 @@ export default function SpeakV2() {
           </Text>
         </Card>
 
-        <Card title="Say this">
+        <Card title={t("speak.say_this")}>
           <Text fontSize={20} fontWeight="900" color="$text">
             {prompt.sentence}
           </Text>
@@ -118,7 +132,7 @@ export default function SpeakV2() {
           <PronunciationGuide items={pronunciationGuides} />
 
           <Stack flexDirection="row" gap={10} marginTop={12}>
-            <PillButton label={showTip ? "Hide tip" : "Tip"} onPress={() => setShowTip((s) => !s)} />
+            <PillButton label={showTip ? t("speak.hide_tip") : t("speak.tip")} onPress={() => setShowTip((s) => !s)} />
           </Stack>
 
           {showTip ? (
@@ -132,7 +146,7 @@ export default function SpeakV2() {
 
         {stage === "prompt" && (
           <PrimaryButton
-            label="Hold to speak"
+            label={t("speak.hold_to_speak")}
             onPressIn={() => setStage("speaking")}
             onPressOut={() => {
               setTranscript("Entschuldigung… wo finde ich Reis? Ich brauche zwei Kilo.");
@@ -144,7 +158,7 @@ export default function SpeakV2() {
 
         {stage === "speaking" && (
           <PrimaryButton
-            label="Listening… release"
+            label={t("speak.listening_release")}
             onPressOut={() => {
               setTranscript("Entschuldigung… wo finde ich Reis? Ich brauche zwei Kilo.");
               setReply("Super. Du kannst jetzt im Supermarkt höflich nach einem Produkt fragen.");
@@ -155,24 +169,24 @@ export default function SpeakV2() {
 
         {stage === "result" && (
           <>
-            <Card title="What you said">
+            <Card title={t("speak.what_you_said")}>
               <Text color="$text" fontWeight="900">
                 {transcript}
               </Text>
             </Card>
 
-            <Card title="Response">
+            <Card title={t("speak.response")}>
               <Text color="$text" fontWeight="900">
                 {reply}
               </Text>
             </Card>
 
-            <PrimaryButton label="Done → Next Action" onPress={onDone} />
+            <PrimaryButton label={t("speak.done_next")} onPress={onDone} />
           </>
         )}
 
         <Text marginTop={12} color="$muted" fontSize={12}>
-          ASR + real audio playback comes next. UI/flow is ready.
+          {t("speak.simulation_note")}
         </Text>
       </ScrollView>
     </ScreenShell>

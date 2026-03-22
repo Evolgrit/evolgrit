@@ -1,0 +1,34 @@
+{
+  "id": "b2_01_opinion",
+  "level": "B2",
+  "title": "Meinung äußern",
+  "subtitle": "Ruhig und begründet sprechen",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Hören Sie zu und sprechen Sie nach.",
+      "ttsText": "Ich persönlich finde den Vorschlag sinnvoll, weil er den Arbeitsablauf vereinfacht."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Welche Antwort ist sachlich und ruhig?",
+      "text": "Teammeeting: Neue Regel im Unternehmen",
+      "choices": [
+        { "id": "a", "label": "Ich bin dagegen, das ist Unsinn." },
+        { "id": "b", "label": "Ich sehe das kritisch, weil es mehr Aufwand bedeutet." },
+        { "id": "c", "label": "Das funktioniert sowieso nicht." }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Formulieren Sie Ihre eigene Meinung.",
+      "ttsText": "Ich sehe das etwas anders, da es in der Praxis schwierig sein könnte."
+    },
+    {
+      "type": "summary",
+      "title": "Gut gemacht",
+      "text": "Du hast deine Meinung ruhig und nachvollziehbar ausgedrückt."
+    }
+  ]
+}

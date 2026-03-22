@@ -8,7 +8,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Avatar, Button, SizableText, Spacer, XStack, YStack, Sheet } from "tamagui";
+import { Avatar, Button, SizableText, Spacer, XStack, YStack, Sheet, useTheme } from "tamagui";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -53,19 +53,13 @@ const GlassPill = ({
   children: React.ReactNode;
   height?: number;
 }) => {
-  const pillBg = "rgba(255,255,255,0.72)";
-
   return (
     <XStack
       height={height}
       alignItems="center"
       borderRadius={999}
-      backgroundColor={pillBg}
-      borderWidth={1}
-      borderColor="rgba(0,0,0,0.06)"
-      shadowColor="rgba(0,0,0,0.08)"
-      shadowRadius={16}
-      shadowOffset={{ width: 0, height: 6 }}
+      backgroundColor="$bgInput"
+      borderWidth={0}
     >
       <XStack paddingHorizontal={10} gap={6} alignItems="center">
         {children}
@@ -75,6 +69,9 @@ const GlassPill = ({
 };
 
 export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
+  const theme = useTheme();
+  const iconColor = theme.text?.val ?? theme.color?.val ?? "#111111";
+  const muted = theme.textSecondary?.val ?? theme.colorMuted?.val ?? "#6B7280";
   const {
     title = "Chat",
     profileImageUrl,
@@ -194,7 +191,7 @@ export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
             circular
             chromeless
             onPress={onPressFilter}
-            icon={<Ionicons name="filter-outline" size={18} color="#111827" />}
+            icon={<Ionicons name="filter-outline" size={18} color={iconColor} />}
             accessibilityLabel="Filter chats"
           />
           <Button
@@ -202,7 +199,7 @@ export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
             circular
             chromeless
             onPress={() => (isSearch ? closeSearch() : openSearch())}
-            icon={<Ionicons name="search-outline" size={18} color="#111827" />}
+            icon={<Ionicons name="search-outline" size={18} color={iconColor} />}
             accessibilityLabel="Search chats"
           />
           <Button
@@ -210,7 +207,7 @@ export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
             circular
             chromeless
             onPress={() => setIsSelectOpen(true)}
-            icon={<Ionicons name="add-outline" size={20} color="#111827" />}
+            icon={<Ionicons name="add-outline" size={20} color={iconColor} />}
             accessibilityLabel="New mentor chat"
           />
         </GlassPill>
@@ -220,17 +217,17 @@ export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
         <XStack marginTop={10} alignItems="center" gap={10}>
           <GlassPill height={44}>
             <XStack alignItems="center" gap={8} flex={1} width={260}>
-              <Ionicons name="search-outline" size={18} color="rgba(0,0,0,0.7)" />
+              <Ionicons name="search-outline" size={18} color={muted} />
               <TextInput
                 value={query}
                 onChangeText={(t) => setQuery(t)}
                 placeholder="Search messages"
-                placeholderTextColor="rgba(0,0,0,0.45)"
+                placeholderTextColor={muted}
                 style={{
                   flex: 1,
                   fontSize: 16,
                   paddingVertical: 8,
-                  color: "rgba(0,0,0,0.92)",
+                  color: iconColor,
                 }}
                 returnKeyType="search"
               />
@@ -239,7 +236,7 @@ export function ChatTopBarIOS26(props: ChatTopBarIOS26Props) {
                   size="$2.5"
                   circular
                   chromeless
-                  icon={<Ionicons name="close-outline" size={18} color="rgba(0,0,0,0.7)" />}
+                  icon={<Ionicons name="close-outline" size={18} color={muted} />}
                   onPress={() => setQuery("")}
                   accessibilityLabel="Clear search"
                 />

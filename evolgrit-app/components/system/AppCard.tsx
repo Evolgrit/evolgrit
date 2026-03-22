@@ -14,11 +14,7 @@ export function AppCard({ title, children, footer }: Props) {
       borderRadius={18}
       padding={16}
       gap="$2"
-      borderWidth={1}
-      borderColor="$border"
-      shadowColor="rgba(17,24,39,0.08)"
-      shadowRadius={12}
-      shadowOffset={{ width: 0, height: 6 }}
+      borderWidth={0}
     >
       {title ? (
         <Text fontSize={14} fontWeight="800" color="$text">

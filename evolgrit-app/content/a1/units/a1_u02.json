@@ -1,0 +1,31 @@
+{
+  "id": "a1_u02",
+  "title": "Ich bin …",
+  "subtitle": "Name, Herkunft, Wohnort",
+  "items": [
+    {
+      "id": "a1_u02_l01",
+      "title": "Ich bin …",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u02_l02",
+      "title": "Name",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u02_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u02_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

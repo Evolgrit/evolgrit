@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_12_self_management",
+  "title": "Modul 12 · Selbstorganisation & Stress",
+  "subtitle": "Prioritaeten, Pausen, Klarheit",
+  "durationMin": 12,
+  "outcomes": [
+    "Prioritaeten klar benennen",
+    "Pausen sachlich ankundigen",
+    "Stress kurz erklaeren"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_12_stress"
+  ]
+}

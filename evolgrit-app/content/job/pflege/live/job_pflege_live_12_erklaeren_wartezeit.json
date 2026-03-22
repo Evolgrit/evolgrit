@@ -1,0 +1,42 @@
+{
+  "id": "job_pflege_live_12_erklaeren_wartezeit",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Wartezeit erklären",
+  "subtitle": "Geduldig bleiben und nächsten Schritt nennen",
+  "durationMin": 5,
+  "tasks": [
+    "Empathisch reagieren",
+    "Nächsten Schritt erklären",
+    "Ruhig abschließen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Sagen Sie einen empathischen Satz."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Ein Satz reicht.",
+      "suggestions": ["Ich verstehe, dass das gerade schwierig ist."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Was passiert als nächstes?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz und klar.",
+      "suggestions": ["Ich messe jetzt die Werte und hole dann den Arzt."]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Sehr gut. Ruhig und verständlich."
+    }
+  ]
+}

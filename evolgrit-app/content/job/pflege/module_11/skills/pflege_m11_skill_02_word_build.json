@@ -1,0 +1,49 @@
+{
+  "id": "pflege_m11_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M11 · Satzbau",
+  "subtitle": "Pruefung kurz antworten",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich nenne die Massnahme.",
+      "tokens": ["Ich", "nenne", "die", "Massnahme", "."],
+      "answer": ["Ich", "nenne", "die", "Massnahme", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich begruende kurz.",
+      "tokens": ["Ich", "begruende", "kurz", "."],
+      "answer": ["Ich", "begruende", "kurz", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich dokumentiere die Beobachtung.",
+      "tokens": ["Ich", "dokumentiere", "die", "Beobachtung", "."],
+      "answer": ["Ich", "dokumentiere", "die", "Beobachtung", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Die Werte sind stabil.",
+      "tokens": ["Die", "Werte", "sind", "stabil", "."],
+      "answer": ["Die", "Werte", "sind", "stabil", "."]
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "sentence": "Ich informiere den Arzt.",
+      "tokens": ["Ich", "informiere", "den", "Arzt", "."],
+      "answer": ["Ich", "informiere", "den", "Arzt", "."]
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Sie koennen Antworten kurz strukturieren."
+    }
+  ]
+}

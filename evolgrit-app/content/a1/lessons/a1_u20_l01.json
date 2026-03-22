@@ -1,0 +1,51 @@
+{
+  "id": "a1_u20_l01",
+  "level": "A1",
+  "unitId": "a1_u20",
+  "title": "Gestern / Heute",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Gestern war ich zu Hause."
+        },
+        {
+          "id": "b",
+          "label": "Gestern war ich morgen."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Heute gehe ich zur Arbeit."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Gestern habe ich ___ gekocht.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Nudeln"
+        },
+        {
+          "id": "b",
+          "label": "Reis"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst einfache Vergangenheit sagen."
+    }
+  ]
+}

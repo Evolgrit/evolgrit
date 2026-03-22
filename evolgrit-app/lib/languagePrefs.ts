@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export type LangPrefs = {
   nativeLang: string; // e.g. "en", "pl", "ar"
   targetLang: string; // for now always "de"
+  uiLocale?: string; // "system" or language code
 };
 
 const KEY = "evolgrit.langPrefs";

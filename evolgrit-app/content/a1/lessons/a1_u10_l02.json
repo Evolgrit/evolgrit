@@ -1,0 +1,51 @@
+{
+  "id": "a1_u10_l02",
+  "level": "A1",
+  "unitId": "a1_u10",
+  "title": "Supermarkt & Markt",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Wo finde ich Milch?"
+        },
+        {
+          "id": "b",
+          "label": "Wo finde ich Montag?"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich brauche Gemüse."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Haben Sie ___ ?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Bananen"
+        },
+        {
+          "id": "b",
+          "label": "Züge"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst im Supermarkt fragen."
+    }
+  ]
+}

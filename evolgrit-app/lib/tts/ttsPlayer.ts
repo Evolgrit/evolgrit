@@ -1,9 +1,12 @@
 import * as FileSystem from "expo-file-system/legacy";
 import AudioModule from "expo-audio/build/AudioModule";
 import type { AudioPlayer } from "expo-audio/build/AudioModule.types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 let currentPlayer: AudioPlayer | null = null;
 const TTS_DEBUG = __DEV__ && false;
+const CACHE_VERSION = 2;
+const CACHE_VERSION_KEY = "evolgrit.tts.cache_version";
 
 async function ensureDir() {
   const dir = `${FileSystem.cacheDirectory}tts/`;
@@ -13,6 +16,21 @@ async function ensureDir() {
   }
   return dir;
 }
+
+async function ensureCacheVersion() {
+  try {
+    const stored = await AsyncStorage.getItem(CACHE_VERSION_KEY);
+    if (stored !== String(CACHE_VERSION)) {
+      const dir = `${FileSystem.cacheDirectory}tts/`;
+      await FileSystem.deleteAsync(dir, { idempotent: true });
+      await AsyncStorage.setItem(CACHE_VERSION_KEY, String(CACHE_VERSION));
+    }
+  } catch {
+    // ignore
+  }
+}
+
+void ensureCacheVersion();
 
 async function buildCachePath({
   text,
@@ -26,7 +44,7 @@ async function buildCachePath({
   locale?: string;
 }) {
   const dir = await ensureDir();
-  const canonical = `${locale ?? "de-DE"}|${voice ?? "default"}|${rate}|${text.trim()}`;
+  const canonical = `v${CACHE_VERSION}|${locale ?? "de-DE"}|${voice ?? "default"}|${rate}|${text.trim()}`;
   const hash = hashCanonical(canonical);
   const fileName = `tts_${hash}_${rate}.mp3`;
   return { pathMp3: `${dir}${fileName}`, fileName };
@@ -63,6 +81,14 @@ export async function playBase64Tts({
   voice?: string;
   locale?: string;
 }): Promise<string> {
+  if (!text || !text.trim()) {
+    console.warn("[tts] missing text - skipping speak");
+    return "";
+  }
+  if (text.toLowerCase().includes("daniel")) {
+    console.warn("[tts] blocked debug phrase");
+    return "";
+  }
   const { pathMp3, fileName } = await buildCachePath({ text, rate, voice, locale });
 
   const info = await FileSystem.getInfoAsync(pathMp3);

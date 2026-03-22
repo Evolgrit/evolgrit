@@ -1,0 +1,51 @@
+{
+  "id": "a1_u02_l01",
+  "level": "A1",
+  "unitId": "a1_u02",
+  "title": "Ich bin …",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ich heiße Maria."
+        },
+        {
+          "id": "b",
+          "label": "Ich bin Hunger."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich komme aus Spanien."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich wohne in ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Berlin"
+        },
+        {
+          "id": "b",
+          "label": "Teller"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst dich kurz vorstellen."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "a2_u16_q01_party_quiz",
+  "level": "A2",
+  "unitId": "a2_u16",
+  "title": "Quiz · Einladen",
+  "durationMin": 3,
+  "imageKey": "a2_party_quiz_01",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Einladung passt?",
+      "choices": [
+        { "id": "a", "label": "Hast du Lust, zu meiner Party zu kommen?" },
+        { "id": "b", "label": "Ich wohne in Berlin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort ist eine Zusage?",
+      "choices": [
+        { "id": "a", "label": "Gerne, ich komme." },
+        { "id": "b", "label": "Vielleicht später nicht." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Fülle die Lücke:",
+      "text": "Leider ___ ich nicht.",
+      "choices": [
+        { "id": "a", "label": "kann" },
+        { "id": "b", "label": "bin" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt zur Uhrzeit?",
+      "choices": [
+        { "id": "a", "label": "Um wie viel Uhr geht’s los?" },
+        { "id": "b", "label": "Wo arbeitest du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt zum Ort?",
+      "choices": [
+        { "id": "a", "label": "Wo findet die Party statt?" },
+        { "id": "b", "label": "Warum ist die Party?" }
+      ],
+      "answer": "a"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_08_observation_reasoning",
+  "title": "Modul 8 · Beobachten & Begründen",
+  "subtitle": "Symptome benennen, Maßnahmen erklären",
+  "durationMin": 14,
+  "outcomes": [
+    "Symptome klar beschreiben",
+    "Beobachtungen nachvollziehbar begruenden",
+    "Massnahmen kurz erklaeren"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_08_beobachtung"
+  ]
+}

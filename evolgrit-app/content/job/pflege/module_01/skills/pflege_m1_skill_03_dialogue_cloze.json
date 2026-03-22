@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m1_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M1 · Mini-Dialog",
+  "subtitle": "Kurz antworten – dann nachfragen",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Guten Morgen. Wie heißen Sie?",
+      "choices": [
+        { "id": "a", "label": "Guten Morgen. Ich heiße Müller." },
+        { "id": "b", "label": "Guten Abend. Ich komme aus Polen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich heiße ____. ",
+      "choices": [
+        { "id": "a", "label": "Müller" },
+        { "id": "b", "label": "Zimmer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Wo tut es weh?",
+      "choices": [
+        { "id": "a", "label": "Es tut hier im Bauch weh." },
+        { "id": "b", "label": "Ich habe Zimmer 102." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Es tut im ____ weh.",
+      "choices": [
+        { "id": "a", "label": "Bauch" },
+        { "id": "b", "label": "Zimmer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was fragst du als nächstes?",
+      "choices": [
+        { "id": "a", "label": "Seit wann haben Sie die Schmerzen?" },
+        { "id": "b", "label": "Wo ist die Küche?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Seit wann haben Sie die Schmerzen?"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Du kannst kurz antworten und sinnvoll nachfragen."
+    }
+  ]
+}

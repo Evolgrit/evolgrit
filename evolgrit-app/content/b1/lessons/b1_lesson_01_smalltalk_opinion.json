@@ -1,0 +1,42 @@
+{
+  "id": "b1_01_smalltalk_opinion",
+  "title": "Smalltalk & Meinung",
+  "level": "B1",
+  "week": 1,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich finde das spannend." },
+        { "id": "b", "label": "Ich brauche Brot." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Meiner Meinung nach ist das ____.",
+      "choices": [
+        { "id": "a", "label": "gut" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Wie findest du das?",
+      "choices": [
+        { "id": "a", "label": "Ich finde das gut." },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst eine einfache Meinung äußern."
+    }
+  ]
+}

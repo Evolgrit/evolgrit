@@ -29,7 +29,7 @@ export default function LanguageSelect() {
   }, []);
 
   async function onContinue() {
-    const prefs: LangPrefs = { nativeLang, targetLang: "de" };
+    const prefs: LangPrefs = { nativeLang, targetLang: "de", uiLocale: "system" };
     await saveLangPrefs(prefs);
     router.replace("/(tabs)/home");
   }

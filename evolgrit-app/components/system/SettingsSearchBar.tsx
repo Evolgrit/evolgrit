@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Stack, XStack } from "tamagui";
+import { Stack, XStack, useTheme } from "tamagui";
 
 type Props = {
   value: string;
@@ -10,28 +10,26 @@ type Props = {
 };
 
 export function SettingsSearchBar({ value, onChangeText, placeholder = "Suchen" }: Props) {
+  const theme = useTheme();
+  const textColor = theme.text?.val ?? theme.color?.val ?? "#111111";
+  const muted = theme.textSecondary?.val ?? theme.colorMuted?.val ?? "#6B7280";
   return (
     <Stack
-      backgroundColor="$surface"
+      backgroundColor="$bgInput"
       borderRadius={14}
-      borderWidth={1}
-      borderColor="$border"
+      borderWidth={0}
       paddingHorizontal={12}
       paddingVertical={10}
       marginBottom={12}
-      shadowColor="rgba(0,0,0,0.08)"
-      shadowOpacity={0.08}
-      shadowRadius={12}
-      shadowOffset={{ width: 0, height: 6 }}
     >
       <XStack alignItems="center" gap="$2">
-        <Ionicons name="search" size={18} color="rgba(0,0,0,0.45)" />
+        <Ionicons name="search" size={18} color={muted} />
         <TextInput
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor="rgba(0,0,0,0.45)"
-          style={{ flex: 1, fontSize: 16, color: "rgba(0,0,0,0.92)" }}
+          placeholderTextColor={muted}
+          style={{ flex: 1, fontSize: 16, color: textColor }}
         />
       </XStack>
     </Stack>

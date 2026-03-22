@@ -2,16 +2,24 @@ import { Alert } from "react-native";
 import { getTtsBase64 } from "./azureTtsClient";
 import { playBase64Tts } from "./ttsPlayer";
 
-export async function playTtsText(text: string, rate: "normal" | "slow" = "normal") {
+export async function playTtsText(
+  text: string,
+  rate: "normal" | "slow" = "normal",
+  locale?: string
+) {
   try {
     const clean = sanitizeText(text);
 
     if (!clean) {
-      console.warn("[tts] missing text");
+      console.warn("[tts] missing text - skipping speak");
+      return;
+    }
+    if (clean.toLowerCase().includes("daniel")) {
+      console.warn("[tts] blocked debug phrase");
       return;
     }
 
-    const res = await getTtsBase64({ text: clean, rate });
+    const res = await getTtsBase64({ text: clean, rate, locale });
     await playBase64Tts({ base64: res.base64, mime: res.mime, text: clean, rate, voice: res.voice, locale: res.locale });
   } catch (err: any) {
     console.error("[tts] play failed", err);

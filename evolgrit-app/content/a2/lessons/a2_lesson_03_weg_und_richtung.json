@@ -1,0 +1,32 @@
+{
+  "id": "a2_l03_weg_und_richtung",
+  "title": "Weg & Richtung",
+  "level": "A2",
+  "week": 3,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wo ist …?",
+      "choices": [
+        { "id": "a", "label": "links" },
+        { "id": "b", "label": "rechts" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Gehen Sie ____.",
+      "choices": [
+        { "id": "a", "label": "geradeaus" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wo ist die Apotheke?"
+    }
+  ]
+}

@@ -36,10 +36,6 @@ export function CapsuleButton({
           borderColor: "rgba(0,0,0,0.06)",
           backgroundColor: "#fff",
           opacity: disabled ? 0.45 : 1,
-          shadowColor: "rgba(0,0,0,0.06)",
-          shadowOpacity: 1,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
         },
         style,
       ]}

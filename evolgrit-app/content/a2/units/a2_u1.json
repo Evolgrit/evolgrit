@@ -1,0 +1,43 @@
+{
+  "id": "a2_u1",
+  "title": "Unit 1 · Smalltalk",
+  "subtitle": "Fragen, antworten, reagieren",
+  "items": [
+    {
+      "id": "a2_l01_smalltalk",
+      "title": "Lektion 1 · Wie geht’s?",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_l02_zeiten_tagesablauf",
+      "title": "Lektion 2 · Zeiten & Tagesablauf",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u01_l01_wie_gehts",
+      "title": "Lektion · Wie geht’s? (A2 Plus)",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u01_l02_zeiten_tagesablauf",
+      "title": "Lektion · Zeiten & Tagesablauf (A2 Plus)",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u01_m01_smalltalk_mini",
+      "title": "Mini · Smalltalk",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u01_q01_smalltalk_quiz",
+      "title": "Quiz · Smalltalk",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

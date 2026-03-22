@@ -72,10 +72,6 @@ export function TasksPill({ storageKey, tasks, style, completed, onChangeComplet
             backgroundColor: "#fff",
             borderWidth: 1,
             borderColor: "rgba(17,24,39,0.08)",
-            shadowColor: "rgba(0,0,0,0.08)",
-            shadowOpacity: 1,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 4 },
             gap: 10,
           },
           style,
@@ -113,10 +109,6 @@ export function TasksPill({ storageKey, tasks, style, completed, onChangeComplet
           borderWidth={1}
           borderColor="rgba(17,24,39,0.08)"
           padding={12}
-          shadowColor="rgba(0,0,0,0.06)"
-          shadowOpacity={1}
-          shadowRadius={10}
-          shadowOffset={{ width: 0, height: 4 }}
           gap={10}
         >
           {tasks.map((task) => {

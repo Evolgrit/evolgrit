@@ -1,0 +1,56 @@
+{
+  "id": "pflege_m4_skill_01_vocab",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M4 · Vokabeln",
+  "subtitle": "Übergabe & Dokumentation",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Übergabe",
+      "choices": [
+        { "id": "a", "label": "Übergabe", "imageKey": "job_pflege_handover_correct_01" },
+        { "id": "b", "label": "Pause", "imageKey": "job_pflege_break_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "notieren",
+      "choices": [
+        { "id": "a", "label": "notieren", "imageKey": "job_pflege_note_correct_01" },
+        { "id": "b", "label": "vergessen", "imageKey": "job_pflege_forget_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Ich informiere den Arzt.",
+      "text": "Ich informiere den ____. ",
+      "choices": [
+        { "id": "a", "label": "Arzt" },
+        { "id": "b", "label": "Bus" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Die Werte sind stabil.",
+      "text": "Die ____ sind stabil.",
+      "choices": [
+        { "id": "a", "label": "Werte" },
+        { "id": "b", "label": "Wände" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut!",
+      "text": "Du kennst wichtige Wörter für Übergabe & Doku."
+    }
+  ]
+}

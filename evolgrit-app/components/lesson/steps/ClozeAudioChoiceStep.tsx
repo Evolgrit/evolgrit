@@ -3,10 +3,12 @@ import { Pressable } from "react-native";
 import { Image, Stack, Text, YStack } from "tamagui";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { LESSON_IMAGES } from "../../../assets/lesson-images";
+import { getLessonImage } from "../../../assets/lesson-images";
 import { playTtsText } from "../../../lib/tts/playText";
 import { stopTts } from "../../../lib/tts/ttsPlayer";
 import { SoftButton } from "../../system/SoftButton";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 type Choice = { id: string; label: string; correct?: boolean };
 
@@ -35,6 +37,8 @@ export function ClozeAudioChoiceStep({
   const successBg = "rgba(52,199,89,0.10)";
   const shake = useSharedValue(0);
   const [audioBusy, setAudioBusy] = useState(false);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   const shakeStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shake.value }],
@@ -53,16 +57,13 @@ export function ClozeAudioChoiceStep({
     if (!ttsText) return;
     try {
       setAudioBusy(true);
-      await playTtsText(ttsText, "normal");
+      await playTtsText(ttsText, "normal", targetLocale);
     } finally {
       setAudioBusy(false);
     }
   };
 
-  const source = imageKey ? LESSON_IMAGES[imageKey] : null;
-  if (imageKey && !source) {
-    console.warn(`[lesson] Missing image key ${imageKey}`);
-  }
+  const source = getLessonImage(imageKey);
 
   return (
     <YStack gap="$3" backgroundColor="$background">
@@ -91,26 +92,13 @@ export function ClozeAudioChoiceStep({
         </Pressable>
       ) : null}
 
-      {source ? (
-        <Stack
-          height={180}
-          borderRadius={18}
-          overflow="hidden"
-        >
-          <Image source={source} width="100%" height="100%" resizeMode="cover" />
-        </Stack>
-      ) : imageKey ? (
-        <Stack
-          height={180}
-          borderRadius={18}
-          overflow="hidden"
-          alignItems="center"
-          justifyContent="center"
-          backgroundColor="$color3"
-        >
-          <Text color="$muted">Bild fehlt</Text>
-        </Stack>
-      ) : null}
+      <Stack
+        height={180}
+        borderRadius={18}
+        overflow="hidden"
+      >
+        <Image source={source} width="100%" height="100%" resizeMode="cover" />
+      </Stack>
 
       <YStack gap="$2" padding="$3" backgroundColor="$background" borderRadius="$5">
         <Text color="$text" fontSize={18} fontWeight="800" textAlign="center">

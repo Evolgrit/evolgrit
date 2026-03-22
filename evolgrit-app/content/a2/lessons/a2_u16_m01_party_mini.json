@@ -1,0 +1,29 @@
+{
+  "id": "a2_u16_m01_party_mini",
+  "level": "A2",
+  "unitId": "a2_u16",
+  "title": "Mini · Party",
+  "durationMin": 2,
+  "imageKey": "a2_party_mini_01",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Kommst du heute Abend zur Party?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort sagt zu?",
+      "choices": [
+        { "id": "a", "label": "Ja, ich komme gern." },
+        { "id": "b", "label": "Ich arbeite im Büro." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst eine Einladung annehmen."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "job_pflege_live_10_deeskalation_patient",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Deeskalation (Patient)",
+  "subtitle": "Empathie und ruhige Führung",
+  "durationMin": 5,
+  "tasks": [
+    "Empathisch reagieren",
+    "Beruhigen",
+    "Grenze ruhig setzen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Sagen Sie einen empathischen Satz."
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Ein Satz reicht.",
+      "suggestions": ["Ich verstehe, dass das unangenehm ist."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Wie beruhigen Sie die Situation in einem Satz?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz und ruhig.",
+      "suggestions": ["Wir kümmern uns gleich darum."]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Wie setzen Sie ruhig eine Grenze?"
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Kurz und respektvoll.",
+      "suggestions": ["Bitte sprechen Sie leiser. Ich helfe Ihnen dann besser."]
+    },
+    {
+      "id": "c4",
+      "role": "coach",
+      "text": "Sehr gut. Ruhig und klar." 
+    }
+  ]
+}

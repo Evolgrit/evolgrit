@@ -1,0 +1,45 @@
+{
+  "id": "job_pflege_live_04_schmerz_verlauf",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Schmerzverlauf",
+  "subtitle": "Ort · Stärke · seit wann · besser/schlechter",
+  "durationMin": 5,
+  "tasks": [
+    "Frag nach: Wo genau?",
+    "Frag nach: 0–10",
+    "Frag nach: seit wann",
+    "Frag: besser oder schlechter?"
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Okay. Zeigen Sie bitte: Wo genau tut es weh?" },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Sag den Ort kurz.",
+      "suggestions": ["Hier im Bauch, rechts.", "Im Kopf, vorne.", "Im Rücken, unten."]
+    },
+    { "id": "c2", "role": "coach", "text": "Auf einer Skala von 0 bis 10: Wie stark ist der Schmerz?" },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Sag eine Zahl und optional ein Wort.",
+      "suggestions": ["Sieben von zehn, stark.", "Fünf von zehn.", "Neun von zehn, sehr stark."]
+    },
+    { "id": "c3", "role": "coach", "text": "Seit wann haben Sie diese Schmerzen?" },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "Sag seit wann.",
+      "suggestions": ["Seit heute Morgen.", "Seit gestern Abend.", "Seit zwei Tagen."]
+    },
+    { "id": "c4", "role": "coach", "text": "Wird es gerade besser oder schlechter?" },
+    {
+      "id": "u4",
+      "role": "user",
+      "prompt": "Sag besser/schlechter/gleich.",
+      "suggestions": ["Es wird schlimmer.", "Es wird besser.", "Es bleibt gleich."]
+    },
+    { "id": "c5", "role": "coach", "text": "Danke. Ich notiere das und informiere gleich den Arzt." }
+  ]
+}

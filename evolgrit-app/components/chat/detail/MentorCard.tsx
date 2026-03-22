@@ -27,10 +27,6 @@ export function MentorCard({
           backgroundColor="#F2F2F7"
           borderWidth={StyleSheet.hairlineWidth}
           borderColor="rgba(17,24,39,0.10)"
-          shadowColor="transparent"
-          shadowOpacity={0}
-          shadowRadius={0}
-          shadowOffset={{ width: 0, height: 0 }}
         >
           {imageUri ? (
             <Image

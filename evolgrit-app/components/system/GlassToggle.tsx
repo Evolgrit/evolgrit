@@ -44,10 +44,6 @@ export function GlassToggle({ value, onValueChange, disabled }: Props) {
             inset: 0,
             borderRadius: 999,
             backgroundColor: bg,
-            shadowColor: glow,
-            shadowOpacity: 1,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 4 },
           }}
         />
         <Animated.View
@@ -58,10 +54,6 @@ export function GlassToggle({ value, onValueChange, disabled }: Props) {
             backgroundColor: "rgba(255,255,255,0.96)",
             borderWidth: 1,
             borderColor: "rgba(0,0,0,0.05)",
-            shadowColor: "rgba(0,0,0,0.18)",
-            shadowOpacity: 1,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 4 },
             transform: [{ translateX: knobTranslate }],
           }}
         />

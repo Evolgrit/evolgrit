@@ -1,0 +1,68 @@
+{
+  "id": "pflege_m8_skill_03_dialogue_cloze",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M8 · Mini-Dialog",
+  "subtitle": "Beobachtung berichten",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Was beobachten Sie?",
+      "choices": [
+        { "id": "a", "label": "Die Atmung ist flach." },
+        { "id": "b", "label": "Ich habe Pause." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Die Atmung ist ____.",
+      "choices": [
+        { "id": "a", "label": "flach" },
+        { "id": "b", "label": "schnell" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Wähle die passende Antwort",
+      "text": "Coach: Was ist Ihre Begruendung?",
+      "choices": [
+        { "id": "a", "label": "Der Puls ist unregelmaessig." },
+        { "id": "b", "label": "Ich gehe nach Hause." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Der Puls ist ____.",
+      "choices": [
+        { "id": "a", "label": "unregelmaessig" },
+        { "id": "b", "label": "puenktlich" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Was tun Sie als naechstes?",
+      "choices": [
+        { "id": "a", "label": "Ich informiere den Arzt." },
+        { "id": "b", "label": "Ich ignoriere es." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich informiere den Arzt und dokumentiere die Beobachtung."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig!",
+      "text": "Sie koennen Beobachtungen kurz berichten."
+    }
+  ]
+}

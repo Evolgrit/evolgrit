@@ -7,7 +7,7 @@ export type AsrTokenStatus = "ok" | "wrong" | "missing";
 
 export type AsrResult = {
   transcript: string;
-  score: number;
+  score: number | null;
   tokens: Array<{ token: string; status: AsrTokenStatus }>;
 };
 
@@ -17,7 +17,7 @@ export async function evaluateRecording({
   locale = "de-DE",
 }: {
   fileUri: string;
-  targetText: string;
+  targetText?: string | null;
   locale?: string;
 }): Promise<AsrResult> {
   if (!supabase) throw new Error("Supabase client missing");
@@ -101,33 +101,43 @@ export async function evaluateRecording({
     throw new Error(upload.error.message);
   }
 
-  const signed = await supabase.storage
-    .from(bucket)
-    .createSignedUrl(audioPath, 60);
-  if (signed.error || !signed.data?.signedUrl) {
-    console.error("[asr] signed url error", signed.error);
-    throw new Error(signed.error?.message ?? "Signed URL failed");
+  const cleanedTargetText =
+    typeof targetText === "string" && targetText.trim().length > 0
+      ? targetText.trim()
+      : "";
+  const invokeBody: Record<string, unknown> = {
+    audioPath,
+    locale: locale ?? "de-DE",
+  };
+  if (cleanedTargetText) {
+    invokeBody.targetText = cleanedTargetText;
   }
 
-  const audioUrl = signed.data.signedUrl;
+  const payloadStr = JSON.stringify(invokeBody);
+  console.log("[asr] INVOKE BODY =", payloadStr);
+  console.log("[asr] INVOKE BYTES =", payloadStr.length);
 
-  const invokeBody = { audioUrl, targetText, locale };
-  console.log("[asr] eval request", invokeBody);
+  if (!invokeBody.audioUrl && !invokeBody.audioPath) {
+    console.error("[asr] invokeBody missing audioUrl/audioPath", invokeBody);
+    throw new Error("ASR invokeBody missing audioUrl/audioPath");
+  }
+  if (!invokeBody.locale) {
+    console.error("[asr] invokeBody missing locale", invokeBody);
+    throw new Error("ASR invokeBody missing locale");
+  }
+
   const { data, error } = await supabase.functions.invoke("asr-eval", {
     body: invokeBody,
   });
+
   if (error) {
     console.error("[asr] invoke error raw", JSON.stringify(error, null, 2));
-    const status = (error as any)?.status ?? "unknown";
-    const details = (error as any)?.details ?? "";
-    throw new Error(
-      `ASR failed: status=${status} message=${error.message ?? ""} details=${details}`
-    );
+    throw new Error(error.message ?? "ASR failed");
   }
 
   return {
     transcript: data?.transcript ?? "",
-    score: typeof data?.score === "number" ? data.score : 0,
+    score: typeof data?.score === "number" ? data.score : null,
     tokens: Array.isArray(data?.tokens) ? data.tokens : [],
   };
 }

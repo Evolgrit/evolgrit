@@ -13,6 +13,7 @@ const iconMap: Record<string, keyof typeof Feather.glyphMap> = {
   home: "home",
   learn: "book-open",
   speak: "mic",
+  focus: "target",
   progress: "bar-chart-2",
 };
 

@@ -1,0 +1,31 @@
+{
+  "id": "a2_u08",
+  "title": "Routinen & Gefühle",
+  "subtitle": "Alltag erklären",
+  "items": [
+    {
+      "id": "a2_u08_l01",
+      "title": "Lektion 1 · Routinen & Gefühle",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u08_l02",
+      "title": "Lektion 2 · Alltag erklären",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u08_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u08_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

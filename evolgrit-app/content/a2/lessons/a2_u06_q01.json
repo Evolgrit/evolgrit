@@ -1,0 +1,92 @@
+{
+  "id": "a2_u06_q01",
+  "level": "A2",
+  "unitId": "a2_u06",
+  "title": "Quiz · Kurzcheck",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Apotheke ist neben dem Bahnhof."
+        },
+        {
+          "id": "b",
+          "label": "Die Apotheke ist neben dem Montag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gegenüber"
+        },
+        {
+          "id": "b",
+          "label": "gestern"
+        }
+      ],
+      "answer": "a",
+      "text": "Der Park ist ___ der Schule."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Apotheke ist neben dem Bahnhof."
+        },
+        {
+          "id": "b",
+          "label": "Die Apotheke ist neben dem Montag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gegenüber"
+        },
+        {
+          "id": "b",
+          "label": "gestern"
+        }
+      ],
+      "answer": "a",
+      "text": "Der Park ist ___ der Schule."
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die richtige Antwort",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Apotheke ist neben dem Bahnhof."
+        },
+        {
+          "id": "b",
+          "label": "Die Apotheke ist neben dem Montag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Quiz fertig",
+      "text": "Gut gemacht!"
+    }
+  ]
+}

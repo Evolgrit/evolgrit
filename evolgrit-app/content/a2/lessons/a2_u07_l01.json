@@ -1,0 +1,51 @@
+{
+  "id": "a2_u07_l01",
+  "level": "A2",
+  "unitId": "a2_u07",
+  "title": "Lektion 1 · Personen & Neuigkeiten",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Er hat eine neue Arbeit."
+        },
+        {
+          "id": "b",
+          "label": "Er hat eine neue Milch."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Sie ist letzte Woche umgezogen."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Wir haben ___ Neuigkeiten.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gute"
+        },
+        {
+          "id": "b",
+          "label": "gut"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Neuigkeiten teilen."
+    }
+  ]
+}

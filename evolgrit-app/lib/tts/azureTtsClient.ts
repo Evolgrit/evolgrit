@@ -11,7 +11,15 @@ type TtsResponse = {
   rate?: Rate;
 };
 
-export async function getTtsBase64({ text, rate = "normal" }: { text: string; rate?: Rate }) {
+export async function getTtsBase64({
+  text,
+  rate = "normal",
+  locale,
+}: {
+  text: string;
+  rate?: Rate;
+  locale?: string;
+}) {
   const url = `${Constants.expoConfig?.extra?.supabaseUrl ?? process.env.EXPO_PUBLIC_SUPABASE_URL}/functions/v1/azure-tts`;
   const anonKey = Constants.expoConfig?.extra?.supabaseAnonKey ?? process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -26,7 +34,7 @@ export async function getTtsBase64({ text, rate = "normal" }: { text: string; ra
       apikey: anonKey,
       Authorization: `Bearer ${anonKey}`,
     },
-    body: JSON.stringify({ text, rate }),
+    body: JSON.stringify({ text, rate, locale }),
   });
 
   if (!res.ok) {

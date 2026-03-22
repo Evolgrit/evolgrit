@@ -1,0 +1,32 @@
+{
+  "id": "b1_05_exam_sim_1",
+  "title": "Prüfungssimulation: Teil 1",
+  "level": "B1",
+  "week": 5,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Ich möchte mich kurz vorstellen." },
+        { "id": "b", "label": "Wo ist der Bahnhof?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Warum möchtest du hier arbeiten?",
+      "choices": [
+        { "id": "a", "label": "Weil ich das Team mag." },
+        { "id": "b", "label": "Guten Abend." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst kurz antworten."
+    }
+  ]
+}

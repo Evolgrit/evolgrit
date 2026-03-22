@@ -1,0 +1,86 @@
+{
+  "id": "pflege_m1_skill_01_vocab",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M1 · Vokabeln",
+  "subtitle": "Aufnahme & Schmerz – Grundwörter",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Guten Morgen",
+      "choices": [
+        { "id": "a", "label": "Guten Morgen", "imageKey": "job_pflege_greeting_goodmorning_correct_01" },
+        { "id": "b", "label": "Guten Abend", "imageKey": "job_pflege_greeting_goodevening_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Wie heißen Sie?",
+      "choices": [
+        { "id": "a", "label": "Wie heißen Sie?", "imageKey": "job_pflege_admission_name_correct_01" },
+        { "id": "b", "label": "Wo wohnen Sie?", "imageKey": "job_pflege_admission_address_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Zimmer",
+      "choices": [
+        { "id": "a", "label": "Zimmer", "imageKey": "job_pflege_admission_room_correct_01" },
+        { "id": "b", "label": "Küche", "imageKey": "job_pflege_admission_kitchen_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Errate die Bedeutung",
+      "ttsText": "Schmerzen",
+      "choices": [
+        { "id": "a", "label": "Schmerzen", "imageKey": "job_pflege_pain_correct_01" },
+        { "id": "b", "label": "Hunger", "imageKey": "job_pflege_hunger_distract_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Wo genau tut es weh?",
+      "text": "Wo genau tut es ____?",
+      "choices": [
+        { "id": "a", "label": "weh" },
+        { "id": "b", "label": "gut" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "ttsText": "Auf einer Skala von null bis zehn.",
+      "text": "Auf einer Skala von 0 bis ____. ",
+      "choices": [
+        { "id": "a", "label": "10" },
+        { "id": "b", "label": "100" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle die passende Übersetzung",
+      "text": "Bitte zeigen Sie mir, wo es weh tut.",
+      "choices": [
+        { "id": "a", "label": "Please show me where it hurts." },
+        { "id": "b", "label": "Please tell me your name." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut!",
+      "text": "Du kennst die wichtigsten Wörter für Aufnahme & Schmerz."
+    }
+  ]
+}

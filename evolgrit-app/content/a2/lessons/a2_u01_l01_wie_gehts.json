@@ -1,0 +1,51 @@
+{
+  "id": "a2_u01_l01_wie_gehts",
+  "level": "A2",
+  "unitId": "a2_u01",
+  "title": "Wie geht’s?",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Gut, danke. Und dir?"
+        },
+        {
+          "id": "b",
+          "label": "Ich heiße Sonntag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Mir geht es gut."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Wie ___ es dir?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "geht"
+        },
+        {
+          "id": "b",
+          "label": "fährt"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst nach dem Befinden fragen und antworten."
+    }
+  ]
+}

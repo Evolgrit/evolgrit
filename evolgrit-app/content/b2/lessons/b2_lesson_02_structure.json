@@ -1,0 +1,33 @@
+{
+  "id": "b2_02_structure",
+  "level": "B2",
+  "title": "Gespräch strukturieren",
+  "subtitle": "Zusammenfassen und weiterführen",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Hören Sie zu und sprechen Sie nach.",
+      "ttsText": "Lassen Sie mich kurz zusammenfassen, was bisher gesagt wurde."
+    },
+    {
+      "type": "choice",
+      "prompt": "Was hilft, das Gespräch zu ordnen?",
+      "choices": [
+        { "id": "a", "label": "Das ist alles viel zu kompliziert." },
+        { "id": "b", "label": "Wir sollten nochmal von vorne anfangen." },
+        { "id": "c", "label": "Wir haben zwei Punkte: Zeit und Budget." }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Leiten Sie zum nächsten Schritt über.",
+      "ttsText": "Als nächsten Schritt schlage ich vor, eine Lösung zu testen."
+    },
+    {
+      "type": "summary",
+      "title": "Stark",
+      "text": "Du hast gezeigt, wie man ein Gespräch ruhig lenkt."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "a1_l8_02_alltag_simulation",
+  "title": "Alltagssimulation",
+  "level": "A1",
+  "week": 8,
+  "steps": [
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Guten Tag!",
+      "choices": [
+        { "id": "a", "label": "Guten Tag!" },
+        { "id": "b", "label": "Tschüss!" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Können Sie mir helfen?",
+      "choices": [
+        { "id": "a", "label": "Ja, gern." },
+        { "id": "b", "label": "Nein." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das richtige Wort",
+      "choices": [
+        { "id": "a", "label": "Danke." },
+        { "id": "b", "label": "Nein." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Wähle das richtige Wort",
+      "choices": [
+        { "id": "a", "label": "Tschüss!" },
+        { "id": "b", "label": "Hallo!" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst kurze Dialoge führen.",
+        "Du kannst höflich reagieren."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

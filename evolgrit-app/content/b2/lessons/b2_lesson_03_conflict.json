@@ -1,0 +1,34 @@
+{
+  "id": "b2_03_conflict",
+  "level": "B2",
+  "title": "Konflikte ansprechen",
+  "subtitle": "Sachlich und lösungsorientiert",
+  "steps": [
+    {
+      "type": "listen_repeat",
+      "prompt": "Hören Sie zu und sprechen Sie nach.",
+      "ttsText": "Ich möchte ein Thema ansprechen, das mir wichtig ist."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Welche Formulierung ist professionell?",
+      "text": "Teammeeting: Neue Regel im Unternehmen",
+      "choices": [
+        { "id": "a", "label": "Das ist immer dein Fehler." },
+        { "id": "b", "label": "Mir ist aufgefallen, dass es hier öfter zu Verzögerungen kommt." },
+        { "id": "c", "label": "So kann man nicht arbeiten." }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Schlagen Sie eine Lösung vor.",
+      "ttsText": "Vielleicht können wir gemeinsam einen klaren Ablauf festlegen."
+    },
+    {
+      "type": "summary",
+      "title": "Sehr gut",
+      "text": "Du hast ein Problem ruhig und lösungsorientiert formuliert."
+    }
+  ]
+}

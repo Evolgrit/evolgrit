@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_01_time",
+  "title": "Zeit & Pünktlichkeit",
+  "subtitle": "So funktioniert Zeit in Deutschland",
+  "durationMin": 10,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Pünktlichkeit wirkt in Deutschland respektvoll. Schon 5–10 Minuten Verspätung können unzuverlässig wirken – besonders bei Terminen."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Sag früh Bescheid, wenn du später kommst." },
+        { "kind": "do", "text": "Nenne eine neue Uhrzeit: „Ich bin um 18:10 da.“" },
+        { "kind": "dont", "text": "Einfach später erscheinen ohne Nachricht." },
+        { "kind": "dont", "text": "Ausreden ohne Lösung: „Ich konnte nichts machen.“" }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Du bist 10 Minuten zu spät. Was ist am besten?",
+      "options": [
+        "Entschuldigung, ich komme 10 Minuten später. Ich bin um 18:10 da.",
+        "Ich komme irgendwann. Ist doch nicht schlimm."
+      ],
+      "correctIndex": 0,
+      "explain": "Klar + neue Uhrzeit wirkt zuverlässig."
+    },
+    {
+      "type": "examples",
+      "title": "Sätze, die funktionieren",
+      "items": [
+        "Entschuldigung, ich komme 5 Minuten später.",
+        "Ich stehe im Stau. Ich bin um 18:10 da.",
+        "Können wir den Termin um 15 Minuten verschieben?"
+      ]
+    }
+  ]
+}

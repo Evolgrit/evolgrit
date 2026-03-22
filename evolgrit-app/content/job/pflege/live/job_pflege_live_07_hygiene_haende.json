@@ -1,0 +1,42 @@
+{
+  "id": "job_pflege_live_07_hygiene_haende",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Händehygiene",
+  "subtitle": "Ruhig und korrekt anleiten",
+  "durationMin": 4,
+  "tasks": [
+    "Händedesinfektion nennen",
+    "Handschuhe begründen",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Was machen Sie zuerst, bevor Sie den Patienten anfassen?"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Nennen Sie die erste Hygienehandlung.",
+      "suggestions": ["Hände desinfizieren."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Wann brauchen Sie Handschuhe?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Nennen Sie kurz den Grund.",
+      "suggestions": ["Bei Körperflüssigkeiten.", "Bei Wundversorgung."]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Sehr gut. Hygiene ist klar." 
+    }
+  ]
+}

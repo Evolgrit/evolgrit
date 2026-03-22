@@ -21,9 +21,6 @@ export function IconButton({ icon, onPress, disabled }: Props) {
       backgroundColor="$card"
       borderWidth={1}
       borderColor="$border"
-      shadowColor="rgba(17,24,39,0.08)"
-      shadowRadius={10}
-      shadowOffset={{ width: 0, height: 4 }}
     >
       {icon}
     </Button>

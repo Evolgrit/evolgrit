@@ -1,0 +1,85 @@
+{
+  "id": "pflege_live_02_pain",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Pflege: Schmerzen abfragen",
+  "subtitle": "Ruhig nachfragen und dokumentieren",
+  "durationMin": 5,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "setting": {
+    "scene": "Patientenzimmer",
+    "context": "Du fragst nach Schmerzen und fasst kurz zusammen."
+  },
+  "tasks": [
+    "Schmerzort erfragen.",
+    "Stärke einschätzen (z.B. Skala).",
+    "Nächsten Schritt sagen."
+  ],
+  "difficultyNotes": {
+    "focus": [
+      "freundlich fragen",
+      "Skala nutzen",
+      "kurz zusammenfassen"
+    ],
+    "tone": "ruhig, unterstützend"
+  },
+  "tipSuggestionsGlobal": [
+    "Wo genau haben Sie Schmerzen?",
+    "Auf einer Skala von 1 bis 10?",
+    "Ich gebe das weiter."
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Frag nach dem Schmerzort.",
+      "goalHint": "Ort erfragen.",
+      "tipSuggestions": [
+        "Wo genau haben Sie Schmerzen?",
+        "Tut es im Bauch oder im Rücken weh?",
+        "Können Sie den Ort zeigen?"
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Frag nach der Stärke (Skala).",
+      "goalHint": "Skala 1–10.",
+      "tipSuggestions": [
+        "Wie stark ist der Schmerz von 1 bis 10?",
+        "Ist es eher leicht oder stark?",
+        "Würden Sie es als 6 von 10 beschreiben?"
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Frag kurz nach der Dauer.",
+      "goalHint": "Seit wann?",
+      "tipSuggestions": [
+        "Seit wann haben Sie die Schmerzen?",
+        "Ist es seit heute oder länger?",
+        "Hat es plötzlich angefangen?"
+      ]
+    },
+    {
+      "id": "t04",
+      "text": "Sag, was du als Nächstes machst.",
+      "goalHint": "Weitergeben/Medikation.",
+      "tipSuggestions": [
+        "Ich gebe das an die Ärztin weiter.",
+        "Ich dokumentiere das jetzt.",
+        "Ich schaue gleich nach einer Lösung."
+      ]
+    }
+  ],
+  "endSummary": {
+    "title": "Stark",
+    "bullets": [
+      "Du hast ruhig nachgefragt.",
+      "Du hast eine Skala genutzt.",
+      "Du hast den nächsten Schritt klar gesagt."
+    ],
+    "nextSuggestion": "Als Nächstes üben wir den Arztkontakt."
+  }
+}

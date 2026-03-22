@@ -1,0 +1,32 @@
+{
+  "id": "a2_l05_termine",
+  "title": "Termine",
+  "level": "A2",
+  "week": 5,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Haben Sie morgen Zeit?" },
+        { "id": "b", "label": "Wie alt bist du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich kann ____.",
+      "choices": [
+        { "id": "a", "label": "am Dienstag" },
+        { "id": "b", "label": "ja" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Können wir den Termin verschieben?"
+    }
+  ]
+}

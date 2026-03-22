@@ -1,0 +1,37 @@
+{
+  "id": "b1_02_phone_reschedule",
+  "title": "Termin telefonisch verschieben",
+  "level": "B1",
+  "week": 2,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Können wir den Termin verschieben?" },
+        { "id": "b", "label": "Wo ist der Markt?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich kann ____.",
+      "choices": [
+        { "id": "a", "label": "am Mittwoch" },
+        { "id": "b", "label": "ja" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich rufe wegen des Termins an."
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "text": "Du kannst einen Termin am Telefon verschieben."
+    }
+  ]
+}

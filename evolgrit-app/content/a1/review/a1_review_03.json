@@ -1,0 +1,32 @@
+{
+  "id": "a1_review_03",
+  "title": "Markt: Preis & Menge",
+  "level": "A1",
+  "week": 0,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Was kostet das?" },
+        { "id": "b", "label": "Wie heißt du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich hätte gern ____.",
+      "choices": [
+        { "id": "a", "label": "ein Kilo" },
+        { "id": "b", "label": "guten Tag" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Was kostet ein Kilo Äpfel?"
+    }
+  ]
+}

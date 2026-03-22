@@ -1,0 +1,31 @@
+{
+  "id": "a2_u04",
+  "title": "Im Geschäft & Café",
+  "subtitle": "nachfragen & reagieren",
+  "items": [
+    {
+      "id": "a2_u04_l01",
+      "title": "Lektion 1 · Im Geschäft & Café",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u04_l02",
+      "title": "Lektion 2 · nachfragen & reagieren",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u04_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u04_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

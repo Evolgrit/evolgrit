@@ -1,0 +1,16 @@
+{
+  "id": "job_pflege_mod_06",
+  "title": "Pflege · Modul 6",
+  "subtitle": "Hygiene & Sicherheit",
+  "durationMin": 12,
+  "outcomes": [
+    "Hygiene-Schritte klar benennen",
+    "Sicherheitsregeln am Bett erklären",
+    "Patienten ruhig anleiten"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_07_hygiene_haende",
+    "job_pflege_live_08_sicherheit_sturz",
+    "job_pflege_live_09_lagerung_klingel"
+  ]
+}

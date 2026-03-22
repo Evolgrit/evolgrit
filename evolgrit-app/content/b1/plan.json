@@ -1,0 +1,70 @@
+{
+  "level": "B1",
+  "title": "B1 – Pruefungsmodus",
+  "subtitle": "6 Lektionen · strukturierter Ablauf",
+  "units": [
+    {
+      "id": "b1_u1",
+      "title": "Unit 1 · Smalltalk",
+      "subtitle": "Meinung und Telefon",
+      "items": [
+        {
+          "id": "b1_01_smalltalk_opinion",
+          "title": "Lektion 1 · Smalltalk & Meinung",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_01_smalltalk_opinion" },
+          "status": "available"
+        },
+        {
+          "id": "b1_02_phone_reschedule",
+          "title": "Lektion 2 · Termin telefonisch verschieben",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_02_phone_reschedule" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "b1_u2",
+      "title": "Unit 2 · Beruf",
+      "subtitle": "Problem & Beschwerde",
+      "items": [
+        {
+          "id": "b1_03_polite_complaint",
+          "title": "Lektion 3 · Beschwerde hoeflich aeussern",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_03_polite_complaint" },
+          "status": "available"
+        },
+        {
+          "id": "b1_04_work_problem",
+          "title": "Lektion 4 · Im Job: Problem erklaeren",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_04_work_problem" },
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "b1_u3",
+      "title": "Unit 3 · Simulation",
+      "subtitle": "Pruefungssimulation",
+      "items": [
+        {
+          "id": "b1_05_exam_sim_1",
+          "title": "Lektion 5 · Pruefungssimulation: Teil 1",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_05_exam_sim_1" },
+          "status": "available"
+        },
+        {
+          "id": "b1_06_exam_sim_2",
+          "title": "Lektion 6 · Pruefungssimulation: Teil 2",
+          "meta": "3 Min · Lesson",
+          "route": { "type": "lesson_runner", "lessonId": "b1_06_exam_sim_2" },
+          "status": "available"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "a2_u03",
+  "title": "Vergleichen & Beschreiben",
+  "subtitle": "größer, besser, anders",
+  "items": [
+    {
+      "id": "a2_u03_l01",
+      "title": "Lektion 1 · Vergleichen & Beschreiben",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u03_l02",
+      "title": "Lektion 2 · größer, besser, anders",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a2_u03_m01",
+      "title": "Mini · Kurz",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a2_u03_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

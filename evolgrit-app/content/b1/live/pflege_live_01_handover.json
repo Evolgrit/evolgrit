@@ -1,0 +1,85 @@
+{
+  "id": "pflege_live_01_handover",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Pflege: Übergabe",
+  "subtitle": "Wichtiges kurz und klar übergeben",
+  "durationMin": 5,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "setting": {
+    "scene": "Stationszimmer",
+    "context": "Du gibst eine kurze Übergabe an die nächste Schicht."
+  },
+  "tasks": [
+    "Nenne Name + Zimmer.",
+    "Sag kurz den aktuellen Zustand.",
+    "Erwähne eine wichtige Aufgabe."
+  ],
+  "difficultyNotes": {
+    "focus": [
+      "Kurzsätze",
+      "ruhiger Ton",
+      "klare Prioritäten"
+    ],
+    "tone": "freundlich, ruhig, sachlich"
+  },
+  "tipSuggestionsGlobal": [
+    "Patientin Müller, Zimmer 12.",
+    "Stabil, aber müde.",
+    "Bitte die Medikation um 14 Uhr geben."
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Starte die Übergabe: Name und Zimmer.",
+      "goalHint": "Name + Zimmer nennen.",
+      "tipSuggestions": [
+        "Patientin Müller, Zimmer 12.",
+        "Herr Schmidt, Zimmer 7.",
+        "Frau Kaya, Zimmer 4."
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Wie ist der aktuelle Zustand?",
+      "goalHint": "Kurz und sachlich.",
+      "tipSuggestions": [
+        "Stabil, aber müde.",
+        "Kreislauf ruhig, Schmerzen leicht.",
+        "Heute insgesamt gut."
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Gibt es eine wichtige Aufgabe für die nächste Schicht?",
+      "goalHint": "Aufgabe + Zeitpunkt.",
+      "tipSuggestions": [
+        "Bitte die Medikation um 14 Uhr geben.",
+        "Blutdruck heute Nachmittag kontrollieren.",
+        "Bitte Mobilisation gegen 16 Uhr."
+      ]
+    },
+    {
+      "id": "t04",
+      "text": "Gib noch einen kurzen Hinweis (z.B. Essen/Trinken).",
+      "goalHint": "Ein kurzer Zusatz.",
+      "tipSuggestions": [
+        "Trinkt wenig, bitte anbieten.",
+        "Isst schlecht, bitte beobachten.",
+        "Heute nur weiche Kost."
+      ]
+    }
+  ],
+  "endSummary": {
+    "title": "Gut gemacht",
+    "bullets": [
+      "Du hast die wichtigsten Infos genannt.",
+      "Deine Übergabe war ruhig und klar.",
+      "Du hast Aufgaben sauber markiert."
+    ],
+    "nextSuggestion": "Als Nächstes üben wir Schmerzabfrage."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "a1_l2_01_einkaufen_basics",
+  "title": "Einkaufen: Basics",
+  "level": "A1",
+  "week": 2,
+  "steps": [
+    {
+      "type": "image_choice",
+      "prompt": "Wähle die passende Begrüßung.",
+      "ttsText": "Hallo",
+      "choices": [
+        { "id": "a", "label": "Hallo", "imageKey": "a1_greeting_hallo_correct_02" },
+        { "id": "b", "label": "Guten Abend", "imageKey": "a1_greeting_gutenabend_correct_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Ich brauche …",
+      "choices": [
+        { "id": "a", "label": "Brot" },
+        { "id": "b", "label": "Guten Morgen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Ich brauche ____.",
+      "choices": [
+        { "id": "a", "label": "Brot" },
+        { "id": "b", "label": "Danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ich brauche Brot."
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "Verkäufer: Kann ich helfen?",
+      "choices": [
+        { "id": "a", "label": "Ja, bitte." },
+        { "id": "b", "label": "Tschüss." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst etwas bestellen.",
+        "Du kannst höflich antworten."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

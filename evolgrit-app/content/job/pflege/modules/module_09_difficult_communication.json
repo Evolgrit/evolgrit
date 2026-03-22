@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_09_difficult_communication",
+  "title": "Modul 9 · Schwierige Gespräche",
+  "subtitle": "Ruhig bleiben, professionell sprechen",
+  "durationMin": 14,
+  "outcomes": [
+    "Ruhig und klar formulieren",
+    "Rueckfragen strukturiert stellen",
+    "Gespaeche professionell abschliessen"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_09_angehoerige"
+  ]
+}

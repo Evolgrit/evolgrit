@@ -1,0 +1,31 @@
+{
+  "id": "a1_u13",
+  "title": "Wohnen",
+  "subtitle": "Zimmer, Möbel, Dinge",
+  "items": [
+    {
+      "id": "a1_u13_l01",
+      "title": "Wohnen",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u13_l02",
+      "title": "Zimmer",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u13_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u13_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}

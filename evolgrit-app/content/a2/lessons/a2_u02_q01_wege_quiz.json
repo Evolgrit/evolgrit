@@ -1,0 +1,92 @@
+{
+  "id": "a2_u02_q01_wege_quiz",
+  "level": "A2",
+  "unitId": "a2_u02",
+  "title": "Quiz · Wege",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Wo ist der Bahnhof?"
+        },
+        {
+          "id": "b",
+          "label": "Wo ist der Bahnhofen?"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Richtung ist richtig?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Biegen Sie rechts ab."
+        },
+        {
+          "id": "b",
+          "label": "Biegen Sie Arbeit ab."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Gehen Sie ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "geradeaus"
+        },
+        {
+          "id": "b",
+          "label": "gerne"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ist das weit von hier?"
+        },
+        {
+          "id": "b",
+          "label": "Ist das weit von Brot?"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Die Post ist ___ der Ecke.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "an"
+        },
+        {
+          "id": "b",
+          "label": "auf"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Quiz fertig",
+      "text": "Gut gemacht!"
+    }
+  ]
+}

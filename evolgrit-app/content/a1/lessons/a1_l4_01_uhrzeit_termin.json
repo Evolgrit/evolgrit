@@ -1,0 +1,60 @@
+{
+  "id": "a1_l4_01_uhrzeit_termin",
+  "title": "Uhrzeit & Termin",
+  "level": "A1",
+  "week": 4,
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Frage passt?",
+      "choices": [
+        { "id": "a", "label": "Um wie viel Uhr?" },
+        { "id": "b", "label": "Wie heißt du?" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Um wie viel Uhr?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Um ____ Uhr.",
+      "choices": [
+        { "id": "a", "label": "zwei" },
+        { "id": "b", "label": "danke" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "dialogue_choice",
+      "prompt": "Was passt als Antwort?",
+      "text": "A: Um wie viel Uhr?",
+      "choices": [
+        { "id": "a", "label": "Um zwei Uhr." },
+        { "id": "b", "label": "Guten Morgen." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        { "id": "a", "label": "Treffen wir uns um zwei?" },
+        { "id": "b", "label": "Ich brauche Brot." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Fertig",
+      "bullets": [
+        "Du kannst nach der Uhrzeit fragen.",
+        "Du kannst einen Termin nennen."
+      ],
+      "cta": "Weiter"
+    }
+  ]
+}

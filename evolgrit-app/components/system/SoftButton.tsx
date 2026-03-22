@@ -21,7 +21,6 @@ export function SoftButton({
       borderWidth={0}
       backgroundColor={bg}
       pressStyle={{ backgroundColor: pressBg, scale: 0.98 }}
-      elevation={0}
     >
       <Button.Text color={textColor ?? "$text"} fontWeight="700" fontSize={15} lineHeight={20}>
         {typeof content === "string" ? content : " "}

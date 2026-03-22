@@ -1,0 +1,77 @@
+{
+  "id": "a2_u16_l01_party_invite",
+  "level": "A2",
+  "unitId": "a2_u16",
+  "title": "Party einladen",
+  "durationMin": 3,
+  "imageKey": "a2_party_cover_01",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Du willst deinen Freund zu deiner Party einladen. Was passt?",
+      "choices": [
+        { "id": "a", "label": "Hast du Lust, am Samstag zu meiner Party zu kommen?" },
+        { "id": "b", "label": "Ich gehe morgen arbeiten." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hast du Lust, am Samstag zu meiner Party zu kommen?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort ist eine Zusage?",
+      "choices": [
+        { "id": "a", "label": "Ja, gerne! Ich komme." },
+        { "id": "b", "label": "Ich weiß nicht, was das ist." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Ja, gerne! Ich komme."
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort ist eine höfliche Absage?",
+      "choices": [
+        { "id": "a", "label": "Nein. Tschüss." },
+        { "id": "b", "label": "Leider kann ich nicht. Ich habe schon etwas vor." }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Leider kann ich nicht. Ich habe schon etwas vor."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Fülle die Lücke:",
+      "text": "Leider ___ ich nicht.",
+      "choices": [
+        { "id": "a", "label": "kann" },
+        { "id": "b", "label": "bin" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Welche Situation passt zu „Party“?",
+      "imageKey": "a2_party_scene_01",
+      "choices": [
+        { "id": "a", "label": "Party", "imageKey": "a2_party_scene_01" },
+        { "id": "b", "label": "Arzt", "imageKey": "a2_party_scene_02" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Gut gemacht!",
+      "text": "Du kannst jetzt jemanden zu einer Party einladen und passend reagieren."
+    }
+  ]
+}

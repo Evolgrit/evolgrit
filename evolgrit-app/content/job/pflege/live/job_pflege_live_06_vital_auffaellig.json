@@ -1,0 +1,42 @@
+{
+  "id": "job_pflege_live_06_vital_auffaellig",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Auffällige Werte",
+  "subtitle": "Einschätzen und handeln",
+  "durationMin": 5,
+  "tasks": [
+    "Einschätzen: auffällig ja/nein",
+    "Nächste Handlung nennen",
+    "Kurz bestätigen"
+  ],
+  "turns": [
+    {
+      "id": "c1",
+      "role": "coach",
+      "text": "Sind die Werte auffällig? (ja/nein)"
+    },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Antworte kurz: ja oder nein.",
+      "suggestions": ["Nein.", "Ja."]
+    },
+    {
+      "id": "c2",
+      "role": "coach",
+      "text": "Was tun Sie als Nächstes?"
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz und klar.",
+      "suggestions": ["Ich informiere den Arzt.", "Ich messe noch einmal.", "Ich hole Hilfe."]
+    },
+    {
+      "id": "c3",
+      "role": "coach",
+      "text": "Alles klar. Danke."
+    }
+  ]
+}

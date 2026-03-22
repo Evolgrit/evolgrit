@@ -1,0 +1,37 @@
+{
+  "id": "job_pflege_live_09_rueckfragen_allergie",
+  "level": "JOB",
+  "coachName": "Lena",
+  "title": "Pflege: Rückfragen & Allergie",
+  "subtitle": "vor/nach dem Essen · Allergie abfragen",
+  "durationMin": 6,
+  "tasks": [
+    "Frag: Haben Sie Allergien?",
+    "Antwort: vor/nach dem Essen",
+    "Sag: Ich frage kurz den Arzt"
+  ],
+  "turns": [
+    { "id": "c1", "role": "coach", "text": "Bevor du ein neues Medikament gibst, frag: Haben Sie Allergien?" },
+    {
+      "id": "u1",
+      "role": "user",
+      "prompt": "Frag freundlich.",
+      "suggestions": ["Haben Sie Allergien?", "Sind Sie gegen etwas allergisch?", "Haben Sie eine Allergie?"]
+    },
+    { "id": "c2", "role": "coach", "text": "Der Patient fragt: Vor oder nach dem Essen? Sag: Nach dem Essen." },
+    {
+      "id": "u2",
+      "role": "user",
+      "prompt": "Kurz.",
+      "suggestions": ["Nach dem Essen.", "Bitte nach dem Essen nehmen.", "Nehmen Sie es bitte nach dem Essen."]
+    },
+    { "id": "c3", "role": "coach", "text": "Wenn du unsicher bist: Sag, du fragst kurz den Arzt." },
+    {
+      "id": "u3",
+      "role": "user",
+      "prompt": "1 Satz.",
+      "suggestions": ["Ich frage kurz den Arzt.", "Ich kläre das kurz mit dem Arzt.", "Einen Moment, ich frage kurz nach."]
+    },
+    { "id": "c4", "role": "coach", "text": "Sehr gut. Sicherheit geht vor – lieber einmal mehr fragen." }
+  ]
+}

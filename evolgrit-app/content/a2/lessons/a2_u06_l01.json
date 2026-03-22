@@ -1,0 +1,51 @@
+{
+  "id": "a2_u06_l01",
+  "level": "A2",
+  "unitId": "a2_u06",
+  "title": "Lektion 1 · Orte & Orientierung",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Die Apotheke ist neben dem Bahnhof."
+        },
+        {
+          "id": "b",
+          "label": "Die Apotheke ist neben dem Montag."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Wo ist die Post?"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Der Park ist ___ der Schule.",
+      "choices": [
+        {
+          "id": "a",
+          "label": "gegenüber"
+        },
+        {
+          "id": "b",
+          "label": "gestern"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Orte beschreiben."
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "a2_u01_l01_meeting_invite",
+  "level": "A2",
+  "unitId": "a2_u01",
+  "title": "Treffen organisieren",
+  "durationMin": 3,
+  "imageKey": "a2_meeting_cover_01",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Du planst ein Treffen. Was passt als Einstieg?",
+      "choices": [
+        { "id": "a", "label": "Hast du Lust, dich zu treffen?" },
+        { "id": "b", "label": "Ich kaufe ein Brot." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Hast du Lust, dich zu treffen?"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort ist informell?",
+      "choices": [
+        { "id": "a", "label": "Klar, gerne!" },
+        { "id": "b", "label": "Hiermit bestätige ich den Termin." }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Klar, gerne!"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Formell sprechen",
+      "ttsText": "Ich freue mich auf unser Treffen."
+    },
+    {
+      "type": "image_choice",
+      "prompt": "Welches Bild passt zu der formellen Aussage?",
+      "imageKey": "a2_meeting_office_02",
+      "choices": [
+        { "id": "a", "label": "Bürotermin", "imageKey": "a2_meeting_office_02" },
+        { "id": "b", "label": "Café-Treffen", "imageKey": "a2_meeting_cafe_01" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Ergänze die formelle Variante:",
+      "text": "___ freue mich auf unser Treffen.",
+      "choices": [
+        { "id": "a", "label": "Ich" },
+        { "id": "b", "label": "Du" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "prompt": "Welche Antwort passt zur Chefin?",
+      "choices": [
+        { "id": "a", "label": "Klar, passt!" },
+        { "id": "b", "label": "Sehr gerne, ich freue mich auf unser Treffen." }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "summary",
+      "title": "Gut gemacht!",
+      "text": "Du kannst informell und formell einladen und passend reagieren."
+    }
+  ]
+}

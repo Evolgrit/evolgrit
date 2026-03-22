@@ -1,0 +1,14 @@
+{
+  "id": "pflege_module_07_responsibility",
+  "title": "Modul 7 · Verantwortung & Meldewege",
+  "subtitle": "Sicher handeln, richtig melden",
+  "durationMin": 12,
+  "outcomes": [
+    "Auffaelligkeiten sicher benennen",
+    "Zustaendige Stelle korrekt informieren",
+    "Meldung kurz dokumentieren"
+  ],
+  "liveDialogues": [
+    "job_pflege_live_07_melden"
+  ]
+}

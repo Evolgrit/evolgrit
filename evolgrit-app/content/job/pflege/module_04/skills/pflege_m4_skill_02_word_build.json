@@ -1,0 +1,64 @@
+{
+  "id": "pflege_m4_skill_02_word_build",
+  "level": "JOB_PFLEGE",
+  "title": "Pflege M4 · Satzbau",
+  "subtitle": "Übergabe klar formulieren",
+  "durationMin": 3,
+  "steps": [
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Patient ____ Zimmer 102.",
+      "choices": [
+        { "id": "a", "label": "Müller" },
+        { "id": "b", "label": "morgen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Starke ____ seit gestern.",
+      "choices": [
+        { "id": "a", "label": "Bauchschmerzen" },
+        { "id": "b", "label": "Fenster" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Ich habe den ____ informiert.",
+      "choices": [
+        { "id": "a", "label": "Arzt" },
+        { "id": "b", "label": "Bus" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Bitte weiter ____.",
+      "choices": [
+        { "id": "a", "label": "beobachten" },
+        { "id": "b", "label": "vergessen" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "word_build",
+      "prompt": "Bilde den Satz",
+      "text": "Werte sind ____.",
+      "choices": [
+        { "id": "a", "label": "stabil" },
+        { "id": "b", "label": "leer" }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Stark!",
+      "text": "Du kannst Übergaben kurz formulieren."
+    }
+  ]
+}

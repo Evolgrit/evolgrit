@@ -1,0 +1,110 @@
+{
+  "id": "b1_live_03_beschwerde_loesung",
+  "level": "B1",
+  "mode": "live_dialogue",
+  "title": "Höflich reklamieren",
+  "subtitle": "Problem erklären, Lösung erbitten",
+  "durationMin": 4,
+  "coach": {
+    "name": "Lena",
+    "style": "calm_structured"
+  },
+  "tasks": [
+    "Erkläre kurz das Problem.",
+    "Sag, was du möchtest (Umtausch / Rückgabe / Rabatt).",
+    "Bleib freundlich und beende das Gespräch."
+  ],
+  "mentorTurns": [
+    {
+      "id": "t01",
+      "text": "Hallo! Wie kann ich helfen?",
+      "goalHint": "Erkläre kurz das Problem.",
+      "tipSuggestions": [
+        "Ich habe ein Problem mit diesem Produkt.",
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt."
+      ]
+    },
+    {
+      "id": "t02",
+      "text": "Was genau ist passiert?",
+      "goalHint": "Nenne kurz, was nicht stimmt.",
+      "tipSuggestions": [
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt.",
+        "Es geht nicht an."
+      ]
+    },
+    {
+      "id": "t03",
+      "text": "Was möchtest du?",
+      "goalHint": "Sag deinen Wunsch.",
+      "tipSuggestions": [
+        "Ich möchte es umtauschen.",
+        "Ich hätte gern eine Rückerstattung.",
+        "Ich möchte einen Rabatt."
+      ]
+    }
+  ],
+  "turns": [
+    {
+      "role": "coach",
+      "coachText": "Hallo! Wie kann ich helfen?",
+      "expectedUser": "Ich habe ein Problem mit diesem Produkt.",
+      "hints": [
+        "Ich habe ein Problem mit diesem Produkt.",
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt."
+      ],
+      "tip": "Kurz und sachlich bleiben."
+    },
+    {
+      "role": "user",
+      "instruction": "Erkläre kurz das Problem.",
+      "exampleAnswers": [
+        "Ich habe ein Problem mit diesem Produkt.",
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt."
+      ]
+    },
+    {
+      "role": "coach",
+      "coachText": "Was genau ist passiert?",
+      "expectedUser": "Es funktioniert nicht richtig / Es ist kaputt.",
+      "hints": [
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt.",
+        "Es geht nicht an."
+      ],
+      "tip": "Ein kurzer Satz reicht."
+    },
+    {
+      "role": "user",
+      "instruction": "Sag, was genau nicht stimmt.",
+      "exampleAnswers": [
+        "Es funktioniert nicht richtig.",
+        "Es ist kaputt.",
+        "Es geht nicht an."
+      ]
+    },
+    {
+      "role": "coach",
+      "coachText": "Was möchtest du?",
+      "expectedUser": "Ich möchte es umtauschen / Ich hätte gern eine Rückerstattung.",
+      "hints": [
+        "Ich möchte es umtauschen.",
+        "Ich hätte gern eine Rückerstattung.",
+        "Ich möchte einen Rabatt."
+      ],
+      "tip": "Wunsch klar sagen."
+    }
+  ],
+  "endSummary": {
+    "title": "Gute Arbeit",
+    "bullets": [
+      "Du hast das Problem kurz erklärt.",
+      "Du hast deinen Wunsch klar gesagt.",
+      "Du bist freundlich geblieben."
+    ]
+  }
+}

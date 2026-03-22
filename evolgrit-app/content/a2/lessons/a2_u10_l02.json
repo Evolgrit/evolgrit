@@ -1,0 +1,51 @@
+{
+  "id": "a2_u10_l02",
+  "level": "A2",
+  "unitId": "a2_u10",
+  "title": "Lektion 2 · Symptome beschreiben",
+  "durationMin": 3,
+  "imageKey": "PLACEHOLDER_IMAGE",
+  "steps": [
+    {
+      "type": "choice",
+      "prompt": "Welche Aussage passt?",
+      "choices": [
+        {
+          "id": "a",
+          "label": "Ich habe Kopfschmerzen."
+        },
+        {
+          "id": "b",
+          "label": "Ich habe Kopfbrot."
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "listen_repeat",
+      "prompt": "Sprich nach",
+      "ttsText": "Mein Hals tut weh."
+    },
+    {
+      "type": "cloze_choice",
+      "prompt": "Wähle das fehlende Wort",
+      "text": "Mir ist ___ .",
+      "choices": [
+        {
+          "id": "a",
+          "label": "schwindlig"
+        },
+        {
+          "id": "b",
+          "label": "schwindel"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "summary",
+      "title": "Kurz geschafft",
+      "text": "Du kannst Beschwerden sagen."
+    }
+  ]
+}

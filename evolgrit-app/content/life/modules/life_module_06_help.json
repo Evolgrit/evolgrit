@@ -1,0 +1,43 @@
+{
+  "moduleId": "life_06_help",
+  "title": "Sicherheit & Hilfe",
+  "subtitle": "Was tun bei Problemen?",
+  "durationMin": 10,
+  "sections": [
+    {
+      "type": "info",
+      "title": "Kurz erklärt",
+      "text": "Hilfe holen ist normal. Bei Notfällen: 112. Bei Fragen: ruhig sagen, was passiert ist und wo du bist."
+    },
+    {
+      "type": "do_dont",
+      "title": "Do & Don’t",
+      "items": [
+        { "kind": "do", "text": "Sag kurz: Was? Wo? Wer?" },
+        { "kind": "do", "text": "Frag nach: „Können Sie mir helfen?“" },
+        { "kind": "dont", "text": "Schweigen aus Angst – das macht es schwerer." },
+        { "kind": "dont", "text": "Viele Details ohne Reihenfolge." }
+      ]
+    },
+    {
+      "type": "skill_choice",
+      "title": "Mini-Skill",
+      "question": "Welche Info ist zuerst am wichtigsten?",
+      "options": [
+        "Wo du bist + was passiert ist.",
+        "Die ganze Geschichte von Anfang an."
+      ],
+      "correctIndex": 0,
+      "explain": "Ort + Problem zuerst – dann Details."
+    },
+    {
+      "type": "examples",
+      "title": "Sätze, die helfen",
+      "items": [
+        "Ich brauche Hilfe. Ich bin hier: …",
+        "Es ist ein Notfall.",
+        "Können Sie bitte kurz warten? Ich erkläre es."
+      ]
+    }
+  ]
+}

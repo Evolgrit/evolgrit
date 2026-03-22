@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ActivityIndicator, Alert } from "react-native";
+import { ActivityIndicator, Alert, Pressable } from "react-native";
 import { Text, XStack, YStack } from "tamagui";
 import { Volume2, RotateCcw, Play, Pause, Mic, Square } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
@@ -15,10 +15,12 @@ import { getTtsBase64 } from "../../../lib/tts/azureTtsClient";
 import * as FileSystem from "expo-file-system/legacy";
 import { evaluateRecording, AsrTokenStatus } from "../../../lib/asrClient";
 import { playCorrect, playWrong } from "../../../lib/feedback";
-import { PressableIconButton } from "../../system/PressableIconButton";
 import { AudioMeter } from "../AudioMeter";
 import { SoftButton } from "../../system/SoftButton";
 import { lessonType } from "@/design/typography";
+import { useI18n } from "../../../lib/i18n";
+import { useUserSettings } from "../../../lib/userSettings";
+import { getLocaleForLanguage } from "../../../lib/locale";
 
 const HIGHLIGHT_BG = "rgba(46,204,113,0.18)";
 const PASS_SCORE = 0.9;
@@ -57,11 +59,14 @@ export function ListenRepeatStep({
   prompt,
   text,
   onSolved,
+  onCorrectChange,
 }: {
   prompt: string;
   text: string;
   onSolved?: (ok: boolean) => void;
+  onCorrectChange?: (ok: boolean) => void;
 }) {
+  const { t } = useI18n();
   const recorder = useAudioRecorder(WAV_REC_OPTIONS);
   const recState = useAudioRecorderState(recorder);
   const recSnapshot = useRef(recState);
@@ -83,6 +88,10 @@ export function ListenRepeatStep({
   const meterBusy = useRef(false);
   const pulse = useSharedValue(0);
   const [attemptCount, setAttemptCount] = useState(0);
+  const [hasMicPermission, setHasMicPermission] = useState(true);
+  const [asrHint, setAsrHint] = useState<string | null>(null);
+  const { targetLanguageCode } = useUserSettings();
+  const targetLocale = getLocaleForLanguage(targetLanguageCode);
 
   useEffect(() => {
     recSnapshot.current = recState;
@@ -141,13 +150,16 @@ export function ListenRepeatStep({
       setRecordedUri(null);
     }
     onSolved?.(false);
+    onCorrectChange?.(false);
     setTranscript(null);
     setScore(null);
     setTokenStatuses([]);
     setAttemptCount(0);
+    setAsrHint(null);
     setIsRequesting(true);
     try {
       const perm = await requestRecordingPermissionsAsync();
+      setHasMicPermission(perm.granted);
       if (!perm.granted) {
         setRecPhase("idle");
         return;
@@ -192,12 +204,20 @@ export function ListenRepeatStep({
       }
 
       if (!uri || (durMs && durMs < 800)) {
-        Alert.alert("Zu kurz", "Bitte noch einmal aufnehmen.");
+        setAsrHint("Ich habe dich nicht gut gehört. Sprich bitte etwas länger.");
         setRecordedUri(null);
         setRecPhase("idle");
         return;
       }
       const wavUri = await ensureWavCopy(uri);
+      const info = await FileSystem.getInfoAsync(wavUri);
+      const size = typeof (info as any)?.size === "number" ? (info as any).size : 0;
+      if (durMs < 900 || size < 60 * 1024) {
+        setAsrHint("Ich habe dich nicht gut gehört. Sprich bitte etwas länger.");
+        setRecordedUri(null);
+        setRecPhase("idle");
+        return;
+      }
       setRecordedUri(wavUri);
       setRecPhase("processing");
       await player.stop();
@@ -210,10 +230,14 @@ export function ListenRepeatStep({
           setScore,
           setTokenStatuses,
           setAsrLoading,
+          setAsrHint,
         },
+        durMs,
         attemptCount,
         setAttemptCount,
-        onSolved
+        targetLocale,
+        onSolved,
+        onCorrectChange
       );
       setRecPhase("recorded");
     } catch (err) {
@@ -256,13 +280,14 @@ export function ListenRepeatStep({
 
   const ensureTtsPath = async () => {
     const clean = sanitizeText(text);
-    const res = await getTtsBase64({ text: clean, rate: "normal" });
+    const localeKey = targetLocale || "de-DE";
+    const res = await getTtsBase64({ text: clean, rate: "normal", locale: localeKey });
     const dir = `${FileSystem.cacheDirectory}tts/`;
     const info = await FileSystem.getInfoAsync(dir);
     if (!info.exists) {
       await FileSystem.makeDirectoryAsync(dir, { intermediates: true });
     }
-    const hash = hashCanonical(`de-DE|default|normal|${clean}`);
+    const hash = hashCanonical(`${localeKey}|default|normal|${clean}`);
     const path = `${dir}tts_${hash}_normal.mp3`;
     const existing = await FileSystem.getInfoAsync(path);
     if (!existing.exists) {
@@ -329,6 +354,17 @@ export function ListenRepeatStep({
     borderRadius: 999,
   }));
 
+  const micDisabled =
+    !hasMicPermission ||
+    isRequesting ||
+    recPhase === "stopping" ||
+    recPhase === "processing" ||
+    stopLockRef.current;
+  const playDisabled =
+    !recordedUri || recPhase === "recording" || recPhase === "stopping" || recPhase === "processing" || asrLoading;
+  const replayDisabled = playDisabled;
+  const targetDisabled = recPhase === "recording" || recPhase === "stopping" || recPhase === "processing";
+
   return (
     <YStack gap="$3" backgroundColor="#fff" width="100%">
       {/* Prompt Card */}
@@ -337,13 +373,13 @@ export function ListenRepeatStep({
           <Text {...lessonType.section} color="$text" flexShrink={1}>
             Sprich nach
           </Text>
-          <PressableIconButton
+          <IconButton
             icon={<Volume2 size={22} color="#111" />}
             onPress={playTarget}
             accessibilityLabel="Referenz abspielen"
-            disabled={recPhase === "recording" || recPhase === "stopping"}
+            disabled={targetDisabled}
             size={44}
-            bg="$color2"
+            labelFallback="Audio"
           />
         </XStack>
 
@@ -386,54 +422,57 @@ export function ListenRepeatStep({
           ) : null}
         </XStack>
 
-        {recPhase === "recording" ? <AudioMeter amplitude={amplitude} /> : null}
+        <YStack minHeight={28}>
+          <AudioMeter amplitude={recPhase === "recording" ? amplitude : 0} />
+        </YStack>
 
-        <XStack gap="$3" alignItems="center" justifyContent="space-between">
-          <PressableIconButton
+        <XStack gap="$3" alignItems="center" justifyContent="space-between" pointerEvents="auto">
+          <IconButton
             icon={<RotateCcw size={22} color="#111" />}
             onPress={playRecording}
             accessibilityLabel="Aufnahme wiederholen"
-            disabled={
-              !recordedUri ||
-              recPhase === "recording" ||
-              recPhase === "stopping" ||
-              recPhase === "processing" ||
-              asrLoading
-            }
+            disabled={replayDisabled}
             size={44}
-            bg="$color2"
+            labelFallback="Replay"
           />
 
-          <PressableIconButton
+          <IconButton
             icon={recordedUri && player.isPlaying ? <Pause size={24} color="#111" /> : <Play size={24} color="#111" />}
             onPress={togglePlay}
             accessibilityLabel="Aufnahme abspielen"
-            disabled={
-              !recordedUri ||
-              recPhase === "recording" ||
-              recPhase === "stopping" ||
-              recPhase === "processing" ||
-              asrLoading
-            }
+            disabled={playDisabled}
             size={56}
-            bg="$color2"
+            labelFallback="Play"
           />
 
           <Animated.View style={micRingStyle}>
-            <PressableIconButton
+            <IconButton
               icon={recPhase === "recording" || recPhase === "stopping" ? <Square size={22} color="#111" /> : <Mic size={22} color="#111" />}
               onPress={recPhase === "recording" || recPhase === "stopping" ? stopRec : startRec}
               accessibilityLabel={recPhase === "recording" || recPhase === "stopping" ? "Stop" : "Aufnehmen"}
-              disabled={isRequesting || recPhase === "stopping" || recPhase === "processing" || stopLockRef.current}
+              disabled={micDisabled}
               size={52}
               bg={recPhase === "recording" ? "rgba(46,204,113,0.18)" : "$color2"}
+              labelFallback="Mic"
             />
           </Animated.View>
         </XStack>
 
+        {!hasMicPermission ? (
+          <Text {...lessonType.muted} color="$muted">
+            Mikrofon-Zugriff fehlt. Bitte erlauben.
+          </Text>
+        ) : null}
+
         {recPhase === "stopping" ? (
           <Text {...lessonType.muted} color="$muted">
             Stoppen …
+          </Text>
+        ) : null}
+
+        {asrHint ? (
+          <Text {...lessonType.muted} color="$muted">
+            {asrHint}
           </Text>
         ) : null}
 
@@ -444,7 +483,7 @@ export function ListenRepeatStep({
             </Text>
             <Text {...lessonType.body}>{transcript}</Text>
             {score !== null ? (
-              <Text {...lessonType.body} color={score >= PASS_SCORE ? "$text" : "$red10"}>
+              <Text {...lessonType.body} color="$muted">
                 Score: {score.toFixed(2)}
               </Text>
             ) : null}
@@ -486,7 +525,7 @@ export function ListenRepeatStep({
 
         <XStack justifyContent="flex-end">
           <SoftButton
-            label="Nochmal"
+            label={t("common.tryAgain")}
             onPress={() => {
               setTranscript(null);
               setScore(null);
@@ -495,11 +534,55 @@ export function ListenRepeatStep({
               setAttemptCount(0);
               setRecPhase("idle");
               onSolved?.(false);
+              onCorrectChange?.(false);
+              setAsrHint(null);
             }}
           />
         </XStack>
       </YStack>
     </YStack>
+  );
+}
+
+function IconButton({
+  icon,
+  labelFallback,
+  onPress,
+  accessibilityLabel,
+  disabled,
+  size = 44,
+  bg = "$color2",
+}: {
+  icon?: React.ReactNode;
+  labelFallback?: string;
+  onPress?: () => void;
+  accessibilityLabel?: string;
+  disabled?: boolean;
+  size?: number;
+  bg?: string;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      onPress={disabled ? undefined : onPress}
+      style={disabled ? { opacity: 0.5 } : undefined}
+    >
+      <YStack
+        width={size}
+        height={size}
+        borderRadius={size / 2}
+        backgroundColor={bg}
+        alignItems="center"
+        justifyContent="center"
+      >
+        {icon ?? (
+          <Text {...lessonType.muted} color="$text">
+            {labelFallback ?? ""}
+          </Text>
+        )}
+      </YStack>
+    </Pressable>
   );
 }
 
@@ -534,24 +617,44 @@ async function runAsr(
     setScore: (s: number | null) => void;
     setTokenStatuses: (t: { token: string; status: AsrTokenStatus }[]) => void;
     setAsrLoading: (b: boolean) => void;
+    setAsrHint: (msg: string | null) => void;
   },
+  durationMs: number,
   attemptCount: number,
   setAttemptCount: React.Dispatch<React.SetStateAction<number>>,
-  onSolved?: (ok: boolean) => void
+  targetLocale: string,
+  onSolved?: (ok: boolean) => void,
+  onCorrectChange?: (ok: boolean) => void
 ) {
-  const { setTranscript, setScore, setTokenStatuses, setAsrLoading } = setters;
+  const { setTranscript, setScore, setTokenStatuses, setAsrLoading, setAsrHint } = setters;
   setAsrLoading(true);
   try {
-    const res = await evaluateRecording({ fileUri: uri, targetText: target, locale: "de-DE" });
+    const res = await evaluateRecording({ fileUri: uri, targetText: target, locale: targetLocale });
+    const score = typeof res.score === "number" ? res.score : 0;
+    const transcript = (res.transcript ?? "").trim();
+    if ((transcript.length === 0 || score === 0) && durationMs < 1200) {
+      setTranscript(null);
+      setScore(null);
+      setTokenStatuses([]);
+      setAsrHint("Ich habe dich nicht verstanden. Versuch’s nochmal.");
+      const nextAttempt = attemptCount + 1;
+      setAttemptCount(nextAttempt);
+      onSolved?.(false);
+      onCorrectChange?.(false);
+      console.log("[asr] attempt", { attemptCount: nextAttempt, score, canContinue: false });
+      return;
+    }
+    setAsrHint(null);
     setTranscript(res.transcript);
-    setScore(res.score);
+    setScore(score);
     setTokenStatuses(res.tokens ?? []);
     const nextAttempt = attemptCount + 1;
     setAttemptCount(nextAttempt);
-    const ok = res.score >= PASS_SCORE;
+    const ok = score >= PASS_SCORE;
     const canContinue = ok || nextAttempt >= MAX_ATTEMPTS;
-    console.log("[asr] attempt", { attemptCount: nextAttempt, score: res.score, canContinue });
+    console.log("[asr] attempt", { attemptCount: nextAttempt, score, canContinue });
     onSolved?.(canContinue);
+    onCorrectChange?.(ok);
     if (ok) {
       await playCorrect();
     } else {
@@ -563,7 +666,9 @@ async function runAsr(
     setTranscript(null);
     setScore(null);
     setTokenStatuses([]);
+    setAsrHint("Ich habe dich nicht verstanden. Versuch’s nochmal.");
     onSolved?.(false);
+    onCorrectChange?.(false);
   } finally {
     setAsrLoading(false);
   }

@@ -73,10 +73,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 999,
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 6 },
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

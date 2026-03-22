@@ -1,0 +1,31 @@
+{
+  "id": "a1_u17",
+  "title": "Sport & Hobbys",
+  "subtitle": "Was du gerne machst",
+  "items": [
+    {
+      "id": "a1_u17_l01",
+      "title": "Sport & Hobbys",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u17_l02",
+      "title": "Was du gerne machst",
+      "kind": "lesson",
+      "durationMin": 3
+    },
+    {
+      "id": "a1_u17_m01",
+      "title": "Mini · Schnellstart",
+      "kind": "mini",
+      "durationMin": 2
+    },
+    {
+      "id": "a1_u17_q01",
+      "title": "Quiz · Kurzcheck",
+      "kind": "quiz",
+      "durationMin": 3
+    }
+  ]
+}
