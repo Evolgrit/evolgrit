@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Alert, KeyboardAvoidingView, Platform } from "react-native";
+import { Alert, Image, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { YStack, Stack, Input, Button, Text } from "tamagui";
 import { useRouter } from "expo-router";
 import { supabase } from "../lib/supabaseClient";
+
+const LOGIN_LOGO = require("../assets/branding/login-logo.png");
 
 export default function Login() {
   const router = useRouter();
@@ -60,6 +62,15 @@ export default function Login() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <YStack flex={1} justifyContent="center" padding="$4" gap="$3">
+          <Stack alignItems="flex-start" paddingBottom="$2">
+            <Image
+              source={LOGIN_LOGO}
+              style={styles.logo}
+              resizeMode="contain"
+              accessibilityIgnoresInvertColors
+            />
+          </Stack>
+
           <Stack gap="$2">
             <Text fontSize={20} fontWeight="900" color="$text">
               Melde dich an
@@ -117,3 +128,10 @@ export default function Login() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 176,
+    height: 36,
+  },
+});

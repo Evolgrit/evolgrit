@@ -19,11 +19,9 @@ import { Fraunces_600SemiBold } from "@expo-google-fonts/fraunces";
 
 import { I18nProvider } from "../lib/i18n";
 import { useUserSettings } from "../lib/userSettings";
-import { IntroSplash } from "../components/system/IntroSplash";
 
 export default function RootLayout() {
   const { uiLocale } = useUserSettings();
-  const [showIntro, setShowIntro] = React.useState(true);
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -67,9 +65,6 @@ export default function RootLayout() {
               />
               <Stack.Screen name="chat/details" />
             </Stack>
-            {showIntro ? (
-              <IntroSplash durationMs={1050} onDone={() => setShowIntro(false)} />
-            ) : null}
           </I18nProvider>
         </PortalProvider>
       </TamaguiProvider>
