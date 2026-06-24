@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { heroStats } from "@/lib/data/marketingContent";
+import { WaitlistCounter } from "@/components/WaitlistCounter";
 
 const marketingContainer = "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8";
 
@@ -38,6 +39,8 @@ export function HeroSection() {
               Talk to us about hiring
             </Link>
           </div>
+
+          <WaitlistCounter />
 
           <Link
             href="/how-it-works"
